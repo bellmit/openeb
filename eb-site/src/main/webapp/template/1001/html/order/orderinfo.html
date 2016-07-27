@@ -1,0 +1,107 @@
+<div class="m" id="orderinfo">
+	<div class="mt">
+		<strong>订单信息</strong>
+	</div>
+	<div class="mc">
+		<!-- 节能补贴信息 -->
+
+		<!--顾客信息-->
+		<dl class="fore">
+			<dt>收货人信息</dt>
+			<dd>
+				<ul>
+					<li>收&nbsp;货&nbsp;人：${order.consignee}</li>
+					<li>地&nbsp;&nbsp;&nbsp;址：${order.receaddress}</li>
+					<li>手机号码：${order.phone}</li>
+					<li>固定电话：${order.telnum}</li>
+				</ul>
+			</dd>
+		</dl>
+		<!-- 礼品购订单展示送礼人信息 -->
+
+		<!--配送、支付方式-->
+		<dl>
+			<dt>支付及配送方式</dt>
+			<dd>
+				<ul>
+					<li>支付方式：在线支付</li>
+					<li>运&nbsp;&nbsp;&nbsp;&nbsp;费：￥${order.shipfee}</li>
+				</ul>
+			</dd>
+		</dl>
+		<!--发票-->
+		<dl>
+			<dt>发票信息</dt>
+			<dd>
+				<ul>
+					<li>发票类型：不开发票</li>
+				</ul>
+			</dd>
+		</dl>
+		<!-- 礼品购订单展示寄语信息 -->
+
+		<!--备注-->
+		<dl>
+			<dt>备注</dt>
+			<dd>
+				<ul>
+					<li></li>
+				</ul>
+			</dd>
+		</dl>
+
+		<!--商品-->
+		<dl>
+			<dt>
+				<span class="i-mt">商品清单</span>
+				<div id="fquan" class="fquan">
+					<div id="eventName"></div>
+					<div class="prompt p-fquan" id="couponListShow">
+						<div class="pc" id="couponList"></div>
+					</div>
+				</div>
+
+				<div class="clr"></div>
+
+			</dt>
+
+			<dd class="p-list">
+				<table cellpadding="0" cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th width="10%">商品编号</th>
+							<th width="12%">商品图片</th>
+							<th width="42%">商品名称</th>
+							<th width="10%">单价</th>
+							<!-- <th width="8%">京豆数量</th> -->
+							<th width="7%">商品数量</th>
+							<th width="11%">操作</th>
+						</tr>
+					</thead>
+					<tbody id="order-items">
+						
+					</tbody>
+				</table>
+			</dd>
+		</dl>
+
+		<!--条形码-->
+		<div id="barcode">
+		</div>
+		<!-- 商家运费险  -->
+		<div id="yunFeiXian"></div>
+	</div>
+	<!--金额-->
+	<div class="total">
+		<ul>
+			<li><span>总商品金额：</span>￥${order.totalfee}</li>
+			<li><span>- 优惠：</span>￥0.00</li>
+			<li><span>+ 运费：</span>￥0.00</li>
+		</ul>
+		<span class="clr"></span> <span style="color: #EDEDED;"></span>
+		<div class="extra">
+			应付总额：<span class="ftx04"><b>￥${order.totalfee}</b></span>
+		</div>
+	</div>
+	<!--进度条预计功能使用-->
+</div>

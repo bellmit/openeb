@@ -1,0 +1,412 @@
+<style>
+
+.jdm-toolbar-panels {
+  position: absolute;
+  left: 35px;
+  _left: 35px;
+  top: 0;
+  width: 270px;
+  height: 100%;
+  z-index: 2;
+  background: #eceaea;
+  _display: none;
+}
+
+.jdm-toolbar-panel {
+	width: 270px;
+	height: 100%;
+	position: absolute;
+	background: #eceaea;
+	visible: hidden;
+}
+
+.jdm-tbar-panel-header {
+	position: relative;
+	width: 270px;
+	height: 40px;
+	line-height: 40px;
+	background: #eceaea;
+}
+
+.jdm-tbar-panel-header i {
+  width: 20px;
+  height: 18px;
+  background-position: 0 0;
+  margin-top: 11px;
+}
+
+.jdm-tbar-panel-header i {
+  margin-right: 4px;
+  margin-left: 10px;
+  vertical-align: top;
+}
+
+.jdm-tbar-panel-header i, .jdm-tbar-panel-header .close-panel, .jdm-toolbar-tab .tab-ico {
+  display: inline-block;
+  background-image: url(http://misc.360buyimg.com/product/toolbar/1.0.1/css/i/jdm-toolbar-icons.png);
+  _background-image: url(http://misc.360buyimg.com/product/toolbar/1.0.1/css/i/jdm-toolbar-icons-png8.png);
+  background-repeat: no-repeat;
+}
+
+.jdm-tbar-panel-header .title em {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.jdm-tbar-panel-header .title {
+  display: inline-block;
+  height: 40px;
+  color: #5e5050;
+  font: 16px/40px '\5fae\8f6f\96c5\9ed1';
+}
+
+.jdm-tbar-panel-main {
+	position: relative;
+}
+
+.jdm-tbar-panel-content {
+  width: 270px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+}
+
+
+.jdm-tbar-cart-list {
+  width: 100%;
+}
+
+.jtc-item-goods {
+  padding: 10px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.jtc-item-goods .p-img {
+  float: left;
+  width: 50px;
+  height: 50px;
+  border: 1px solid #ddd;
+  padding: 0;
+  margin-right: 5px;
+}
+
+.jtc-item-goods .p-name {
+  height: 32px;
+  line-height: 16px;
+  margin-bottom: 4px;
+  overflow: hidden;
+}
+
+.jtc-item-goods .p-price {
+  height: 16px;
+  padding-right: 65px;
+  overflow: hidden;
+  font: 12px/16px verdana;
+  color: #666;
+}
+
+.jdm-tbar-cart-item {
+  padding: 0 5px;
+  margin-bottom: 10px;
+  background: #fff;
+}
+
+.jtc-item-promo {
+  padding: 12px 0 12px 57px;
+  border-bottom: 1px dashed #e1e1e1;
+}
+
+.jtc-item-promo .promo-tag {
+  position: relative;
+  float: left;
+  width: 40px;
+  height: 20px;
+  margin-top: -1px;
+  margin-left: -57px;
+  margin-right: 17px;
+  text-align: center;
+  font: 12px/20px '\5B8B\4F53';
+  color: #fff;
+  background-color: #f58813;
+}
+
+.jdm-tbar-panel-footer {
+	height: 50px;
+	background-color: #eceaea;
+}
+
+.jdm-tbar-checkout {
+  height: 40px;
+  padding: 5px 110px 5px 5px;
+  position: relative;
+}
+
+.jdm-tbar-checkout .jtc-number {
+  line-height: 20px;
+}
+
+.jdm-tbar-checkout .jtc-sum {
+  line-height: 20px;
+}
+
+.jdm-tbar-checkout .jtc-btn {
+  position: absolute;
+  right: 5px;
+  top: 7px;
+  width: 110px;
+  height: 35px;
+  font: 16px/35px '\5fae\8f6f\96c5\9ed1';
+  text-align: center;
+  background: #c81623;
+  color: #fff;
+}
+
+.jdm-toolbar-wrap {
+	position: fixed;
+	_position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 9990;
+	width: 35px;
+	height: 100%;
+}
+
+.z-jdm-toolbar-open .jdm-toolbar {
+	right: 270px;
+}
+
+.jdm-toolbar {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 29px;
+  height: 100%;
+  border-right: 6px solid #7a6e6e;
+}
+
+.jdm-toolbar-tabs {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 35px;
+  background: #000;
+  color: #fff;
+}
+</style>
+
+
+<!-- right bar -->
+
+<div class="jdm-toolbar-wrap J-wrap">
+	<div class="jdm-toolbar J-toolbar">
+		<div class="jdm-toolbar-panels J-panel">
+			<div data-name="cart"
+				class="J-content jdm-toolbar-panel jdm-tbar-panel-cart toolbar-animate-in"
+				style="visibility: visible; z-index: 2;">
+				<h3 class="jdm-tbar-panel-header J-panel-header">
+					<a href="${store.domain}/cart/cart.html"
+						target="_blank" class="title"> <i></i>
+						<em class="title">购物车</em>
+					</a> <span class="close-panel J-close"></span>
+				</h3>
+				<div class="jdm-tbar-panel-main">
+					<div class="jdm-tbar-panel-content J-panel-content">
+						<div id="J-cart-render">
+							<div class="jdm-tbar-cart-list" id="jdm-tbar-cart-list">
+								
+								<div class="jdm-tbar-cart-item" data-type="mj">
+									<div class="jtc-item-promo">
+										<em class="promo-tag promo-mj">满减<i class="arrow"></i></em>
+										<div class="promo-text">购满200元，即可享受满减优惠</div>
+									</div>
+									<div class="jtc-item-goods">
+										<span class="p-img"> <a
+											href="http://item.jd.com/813866.html" target="_blank"
+											>
+												<img
+												src="http://img11.360buyimg.com/n5/g10/M00/04/01/rBEQWFEkZgcIAAAAAAGW6_oJvU8AAAykgFbcBEAAZcD232.jpg"
+												width="50" height="50" alt="欧普照明opple 2D节能灯管28瓦白光2支装">
+										</a>
+										</span>
+										<div class="p-name">
+											<a href="http://item.jd.com/813866.html"
+												title="欧普照明opple 2D节能灯管28瓦白光2支装" target="_blank"
+												>欧普照明opple
+												2D节能灯管28瓦白光2支装</a>
+										</div>
+										<div class="p-price">
+											<strong>¥69.00</strong>×1
+										</div>
+										<a href="#none"
+											class="p-del J-del" data-cid="813866|183802878"
+											data-action="RemoveSuit">删除</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="jdm-tbar-panel-footer J-panel-footer">
+					<div class="jdm-tbar-checkout">
+						<div class="jtc-number">
+							<strong class="J-count">7</strong>件商品
+						</div>
+						<div class="jtc-sum">
+							共计：<strong class="J-total">￥1359.00</strong>
+						</div>
+						<a class="jtc-btn J-btn"
+							href="${store.domain}/cart/cart.html"
+							target="_blank"
+							>去购物车结算</a>
+					</div>
+				</div>
+			</div>
+			<div data-name="follow"
+				class="J-content jdm-toolbar-panel jdm-tbar-panel-follow"
+				style="visibility: hidden;">
+				<h3 class="jdm-tbar-panel-header J-panel-header">
+					<a href="http://t.jd.com/home/follow" target="_blank" class="title">
+						<i></i> <em class="title">我的关注</em>
+					</a> <span class="close-panel J-close"></span>
+				</h3>
+				<div class="jdm-tbar-panel-main">
+					<div class="jdm-tbar-panel-content J-panel-content">
+						<div class="jdm-tbar-tipbox2">
+							<div class="tip-inner">
+								<i class="i-loading"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="jdm-tbar-panel-footer J-panel-footer"></div>
+			</div>
+			<div data-name="history"
+				class="J-content jdm-toolbar-panel jdm-tbar-panel-history" style="">
+				<h3 class="jdm-tbar-panel-header J-panel-header">
+					<a href="http://my.jd.com/history/list.html" target="_blank"
+						class="title">
+						<i></i> <em class="title">我的足迹</em>
+					</a> <span class="close-panel J-close"></span>
+				</h3>
+				<div class="jdm-tbar-panel-main">
+					<div class="jdm-tbar-panel-content J-panel-content">
+						<div class="jdm-tbar-tipbox2">
+							<div class="tip-inner">
+								<i class="i-loading"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="jdm-tbar-panel-footer J-panel-footer"></div>
+			</div>
+			<div data-name="jimi"
+				class="J-content jdm-toolbar-panel jdm-tbar-panel-jimi" style="">
+				<h3 class="jdm-tbar-panel-header J-panel-header">
+					<span class="title">
+						<i></i> <em class="title">咨询JIMI</em>
+					</span> <span class="close-panel J-close"></span>
+				</h3>
+				<div class="jdm-tbar-panel-main">
+					<div class="jdm-tbar-panel-content J-panel-content">
+						<div class="jdm-tbar-tipbox2">
+							<div class="tip-inner">
+								<i class="i-loading"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="jdm-tbar-panel-footer J-panel-footer"></div>
+			</div>
+		</div>
+
+
+		<div class="jdm-toolbar-tabs mui-mbar-tabs-mask">
+
+			<!-- 活动 -->
+			<div class="mui-mbar-tab mui-mbar-tab-acti"></div>
+
+			<!-- 购物车 -->
+			<div class="mui-mbar-tab mui-mbar-tab-cart" data-name="cart"
+				style="top: 0px; margin: 8px 0px;">
+				<div class="mui-mbar-tab-logo mui-mbar-tab-logo-cart"></div>
+				<div class="mui-mbar-tab-txt">购物车</div>
+				<div class="mui-mbar-tab-sup">
+					<div class="mui-mbar-tab-sup-bg">
+						<div class="mui-mbar-tab-sup-bd" id="shopcart_num">0</div>
+					</div>
+				</div>
+				<div class="mui-mbar-tab-tip">
+					购物车
+					<div class="mui-mbar-arr mui-mbar-tab-tip-arr">◆</div>
+				</div>
+				<div class="mui-mbar-cart-tip">
+					购物车商品添加成功！
+					<div class="mui-mbar-arr mui-mbar-tab-tip-arr">◆</div>
+				</div>
+			</div>
+			<div class="mui-mbar-tab mui-mbar-tab-asset" data-name="asset"
+				style="top: 0px; margin: 8px 0px;">
+				<div class="mui-mbar-tab-logo mui-mbar-tab-logo-asset"></div>
+				<div class="mui-mbar-tab-tip">
+					我的资产
+					<div class="mui-mbar-arr mui-mbar-tab-tip-arr">◆</div>
+				</div>
+			</div>
+			<div class="mui-mbar-tab mui-mbar-tab-brand"  data-name="follow"
+				style="top: 0px; margin: 8px 0px;">
+				<div class="mui-mbar-tab-logo mui-mbar-tab-logo-brand"></div>
+				<div class="mui-mbar-tab-tip">
+					我关注的品牌
+					<div class="mui-mbar-arr mui-mbar-tab-tip-arr">◆</div>
+				</div>
+			</div>
+			
+			<div class="mui-mbar-tab mui-mbar-tab-favor" data-name="collect"
+				style="top: 0px; margin: 8px 0px;">
+				<div class="mui-mbar-tab-logo mui-mbar-tab-logo-favor"></div>
+				<div class="mui-mbar-tab-tip">
+					我的收藏
+					<div class="mui-mbar-arr mui-mbar-tab-tip-arr">◆</div>
+				</div>
+			</div>
+			<div class="mui-mbar-tab mui-mbar-tab-foot" data-name="history"
+				style="top: 0px; margin: 8px 0px;">
+				<div class="mui-mbar-tab-logo mui-mbar-tab-logo-foot"></div>
+				<div class="mui-mbar-tab-tip">
+					我的足迹
+					<div class="mui-mbar-arr mui-mbar-tab-tip-arr">◆</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(".mui-mbar-tab").toggle(
+		function(){
+			var name = $(this).data("name");
+			$(".jdm-toolbar-panel").css("visibility","hidden");
+			$(".jdm-toolbar-panel.jdm-tbar-panel-"+name).css("visibility","visible");
+			$(".jdm-toolbar-wrap").addClass("z-jdm-toolbar-open");
+		},
+		function(){
+			$(".jdm-toolbar-wrap").removeClass("z-jdm-toolbar-open");	
+		}
+	);
+	
+	
+	$(".mui-mbar-tab").hover(function() {
+		$(this).find(".mui-mbar-tab-tip").show().animate({
+			right : "35px",
+			opacity : "1"
+		}, 300);
+	}, function() {
+		$(this).find(".mui-mbar-tab-tip").animate({
+			right : "70px",
+			opacity : "0"
+		}, 300, "swing", function() {
+			$(this).hide();
+		});
+	});
+</script>

@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>订单详情-${store.title}</title>
+<script src="http://js.spcrm.com/jQuery-1.7.1.min.js" type="text/javascript"></script>
+<!--结算页面样式-->
+<link type="text/css" rel="stylesheet" href="http://cdn.titles.top/css/common.css" />
+<link type="text/css" rel="stylesheet" href="http://cdn.titles.top/css/order.css" />
+<link type="text/css" rel="stylesheet" href="http://cdn.titles.top/css/orderdetail.css" />
+</head>
+<body>
+	<!-- 顶部 -->
+	[#include "/html/widget/topbar.html" /]
+	<!-- 头部 -->
+	[#include "/html/widget/header.html" /]
+	<div style="clear: both"></div>
+	<!-- 导航-->
+	[#include "/html/widget/navbar.html" /]
+	<div style="clear: both"></div>
+
+
+	<div class="wrap w1 header clearfix">
+		<div id="logo">
+			<a href="#none" class="link2"><b></b>"结算页"</a>
+		</div>
+
+		<div class="stepflex" id="#sflex03">
+			<dl class="normal done">
+				<dt class="s-num">1</dt>
+				<dd class="s-text">
+					1.订单付款<s></s><b></b>
+				</dd>
+			</dl>
+			<dl class="normal doing">
+				<dt class="s-num">2</dt>
+				<dd class="s-text">
+					2.商家发货<s></s><b></b>
+				</dd>
+			</dl>
+			<dl class="normal last">
+				<dt class="s-num">3</dt>
+				<dd class="s-text">
+					3.确认收货<s></s><b></b>
+				</dd>
+			</dl>
+		</div>
+	</div>
+
+
+	<div class="wrap">
+		<div class="m" id="orderstate">
+			<div class="mt">
+				<strong>订单号：${order.serialnum}&nbsp;&nbsp;&nbsp;&nbsp;
+				状态：<span class="ftx14">付款成功，等待卖家发货</span>
+					<span id="pay-button-${order.serialnum}"></span>
+				</strong>
+				<div class="fr">
+					
+				</div>
+			</div>
+
+			<div class="mc" style="display: show">
+				订单已经完成，感谢您在${store.title}购物。<span class="flk13"><a href="#"></a></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="wrap">
+		<div class="m" id="ordertrack">
+			<ul class="tab">
+				<li class="curr">
+					<h2>订单跟踪</h2>
+				</li>
+
+				<li class="">
+					<h2>付款信息</h2>
+				</li>
+			</ul>
+			<div class="clr"></div>
+			<div class="mc tabcon" style="display: block;">
+				<!--订单跟踪-->
+				<table cellpadding="0" cellspacing="0" width="100%" id="order_track">
+					<tbody id="tbody_track">
+						<tr>
+							<th width="15%"><strong>处理时间</strong></th>
+							<th width="50%"><strong>处理信息</strong></th>
+							<th width="35%"><strong>操作人</strong></th>
+						</tr>
+					</tbody>
+					
+				</table>
+
+				<div class="extra">
+					
+				</div>
+			</div>
+
+			<div class="mc tabcon hide" style="display: none;">
+				<!--付款信息-->
+				<table cellpadding="0" cellspacing="0" width="100%">
+					<tbody>
+						<tr>
+							<td width="30%" id="daiFuName">付款方式：在线支付</td>
+							<td width="70%" id="daiFuPeople"></td>
+						</tr>
+						<tr>
+							<td>商品金额：￥${order.goodsfee}</td>
+							<td>运费金额：￥${order.shipfee}</td>
+						</tr>
+						<tr>
+							<td>优惠总金额：￥0.00</td>
+							<td>实际运费：￥${order.shipfee}</td>
+						</tr>
+						<tr>
+							<td>应支付金额：￥${order.totalfee}</td>
+							<td>已支付金额：￥${order.totalfee}</td>
+						</tr>
+						<tr>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="tb-ul"></div>
+			</div>
+
+			<div class="mc tabcon hide" style="display: none;">
+				<!--订单跟踪-->
+				<table width="100%" cellspacing="0" cellpadding="0">
+					<tbody id="tbody_bigtrack">
+						<tr>
+							<th width="26%"><strong>处理时间</strong></th>
+							<th width="72%"><strong>处理信息</strong></th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="i-ordertrack">
+				
+			</div>
+			<div id="im" title="" style="display: block;">
+				
+			</div>
+		</div>
+		[#include "/html/order/orderinfo.html" /]
+	</div>
+	
+	
+	<script type="text/javascript">
+	$("#ordertrack .tab li").click(
+		function (){
+			$(this).siblings().removeClass("curr");
+			$(this).addClass("curr");
+			$("#ordertrack").children(".tabcon").css("display","none");
+			$("#ordertrack").children(".tabcon").eq($(this).index()).css("display","block");
+		}
+	);
+	
+	
+	function getOrderItems(){
+		$.ajax({
+			url : domain+'/order/detail?sn=${order.serialnum}',
+			dataType : 'json',
+			type : 'POST',
+			success : function(data) {
+				var orderitems = data.orderItems;
+				var itemhtml = "";
+				if (orderitems){
+					for(var i=0;i<orderitems.length;i++){
+						itemhtml = itemhtml +"<tr>"
+						+"<td>"+orderitems[i].productid+"</td>"
+						+"<td><div class=\"img-list\"><a class=\"img-box\" target=\"_blank\" href=\"${store.domain}/item-"+orderitems[i].productid+".html\"> <img width=\"50\" height=\"50\" src=\""+orderitems[i].purl+"\" title=\"\" /></a></td>"
+						+"<td>"
+							+"<div class=\"al fl\"><a class=\"flk13\" target=\"_blank\" href=\"${store.domain}/item-"+orderitems[i].productid+".html\">"+orderitems[i].ptitle+"</a></div>"
+							+"<div class=\"clr\"></div>"
+							+"<div id=\"coupon_\" class=\"fl\"></div>"
+						+"</td>"
+						+"<td><span class=\"ftx04\"> ￥"+orderitems[i].price+"</span></td>"
+						+"<td>1</td>"
+						+"<td><span id=\"iwo_\" class=\"flk13\"> <a target=\"_blank\" href=\"#\">查看评价</a><a href=\"#\" target=\"_blank\">申请返修/退换货</a></span> </td>"
+						+"</tr>";
+					}
+				}
+				$("#order-items").html(itemhtml);
+			}
+		});
+	}
+	
+	function getOrderTrace(){
+		$.ajax({
+			url : domain+'/order/tracelist?ordersn=${order.serialnum}',
+			dataType : 'json',
+			type : 'POST',
+			success : function(data) {
+				console.info(data);
+				var trace_html_ = "<tbody>";
+				if (data){
+					for(var i=0;i<data.length;i++){
+						if (data[i].operate=='PAYED'){
+							trace_html_ +="<tr><td>"+data[i].opttimestr+"</td><td> 您完成订单支付。</td><td>客户</td></tr>"	
+						}else if (data[i].operate=='SENDED'){
+							trace_html_ +="<tr><td>"+data[i].opttimestr+"</td><td>"+data[i].remark+"</td><td> 商家</td></tr>"	
+						}else if (data[i].operate=='RECEIVED'){
+							trace_html_ +="<tr><td>"+data[i].opttimestr+"</td><td> 您已确认收货。</td><td>客户</td></tr>"	
+						}else if (data[i].operate=='EVALED'){
+							trace_html_ +="<tr><td>"+data[i].opttimestr+"</td><td> 您已对本次购物进行评价。</td><td>客户</td></tr>"	
+						}else{
+							trace_html_ +="<tr><td>"+data[i].opttimestr+"</td><td>"+data[i].remark+"</td><td>"+data[i].optuser+"</td></tr>"
+						}
+						
+					}
+				}
+				trace_html_ +="</tbody>";
+				$("#order_track").append(trace_html_);
+			}
+		});
+	}
+	
+	//
+	getOrderItems();
+	
+	//订单跟踪记录
+	getOrderTrace();
+	</script>
+
+	<!-- 尾部-->
+	[#include "/html/widget/footer.html" /]
+	<!-- footer end -->
+	<!-- <script type="text/javascript" src="http://cdn.titles.top/site/order.js"></script> -->
+</body>
+</html>

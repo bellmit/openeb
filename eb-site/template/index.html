@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>商城门户系统--EB-SHOP</title>
+<meta name="keywords" content="{$metaKeywords}" />
+<meta name="description" content="{$metaDesc}" />
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="Bookmark" href="favicon.ico">
+<link rel="Shortcut Icon" href="favicon.ico">
+
+<script src="http://js.spcrm.com/jQuery-1.7.1.min.js"
+	type="text/javascript"></script>
+<script charset="utf-8" src="http://js.spcrm.com/jquery.qrcode.min.js"
+	type="text/javascript"></script>
+
+<script charset="utf-8"
+	src="http://cdn.titles.top/api/smallslider/rs/js/jquery.smallslider.js"
+	type="text/javascript"></script>
+
+<script charset="utf-8"
+	src="http://cdn.titles.top/api/smallslider/rs/js/jquery.smallslider.js"
+	type="text/javascript"></script>
+<script charset="utf-8"
+	src="http://cdn.titles.top/js/jquery.autocomplete.min.js"
+	type="text/javascript"></script>
+<script charset="utf-8"
+	src="http://cdn.titles.top/js/JD.js"
+	type="text/javascript"></script>
+
+
+<link type="text/css" rel="stylesheet"
+	href="http://cdn.titles.top/css/common.css">
+<link type="text/css" rel="stylesheet"
+	href="http://cdn.titles.top/css/index.css">
+<link type="text/css" rel="stylesheet"
+	href="http://cdn.titles.top/api/smallslider/rs/css/smallslider.css">
+<link type="text/css" rel="stylesheet"
+	href="http://cdn.titles.top/js/jquery.autocomplete.css">
+<link type="text/css" rel="stylesheet"
+	href="http://cdn.titles.top/css/JD.css">
+
+<script type="text/javascript">
+	$(function(){
+		var storey = ${storey};
+		console.info(${storey});
+		var banner = ${banner};
+		console.info(${banner});
+		console.info(${brand});
+		var brand = ${brand};
+		console.info(${cates});
+		
+		/** 首页导航 **/
+		var index_nav_ = ${cates};
+		if(index_nav_.length > 0) {
+			var index_nav_html_ = "";
+			// 遍历一级
+			for(var i = 0; i < index_nav_.length; i++) {
+				if(i == 0) {
+					index_nav_html_ += "<div class='item fore'>";
+				} else {
+					index_nav_html_ += "<div class='item'>";
+				}
+				index_nav_html_ += "<span><h3><a href=''>"+index_nav_[i].title+"</a></h3><s></s></span><div class='i-mc'>"+
+								   "<div class='close' onclick='$(this).parent().parent().removeClass('hover')'></div><div class='subitem'>";
+				var index_nav_html2_ = index_nav_[i].cates;
+				if(index_nav_html2_ != null) {
+					// 遍历一级
+					for(var j = 0; j < index_nav_html2_.length; j ++) {
+						if(j == 0) {
+							index_nav_html_ += "<dl class='fore'>";
+						} else {
+							index_nav_html_ += "<dl>";
+						}
+						index_nav_html_ += "<dt>"+index_nav_html2_[j].title+"</dt><dd>";
+						var index_nav_html3_ = index_nav_html2_[j].cates;
+						if(index_nav_html3_ != null) {
+							for(var k = 0; k < index_nav_html3_.length; k ++) {
+								index_nav_html_ += "<em><a href='#'>"+index_nav_html3_[k].title+"</a></em>";
+							}
+						}
+						index_nav_html_ += "</dd></dl>";
+					}
+				}
+				index_nav_html_ += "</div></div></div>";
+			}
+			$("#index_nav_list").append(index_nav_html_);
+		}
+		
+		/** 首页Banner **/
+		$("#flashbox").append("<ul><li style='background:url("+banner.maingraph+") center;'><a href='"+banner.maingraphline+"' target='_blank'></a></li></ul>");
+		
+		
+		/** 热门品牌列表 **/
+		var index_hot_brands_ = "";
+		index_hot_brands_ += "<div class='brandfirst width-2'><div class='bigbrand'>"+
+							 "<a href='"+brand.hotBrandLine1+"' target='_blank'><img src='"+brand.hotBrand1+"' /></a></div></div><div class='brandlist width-8'>";
+		var index_hot_list_ = brand.hotBrands;
+		var index_brand_tmp_ = 0;
+		for(var i = 0; i < 24; i ++) {
+			if(index_brand_tmp_ == index_hot_list_.length) {
+				index_brand_tmp_ = 0;
+			}
+			index_hot_brands_ += "<a class='branditem' href='"+index_hot_list_[index_brand_tmp_].hotBrandLine+"' target='_blank'><em class='message'></em> <i class='icon icon_heart0'></i>"+
+			 "<img src='"+index_hot_list_[index_brand_tmp_].hotBrand+"'></a>";
+			index_brand_tmp_ ++;
+		}
+		index_hot_brands_ += "</div><div class='brand3 width-2'><a href='"+brand.hotBrandLine2+"' target='_blank'><img src='"+brand.hotBrand2+"' /></a></div>";
+		
+		$("#hot_brand_list").append(index_hot_brands_);
+		
+		
+		/** 首页楼层列表 **/
+		var index_storey_ = "";
+		for(var i = 0; i < storey.length; i ++) {
+			index_storey_ += "<div class='index_hang index_pro pro1 row'>"+
+								"<div class='category width-2'><div class='t'><div class='item'><i class='i1'></i>"+storey[i].title+"</div></div>"+
+								"<div class='c'><div class='brand'>";
+			var index_brand_ = storey[i].indexBrands;
+			for(var j = 0; j < index_brand_.length; j++) {
+				index_storey_ += "<a href='"+index_brand_[j].brandLine+"'><img src='"+index_brand_[j].brandImg+"'></a>";
+			}
+			index_storey_ += "</div><div class='keyword'>";
+			var index_cate_ = storey[i].indexCates;
+			for(var k = 0; k < index_cate_.length; k++) {
+				index_storey_ += "<a href='"+index_cate_[k].cateLine+"'>"+index_cate_[k].cateTitle+"</a>";
+			}
+			index_storey_ += "</div></div></div><div class='list row width-4 '><a href='"+storey[i].mainImgline+"'><img src='"+storey[i].mainImg+"'></a></div>"+
+							"<div class='list row width-6'>";
+			var index_img_ = storey[i].indexImgs;
+			for(var l = 0; l < index_img_.length; l++) {
+				index_storey_ += "<div class='item  width-4'><a href='"+index_img_[l].imgLine+"' target='_blank'>"+
+								"<img src='"+index_img_[l].img+"' alt=''/></a></div>";
+			}
+			index_storey_ += "</div><div class='clear'></div></div>";
+		}
+		
+		$("#index_storey").append(index_storey_);
+		
+		// 页面条幅
+		$("#index_long_banner_1").append("<a href='"+banner.longBanners[0].bannerLine+"' target='_blank'> <img src='"+banner.longBanners[0].banner+"' /></a>");
+		$("#index_long_banner_2").append("<a href='"+banner.longBanners[1].bannerLine+"' target='_blank'> <img src='"+banner.longBanners[1].banner+"' /></a>");
+		
+		
+		$(".allsort").hoverForIE6({
+			current : "allsorthover",
+			delay : 200
+		});
+		$(".allsort .item").hoverForIE6({
+			delay : 150
+		});
+	});
+</script>
+</head>
+<body>
+	<div class="topbar">
+		<div class="wrap iconlist">
+			<div class="memberbox width-6">
+				嗨！欢迎来到EB-SHOP <@shiro.user> <@shiro.principal/> </@shiro.user>
+				<@shiro.guest> <a href="#">请登录</a> <a href="#">免费注册</a>
+				</@shiro.guest>
+			</div>
+			<div class="width-6">
+				<a href="#"><i class="icon_heart icon_topbar"></i>我关注的品牌</a>
+				<@shiro.user> <a href="/eb-site/1001/member.html">会员中心</a>
+				</@shiro.user> <a href="#"><i class="icon_shopcart icon_topbar"></i>购物车<span
+					id="shopcart_count">0</span>件</a> <span class="fav">收藏夹<i
+					class="icon icon_dropdown"></i></span> | <span><i
+					class="icon_phone icon_topbar"></i>手机版</span> <span class="fav">商家支持<i
+					class="icon icon_dropdown"></i></span> <span class="fav"><i
+					class="icon_shopcart icon_topbar"></i>网站导航<i
+					class="icon icon_dropdown"></i></span>
+			</div>
+		</div>
+	</div>
+
+	<div id="header">
+		<div class=" wrap">
+			<div class="logobar width-3">
+				<a href="../" title="返回首页" class="logo "></a>
+			</div>
+			<div id="searchbar" class="width-6">
+				<form method="get" action="/product/">
+					<input type="text" name="keywords" class="txt autocomplete"
+						value="" placeholder="站内搜索" /> <input type="submit" class="bt"
+						value="搜索" />
+					<div class="clear"></div>
+				</form>
+				<a href="#">时尚彩宝</a> | <a href="#">钻石</a> | <a href="#">时尚搭配</a> | <a
+					href="#">设计师定制</a> | <a href="#">珠宝资讯</a> | <a href="#">贵金属投资</a>
+			</div>
+
+			<div id="login">
+				<div class="loginbox hidden-sm"></div>
+			</div>
+		</div>
+	</div>
+	<div style="clear: both"></div>
+	<div id="nav">
+		<ul class="wrap">
+			<li id="rootnav" class="width-2">
+            	<div class='allsort'>
+                    <div class='mt'>
+                        <strong><a href="http://www.17sucai.com/">全部商品分类</a></strong>
+                        <div class='extra'>&nbsp;</div>
+                    </div>
+            		<!-- 分类列表 -->
+                    <div class='mc' id="index_nav_list"></div>
+                </div>				
+			</li>
+
+			<li class="width-1"><a href="brand.html" class="nava">品牌街</a></li>
+			<li class="width-1"><a href="member.html" class="nava">会员尊享</a></li>
+			<li class="width-1"><a href="offline.html" class="nava">门店惊喜</a></li>
+			<li class="width-1"><a href="raise.html" class="nava">珠宝众筹</a></li>
+			<li class="width-1"><a href="gold.html" class="nava">金银投资</a></li>
+			<li class="width-1"><a href="design.html" class="nava">设计定制</a></li>
+			<li class="width-1"><a href="vip.html" class="nava">搭配资讯</a></li>
+		</ul>
+		<div class="clear"></div>
+	</div>
+	<div id="mainer">
+		<div id="flashbox" class="smallslider">
+		</div>
+
+		<div class="wrap">
+			<!-- 热门品牌列表 -->
+			<div class="index_hang index_brand">
+				<div class="t">
+					<a href="" class="cur">大牌街</a> <a href="">潮牌街</a> <a href="">原创街</a>
+					<div class="right">
+						<a class="btn_reload"><i class="icon icon_reload"></i>换一批</a> <a
+							href="#">品牌库 </a>
+					</div>
+				</div>
+				<div class="c" id="hot_brand_list"></div>
+				<div class="clear"></div>
+			</div>
+			
+			<!-- 条幅一 -->
+			<div class="index_hang" id="index_long_banner_1"></div>
+			
+			<!-- 首页楼层 -->
+			<div id="index_storey"></div>
+			
+			<!-- 条幅二 -->
+			<div class="index_hang" id="index_long_banner_2"></div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	
+	<div class="mui-mbar-tabs-mask">
+		<div class="mui-mbar-tab mui-mbar-tab-cart"
+			style="top: 0px; margin: 8px 0px;">
+			<div class="mui-mbar-tab-logo mui-mbar-tab-logo-cart"></div>
+			<div class="mui-mbar-tab-txt">购物车</div>
+			<div class="mui-mbar-tab-sup">
+				<div class="mui-mbar-tab-sup-bg">
+					<div class="mui-mbar-tab-sup-bd">7</div>
+				</div>
+			</div>
+		</div>
+		<div class="mui-mbar-tab mui-mbar-tab-asset"
+			style="top: 0px; margin: 8px 0px;">
+			<div class="mui-mbar-tab-logo mui-mbar-tab-logo-asset"></div>
+			<div class="mui-mbar-tab-tip">
+				我的资产
+				<div class="mui-mbar-arr mui-mbar-tab-tip-arr">◆</div>
+			</div>
+		</div>
+		<div class="mui-mbar-tab mui-mbar-tab-brand"
+			style="top: 0px; margin: 8px 0px;">
+			<div class="mui-mbar-tab-logo mui-mbar-tab-logo-brand"></div>
+			<div class="mui-mbar-tab-tip">
+				我关注的品牌
+				<div class="mui-mbar-arr mui-mbar-tab-tip-arr">◆</div>
+			</div>
+		</div>
+		<div class="mui-mbar-tab mui-mbar-tab-favor"
+			style="top: 0px; margin: 8px 0px;">
+			<div class="mui-mbar-tab-logo mui-mbar-tab-logo-favor"></div>
+			<div class="mui-mbar-tab-tip">
+				我的收藏
+				<div class="mui-mbar-arr mui-mbar-tab-tip-arr">◆</div>
+			</div>
+		</div>
+		<div class="mui-mbar-tab mui-mbar-tab-favor"
+			style="top: 0px; margin: 8px 0px;">
+			<div class="mui-mbar-tab-logo mui-mbar-tab-logo-favor"></div>
+			<div class="mui-mbar-tab-tip">
+				我的收藏
+				<div class="mui-mbar-arr mui-mbar-tab-tip-arr">◆</div>
+			</div>
+		</div>
+		<div class="mui-mbar-tab mui-mbar-tab-foot"
+			style="top: 0px; margin: 8px 0px;">
+			<div class="mui-mbar-tab-logo mui-mbar-tab-logo-foot"></div>
+			<div class="mui-mbar-tab-tip">
+				我的收藏
+				<div class="mui-mbar-arr mui-mbar-tab-tip-arr">◆</div>
+			</div>
+		</div>
+	</div>
+	<script>
+            $(".mui-mbar-tab").hover(function () { 
+                $(this).find(".mui-mbar-tab-tip").show().animate({
+                    right: "35px",
+                    opacity: "1"
+                }, 300);
+            }, function () { 
+                $(this).find(".mui-mbar-tab-tip").animate({
+                    right: "70px",
+                    opacity: "0"
+                }, 300,"swing",function(){$(this).hide();});
+
+            });
+        </script>
+	﻿
+	<div id="footer">
+		<div class="wrap">
+			<div class="line"></div>
+			<div class="help">
+				<dl class="width-2">
+					<dt>购物指南</dt>
+					<dd>
+						<a href="{$prefix}article/?id={$v.id}">购买流程</a>
+					</dd>
+					<dd>
+						<a href="{$prefix}article/?id={$v.id}">支付方式</a>
+					</dd>
+				</dl>
+				<dl class="width-2">
+					<dt>购物保障</dt>
+					<dd>
+						<a href="{$prefix}article/?id={$v.id}">购买流程</a>
+					</dd>
+					<dd>
+						<a href="{$prefix}article/?id={$v.id}">支付方式</a>
+					</dd>
+				</dl>
+				<dl class="width-2">
+					<dt>售后服务</dt>
+					<dd>
+						<a href="{$prefix}article/?id={$v.id}">购买流程</a>
+					</dd>
+					<dd>
+						<a href="{$prefix}article/?id={$v.id}">支付方式</a>
+					</dd>
+				</dl>
+				<dl class="width-2">
+					<dt>关于我们</dt>
+					<dd>
+						<a href="{$prefix}article/?id={$v.id}">购买流程</a>
+					</dd>
+					<dd>
+						<a href="{$prefix}article/?id={$v.id}">支付方式</a>
+					</dd>
+				</dl>
+				<dl class="width-4">
+					<dt>手机上EB-SHOP</dt>
+					<dd>
+						<a href="{$prefix}article/?id={$v.id}">购买流程</a>
+					</dd>
+					<dd>
+						<a href="{$prefix}article/?id={$v.id}">支付方式</a>
+					</dd>
+				</dl>
+
+
+				<div style="clear: both"></div>
+			</div>
+			<!-- help -->
+		</div>
+		<!-- copyright -->
+		<div class="copyright">
+			<p class="copy wrap">
+				<a href="#">关于EB-SHOP</a> <a href="#">帮助中心</a> <a href="#">诚聘英才</a>
+				<a href="#">联系我们</a> <a href="#">网站合作</a> <a href="#">法律声明</a> <a
+					href="#">廉政举报</a><br> <a href="#">京东商城</a> | <a href="#">中国白银网</a>
+				| <a href="#">央视网</a> | <a href="#">1号店</a> | <a href="#">京东商城</a> |
+				<a href="#">中国白银网</a> | <a href="#">央视网</a> | <a href="#">1号店</a> <br>
+
+				<a href="http://www.csmall.com/help.do?page=help_help_icp"
+					target="_blank">中国增值电信业务经营许可证 B2-20140169号</a> <span
+					style="line-height: 1.5;"> | ©2014甘肃中通申信科技有限公司 All Rights
+					Reserved | 国家信息产业部粤ICP备14018586号</span> <span class="powerby">技术支持：<a
+					href="http://www.jentian.com/" target="_blank" title="甘肃中通申信科技有限公司">牛军军</a>
+					<br> <a
+					href="http://si.trustutn.org/info?sn=131141223010513021410"
+					target="_blank"><img
+						src="http://v.trustutn.org/images/cert/bottom_small_img.png"
+						alt="实名认证" title="实名认证"></a>
+				</span>
+			</p>
+		</div>
+
+		<div class="clear"></div>
+	</div>
+	<script>
+            (function () {
+                $('.nav_list dl:odd').addClass("odd");
+                $('#flashbox').smallslider();
+                
+                $('.navbar-toggle').click(function () {
+                    var nav = $('.navMobile');
+                    if (nav.is(':visible')) {
+                        nav.slideUp('slow');
+                    } else {
+                        nav.slideDown('slow');
+                    }
+                });
+                
+                $('#rootnav').mouseover(function (){
+                	$('.nav1').show();
+                });
+                
+                $('#rootnav').mouseout(function (){
+                	$('.nav1').hide();
+                });
+                
+				/**自动补全***/
+                $('.autocomplete').AutoComplete({
+                	'data': 'http://localhost:9080/eb-site/1001/suggest',
+                    'ajaxDataType': 'json',
+                    'ajaxType': 'POST',
+                    'maxItems': 5,
+                    'itemHeight': 20,
+                    'width': 'auto',
+                    'onerror': function(msg){alert(msg);}
+                });
+            })();
+        </script>
+
+	<script>
+           if ($(".navMobile").is(':visible')) {
+               setTimeout(function () {
+                   $(".navMobile").slideUp("slow");
+               }, 3000);
+           }
+       </script>
+       
+       <script type="text/javascript">
+		
+	</script>
+</body>
+</html>

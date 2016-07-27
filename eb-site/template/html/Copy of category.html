@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>${category.title}--${store.title}</title>
+<meta name="keywords" content="{$metaKeywords}" />
+<meta name="description" content="{$metaDesc}" />
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="Bookmark" href="favicon.ico">
+<link rel="Shortcut Icon" href="favicon.ico">
+
+<script src="http://js.spcrm.com/jQuery-1.7.1.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://cdn.titles.top/js/jquery.pagination.js"></script>
+<link type="text/css" rel="stylesheet" href="http://cdn.titles.top/css/common.css">
+<link type="text/css" rel="stylesheet" href="http://cdn.titles.top/css/list.css">
+<link type="text/css" rel="stylesheet" href="http://cdn.titles.top/css/pagination.css">
+</head>
+<body>
+
+	<!-- 顶部 -->
+	[#include "/html/widget/topbar.html" /]
+	<!-- 头部 -->
+	[#include "/html/widget/header.html" /]
+	<div style="clear: both"></div>
+	<!-- 导航-->
+	[#include "/html/widget/navbar.html" /]
+	<div style="clear: both"></div>
+
+	<!-- AD Banner -->
+	[#include "/html/widget/adbanner.html" /]
+
+	<!-- Search Param -->
+	[#include "/html/category/parambar.html" /]
+
+	<!-- Search Condiction -->
+	<div id="J_searchWrap" class="wrap">
+		<div id="J_container" class="container">
+			<!-- 搜索条件-->
+			[#include "/html/category/selectbar.html" /]
+			<div id="J_main" class="g-main2">
+				<div class="m-list">
+					<div class="ml-wrap">
+						<!-- 过滤条 -->
+						[#include "/html/category/filterbar.html" /]
+						<div class="clr"></div>
+						
+						<div id="plist" class="goods-list-v1 J-goods-list gl-type-3">
+							<div class="clr"></div>
+						</div>
+						<div class="clr"></div>
+						<!-- 分页 -->
+						[#include "/html/category/pagebar.html" /]
+					</div>
+				</div>
+				
+				<!-- m-aside start-->
+				[#include "/html/category/leftbar.html" /]
+				<!-- m-aside end -->
+				
+				<div class="clr"></div>
+			</div>
+		</div>
+		<span class="clr"></span>
+		<div id="Collect_Tip" class="Tip360 w260"></div>
+	</div>
+	
+	<!-- AD Banner -->
+	<div class="index_hang wrap">
+		<a href="{$value.href}" target="_blank"> <img
+			src="http://cdn.titles.top/pic/banner08.jpg" alt="{$value.title}" />
+		</a>
+	</div>
+	
+	<div class="clear"></div>
+	
+	<script>
+		var searchResult = ${search_result};
+		var brands = searchResult.brand_data;
+		var attrs = searchResult.attr_data;
+		var params = searchResult.params_data;
+		var total = searchResult.total;
+		$("#goods-total").text(total);
+		
+		function initselect(){
+			var J_selectorBrand = $("#J_selectorBrand");
+			
+			if (null != brands && brands.length>0){
+				var brandHtml = "<div class=\"sl-wrap\"> <div class=\"sl-key\"><span>品牌：</span></div><div class=\"sl-value\"><div class=\"clr\"></div><div class=\"sl-v-list\"><ul class=\"J_valueList v-fixed\">  ";
+				for(var i=0;i<brands.length;i++){
+					brandHtml = brandHtml + "<li id=\"brand-"+brands[i].id+"\" style=\"display: block;\">"+
+						"<a href=\"#\" title=\""+brands[i].title+"\" rel=\"nofollow\"><i></i>"+brands[i].title+"</a>"+
+					"</li> ";
+				}
+				brandHtml = brandHtml +"</ul> </div> <div style=\"display: none;\" class=\"sl-b-selected J_brandSelected\"> <span class=\"sl-b-key\">已选条件：</span> <ul class=\"sl-v-list brand-selected\"></ul> </div> <div class=\"sl-btns\"> <a href=\"javascript:;\" class=\"btn btn-primary J_btnsConfirm\">确定</a> <a href=\"javascript:;\" class=\"btn btn-default J_btnsCancel\">取消</a> </div> </div> <div class=\"sl-ext\"> <a href=\"javascript:;\" style=\"visibility: visible;\" class=\"sl-e-more J_extMore\">更多<i></i></a> <a href=\"javascript:;\" class=\"sl-e-multiple J_extMultiple\">多选<i></i></a> </div> </div> ";
+			}
+			
+			if (null != attrs && attrs.length>0){
+				var attrHtml = "";
+				for(var i=0;i<attrs.length;i++){
+					if (i<3){
+						attrHtml = attrHtml + "<div style=\"display: block;\" class=\"J_selectorLine s-line J_selectorFold\">"
+					}else{
+						attrHtml = attrHtml + "<div style=\"display: none;\" class=\"J_selectorLine s-line J_selectorFold hide\">"
+					}
+					attrHtml = attrHtml 
+						+"<div class=\"sl-wrap extend\">"
+						+"<div class=\"sl-key\"> <span>"+attrs[i].title+"：</span> </div> "
+						+"<div class=\"sl-value\"> "
+						+"<div class=\"sl-v-list\"> "
+						+"<ul class=\"J_valueList\"> ";
+					console.info(attrs[i].vals);
+					
+					for(var j=0;j<attrs[i].vals.length;j++){
+						if(params.props){
+							attrHtml = attrHtml + "<li style=\"display: block;\"><a href=\"list-"+params.cats+".html?props="+params.props+"@"+attrs[i].vals[j].id+"\" rel=\"nofollow\"><i></i>"+attrs[i].vals[j].title+"</a></li> ";
+						}else{
+							attrHtml = attrHtml + "<li style=\"display: block;\"><a href=\"list-"+params.cats+".html?props="+attrs[i].vals[j].id+"\" rel=\"nofollow\"><i></i>"+attrs[i].vals[j].title+"</a></li> ";
+						}
+					}
+					attrHtml = attrHtml+"</ul>";
+					attrHtml = attrHtml +"</div>"
+					+" <div class=\"sl-btns\"> <a href=\"javascript:;\" class=\"btn btn-primary J_btnsConfirm\">确定</a> <a href=\"javascript:;\" class=\"btn btn-default J_btnsCancel\">取消</a> </div> </div>"
+					+" <div class=\"sl-ext\"> <a href=\"javascript:;\"  class=\"sl-e-more J_extMore opened\">更多<i></i></a> <a href=\"javascript:;\" class=\"sl-e-multiple J_extMultiple\">多选<i></i></a> </div>"
+					+" </div> </div> </div> ";
+				}
+				
+			}
+			J_selectorBrand.empty();
+			J_selectorBrand.html(brandHtml);
+			$("#J_selectorAttr").append(attrHtml);
+		}
+		
+		
+		
+		function initpage() {
+			$.ajax({
+				url : domain+'/list/${category.id}',
+				//data: 
+				dataType : 'json',
+				type : 'GET',
+				//contentType:'application/json;charset=UTF-8',
+				success : function(goods) {
+					if (goods) {
+						alert(goods.length);
+						var plisthtml = "<ul class=\"list-h clearfix\">";
+						for (var i = 0; i < goods.length; i++) {
+							plisthtml = plisthtml
+									+ "<li class=\"gl-item\">"
+									+ "<div class=\"p-img\"><a target=\"_blank\" href=\"${store.domain}/item-"
+									+ goods[i].id
+									+ ".html\" title=\"\"> <img width=\"160\" height=\"160\" data-img=\"1\" src=\"#\" class=\"err-product\"></a><div></div></div>"
+									+ "<div class=\"p-name\"><a target=\"_blank\" href=\"${store.domain}/item-"
+									+ goods[i].id
+									+ ".html\" title=\"\"> <span class=\"p-promo-tag1\"> <b class=\"text\">推荐&gt;&gt;</b><b class=\"arrow\"></b></span>"
+									+ goods[i].title
+									+ "<font class=\"adwords\">"
+									+ goods[i].title
+									+ "</font></a></div>"
+									+ "<div class=\"p-price\"><i>定价：</i> <strong class=\""
+									+ goods[i].id
+									+ "\" done=\"1\">￥"
+									+ goods[i].price
+									+ "</strong> <span class=\"discount\">（8.2折）</span><span id=\"p11111117\"></span></div>"
+									+ "<div class=\"p-market\">市场定价：<del>￥"
+									+ goods[i].price
+									+ "</del></div>"
+									+ "<div class=\"extra\"><span class=\"star\"><span class=\"star-white\"><span class=\"star-yellow h5\">&nbsp;</span></span></span> <a id=\"comment-11111117\" onclick=\"searchlog()\" target=\"_blank\" href=\"#comment\">已有4639人评价</a> </div>"
+									+ "<div class=\"p-summary\" done=\"1\"> <span> "
+									+ goods[i].title
+									+ "...</span><a href=\"\" target=\"_blank\" onclick=\"searchlog()\">更多&gt;</a> </div>"
+									+ "<div class=\"p-shopnum\"></div>" + "</li>";
+						}
+						plisthtml = plisthtml + "</ul>";
+					}
+					$("#plist").empty();
+					$("#plist").html(plisthtml);
+				}
+			}
+		}
+	</script>
+	<script>
+            (function () {
+            	initpage();
+                initselect();
+                
+                $('#rootnav').mouseover(function (){
+                	$('.nav1').show();
+                });
+                
+                $('#rootnav').mouseout(function (){
+                	$('.nav1').hide();
+                });
+                
+                $(".sl-e-more.J_extMore").toggle(
+                	function(){
+                    	$(this).parents(".sl-wrap").addClass("extend");
+                    	$(this).addClass("opened");
+                    },
+                    function(){
+                    	$(this).parents(".sl-wrap").removeClass("extend");
+                    	$(this).removeClass("opened");
+                    }
+                );
+                
+                $(".sl-e-multiple.J_extMultiple").click(
+                	function(){
+                		$(this).parents(".sl-wrap").addClass("multiple");
+                	}		
+                );
+                
+                $(".sl-wrap").find("li").click(
+                	function(){
+                		if (!$(this).parents(".sl-wrap").hasClass("multiple")){
+                			return true;
+                		}
+                		if(!$(this).hasClass("selected")){
+                			$(this).addClass("selected");
+                			$(".J_btnsConfirm.disabled").removeClass("disabled");
+                		}else{
+                			$(this).removeClass("selected");
+                			var size = $(this).siblings(".selected").length;
+                			if (size==0){
+                				$(".J_btnsConfirm").addClass("disabled");
+                			}
+                		}
+                		return false;
+                	}
+                );
+                
+                $(".J_btnsCancel").click(
+                	function(){
+                		$(this).parents(".sl-wrap.multiple").removeClass("multiple");
+                	}
+                );
+                
+				$('#J_selectorMore').toggle(
+					function (){
+						$(".J_selectorLine.hide").show();
+						$(".sm-wrap").addClass("opened");
+						$(".sm-wrap").empty();
+						$(".sm-wrap").html("收起<i></i>");
+					},
+					function (){
+						$(".J_selectorLine.hide").hide();
+						$(".sm-wrap").removeClass("opened");
+						$(".sm-wrap").empty();
+						$(".sm-wrap").html("更多选项<i></i>");
+					}
+				);
+				
+            })();
+            
+        </script>
+
+	
+<!-- 尾部-->
+[#include "/html/widget/footer.html" /]
+<!-- footer end -->
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!-- Search Param -->
+	<div class="w wrap">
+		<div class="crumbs-bar clearfix">
+			<div class="crumbs-nav">
+				<div class="crumbs-nav-main clearfix">
+					<@b2c_cate_list siteid="1001" cateid="1010";cate>
+					<#if cate.index ==0 >
+					<div class="crumbs-nav-item one-level">
+					<#else>
+					<div class="crumbs-nav-item">
+					</#if>
+						<a href="list-${cate.id}.html" class="crumbs-link">${cate.title}</a> <i class="crumbs-arrow">&gt;</i>
+					</div>
+					</@b2c_cate_list>
+					<div class="crumbs-nav-item">
+						<div class="menu-drop">
+							<div class="trigger">
+								<span class="curr">灯饰照明</span><i class="menu-drop-arrow"></i>
+							</div>
+							<div class="menu-drop-main">
+								<ul class="menu-drop-list">
+									<li><a href="#">灯饰照明</a></li>
+									<li><a href="#">厨房卫浴</a></li>
+									<li><a href="#">五金工具</a></li>
+									<li><a href="#">电工电料</a></li>
+									<li><a href="#">墙地面材料</a></li>
+									<li><a href="#">装饰材料</a></li>
+									<li><a href="#">装修服务</a></li>
+								</ul>
+							</div>
+						</div>
+						<i class="crumbs-arrow">&gt;</i>
+					</div>
+					<div class="crumbs-nav-item">
+						<div class="menu-drop">
+							<div class="trigger">
+								<span class="curr">筒灯/射灯</span><i class="menu-drop-arrow"></i>
+							</div>
+							<div class="menu-drop-main">
+								<ul class="menu-drop-list clearfix">
+									<li><a href="#">台灯</a></li>
+									<li><a href="#">节能灯</a></li>
+									<li><a href="#">装饰灯</a></li>
+									<li><a href="#">落地灯</a></li>
+								</ul>
+							</div>
+						</div>
+						<i class="crumbs-arrow">&gt;</i>
+					</div>
+					<div class="crumbs-nav-item">
+						<div class="selector-set">
+							<a href="#" title="11-15W、15W以上" data-id="440" class="ss-item"><b>功率：</b><em>11-15W、15W以上</em><i></i></a>
+						</div>
+					</div>
+					<a href="#" class="btn btn-default fr">全部撤消</a>
+				</div>
+			</div>
+		</div>
+	</div>

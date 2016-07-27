@@ -1,0 +1,20 @@
+.p-num {
+	float: left;
+	height: 36px;
+	line-height: 36px;
+	padding: 0 14px;
+	margin-right: 5px;
+	font-size: 14px;
+}
+
+.page a {
+  color: #333;
+  border: 1px solid #ddd;
+  background-color: #f7f7f7;
+  background-repeat: repeat-x;
+  background-image: -moz-linear-gradient(top, #f7f7f7, #f2f2f2);
+  background-image: -webkit-linear-gradient(top, #f7f7f7, #f2f2f2);
+  background-image: -o-linear-gradient(top, #f7f7f7, #f2f2f2);
+  background-image: linear-gradient(top, #f7f7f7, #f2f2f2);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f7f7f7', endColorstr='#f2f2f2', GradientType=0);
+}

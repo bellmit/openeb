@@ -1,0 +1,42 @@
+<script charset="utf-8" src="http://cdn.titles.top/js/JD.js"
+	type="text/javascript"></script>
+<link type="text/css" rel="stylesheet"
+	href="http://cdn.titles.top/css/JD.css">
+<div id="nav">
+	<ul class="wrap">
+		<li id="rootnav" class="width-2">
+           	<div class='allsort'>
+                   <div class='mt'>
+                       <strong><a href="#">商品服务分类</a></strong>
+                       <div class='extra'>&nbsp;</div>
+                   </div>
+           			<!-- 分类列表 -->
+                   <div class='mc hide' id="index_nav_list"></div>
+               </div>				
+		</li>
+
+		<div id="navitems"></div>
+	</ul>
+	<div class="clear"></div>
+</div>
+<div class="clear"></div>
+<script>
+function initShopNav(){
+	$.ajax({
+		url : domain+'/navlist',
+		dataType : 'json',
+		type : 'GET',
+		success : function(json) {
+			var navhtml = "<ul>";
+			if (json.success){
+				for(var i=0;i<json.data.length;i++){
+					navhtml = navhtml+"<li class=\"width-1\"><a href=\""+json.data[i].href+"\" class=\"nava\" target='blank'>"+json.data[i].title+"</a></li>"
+				}
+			}
+			navhtml = navhtml+"</ul>";
+			$("#navitems").html(navhtml);
+		}
+	});
+}
+initShopNav();
+</script>

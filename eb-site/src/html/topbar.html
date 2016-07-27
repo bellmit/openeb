@@ -1,0 +1,46 @@
+<script type="text/javascript">
+var domain = "${store.domain}";
+</script>
+<div class="topbar">
+		<div class="wrap iconlist">
+			<div class="memberbox width-6">
+				嗨！欢迎来到 <@b2c_store siteid="1001";store>${store.title}</@b2c_store>
+				<@shiro.user> 
+				<@shiro.principal/> 
+				<a href="javascript:void(0);" onclick="logout();">退出</a>
+				</@shiro.user>
+				<@shiro.guest> 
+				<a href="${store.domain}/login.html">请登录</a> <a href="${store.domain}/regist.html">免费注册</a>
+				</@shiro.guest>
+			</div>
+			<div class="width-6">
+				<!-- <a href="#"><i class="icon_heart icon_topbar"></i>我关注的品牌</a> -->
+				<@shiro.user> 
+				<@b2c_store siteid="1001";store>
+				<a href="${store.domain}/home/home.html">会员中心</a>
+				<a href="${store.domain}/cart/cart.html"><i class="icon_shopcart icon_topbar"></i>购物车<span
+					id="top_cart_num">0</span>件</a>
+				</@b2c_store>
+				</@shiro.user>  
+					<span class="fav">收藏夹<i class="icon icon_dropdown"></i></span> 
+				  | <span><i class="icon_phone icon_topbar"></i>手机版</span> 
+					<span class="fav">商家支持<i class="icon icon_dropdown"></i></span> 
+					<span class="fav"><i class="icon_shopcart icon_topbar"></i>
+					网站导航<i class="icon icon_dropdown"></i></span>
+			</div>
+		</div>
+	</div>
+	
+	
+	<script>
+		function logout(){
+			$.ajax({
+				type: 'GET',
+				url : domain+'/logout',
+				dataType : 'json',
+				success : function(json) {
+					window.location.href=domain+"/index.html";
+				}
+			});
+		}
+	</script>

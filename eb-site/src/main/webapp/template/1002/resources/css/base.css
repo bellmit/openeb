@@ -1,0 +1,182 @@
+﻿@CHARSET "UTF-8" /* version:20141125 */
+
+/* 初始化CSS */
+html{margin:0; padding:0;}
+body{margin:0; padding:0;width:100%;font-size:12px;}
+ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend,div {margin:0; padding:0;}
+fieldset, img {border:none;}
+img{margin:0px;padding:0px;}
+select, input {vertical-align:middle;}
+textarea {resize:none;}
+a {color:#666666; text-decoration:none;}
+a:hover {color:#B30000;}
+ul, li{list-style-type:none; margin:0; padding:0;}
+
+/* 鼠标样式 */
+.pointer{ cursor:pointer;}
+
+/* 分隔符 */
+.sep-5{ height:5px; clear:both;}
+.sep-10{ height:10px; clear:both;}
+.sep-15{ height:15px; clear:both;}
+.sep-20{ height:20px; clear:both;}
+.sep-25{ height:25px; clear:both;}
+.sep-30{ height:30px; clear:both;}
+
+/* 边框边距 */
+.noborder{ border:0;}	/* 无边框 */
+.nomargin{ margin:0;}	/* 无外边距 */
+.nopadding{ padding:0;}	/* 无内边距 */
+
+/* 字体字号 */
+.f-size-24 { font-size:24px; }
+.f-size-20 { font-size:20px; }
+.f-size-18 { font-size:18px; }
+.f-size-16 { font-size:16px; }
+.f-size-14 { font-size:14px; }
+.f-size-12 { font-size:12px; }
+.f-bold { font-weight:bold;} /* 字体加粗 */
+.f-normal { font-weight:normal;} /* 字体不加粗 */
+
+/* 文本对齐方式 */
+.t-align-l { text-align:left;}
+.t-align-r { text-align:right;}
+.t-align-c { text-align:center;}
+
+/* 字距 */
+.l-height-12 { line-height:12px;}
+.l-height-14 { line-height:14px;}
+.l-height-16 { line-height:16px;}
+.l-height-18 { line-height:18px;}
+.l-height-20 { line-height:20px;}
+.l-height-24 { line-height:24px;}
+.l-height-30 { line-height:30px;}
+.l-height-36 { line-height:36px;}
+.l-height-42 { line-height:42px;}
+.l-height-46 { line-height:46px;}
+.l-height-50 { line-height:50px;}
+.l-height-56 { line-height:56px;}
+.l-height-70 { line-height:70px;}
+
+/* 字体颜色 */
+.c-red { color:#B30000;}
+.c-green { color:#66cc74;}
+.c-green2 { color:#66cca7;}
+.c-white { color:#FFFFFF;}
+.c-golden { color:#dec777;}
+.c-grassgreen { color:#bbcc66;}
+.c-black {color:#000000;}
+.c-gray {color:#666666;}
+.c-blue {color:#66BECC;}
+.c-oragle {color:#cca766;}
+/* 线框颜色 */
+.b-red {border-bottom:1px solid #cca766;}
+.b-green {border-bottom:1px solid #66cc74;}
+.b-green2 {border-bottom:1px solid #66cca7;}
+.b-white {border-bottom:1px solid #cca766;}
+.b-golden {border-bottom:1px solid #cca766;}
+.b-grassgreen {border-bottom:1px solid #cca766;}
+.b-black {border-bottom:1px solid #cca766;}
+.b-gray {border-bottom:1px solid #cca766;}
+.b-blue {border-bottom:1px solid #66BECC;}
+.b-oragle {border-bottom:1px solid #cca766;}
+/* 背景颜色 */
+.bg-red {background-color:#B30000;}
+.bg-green {background-color:#66cc74;}
+.bg-green2 {background-color:#66cca7;}
+.bg-white {background-color:#FFFFFF;}
+.bg-golden {background-color:#ccc966;}
+.bg-grassgreen {background-color:#bbcc66;}
+.bg-black {background-color:#000000;}
+.bg-gray {background-color:#666666;}
+.bg-blue {background-color:#66BECC;}
+.bg-oragle {background-color:#cca766;}
+/* 定位 */
+.absolute { position:absolute; }
+.relative { position:relative; }
+/* 位置 */
+.m-left-10 {margin-left:10px;}
+.m-left-20 {margin-left:20px;}
+.m-right-10 {margin-right:10px;}
+.m-right-20 {margin-right:20px;}
+.m-top-10 {margin-top:10px;}
+.m-top-20 {margin-top:20px;}
+.m-top-50 {margin-top:50px;}
+.m-top-70 {margin-top:70px;}
+.p-left-10 {padding-left:10px;}
+.p-left-20 {padding-left:20px;}
+.p-right-10 {padding-right:10px;}
+.p-right-20 {padding-right:20px;}
+.p-top-10 {padding-top:10px;}
+.p-top-20 {padding-top:20px;}
+/* 显示 */
+.o-hidden { overflow:hidden; }
+.hidden { display:none; }
+.block { display:block; }
+
+/* 浮动 */
+.f-left { float:left;}
+.f-right { float:right;}
+
+/* 栏目标题 */
+.channel-title {height:30px;width:100%;}
+.title-style {font-size:16px;line-height:30px;float:left;padding-left:10px;font-family:"微软雅黑","黑体","宋体";}
+.title-style1 {width:680px;font-size:14px;line-height:30px;float:left;padding-left:10px;margin-top:10px;font-family:"微软雅黑","黑体","宋体"; font-weight:bold;}
+
+/* 查看更多 */
+.more {float:right;padding-right:10px;text-align:center;line-height:30px;color:#666666;margin-top:10px;}
+
+/* 文章列表 */
+.list {width:100%;height:100%;overflow:hidden;}
+.list ul {margin:0;padding:0;margin-top:5px;}
+
+/* 可修改列表的行高和行距 */
+.list ul li {height:29px;line-height:29px;list-style-type:none;font-size:14px;margin:0 10px;border-bottom:1px dashed #BFBFBF;position:relative;}
+.list ul li img{ padding-left:10px; }
+.list ul li span a{ color:#666666; }
+.list ul li span a:hover{ color:#FF8000; }
+
+/* 带日期文章列表 */
+.listd-title {float:left;padding-right:20px;overflow:hidden;}
+.listd-date { color:#666666; position:absolute; right:10px;top:0px;}
+
+/* 列表样式2 */
+.list2 ul li {list-style-type:none;clear:both;font-size:14px;height:47px;margin-top:5px;display:block;border-bottom:1px dashed #BFBFBF;}
+.list2-img {width:15px;height:40px;line-height:40px;float:left;margin-left:10px;}
+.list2-info {width:165px;height:40px;float:left;padding-right:10px;overflow:hidden;}
+.list2-info span {display:block;float:left;line-height:20px;}
+.list2-title a{color:#B30000;}
+.list2-title a:hover{color:#ff8000;}
+.list2-date {color:#ff8000;width:100%;}
+
+/* 分页 */
+.content-page {text-align: center;color: #666666;font-size: 12px;font-family: "微软雅黑","黑体","宋体";}
+span.page_size {padding: 0 10px;}
+span.page_size b {padding: 0 4px;}
+.content-page a {padding: 0 5px;font-weight: bold;}
+.content-page a:hover {color:#b30000;}
+span.page_count {padding: 0 10px;}
+
+/* 栏目信息(图左文字右) */
+.info {width:380px;clear:both;}
+.info-img {width:120px;height:70px;margin:10px 10px 0 10px;border:1px solid #BFBFBF;padding:4px;float:left;}
+.info-detail {width:210px;height:80px;float:right;margin-top:10px;margin-right:10px;}
+.info-title {display:block;line-height:26px;font-size:14px;overflow:hidden;}
+.info-title a{color:#B30000;}
+.info-title a:hover{color:#ff8000;}
+.info-description {display:block;line-height:18px;text-indent:2em;color:#666666;overflow:hidden;}
+
+/* Message */
+.message {width:700px; margin:0 auto;}
+.message div{margin:10px 0;}
+.message label{ color:#666666; font-size:14px;}
+.message input{width:600px; height:30px;color:#666666;font-size:14px;}
+.message textarea{width:600px; height:150px;color:#666666;font-size:14px;}
+.messageSubmit input {width:150px;height:40px;color:#ffffff;font-size:14px;margin-left:260px;background-color:#00bfee; border:0;}
+.messageSubmit input:hover {background-color:#FF8400;}
+
+/* 上一条-下一条 */
+.pre-next {padding-left: 20px;font-size: 12px;color: #884244;}
+.pre-next a {color: #b30000;}
+.pre-next a:hover {color: #0085d0;}
+.pre-next div {height: 20px;}

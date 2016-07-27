@@ -1,0 +1,59 @@
+<!-- Search Param -->
+	<div class="wrap">
+		<div class="crumbs-bar clearfix">
+			<div class="crumbs-nav">
+				<div class="crumbs-nav-main clearfix">
+					<@b2c_cate_path siteid="1001" cateid="${category.id}";cate,index>
+					<#if index ==0 >
+					<div class="crumbs-nav-item one-level">
+						<a href="${store.domain}/list-${cate.id}.html" class="crumbs-link">${cate.title}</a> <i class="crumbs-arrow">&gt;</i>
+					</div>
+					<#else>
+					<div class="crumbs-nav-item">
+						<div class="menu-drop">
+							<div class="trigger">
+								<span class="curr">${cate.title}</span><i class="menu-drop-arrow"></i>
+							</div>
+							<div class="menu-drop-main">
+								<ul class="menu-drop-list">
+									<li><a href="list-${cate.id}.html">${cate.title}</a></li>
+									<li><a href="#">厨房卫浴</a></li>
+									<li><a href="#">五金工具</a></li>
+									<li><a href="#">电工电料</a></li>
+									<li><a href="#">墙地面材料</a></li>
+									<li><a href="#">装饰材料</a></li>
+									<li><a href="#">装修服务</a></li>
+								</ul>
+							</div>
+						</div>
+						<i class="crumbs-arrow">&gt;</i>
+					</div>
+					</#if>
+					</@b2c_cate_path>
+					<div class="crumbs-nav-item">
+						<div class="menu-drop">
+							<div class="trigger">
+								<span class="curr">${category.title}</span><i class="menu-drop-arrow"></i>
+							</div>
+							<div class="menu-drop-main">
+								<ul class="menu-drop-list">
+									<li><a href="list-${category.id}.html">${category.title}</a></li>
+								</ul>
+							</div>
+						</div>
+						<i class="crumbs-arrow">&gt;</i>
+					</div>
+					<!-- 已选条件 -->
+					<div class="crumbs-nav-item">
+						<div class="selector-set" id="param_checked">
+							<a href="#" title="11-15W、15W以上" data-id="440" class="ss-item"><b>功率：</b><em>11-15W、15W以上</em><i></i></a>
+							<a href="#" title="11-15W、15W以上" data-id="440" class="ss-item"><b>功率：</b><em>11-15W、15W以上</em><i></i></a>
+							<a href="#" title="11-15W、15W以上" data-id="440" class="ss-item"><b>功率：</b><em>11-15W、15W以上</em><i></i></a>
+						</div>
+					</div>
+					
+					<a href="${store.domain}/list-${category.id}.html" class="btn btn-default fr">全部撤消</a>
+				</div>
+			</div>
+		</div>
+	</div>

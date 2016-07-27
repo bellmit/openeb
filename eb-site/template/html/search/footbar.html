@@ -1,0 +1,36 @@
+<div id="footmark" class="footmark">
+	<div class="m hide may-like" style="display: block;">
+		<div class="mt clearfix">
+			<h2 class="title">根据浏览猜你喜欢</h2>
+			<div class="extra">
+				<a href="#none" class="change"><i class="ico"></i><span
+					class="txt">换一批</span></a>
+			</div>
+		</div>
+		<div class="mc">
+			<ul class="may-like-list clearfix">
+				<@b2c_top_goods siteid='1001';product,index>
+				<li onclick="clsClickLog();" data-gid="1">
+					<div class="p-img">
+						<a href="${store.domain}/item-${product.id}.html"
+							title="${product.title}" target="_blank"> <img
+							src="${product.picUrl}"
+							alt="${product.title}" width="130" height="130" />
+						</a>
+					</div>
+					<div class="p-name">
+						<a href="${store.domain}/item-${product.id}.html" target="_blank"
+							title="${product.title}">${product.title}</a>
+					</div>
+					<div class="p-review">
+						<a class="p-comm-1530167943"
+							href="${store.domain}/item-${product.id}.html"
+							target="_blank">(已有人评价)</a>
+					</div>
+					<div class="p-price J-p-1530167943">￥${product.price}</div>
+				</li>
+				</@b2c_top_goods>
+			</ul>
+		</div>
+	</div>
+</div>

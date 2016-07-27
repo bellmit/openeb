@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>订单支付 -${store.name}</title>
+<script src="http://js.spcrm.com/jQuery-1.7.1.min.js" type="text/javascript"></script>
+<!--结算页面样式-->
+<link type="text/css" rel="stylesheet" href="http://cdn.titles.top/css/common.css"/>
+<link type="text/css" rel="stylesheet" href="http://cdn.titles.top/css/order.css"/>
+<link type="text/css" rel="stylesheet" href="http://cdn.titles.top/css/flow2014.min.css"/>
+
+</head>
+<body>
+	<!-- 顶部 -->
+	[#include "/html/widget/topbar.html" /]
+	<!-- 头部 -->
+	[#include "/html/widget/header.html" /]
+	<div style="clear: both"></div>
+	<!-- 导航-->
+	[#include "/html/widget/navbar.html" /]
+	<div style="clear: both"></div>
+	
+	<div class="wrap w1 header clearfix">
+		<div id="logo">
+			<a href="#none" class="link2"><b></b>"结算页"</a>
+		</div>
+	
+		<div class="stepflex" id="#sflex03">
+			<dl class="first done">
+				<dt class="s-num">1</dt>
+				<dd class="s-text">1.我的购物车<s></s><b></b></dd>
+			</dl>
+			<dl class="normal done">
+				<dt class="s-num">2</dt>
+				<dd class="s-text">2.填写核对订单信息<s></s><b></b></dd>
+			</dl>
+			<dl class="normal doing">
+				<dt class="s-num">3</dt>
+				<dd class="s-text">3.成功提交订单<s></s><b></b></dd>
+			</dl>
+		</div>
+	</div>
+
+
+	<!-- main -->
+	<div class="wrap">
+	    <div class="done_info w clearfix">
+		<!-- <div class="Left icon"></div> -->
+		<div class="Left main">
+			<div class="strong">您的订单已提交成功，感谢您的订购！</div>
+				<div class="f14" style="line-height:1.5">
+					<p class="p">在线支付订单编号：<span class="red yen f14 bold" id="order_sn"></span> <span class="gray">|</span>
+						应付款金额：<span class="yen red bold" id="order_fee">¥</span> <a href="javascript:;" class="detail_txt" id="JS_order_detail_hander">订单付款详情</a></p>
+				</div>
+				<div class="notice" id="JS_notice_timeer">请您在<span class="red bold">2天23小时59分钟</span>内完成支付，否则订单会被自动取消。</div>
+			
+			
+			<table id="JS_order_detail_list" class="detail_list">
+				<tbody>
+					<tr>
+						<th>订单号</th>
+						<th>服务提供商</th>
+						<th>应付款金额</th>
+					</tr>
+					<tr>
+						<td>${order.serialnum}</td>
+						<td>${order.storename}</td>
+						<td>${order.totalfee}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<!-- /order -->
+
+<!-- pay -->
+<div class="wrap done_pay ">
+	<div class="nav">
+		<a href="javascript:;" id="JS_payment_platform" onclick="togglePayment('platform');return false;" class="current">支付平台</a>
+		<a href="javascript:;" id="JS_payment_netbank" onclick="togglePayment('netbank');return false;" >网上银行支付</a>
+	</div>
+	<div class="body">
+		<form id="deposit" name="alipaysubmit" method="post" target="_blank">
+			<input type="hidden" name="sn" value="${order.serialnum}"/>
+			<div class="way netbank" id="JS_paybody_netbank" style="display: none;">
+				<div class="item flow_bank clearfix " id="FD_chinabank2">
+				<div class="brank_title"><b>请选择网上银行</b></div>
+				<div class="banks">
+				</div>
+				
+			</div>			
+			<div class="select_bank l" id="JS_selected_bank"></div>
+			</div>
+			<div class="way netbank" id="JS_paybody_creditcard">
+				<div class="item flow_bank clearfix " id="FD_chinabank4">
+				<div class="brank_title"><b>请选择信用卡开卡银行</b></div>
+				<div class="banks"><input type="radio" name="creditcard" value="ICBC" id="CC_ICBC" /><label for="CC_ICBC"><img src="http://image.meilele.com/themes/paipai/images/bank_logo/gongshang.gif" alt="工商银行" /></label></div>
+				<div class="banks"><input type="radio" name="creditcard" value="ABC" id="CC_ABC" /><label for="CC_ABC"><img src="http://image.meilele.com/themes/paipai/images/bank_logo/nongye.gif" alt="农业银行"></label></div>
+			</div>			
+			<div class="select_bank l" id="JS_selected_creditcard"></div>
+			</div>
+			<div class="way alipay" id="JS_paybody_platform" style="display: block;">
+				<label><input id="JS_payment_platform_1" type="radio" name="payment_platform" value="1" /><img src="http://image.meilele.com/images/zhuanti/upload/alipay_1347593387.jpg" width="113" height="46" style="vertical-align:middle;"/></label>
+				<label><input id="JS_payment_platform_3" type="radio" name="payment_platform" value="6" /><img src="http://image.meilele.com/images/zhuanti/upload/alipay_s_1389162335.gif" width="146" height="46" style="vertical-align:middle;"/></label>
+			</div>
+			<div class="mt20">
+				<a href="javascript:;" class="gopay" onclick="posttopay();" title="确认支付" id="JS_btn_d1" style="vertical-align:middle"></a>
+				<br><span style="display:none" class="gray" id="JS_btn_d2">正在提交，请稍候。</span>
+			</div>
+		</form>
+	</div>
+</div>
+	<!-- 尾部-->
+	[#include "/html/widget/footer.html" /]
+	<!-- footer end -->
+
+	<script type="text/javascript" charset="utf-8">
+	var domain = ${domain};
+	function posttopay(){
+		var sn=$("#sn").val();
+		if (!sn){
+			alert("订单不存在或已失效，请重新下单！");
+		}
+		$.ajax({
+			url : domain+"/alipay/deposit",
+			type : "POST",
+			data : "sn="+sn,
+			contentType : "application/json",
+			success : function(json) {
+				//data.total_fee = data.total_fee / 100;//测试成功后请删除
+				console.log(json);
+				console.log(json.data);
+				$("#deposit").append(json.data);//后台会返回一个新的交易表单，并自动提交。
+			},
+			error : function() {
+			}
+		});
+	}
+</script>
+</body>																			
+</html>

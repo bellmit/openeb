@@ -1,0 +1,69 @@
+<!-- 搜索页左侧 -->
+<div class="left">
+	<div class="m" id="refilter">
+		<div class="mt">
+			<h2>
+				<a href="#">查看所有类目</a>
+			</h2>
+		</div>
+		<div class="mc" id="all_cate_box">
+			
+		</div>
+	</div>
+
+	<div id="ad_left" class="m m0 hide"></div>
+	
+	<div class="promo-pic-ad hide">
+		<h5 class="hd">商家精选</h5>
+		<div class="bd"></div>
+	</div>
+	
+	<div class="m">
+		<a href="javascript:void(0)" target="_blank">
+		<img width="210" height="210" alt="" src="http://cdn.titles.top/images/qrcode.jpg" /></a>
+	</div>
+</div>
+
+<script type="text/javascript">
+initSiteCates();
+function initSiteCates(){
+	$.ajax({
+		url : domain+'/allcates',
+		dataType : 'json',
+		type : 'GET',
+		success : function(json) {
+			var all_cate_html="";
+			for (var i=0;i<json.length;i++){
+				if (i==0){
+					all_cate_html+="<div class=\"item fore hover\">"
+				}else{
+					all_cate_html+="<div class=\"item \">"
+				}
+				all_cate_html+="<h3><b></b> <a href='"+domain+"/list-"+json[i].id+".html' id='category-"+json[i].id+"' class='curr'>"+json[i].title+"</a></h3>"
+				all_cate_html+="<ul>";
+				var nodes = json[i].items;
+				if (nodes){
+					for(var j=0;j<nodes.length;j++){
+						if (j==0){
+							all_cate_html+="<li class=\"curr\">"
+						}else{
+							all_cate_html+="<li>"
+						}
+						all_cate_html+="<a href='"+domain+"/list-"+nodes[j].id+".html' id='category-"+nodes[j].id+"'>"+nodes[j].title+"</a></li>"
+					}
+				}
+				all_cate_html+="</ul>";
+				all_cate_html+="<div class='show-more hide'><a href='javascript:;'>查看更多<i></i></a></div>"
+				all_cate_html+="</div>"
+			}
+			$("#all_cate_box").html(all_cate_html);
+		}
+	});
+}
+
+//类目事件
+$(".item").live("click",function(){
+	$(".item").removeClass("fore hover");
+	$(this).addClass("fore hover");
+});
+</script>

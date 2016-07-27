@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>${product.title}-${store.title}</title>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script src="http://js.spcrm.com/jQuery-1.7.1.min.js" type="text/javascript"></script>     
+		<script src="http://cdn.titles.top/js/jquery.jqzoom.js" type="text/javascript"></script>  
+        <link type="text/css" rel="stylesheet" href="http://cdn.titles.top/css/common.css">
+        <link type="text/css" rel="stylesheet" href="http://cdn.titles.top/css/buy.css">
+    </head>
+    <body>
+    	<!-- 顶部 -->
+		[#include "/html/widget/topbar.html" /]
+		<!-- 头部 -->
+		[#include "/html/widget/header.html" /]
+		<!-- 导航-->
+		[#include "/html/widget/navbar.html" /]
+        <!-- AD Banner -->
+		[#include "/html/widget/adbanner.html" /]
+        <!-- 导航 -->
+        [#include "/html/product/parambar.html" /]
+        
+        <!-- 内容-Start -->
+        <div class="wrap product">
+            	<!-- 内容左侧-start -->
+            	<div class="buy-left">                    
+                	<!-- Buy-Head-Start -->
+                	<div class="photo-show">
+                        <div id="big-photo" class="big-photo">
+                        	<span id="bigger-photo" class="jqzoom" ></span>
+                        </div>
+                    	<div id="small-photo" class="small-photo">
+                        	
+                        </div>
+                    </div>
+                    <div class="other-show">
+                    	<div class="product-title" id="product-title">${product.title}</div>
+                        <div class="price-panel">
+                        	<div>
+                            	<dl class="tm-price-panel">
+                                	<dt class="tb-metatit">市场价</dt>
+                                    <dd><em class="tm-yen">¥</em> <span class="tm-price" id="product-mkprice">${product.mkprice}</span></dd>
+                                </dl>
+                            </div>
+                            <div>
+                            	<dl class="tm-price-panel">
+                                	<dt class="tb-metatit">价格</dt>
+                                    <dd><em class="tm-yen-c">¥</em> <span class="tm-price-c" id="product-price">${product.price}</span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <!-- <div class="product-desc-panel">
+                            <dl class="tm-price-panel">
+                                <dt class="tb-metatit">运费</dt>
+                                <dd><span class="tm-desc"><span>江苏南通</span>&nbsp;&nbsp;至&nbsp;&nbsp;<span>兰州</span>&nbsp;&nbsp;<span>快递:</span> <span>15.00</span></span></dd>
+                            </dl>
+                        </div> -->
+                        <div class="product-sale">
+                            <ul class="tm-ind-panel">
+                                <li><span class="tm-label">月销量</span><span class="tm-count" id="product-salesnum">0</span></li>
+                                <li><span class="tm-label">累计评价</span><span class="tm-count" id="product-pinjia">0</span></li>
+                                <li><span class="tm-label">送积分</span><span class="tm-count" id="product-points">${product.auctionPoint}</span></li>
+                			</ul>
+                        </div>                        
+                        <div class="product-desc-panel" id="product-spec-list">
+                            
+                        </div>                       
+                        <!-- <div class="product-desc-panel product-color">
+                            <dl class="tm-price-panel">
+                                <dt class="tb-metatit">颜色分类</dt>
+                                <dd>
+                                	<ul class="product-sku-color" id="color-category">
+                                    	<li class="product-color-category-out"><img src="http://cdn.titles.top/images/buy/sh1.png" width="40" height="40" /></li>
+                                    	<li class="product-color-category-out"><img src="http://cdn.titles.top/images/buy/sh2.png" width="40" height="40" /></li>
+                                    	<li class="product-color-category-out"><img src="http://cdn.titles.top/images/buy/sh3.png" width="40" height="40" /></li>
+                                    </ul>
+                                </dd>
+                            </dl>
+                        </div> -->
+                        <div class="product-desc-panel">
+                            <dl class="tm-price-panel">
+                                <dt class="tb-metatit">数量</dt>
+                                <dd>
+                                	<input type="text" class="tb-text mui-amount-input" id="mui-amount-input" value="1" maxlength="8" title="请输入购买量">
+                                    <span class="mui-amount-btn">
+                                        <span class="mui-amount-increase" id="mui-amount-increase"><img src="http://cdn.titles.top/images/buy/up.png" width="8" height="5" /></span>
+                                        <span class="mui-amount-decrease" id="mui-amount-decrease"><img src="http://cdn.titles.top/images/buy/down.png" width="8" height="5" /></span>
+                                    </span>
+                                    <span class="mui-amount-unit">件</span>
+                                    <span class="tm-desc tm-inventory">库存<span id="product-storenum">${product.storenum}</span>件</span>
+                                </dd>
+                            </dl>
+                        </div> 
+                        <div class="product-desc-panel">
+                        	<div class="product-buy-cart">
+                                <!-- <span id="J_LinkBuy"><img src="http://cdn.titles.top/images/buy/crr_buy.png" width="180" height="40" /></span> -->
+                                <span id="J_LinkBasket"><img src="http://cdn.titles.top/images/buy/shopping_cart.png" width="180" height="40" /></span>
+                            </div>
+                        </div>
+                        <div class="product-desc-panel">
+                            <dl class="tm-price-panel">
+                                <dt class="tb-metatit">服务承诺</dt>
+                                <dd>
+                                	<ul class="tb-serPromise">
+                                    	<li>
+                                        	<a href="#" title="按时发货" target="_blank">按时发货</a></li>
+                                        <li>
+                                        	<a href="#" title="极速退" target="_blank"><s>T2</s>极速退款</a></li>
+                                        <li>
+                                        	<a href="#" title="退货保障" target="_blank"><s>T1</s>退货保障卡</a></li>
+                                        <li>
+                                        	<a href="#" title="七天无理由退换" target="_blank">七天无理由退换</a></li>
+                                    </ul>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                	<!-- Buy-Head-End -->
+                    <div class="clear"></div>
+                    
+                	<!-- Buy-Content-Start -->
+                    <div class="buy-cont-l">
+                    	<div class="panel">
+                        	<div class="store-title">
+                            	<span><strong><a href="#">${store.title}</a></strong></span>
+                                <span></span>
+                            </div>
+                            <div class="store-desc clear">
+                            	<ul>
+                                	<li>服务<span class="store-desc-point">4.8</span></li>
+                                    <li>描述<span class="store-desc-point">4.8</span></li>
+                                    <li>物流<span class="store-desc-point">4.8</span></li>
+                                </ul>
+                            </div>
+                            <div class="clear store-shopping">
+                            </div>
+                        </div>
+                        <div class="">
+                        	
+                        </div>
+                    </div>
+                    <div class="buy-cont-r">
+                    	<!-- 详情菜单-Start -->
+                    	<div class="panel-right">
+                        	<ul class="store-menu">
+                            	<li id="goods-detail">商品详情</li>
+                            	<li id="goods-assessment">累计评价<span>0</span></li>
+                            	<li id="goods-solds">月成交记录<span>0</span>件</li>
+                            </ul>
+                        </div>
+                    	<!-- 详情菜单-End -->
+                        <!-- 商品详情-Start -->
+                    	<div class="panel-right-1" id="goods-detail-cont">
+                        	<div class="attributes-list">
+                            	<div class="store-title">品牌名称：${brand.name}</div>
+                            	<div class="store-attr-list-hd">产品参数：</div>
+                                <ul id="product-props"></ul>
+                            </div>
+                            <div class="skin-box" id="product-desc">
+                            	
+                            </div>
+                        </div>
+                        <!-- 商品详情-End -->
+                        
+                        <!-- 累计评价-Start -->
+                        <div class="panel-right-1" id="goods-assessment-cont" style="display:none;">
+                        	<!-- 评价头部-Start -->
+                        	<div class="rate-header rate-header-tags">
+                            	<div class="rate-score">
+                                	<h4>与描述相符</h4>
+                                    <strong>4.8</strong>
+                                </div>
+                                <div class="rate-tag-box">
+                                	<div class="rate-tag-label">
+                                    	<span>大家都写到</span>
+                                    </div>
+                                    <div class="rate-tag-list" style="height: 70px;">
+                                    	<div class="rate-tag-inner">
+                                            <span class="tag-posi">
+                                            	<a id="ratetag3089_2160a" href="#" data-posi="1" data-id="2160">效果不错(61)<s></s></a>
+                                            </span>
+                                            <span class="tag-posi">
+                                            	<a id="ratetag3089_160a" href="#" data-posi="1" data-id="160">颜色不错(35)<s></s></a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        	<!-- 评价头部-End -->
+                            
+                        	<!-- 评价内容-Start -->
+                            <div class="goods-ass-item">
+                            	<ul id="product-evals">
+                                </ul>
+                            </div>
+                        	<!-- 评价内容-End -->
+                        </div>
+                        <!-- 累计评价-End -->
+                        
+                        <!-- 成交记录-Start -->
+                        <div class="panel-right-1" id="goods-solds-cont" style="display:none;">
+                            <table border="0" cellspacing="0" cellpadding="0" class="table-deal-record">
+                            	<thead>
+                            		<tr>
+                                        <th class="th-buyer">买家<span class="tb-anonytip"></span></th>
+                                        <th class="th-goods">型号</th>
+                                        <th class="th-quantity">数量</th>
+                                        <th class="th-dealtime">成交时间</th>
+                                    </tr>
+                            	</thead>
+                                <tbody id="product-sales">
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- 成交记录-End -->
+                    </div>
+                	<!-- Buy-Content-End -->
+                </div>
+                <!-- 内容左侧-end -->
+                
+                <!-- 内容右侧-start -->
+                [#include "/html/product/rightbar.html" /]
+                <!-- 内容右侧-end -->
+            </div>
+        <!-- 内容-End -->
+        <div class="clear"></div>
+		
+		<script type="text/javascript">
+			var productid="${product.id}";
+			var skuid;
+			$("#J_LinkBasket").click(
+				function(){
+					var specs = $("#product-spec-list").children();
+					var selecteds = $(".product-sku-over");
+					
+					//规格全部选中
+					if(specs.length==selecteds.length){
+						var data = "productId=${product.id}";
+						if (skuid){
+							data = data +"&skuId="+skuid;
+						}
+						$.ajax({
+							type: 'POST',
+							url : domain+'/cart/add',
+							data : data,
+							dataType : 'json',
+							success : function(json) {
+								if(json.success) {
+									showShopCart();
+								}
+							},
+							complete:function(data){
+								var jsonData = eval("("+data.responseText+")");
+								if (jsonData.message=="login"){
+									window.location.href=domain+"/login.html";
+								}
+							}
+						});
+					}else{
+						$("#product-spec-list").addClass("sku-warning");
+					}
+				}		
+			);
+			
+			//商品图片及描述信息
+			function getProductImgs(){
+				$.ajax({
+					url : domain+'/descimgs?pid='+productid,
+					dataType : 'json',
+					type : 'GET',
+					success : function(json) {
+						var imghtml = "<ul>";
+						if (json.images){
+							$("#bigger-photo").html("<img jqimg=\""+json.images[0].url+"\" src=\""+json.images[0].url+"\" width='100%' />");
+							for(var i=0;i<json.images.length>0;i++){
+								imghtml = imghtml+
+	                        	"<li class=\"small-photo-out\">"
+	                           +"	<img bimg=\""+json.images[i].url+"\" src=\""+json.images[i].url+"\" width=\"60\" height=\"60\" />"
+	                           +" </li>"	
+							}
+						}
+						imghtml = imghtml+"</ul>";
+						$("#small-photo").html(imghtml);
+						$("#product-desc").html(json.desc);
+						
+						// 小图鼠标移动事件
+						$("#small-photo ul li").mouseover(function(){
+							$("#small-photo ul li").removeClass("small-photo-over").addClass("small-photo-out");
+							$(this).removeClass("small-photo-out").addClass("small-photo-over");
+							$("#big-photo img").attr("src",$(this).find("img").attr("src")).attr("jqimg",$(this).find("img").attr("bimg"));
+						});
+						$("#color-category li").click(function(){
+							$("#big-photo img").attr("src",$(this).find("img").attr("src"));
+							$("#color-category li").removeClass("product-color-category-over").addClass("product-color-category-out");
+							$(this).removeClass("product-color-category-out").addClass("product-color-category-over");
+						});
+					}
+				});
+			}
+			
+			//商品SKU
+			function getProductSKUs(){
+				$.ajax({
+					url : domain+'/skus?pid='+productid,
+					dataType : 'json',
+					type : 'GET',
+					success : function(json) {
+						console.info(json);
+						if (json){
+							var skus_data = eval("("+json.PRODUCT_SKU_JSON_+")");
+							var spec_data = eval("("+json.PRODUCT_SPEC_JSON_+")");
+							if (null != spec_data && spec_data.length>0){
+								var spechtml = "";
+								for(var i=0;i<spec_data.length;i++){
+									spechtml = spechtml +"<dl class=\"tm-price-panel\">"
+									+"<dt class=\"tb-metatit\">"+spec_data[i].title+"</dt>"
+									+"<dd>"
+									+"<ul class=\"product-sku\" id=\"product-sku\">";
+									if (null != spec_data[i].vals && spec_data[i].vals.length>0){
+										for(var j=0;j<spec_data[i].vals.length;j++){
+											spechtml = spechtml+"<li class=\"product-sku-out\" data-value='"+spec_data[i].id+":"+spec_data[i].vals[j].id+"'>"+spec_data[i].vals[j].title+"</li>";
+										}
+									}
+									spechtml = spechtml +"</ul></dd></dl>";
+								}
+								$("#product-spec-list").empty();
+								$("#product-spec-list").html(spechtml);
+							}
+							
+							$(".product-sku-out").click(function(){
+								$("#product-spec-list").removeClass("sku-warning");
+								$(this).siblings().removeClass("product-sku-over");
+								$(this).siblings().addClass("product-sku-out");
+								$(this).removeClass("product-sku-out");
+								$(this).addClass("product-sku-over");
+								var specs = $("#product-spec-list").children();
+								var selecteds = $(".product-sku-over");
+								//规格全部选中
+								if(specs.length==selecteds.length){
+									var specvals = "";
+									$(".product-sku-over").each(function(){
+										specvals = specvals+";"+$(this).attr("data-value");
+									});
+									
+									specvals = specvals.substring(1);
+									var sku = skus_data[specvals];
+									if (!sku){
+										return;
+									}
+									skuid = sku.skuId;
+									$("#product-mkprice").html(sku.mkprice);
+									$("#product-price").html(sku.price);
+									//$("#product-salesnum").html("0");
+									$("#product-storenum").html(sku.store);
+								}
+							});
+							
+						}
+					}
+				});
+			}
+			
+			//产品参数
+			function getProductProps(){
+				$.ajax({
+					url : domain+'/props?pid='+productid,
+					dataType : 'json',
+					type : 'GET',
+					success : function(json) {
+						console.info("prop",json);
+						var propshtml = "";
+						if (json){
+							for(var i=0;i<json.length;i++){
+								propshtml = propshtml+"<li>"+json[i].title+"</li><li>"+json[i].value+"</li>"
+							}
+						}
+						$("#product-props").html(propshtml);
+					}
+				});
+			}
+			
+			//商品销售情况
+			function getProductSales(){
+				$.ajax({
+					url : domain+'/product/sales?pid='+productid,
+					dataType : 'json',
+					type : 'GET',
+					success : function(data) {
+						var saleshtml = "";
+						if (!data || !data.items){
+							return;
+						}
+						console.info("sales:",data);
+						$("#goods-solds").children("span").text(data.total);
+						$("#product-salesnum").text(data.total);
+						for(var i=0;i<data.items.length;i++){
+							saleshtml = saleshtml
+							+"<tr>"
+							+"<td class=\"cell-align-l buyer\">"
+							+" 	<div class=\"line\"><span class=\"tb-anonymous\">"+data.items[i].buyerid+"</span> </div>"
+							+"</td>"
+							+"<td class=\"cell-align-l style\"> "+data.items[i].specstr+" </td>"
+							+"<td class=\"quantity\">"+data.items[i].totalnum+"</td>"
+							+"<td class=\"dealtime\"> <p class=\"date\">"+data.items[i].addtime+"</p> <p class=\"time\"></p> </td>"
+							+"</tr>"
+						}
+						$("#product-sales").html(saleshtml);
+					}
+				});
+			}
+			
+			
+			//累计评价
+			function getProductEvals(page){
+				$.ajax({
+					url : domain+'/product/evals?pid='+productid+'&page='+page,
+					dataType : 'json',
+					type : 'GET',
+					success : function(data) {
+						var evalshtml = "";
+						if (!data || !data.items){
+							return;
+						}
+						$("#product-pinjia").text(data.total);
+						$("#goods-assessment").children("span").text(data.total);
+						for(var i=0;i<data.items.length;i++){
+							evalshtml = evalshtml
+							+"<li class=\"items\">"
+							+"<div class=\"goods-desc\">"
+							+"<div class=\"desc\">"+data.items[i].content+"</div>"
+							+"<div class=\"date\">"+data.items[i].addtime+"</div>"
+							+"</div>"
+							+"<div class=\"goods-sku\">"
+							+"<ul>"
+							+"	<li><label>颜色分类：</label><span>粉红色/金属蓝/白色</span></li>"
+							+"	<li><label>鞋码：</label><span>38</span></li>"
+							+"</ul>"
+							+"</div>"
+							+"<div class=\"goods-buyer\"><label>"+data.items[i].account+"</label><span></span></div>"
+							+"</li>"
+						}
+						$("#product-evals").html(evalshtml);
+					}
+				});
+			}
+			
+			getProductImgs();
+			getProductSKUs();
+			getProductEvals(1);
+			getProductProps();
+			getProductSales();
+		</script>
+		
+		<script>
+			$(function(){
+				$('.nav_list dl:odd').addClass("odd");
+				//图片放大镜效果
+				$(".jqzoom").jqueryzoom({
+						xzoom:420,
+						yzoom:420
+				});
+				
+				//商品购买数量点击事件
+				$("#mui-amount-increase").click(function(){
+					$("#mui-amount-input").val(Number($("#mui-amount-input").val()) + 1);
+				});
+				$("#mui-amount-decrease").click(function(){
+					if($("#mui-amount-input").val() != 1) {
+						$("#mui-amount-input").val(Number($("#mui-amount-input").val()) - 1);
+					}
+				});
+				
+				
+				// 商品详情点击事件
+				$(".store-menu li").click(function(){
+					var lis = $(".store-menu li");
+					for(var i = 0; i < lis.length; i ++) {
+						$(lis[i]).removeClass("store-menu-click");
+						var id = $(lis[i]).attr("id") +　"-cont";
+						$("#" + id).hide();
+					}
+					$(this).addClass("store-menu-click");
+					var crr_Id = $(this).attr("id") +　"-cont";
+					$("#" + crr_Id).show();
+				});
+			});
+        </script>
+        
+	<!-- 右侧-->
+	[#include "/html/widget/rightbar.html" /]
+	<!-- 尾部-->
+	[#include "/html/widget/footer.html" /]
+	<!-- footer end -->
+    </body>
+</html>

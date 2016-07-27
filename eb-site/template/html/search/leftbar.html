@@ -1,0 +1,53 @@
+<!-- 搜索页左侧 -->
+<div class="left">
+	<div class="m" id="refilter">
+		<div class="mt">
+			<h2>
+				<a href="#">查看所有类目</a>
+			</h2>
+		</div>
+		<div class="mc">
+			<@b2c_cate_list siteid="1001" cateid="0";cate,index>
+			<#if index==0>
+			<div class="item fore hover">
+			<#else>
+			<div class="item">
+			</#if>
+				<h3>
+					<b></b> 
+					<a href="${store.domain}/list-${cate.id}.html" id="category-${cate.id}" onclick="searchlog(1,1713,0,51)" class="curr">${cate.title}</a>
+				</h3>
+				<ul>
+					<@b2c_cate_list siteid="1001" cateid="${cate.id}";subcate,index>
+					<#if index==0>
+					<li class="curr">
+					<#else>
+					<li class="">
+					</#if>
+					<a href="${store.domain}/list-${subcate.id}.html" id="category-${subcate.id}" onclick="searchlog(1,3264,0,51)">${subcate.title}</a></li>
+					</@b2c_cate_list>
+					<li style="display: none;" class=""><a
+						href="http://search.jd.com/Search?keyword=%E7%BB%8F%E6%B5%8E%E5%AD%A6&amp;enc=utf-8&amp;suggest=0#keyword=%E7%BB%8F%E6%B5%8E%E5%AD%A6&amp;enc=utf-8&amp;qrst=1&amp;ps=addr&amp;rt=1&amp;cid3=9291&amp;click=3-9291"
+						id="category-3-9291" onclick="searchlog(1,9291,40,51)">时尚/美妆</a></li>
+				</ul>
+				<div class="show-more hide">
+					<a href="javascript:;" onclick="searchlog(1,0,0,19)">查看更多<i></i></a>
+				</div>
+			</div>
+			</@b2c_cate_list>
+		</div>
+	</div>
+
+
+	<div id="ad_left" class="m m0 hide"></div>
+	
+	<div class="promo-pic-ad hide">
+		<h5 class="hd">商家精选</h5>
+		<div id="xjd_left_576" class="bd"></div>
+	</div>
+	
+	<div id="miaozhen8148" class="m">
+		<a href="#" target="_blank">
+		<img width="210" height="261" alt="" src="#" /></a>
+	</div>
+</div>

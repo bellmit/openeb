@@ -1,0 +1,227 @@
+<div id="footer">
+	<div class="wrap">
+		<div class="line"></div>
+		<div class="help">
+			<dl class="width-2">
+				<dt>购物指南</dt>
+				<dd>
+					<a href="{$prefix}article/?id={$v.id}">购买流程</a>
+				</dd>
+				<dd>
+					<a href="{$prefix}article/?id={$v.id}">支付方式</a>
+				</dd>
+			</dl>
+			<dl class="width-2">
+				<dt>购物保障</dt>
+				<dd>
+					<a href="{$prefix}article/?id={$v.id}">购买流程</a>
+				</dd>
+				<dd>
+					<a href="{$prefix}article/?id={$v.id}">支付方式</a>
+				</dd>
+			</dl>
+			<dl class="width-2">
+				<dt>售后服务</dt>
+				<dd>
+					<a href="{$prefix}article/?id={$v.id}">购买流程</a>
+				</dd>
+				<dd>
+					<a href="{$prefix}article/?id={$v.id}"> 支付方式 </a>
+				</dd>
+			</dl>
+			<dl class="width-2">
+				<dt>关于我们</dt>
+				<dd>
+					<a href="{$prefix}article/?id={$v.id}"> 购买流程 </a>
+				</dd>
+				<dd>
+					<a href="{$prefix}article/?id={$v.id}"> 支付方式 </a>
+				</dd>
+			</dl>
+			<dl class="width-4">
+				<dt>手机上EB-SHOP</dt>
+				<dd>
+					<a href="{$prefix}article/?id={$v.id}"> 购买流程 </a>
+				</dd>
+				<dd>
+					<a href="{$prefix}article/?id={$v.id}"> 支付方式 </a>
+				</dd>
+			</dl>
+			<div style="clear: both"></div>
+		</div>
+		<!-- help -->
+	</div>
+	<!-- copyright -->
+	<div class="copyright">
+		<p class="copy wrap">
+			<a href="#"> 关于EB-SHOP </a> <a href="#"> 帮助中心 </a> <a href="#">
+				诚聘英才 </a> <a href="#"> 联系我们 </a> <a href="#"> 网站合作 </a> <a href="#">
+				法律声明 </a> <a href="#"> 廉政举报 </a> <br> <a href="#"> 京东商城 </a> | <a
+				href="#"> 中国白银网 </a> | <a href="#"> 央视网 </a> | <a href="#"> 1号店
+			</a> | <a href="#"> 京东商城 </a> | <a href="#"> 中国白银网 </a> | <a href="#">
+				央视网 </a> | <a href="#"> 1号店 </a> <br> <a
+				href="http://www.csmall.com/help.do?page=help_help_icp"
+				target="_blank"> 中国增值电信业务经营许可证 B2-20140169号 </a> <span
+				style="line-height: 1.5;"> | ©2014甘肃中通申信科技有限公司 All Rights
+				Reserved | 国家信息产业部粤ICP备14018586号 </span> <span class="powerby">
+				技术支持： <a href="http://www.jentian.com/" target="_blank"
+				title="甘肃中通申信科技有限公司"> 牛军军 </a> <br> <a
+				href="http://si.trustutn.org/info?sn=131141223010513021410"
+				target="_blank"> <img
+					src="http://v.trustutn.org/images/cert/bottom_small_img.png"
+					alt="实名认证" title="实名认证">
+			</a>
+			</span>
+		</p>
+	</div>
+	<div class="clear"></div>
+</div>
+
+
+
+<script charset="utf-8" src="http://cdn.titles.top/js/common.js"
+	type="text/javascript">
+</script>
+<script charset="utf-8" src="http://cdn.titles.top/js/jquery.suggest.js"
+	type="text/javascript"></script>
+<script>
+	//首页显示类目
+	function showcartItems(){
+		$("#cartItemBar").show();		
+	}
+	
+	
+	function search() {
+		var kwords = $("#keywords").val();
+		if (kwords != ""){
+			window.location.href= domain+"/search.html?keyword="+kwords;			
+		}
+	}
+	
+	function upsearch(){
+		var keywords = $("#keywords").val();
+		$.ajax({
+	        contentType: "application/json",
+	        url: domain+"/suggest?keywords="+keywords,
+	        dataType: "json",
+	        success: function (msg) {
+	          $("#keywords").autocomplete(msg, {
+	             minChars: 1,                    //最少输入字条
+	             max: 12,
+	             autoFill: false,                //是否选多个,用","分开
+	             mustMatch: false,               //是否全匹配, 如数据中没有此数据,将无法输入
+	             matchContains: true,            //是否全文搜索,否则只是前面作为标准
+	             scrollHeight: 220,
+	             width: 147,
+	             multiple: false,
+	             formatItem: function (row, i, max) {                    //显示格式
+	                    	//alert("formatItem:"+row)
+	                        //return "<span style='width:72px;'>" + row.user_employeeNo + "</span><span style='width:72px;float:right;font-style: normal;font-weight:normal;'>" + row.User_LastName + "</span>";
+	                 return "<span style='width:72px;'>" + row + "</span><span style='width:72px;float:right;font-style: normal;font-weight:normal;'>" + row + "</span>";
+	             },
+	             formatMatch: function (row, i, max) {               //以什么数据作为搜索关键词,可包括中文,
+	                    	//alert("formatMatch:"+row)
+	                        //return row.user_employeeNo + row.User_LastName;
+	                 return row;
+	             },
+	             formatResult: function (row) {                      //返回结果
+	                    	//alert("formatResult:"+row)
+	                        //return row.user_employeeNo + " " + row.User_LastName;
+	                  return row;
+	             }
+	          }).result(function(event, row){ 
+	                	alert("result:"+row); 
+	          });
+	        }
+	    });
+	}
+	$(function() {
+		initShopCart();
+		initSiteCates();
+	});
+		
+		
+</script>
+<style>
+.ac_results {
+	padding: 0px;
+	/*border: 1px solid black;*/
+	border: 1px solid #C0CADD;
+	background-color: white;
+	overflow: hidden;
+	z-index: 99999;
+}
+
+.ac_results ul {
+	width: 100%;
+	list-style-position: outside;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.ac_results li {
+	/*加*/
+	clear: both;
+	margin: 0px;
+	padding: 2px 5px;
+	cursor: default;
+	display: block;
+	overflow: hidden;
+	position: relative;
+	/* 
+    if width will be 100% horizontal scrollbar will apear 
+    when scroll mode will be used
+    */
+	/*width: 100%;*/
+	font: menu;
+	font-size: 12px;
+	/* 
+    it is very important, if line-height not setted or setted 
+    in relative units scroll will be broken in firefox
+    */
+	line-height: 23px;
+	overflow: hidden;
+}
+/*减*/
+/*.ac_results li span {
+            font-size: 12px;
+            display: block;
+            float: left;
+            width: 80px;
+        }*/
+
+/*加*/
+.ac_results li span {
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+}
+
+.ac_results li b {
+	font-size: 12px;
+	display: block;
+	float: left;
+}
+
+.ac_loading {
+	background: white url('indicator.gif') right center no-repeat;
+}
+
+/*.ac_odd {
+    background-color: #eee;
+}
+ 
+.ac_over {
+    background-color: #0A246A;
+    color: white;
+}*/
+.ac_odd {
+	background-color: #F5F7FA;
+}
+
+.ac_over {
+	background-color: #E1E6EF;
+	color: #374767;
+}
+</style>

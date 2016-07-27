@@ -1,0 +1,17 @@
+<!-- Search Param -->
+	<div class="wrap">
+		<div class="crumbs-bar clearfix">
+			<div class="crumbs-nav">
+				<div class="crumbs-nav-main clearfix">${(product.cateId)!'0'}
+					<@b2c_cate_path siteid="1001" cateid="${(product.cateId)!'0'}";cate,index>
+					<div class="crumbs-nav-item one-level">
+						<a href="${store.domain}/list-${cate.id}.html" class="crumbs-link">${cate.title}</a> <i class="crumbs-arrow">&gt;</i>
+					</div>
+					</@b2c_cate_path>
+					<div class="crumbs-nav-item one-level">
+						${(product.title)!''}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

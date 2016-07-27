@@ -1,0 +1,26 @@
+#!/bin/sh
+
+export CURR_DIR=$pwd
+cd $CURR_DIR
+
+echo JAVA_HOME=$JAVA_HOME
+
+export PATH=$JAVA_HOME/bin:$PATH
+#echo PATH=$PATH
+
+java -version
+
+export CLASSPATH=$CURR_DIR/lib:$CURR_DIR:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
+
+for jarfile in `ls $CURR_DIR/lib/*.jar`
+do
+ export CLASSPATH=$CLASSPATH:$jarfile
+done
+
+#echo CLASSPATH=$CLASSPATH
+JVM_ARGS="-Xms:512m -XX:MinPermSize=128m"
+echo JVM_ARGS=$JVM_ARGS
+ulimit -n 400000
+echo "" > nohup.out
+conf_file = $CURR_DIR/conf/config.properties
+nohup $JAVA_HOME/bin/java -cp $CLASSPATH:oss-server.jar com.gsccs.oss.server.OssServer $conf_file &

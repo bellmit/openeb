@@ -1,0 +1,695 @@
+
+.flow_bank {
+	background: #fefef4;
+	border: 1px solid #e7d3b8;
+	padding: 10px;
+	margin-right: 30px
+}
+
+.flow_bank .banks {
+	float: left;
+	padding: 5px
+}
+
+.flow_bank .banks img {
+	vertical-align: middle;
+	width: 154px;
+	height: 33px
+}
+
+.pre_box .trans_type_extra {
+	padding: 0 10px;
+	line-height: 1.8
+}
+
+.pre_box .count-list {
+	padding: 0 10px
+}
+
+.pre_box .count-list li {
+	text-align: right
+}
+
+.pre_box .count-list li .col-left {
+	width: 85%;
+	float: left
+}
+
+.pre_box .count-list li .col-right {
+	width: 15%;
+	float: right
+}
+
+.pre_box .count-list li .quest {
+	display: inline-block;
+	height: 20px;
+	line-height: 20px;
+	padding-right: 16px;
+	background: url(/images/flow/icon.gif?1) right -22px no-repeat;
+	color: #333
+}
+
+.pre_box .count-list .express_tip {
+	height: 30px;
+	display: inline-block;
+	*display: inline;
+	cursor: default;
+	position: relative;
+	z-index: 2
+}
+
+.pre_box .count-list .express_tip .tip {
+	color: #c9033b
+}
+
+.pre_box .count-list .express_tip .content {
+	height: 16px;
+	padding: 8px;
+	border: 1px solid #ddd;
+	position: absolute;
+	left: 0;
+	top: 25px;
+	color: #c9033b;
+	background: #fff;
+	white-space: nowrap;
+	line-height: 16px;
+	display: none;
+	z-index: 1
+}
+
+.pre_box .count-list .express_tip .arrow {
+	width: 0;
+	height: 0;
+	border: 5px solid #fff;
+	border-top: 5px solid #c9033b;
+	line-height: 0;
+	font-size: 0;
+	display: inline-block;
+	vertical-align: middle
+}
+
+.pre_box .count-list .trans_type_select {
+	_margin-left: -20px
+}
+
+.pre_box .count-list .trans_type_select input {
+	_vertical-align: -5px
+}
+
+.pre_box .count-list .hover .arrow {
+	border: 5px solid #fff;
+	border-bottom: 5px solid #c9033b;
+	vertical-align: text-top
+}
+
+.pre_box .count-list .hover .content {
+	display: block
+}
+
+.pre_box .count-list .goods_activity {
+	border: 1px solid #c9033b;
+	color: #c9033b
+}
+
+.pre_box .extend {
+	margin-top: 10px;
+	padding: 0 20px
+}
+
+.pre_box .extend li {
+	padding: 3px 0;
+	text-align: left
+}
+
+.pre_box .extend li .label {
+	height: 19px
+}
+
+.pre_box .extend li .label span {
+	display: inline-block;
+	line-height: 19px;
+	color: #f60;
+	padding-left: 20px;
+	background: url(/images/flow/icon.gif?1) left -43px no-repeat;
+	cursor: pointer
+}
+
+.pre_box .extend li .theme {
+	margin-left: 20px;
+	margin-top: 10px;
+	color: #666;
+	display: none
+}
+
+.pre_box .extend li.open .label span {
+	background-position: left -63px
+}
+
+.pre_box .extend li.open .theme {
+	display: block
+}
+
+.pre_box .extend li.bonus .list {
+	border: solid 1px #eae4cd
+}
+
+.pre_box .extend li.bonus .list table {
+	width: 100%;
+	margin: 0
+}
+
+.pre_box .extend li.bonus .list table tbody {
+	border: 0
+}
+
+.pre_box .extend li.bonus .list table tr {
+	border: 0
+}
+
+.pre_box .extend li.bonus .list table tr th,.pre_box .extend li.bonus .list table tr td
+	{
+	border: 0;
+	padding: 0;
+	border: 0;
+	margin: 0;
+	text-align: center
+}
+
+.pre_box .extend li.bonus .list table tr th {
+	height: 36px;
+	line-height: 36px;
+	background: #fef6d7;
+	color: #a68b3c;
+	font-weight: bold
+}
+
+.pre_box .extend li.bonus .list table tr td {
+	height: 35px;
+	line-height: 35px;
+	background: #fff
+}
+
+.pre_box .extend li.bonus .btn {
+	display: inline-block;
+	vertical-align: top;
+	width: 52px;
+	height: 22px;
+	line-height: 22px;
+	text-align: center;
+	overflow: hidden;
+	background: url(/images/flow/icon.gif?1) 0 0 no-repeat;
+	color: #fff;
+	text-decoration: none
+}
+
+.pre_box .extend li.bonus .btn:hover {
+	color: #fff !important
+}
+
+.pre_box .extend li.bonus .add {
+	margin-top: 1px
+}
+
+.pre_box .extend li.bonus .coupon {
+	height: 26px;
+	line-height: 26px;
+	margin-top: 12px
+}
+
+.pre_box .extend li.bonus .coupon input {
+	vertical-align: top
+}
+
+.pre_box .extend li.bonus .coupon span {
+	display: inline-block;
+	vertical-align: top
+}
+
+.pre_box .extend li.gold .theme {
+	height: 22px;
+	line-height: 22px
+}
+
+.pre_box .extend li.gold .theme label,.pre_box .extend li.gold .theme span
+	{
+	display: inline-block;
+	line-height: 22px;
+	vertical-align: top
+}
+
+.pre_box .extend li.gold .theme label input {
+	margin: 5px 5px 0 0;
+	*margin: 0 5px 0 0;
+	vertical-align: top
+}
+
+.pre_box .extend li.gold .theme label,.pre_box .extend li.gold .theme input,.pre_box .extend li.gold .theme span
+	{
+	float: left
+}
+
+.pre_box .extend li.message textarea {
+	width: 320px;
+	height: 30px;
+	padding: 4px;
+	border: solid 1px #ddd;
+	resize: none;
+	outline: 0
+}
+
+.pre_box .extend li.message label input {
+	margin-left: 0
+}
+
+.pre_box .extend li.message .delay_input {
+	margin: 0 5px
+}
+
+.done_info {
+	padding: 40px 39px;
+	border: 1px solid #ddd;
+	background: #f7ffef;
+	/* width: 900px; */
+	margin-top: 20px
+}
+
+.done_info .Left.icon {
+	width: 42px;
+	height: 42px;
+	background: url(../images/success.jpg) no-repeat
+}
+
+.done_info .Left.main {
+	width: 780px;
+	padding-left: 18px;
+	color: #464447
+}
+
+.done_info .Left.main .strong {
+	font-size: 20px;
+	font-family: 微软雅黑;
+	line-height: 42px;
+	font-weight: normal
+}
+
+.done_info .Left.main .notice {
+	margin-top: 20px;
+	padding-top: 20px;
+	border-top: 1px dashed #d6dad9
+}
+
+.done_info .p {
+	font-family: 微软雅黑;
+	word-break: break-all;
+	word-wrap: break-word
+}
+
+.done_info .detail_txt {
+	display: inline-block;
+	height: 17px;
+	line-height: 17px;
+	background: url(/images/flow/icon.gif?1) right -82px no-repeat;
+	padding-left: 15px;
+	padding-right: 15px;
+	color: #fe6603;
+	text-decoration: none
+}
+
+.done_info .detail_txt.open {
+	background-position: right -99px
+}
+
+.done_info .detail_list {
+	width: 100%;
+	margin-top: 15px;
+	font-family: 微软雅黑;
+	display: none
+}
+
+.done_info .detail_list th,.done_info .detail_list td {
+	text-align: left;
+	padding-left: 22px
+}
+
+.done_info .detail_list th {
+	height: 29px;
+	line-height: 29px;
+	background: #f0f0f0;
+	border-bottom: solid 1px #ddd;
+	color: #565656
+}
+
+.done_info .detail_list td {
+	height: 34px;
+	line-height: 34px;
+	border-bottom: dashed 1px #dddce1
+}
+
+.done_pay {
+	border: 1px solid #ddd;
+	/* padding: 39px;
+	width: 900px; */
+	border-top: 0
+}
+
+.done_pay .nav {
+	background: #f9f9f9;
+	height: 37px;
+	border: 1px solid #eee;
+	border-bottom: 2px solid #f46d01
+}
+
+.done_pay .nav a {
+	display: inline-block;
+	width: 135px;
+	height: 36px;
+	text-align: center;
+	line-height: 36px;
+	font-weight: bold;
+	color: #777;
+	border-right: 1px solid #f9f9f9
+}
+
+.done_pay .nav a:hover,.done_pay .nav a.current {
+	background: #f56e02;
+	color: #fff !important;
+	padding-top: 3px;
+	margin-top: -2px;
+	position: relative;
+	z-index: 1
+}
+
+.done_pay .body {
+	border: 1px solid #eee;
+	border-top: 0;
+	background: #f9f9f9;
+	padding: 40px
+}
+
+.done_pay .body .way {
+	display: none
+}
+
+.done_pay .body .alipay {
+	padding-top: 20px
+}
+
+.done_pay .body .gopay {
+	width: 185px;
+	height: 41px;
+	background: url(../images/bg2.png) -643px -141px;
+	display: inline-block
+}
+
+.done_pay .body .flow_bank {
+	background: 0;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-bottom: 1px dashed #ddd;
+	padding-bottom: 20px
+}
+
+.done_pay .body .flow_bank .banks {
+	float: left;
+	padding: 0;
+	padding-right: 15px;
+	padding-top: 10px
+}
+
+.done_pay .body .flow_bank .banks img {
+	vertical-align: center;
+	cursor: pointer
+}
+
+.done_pay .body .select_bank {
+	padding: 20px 0
+}
+
+.no_goods {
+	width: 830px;
+	padding: 90px 0 90px 148px;
+	border: 1px solid #ddd;
+	margin-top: 20px
+}
+
+.no_goods .icon {
+	width: 131px;
+	height: 93px;
+	background: url(../images/bg2.png) -840px -99px no-repeat
+}
+
+.no_goods .main {
+	width: 630px
+}
+
+.no_goods .main .strong {
+	font-size: 24px;
+	font-family: 微软雅黑;
+	line-height: 50px;
+	font-weight: normal;
+	color: #454545
+}
+
+.no_goods .main .go_buy {
+	display: inline-block;
+	vertical-align: middle;
+	width: 149px;
+	height: 40px;
+	background: url(../images/bg2.png) -311px -135px no-repeat
+}
+
+.no_goods .main .search .text {
+	padding: 0;
+	margin: 0;
+	width: 250px;
+	height: 27px;
+	border: 1px solid #cecece;
+	vertical-align: top;
+	margin-top: 5px
+}
+
+.no_goods .main .search .submit {
+	padding: 0;
+	margin: 0;
+	width: 60px;
+	color: #666;
+	height: 29px;
+	vertical-align: top;
+	border: 1px solid #cecece;
+	background: url(/images/flow/liner.jpg) 0 0 repeat-x;
+	margin-top: 5px;
+	border-left: none
+}
+
+.also_buy {
+	border: 1px solid #ddd;
+	margin-top: 20px;
+	width: 978px;
+	padding-bottom: 25px
+}
+
+.also_buy .flow_title {
+	border-bottom: 1px solid #ddd
+}
+
+.also_buy .flow_title .pages {
+	padding-top: 8px
+}
+
+.also_buy .flow_title .pages span {
+	display: inline-block;
+	width: 13px;
+	height: 13px;
+	font-size: 12px;
+	text-align: center;
+	color: #fff;
+	background: url(../images/bg2.png) -168px -165px;
+	margin-left: 2px;
+	line-height: 13px;
+	font-family: Arial
+}
+
+.also_buy .flow_title .pages span.current {
+	background-position: -155px -165px
+}
+
+.also_buy .body {
+	border: 1px solid #ddd;
+	border-top: 0;
+	padding-bottom: 30px
+}
+
+.also_buy .stage {
+	width: 888px;
+	margin: 30px auto 0;
+	overflow: hidden
+}
+
+.also_buy .stage .list {
+	width: 222px;
+	text-align: center
+}
+
+.also_buy .stage .list .img {
+	width: 196px;
+	height: 130px;
+	margin: 0 auto 10px
+}
+
+.also_buy .stage .list .info {
+	line-height: 1.8
+}
+
+.also_buy .stage .list .info .buy {
+	display: inline-block;
+	width: 99px;
+	height: 25px;
+	background: url(../images/bg2.png) -422px -99px no-repeat
+}
+
+.also_buy .nav a {
+	display: block;
+	width: 40px;
+	height: 66px;
+	background: url(../images/bg2.png) -563px -99px no-repeat;
+	position: absolute;
+	margin-top: 70px
+}
+
+.also_buy .nav a.tright {
+	margin-left: 938px;
+	background-position: -603px -99px
+}
+
+tr .user_bonus_td .cancl,tr.used .user_bonus_td .use,tr.only .user_bonus_td .use
+	{
+	display: none !important
+}
+
+tr.used .user_bonus_td .cancl,tr .user_bonus_td .use {
+	display: inline-block !important
+}
+
+.delete_icon,.gift_icon {
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	background: url(../images/bg2.png) -364px -121px no-repeat
+}
+
+.gift_icon {
+	background-position: -406px -121px
+}
+
+.youhui_sn {
+	border: 1px solid #ddd;
+	width: 180px;
+	height: 20px;
+	line-height: 20px;
+	vertical-align: top
+}
+
+.bank_limit {
+	width: 100%;
+	border: 1px solid #e7e7e7;
+	margin-top: 15px
+}
+
+.bank_limit td,.bank_limit th {
+	vertical-align: middle;
+	padding: 8px 10px;
+	color: #666;
+	border: 1px solid #e7e7e7
+}
+
+.bank_limit th {
+	color: #333;
+	padding: 10px;
+	border-color: #f2f2f2;
+	background: #f2f2f2;
+	text-align: center;
+	font-weight: normal
+}
+
+.continue_pay {
+	display: inline-block;
+	width: 154px;
+	height: 40px;
+	background: url(../images/bg2.png) -643px -184px
+}
+
+.importTip .btns a {
+	height: 11px;
+	line-height: 11px;
+	border-radius: 0;
+	background: #dcdcdc;
+	background: linear-gradient(#fcfcfc, #f3f3f3);
+	color: #666;
+	border: 1px solid #dcdcdc;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-khtml-border-radius: 2px;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	padding: 7px 13px
+}
+
+.importTip .in {
+	width: 440px
+}
+
+.importTip .in .content .icons_td {
+	padding-right: 10px
+}
+
+.importTip .in .content .content_td {
+	font-size: 14px;
+	font-family: "微软雅黑"
+}
+
+.importTip .favour {
+	padding: 15px 22px;
+	border: 1px solid #f5e4d0;
+	margin: 0 34px;
+	margin-bottom: 8px;
+	background: #fffced
+}
+
+.importTip .favour .itip {
+	font-family: "微软雅黑";
+	font-size: 13px;
+	color: #c9033b
+}
+
+.importTip .favour .favour-list {
+	font-size: 12px;
+	margin-top: 2px;
+	margin-bottom: 3px
+}
+
+.importTip .favour .favour-item {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	line-height: 18px
+}
+
+.importTip .favour .favour-link {
+	color: #787876;
+	text-decoration: underline
+}
+
+.importTip .favour .favour-list {
+	font-size: 12px
+}
+
+.importTip .favour .favour-btn {
+	font-family: "微软雅黑";
+	font-size: 12px
+}
+
+.lightBox .btns {
+	border: 0
+}

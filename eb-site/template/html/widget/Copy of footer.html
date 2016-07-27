@@ -1,0 +1,352 @@
+<!-- right bar -->
+<div class="mui-mbar-tabs-mask">
+
+	<!-- 活动 -->
+	<div class="mui-mbar-tab mui-mbar-tab-acti">
+		
+	</div>
+	
+	<!-- 购物车 -->
+    <div class="mui-mbar-tab mui-mbar-tab-cart" style="top: 0px; margin: 8px 0px;">
+        <div class="mui-mbar-tab-logo mui-mbar-tab-logo-cart">
+        </div>
+        <div class="mui-mbar-tab-txt" >购物车  </div>
+        <div class="mui-mbar-tab-sup">
+            <div class="mui-mbar-tab-sup-bg">
+                <div class="mui-mbar-tab-sup-bd" id="shopcart_num">
+                    0
+                </div>
+            </div>
+        </div>
+        <div class="mui-mbar-tab-tip  ">
+            	添加购物车成功
+            <div class="mui-mbar-arr mui-mbar-tab-tip-arr">
+                ◆
+            </div>
+        </div>
+    </div>
+    <div class="mui-mbar-tab mui-mbar-tab-asset" style="top: 0px; margin: 8px 0px;">
+        <div class="mui-mbar-tab-logo mui-mbar-tab-logo-asset">
+        </div>
+        <div class="mui-mbar-tab-tip">我的资产
+            <div class="mui-mbar-arr mui-mbar-tab-tip-arr">
+                ◆
+            </div>
+        </div>
+    </div>
+    <div class="mui-mbar-tab mui-mbar-tab-brand" style="top: 0px; margin: 8px 0px;">
+        <div class="mui-mbar-tab-logo mui-mbar-tab-logo-brand">
+        </div>
+        <div class="mui-mbar-tab-tip">
+            我关注的品牌
+            <div class="mui-mbar-arr mui-mbar-tab-tip-arr">
+                ◆
+            </div>
+        </div>
+    </div>
+    <div class="mui-mbar-tab mui-mbar-tab-favor" style="top: 0px; margin: 8px 0px;">
+        <div class="mui-mbar-tab-logo mui-mbar-tab-logo-favor">
+        </div>
+        <div class="mui-mbar-tab-tip">
+            我的收藏
+            <div class="mui-mbar-arr mui-mbar-tab-tip-arr">
+                ◆
+            </div>
+        </div>
+    </div>
+    <div class="mui-mbar-tab mui-mbar-tab-favor" style="top: 0px; margin: 8px 0px;">
+        <div class="mui-mbar-tab-logo mui-mbar-tab-logo-favor">
+        </div>
+        <div class="mui-mbar-tab-tip">
+            我的收藏
+            <div class="mui-mbar-arr mui-mbar-tab-tip-arr">
+                ◆
+            </div>
+        </div>
+    </div>
+    <div class="mui-mbar-tab mui-mbar-tab-foot" style="top: 0px; margin: 8px 0px;">
+        <div class="mui-mbar-tab-logo mui-mbar-tab-logo-foot">
+        </div>
+        <div class="mui-mbar-tab-tip">
+            我的收藏
+            <div class="mui-mbar-arr mui-mbar-tab-tip-arr">
+                ◆
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(".mui-mbar-tab").hover(function() {
+        $(this).find(".mui-mbar-tab-tip").show().animate({
+            right: "35px",
+            opacity: "1"
+        },
+        300);
+    },
+    function() {
+        $(this).find(".mui-mbar-tab-tip").animate({
+            right: "70px",
+            opacity: "0"
+        },
+        300, "swing",
+        function() {
+            $(this).hide();
+        });
+    });
+</script>
+
+<div id="footer">
+    <div class="wrap">
+        <div class="line">
+        </div>
+        <div class="help">
+            <dl class="width-2">
+                <dt>
+                    购物指南
+                </dt>
+                <dd>
+                    <a href="{$prefix}article/?id={$v.id}">
+                        购买流程
+                    </a>
+                </dd>
+                <dd>
+                    <a href="{$prefix}article/?id={$v.id}">
+                        支付方式
+                    </a>
+                </dd>
+            </dl>
+            <dl class="width-2">
+                <dt>
+                    购物保障
+                </dt>
+                <dd>
+                    <a href="{$prefix}article/?id={$v.id}">
+                        购买流程
+                    </a>
+                </dd>
+                <dd>
+                    <a href="{$prefix}article/?id={$v.id}">
+                        支付方式
+                    </a>
+                </dd>
+            </dl>
+            <dl class="width-2">
+                <dt>
+                    售后服务
+                </dt>
+                <dd>
+                    <a href="{$prefix}article/?id={$v.id}">
+                        购买流程
+                    </a>
+                </dd>
+                <dd>
+                    <a href="{$prefix}article/?id={$v.id}">
+                        支付方式
+                    </a>
+                </dd>
+            </dl>
+            <dl class="width-2">
+                <dt>
+                    关于我们
+                </dt>
+                <dd>
+                    <a href="{$prefix}article/?id={$v.id}">
+                        购买流程
+                    </a>
+                </dd>
+                <dd>
+                    <a href="{$prefix}article/?id={$v.id}">
+                        支付方式
+                    </a>
+                </dd>
+            </dl>
+            <dl class="width-4">
+                <dt>
+                    手机上EB-SHOP
+                </dt>
+                <dd>
+                    <a href="{$prefix}article/?id={$v.id}">
+                        购买流程
+                    </a>
+                </dd>
+                <dd>
+                    <a href="{$prefix}article/?id={$v.id}">
+                        支付方式
+                    </a>
+                </dd>
+            </dl>
+            <div style="clear: both">
+            </div>
+        </div>
+        <!-- help -->
+    </div>
+    <!-- copyright -->
+    <div class="copyright">
+        <p class="copy wrap">
+            <a href="#">
+                关于EB-SHOP
+            </a>
+            <a href="#">
+                帮助中心
+            </a>
+            <a href="#">
+                诚聘英才
+            </a>
+            <a href="#">
+                联系我们
+            </a>
+            <a href="#">
+                网站合作
+            </a>
+            <a href="#">
+                法律声明
+            </a>
+            <a href="#">
+                廉政举报
+            </a>
+            <br>
+            <a href="#">
+                京东商城
+            </a>
+            |
+            <a href="#">
+                中国白银网
+            </a>
+            |
+            <a href="#">
+                央视网
+            </a>
+            |
+            <a href="#">
+                1号店
+            </a>
+            |
+            <a href="#">
+                京东商城
+            </a>
+            |
+            <a href="#">
+                中国白银网
+            </a>
+            |
+            <a href="#">
+                央视网
+            </a>
+            |
+            <a href="#">
+                1号店
+            </a>
+            <br>
+            <a href="http://www.csmall.com/help.do?page=help_help_icp" target="_blank">
+                中国增值电信业务经营许可证 B2-20140169号
+            </a>
+            <span style="line-height: 1.5;">
+                | ©2014甘肃中通申信科技有限公司 All Rights Reserved | 国家信息产业部粤ICP备14018586号
+            </span>
+            <span class="powerby">
+                技术支持：
+                <a href="http://www.jentian.com/" target="_blank" title="甘肃中通申信科技有限公司">
+                    牛军军
+                </a>
+                <br>
+                <a href="http://si.trustutn.org/info?sn=131141223010513021410" target="_blank">
+                    <img src="http://v.trustutn.org/images/cert/bottom_small_img.png" alt="实名认证"
+                    title="实名认证">
+                </a>
+            </span>
+        </p>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+<script>
+	var domain = "${store.domain}";
+    (function() {
+        /**自动补全***/
+        /* $('.autocomplete').AutoComplete({
+                	'data': 'http://localhost:9080/eb-site/1001/suggest?keywords='+$("#keywords").val(),
+                    'ajaxDataType': 'json',
+                    'ajaxType': 'POST',
+                    'maxItems': 5,
+                    'itemHeight': 20,
+                    'width': 'auto',
+                    'onerror': function(msg){alert(msg);}
+                }); 
+        $('.autocomplete').autocomplete({
+            //valueKey:'title',
+            //minLength:3,
+            highlight: true,
+            //showHint:true,
+            source: [function(q, add) {
+                $.getJSON("http://localhost:9080/eb-site/1001/suggest?keywords=" + encodeURIComponent(q),
+                function(data) {
+                    add(data);
+                })
+            }]
+        });*/
+
+    })();
+    
+    
+</script>
+
+
+<script charset="utf-8"
+	src="http://cdn.titles.top/js/common.js"
+	type="text/javascript"></script>
+<script charset="utf-8"
+	src="http://cdn.titles.top/js/jquery.autocomplete.js"
+	type="text/javascript"></script>
+	
+<script>
+function search(){
+	$.ajax({
+		url : domain+'/search',
+		dataType : 'json',
+		type : 'GET',
+		contentType:'application/json;charset=UTF-8',
+		success : function(json) {
+			if(json.success) {
+				
+			}
+		}
+	}); 
+}
+(function () {
+	initShopCart();
+	initSiteCates();
+	//$('.dd').show();
+	$('#categorys').mouseover(function (){
+		$('.dd').show();
+	});
+
+	$('.dd').mouseout(function (){
+		//$(".subnav-layer").hide();
+		//$(this).hide();
+		/* $('.item').removeClass("hover");
+		$(".item-sub").hide();
+		$(".subnav-layer").hide();
+		$('.dd').hide(); */
+	});
+	
+	$('.item').live("mouseover",function (){
+		$('.item').removeClass("hover");
+		$(this).addClass("hover");
+		$(".subnav-layer").show();
+		$(".item-sub").hide();
+		var id = $(this).attr("cateid");
+		$("#subcategory-"+id).show();
+	});
+
+	/* $('.item').live("mouseout",function (){
+		$(this).removeClass("hover");
+		var id = $(this).attr("cateid");
+		$("#subcategory-"+id).hide();
+	}); */
+	
+})(); 
+
+
+</script>

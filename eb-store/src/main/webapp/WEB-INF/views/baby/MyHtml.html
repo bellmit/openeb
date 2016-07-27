@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="Generator" content="EditPlus®">
+<meta name="Author" content="">
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+<title>Document</title>
+</head>
+<script>
+	var aa = [ 1, 2 ];
+	var bb = [ 3 ];
+	var cc = [ 4, 8, 9 ];
+	var dd = [ 6, 0 ];
+	var all = [ aa, bb, dd, cc ]; //有多少数组都集起来
+	var i = all.length;
+
+	function arrl(arr, k, str) {
+		if (k >= i) {
+			return false;
+		} else {
+			var a = arr[k];
+			if (k == i - 1) {
+				for (var l = 0; l < a.length; l++) {
+					document.write(str + a[l] + "]");
+					return;
+				}
+			} else {
+				for (var l = 0; l < a.length; l++) {
+					if (k == 0) {
+						str = "["
+					}
+					str += a[l] + ",";
+					var b = k + 1;
+					arrl(arr, b, str);
+				}
+			}
+		}
+	}
+	arrl(all, 0, "");
+</script>
+<body>
+
+</body>
+</html>

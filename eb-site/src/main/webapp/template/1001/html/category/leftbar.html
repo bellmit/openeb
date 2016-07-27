@@ -1,0 +1,98 @@
+<div class="m-aside">
+	<div class="aside-bar">
+		<div id="J_spread_goods" class="hide ab-goods" style="display: block;">
+			<div class="mt">
+				<h3>推广商品</h3>
+			</div>
+			<div class="mc">
+				<ul data="type=&quot;47&quot;" class="clearfix">
+					<@b2c_top_goods siteid='1001';product,index>
+					<li data-sku="11" onclick="log()">
+						<div class="p-img">
+							<a target="_blank"
+								href="${store.domain}/item-${product.id}.html"
+								title="${product.title}"> <img
+								width="190" height="190" data-img="1"
+								src="${product.picUrl}"
+								class="err-product">
+							</a>
+						</div>
+						<div class="p-name">
+							<a target="_blank"
+								href="${store.domain}/item-${product.id}.html"
+								title="${product.title}"> <em>${product.title}</em>
+							</a>
+						</div>
+						<div class="p-price">
+							<strong class="price"><span class="J-p-${product.id}">￥${product.price}</span></strong>
+							<span class="p-ico J-pt-${product.id}"></span>
+						</div>
+						<div class="p-review">
+							<a href="${store.domain}/item-${product.id}.html#comment-list"
+								target="_blank" class="number">2221</a>人好评
+						</div>
+					</li>
+					</@b2c_top_goods>
+				</ul>
+			</div>
+		</div>
+		<!--用户最终购买-->
+		<div id="finalbuy" class="ab-goods" style="display: block;">
+			<div class="mt">
+				<h2>浏览了最终购买</h2>
+			</div>
+			<div class="mc">
+				<ul>
+					<@b2c_hot_goods siteid='1001';product,index>
+					<li class="fore"
+						onclick="reClick2();">
+						<div class="p-img">
+							<a href="${store.domain}/item-${product.id}.html"
+								title="${product.title}"
+								target="_blank"><img width="190" height="190"
+								src="${product.picUrl}"
+								alt="${product.title}"></a>
+						</div>
+						<div class="p-price">
+							<span>特价：</span><strong>￥${product.price}</strong>
+						</div>
+						<div class="p-name">
+							<a href="${store.domain}/item-${product.id}.html"
+								title="${product.title}"
+								target="_blank">${product.title}</a>
+						</div>
+					</li>
+					</@b2c_hot_goods>
+				</ul>
+			</div>
+		</div>
+		<!--浏览${category.name}还购买了-->
+		<div id="alsobuy" class="ab-goods" style="display: block;">
+			<div class="mt">
+				<h2>浏览了还购买了</h2>
+			</div>
+			<div class="mc">
+				<ul>
+					<@b2c_top_goods siteid='1001';product,index>
+					<li class="fore" onclick=""><div class="p-img">
+							<a href="${store.domain}/item-${product.id}.html"
+								title="VNC ${product.title}"
+								target="_blank"><img width="190" height="190"
+								src="http://img13.360buyimg.com/cms/s190x190_g6/M04/02/0B/rBEGF1CfqhkIAAAAAARWfR7Y7sQAAAdlAN5_GUABFaV164.jpg"
+								alt="${product.title}"></a>
+						</div>
+						<div class="p-price">
+							<span>特价：</span><strong>￥${product.price}</strong>
+						</div>
+						<div class="p-name">
+							<a href="${store.domain}/item-${product.id}.html"
+								title="${product.title}"
+								target="_blank">${product.title}</a>
+						</div></li>
+					</@b2c_top_goods>
+				</ul>
+			</div>
+		</div>
+		<!-- 商家精选 -->
+	</div>
+</div>

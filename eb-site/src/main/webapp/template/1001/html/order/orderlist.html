@@ -1,0 +1,54 @@
+<ul class="order-td">
+	<li class="order-info">订单信息</li> 
+	<li class="order-price">单价</li> 
+	<li class="order-num">数量</li>
+	<li class="order-account"> 实付款</li> 
+	<li class="order-state">交易状态</li> 
+	<li class="order-opt">交易操作</li>
+</ul>
+
+<ul class="order-hd">
+	<li></li>
+</ul>
+
+<ul class="order-bd">
+	<li><img src="#" width="60px;" height="60px;" /></li>
+	<li>${oitem.price}</li>
+	<li>${oitem.num}</li>
+	<li>${oitem.account}</li>
+	<li>${oitem.state}</li>
+	<li>
+</ul>
+
+<table class="list order-table" style="width: 100%;">
+	<thead>
+		<tr>
+			<th class="order-info">订单信息</th>
+			<th class="order-price">单价</th>
+			<th class="order-num">数量</th>
+			<th class="order-account">实付款</th>
+			<th class="order-state">交易状态</th>
+			<th class="order-opt">交易操作</th>
+		</tr>
+	</thead>
+	<@b2c_order_list siteid="1001";order,index>
+	<tbody id="order_list">
+		<tr class="order-hd">
+			<td colspan="6" class="first"><span>${order.adddatestr}</span><span>订单编号：${order.id}</span></td>
+		<tr><@b2c_order_items siteid="1001"
+			orderid="${order.id}";oitem,index>
+		<tr class="order-bd">
+			<td><img src="#" width="60px;" height="60px;" /></td>
+			<td>${oitem.price}</td>
+			<td>${oitem.num}</td>
+			<td>${oitem.account}</td>
+			<td>${oitem.state}</td>
+			<td></td>
+		</tr>
+		</@b2c_order_items>
+		<tr class="sep-row">
+			<td colspan="6"></td>
+		</tr>
+	</tbody>
+	</@b2c_order_list>
+</table>

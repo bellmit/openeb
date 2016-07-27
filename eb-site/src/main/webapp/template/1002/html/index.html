@@ -1,0 +1,935 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" charset="utf-8">
+<title>${store.title}</title>
+<link rel="stylesheet" href="http://cdn.titles.top/tour/css/base.css" type="text/css"/>
+<link rel="stylesheet" href="http://cdn.titles.top/tour/css/common.css" type="text/css"/>
+<link media="screen" rel="stylesheet" href="http://cdn.titles.top/tour/css/nav.css"/>
+<link href="http://cdn.titles.top/tour/css/jquery.slideBox.css" rel="stylesheet" type="text/css" />
+<script src="http://js.spcrm.com/jQuery-1.7.1.min.js" type="text/javascript"></script>
+<script src="http://cdn.titles.top/tour/js/jquery.slideBox.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	/* 加载导航菜单 */
+	jQuery(document).ready(function(){
+		var qcloud={};
+		$('[_t_nav]').hover(function(){
+			var _nav = $(this).attr('_t_nav');
+			clearTimeout( qcloud[ _nav + '_timer' ] );
+			qcloud[ _nav + '_timer' ] = setTimeout(function(){
+				$('[_t_nav]').each(function(){
+					$(this)[ _nav == $(this).attr('_t_nav') ? 'addClass':'removeClass' ]('nav-up-selected');
+				});
+				$('#'+_nav).stop(true,true).slideDown(200);
+			}, 150);
+		},function(){
+			var _nav = $(this).attr('_t_nav');
+			if(_nav != 'home') {
+				clearTimeout( qcloud[ _nav + '_timer' ] );
+				qcloud[ _nav + '_timer' ] = setTimeout(function(){
+					$('[_t_nav]').removeClass('nav-up-selected');
+					$('#'+_nav).stop(true,true).slideUp(200);
+					// 添加首页显示
+					$('#homePage').addClass('nav-up-selected');
+					$('#home').show();
+				}, 150);
+			}
+		});
+		
+		// 页面加载的时候，首页栏目显示
+		$('#homePage').addClass('nav-up-selected');
+		$('#home').show();
+		
+		// 加载完成后初始化菜单
+		var windowWidth = $(window).width();
+		$('.navigation-down-inner').css('margin-left',(windowWidth-1000)/2+30);
+		// 页面放大缩小的时候，菜单跟着变化
+		$(window).resize(function(e) {
+			var windowWidth = $(window).width();
+			$('.navigation-down-inner').css('margin-left',(windowWidth-1000)/2+30);
+        });
+	});
+	
+	// 热门景点图片轮播
+	jQuery(function($){
+		$('#hot-img').slideBox({
+			duration : 0.3,//滚动持续时间，单位：秒
+			easing : 'linear',//swing,linear//滚动特效
+			delay : 5,//滚动延迟时间，单位：秒
+			hideClickBar : false,//不自动隐藏点选按键
+			clickBarRadius : 10
+		});
+	});
+	
+	// 栏目切换
+	jQuery(function($){
+		// 拿到所有的一级栏目
+		var a = $('.hot-list a');
+		//注册点击事件
+		$(a).click(function(){
+			//给当前点击内容添加样式
+			$(this).addClass('hot-list-current');
+			//移除和当前点击同级的内容样式
+			$(this).siblings('a').removeClass('hot-list-current');
+			var aId = $(this).attr('id');
+			//隐藏不需要显示的内容
+			$('#' + aId + '-show').siblings('div').hide();
+			//显示需要显示的内容
+			$('#' + aId + '-show').show();
+		});
+	});
+	
+	// 给点击切换菜单首个A链接添加样式
+	jQuery(function($){
+		// 拿到所有的一级栏目
+		var channel = $('.hot-list');
+		for(var i = 0; i < channel.length; i++) {
+			$(channel[i]).children('a:first').addClass('hot-list-current');
+		}
+		
+		//当点击跳转链接后，回到页面顶部位置
+		$("#back-to-top").click(function(){  
+			$('body,html').animate({scrollTop:0},1000);  
+			return false;  
+		}); 
+	});
+</script>
+</head>
+<body>
+	<!-- 头部-Start -->
+    <div class="header">
+        <!-- 顶部 -->
+		[#include "/html/widget/topbar.html" /]
+        <div class="sep-20"></div>
+        [#include "/html/widget/header.html" /]
+        <div class="sep-20"></div>
+        <!-- 导航_START -->
+        [#include "/html/widget/navbar.html" /]
+    </div>
+    <!-- 头部-End -->
+    
+    <div class="sep-30"></div>
+    <!-- 内容页-Start -->
+    <div class="container">
+    	<!-- 正文顶部-Start -->
+    	<div class="con-top">
+        	<!-- 正文菜单 -->
+        	<div class="con-t-menu">
+            	<div class="con-t-m-hot titlePosition">
+                	<div class="titlePosi titlePosiBg1">
+                    	主题<br/>热门
+                    </div>
+                	<!-- 热门 -->
+                	<div>
+                    	<a href="#">普吉岛</a>
+                        <a href="#">九寨沟</a>
+                        <a href="#">鸣沙山</a>
+                        <a href="#">普吉岛</a>
+                    </div>
+                	<div>
+                    	<a href="#">普吉岛</a>
+                        <a href="#">九寨沟</a>
+                        <a href="#">鸣沙山</a>
+                        <a href="#">普吉岛</a>
+                    </div>
+                </div>
+                <!-- 国内 -->
+                <div class="con-t-m-internal titlePosition">
+                	<div class="titlePosi titlePosiBg2">
+                    	国<br/>内<br/>游
+                    </div>
+                    <div>
+                        <span>海南:</span>
+                        <a href="#">普吉岛</a>
+                        <a href="#">九寨沟</a>
+                        <a href="#">鸣沙山</a>
+                        <a href="#">普吉岛</a>
+                    </div>
+                    <div>
+                        <span>海南:</span>
+                        <a href="#">普吉岛</a>
+                        <a href="#">九寨沟</a>
+                        <a href="#">鸣沙山</a>
+                        <a href="#">普吉岛</a>
+                    </div>
+                    <div>
+                        <span>海南:</span>
+                        <a href="#">普吉岛</a>
+                        <a href="#">九寨沟</a>
+                        <a href="#">鸣沙山</a>
+                        <a href="#">普吉岛</a>
+                    </div>
+                    <div>
+                        <span>海南:</span>
+                        <a href="#">普吉岛</a>
+                        <a href="#">九寨沟</a>
+                        <a href="#">鸣沙山</a>
+                        <a href="#">普吉岛</a>
+                    </div>
+                    <div>
+                        <span>海南:</span>
+                        <a href="#">普吉岛</a>
+                        <a href="#">九寨沟</a>
+                        <a href="#">鸣沙山</a>
+                        <a href="#">普吉岛</a>
+                    </div>
+                    <div>
+                        <span>海南:</span>
+                        <a href="#">普吉岛</a>
+                        <a href="#">九寨沟</a>
+                        <a href="#">鸣沙山</a>
+                        <a href="#">普吉岛</a>
+                    </div>
+                    <div>
+                        <span>海南:</span>
+                        <a href="#">普吉岛</a>
+                        <a href="#">九寨沟</a>
+                        <a href="#">鸣沙山</a>
+                        <a href="#">普吉岛</a>
+                    </div>
+                    <div>
+                        <span>海南:</span>
+                        <a href="#">普吉岛</a>
+                        <a href="#">九寨沟</a>
+                        <a href="#">鸣沙山</a>
+                        <a href="#">普吉岛</a>
+                    </div>
+                </div>
+                <!-- 国外 -->
+                <div class="con-t-m-internal titlePosition">
+                	<div class="titlePosi titlePosiBg2">
+                    	出<br/>境<br/>游
+                    </div>
+                    <div>
+                        <span>海南:</span>
+                        <a href="#">普吉岛</a>
+                        <a href="#">九寨沟</a>
+                        <a href="#">鸣沙山</a>
+                        <a href="#">普吉岛</a>
+                    </div>
+                    <div>
+                        <span>海南:</span>
+                        <a href="#">普吉岛</a>
+                        <a href="#">九寨沟</a>
+                        <a href="#">鸣沙山</a>
+                        <a href="#">普吉岛</a>
+                    </div>
+                    <div>
+                        <span>海南:</span>
+                        <a href="#">普吉岛</a>
+                        <a href="#">九寨沟</a>
+                        <a href="#">鸣沙山</a>
+                        <a href="#">普吉岛</a>
+                    </div>
+                    <div>
+                        <span>海南:</span>
+                        <a href="#">普吉岛</a>
+                        <a href="#">九寨沟</a>
+                        <a href="#">鸣沙山</a>
+                        <a href="#">普吉岛</a>
+                    </div>
+                    <div>
+                        <span>海南:</span>
+                        <a href="#">普吉岛</a>
+                        <a href="#">九寨沟</a>
+                        <a href="#">鸣沙山</a>
+                        <a href="#">普吉岛</a>
+                    </div>
+                    <div>
+                        <span>海南:</span>
+                        <a href="#">普吉岛</a>
+                        <a href="#">九寨沟</a>
+                        <a href="#">鸣沙山</a>
+                        <a href="#">普吉岛</a>
+                    </div>
+                    <div>
+                        <span>海南:</span>
+                        <a href="#">普吉岛</a>
+                        <a href="#">九寨沟</a>
+                        <a href="#">鸣沙山</a>
+                        <a href="#">普吉岛</a>
+                    </div>
+                    <div>
+                        <span>海南:</span>
+                        <a href="#">普吉岛</a>
+                        <a href="#">九寨沟</a>
+                        <a href="#">鸣沙山</a>
+                        <a href="#">普吉岛</a>
+                    </div>
+                </div>
+            </div>
+            <!-- 正文图片 -->
+        	<div class="con-t-center">
+            	<!-- 滚动图片-Start -->
+            	<div id="hot-img" class="slideBox">
+                    <ul class="items">
+                        <li><a href="#" title=""><img src="http://cdn.titles.top/tour/images/1.png" width="500" height="250"></a></li>
+                        <li><a href="#" title=""><img src="http://cdn.titles.top/tour/images/2.jpg" width="500" height="250"></a></li>
+                        <li><a href="#" title=""><img src="http://cdn.titles.top/tour/images/3.jpg" width="500" height="250"></a></li>
+                        <li><a href="#" title=""><img src="http://cdn.titles.top/tour/images/4.jpg" width="500" height="250"></a></li>
+                    </ul>
+                </div>
+            	<!-- 滚动图片-End -->
+                <div class="con-t-right">
+                    <div class="image-style1">
+                        <a href="#"><img src="http://cdn.titles.top/tour/images/kdl.png" width="188" height="118"/></a>
+                        <div class="h40">
+                            <div class="img-title">昆明/大理/丽江/版纳双飞10日游</div>
+                            <div class="img-price">￥12306</div>
+                        </div>
+                    </div>
+                    <div class="sep-10"></div>
+                    <div class="image-style1">
+                        <a href="#"><img src="http://cdn.titles.top/tour/images/kdl.png" width="188" height="118"/></a>
+                        <div class="h40">
+                            <div class="img-title">昆明/大理/丽江/版纳双飞10日游</div>
+                            <div class="img-price">￥12306</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sep-10"></div>
+                <!-- 特价旅游-Start -->
+                <div class="con-offer">
+                    <div class="con-offer-logo">
+                    	<img class="p-left-20" src="http://cdn.titles.top/tour/images/tjly.png" />
+                        <img class="m-top-70" src="http://cdn.titles.top/tour/images/tjly2.png" />
+                    </div>
+                    <!-- 图片一行-Start -->
+                    <div class="con-offer-img">
+                        <div class="image-style2 f-left">
+                            <a href="#"><img src="http://cdn.titles.top/tour/images/bn.png" width="188" height="138"/></a>
+                            <div class="h40">
+                                <div class="img-title">昆明/大理/丽江/版纳双飞10日游</div>
+                                <div class="img-price">￥12306</div>
+                            </div>
+                        </div>
+                        <div class="image-style2 f-left m-left-10">
+                            <a href="#"><img src="http://cdn.titles.top/tour/images/bn.png" width="188" height="138"/></a>
+                            <div class="h40">
+                                <div class="img-title">昆明/大理/丽江/版纳双飞10日游</div>
+                                <div class="img-price">￥12306</div>
+                            </div>
+                        </div>
+                        <div class="image-style2 f-right">
+                            <a href="#"><img src="http://cdn.titles.top/tour/images/bn.png" width="188" height="138"/></a>
+                            <div class="h40">
+                                <div class="img-title">昆明/大理/丽江/版纳双飞10日游</div>
+                                <div class="img-price">￥12306</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 图片一行-End -->
+                    <!-- 图片一行-Start -->
+                    <div class="con-offer-img">
+                    	<div class="sep-10"></div>
+                        <div class="image-style2 f-left">
+                            <a href="#"><img src="http://cdn.titles.top/tour/images/bn.png" width="188" height="138"/></a>
+                            <div class="h40">
+                                <div class="img-title">昆明/大理/丽江/版纳双飞10日游</div>
+                                <div class="img-price">￥12306</div>
+                            </div>
+                        </div>
+                        <div class="image-style2 f-left m-left-10">
+                            <a href="#"><img src="http://cdn.titles.top/tour/images/bn.png" width="188" height="138"/></a>
+                            <div class="h40">
+                                <div class="img-title">昆明/大理/丽江/版纳双飞10日游</div>
+                                <div class="img-price">￥12306</div>
+                            </div>
+                        </div>
+                        <div class="image-style2 f-right">
+                            <a href="#"><img src="http://cdn.titles.top/tour/images/bn.png" width="188" height="138"/></a>
+                            <div class="h40">
+                                <div class="img-title">昆明/大理/丽江/版纳双飞10日游</div>
+                                <div class="img-price">￥12306</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 图片一行-End -->
+                </div>
+                <!-- 特价旅游-End -->
+            </div>
+        </div>
+    	<!-- 正文顶部-End -->
+        <div class="sep-20"></div>
+        <div class="sep-20"></div>
+        <!-- 内容栏目-Start -->
+        <div class="con-column">
+        	<!-- 热点旅游-Start -->
+        	<div class="hot-addr">
+            	<div class="channel-title b-golden">
+                    <div class="title-style c-gray">热点目的地<span class="title-discription">看看身边的精彩，发现平时看不到的美景，来地场心灵旅途!</span></div>
+                </div>
+                <div class="channel-title">
+                    <div class="title-style1 c-gray">
+                    	<span class="hot-list">
+                        	<a class="pointer" id="hot">当季热门</a><a class="pointer" id="hai">面朝大海</a><a class="pointer" id="time">古镇时光</a>
+                        </span>
+                    </div>
+                    <div class="more"><a href="#12" class="f-size-12">查看更多&gt;&gt;</a></div>
+                </div>
+                <div class="sep-20"></div>
+                <div class="img-arrs">
+                    <!-- 栏目显示内容-Start -->
+                    <div class="imgArray" id="hot-show">
+                        <div class="hot-addr-1 relative">                	
+                            <div class="hot-addr1-ty bg-golden">
+                                <div class="hot-addr1-title">北京精品双卧7日游</div>
+                                <div class="hot-addr1-price">￥12306</div>
+                            </div>
+                            <a href="#"><img src="http://cdn.titles.top/tour/images/hot1.png" width="250" height="300" /></a>
+                        </div>
+                        <div class="hot-addr-2">
+                            <div class="f-left relative">
+                                <div class="hot-addr-ty">
+                                    <div class="hot-addr-title">北京精品双卧7日游</div>
+                                    <div class="hot-addr-price">￥12306</div>
+                                </div>
+                                <a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                            </div>
+                            <div class="f-right relative">
+                                <div class="hot-addr-ty">
+                                    <div class="hot-addr-title">北京精品双卧7日游</div>
+                                    <div class="hot-addr-price">￥12306</div>
+                                </div>
+                                <a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                            </div>
+                            <div class="sep-10"></div>
+                            <div class="f-left relative">
+                                <div class="hot-addr-ty">
+                                    <div class="hot-addr-title">北京精品双卧7日游</div>
+                                    <div class="hot-addr-price">￥12306</div>
+                                </div>
+                                <a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                            </div>
+                            <div class="f-right relative">
+                                <div class="hot-addr-ty">
+                                    <div class="hot-addr-title">北京精品双卧7日游</div>
+                                    <div class="hot-addr-price">￥12306</div>
+                                </div>
+                                <a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 栏目显示内容-End -->
+                    <!-- 栏目显示内容-Start -->
+                    <div class="imgArray hidden" id="hai-show">
+                        <div class="hot-addr-1 relative">                	
+                            <div class="hot-addr1-ty bg-golden">
+                                <div class="hot-addr1-title">天津精品双卧7日游</div>
+                                <div class="hot-addr1-price">￥12306</div>
+                            </div>
+                            <a href="#"><img src="http://cdn.titles.top/tour/images/hot1.png" width="250" height="300" /></a>
+                        </div>
+                        <div class="hot-addr-2">
+                            <div class="f-left relative">
+                                <div class="hot-addr-ty">
+                                    <div class="hot-addr-title">天津精品双卧7日游</div>
+                                    <div class="hot-addr-price">￥12306</div>
+                                </div>
+                                <a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                            </div>
+                            <div class="f-right relative">
+                                <div class="hot-addr-ty">
+                                    <div class="hot-addr-title">天津精品双卧7日游</div>
+                                    <div class="hot-addr-price">￥12306</div>
+                                </div>
+                                <a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                            </div>
+                            <div class="sep-10"></div>
+                            <div class="f-left relative">
+                                <div class="hot-addr-ty">
+                                    <div class="hot-addr-title">天津精品双卧7日游</div>
+                                    <div class="hot-addr-price">￥12306</div>
+                                </div>
+                                <a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                            </div>
+                            <div class="f-right relative">
+                                <div class="hot-addr-ty">
+                                    <div class="hot-addr-title">天津精品双卧7日游</div>
+                                    <div class="hot-addr-price">￥12306</div>
+                                </div>
+                                <a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 栏目显示内容-End -->
+                    <!-- 栏目显示内容-Start -->
+                    <div class="imgArray hidden" id="time-show">
+                        <div class="hot-addr-1 relative">                	
+                            <div class="hot-addr1-ty bg-golden">
+                                <div class="hot-addr1-title">上海精品双卧7日游</div>
+                                <div class="hot-addr1-price">￥12306</div>
+                            </div>
+                            <a href="#"><img src="http://cdn.titles.top/tour/images/hot1.png" width="250" height="300" /></a>
+                        </div>
+                        <div class="hot-addr-2">
+                            <div class="f-left relative">
+                                <div class="hot-addr-ty">
+                                    <div class="hot-addr-title">上海精品双卧7日游</div>
+                                    <div class="hot-addr-price">￥12306</div>
+                                </div>
+                                <a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                            </div>
+                            <div class="f-right relative">
+                                <div class="hot-addr-ty">
+                                    <div class="hot-addr-title">上海精品双卧7日游</div>
+                                    <div class="hot-addr-price">￥12306</div>
+                                </div>
+                                <a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                            </div>
+                            <div class="sep-10"></div>
+                            <div class="f-left relative">
+                                <div class="hot-addr-ty">
+                                    <div class="hot-addr-title">上海精品双卧7日游</div>
+                                    <div class="hot-addr-price">￥12306</div>
+                                </div>
+                                <a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                            </div>
+                            <div class="f-right relative">
+                                <div class="hot-addr-ty">
+                                    <div class="hot-addr-title">上海精品双卧7日游</div>
+                                    <div class="hot-addr-price">￥12306</div>
+                                </div>
+                                <a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 栏目显示内容-End -->
+                </div>
+            </div>
+        	<!-- 热点旅游-End -->
+        	<!-- 热点攻略-Start -->
+            <div class="hot-guide">
+            	<div class="channel-title b-golden">
+                    <div class="title-style c-gray">热点攻略</div>
+                    <div class="sep-10"></div>
+                    <div class="hot-guide-img relative">
+                    	<div class="hot-guide-ty">
+                        	<div class="hot-guide-title">青岛我来了</div>
+                            <div class="hot-guide-price">知名酒店+大餐</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot3.png" width="200" height="80" /></a>
+                    </div>
+                    <div class="sep-10"></div>
+                    <div class="hot-guide-img relative">
+                    	<div class="hot-guide-ty">
+                        	<div class="hot-guide-title">青岛我来了</div>
+                            <div class="hot-guide-price">知名酒店+大餐</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot3.png" width="200" height="80" /></a>
+                    </div>
+                    <div class="sep-10"></div>
+                    <div class="hot-guide-img relative">
+                    	<div class="hot-guide-ty">
+                        	<div class="hot-guide-title">青岛我来了</div>
+                            <div class="hot-guide-price">知名酒店+大餐</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot3.png" width="200" height="80" /></a>
+                    </div>
+                    <div class="sep-10"></div>
+                    <div class="hot-guide-img relative">
+                    	<div class="hot-guide-ty">
+                        	<div class="hot-guide-title">青岛我来了</div>
+                            <div class="hot-guide-price">知名酒店+大餐</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot3.png" width="200" height="80" /></a>
+                    </div>
+                </div>
+            </div>
+        	<!-- 热点攻略-End -->
+        </div>
+        <!-- 内容栏目-End -->
+        <div class="sep-20"></div>
+        <!-- 内容栏目-Start -->
+        <div class="con-column">
+        	<!-- 热点旅游-Start -->
+        	<div class="hot-addr">
+            	<div class="channel-title b-green">
+                    <div class="title-style c-gray">热点目的地<span class="title-discription">看看身边的精彩，发现平时看不到的美景，来地场心灵旅途!</span></div>
+                </div>
+                <div class="channel-title">
+                    <div class="title-style1 c-gray">
+                    	<span class="hot-list">
+                        	<a class="pointer" id="hot">当季热门</a><a class="pointer" id="hai">面朝大海</a><a class="pointer" id="time">古镇时光</a>
+                        </span>
+                    </div>
+                    <div class="more"><a href="#12" class="f-size-12">查看更多&gt;&gt;</a></div>
+                </div>
+                <div class="sep-20"></div>
+                <div class="hot-addr-1 relative">                	
+                    <div class="hot-addr1-ty bg-green">
+                        <div class="hot-addr1-title">北京精品双卧7日游</div>
+                        <div class="hot-addr1-price">￥12306</div>
+                    </div>
+                	<a href="#"><img src="http://cdn.titles.top/tour/images/hot1.png" width="250" height="300" /></a>
+                </div>
+                <div class="hot-addr-2">
+                	<div class="f-left relative">
+                    	<div class="hot-addr-ty">
+                        	<div class="hot-addr-title">北京精品双卧7日游</div>
+                            <div class="hot-addr-price">￥12306</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                    </div>
+                    <div class="f-right relative">
+                    	<div class="hot-addr-ty">
+                        	<div class="hot-addr-title">北京精品双卧7日游</div>
+                            <div class="hot-addr-price">￥12306</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                    </div>
+                    <div class="sep-10"></div>
+                    <div class="f-left relative">
+                    	<div class="hot-addr-ty">
+                        	<div class="hot-addr-title">北京精品双卧7日游</div>
+                            <div class="hot-addr-price">￥12306</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                    </div>
+                    <div class="f-right relative">
+                    	<div class="hot-addr-ty">
+                        	<div class="hot-addr-title">北京精品双卧7日游</div>
+                            <div class="hot-addr-price">￥12306</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                    </div>
+                </div>
+            </div>
+        	<!-- 热点旅游-End -->
+        	<!-- 热点攻略-Start -->
+            <div class="hot-guide">
+            	<div class="channel-title b-green">
+                    <div class="title-style c-gray">热点攻略</div>
+                    <div class="sep-10"></div>
+                    <div class="hot-guide-img relative">
+                    	<div class="hot-guide-ty">
+                        	<div class="hot-guide-title">青岛我来了</div>
+                            <div class="hot-guide-price">知名酒店+大餐</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot3.png" width="200" height="80" /></a>
+                    </div>
+                    <div class="sep-10"></div>
+                    <div class="hot-guide-img relative">
+                    	<div class="hot-guide-ty">
+                        	<div class="hot-guide-title">青岛我来了</div>
+                            <div class="hot-guide-price">知名酒店+大餐</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot3.png" width="200" height="80" /></a>
+                    </div>
+                    <div class="sep-10"></div>
+                    <div class="hot-guide-img relative">
+                    	<div class="hot-guide-ty">
+                        	<div class="hot-guide-title">青岛我来了</div>
+                            <div class="hot-guide-price">知名酒店+大餐</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot3.png" width="200" height="80" /></a>
+                    </div>
+                    <div class="sep-10"></div>
+                    <div class="hot-guide-img relative">
+                    	<div class="hot-guide-ty">
+                        	<div class="hot-guide-title">青岛我来了</div>
+                            <div class="hot-guide-price">知名酒店+大餐</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot3.png" width="200" height="80" /></a>
+                    </div>
+                </div>
+            </div>
+        	<!-- 热点攻略-End -->
+        </div>
+        <!-- 内容栏目-End -->
+        <div class="sep-20"></div>
+        <!-- 内容栏目-Start -->
+        <div class="con-column">
+        	<!-- 热点旅游-Start -->
+        	<div class="hot-addr">
+            	<div class="channel-title b-blue">
+                    <div class="title-style c-gray">热点目的地<span class="title-discription">看看身边的精彩，发现平时看不到的美景，来地场心灵旅途!</span></div>
+                </div>
+                <div class="channel-title">
+                    <div class="title-style1 c-gray">
+                    	<span class="hot-list"><a class="pointer" id="hot">当季热门</a><a class="pointer" id="hai">面朝大海</a><a class="pointer" id="time">古镇时光</a></span>
+                    </div>
+                    <div class="more"><a href="#12" class="f-size-12">查看更多&gt;&gt;</a></div>
+                </div>
+                <div class="sep-20"></div>
+                <div class="hot-addr-1 relative">                	
+                    <div class="hot-addr1-ty bg-blue">
+                        <div class="hot-addr1-title">北京精品双卧7日游</div>
+                        <div class="hot-addr1-price">￥12306</div>
+                    </div>
+                	<a href="#"><img src="http://cdn.titles.top/tour/images/hot1.png" width="250" height="300" /></a>
+                </div>
+                <div class="hot-addr-2">
+                	<div class="f-left relative">
+                    	<div class="hot-addr-ty">
+                        	<div class="hot-addr-title">北京精品双卧7日游</div>
+                            <div class="hot-addr-price">￥12306</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                    </div>
+                    <div class="f-right relative">
+                    	<div class="hot-addr-ty">
+                        	<div class="hot-addr-title">北京精品双卧7日游</div>
+                            <div class="hot-addr-price">￥12306</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                    </div>
+                    <div class="sep-10"></div>
+                    <div class="f-left relative">
+                    	<div class="hot-addr-ty">
+                        	<div class="hot-addr-title">北京精品双卧7日游</div>
+                            <div class="hot-addr-price">￥12306</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                    </div>
+                    <div class="f-right relative">
+                    	<div class="hot-addr-ty">
+                        	<div class="hot-addr-title">北京精品双卧7日游</div>
+                            <div class="hot-addr-price">￥12306</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                    </div>
+                </div>
+            </div>
+        	<!-- 热点旅游-End -->
+        	<!-- 热点攻略-Start -->
+            <div class="hot-guide">
+            	<div class="channel-title b-blue">
+                    <div class="title-style c-gray">热点攻略</div>
+                    <div class="sep-10"></div>
+                    <div class="hot-guide-img relative">
+                    	<div class="hot-guide-ty">
+                        	<div class="hot-guide-title">青岛我来了</div>
+                            <div class="hot-guide-price">知名酒店+大餐</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot3.png" width="200" height="80" /></a>
+                    </div>
+                    <div class="sep-10"></div>
+                    <div class="hot-guide-img relative">
+                    	<div class="hot-guide-ty">
+                        	<div class="hot-guide-title">青岛我来了</div>
+                            <div class="hot-guide-price">知名酒店+大餐</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot3.png" width="200" height="80" /></a>
+                    </div>
+                    <div class="sep-10"></div>
+                    <div class="hot-guide-img relative">
+                    	<div class="hot-guide-ty">
+                        	<div class="hot-guide-title">青岛我来了</div>
+                            <div class="hot-guide-price">知名酒店+大餐</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot3.png" width="200" height="80" /></a>
+                    </div>
+                    <div class="sep-10"></div>
+                    <div class="hot-guide-img relative">
+                    	<div class="hot-guide-ty">
+                        	<div class="hot-guide-title">青岛我来了</div>
+                            <div class="hot-guide-price">知名酒店+大餐</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot3.png" width="200" height="80" /></a>
+                    </div>
+                </div>
+            </div>
+        	<!-- 热点攻略-End -->
+        </div>
+        <!-- 内容栏目-End -->
+        <div class="sep-20"></div>
+        <!-- 内容栏目-Start -->
+        <div class="con-column">
+        	<!-- 热点旅游-Start -->
+        	<div class="hot-addr">
+            	<div class="channel-title b-green2">
+                    <div class="title-style c-gray">热点目的地<span class="title-discription">看看身边的精彩，发现平时看不到的美景，来地场心灵旅途!</span></div>
+                </div>
+                <div class="channel-title">
+                    <div class="title-style1 c-gray">
+                    	<span class="hot-list"><a class="pointer" id="hot">当季热门</a><a class="pointer" id="hai">面朝大海</a><a class="pointer" id="time">古镇时光</a></span>
+                    </div>
+                    <div class="more"><a href="#12" class="f-size-12">查看更多&gt;&gt;</a></div>
+                </div>
+                <div class="sep-20"></div>
+                <div class="hot-addr-1 relative">                	
+                    <div class="hot-addr1-ty bg-green2">
+                        <div class="hot-addr1-title">北京精品双卧7日游</div>
+                        <div class="hot-addr1-price">￥12306</div>
+                    </div>
+                	<a href="#"><img src="http://cdn.titles.top/tour/images/hot1.png" width="250" height="300" /></a>
+                </div>
+                <div class="hot-addr-2">
+                	<div class="f-left relative">
+                    	<div class="hot-addr-ty">
+                        	<div class="hot-addr-title">北京精品双卧7日游</div>
+                            <div class="hot-addr-price">￥12306</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                    </div>
+                    <div class="f-right relative">
+                    	<div class="hot-addr-ty">
+                        	<div class="hot-addr-title">北京精品双卧7日游</div>
+                            <div class="hot-addr-price">￥12306</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                    </div>
+                    <div class="sep-10"></div>
+                    <div class="f-left relative">
+                    	<div class="hot-addr-ty">
+                        	<div class="hot-addr-title">北京精品双卧7日游</div>
+                            <div class="hot-addr-price">￥12306</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                    </div>
+                    <div class="f-right relative">
+                    	<div class="hot-addr-ty">
+                        	<div class="hot-addr-title">北京精品双卧7日游</div>
+                            <div class="hot-addr-price">￥12306</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                    </div>
+                </div>
+            </div>
+        	<!-- 热点旅游-End -->
+        	<!-- 热点攻略-Start -->
+            <div class="hot-guide">
+            	<div class="channel-title b-green2">
+                    <div class="title-style c-gray">热点攻略</div>
+                    <div class="sep-10"></div>
+                    <div class="hot-guide-img relative">
+                    	<div class="hot-guide-ty">
+                        	<div class="hot-guide-title">青岛我来了</div>
+                            <div class="hot-guide-price">知名酒店+大餐</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot3.png" width="200" height="80" /></a>
+                    </div>
+                    <div class="sep-10"></div>
+                    <div class="hot-guide-img relative">
+                    	<div class="hot-guide-ty">
+                        	<div class="hot-guide-title">青岛我来了</div>
+                            <div class="hot-guide-price">知名酒店+大餐</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot3.png" width="200" height="80" /></a>
+                    </div>
+                    <div class="sep-10"></div>
+                    <div class="hot-guide-img relative">
+                    	<div class="hot-guide-ty">
+                        	<div class="hot-guide-title">青岛我来了</div>
+                            <div class="hot-guide-price">知名酒店+大餐</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot3.png" width="200" height="80" /></a>
+                    </div>
+                    <div class="sep-10"></div>
+                    <div class="hot-guide-img relative">
+                    	<div class="hot-guide-ty">
+                        	<div class="hot-guide-title">青岛我来了</div>
+                            <div class="hot-guide-price">知名酒店+大餐</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot3.png" width="200" height="80" /></a>
+                    </div>
+                </div>
+            </div>
+        	<!-- 热点攻略-End -->
+        </div>
+        <!-- 内容栏目-End -->
+        <div class="sep-20"></div>
+        <!-- 内容栏目-Start -->
+        <div class="con-column">
+        	<!-- 热点旅游-Start -->
+        	<div class="hot-addr">
+            	<div class="channel-title b-oragle">
+                    <div class="title-style c-gray">热点目的地<span class="title-discription">看看身边的精彩，发现平时看不到的美景，来地场心灵旅途!</span></div>
+                </div>
+                <div class="channel-title">
+                    <div class="title-style1 c-gray">
+                    	<span class="hot-list"><a class="pointer" id="hot">当季热门</a><a class="pointer" id="hai">面朝大海</a><a class="pointer" id="time">古镇时光</a></span>
+                    </div>
+                    <div class="more"><a href="#12" class="f-size-12">查看更多&gt;&gt;</a></div>
+                </div>
+                <div class="sep-20"></div>
+                <div class="hot-addr-1 relative">                	
+                    <div class="hot-addr1-ty bg-oragle">
+                        <div class="hot-addr1-title">北京精品双卧7日游</div>
+                        <div class="hot-addr1-price">￥12306</div>
+                    </div>
+                	<a href="#"><img src="http://cdn.titles.top/tour/images/hot1.png" width="250" height="300" /></a>
+                </div>
+                <div class="hot-addr-2">
+                	<div class="f-left relative">
+                    	<div class="hot-addr-ty">
+                        	<div class="hot-addr-title">北京精品双卧7日游</div>
+                            <div class="hot-addr-price">￥12306</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                    </div>
+                    <div class="f-right relative">
+                    	<div class="hot-addr-ty">
+                        	<div class="hot-addr-title">北京精品双卧7日游</div>
+                            <div class="hot-addr-price">￥12306</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                    </div>
+                    <div class="sep-10"></div>
+                    <div class="f-left relative">
+                    	<div class="hot-addr-ty">
+                        	<div class="hot-addr-title">北京精品双卧7日游</div>
+                            <div class="hot-addr-price">￥12306</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                    </div>
+                    <div class="f-right relative">
+                    	<div class="hot-addr-ty">
+                        	<div class="hot-addr-title">北京精品双卧7日游</div>
+                            <div class="hot-addr-price">￥12306</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot2.png" width="250" height="145" /></a>
+                    </div>
+                </div>
+            </div>
+        	<!-- 热点旅游-End -->
+        	<!-- 热点攻略-Start -->
+            <div class="hot-guide">
+            	<div class="channel-title b-oragle">
+                    <div class="title-style c-gray">热点攻略</div>
+                    <div class="sep-10"></div>
+                    <div class="hot-guide-img relative">
+                    	<div class="hot-guide-ty">
+                        	<div class="hot-guide-title">青岛我来了</div>
+                            <div class="hot-guide-price">知名酒店+大餐</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot3.png" width="200" height="80" /></a>
+                    </div>
+                    <div class="sep-10"></div>
+                    <div class="hot-guide-img relative">
+                    	<div class="hot-guide-ty">
+                        	<div class="hot-guide-title">青岛我来了</div>
+                            <div class="hot-guide-price">知名酒店+大餐</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot3.png" width="200" height="80" /></a>
+                    </div>
+                    <div class="sep-10"></div>
+                    <div class="hot-guide-img relative">
+                    	<div class="hot-guide-ty">
+                        	<div class="hot-guide-title">青岛我来了</div>
+                            <div class="hot-guide-price">知名酒店+大餐</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot3.png" width="200" height="80" /></a>
+                    </div>
+                    <div class="sep-10"></div>
+                    <div class="hot-guide-img relative">
+                    	<div class="hot-guide-ty">
+                        	<div class="hot-guide-title">青岛我来了</div>
+                            <div class="hot-guide-price">知名酒店+大餐</div>
+                        </div>
+                    	<a href="#"><img src="http://cdn.titles.top/tour/images/hot3.png" width="200" height="80" /></a>
+                    </div>
+                </div>
+            </div>
+        	<!-- 热点攻略-End -->
+        </div>
+        <!-- 内容栏目-End -->
+    </div>
+    <!-- 内容页-End -->
+    <div class="sep-20"></div>
+    <!-- 页脚-Start -->
+    [#include "/html/widget/footer.html" /]
+</body>
+</html>

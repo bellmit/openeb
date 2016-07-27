@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>${store.title}</title>
+<meta name="keywords" content="{$metaKeywords}" />
+<meta name="description" content="{$metaDesc}" />
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="Bookmark" href="favicon.ico">
+<link rel="Shortcut Icon" href="favicon.ico">
+
+<script src="http://js.spcrm.com/jQuery-1.7.1.min.js"
+	type="text/javascript"></script>
+<script charset="utf-8" src="http://js.spcrm.com/jquery.qrcode.min.js"
+	type="text/javascript"></script>
+
+<script charset="utf-8"
+	src="http://cdn.titles.top/api/smallslider/rs/js/jquery.smallslider.js"
+	type="text/javascript"></script>
+<link type="text/css" rel="stylesheet"
+	href="http://cdn.titles.top/css/common.css">
+<link type="text/css" rel="stylesheet"
+	href="http://cdn.titles.top/css/index.css">
+<link type="text/css" rel="stylesheet"
+	href="http://cdn.titles.top/api/smallslider/rs/css/smallslider.css">
+<link type="text/css" rel="stylesheet"
+	href="http://cdn.titles.top/js/jquery.autocomplete.css">
+
+<script type="text/javascript">
+var domain = "${store.domain}";
+</script>
+</head>
+<body>
+	<!-- 顶部 -->
+	[#include "/html/widget/topbar.html" /]
+	<div style="clear: both"></div>
+	<!-- 头部 -->
+	[#include "/html/widget/header.html" /]
+	<div style="clear: both"></div>
+	<!-- 导航 -->
+	[#include "/html/widget/navbar.html" /]
+	<!-- 焦点 -->
+	<div class="focus">
+		<div id="flashbox" class="smallslider">
+			<ul style="width: 100%;">
+				<li><img alt="" src="http://img.alicdn.com/imgextra/i3/101450072/TB2_rtgdpXXXXXEXpXXXXXXXXXX-101450072.jpg"> </li>
+			</ul>
+		</div>
+	</div>
+	<!--  -->	
+	<div class="wrap">
+			<!-- 热门品牌列表 -->
+			<div class="index_hang index_brand">
+				<div class="t">
+					<a href="" class="cur">大牌街</a> <a href="">潮牌街</a> <a href="">原创街</a>
+					<div class="right">
+						<a class="btn_reload"><i class="icon icon_reload"></i>换一批</a> <a
+							href="#">品牌库 </a>
+					</div>
+				</div>
+				<div class="c" id="hot_brand_list"></div>
+				<div class="clear"></div>
+			</div>
+			
+			<!-- 条幅一 -->
+			<div class="index_hang" id="index_long_banner_1"></div>
+			
+			<!-- 首页楼层 -->
+			<div id="index_storey"></div>
+			
+			<!-- 条幅二 -->
+			<div class="index_hang" id="index_long_banner_2"></div>
+	</div>
+	<div class="clear"></div>
+	
+	<script type="text/javascript">
+	var storey = ${storey};
+	console.info(${storey});
+	var banner = ${banner};
+	console.info(${banner});
+	console.info(${brand});
+	var brand = ${brand};
+	//console.info(${cates});
+	/** 首页Banner **/
+	if (banner){
+		$("#flashbox").append("<ul><li style='background:url("+banner.maingraph+") center;'><a href='"+banner.maingraphline+"' target='_blank'></a></li></ul>");
+		// 页面条幅
+		$("#index_long_banner_1").append("<a href='"+banner.longBanners[0].bannerLine+"' target='_blank'> <img src='"+banner.longBanners[0].banner+"' /></a>");
+		$("#index_long_banner_2").append("<a href='"+banner.longBanners[1].bannerLine+"' target='_blank'> <img src='"+banner.longBanners[1].banner+"' /></a>");
+		
+	}
+	
+	/** 热门品牌列表 **/
+	if (brand){
+		var index_hot_brands_ = "";
+		index_hot_brands_ += "<div class='brandfirst width-2'><div class='bigbrand'>"+
+							 "<a href='"+brand.hotBrandLine1+"' target='_blank'><img src='"+brand.hotBrand1+"' /></a></div></div><div class='brandlist width-8'>";
+		var index_hot_list_ = brand.hotBrands;
+		var index_brand_tmp_ = 0;
+		for(var i = 0; i < 24; i ++) {
+			if(index_brand_tmp_ == index_hot_list_.length) {
+				index_brand_tmp_ = 0;
+			}
+			index_hot_brands_ += "<a class='branditem' href='"+index_hot_list_[index_brand_tmp_].hotBrandLine+"' target='_blank'><em class='message'></em> <i class='icon icon_heart0'></i>"+
+			 "<img src='"+index_hot_list_[index_brand_tmp_].hotBrand+"'></a>";
+			index_brand_tmp_ ++;
+		}
+		index_hot_brands_ += "</div><div class='brand3 width-2'><a href='"+brand.hotBrandLine2+"' target='_blank'><img src='"+brand.hotBrand2+"' /></a></div>";
+		
+		$("#hot_brand_list").append(index_hot_brands_);
+	}
+	
+	
+	if (storey){
+		/** 首页楼层列表 **/
+		var index_storey_ = "";
+		for(var i = 0; i < storey.length; i ++) {
+			index_storey_ += "<div class='index_hang index_pro pro"+(i+1)+" row'>"+
+								"<div class='category width-2'><div class='t'><div class='item'><i class='i"+(i+1)+"'></i>"+storey[i].title+"</div></div>"+
+								"<div class='c'><div class='brand'>";
+			var index_brand_ = storey[i].indexBrands;
+			for(var j = 0; j < index_brand_.length; j++) {
+				index_storey_ += "<a href='"+index_brand_[j].brandLine+"'><img src='"+index_brand_[j].brandImg+"'></a>";
+			}
+			index_storey_ += "</div><div class='keyword'>";
+			var index_cate_ = storey[i].indexCates;
+			for(var k = 0; k < index_cate_.length; k++) {
+				index_storey_ += "<a href='"+index_cate_[k].cateLine+"'>"+index_cate_[k].cateTitle+"</a>";
+			}
+			index_storey_ += "</div></div></div><div class='list row width-4 '><a href='"+storey[i].mainImgline+"'><img src='"+storey[i].mainImg+"'></a></div>"+
+							"<div class='list row width-6'>";
+			var index_img_ = storey[i].indexImgs;
+			for(var l = 0; l < index_img_.length; l++) {
+				index_storey_ += "<div class='item  width-4'><a href='"+index_img_[l].imgLine+"' target='_blank'>"+
+								"<img src='"+index_img_[l].img+"' alt=''/></a></div>";
+			}
+			index_storey_ += "</div><div class='clear'></div></div>";
+		}
+		
+		$("#index_storey").append(index_storey_);
+	}
+	$(function(){
+		$(".mc").removeClass("hide");
+	});
+</script>
+	
+	<!-- 尾部-->
+	[#include "/html/widget/footer.html" /]
+	<!-- footer end -->
+	
+</body>
+</html>

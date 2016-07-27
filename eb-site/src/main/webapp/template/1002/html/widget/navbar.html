@@ -1,0 +1,76 @@
+<div id="nav">
+	<div class="head-v3">
+		<div class="navigation-up">
+			<div class="navigation-inner">
+				<div class="navigation-v3">
+					<ul id="navitems">
+						<li id="homePage" class="nav-up-selected-inpage" _t_nav="home">
+							<a href="${store.domain}">首页</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- 导航二级菜单 -->
+		<div class="navigation-down">
+			<div id="home" class="nav-down-menu" style="display: none;"
+				_t_nav="home">
+				<div class="navigation-down-inner">
+					<span class="home-info"><iframe width="300" scrolling="no"
+							height="25" frameborder="0" allowtransparency="true"
+							src="http://i.tianqi.com/index.php?c=code&id=10&color=%23C6C6C6&icon=1&py=lanzhou"></iframe></span>
+				</div>
+			</div>
+			<div id="nav-1" class="nav-down-menu" style="display: none;"
+				_t_nav="nav-1">
+				<div class="navigation-down-inner">
+					<span><a href="#123">组织机构1</a></span> <span><a href="#123">组织机构2</a></span>
+					<span><a href="#123">组织机构3</a></span> <span><a href="#123">组织机构4</a></span>
+				</div>
+			</div>
+			<div id="nav-2" class="nav-down-menu" style="display: none;"
+				_t_nav="nav-2">
+				<div class="navigation-down-inner">
+					<span><a href="#123">政务公开1</a></span> <span><a href="#123">政务公开2</a></span>
+					<span><a href="#123">政务公开3</a></span>
+				</div>
+			</div>
+			<div id="nav-3" class="nav-down-menu" style="display: none;"
+				_t_nav="nav-3">
+				<div class="navigation-down-inner">
+					<span><a href="#123">信息公开1</a></span> <span><a href="#123">信息公开2</a></span>
+					<span><a href="#123">信息公开3</a></span> <span><a href="#123">信息公开4</a></span>
+					<span><a href="#123">信息公开5</a></span> <span><a href="#123">信息公开6</a></span>
+				</div>
+			</div>
+			<div id="nav-4" class="nav-down-menu" style="display: none;"
+				_t_nav="nav-4">
+				<div class="navigation-down-inner">
+					<span><a href="#123">服务互动1</a></span> <span><a href="#123">服务互动2</a></span>
+					<span><a href="#123">服务互动3</a></span> <span><a href="#123">服务互动4</a></span>
+					<span><a href="#123">服务互动5</a></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 导航_END -->
+<script type="text/javascript">
+function initShopNav(){
+	$.ajax({
+		url : domain+'/navlist',
+		dataType : 'json',
+		type : 'GET',
+		success : function(json) {
+			var navhtml = "";
+			if (json.success){
+				for(var i=0;i<json.data.length;i++){
+					navhtml+="<li class=\"\" _t_nav=\"nav-"+(i+1)+"\"><a href=\""+json.data[i].href+"\" target='blank'>"+json.data[i].title+"</a></li>"
+				}
+			}
+			$("#navitems").append(navhtml);
+		}
+	});
+}
+initShopNav();
+</script>

@@ -1,0 +1,125 @@
+@charset "utf-8";
+/* 订单结算页样式 */
+.checkout-steps .step-cont {
+	margin-bottom: 10px;
+}
+
+.consignee-addr {
+	overflow: hidden;
+	max-height: 168px;
+}
+
+.consignee-scrollbar {
+	width: 938px;
+}
+
+.consignee-addr {
+	position: relative;
+	zoom: 1;
+}
+
+.consignee-addr .consignee-cont ul {
+	width: 99.8%;
+}
+
+.consignee-addr .consignee-cont li {
+	list-style: none;
+	height: 30px;
+	margin: 6px 0;
+	float: left;
+	width: 99.8%;
+}
+
+.consignee-addr .consignee-cont li.li-hover {
+  background-color: #fff3f3;
+}
+
+.consignee-addr .consignee-cont li.li-hover .addr-ops, .consignee-addr .consignee-cont li.li-hover .op-btns {
+  visibility: visible;
+}
+
+
+.consignee-addr .consignee-item.item-hover,.consignee-addr .consignee-item.item-selected,.consignee-addr .consignee-item:hover
+	{
+	border: 2px solid #e4393c;
+	padding: 4px 23px;
+}
+
+.consignee-addr .consignee-cont .addr-detail {
+	float: left;
+	height: 30px;
+	line-height: 30px;
+}
+
+.consignee-addr .consignee-cont .addr-ops,.consignee-addr .consignee-cont .op-btns
+	{
+	visibility: hidden;
+	float: right;
+	text-align: right;
+	height: 30px;
+	line-height: 30px;
+}
+
+
+.consignee-addr .consignee-cont .addr-detail .addr-info, .consignee-addr .consignee-cont .addr-detail .addr-name, .consignee-addr .consignee-cont .addr-detail .addr-tel {
+  margin-left: 10px;
+}
+
+.consignee-addr .consignee-cont .consignee-item {
+	float: left;
+}
+
+.consignee-addr .consignee-item {
+	list-style: none;
+	position: relative;
+	border: 1px solid #ddd;
+	height: 18px;
+	line-height: 18px;
+	padding: 5px 24px;
+	width: 90px;
+	text-align: center;
+	cursor: pointer;
+	background-color: #fff;
+}
+
+.consignee-addr .consignee-item.item-hover,.consignee-addr .consignee-item.item-selected,.consignee-addr .consignee-item:hover
+	{
+	border: 2px solid #e4393c;
+	padding: 4px 23px;
+}
+
+.consignee-addr .consignee-item.item-selected b {
+	display: block;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 12px;
+	height: 12px;
+	overflow: hidden;
+	background: url(../images/selected-icon.png) no-repeat;
+}
+
+.addr-switch {
+	height: 18px;
+	line-height: 18px;
+	padding: 5px 20px;
+	cursor: pointer;
+}
+
+.addr-switch.switch-on b {
+	background: url(../images/addr-i.png) no-repeat 0 0;
+}
+
+.addr-switch.switch-off b {
+  background: url(../images/addr-i.png) no-repeat 0 -10px;
+}
+
+.addr-switch b {
+  display: inline-block;
+  vertical-align: middle;
+  height: 10px;
+  line-height: 10px;
+  width: 9px;
+  margin-left: 5px;
+  background: url(../images/addr-i.png) no-repeat 0 0;
+}

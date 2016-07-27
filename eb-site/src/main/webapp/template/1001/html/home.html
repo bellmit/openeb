@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>会员中心--${store.title}</title>
+<meta name="keywords" content="{$metaKeywords}" />
+<meta name="description" content="{$metaDesc}" />
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="Bookmark" href="favicon.ico">
+<link rel="Shortcut Icon" href="favicon.ico">
+<script src="http://js.spcrm.com/jQuery-1.7.1.min.js" type="text/javascript"></script>
+<link type="text/css" rel="stylesheet" href="http://cdn.titles.top/css/common.css">
+<link type="text/css" rel="stylesheet" href="http://cdn.titles.top/css/member.css">
+<link type="text/css" rel="stylesheet" href="http://cdn.titles.top/css/order.css">
+
+<style type="text/css">
+.collect_product{
+	
+}
+
+.collect_product li{
+	height: 160px;
+  	float: left;
+  	padding: 5px 5px;
+}
+</style>
+</head>
+<body>
+	<!-- 顶部 -->
+	[#include "/html/widget/topbar.html" /]
+	<!-- 头部 -->
+	[#include "/html/widget/header.html" /]
+	<div style="clear: both"></div>
+	<!-- 导航-->
+	[#include "/html/widget/navbar.html" /]
+	<div style="clear: both"></div>
+
+	<div id="mainer">
+		<div class="wrap">
+			[#include "/html/home/leftbar.html" /]
+			<div id="mainbox" class="info-rcol">
+				<div class="user-counts">
+					<ul>
+						<li>
+							<div class="count-item">
+                                 <a href="${store.domain}/order/list.html?state=WAIT_PAY" target="_self" >
+                                    <i class="count-icon count-icon01"></i> 待付款
+                                    <em id="WAIT_PAY_TOTAL">0</em>
+                                 </a>
+                            </div>
+                        </li>
+                        <li>
+							<div class="count-item">
+                                 <a href="${store.domain}/order/list.html?state=PAYED" target="_self" >
+                                    <i class="count-icon count-icon01"></i> 待发货
+                                    <em id="PAYED_TOTAL">0</em>
+                                 </a>
+                            </div>
+                        </li>
+						<li>
+							<div class="count-item">
+                                 <a href="${store.domain}/order/list.html?state=SENDED" target="_self" >
+                                    <i class="count-icon count-icon02"></i> 待收货
+                                    <em id="SENDED_TOTAL">0</em>
+                                 </a>
+                            </div>
+						</li>
+						<li>
+							<div class="count-item">
+                                 <a href="${store.domain}/order/list.html?state=RECEIVED" target="_self" >
+                                 <i class="count-icon count-icon04"></i> 待评价
+                                 <em id="RECEIVED_TOTAL">0</em>
+                                 </a>
+                            </div>
+						</li>
+						<li></li>
+					</ul>
+				</div>
+				<div class="clear"></div>
+				<div id="order" class="row">
+					<div class="title">我的订单<span class="more"><a href="${store.domain}/order/list.html" target="blank">查看全部</a></span></div>
+					<div id="order-title">
+						<ul class="order-td">
+							<li class="order-info">订单信息</li> 
+							<li class="order-price">单价</li> 
+							<li class="order-num">数量</li>
+							<li class="order-account"> 实付款</li> 
+							<li class="order-state">交易状态</li> 
+							<li class="order-opt">交易操作</li>
+						</ul>
+					</div>
+					<div class="clear"></div>
+					<div id="order-list">
+						
+					</div>
+				</div>
+				<div class="clear"></div>
+				<div id="goods " class="row">
+					<div class="title">我关注的商品<span class="more"><a href="${store.domain}/eval/list.html">查看全部</a></span></div>
+					<ul id="collect-list" class="list">
+					</ul>
+				</div>
+
+			</div>
+		</div>
+		<div class="clear"></div>
+</div>
+	
+<script type="text/javascript">
+function getOrderList(page){
+	$.ajax({
+		url : domain+'/order/list',
+		dataType : 'json',
+		type : 'POST',
+		data : "state=SENDED&page=1&pagesize=3",
+		success : function(data) {
+			if (!data || !data.orderlist){
+				return;
+			}
+			if (!data || !data.orderItemMap){
+				return;
+			}
+			var orders = data.orderlist;
+			var itemmap = data.orderItemMap;
+			var pointhtml = "";
+			for(var i=0;i<orders.length;i++){
+				var orderid =  orders[i].serialnum;
+				var orderitems = itemmap[orderid];
+				pointhtml = pointhtml+"<div class='orderbox'>"
+				if(orders[i].state=="WAIT_PAY"){
+					pointhtml = pointhtml+"<ul class=\"order-hd\"><li class=\"first\" id='"+orderid+"'><span>订单编号："+orderid+"</span><span>"+orders[i].adddatestr+"</span><span style='float: right;'>等待付款</span></li></ul>";	
+				}
+				if(orders[i].state=="PAYED"){
+					pointhtml = pointhtml+"<ul class=\"order-hd\"><li class=\"first\" id='"+orderid+"'><span>订单编号："+orderid+"</span><span>"+orders[i].adddatestr+"</span><span style='float: right;'>已付款，等待卖家发货</span></li></ul>";
+				}
+				if(orders[i].state=="SENDED"){
+					pointhtml = pointhtml+"<ul class=\"order-hd\"><li class=\"first\" id='"+orderid+"'><span>订单编号："+orderid+"</span><span>"+orders[i].adddatestr+"</span><span style='float: right;'>已发货,等待确认收货</span></li></ul>";	
+				}
+				if(orders[i].state=="RECEIVED"){
+					pointhtml = pointhtml+"<ul class=\"order-hd\"><li class=\"first\" id='"+orderid+"'><span>订单编号："+orderid+"</span><span>"+orders[i].adddatestr+"</span><span style='float: right;'>已收货</span></li></ul>";	
+				}
+				if(orders[i].state=="SUCCESS"){
+					pointhtml = pointhtml+"<ul class=\"order-hd\"><li class=\"first\" id='"+orderid+"'><span>订单编号："+orderid+"</span><span>"+orders[i].adddatestr+"</span><span style='float: right;'>交易成功</span></li></ul>";	
+				}
+				if(orders[i].state=="CANCEL"){
+					pointhtml = pointhtml+"<ul class=\"order-hd\"><li class=\"first\" id='"+orderid+"'><span>订单编号："+orderid+"</span><span>"+orders[i].adddatestr+"</span><span style='float: right;'>交易关闭</span></li></ul>";	
+				}
+				if (orderitems){
+					for(var j=0;j<orderitems.length;j++){
+						pointhtml = pointhtml
+						+"<ul class=\"order-bd\">"
+						+"<li class=\"order-info\">"
+							+"<div class='pimg'><img src=\""+orderitems[j].purl+"\" width=\"60px;\" height=\"60px;\" /></div>"
+							+"<div class='ptitle'>"+orderitems[j].ptitle+"</div>"
+							+"<div class='pspec'>"+orderitems[j].specstr+"</div>"
+						+"</li>"
+						+"<li class=\"order-price\">"+orderitems[j].price+"</li>"
+						+"<li class=\"order-num\">"+orderitems[j].num+"</li>"
+						+"<li class=\"order-account\">"+orderitems[j].accout+"</li>"
+						+"<li class=\"order-state\">"+orders[i].state+"</li>"
+						+"<li class=\"order-opt\"><a href='${store.domain}/order/detail.html?orderid="+orderid+"'>查看详情</a></li>"
+						+"</ul>";
+					}
+				}
+				if(orders[i].state=="WAIT_PAY"){
+					pointhtml = pointhtml+"<ul class=\"order-fd\"><li class=\"first\"><span>商品总额：￥"+orders[i].totalfee+"元</span><span> 商品总数:"+orders[i].totalnum+"件</span><span class='order-btn'><input type='button' class='btn btn-pay' value='支付' onclick='order_payfun(\""+orderid+"\")'/><input type='button' class='btn btn-cancel' value='取消' onclick='order_cancel(\""+orderid+"\")'/></span></li></ul>"	
+				}
+				if(orders[i].state=="PAYED"){
+					pointhtml = pointhtml+"<ul class=\"order-fd\"><li class=\"first\"><span>商品总额：￥"+orders[i].totalfee+"元</span><span> 商品总数:"+orders[i].totalnum+"件</span><span class='order-btn'><input type='button' class='btn btn-cancel' value='等待卖家发货' /></span></li></ul>"	
+				}
+				if(orders[i].state=="SENDED"){
+					pointhtml = pointhtml+"<ul class=\"order-fd\"><li class=\"first\"><span>商品总额：￥"+orders[i].totalfee+"元</span><span> 商品总数:"+orders[i].totalnum+"件</span><span class='order-btn'><input type='button' class='btn btn-pay' value='收货确认' onclick='order_receive(\""+orderid+"\")'/><input type='button' class='btn btn-cancel' value='取消' /></span></li></ul>"	
+				}
+				if(orders[i].state=="RECEIVED"){
+					pointhtml = pointhtml+"<ul class=\"order-fd\"><li class=\"first\"><span>商品总额：￥"+orders[i].totalfee+"元</span><span> 商品总数:"+orders[i].totalnum+"件</span><span class='order-btn'><input type='button' class='btn btn-pay' value='评价' onclick='order_payfun(\""+orderid+"\")'/></span></li></ul>"	
+				}
+				if(orders[i].state=="SUCCESS"){
+					pointhtml = pointhtml+"<ul class=\"order-fd\"><li class=\"first\"><span>商品总额：￥"+orders[i].totalfee+"元</span><span> 商品总数:"+orders[i].totalnum+"件</span><span class='order-btn'><input type='button' class='btn btn-cancel' value='交易成功' /></span></li></ul>"	
+				}
+				if(orders[i].state=="CANCEL"){
+					pointhtml = pointhtml+"<ul class=\"order-fd\"><li class=\"first\"><span>商品总额：￥"+orders[i].totalfee+"元</span><span> 商品总数:"+orders[i].totalnum+"件</span><span class='order-btn'><input type='button' class='btn btn-cancel' value='删除' /></span></li></ul>"	
+				}
+				pointhtml = pointhtml+"</div>";
+			}
+			$("#order-list").html(pointhtml);
+		}
+	}); 
+}
+
+function getCollectList(){
+	$.ajax({
+		url : domain+'/collect/list',
+		dataType : 'json',
+		type : 'POST',
+		data : "type=PRODUCT&page=1&pagesize=5",
+		success : function(data) {
+			console.info(data);
+			var collect_html_="";
+			if (data){
+				collect_html_ = collect_html_+"<ul class='collect_product'>";
+				for(var i=0;i<data.length;i++){
+					collect_html_ = collect_html_+"<li><a href='"+domain+"/item-"+data[i].targetid+".html'><img src='"+data[i].picurl+"' width='160px' height='160px' target='blank'></li>"
+				}
+				collect_html_ = collect_html_+"</ul>";
+			}
+			$("#collect-list").html(collect_html_);
+		}
+	});
+}
+
+
+function getOrderStatist(){
+	$.ajax({
+		url : domain+'/order/statist',
+		dataType : 'json',
+		type : 'POST',
+		success : function(data) {
+			console.info(data);
+			$("#WAIT_PAY_TOTAL").html("("+data.WAIT_PAY+")");
+			$("#PAYED_TOTAL").html("("+data.PAYED+")");
+			$("#SENDED_TOTAL").html("("+data.SENDED+")");
+			$("#RECEIVED_TOTAL").html("("+data.RECEIVED+")");
+		}
+	});
+}
+(function () {
+	getOrderList();
+	getCollectList();
+	getOrderStatist();
+})();
+</script>		
+<!-- 尾部-->
+[#include "/html/widget/footer.html" /]
+<!-- footer end -->
+</body>
+</html>

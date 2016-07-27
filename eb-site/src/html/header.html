@@ -1,0 +1,27 @@
+<div id="header">
+		<div class=" wrap">
+			<div class="logobar width-3">
+				<@b2c_store siteid="1001";store>
+				<a href="${store.domain}/index.html" title="${store.title}" class="logo "><img alt="${store.title}" src="http://img.titles.top/1001/logo.png" width="280" height="60"></a>
+				</@b2c_store>
+			</div>
+			<div id="searchbar" class="width-6">
+				<form method="get" action="${store.domain}/search.html">
+					<input type="text" id="keywords" name="keyword" class="txt autocomplete" onkeyup="upsearch();"
+						value="" placeholder="站内搜索" onkeydown="javascript:if(event.keyCode==13) search();"/> 
+					<input type="button" class="bt" value="搜索" onclick="search();return false;"/>
+					<div class="clear"></div>
+				</form>
+				  <a href="${store.domain}/search.html?keyword=工作站">苦水玫瑰</a> 
+				| <a href="${store.domain}/search.html?keyword=服务器">百合</a> 
+				| <a href="${store.domain}/search.html?keyword=笔记本">蔬菜</a> 
+				| <a href="${store.domain}/search.html?keyword=台式机">黑土豆</a> 
+				| <a href="${store.domain}/search.html?keyword=盒子">锁阳</a> 
+			</div>
+
+			<div id="login">
+				<div class="loginbox hidden-sm"></div>
+			</div>
+		</div>
+</div>
+	

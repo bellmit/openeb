@@ -1,0 +1,245 @@
+@charset "utf-8";
+/* 购物车 */
+
+.flow{background-position:center center;background-image:url(../images/flow_03.png);height:125px;background-repeat:no-repeat;}
+
+/*购物车为空*/
+.cart-empty{width:960px;min-height:262px;margin:0 auto;margin-top:10px; margin-bottom: 50px; border: 1px solid #DDDDDD;}
+.cart-empty .message{height: 262px;padding-left: 341px;background: #F3F3F3 url(../../images/order/cart-empty-bg.png) no-repeat scroll 250px 50%;}
+.cart-empty .message p{line-height: 262px;}
+.cart-empty .message ul{padding-top: 23px;}
+.cart-empty .message li{line-height: 26px;}
+.cart-empty a, 
+.cart-empty a:visited, 
+.cart-empty a:hover{color: #005EA7;}
+
+#shopCartList table{
+    border:1px solid #DDD;
+}
+#shopCartList tr{
+    line-height: 25px;
+    border-bottom: 1px solid #DDD;
+}
+#shopCartList th {
+	background: #EEE;
+}
+#shopCartList th{
+	color: #000;
+    font-weight: normal;
+	padding: 5px 0;
+}
+#shopCartList td{    
+    font-family: Arial;
+}
+#shopCartList td a{
+	color: #666;
+}
+#shopCartList td a.pic{
+    display: block;
+    margin: 10px;
+    width: 80px;    
+}
+#shopCartList td a.pic img{
+    max-width: 80px;
+    max-height: 80px;
+}
+#shopCartList td.name{
+    position: relative;
+}
+/* 修改规格等 */
+#shopCartList td.name .btnEdit{
+    display: none;
+    position: absolute;
+    height: 24px;
+	padding: 0px 5px;
+    color: #fff;
+    background-color: #ff6600;
+}
+#shopCartList td.name .selectedSpec{ display: inline-block; text-align: left; padding: 4px 10px;  border: 1px solid #fff;  }
+#shopCartList td.name:hover .selectedSpec{     
+    border: 1px solid #ff6600;
+}
+#shopCartList td.name:hover .btnEdit{
+    display: inline-block;
+}
+#shopCartList td.name .specPanel {
+    background: #fff;
+    border: 1px dashed #ff6600;
+    height: auto;
+    left: 0;
+    position: absolute;
+    text-align: left;
+    top: 0;
+    width: 100%;
+    padding: 10px;z-index: 1;
+}
+#shopCartList td.name .specPanel dl dt{
+    float: left;
+}
+#shopCartList td.name .specPanel dl dd a{
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    padding: 1px 8px  ;
+    border: 1px solid #DDD;
+    transition: none;
+    cursor: pointer;
+}
+#shopCartList td.name .specPanel dl dd a img{ height: 50px; margin: 0 -5px 8px; max-width: none;}
+#shopCartList td.name .specPanel dl dd a:hover, #shopCartList td.name .specPanel dl dd a.selected{
+    padding: 0px 7px;
+    border: 2px solid #c50100;
+}
+#shopCartList td.name .specPanel dl dd a.selected{
+    background: url("../../images/btn.png") right bottom no-repeat;
+}
+#shopCartList td.name .specPanel dl dd a.disable{   padding: 1px 8px  ;cursor: not-allowed;border:1px dashed #DDD;  opacity: .5; }
+#shopCartList td.name .specPanel p{
+    text-align: right;
+}
+#shopCartList td.name .specPanel p span{
+    padding: 5px 10px;
+}
+#shopCartList td.name .specPanel p span.btnSave{    
+    color: #FFF;
+    background: #ff6600;
+}
+#shopCartList td.name .specPanel p span.btnCancel{    
+    color: #333;
+    background: #DDD;
+    margin-left: 10px;
+}
+
+#shopCartList td a:hover{
+	color: #ff0000;
+}
+#shopCartList td img {
+	vertical-align:middle;
+}
+
+#shopCartList .quantity-form {  
+	margin: 0 auto;
+    height: 32px;
+}
+#shopCartList .quantity-form a {
+	width: 30px;
+	height: 30px; 
+    line-height: 30px;
+    color: #666;
+    font-weight: bold;
+	display: inline-block;
+	overflow: hidden;
+	border: 1px solid #CCC;
+    background-color: #EEE;
+}
+#shopCartList .quantity-form a:hover{
+    color: #333;
+}
+#shopCartList .quantity-form .quantity-text { 
+    margin: 0;
+	width: 40px;
+    height: 30px;
+    line-height: 30px;
+	border: 1px solid #CCC;
+    font-size: 14px; 
+	overflow: hidden;
+	text-align: center; 
+	display: inline-block;	
+    vertical-align: top;
+    font-family: Arial;
+}
+
+#shopCartList td .gray_text {
+	margin-left:5px;
+}
+#shopCartList td .del:hover {
+	text-decoration:underline;
+} 
+.giftTable{
+    margin-top: 30px;
+}
+.giftTable thead th{
+    text-align: left;
+    padding: 5px 0 5px 10px;
+}
+.giftTable thead th .icon-gift{
+    width: 20px; 
+    height: 20px; 
+    margin: 0 5px; 
+    vertical-align: -5px;
+}
+.giftTable td.pic{
+    width: 110px;
+}
+.giftTable td.info{
+    text-align: left;
+}
+.countInfo{
+    padding: 20px 10px;
+    text-align: right;
+}
+.countInfo li{
+    padding: 2px 0;
+    font-size: 14px;
+    font-family: Arial;
+}
+.countInfo li label .num{
+    font-size: 14px;
+}
+.countInfo li label.offer span{
+    background: none repeat scroll 0 0 red;
+    border-radius: 2px;
+    color: #fff;
+    padding: 3px;
+}
+
+#totalMoney { 
+	background-color: #f0f0f0;
+    font-size: 18px;
+    height: 80px;
+    line-height: 80px;
+    padding-right: 10px;
+    text-align: right;
+}
+#totalMoney label{
+	display: inline-block;
+	font-size:14px;
+	color: #666;
+    font-family: Arial;
+}
+#totalMoney .amount span{
+	color:#ff6600;
+	font-size:24px;
+	padding: 0 2px;
+}
+#totalMoney .integral{
+	margin-left: 10px;
+}
+#totalMoney .integral, #totalMoney .integral span{
+	font-size:14px;
+	color: #999;
+}
+
+.btnGroup{	
+    overflow: hidden;
+	margin: 20px 0;
+}
+.btnGroup .btn{
+    padding: 8px 30px;
+    font-family: "Microsoft yahei";
+    font-size: 18px;
+}
+.btnGroup .btn:hover{
+    opacity: .8;
+    color: #FFF;
+}
+.btnGroup .continue {
+    float: left;
+    color: #FFF;
+    background: #333;
+}
+.btnGroup .checkout {
+    float: right;
+    color: #FFF;
+    background: #df2606;
+}

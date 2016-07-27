@@ -1,0 +1,17 @@
+<div class="buy-right">
+	<div class="ald-hd ">
+		<s></s> <span>看了又看</span>
+	</div>
+	<div class="wrapCon">
+		<ul id="product-clicktops">
+			<@b2c_top_goods siteid='${store.id}';product,index>
+			<li>
+				<div>
+					<a href="${store.domain}/item-${product.id}.html"><img src="${product.picUrl}" /></a>
+				</div>
+				<div class="look_price">¥${product.price}</div>
+			</li>
+			</@b2c_top_goods>
+		</ul>
+	</div>
+</div>

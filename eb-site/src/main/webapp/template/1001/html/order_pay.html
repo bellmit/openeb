@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>订单支付 -${store.name}</title>
+<script src="http://js.spcrm.com/jQuery-1.7.1.min.js" type="text/javascript"></script>
+<!--结算页面样式-->
+<link type="text/css" rel="stylesheet" href="http://cdn.titles.top/css/common.css"/>
+<link type="text/css" rel="stylesheet" href="http://cdn.titles.top/css/order.css"/>
+<link type="text/css" rel="stylesheet" href="http://cdn.titles.top/css/flow2014.min.css"/>
+
+</head>
+<body>
+	<!-- 顶部 -->
+	[#include "/html/widget/topbar.html" /]
+	<!-- 头部 -->
+	[#include "/html/widget/header.html" /]
+	<div style="clear: both"></div>
+	<!-- 导航-->
+	[#include "/html/widget/navbar.html" /]
+	<div style="clear: both"></div>
+	
+	<div class="wrap w1 header clearfix">
+		<div id="logo">
+			<a href="#none" class="link2"><b>支付页</b></a>
+		</div>
+	
+		<div class="stepflex" id="#sflex03">
+			<dl class=" done">
+				<dt class="s-num">1</dt>
+				<dd class="s-text">1.我的购物车<s></s><b></b></dd>
+			</dl>
+			<dl class="normal done">
+				<dt class="s-num">2</dt>
+				<dd class="s-text">2.填写核对订单信息<s></s><b></b></dd>
+			</dl>
+			<dl class="normal doing">
+				<dt class="s-num">3</dt>
+				<dd class="s-text">3.成功提交订单<s></s><b></b></dd>
+			</dl>
+		</div>
+	</div>
+
+
+	<!-- main -->
+	<div class="wrap">
+	    <div class="done_info w clearfix">
+		<!-- <div class="Left icon"></div> -->
+		<div class="Left main">
+			<div class="strong">您的订单已提交成功，感谢您的订购！</div>
+				<div class="f14" style="line-height:1.5">
+					<p class="p">在线支付订单编号：<span class="red yen f14 bold" id="order_sn"></span> <span class="gray">${order.serialnum}</span>
+						应付款金额：<span class="yen red bold" id="order_fee">¥${order.totalfee}</span> <a href="javascript:;" class="detail_txt" id="JS_order_detail_hander">订单付款详情</a></p>
+				</div>
+				<div class="notice" id="JS_notice_timeer">请您在<span class="red bold">2天23小时59分钟</span>内完成支付，否则订单会被自动取消。</div>
+				<table id="JS_order_detail_list" class="detail_list">
+					<tbody>
+						<tr>
+							<th>订单号</th>
+							<th>服务提供商</th>
+							<th>应付款金额</th>
+						</tr>
+						<tr>
+							<td>2015061870569</td>
+							<td>测试电商</td>
+							<td>¥6200.00</td>
+						</tr>
+					</tbody>
+				</table>
+		</div>
+	</div>
+</div>
+<!-- /order -->
+
+<!-- pay -->
+<div class="wrap done_pay ">
+
+	<div class="nav">
+		<a href="javascript:;" id="JS_payment_platform" onclick="togglePayment('platform');return false;" class="current">支付平台</a>
+		<!-- <a href="javascript:;" id="JS_payment_netbank" onclick="togglePayment('netbank');return false;" >网上银行支付</a> -->
+		<!-- <a href="javascript:;" id="JS_payment_creditcard" onclick="togglePayment('creditcard');return false;">信用卡快捷支付</a> -->
+	</div>
+	<div class="body">
+		<div class="way netbank" id="JS_paybody_netbank" style="display: none;">
+			<div class="item flow_bank clearfix " id="FD_chinabank2">
+			<div class="brank_title"><b>请选择网上银行</b></div>
+			<div class="banks">
+				<input type="radio" name="pd_FrpId" value="ICBC-NET-B2C" id="FD_ICBC-NET-B2C" />
+				<label for="FD_ICBC-NET-B2C"><img src="http://image.meilele.com/themes/paipai/images/bank_logo/gongshang.gif" alt="工商银行" /></label>
+			</div>
+			<div class="banks">
+				<input type="radio" name="pd_FrpId" value="CMBCHINA-NET-B2C" id="FD_CMBCHINA-NET-B2C" />
+				<label for="FD_CMBCHINA-NET-B2C"><img src="http://image.meilele.com/themes/paipai/images/bank_logo/zhaohang.gif" alt="招商银行"></label> </div>
+			<div class="banks">
+				<input type="radio" name="pd_FrpId" value="ABC-NET-B2C" id="FD_ABC-NET-B2C" />
+				<label for="FD_ABC-NET-B2C"><img src="http://image.meilele.com/themes/paipai/images/bank_logo/nongye.gif" alt="中国农业银行"></label></div>
+			<div class="banks">
+				<input type="radio" name="pd_FrpId" value="CCB-NET-B2C" id="FD_CCB-NET-B2C" /><label for="FD_CCB-NET-B2C"><img src="http://image.meilele.com/themes/paipai/images/bank_logo/jianshe.gif" alt="建设银行"></label></div>
+			<div class="banks"><input type="radio" name="pd_FrpId" value="BCCB-NET-B2C" id="FD_BCCB-NET-B2C" /><label for="FD_BCCB-NET-B2C"><img src="http://image.meilele.com/themes/paipai/images/bank_logo/beijing.gif" alt="北京银行"></label></div>
+			<div class="banks"><input type="radio" name="pd_FrpId" value="BOCO-NET-B2C" id="FD_BOCO-NET-B2C" /><label for="FD_BOCO-NET-B2C"><img src="http://image.meilele.com/themes/paipai/images/bank_logo/jiaotong.gif" alt="交通银行"></label></div>
+			<div class="banks"><input type="radio" name="pd_FrpId" value="CIB-NET-B2C" id="FD_CIB-NET-B2C" /><label for="FD_CIB-NET-B2C"><img src="http://image.meilele.com/themes/paipai/images/bank_logo/xingye.gif" alt="兴业银行"></label></div>
+			<div class="banks"><input type="radio" name="pd_FrpId" value="NJCB-NET-B2C" id="FD_NJCB-NET-B2C" /><label for="FD_NJCB-NET-B2C"><img src="http://image.meilele.com/themes/paipai/images/bank_logo/nanjing.gif" alt="南京银行"></label></div>
+		</div>			
+		<div class="select_bank l" id="JS_selected_bank"></div>
+		</div>
+		<div class="way netbank" id="JS_paybody_creditcard">
+			<div class="item flow_bank clearfix " id="FD_chinabank4">
+			<div class="brank_title"><b>请选择信用卡开卡银行</b></div>
+			<div class="banks"><input type="radio" name="creditcard" value="ICBC" id="CC_ICBC" /><label for="CC_ICBC"><img src="http://image.meilele.com/themes/paipai/images/bank_logo/gongshang.gif" alt="工商银行" /></label></div>
+			<div class="banks"><input type="radio" name="creditcard" value="ABC" id="CC_ABC" /><label for="CC_ABC"><img src="http://image.meilele.com/themes/paipai/images/bank_logo/nongye.gif" alt="农业银行"></label></div>
+			<div class="banks"><input type="radio" name="creditcard" value="CMB" id="CC_CMB" /><label for="CC_CMB"><img src="http://image.meilele.com/themes/paipai/images/bank_logo/zhaohang.gif" alt="招商银行"></label></div>
+			<div class="banks"><input type="radio" name="creditcard" value="CCB" id="CC_CCB" /><label for="CC_CCB"><img src="http://image.meilele.com/themes/paipai/images/bank_logo/jianshe.gif" alt="建设银行"></label></div>
+			<div class="banks"><input type="radio" name="creditcard" value="BOC" id="CC_BOC"/><label for="CC_BOC"><img src="http://image.meilele.com/themes/paipai/images/bank_logo/zhongguo.gif" alt="中国银行"></label></div>
+			<!-- <div class="banks"><input type="radio" name="creditcard" value="SDB" id="CC_SDB" /><label for="CC_SDB"><img src="http://image.meilele.com/themes/paipai/images/bank_logo/shenfa.gif" alt="深圳发展银行" /></label></div> -->
+			<div class="banks"><input type="radio" name="creditcard" value="CEB" id="CC_CEB"/><label for="CC_CEB"><img src="http://image.meilele.com/themes/paipai/images/bank_logo/guangda.gif" alt="光大银行"></label></div>
+			<div class="banks"><input type="radio" name="creditcard" value="SPABANK" id="CC_SPABANK"/><label for="CC_SPABANK"><img src="http://image.meilele.com/themes/paipai/images/bank_logo/pingan.gif" alt="平安银行"></label></div>
+		</div>			
+		<div class="select_bank l" id="JS_selected_creditcard"></div>
+		</div>
+		<div class="way alipay" id="JS_paybody_platform" style="display: block;">
+			<label><input id="JS_payment_platform_1" type="radio" name="payment_platform" value="1" checked="checked"/><img src="http://image.meilele.com/images/zhuanti/upload/alipay_1347593387.jpg" width="113" height="46" style="vertical-align:middle;"/></label>
+			<!-- <label><input id="JS_payment_platform_3" type="radio" name="payment_platform" value="6" /><img src="http://image.meilele.com/images/zhuanti/upload/alipay_s_1389162335.gif" width="146" height="46" style="vertical-align:middle;"/></label> -->
+		</div>
+		<div class="opt-box mt20" style="margin-top: 30px;">
+			<a href="javascript:;" class="gopay" onclick="posttopay();" title="确认支付" id="JS_btn_d1" style="vertical-align:middle"></a>
+			<br><span style="display:none" class="gray" id="JS_btn_d2">正在提交，请稍候……</span>
+		</div>
+	</div>
+</div>
+<!-- 尾部-->
+[#include "/html/widget/footer.html" /]
+<!-- footer end -->	
+
+<script type="text/javascript" charset="utf-8">
+var ordersn = "${order.serialnum}";
+var _SHOULD_PAY = 0.00;
+var _SELECT_BANK = false;
+var _MIN_PAY = parseFloat('0.01');
+
+function posttopay(){
+	$("#JS_btn_d1").hide();
+	$("#JS_btn_d2").show();
+	$.ajax({
+		url : domain+"/alipay/deposit",
+		type : "POST",
+		dataType : 'json',
+		data : "ordersn="+ordersn,
+		success : function(json) {
+			console.log(json.data);
+			$("body").append(json.data);//后台会返回一个新的交易表单，并自动提交。所以随便放一个地方就OK
+		},
+		error : function() {
+		}
+	});
+}
+
+function lbox(){
+	var html = '请您在新打开的网上银行页面进行支付，完成支付前请不要关闭该窗口。';
+	var setting = {
+			title:'支付',
+			onOk:function(){
+				location.href = "/pay.html?sn=2015061870569";
+			},
+			onCancel:function(){
+				location.href="/user/?act=pay_question_online&order_id=1402924"
+			},
+			mask:true,
+			type:'warn'
+		}
+	var url = "'/user/?act=order_list'";
+	h = '<div class="clearfix title"><div class="Left"><i style="display:inline-block;"></i><span>'+setting.title+'</span></div><a href="javascript:;" class="Right" onclick="M.closeLightBox(\'{=id}\' , function(){location.href='+url+'});">&times;</a></div>'+
+		'<div class="content"><table style="width:100%"><tr>'+
+			'<td class="icons_td"><span class="icons icons_'+setting.type+'"></span></td>'+
+			'<td class="content_td">'+html+'</td>'+
+		'</tr></table></div>';
+	$(this).lightBox(h, {
+		'b1':function(){
+			$(this).closeLightBox( false , setting.onOk );
+		},
+		'b2':function(){
+			$(this).closeLightBox( false , setting.onCancel );
+		}
+	} , null , null , null , setting.mask , 'MALERT MCONFIRM flow_lightbox');
+	var b1 = $('#'+M.lightBoxId+'_b1');
+	if( b1 && $('#partpay').value - 0 < _SHOULD_PAY){
+		M.addClass( b1 , 'lightbox_btnsi_3' );
+	}
+	lbox.setting = setting;
+}
+</script>
+</body>																			
+</html>

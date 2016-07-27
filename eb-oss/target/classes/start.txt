@@ -1,0 +1,7 @@
+#!/bin/sh 
+programdir="." 
+temp=$CLASSPATH 
+libs=lib/*
+export CLASSPATH=$CLASSPATH:$libs:.:../:$programdir 
+export LANG=zh_CN 
+nohup java -classpath $CLASSPATH com.gsccs.oss.server.OssServer &

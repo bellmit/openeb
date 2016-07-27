@@ -1,0 +1,791 @@
+@charset "utf-8";
+/* 搜索结果页样式 */
+.crumb {
+	font-family: \5b8b\4f53;
+	padding: 0 5px 8px;
+}
+
+.left {
+	float: left;
+	width: 210px
+}
+
+.right-extra {
+	float: right;
+	width: 970px
+}
+
+
+
+
+#plist,#plist .list-h {
+	position: relative;
+	overflow: hidden;
+	z-index: 2;
+	min-height: 600px;
+}
+
+#plist li {
+	/** width: 230px; **/
+	width: 215px;
+	/* padding: 20px 13px 0; */
+	font-family: arial, \5b8b\4f53;
+	border-bottom: 1px dotted #ddd
+}
+
+#plist .p-img {
+	position: relative;
+	height: 160px;
+	border: 1px solid #fff;
+	transition: border .3s ease-in 0s;
+	text-align: center
+}
+
+#plist .p-img .p-img-mask {
+	position: absolute;
+	right: 0;
+	bottom: 10px;
+	width: 220px;
+	height: 220px;
+	background: url(../images/p-img-mask.png) no-repeat;
+	_background: url(../images/p-img-mask-png8.png) no-repeat
+}
+
+#plist .p-price {
+	margin-top: 5px;
+	height: 22px
+}
+
+#plist .p-price em {
+	float: left;
+	color: #E4393C;
+	font-size: 11px
+}
+
+#plist .p-price strong {
+	float: left;
+	margin-right: 5px;
+	font-family: verdana;
+	font-size: 14px;
+	color: #E4393C
+}
+
+#plist .p-price i.prebuy-num {
+	font-style: normal;
+	font-size: 12px
+}
+
+#plist .p-name a:link,#plist .p-name a:visited {
+	color: #666
+}
+
+#plist .p-name a:hover {
+	color: #E4393C
+}
+
+#plist .p-name a .adwords {
+	margin-left: 5px;
+	color: red
+}
+
+#plist .p-name a .personal-icon {
+	display: inline-block;
+	width: 45px;
+	height: 16px;
+	padding: 1px 4px 0 3px;
+	background: url(../images/2013101001.gif) no-repeat;
+	text-align: left;
+	font: 400 12px/14px arial;
+	color: #FFF
+}
+
+#plist .p-name .p-promo-tag1 {
+	display: inline-block;
+	height: 17px;
+	padding-right: 6px;
+	position: relative;
+	vertical-align: top
+}
+
+#plist .p-name .p-promo-tag1 .text {
+	display: inline-block;
+	height: 17px;
+	line-height: 17px;
+	padding: 0 4px;
+	border-radius: 3px;
+	background: #e96163;
+	color: #fff;
+	font-size: 12px;
+	font-weight: 400;
+	font-family: '\5B8B\4F53';
+	vertical-align: top
+}
+
+#plist .p-name .p-promo-tag1 .arrow {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	border-width: 3px;
+	border-style: dashed dashed dashed solid;
+	border-color: transparent transparent transparent #e96163;
+	overflow: hidden;
+	position: absolute;
+	right: 0;
+	top: 6px
+}
+
+#plist .p-name strong {
+	font-weight: 700;
+	color: #c00
+}
+
+#plist .service {
+	margin-top: 5px;
+	height: 18px;
+	overflow: hidden;
+	line-height: 18px
+}
+
+#plist .service a {
+	display: inline-block;
+	max-width: 170px;
+	overflow: hidden;
+	line-height: 18px;
+	height: 18px;
+	vertical-align: bottom;
+	*vertical-align: baseline;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	word-wrap: normal
+}
+
+#plist .extra {
+	margin-top: 5px;
+	padding: 2px 0;
+	height: 16px;
+	line-height: 16px;
+	overflow: hidden;
+	font-family: verdana
+}
+
+#plist .extra {
+	color: #005aa0
+}
+
+#plist .extra a:link,#plist .extra a:visited {
+	float: left;
+	color: #005aa0
+}
+
+#plist .p-summary {
+	display: none
+}
+
+#plist .reputation {
+	display: inline;
+	color: #1A8705
+}
+
+#plist .btns {
+	height: 24px;
+	margin-top: 10px;
+	text-align: center;
+	overflow: hidden;
+	zoom: 1
+}
+
+#plist .p-shopnum {
+	height: 20px;
+	margin: 2px 0 5px;
+	line-height: 20px;
+	font-family: verdana;
+	color: #333
+}
+
+#plist .p-shopnum a {
+	color: #005AA0
+}
+
+#plist .p-shopnum span {
+	padding-right: .5em;
+	padding-left: .5em;
+	color: #E4393C
+}
+
+.btns .ehaoyao,#plist .btns input {
+	float: left;
+	width: 50px;
+	height: 22px;
+	margin-right: 4px;
+	line-height: 21px;
+	text-align: center;
+	vertical-align: middle;
+	background: url(../images/bg_hotsale.gif) no-repeat 0 -632px
+}
+
+#plist input.btn-comp {
+	border: 0;
+	line-height: 20px;
+	cursor: pointer
+}
+
+#plist a.ehaoyao {
+	width: 86px;
+	height: 21px;
+	padding-left: 26px;
+	line-height: 20px;
+	background:
+		url(http://misc.360buyimg.com/201007/skin/df/i/btn2012062502.png)
+		no-repeat;
+	cursor: pointer;
+	color: #333
+}
+
+#plist .btns a.disabled {
+	background: #fff;
+	cursor: no-drop;
+	color: #ccc
+}
+
+#plist a.free-download {
+	float: left;
+	width: 67px;
+	height: 21px;
+	margin-right: 4px;
+	background: url(../images/20130415i.png) no-repeat -97px -131px;
+	line-height: 20px;
+	text-align: center;
+	text-decoration: none;
+	color: #000
+}
+
+#plist a.ehaoyao:hover,#plist a.notice-store:hover,#plist a.btn-coll:hover
+	{
+	text-decoration: none
+}
+
+#plist .p-price a {
+	text-decoration: none;
+	color: #fff
+}
+
+#plist .btn-buy,#plist .btns .btn-coll,#plist .btn-compare,#plist .notice-store,#plist-shop .go-shop,#plist .btn-panic-buying
+	{
+	float: left;
+	height: 19px;
+	padding: 0 9px;
+	border: 1px solid #ddd;
+	border-radius: 2px;
+	margin: 0 4px 0 0;
+	background: #F7F7F7;
+	line-height: 18px;
+	line-height: 19px\9;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+	color: #333;
+	background: -moz-linear-gradient(top, #f7f7f7, #f2f2f2);
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#f7f7f7),
+		to(#f2f2f2));
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f7f7f7",
+		endColorstr="#f2f2f2");
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr="
+		#f7f7f7 ", endColorstr=" #f2f2f2 ")"
+}
+
+#plist .notice-store {
+	position: relative;
+	padding: 0 9px 0 31px
+}
+
+#plist .notice-store b {
+	position: absolute;
+	left: 10px;
+	top: 3px;
+	display: block;
+	width: 15px;
+	height: 12px;
+	background: url(../images/20130428A.png) no-repeat
+}
+
+#plist .btn-buy:hover,#plist .btns .btn-coll:hover,#plist .notice-store:hover,#plist-shop .go-shop:hover,#plist .btn-panic-buying:hover
+	{
+	border: 1px solid #ccc;
+	box-shadow: 0 1px 1px rgba(0, 1, 1, .08);
+	cursor: pointer;
+	color: #333;
+	background: -moz-linear-gradient(top, #f9f9f9, #f6f6f6);
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#f9f9f9),
+		to(#f6f6f6));
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f9f9f9",
+		endColorstr="#f6f6f6");
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr="
+		#f9f9f9 ", endColorstr=" #f6f6f6 ")"
+}
+
+#plist .btn-compare {
+	position: relative;
+	padding: 0 9px 0 25px;
+	margin-right: 0;
+	cursor: pointer
+}
+
+#plist .btn-compare span {
+	position: absolute;
+	left: 9px;
+	top: 4px;
+	width: 11px;
+	height: 11px;
+	margin-right: 0;
+	background: url(../images/20130603A.png) no-repeat -68px -50px;
+	font-size: 0
+}
+
+#plist .btn-compare-s-active {
+	border: 1px solid #E4393C;
+	border-radius: 2px;
+	background: #E4393C;
+	color: #fff;
+	background: -moz-linear-gradient(top, #E4393C, #E4393C);
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#E4393C),
+		to(#E4393C));
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#E4393C",
+		endColorstr="#E4393C");
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr="
+		#E4393C ", endColorstr=" #E4393C ")"
+}
+
+#plist .btn-compare-s-active span {
+	background-position: -68px -62px
+}
+
+#plist .btn-compare:hover {
+	border: 1px solid #ccc;
+	box-shadow: 0 1px 1px rgba(0, 1, 1, .08);
+	cursor: pointer;
+	color: #333;
+	background: -moz-linear-gradient(top, #f9f9f9, #f6f6f6);
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#f9f9f9),
+		to(#f6f6f6));
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f9f9f9",
+		endColorstr="#f6f6f6");
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr="
+		#f9f9f9 ", endColorstr=" #f6f6f6 ")"
+}
+
+#plist .btn-compare-s-active:hover {
+	border: 1px solid #E4393C;
+	color: #fff;
+	background: -moz-linear-gradient(top, #E4393C, #E4393C);
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#E4393C),
+		to(#E4393C));
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#E4393C",
+		endColorstr="#E4393C");
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr="
+		#E4393C ", endColorstr=" #E4393C ")"
+}
+
+#plist .gl-item {
+	position: relative;
+	zoom: 1
+}
+
+#plist .gl-item .p-name,#plist .gl-item .p-info {
+	overflow: hidden
+}
+
+#plist .gl-item .p-info {
+	display: none
+}
+
+#plist .gl-item .p-info span {
+	margin: 0 10px;
+	color: #ccc
+}
+
+#plist .gl-item .summary {
+	position: absolute;
+	right: -280px;
+	top: 0;
+	z-index: 2;
+	display: block;
+	width: 314px;
+	border: 1px solid #ECD28B;
+	-moz-box-shadow: 0 1px 4px #CCC;
+	-webkit-box-shadow: 0 1px 4px #CCC;
+	box-shadow: 0 1px 4px #CCC;
+	background: #FFFEEE
+}
+
+#plist .gl-item .i-summary {
+	position: relative;
+	margin-top: 10px;
+	zoom: 1
+}
+
+#plist .gl-item .summary .close {
+	position: absolute;
+	right: 3px;
+	top: -7px;
+	width: 19px;
+	height: 19px;
+	background: url(../images/20121225C.png) no-repeat -42px 0;
+	cursor: pointer
+}
+
+#plist .gl-item .summary .arrow {
+	position: absolute;
+	left: -20px;
+	top: 30px;
+	width: 20px;
+	height: 40px;
+	background: url(../images/20121225C.png) no-repeat 0 0;
+	background: url(../images/20121225C.png) no-repeat 0 0\0;
+	background: url(../images/20121109A.gif) no-repeat \9\0;
+	*background: url(../images/20121109A.gif) no-repeat 0 0
+}
+
+#plist .gl-item .direct-left {
+	left: -280px
+}
+
+#plist .gl-item .direct-left .arrow {
+	left: 314px;
+	background-position: -21px 0
+}
+
+#plist .gl-item .summary .img {
+	width: 280px;
+	height: 280px;
+	padding: 0 6px;
+	border: 1px solid #FFE7BD;
+	background: #fff;
+	margin: 4px auto 8px
+}
+
+#plist .gl-item .summary .text {
+	padding: 0 5px 8px
+}
+
+#plist .gl-item td {
+	text-align: left;
+	padding: 1px 5px
+}
+
+#plist .gl-item .summary .iloading {
+	margin: 120px auto 135px;
+	text-align: left
+}
+
+#plist .gl-item .summary .carrier {
+	float: left;
+	height: 36px;
+	line-height: 18px
+}
+
+#plist .gl-item .summary .pc,#plist .gl-item .summary .iphone,#plist .gl-item .summary .android,#plist .gl-item .summary .ipad
+	{
+	float: left;
+	height: 36px;
+	margin-right: 5px;
+	background: url(../images/20121108B.gif) no-repeat
+}
+
+#plist .gl-item .summary .pc {
+	width: 22px;
+	background-position: 0 0
+}
+
+#plist .gl-item .summary .iphone {
+	width: 27px;
+	background-position: -23px 0
+}
+
+#plist .gl-item .summary .android {
+	width: 32px;
+	background-position: -51px 0
+}
+
+#plist .gl-item .summary .ipad {
+	width: 20px;
+	background-position: -84px 0
+}
+
+#plist .stocklist {
+	margin-top: 5px
+}
+
+#plist .gl-item .p-price i,#plist .gl-item .p-market,#plist .gl-item .ebook-price,#plist .gl-item .discount
+	{
+	display: none
+}
+
+.plist-book .list-h,.plist-book .list-h dl {
+	float: none
+}
+
+#plist.plist-book li {
+	position: relative;
+	overflow: hidden;
+	width: 444px;
+	height: 180px;
+	padding: 20px 130px 0 180px
+}
+
+#plist.plist-book .p-name {
+	position: absolute;
+	left: 180px;
+	top: 20px;
+	width: 444px;
+	height: 20px;
+	font-size: 14px;
+	font-weight: 700
+}
+
+#plist.plist-book .p-img {
+	position: absolute;
+	left: 0;
+	top: 20px;
+	width: 160px;
+	height: 160px;
+	padding: 0 20px 0 0;
+	border: 0
+}
+
+#plist.plist-book .p-img:hover {
+	border: 0
+}
+
+#plist.plist-book .p-price {
+	position: absolute;
+	left: 180px;
+	top: 45px;
+	width: 443px;
+	height: 22px;
+	padding-bottom: 10px;
+	border-bottom: 1px dotted #bbb;
+	margin-top: 0;
+	line-height: 22px;
+	font-family: verdana;
+	color: #333
+}
+
+#plist.plist-book .p-price em {
+	float: none;
+	font-size: 14px
+}
+
+#plist.plist-book .p-price strong {
+	float: none
+}
+
+#plist.plist-book .p-price span {
+	float: none;
+	display: none
+}
+
+#plist.plist-book .p-price i {
+	font-style: normal;
+	display: inline
+}
+
+#plist.plist-book .p-price span.discount {
+	display: inline
+}
+
+#plist.plist-book .p-market {
+	display: block;
+	position: absolute;
+	left: 376px;
+	top: 45px;
+	width: 105px;
+	height: 22px;
+	line-height: 22px;
+	font-family: verdana
+}
+
+#plist.plist-book .ebook-price {
+	display: block;
+	position: absolute;
+	left: 481px;
+	top: 45px;
+	width: 200px;
+	height: 22px;
+	line-height: 22px
+}
+
+#plist.plist-book .ebook-price a {
+	font-family: verdana;
+	color: #005EA7
+}
+
+#plist.plist-book .discount {
+	display: inline;
+	color: #c00
+}
+
+#plist.plist-book .stocklist {
+	position: absolute;
+	left: 376px;
+	top: 115px;
+	width: 105px;
+	margin-top: 0
+}
+
+#plist.plist-book .service {
+	position: absolute;
+	left: 480px;
+	top: 115px;
+	width: 140px;
+	height: 18px;
+	margin-top: 0
+}
+
+#plist.plist-book .service a {
+	color: #005AA0
+}
+
+#plist.plist-book .p-info {
+	display: block;
+	position: absolute;
+	top: 89px;
+	left: 180px;
+	width: 403px;
+	height: 18px
+}
+
+#plist.plist-book .p-info a:link,#plist.plist-book .p-info a:visited {
+	color: #005AA0
+}
+
+#plist.plist-book .extra {
+	position: absolute;
+	left: 180;
+	top: 115px;
+	width: 195px;
+	height: 18px;
+	padding: 0;
+	margin: 0;
+	line-height: 18px
+}
+
+#plist.plist-book .p-summary {
+	position: absolute;
+	left: 180px;
+	top: 140px;
+	display: block;
+	width: 444px;
+	height: 3em;
+	line-height: 1.5em;
+	word-wrap: break-word;
+	color: #999
+}
+
+#plist.plist-book .p-summary a {
+	position: relative;
+	margin-left: 5px
+}
+
+#plist.plist-book .btns {
+	position: absolute;
+	right: 10px;
+	top: 44px;
+	width: 100px;
+	height: 70px
+}
+
+#plist.plist-book .btns a.btn-buy,#plist.plist-book .btns a.notice-store,#plist.plist-book .btns a.btn-coll,#plist.plist-book .btns a.btn-panic-buying
+	{
+	height: 14px;
+	padding: 6px 0 5px;
+	line-height: 14px
+}
+
+#plist.plist-book .btns a.btn-buy {
+	width: 90px;
+	margin-bottom: 10px;
+	text-align: center
+}
+
+#plist.plist-book .btns a.btn-panic-buying {
+	width: 78px;
+	margin-bottom: 10px;
+	text-align: center
+}
+
+#plist.plist-book .btns a.disabled {
+	background: #fff;
+	cursor: no-drop;
+	color: #ccc
+}
+
+#plist.plist-book .btns a.free-download {
+	width: 77px;
+	height: 14px;
+	padding: 6px 0 5px;
+	margin-bottom: 10px;
+	background-position: -165px -152px;
+	line-height: 14px
+}
+
+#plist.plist-book .btns a.notice-store {
+	width: 56px;
+	padding-left: 34px;
+	margin-bottom: 10px;
+	text-align: left
+}
+
+#plist.plist-book .btns a.notice-store b {
+	top: 7px
+}
+
+#plist.plist-book .btns a.btn-coll {
+	width: 53px;
+	text-align: center
+}
+
+#plist.plist-book .summary {
+	display: none
+}
+
+#plist.plist-book .p-name,#plist.plist-book .p-price,#plist.plist-book .p-market,#plist.plist-book .ebook-price,#plist.plist-book .service,#plist.plist-book .p-info,#plist.plist-book .extra,#plist.plist-book .p-summary
+	{
+	overflow: hidden
+}
+
+#plist.plist-book .p-shopnum {
+	position: absolute;
+	left: 180px;
+	top: 174px
+}
+
+#plist.plist-book .pop-seller {
+	top: 135px
+}
+
+#plist.plist-book #scroll_loading div {
+	margin: 0 auto
+}
+
+#scroll_loading div {
+	margin: 100px auto;
+	text-align: center
+}
+
+#scroll_loading b {
+	background: url(http://misc.360buyimg.com/lib/skin/e/i/loading-jd.gif)
+		no-repeat 50% 50%;
+	display: none;
+	width: 43px;
+	height: 24px;
+	margin: 0 auto 5px
+}
+
+#plist .p-img:hover {
+	border-radius: 1px;
+	border: 1px solid #ddd
+}
+
+#plist.plist-n7a .p-img {
+	height: 220px
+}

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>商城门户系统--EB-SHOP</title>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <script src="http://js.spcrm.com/jQuery-1.7.1.min.js" type="text/javascript"></script>     
+		<script src="http://cdn.titles.top/js/jquery.jqzoom.js" type="text/javascript"></script>  
+        <link type="text/css" rel="stylesheet" href="http://cdn.titles.top/css/common.css">
+        <link type="text/css" rel="stylesheet" href="http://cdn.titles.top/css/buy.css">
+        
+        <script>
+            (function () {
+                $('.nav_list dl:odd').addClass("odd");
+            })();
+            
+            $(function(){
+            	var product = ${product};
+            	console.info(${product});
+            	var skus = ${sku};
+            	console.info(${sku});
+            	
+            	// 标题 
+            	$("#product-title").html(product.title);
+            	//价格
+            	$("#product-mktPrice").html(product.marketPrice);
+            	$("#product-mktPrice").html(product.price);
+            });
+            
+            
+			
+			//图片放大镜效果
+			$(function(){
+				$(".jqzoom").jqueryzoom({
+					xzoom:420,
+					yzoom:420
+				});
+			});
+			
+			$(function(){
+				// 小图鼠标移动事件
+				$("#small-photo ul li").mouseover(function(){
+					$("#small-photo ul li").removeClass("small-photo-over").addClass("small-photo-out");
+					$(this).removeClass("small-photo-out").addClass("small-photo-over");
+					$("#big-photo img").attr("src",$(this).find("img").attr("src")).attr("jqimg",$(this).find("img").attr("bimg"));
+				});
+				$("#color-category li").click(function(){
+					$("#big-photo img").attr("src",$(this).find("img").attr("src"));
+					$("#color-category li").removeClass("product-color-category-over").addClass("product-color-category-out");
+					$(this).removeClass("product-color-category-out").addClass("product-color-category-over");
+				});
+				$("#product-sku li").click(function(){
+					$("#product-sku li").removeClass("product-sku-over").addClass("product-sku-out");
+					$(this).removeClass("product-sku-out").addClass("product-sku-over");
+				});
+				
+				//商品购买数量点击事件
+				$("#mui-amount-increase").click(function(){
+					$("#mui-amount-input").val(Number($("#mui-amount-input").val()) + 1);
+				});
+				$("#mui-amount-decrease").click(function(){
+					if($("#mui-amount-input").val() != 1) {
+						$("#mui-amount-input").val(Number($("#mui-amount-input").val()) - 1);
+					}
+				});
+				
+				
+				// 商品详情点击事件
+				$(".store-menu li").click(function(){
+					var lis = $(".store-menu li");
+					for(var i = 0; i < lis.length; i ++) {
+						$(lis[i]).removeClass("store-menu-click");
+						var id = $(lis[i]).attr("id") +　"-cont";
+						$("#" + id).hide();
+					}
+					$(this).addClass("store-menu-click");
+					var crr_Id = $(this).attr("id") +　"-cont";
+					$("#" + crr_Id).show();
+				});
+			});
+        </script>
+
+    </head>
+    <body>
+    	<!-- TopBar-Start -->
+        <div class="topbar">
+            <div class="wrap iconlist">
+                <div class="memberbox width-6">嗨！欢迎来到EB-SHOP <a href="#">请登录</a>  <a href="#">免费注册</a> </div>
+                <div class="width-6">
+                    <span class="fav"><a href="#">我关注的品牌</a></span>
+                    <span class="fav"><a href="#">EB-SHOP会员</a></span>
+                    <span class="fav"><a href="#">购物车<span id="shopcart_count">0</span>件</a></span>
+                    <span class="fav"><a href="#">收藏夹</a></span> | 
+                    <span class="fav"><a href="#">手机版</a></span>
+                    <span class="fav"><a href="#">商家支持</a></span>
+                    <span class="fav"><a href="#">网站导航</a></span>
+                </div>
+            </div>  
+        </div>
+    	<!-- TopBar-Start -->
+        
+        <!-- Header-Start -->
+        <div id="header">
+            <div class=" wrap">
+                <div class="logobar width-3">
+                    <a href="#" title="返回首页" class="logo"><img src="../images/index/logo.png"/></a>
+                </div>
+                <div id="searchbar" class="width-6">
+                    <form method="get" action="/product/">
+                        <input type="text" name="keywords" class="txt" value="" placeholder="站内搜索"/>
+                        <input type="submit" class="bt" value="搜索"/> 
+                        <div class="clear"></div>
+                    </form>
+                    <a href="#">&nbsp;时尚彩宝</a> | 
+                    <a href="#">&nbsp;钻石</a> | 
+                    <a href="#">&nbsp;时尚搭配</a> | 
+                    <a href="#">&nbsp;设计师定制</a> | 
+                    <a href="#">&nbsp;珠宝资讯</a> | 
+                    <a href="#">&nbsp;贵金属投资</a> 
+                </div>
+            </div>	
+        </div>
+		<!-- Header-End -->
+        
+        <div style="clear:both"></div>
+        <!-- 导航-Start -->
+        <div id="nav" class="nav-bottom" >
+            <ul class="wrap">
+            	<!-- 主导航-Start -->
+                <li class="width-2"><a  href="#"   class="pronava">商品服务分类</a>
+                    <div class="nav1">
+                        
+                    </div>
+                </li>
+                <!-- 主导航-End -->
+				
+                <!-- 主要类目-Start -->
+                <li class="width-1"><a  href="#"  class="nava">品牌街</a></li>
+                <li class="width-1"><a  href="#"  class="nava">会员尊享</a></li>
+                <li class="width-1"><a  href="#"  class="nava">门店惊喜</a></li>
+                <li class="width-1"><a  href="#"  class="nava">珠宝众筹</a></li>
+                <li class="width-1"><a  href="#"  class="nava">金银投资</a></li>
+                <li class="width-1"><a  href="#"  class="nava">设计定制</a></li>
+                <li class="width-1"><a  href="#"  class="nava">搭配资讯</a></li>
+                <!-- 主要类目-Start -->
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <div></div>       
+        <!-- 导航-End -->
+        
+        <!-- 卖家banner-start -->
+        <div class="buy-banner">
+        	<img src="../images/buy/banner.png" />
+        </div>
+        <!-- 卖家banner-end -->
+        
+        <!-- 内容-Start -->
+        <div id="mainer">
+            <div class="wrap ">
+            	<!-- 内容左侧-start -->
+            	<div class="buy-left">                    
+                	<!-- Buy-Head-Start -->
+                	<div class="photo-show">
+                        <div id="big-photo" class="big-photo">
+                        	<span class="jqzoom"><img jqimg="../images/buy/bh1.jpg" src="../images/buy/sh1.png" /></span>
+                        </div>
+                    	<div id="small-photo" class="small-photo">
+                        	<ul>
+                            	<li class="small-photo-out">
+                                	<img bimg="../images/buy/sh1.png" src="../images/buy/sh1.png" width="60" height="60" />
+                                </li>
+                                <li class="small-photo-out">
+                                	<img bimg="../images/buy/sh2.png" src="../images/buy/sh2.png" width="60" height="60" />
+                                </li>
+                                <li class="small-photo-out">
+                                	<img bimg="../images/buy/sh3.png" src="../images/buy/sh3.png" width="60" height="60" />
+                                </li>
+                                <li class="small-photo-out">
+                                	<img bimg="../images/buy/sh4.png" src="../images/buy/sh4.png" width="60" height="60" />
+                                </li>
+                                <li class="small-photo-out">
+                                	<img bimg="../images/buy/sh5.png" src="../images/buy/sh5.png" width="60" height="60" />
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="other-show">
+                    	<div class="product-title" id="product-title"></div>
+                        <div class="price-panel">
+                        	<div>
+                            	<dl class="tm-price-panel">
+                                	<dt class="tb-metatit">价格</dt>
+                                    <dd><em class="tm-yen">¥</em> <span class="tm-price" id="product-mktPrice"></span></dd>
+                                </dl>
+                            </div>
+                            <div>
+                            	<dl class="tm-price-panel">
+                                	<dt class="tb-metatit">促销价</dt>
+                                    <dd><em class="tm-yen-c">¥</em> <span class="tm-price-c" id="product-price"></span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="product-desc-panel">
+                            <dl class="tm-price-panel">
+                                <dt class="tb-metatit">运费</dt>
+                                <dd><span class="tm-desc"><span>江苏南通</span>&nbsp;&nbsp;至&nbsp;&nbsp;<span>兰州</span>&nbsp;&nbsp;<span>快递:</span> <span>15.00</span></span></dd>
+                            </dl>
+                        </div>
+                        <div class="product-sale">
+                            <ul class="tm-ind-panel">
+                                <li><span class="tm-label">月销量</span><span class="tm-count">496</span></li>
+                                <li><span class="tm-label">累计评价</span><span class="tm-count">739</span></li>
+                                <li><span class="tm-label">送积分</span><span class="tm-count">204</span></li>
+                			</ul>
+                        </div>                        
+                        <div class="product-desc-panel">
+                            <dl class="tm-price-panel">
+                                <dt class="tb-metatit">鞋码</dt>
+                                <dd>
+                                	<ul class="product-sku" id="product-sku">
+                                    	<li class="product-sku-out">35.5</li>
+                                    	<li class="product-sku-out">37</li>
+                                    	<li class="product-sku-out">38</li>
+                                    	<li class="product-sku-out">39</li>
+                                    	<li class="product-sku-out">39.5</li>
+                                    	<li class="product-sku-out">41</li>
+                                    </ul>
+                                </dd>
+                            </dl>
+                        </div>                       
+                        <div class="product-desc-panel product-color">
+                            <dl class="tm-price-panel">
+                                <dt class="tb-metatit">颜色分类</dt>
+                                <dd>
+                                	<ul class="product-sku-color" id="color-category">
+                                    	<li class="product-color-category-out"><img src="../images/buy/sh1.png" width="40" height="40" /></li>
+                                    	<li class="product-color-category-out"><img src="../images/buy/sh2.png" width="40" height="40" /></li>
+                                    	<li class="product-color-category-out"><img src="../images/buy/sh3.png" width="40" height="40" /></li>
+                                    </ul>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="product-desc-panel">
+                            <dl class="tm-price-panel">
+                                <dt class="tb-metatit">数量</dt>
+                                <dd>
+                                	<input type="text" class="tb-text mui-amount-input" id="mui-amount-input" value="1" maxlength="8" title="请输入购买量">
+                                    <span class="mui-amount-btn">
+                                        <span class="mui-amount-increase" id="mui-amount-increase"><img src="../images/buy/up.png" width="8" height="5" /></span>
+                                        <span class="mui-amount-decrease" id="mui-amount-decrease"><img src="../images/buy/down.png" width="8" height="5" /></span>
+                                    </span>
+                                    <span class="mui-amount-unit">件</span>
+                                    <span class="tm-desc tm-inventory">库存922件</span>
+                                </dd>
+                            </dl>
+                        </div> 
+                        <div class="product-desc-panel">
+                        	<div class="product-buy-cart">
+                                <span><img src="../images/buy/crr_buy.png" width="180" height="40" /></span>
+                                <span><img src="../images/buy/shopping_cart.png" width="180" height="40" /></span>
+                            </div>
+                        </div>
+                        <div class="product-desc-panel">
+                            <dl class="tm-price-panel">
+                                <dt class="tb-metatit">服务承诺</dt>
+                                <dd>
+                                	<ul class="tb-serPromise">
+                                    	<li>
+                                        	<a href="#" title="按时发货" target="_blank">按时发货</a></li>
+                                        <li>
+                                        	<a href="#" title="极速退" target="_blank"><s>T2</s>极速退款</a></li>
+                                        <li>
+                                        	<a href="#" title="退货保障" target="_blank"><s>T1</s>退货保障卡</a></li>
+                                        <li>
+                                        	<a href="#" title="七天无理由退换" target="_blank">七天无理由退换</a></li>
+                                    </ul>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                	<!-- Buy-Head-End -->
+                    <div class="clear"></div>
+                    
+                	<!-- Buy-Content-Start -->
+                    <div class="buy-cont-l">
+                    	<div class="panel">
+                        	<div class="store-name">
+                            	<span><strong><a href="#">asics旗舰店</a></strong></span>
+                                <span><img src="../images/buy/click-me.png" /></span>
+                            </div>
+                            <div class="store-desc clear">
+                            	<ul>
+                                	<li>服务<span class="store-desc-point">4.8</span></li>
+                                    <li>描述<span class="store-desc-point">4.8</span></li>
+                                    <li>物流<span class="store-desc-point">4.8</span></li>
+                                </ul>
+                            </div>
+                            <div class="clear store-shopping">
+                            	<span><img src="../images/buy/shopping.png" width="72" height="26" /></span>
+                                <span><img src="../images/buy/store.png" width="72" height="26" /></span>
+                            </div>
+                        </div>
+                        <div class="panel-1">
+                        	<a href="#"><img src="../images/buy/50.png" width="190" height="84" /></a>
+                        </div>
+                        <div class="panel-1">
+                        	<a href="#"><img src="../images/buy/100.png" width="190" height="84" /></a>
+                        </div>
+                        <div class="panel-1">
+                        	<a href="#"><img src="../images/buy/100d.png" width="190" height="84" /></a>
+                            <div class="store-call">
+                            	<div class="time">每天9：00 ~ 24：00</div>
+                                <div class="callMe">
+                                	<ul>
+                                    	<li><span>售前</span><a href="#"><img src="../images/buy/call-me.png" width="80" height="19" /></a></li>
+                                        <li><span>售后</span><a href="#"><img src="../images/buy/call-me.png" width="80" height="19" /></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div><img src="../images/buy/store-time.png" width="190" height="105" /></div>
+                        </div>
+                    </div>
+                    <div class="buy-cont-r">
+                    	<!-- 详情菜单-Start -->
+                    	<div class="panel-right">
+                        	<ul class="store-menu">
+                            	<li id="goods-detail">商品详情</li>
+                            	<li id="goods-assessment">累计评价<span>2124</span></li>
+                            	<li id="goods-solds">月成交记录<span>2387</span>件</li>
+                            </ul>
+                        </div>
+                    	<!-- 详情菜单-End -->
+                        <!-- 商品详情-Start -->
+                    	<div class="panel-right-1" id="goods-detail-cont">
+                        	<div class="attributes-list">
+                            	<div class="store-title">品牌名称：<a class="" target="_blank" href="#">Asics/亚瑟士</a></div>
+                            	<div class="store-attr-list-hd">产品参数：</div>
+                                <ul>
+                                    <li>产品名称：Asics/亚瑟士 T20XQ-249...</li>
+                                    <li>是否商场同款: 是</li>
+                                    <li>颜色分类: 绿色/黑色 黑色/黑色 黄色/银</li>
+                                    <li>款号: T20XQ-2490</li>
+                                    <li>品牌: Asics/亚瑟士</li>
+                                    <li>上市时间: 2014年夏季</li>
+                                    <li>吊牌价: 628</li>
+                                    <li>性别: 男子</li>
+                                    <li>帮面材质: 网布+合成革</li>
+                                    <li>外底材料: 碳素橡胶</li>
+                                    <li>适合路面: 公路 跑道</li>
+                                    <li>运动鞋科技: 缓震胶</li>
+                                    <li>功能: 减震 防滑 耐磨 透气 包裹性</li>
+                                    <li>鞋码: 39 39.5 40.5 41.5 42 42.5 43.5 44</li>
+                                    <li>闭合方式: 系带</li>
+                                    <li>流行元素: 皮革拼接</li>
+                                    <li>运动系列: 经典跑鞋</li>
+                                    <li>是否瑕疵: 否</li>
+                                </ul>
+                            </div>
+                            <div class="skin-box">
+                            	<div class="skin-box-item"><img src="../images/buy/sc1.jpg"/></div>
+                            	<div class="skin-box-item">
+                                	<ul>
+                                    	<li><img src="../images/buy/sc2.jpg" width="196" /></li>
+                                    	<li><img src="../images/buy/sc3.jpg" width="196" /></li>
+                                    	<li><img src="../images/buy/sc4.jpg" width="196" /></li>
+                                    	<li><img src="../images/buy/sc5.jpg" width="196" /></li>
+                                    	<li><img src="../images/buy/sc2.jpg" width="196" /></li>
+                                    	<li><img src="../images/buy/sc3.jpg" width="196" /></li>
+                                    	<li><img src="../images/buy/sc4.jpg" width="196" /></li>
+                                    	<li><img src="../images/buy/sc5.jpg" width="196" /></li>
+                                    </ul>
+                                </div>
+                            	<div class="skin-box-item"><img src="../images/buy/sc6.jpg"/></div>
+                            	<div class="skin-box-item"><img src="../images/buy/sc7.jpg"/></div>
+                            	<div class="skin-box-item"><img src="../images/buy/sc8.jpg"/></div>
+                            </div>
+                        </div>
+                        <!-- 商品详情-End -->
+                        
+                        <!-- 累计评价-Start -->
+                        <div class="panel-right-1" id="goods-assessment-cont" style="display:none;">
+                        	<!-- 评价头部-Start -->
+                        	<div class="rate-header rate-header-tags">
+                            	<div class="rate-score">
+                                	<h4>与描述相符</h4>
+                                    <strong>4.8</strong>
+                                </div>
+                                <div class="rate-tag-box">
+                                	<div class="rate-tag-label">
+                                    	<span>大家都写到</span>
+                                    </div>
+                                    <div class="rate-tag-list" style="height: 70px;">
+                                    	<div class="rate-tag-inner">
+                                        	<span class="tag-posi">
+                                            	<a id="ratetag3089_260a" href="#" data-posi="1" data-id="260">鞋子不错(73)<s></s></a>
+                                            </span>
+                                            <span class="tag-posi">
+                                            	<a id="ratetag3089_2160a" href="#" data-posi="1" data-id="2160">穿着效果不错(61)<s></s></a>
+                                            </span>
+                                            <span class="tag-posi">
+                                            	<a id="ratetag3089_160a" href="#" data-posi="1" data-id="160">颜色不错(35)<s></s></a>
+                                            </span>
+                                            <span class="tag-posi">
+                                            	<a id="ratetag3089_1120a" href="#" data-posi="1" data-id="1120">人群(24)<s></s></a>
+                                            </span>
+                                        	<span class="tag-posi">
+                                            	<a id="ratetag3089_260a" href="#" data-posi="1" data-id="260">鞋子不错(73)<s></s></a>
+                                            </span>
+                                            <span class="tag-posi">
+                                            	<a id="ratetag3089_2160a" href="#" data-posi="1" data-id="2160">穿着效果不错(61)<s></s></a>
+                                            </span>
+                                            <span class="tag-posi">
+                                            	<a id="ratetag3089_160a" href="#" data-posi="1" data-id="160">颜色不错(35)<s></s></a>
+                                            </span>
+                                            <span class="tag-posi">
+                                            	<a id="ratetag3089_1120a" href="#" data-posi="1" data-id="1120">人群(24)<s></s></a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        	<!-- 评价头部-End -->
+                            
+                        	<!-- 评价内容-Start -->
+                            <div class="goods-ass-item">
+                            	<ul>
+                                	<li class="items">
+                                    	<div class="goods-desc">
+                                        	<div class="desc">鞋子非常好，大爱啊！时尚又轻便～物流快，客服服务态度好！</div>
+                                            <div class="date">04.26</div>
+                                        </div>
+                                        <div class="goods-sku">
+                                        	<ul>
+                                            	<li><label>颜色分类：</label><span>粉红色/金属蓝/白色</span></li>
+                                            	<li><label>鞋码：</label><span>38</span></li>
+                                            </ul>
+                                        </div>
+                                        <div class="goods-buyer"><label>t***2</label><span>（匿名）</span></div>
+                                    </li>
+                                	<li class="items">
+                                    	<div class="goods-desc">
+                                        	<div class="desc">鞋子非常好，大爱啊！时尚又轻便～物流快，客服服务态度好！</div>
+                                            <div class="date">04.26</div>
+                                        </div>
+                                        <div class="goods-sku">
+                                        	<ul>
+                                            	<li><label>颜色分类：</label><span>粉红色/金属蓝/白色</span></li>
+                                            	<li><label>鞋码：</label><span>38</span></li>
+                                            </ul>
+                                        </div>
+                                        <div class="goods-buyer"><label>t***2</label><span>（匿名）</span></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        	<!-- 评价内容-End -->
+                        </div>
+                        <!-- 累计评价-End -->
+                        
+                        <!-- 成交记录-Start -->
+                        <div class="panel-right-1" id="goods-solds-cont" style="display:none;">
+                            <table border="0" cellspacing="0" cellpadding="0" class="table-deal-record">
+                                <tbody>
+                                    <tr>
+                                        <th class="th-buyer">买家<span class="tb-anonytip">[登录后可见]</span></th>
+                                        <th class="th-goods">款式/型号</th>
+                                        <th class="th-quantity">数量</th>
+                                        <th class="th-dealtime">成交时间</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="cell-align-l buyer">
+                                        	<div class="line">新<span class="tb-anonymous">**</span>笨 </div>
+                                            <div class="line">
+                                            	<img src="../images/buy/b_blue_1.gif" border="0" align="absmiddle" class="rank">
+                                                <a target="_blank" href="#" title="V4会员"><img src="../images/buy/v4.png" alt="V4会员"></a>
+                                            </div> 
+                                        </td>
+                                        <td class="cell-align-l style"> 颜色分类:粉红色/金属蓝/白色<br>鞋码:39.5 </td>
+                                        <td class="quantity"> 1 </td>
+                                        <td class="dealtime"> <p class="date">2015-05-07</p> <p class="time">13:29:45</p> </td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td class="cell-align-l buyer">
+                                        	<div class="line"> 冬<span class="tb-anonymous">**</span>9 </div>
+                                            <div class="line">
+                                            	<img src="../images/buy/b_blue_2.gif" border="0" align="absmiddle" class="rank">
+                                                <a target="_blank" href="#" title="V4会员"><img src="../images/buy/v4.png" alt="V4会员"></a>
+                                            </div>
+                                        </td>
+                                        <td class="cell-align-l style"> 颜色分类:粉红色/金属蓝/白色<br>鞋码:38 </td>
+                                        <td class="quantity"> 1 </td>
+                                        <td class="dealtime"> <p class="date">2015-05-07</p> <p class="time">12:32:44</p> </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="cell-align-l buyer"><div class="line">新<span class="tb-anonymous">**</span>笨 </div> <div class="line"> <img src="../images/buy/b_red_4.gif" border="0" align="absmiddle" class="rank"> <a target="_blank" href="#" title="V4会员"><img src="../images/buy/v3.png" alt="V4会员"></a> </div> 
+                                        </td>
+                                        <td class="cell-align-l style"> 颜色分类:粉红色/金属蓝/白色<br>鞋码:39.5 </td>
+                                        <td class="quantity"> 1 </td>
+                                        <td class="dealtime"> <p class="date">2015-05-07</p> <p class="time">13:29:45</p> </td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td class="cell-align-l buyer"> <div class="line"> 冬<span class="tb-anonymous">**</span>9 </div> <div class="line"> <img src="../images/buy/b_red_5.gif" border="0" align="absmiddle" class="rank"> <a target="_blank" href="#" title="V4会员"><img src="../images/buy/v2.png" alt="V4会员"></a> </div> </td>
+                                        <td class="cell-align-l style"> 颜色分类:粉红色/金属蓝/白色<br>鞋码:38 </td>
+                                        <td class="quantity"> 1 </td>
+                                        <td class="dealtime"> <p class="date">2015-05-07</p> <p class="time">12:32:44</p> </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="cell-align-l buyer"><div class="line">新<span class="tb-anonymous">**</span>笨 </div> <div class="line"> <img src="../images/buy/b_red_5.gif" border="0" align="absmiddle" class="rank"> <a target="_blank" href="#" title="V4会员"><img src="../images/buy/v3.png" alt="V4会员"></a> </div> 
+                                        </td>
+                                        <td class="cell-align-l style"> 颜色分类:粉红色/金属蓝/白色<br>鞋码:39.5 </td>
+                                        <td class="quantity"> 1 </td>
+                                        <td class="dealtime"> <p class="date">2015-05-07</p> <p class="time">13:29:45</p> </td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td class="cell-align-l buyer"> <div class="line"> 冬<span class="tb-anonymous">**</span>9 </div> <div class="line"> <img src="../images/buy/b_red_5.gif" border="0" align="absmiddle" class="rank"> <a target="_blank" href="#" title="V4会员"><img src="../images/buy/v2.png" alt="V4会员"></a> </div> </td>
+                                        <td class="cell-align-l style"> 颜色分类:粉红色/金属蓝/白色<br>鞋码:38 </td>
+                                        <td class="quantity"> 1 </td>
+                                        <td class="dealtime"> <p class="date">2015-05-07</p> <p class="time">12:32:44</p> </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- 成交记录-End -->
+                    </div>
+                	<!-- Buy-Content-End -->
+                </div>
+                <!-- 内容左侧-end -->
+                
+                <!-- 内容右侧-start -->
+                <div class="buy-right">
+                	<div class="ald-hd ">
+                    	<s></s>
+                        <span>看了又看</span>
+                    </div>
+                    <div class="wrapCon">
+                    	<ul>
+                        	<li>
+                            	<div><a href="#"><img src="../images/buy/kl1.jpg" /></a></div>
+                                <div class="look_price">¥450.00</div>
+                            </li>
+                        	<li>
+                            	<div><a href="#"><img src="../images/buy/kl2.jpg" /></a></div>
+                                <div class="look_price">¥349.00</div>
+                            </li>
+                        	<li>
+                            	<div><a href="#"><img src="../images/buy/kl3.jpg" /></a></div>
+                                <div class="look_price">¥349.00</div>
+                            </li>
+                        	<li>
+                            	<div><a href="#"><img src="../images/buy/kl4.jpg" /></a></div>
+                                <div class="look_price">¥349.00</div>
+                            </li>
+                        	<li>
+                            	<div><a href="#"><img src="../images/buy/kl5.jpg" /></a></div>
+                                <div class="look_price">¥479.00</div>
+                            </li>
+                        	<li>
+                            	<div><a href="#"><img src="../images/buy/kl1.jpg" /></a></div>
+                                <div class="look_price">¥450.00</div>
+                            </li>
+                        	<li>
+                            	<div><a href="#"><img src="../images/buy/kl2.jpg" /></a></div>
+                                <div class="look_price">¥349.00</div>
+                            </li>
+                        	<li>
+                            	<div><a href="#"><img src="../images/buy/kl3.jpg" /></a></div>
+                                <div class="look_price">¥349.00</div>
+                            </li>
+                        	<li>
+                            	<div><a href="#"><img src="../images/buy/kl4.jpg" /></a></div>
+                                <div class="look_price">¥349.00</div>
+                            </li>
+                        	<li>
+                            	<div><a href="#"><img src="../images/buy/kl5.jpg" /></a></div>
+                                <div class="look_price">¥479.00</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 内容右侧-end -->
+            </div>
+        </div>
+        <!-- 内容-End -->
+        
+        <!-- 页脚-Start -->
+        ﻿<div id="footer">
+            <div class="wrap"> 
+                <div class="line"></div>
+                <div class="help">
+                    <dl class="width-2"> 
+                        <dt>购物指南</dt> 
+                        <dd><a href="#">购买流程</a></dd> 
+                        <dd><a href="#">支付方式</a></dd> 
+                    </dl> 
+                    <dl class="width-2"> 
+                        <dt>购物保障</dt> 
+                        <dd><a href="#">购买流程</a></dd> 
+                        <dd><a href="#">支付方式</a></dd> 
+                    </dl> 
+                    <dl class="width-2"> 
+                        <dt>售后服务</dt> 
+                        <dd><a href="#">购买流程</a></dd> 
+                        <dd><a href="#">支付方式</a></dd> 
+                    </dl> 
+                    <dl class="width-2"> 
+                        <dt>关于我们</dt> 
+                        <dd><a href="#">购买流程</a></dd> 
+                        <dd><a href="#">支付方式</a></dd> 
+                    </dl> 
+                    <dl class="width-4"> 
+                        <dt>手机上EB-SHOP</dt> 
+                        <dd><a href="#">购买流程</a></dd> 
+                        <dd><a href="#">支付方式</a></dd> 
+                    </dl> 
+                    <div style="clear:both"></div>
+                </div>
+                <!-- help -->
+            </div>
+            <!-- copyright -->
+            <div class="copyright">
+                <p class="copy wrap">
+                    <a href="#">关于EB-SHOP</a>
+                    <a href="#">帮助中心</a>
+                    <a href="#">诚聘英才</a>
+                    <a href="#">联系我们</a>
+                    <a href="#">网站合作</a>
+                    <a href="#">法律声明</a>
+                    <a href="#">廉政举报</a><br>
+                    <a href="#">京东商城</a> |
+                    <a href="#">中国白银网</a> |
+                    <a href="#">央视网</a> |
+                    <a href="#">1号店</a> |
+                    <a href="#">京东商城</a> |
+                    <a href="#">中国白银网</a> |
+                    <a href="#">央视网</a> |
+                    <a href="#">1号店</a> <br>
+
+                    <a href="#" target="_blank">中国增值电信业务经营许可证 B2-20140169号</a>
+                    <span style="line-height:1.5;"> | ©2014甘肃中通申信科技有限公司 All Rights Reserved | 国家信息产业部粤ICP备14018586号</span> 
+                    <span class="powerby">&nbsp;&nbsp;技术支持：<a href="#" target="_blank" title="甘肃中通申信科技有限公司">甘肃中通申信科技有限公司</a>
+                        <br>
+                        <a href="#" target="_blank"><img src="http://v.trustutn.org/images/cert/bottom_small_img.png" alt="实名认证" title="实名认证"></a>
+                    </span>
+                </p>
+            </div>
+
+            <div class="clear"></div>
+        </div>
+		<!-- 页脚-End -->
+    </body>
+</html>

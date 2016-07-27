@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <title>${keyword}--${store.title}</title> 
+  <meta name="keywords" content="{$metaKeywords}" /> 
+  <meta name="description" content="{$metaDesc}" /> 
+  <meta content="IE=edge" http-equiv="X-UA-Compatible" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <link rel="Bookmark" href="favicon.ico" /> 
+  <link rel="Shortcut Icon" href="favicon.ico" /> 
+  <script src="http://js.spcrm.com/jQuery-1.7.1.min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="http://cdn.titles.top/js/jquery.pagination.js"></script> 
+  <link type="text/css" rel="stylesheet" href="http://cdn.titles.top/css/common.css" />
+  <link type="text/css" rel="stylesheet" href="http://cdn.titles.top/css/list.css" /> 
+  <link type="text/css" rel="stylesheet" href="http://cdn.titles.top/css/pagination.css">
+  <link type="text/css" rel="stylesheet" href="http://cdn.titles.top/css/search.css" /> 
+ </head> 
+ <body> 
+  <!-- 顶部 -->
+	[#include "/html/widget/topbar.html" /]
+	<!-- 头部 -->
+	[#include "/html/widget/header.html" /]
+	<div style="clear: both"></div>
+	<!-- 导航-->
+	[#include "/html/widget/navbar.html" /]
+	<div style="clear: both"></div>
+  	<!-- AD Banner -->
+	[#include "/html/widget/adbanner.html" /]
+  
+  <!-- main --> 
+  <div class="wrap"> 
+   <div class="crumb">
+     	全部结果&nbsp;&gt;&nbsp; <strong>&quot;${keyword}&quot;</strong> 
+   </div>
+   <!-- left -->
+   [#include "/html/search/leftbar.html" /]
+   
+   <!-- right -->
+   <div class="right-extra"> 
+    <div id="J_selector" class="selector"> 
+     <div class="s-title"> 
+      <h3> <b>${keyword}</b><em>&nbsp;商品筛选</em> </h3> 
+      <div class="st-ext">共&nbsp; <span id="goods-total">${total}</span>个商品 </div> 
+     </div> 
+     <div id="J_selectorBrand" class="J_selectorLine s-brand"> 
+       
+     </div> 
+     
+     <!-- 
+     <div id="J_selectorPrice" style="display: block;" class="J_selectorLine s-line J_selectorFold"> 
+      <div class="sl-wrap"> 
+       <div class="sl-key"> 
+        <span>价格：</span> 
+       </div> 
+       <div class="sl-value"> 
+        <div class="sl-v-list"> 
+         <ul class="J_valueList"> 
+          <li style="display: block;"><a href="/list.html?cat=9855%2C9856%2C11949&amp;ev=exprice_M0L49%40&amp;page=1&amp;JL=3_价格_0-49" rel="nofollow"><i></i>0-49</a></li> 
+          <li style="display: block;"><a href="/list.html?cat=9855%2C9856%2C11949&amp;ev=exprice_M50L99%40&amp;page=1&amp;JL=3_价格_50-99" rel="nofollow"><i></i>50-99</a></li> 
+          <li style="display: block;"><a href="/list.html?cat=9855%2C9856%2C11949&amp;ev=exprice_M100L199%40&amp;page=1&amp;JL=3_价格_100-199" rel="nofollow"><i></i>100-199</a></li> 
+          <li style="display: block;"><a href="/list.html?cat=9855%2C9856%2C11949&amp;ev=exprice_M200L299%40&amp;page=1&amp;JL=3_价格_200-299" rel="nofollow"><i></i>200-299</a></li> 
+          <li style="display: block;"><a href="/list.html?cat=9855%2C9856%2C11949&amp;ev=exprice_M300L599%40&amp;page=1&amp;JL=3_价格_300-599" rel="nofollow"><i></i>300-599</a></li> 
+          <li style="display: block;"><a href="/list.html?cat=9855%2C9856%2C11949&amp;ev=exprice_M600%40&amp;page=1&amp;JL=3_价格_600以上" rel="nofollow"><i></i>600以上</a></li> 
+         </ul> 
+         <div class="sl-price"> 
+          <input id="priceMin" title="最低价" maxlength="6" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" class="input-txt" /> 
+          <em>-</em> 
+          <input id="priceMax" title="最高价" maxlength="8" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" class="input-txt" /> 
+          <a id="priceBtn" class="btn btn-default">确定</a> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+      -->
+     <div id="J_selectorAttr">
+     
+     </div>
+     <div id="J_selectorMore" class="s-more"> 
+      <span data-more="更多选项" class="sm-wrap">更多选项<i></i></span> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="ml-wrap right-extra"> 
+    [#include "/html/search/filterbar.html" /]
+    <div class="clr"></div> 
+    [#include "/html/search/goodslist.html" /] 
+    <div class="clr"></div> 
+    [#include "/html/search/pagebar.html" /] 
+   </div> 
+  </div> 
+  <div class="clear"></div> 
+  <div class="wrap"> 
+  [#include "/html/search/footbar.html" /]
+  </div> 
+  <div class="clear"></div> 
+  
+  <script type="text/javascript" src="http://cdn.titles.top/js/search.js"></script>
+  <script>
+	var param_keyword = "${param_keyword}";
+	var param_cate = "${param_cate}";
+	var param_brand = "${param_brand}";
+	var param_prop = "${param_prop}";
+	var param_sort = "${param_sort}";
+	var keyword = "${keyword!""}";
+  	var search_param = ${search_param};
+  	console.info("searchResult:",search_param);
+	var brands = search_param.brand_data;
+	var attrs = search_param.attr_data;
+	var params = search_param.params_data;
+	var total = search_param.total;
+	var pagesize = 8;
+	
+	$("#goods-total").text(total);
+	
+    (function () {
+                initselect();
+                
+                $(".sl-e-more.J_extMore").toggle(
+                    	function(){
+                        	$(this).parents(".sl-wrap").addClass("extend");
+                        	$(this).addClass("opened");
+                        },
+                        function(){
+                        	$(this).parents(".sl-wrap").removeClass("extend");
+                        	$(this).removeClass("opened");
+                        }
+                    );
+                    
+                    $(".sl-e-multiple.J_extMultiple").click(
+                    	function(){
+                    		$(this).parents(".sl-wrap").addClass("multiple");
+                    	}		
+                    );
+                    
+                    $(".sl-wrap").find("li").click(
+                    	function(){
+                    		if (!$(this).parents(".sl-wrap").hasClass("multiple")){
+                    			return true;
+                    		}
+                    		if(!$(this).hasClass("selected")){
+                    			$(this).addClass("selected");
+                    			$(".J_btnsConfirm.disabled").removeClass("disabled");
+                    		}else{
+                    			$(this).removeClass("selected");
+                    			var size = $(this).siblings(".selected").length;
+                    			if (size==0){
+                    				$(".J_btnsConfirm").addClass("disabled");
+                    			}
+                    		}
+                    		return false;
+                    	}
+                    );
+                    
+                    $(".J_btnsCancel").click(
+                    	function(){
+                    		$(this).parents(".sl-wrap.multiple").removeClass("multiple");
+                    	}
+                    );
+                    
+    				$('#J_selectorMore').toggle(
+    					function (){
+    						$(".J_selectorLine.hide").show();
+    						$(".sm-wrap").addClass("opened");
+    						$(".sm-wrap").empty();
+    						$(".sm-wrap").html("收起<i></i>");
+    					},
+    					function (){
+    						$(".J_selectorLine.hide").hide();
+    						$(".sm-wrap").removeClass("opened");
+    						$(".sm-wrap").empty();
+    						$(".sm-wrap").html("更多选项<i></i>");
+    					}
+    				);
+                
+            })();
+        </script> 
+<!-- 尾部-->
+[#include "/html/widget/footer.html" /]
+<!-- footer end -->
+ </body>
+</html>
