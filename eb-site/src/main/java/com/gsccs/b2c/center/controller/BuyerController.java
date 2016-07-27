@@ -3,7 +3,6 @@ package com.gsccs.b2c.center.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -19,13 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
-import com.gsccs.b2c.api.domain.BuyerDeliver;
-import com.gsccs.b2c.api.domain.User;
+import com.gsccs.b2c.api.domain.Account;
 import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.BuyerServiceI;
 import com.gsccs.b2c.app.core.FreeMarkerUtil;
 import com.gsccs.b2c.app.core.JsonMsg;
 import com.gsccs.b2c.web.api.service.RedisService;
+import com.gsccs.eb.api.domain.buyer.BuyerDeliver;
 
 import freemarker.template.TemplateModelException;
 
@@ -61,7 +60,7 @@ public class BuyerController {
 
 			Subject subject = SecurityUtils.getSubject();
 			String account = (String) subject.getPrincipal();
-			User user = buyerAPI.findByAccount(siteId, account);
+			Account user = buyerAPI.findByAccount(siteId, account);
 
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("buyer", user);
@@ -98,7 +97,7 @@ public class BuyerController {
 
 			Subject subject = SecurityUtils.getSubject();
 			String account = (String) subject.getPrincipal();
-			User user = buyerAPI.findByAccount(siteId, account);
+			Account user = buyerAPI.findByAccount(siteId, account);
 
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("buyer", user);
@@ -166,7 +165,7 @@ public class BuyerController {
 		try {
 			Subject subject = SecurityUtils.getSubject();
 			String account = (String) subject.getPrincipal();
-			User user = buyerAPI.findByAccount(siteId, account);
+			Account user = buyerAPI.findByAccount(siteId, account);
 			Long uid = user.getUserId();
 			JSONArray delivers = buyerAPI.buyerDelivers(siteId, uid);
 			json.setSuccess(true);
@@ -194,7 +193,7 @@ public class BuyerController {
 		try {
 			Subject subject = SecurityUtils.getSubject();
 			String account = (String) subject.getPrincipal();
-			User user = buyerAPI.findByAccount(siteId, account);
+			Account user = buyerAPI.findByAccount(siteId, account);
 			Long uid = user.getUserId();
 
 			if (null != dlv) {

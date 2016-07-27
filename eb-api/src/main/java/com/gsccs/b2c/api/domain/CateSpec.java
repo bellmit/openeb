@@ -8,7 +8,7 @@ import java.util.List;
  * @author x.d zhang
  * 
  */
-public class CateSpec extends DomainObject {
+public class CateSpec extends Domain {
 
 	private Long id;
 	private String title;

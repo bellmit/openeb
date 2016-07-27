@@ -14,7 +14,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
 
-import com.gsccs.b2c.api.domain.User;
+import com.gsccs.b2c.api.domain.Account;
 import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.BuyerServiceI;
 
@@ -59,7 +59,7 @@ public class ClientRealm extends AuthorizingRealm {
 		Long sid = ctoken.getSite();
 		
 		try {
-			User user = buyerAPI.findByAccount(sid, username);
+			Account user = buyerAPI.findByAccount(sid, username);
 			if (user == null) {
 				throw new UnknownAccountException();// 没找到帐号
 			}

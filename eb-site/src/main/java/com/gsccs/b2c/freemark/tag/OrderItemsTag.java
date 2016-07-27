@@ -9,12 +9,10 @@ import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
-import com.gsccs.b2c.api.domain.Order;
-import com.gsccs.b2c.api.domain.OrderItem;
-import com.gsccs.b2c.api.domain.Product;
 import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.OrderServiceI;
 import com.gsccs.b2c.web.api.service.SsdbService;
+import com.gsccs.eb.api.domain.trade.OrderItem;
 
 import freemarker.core.Environment;
 import freemarker.ext.beans.BeanModel;

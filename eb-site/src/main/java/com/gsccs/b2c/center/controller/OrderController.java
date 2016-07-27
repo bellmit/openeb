@@ -29,15 +29,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.CacheConst;
-import com.gsccs.b2c.api.domain.BuyerDeliver;
-import com.gsccs.b2c.api.domain.EvalItem;
-import com.gsccs.b2c.api.domain.EvalType;
-import com.gsccs.b2c.api.domain.Order;
-import com.gsccs.b2c.api.domain.Order.OrderState;
-import com.gsccs.b2c.api.domain.OrderItem;
-import com.gsccs.b2c.api.domain.Product;
 import com.gsccs.b2c.api.domain.Sku;
-import com.gsccs.b2c.api.domain.User;
+import com.gsccs.b2c.api.domain.Account;
 import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.BuyerServiceI;
 import com.gsccs.b2c.api.service.EvalServiceI;
@@ -49,6 +42,11 @@ import com.gsccs.b2c.app.core.FreeMarkerUtil;
 import com.gsccs.b2c.app.core.JsonMsg;
 import com.gsccs.b2c.web.api.service.RedisService;
 import com.gsccs.b2c.web.api.service.SsdbService;
+import com.gsccs.eb.api.domain.buyer.BuyerDeliver;
+import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.domain.trade.Order;
+import com.gsccs.eb.api.domain.trade.Order.OrderState;
+import com.gsccs.eb.api.domain.trade.OrderItem;
 
 import freemarker.template.TemplateModelException;
 
@@ -178,7 +176,7 @@ public class OrderController {
 		try {
 			Subject subject = SecurityUtils.getSubject();
 			String username = (String) subject.getPrincipal();
-			User user = redisService.getBuyer(siteId, username);
+			Account user = redisService.getBuyer(siteId, username);
 			Long buyerid = user.getUserId();
 			Order param = new Order();
 			param.setBuyerid(buyerid);
@@ -462,7 +460,7 @@ public class OrderController {
 
 			Subject subject = SecurityUtils.getSubject();
 			String account = (String) subject.getPrincipal();
-			User user = redisService.getBuyer(siteId, account);
+			Account user = redisService.getBuyer(siteId, account);
 			BuyerDeliver deliver = null;
 			if (StringUtils.isNotEmpty(addressid)) {
 				deliver = buyerAPI.getbuyerDeliver(siteId, user.getUserId(),
@@ -580,7 +578,7 @@ public class OrderController {
 		Subject subject = SecurityUtils.getSubject();
 		String username = (String) subject.getPrincipal();
 		try {
-			User user = buyerAPI.findByAccount(siteId, username);
+			Account user = buyerAPI.findByAccount(siteId, username);
 			Long buyerid = user.getUserId();
 			Order param = new Order();
 			if (StringUtils.isNotEmpty(state)) {
@@ -755,7 +753,7 @@ public class OrderController {
 		Subject subject = SecurityUtils.getSubject();
 		String username = (String) subject.getPrincipal();
 		try {
-			User user = buyerAPI.findByAccount(siteId, username);
+			Account user = buyerAPI.findByAccount(siteId, username);
 			Long uid = user.getUserId();
 			json = orderAPI.orderStatist(siteId, uid);
 		} catch (Exception e) {

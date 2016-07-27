@@ -8,14 +8,14 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gsccs.b2c.api.APIConst;
-import com.gsccs.b2c.api.domain.Payment;
-import com.gsccs.b2c.api.domain.User;
+import com.gsccs.b2c.api.domain.Account;
 import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.plat.seller.model.SellerPay;
 import com.gsccs.b2c.plat.seller.service.PayService;
 import com.gsccs.b2c.plat.seller.service.SellerService;
 import com.gsccs.b2c.plat.seller.service.StoreService;
 import com.gsccs.b2c.plat.shop.model.SellerAccount;
+import com.gsccs.eb.api.domain.trade.Payment;
 
 public class SellerServiceAPI implements SellerServiceI {
 
@@ -27,8 +27,8 @@ public class SellerServiceAPI implements SellerServiceI {
 	private PayService payService;
 
 	@Override
-	public User getSeller(Long userId) throws ApiException {
-		User user = new User();
+	public Account getSeller(Long userId) throws ApiException {
+		Account user = new Account();
 		SellerAccount seller = sellerService.findById(userId);
 		user.setUserId(seller.getId());
 		user.setNick(seller.getName());
@@ -36,7 +36,7 @@ public class SellerServiceAPI implements SellerServiceI {
 	}
 
 	@Override
-	public User getSeller(String account) throws ApiException {
+	public Account getSeller(String account) throws ApiException {
 		if (null == account || "".equals(account)) {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
@@ -44,7 +44,7 @@ public class SellerServiceAPI implements SellerServiceI {
 
 		SellerAccount seller = sellerService.findByAccount(account);
 		if (null != seller) {
-			User user = new User();
+			Account user = new Account();
 			user.setUserId(seller.getId());
 			user.setSiteId(seller.getStoreId());
 			user.setNick(seller.getName());
@@ -99,7 +99,7 @@ public class SellerServiceAPI implements SellerServiceI {
 	}
 
 	@Override
-	public void addStoreAccount(User user) {
+	public void addStoreAccount(Account user) {
 		if (null != user) {
 			SellerAccount account = new SellerAccount();
 			account.setAccount(user.getAccount());

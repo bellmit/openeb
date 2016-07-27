@@ -8,7 +8,7 @@ import java.util.Date;
  * @author x.d zhang
  * 
  */
-public class Collect extends DomainObject {
+public class Collect extends Domain {
 
 	private String id;
 	/**

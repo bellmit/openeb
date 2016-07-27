@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -23,11 +22,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.CacheConst;
 import com.gsccs.b2c.api.domain.Category;
-import com.gsccs.b2c.api.domain.OrderItem;
-import com.gsccs.b2c.api.domain.ProductImg;
-import com.gsccs.b2c.api.domain.StoreNav;
-import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.shiro.redis.SerializeUtils;
+import com.gsccs.eb.api.domain.trade.OrderItem;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring-redis.xml")

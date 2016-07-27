@@ -21,14 +21,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
-import com.gsccs.b2c.api.domain.BuyerScore;
-import com.gsccs.b2c.api.domain.User;
+import com.gsccs.b2c.api.domain.Account;
 import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.BuyerServiceI;
 import com.gsccs.b2c.api.service.ShopServiceI;
 import com.gsccs.b2c.app.core.FreeMarkerUtil;
 import com.gsccs.b2c.web.api.service.RedisService;
 import com.gsccs.b2c.web.api.service.SsdbService;
+import com.gsccs.eb.api.domain.buyer.BuyerScore;
 
 import freemarker.template.TemplateModelException;
 
@@ -69,7 +69,7 @@ public class PointController {
 		try {
 			Subject subject = SecurityUtils.getSubject();
 			String username = (String) subject.getPrincipal();
-			User user = buyerAPI.findByAccount(siteId, username);
+			Account user = buyerAPI.findByAccount(siteId, username);
 			Map<String, Object> data = new HashMap<String, Object>();
 			int total = buyerAPI.getBuyerPoint(siteId,user.getUserId());
 			data.put("store", redisService.getStore(siteId));
@@ -110,7 +110,7 @@ public class PointController {
 		try {
 			Subject subject = SecurityUtils.getSubject();
 			String username = (String) subject.getPrincipal();
-			User user = buyerAPI.findByAccount(siteId, username);
+			Account user = buyerAPI.findByAccount(siteId, username);
 			BuyerScore param = new BuyerScore();
 			param.setBuyerid(user.getUserId());
 			List<BuyerScore> scores = buyerAPI.getBuyerPoints(siteId, param,

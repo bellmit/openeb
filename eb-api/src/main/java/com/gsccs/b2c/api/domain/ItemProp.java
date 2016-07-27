@@ -8,7 +8,7 @@ import java.util.List;
  * @author x.d zhang
  *
  */
-public class ItemProp extends DomainObject {
+public class ItemProp extends Domain {
 	
 	private static final long serialVersionUID = 3145493243855193151L;
 

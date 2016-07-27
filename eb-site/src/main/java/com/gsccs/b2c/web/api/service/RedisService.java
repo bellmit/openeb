@@ -6,10 +6,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.domain.Brand;
 import com.gsccs.b2c.api.domain.Category;
-import com.gsccs.b2c.api.domain.Product;
-import com.gsccs.b2c.api.domain.Shop;
-import com.gsccs.b2c.api.domain.StoreNav;
-import com.gsccs.b2c.api.domain.User;
+import com.gsccs.b2c.api.domain.Account;
+import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.domain.seller.Shop;
+import com.gsccs.eb.api.domain.site.StoreNav;
 
 
 public interface RedisService {
@@ -22,7 +22,7 @@ public interface RedisService {
 
 	public Shop getStore(Long sid);
 	
-	public User getBuyer(Long sid,String account);
+	public Account getBuyer(Long sid,String account);
 	
 	public JSONObject getStoreyList(Long sid);
 	

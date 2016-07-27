@@ -9,7 +9,7 @@ import java.util.List;
  * @author ZhangTao
  * 
  */
-public class IndexBrands extends DomainObject {
+public class IndexBrands extends Domain {
 
 	private static final long serialVersionUID = -8295456690151511775L;
 	

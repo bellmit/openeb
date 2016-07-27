@@ -6,7 +6,7 @@ package com.gsccs.b2c.api.domain;
  * @author x.d zhang
  * 
  */
-public class AuctionPVPairDO extends DomainObject {
+public class AuctionPVPairDO extends Domain {
 
 	private static final long serialVersionUID = 8453164223432221239L;
 

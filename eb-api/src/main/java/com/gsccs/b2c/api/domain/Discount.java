@@ -8,7 +8,7 @@ import java.util.List;
  * @author x.d zhang
  *
  */
-public class Discount extends DomainObject {
+public class Discount extends Domain {
 
 	private static final long serialVersionUID = 6629334199677469213L;
 

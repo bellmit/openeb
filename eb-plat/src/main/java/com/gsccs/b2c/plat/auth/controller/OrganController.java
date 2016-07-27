@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.gsccs.b2c.api.domain.CtreeGrid;
 import com.gsccs.b2c.plat.auth.model.Organization;
 import com.gsccs.b2c.plat.auth.service.OrganizationService;
 import com.gsccs.b2c.plat.bass.JsonMsg;
+import com.gsccs.eb.api.utils.CtreeGrid;
 
 /**
  * 组织机构管理

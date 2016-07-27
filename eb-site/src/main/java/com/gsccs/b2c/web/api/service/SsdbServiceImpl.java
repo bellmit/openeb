@@ -23,10 +23,6 @@ import com.gsccs.b2c.api.domain.CateProp;
 import com.gsccs.b2c.api.domain.Collect;
 import com.gsccs.b2c.api.domain.Collect.CollectType;
 import com.gsccs.b2c.api.domain.EvalGoods;
-import com.gsccs.b2c.api.domain.OrderItem;
-import com.gsccs.b2c.api.domain.ProductImg;
-import com.gsccs.b2c.api.domain.ProductParam;
-import com.gsccs.b2c.api.domain.ProductProp;
 import com.gsccs.b2c.api.domain.Sku;
 import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.CateServiceI;
@@ -36,6 +32,10 @@ import com.gsccs.b2c.api.service.GoodsServiceI;
 import com.gsccs.b2c.api.service.ShopServiceI;
 import com.gsccs.b2c.api.service.TradeServiceI;
 import com.gsccs.b2c.api.service.TypeServiceI;
+import com.gsccs.eb.api.domain.goods.Attach;
+import com.gsccs.eb.api.domain.goods.ProductParam;
+import com.gsccs.eb.api.domain.goods.ProductProp;
+import com.gsccs.eb.api.domain.trade.OrderItem;
 
 @Service
 public class SsdbServiceImpl implements SsdbService {
@@ -286,7 +286,7 @@ public class SsdbServiceImpl implements SsdbService {
 		} else {
 			jsonArray = new JSONArray();
 			try {
-				List<ProductImg> goodsImgs = goodsAPI.getProductByPid(sid, pid);
+				List<Attach> goodsImgs = goodsAPI.getProductByPid(sid, pid);
 				if (null == goodsImgs || goodsImgs.size() <= 0) {
 					for (int i = 0; i < 5; i++) {
 						JSONObject json = new JSONObject();
@@ -295,7 +295,7 @@ public class SsdbServiceImpl implements SsdbService {
 						jsonArray.add(json);
 					}
 				} else {
-					for (ProductImg img : goodsImgs) {
+					for (Attach img : goodsImgs) {
 						JSONObject json = new JSONObject();
 						json.put("url", img.getUrl());
 						jsonArray.add(json);

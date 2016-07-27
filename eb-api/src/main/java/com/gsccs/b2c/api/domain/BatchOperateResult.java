@@ -8,7 +8,7 @@ import java.util.List;
  * @author x.d zhang
  * 
  */
-public class BatchOperateResult extends DomainObject {
+public class BatchOperateResult extends Domain {
 	private static final long serialVersionUID = 5513696581637458647L;
 
 	/**

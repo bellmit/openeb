@@ -1,6 +1,6 @@
 package com.gsccs.b2c.plat.order.model;
 
-import com.gsccs.b2c.api.domain.OrderItem;
+import com.gsccs.eb.api.domain.trade.OrderItem;
 
 
 /**

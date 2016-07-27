@@ -2,9 +2,9 @@ package com.gsccs.b2c.api.service;
 
 import java.util.List;
 
-import com.gsccs.b2c.api.domain.Order;
-import com.gsccs.b2c.api.domain.ReturnOrder;
 import com.gsccs.b2c.api.exception.ApiException;
+import com.gsccs.eb.api.domain.trade.Order;
+import com.gsccs.eb.api.domain.trade.ReturnOrder;
 
 /**
  * 退单（退货,退款）API

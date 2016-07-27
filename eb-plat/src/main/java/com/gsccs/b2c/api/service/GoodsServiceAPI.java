@@ -9,13 +9,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gsccs.b2c.api.APIConst;
-import com.gsccs.b2c.api.domain.BuyerDiscount;
 import com.gsccs.b2c.api.domain.ItemImg;
-import com.gsccs.b2c.api.domain.Product;
-import com.gsccs.b2c.api.domain.ProductImg;
-import com.gsccs.b2c.api.domain.ProductParam;
-import com.gsccs.b2c.api.domain.ProductProp;
-import com.gsccs.b2c.api.domain.ProductReqInfo;
 import com.gsccs.b2c.api.domain.Sku;
 import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.plat.seller.service.StoreService;
@@ -26,6 +20,12 @@ import com.gsccs.b2c.plat.shop.model.StoreT;
 import com.gsccs.b2c.plat.shop.service.CategoryService;
 import com.gsccs.b2c.plat.shop.service.GoodsService;
 import com.gsccs.b2c.plat.shop.service.ProductImgService;
+import com.gsccs.eb.api.domain.buyer.Discount;
+import com.gsccs.eb.api.domain.goods.Attach;
+import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.domain.goods.ProductParam;
+import com.gsccs.eb.api.domain.goods.ProductProp;
+import com.gsccs.eb.api.domain.goods.ProductReqInfo;
 
 /**
  * 商品服务
@@ -220,7 +220,7 @@ public class GoodsServiceAPI implements GoodsServiceI {
 	}
 
 	@Override
-	public ProductImg uploadProductImg(Long productid, byte[] img,
+	public Attach uploadProductImg(Long productid, byte[] img,
 			int position, boolean is_major) {
 		// TODO Auto-generated method stub
 		return null;
@@ -272,7 +272,7 @@ public class GoodsServiceAPI implements GoodsServiceI {
 
 	@Override
 	public Long[] addBuyerDiscount(Long sid, Long productId, Long goodsid,
-			List<BuyerDiscount> dislist) throws ApiException {
+			List<Discount> dislist) throws ApiException {
 		List<Sku> list = null;
 		if (null == sid || null == productId) {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
@@ -289,7 +289,7 @@ public class GoodsServiceAPI implements GoodsServiceI {
 	}
 
 	@Override
-	public List<BuyerDiscount> getBuyerDiscounts(Long sid, Long productId,
+	public List<Discount> getBuyerDiscounts(Long sid, Long productId,
 			Long goodsid) throws ApiException {
 		// goodsService.getProduct(sid, pid, extra)
 		return null;
@@ -491,7 +491,7 @@ public class GoodsServiceAPI implements GoodsServiceI {
 	}
 
 	@Override
-	public List<ProductImg> getProductByPid(Long sid, Long pid)
+	public List<Attach> getProductByPid(Long sid, Long pid)
 			throws ApiException {
 		if (null == sid || null == pid) {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
@@ -503,13 +503,13 @@ public class GoodsServiceAPI implements GoodsServiceI {
 					APIConst.ERROR_MSG_0002);
 		}
 
-		List<ProductImg> list = null;
+		List<Attach> list = null;
 		List<ProductImgT> ptmList = pimgService.getImgByPid(sid, pid);
 
 		if (null != ptmList && ptmList.size() > 0) {
-			list = new ArrayList<ProductImg>();
+			list = new ArrayList<Attach>();
 			for (ProductImgT pit : ptmList) {
-				ProductImg p = new ProductImg();
+				Attach p = new Attach();
 				try {
 					// 商品Id
 					BeanUtils.copyProperties(p, pit);
@@ -526,7 +526,7 @@ public class GoodsServiceAPI implements GoodsServiceI {
 	}
 
 	@Override
-	public void addPImg(Long sid, Long pid, List<ProductImg> pimgs)
+	public void addPImg(Long sid, Long pid, List<Attach> pimgs)
 			throws ApiException {
 		if (null == sid || null == pid) {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
@@ -540,7 +540,7 @@ public class GoodsServiceAPI implements GoodsServiceI {
 
 		if (null != pimgs && pimgs.size() > 0) {
 			List<ProductImgT> pimgts = new ArrayList<ProductImgT>();
-			for (ProductImg pimg : pimgs) {
+			for (Attach pimg : pimgs) {
 				ProductImgT gt = new ProductImgT();
 				try {
 					BeanUtils.copyProperties(gt, pimg);

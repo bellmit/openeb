@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gsccs.b2c.plat.shop.dao.GoodsTMapper">
+	<resultMap id="BaseResultMap" type="com.gsccs.b2c.plat.shop.model.GoodsT">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="pid" jdbcType="BIGINT" property="pid" />
+		<result column="barcode" jdbcType="VARCHAR" property="barcode" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="specids" jdbcType="VARCHAR" property="specids" />
+		<result column="specstr" jdbcType="VARCHAR" property="specstr" />
+		<result column="price" jdbcType="DECIMAL" property="price" />
+		<result column="mkprice" jdbcType="DECIMAL" property="mkprice" />
+		<result column="storenum" jdbcType="INTEGER" property="storenum" />
+		<result column="locknum" jdbcType="INTEGER" property="locknum" />
+		<result column="salenum" jdbcType="INTEGER" property="salenum" />
+		<result column="status" jdbcType="VARCHAR" property="status" />
+	</resultMap>
+	
+	
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem"
+										open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem"
+										open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id, pid, barcode, title, specids,specstr, price,mkprice, storenum,locknum,salenum, status
+	</sql>
+
+	<select id="selectPageByExample" parameterType="map"
+		resultMap="BaseResultMap">
+		select
+		<if test="example.distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from shop_goods_${sid}
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="example.orderByClause != null">
+			order by ${example.orderByClause}
+		</if>
+		limit ${example.skip},${example.pageSize}
+	</select>
+
+	<select id="selectByPrimaryKey" parameterType="map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from shop_goods_${sid}
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from shop_goods
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.shop.model.GoodsTExample">
+		delete from shop_goods
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	
+	<insert id="insert" parameterType="map">
+		insert into shop_goods_${sid} (id, pid, barcode, title,
+		specids,specstr, price,mkprice, storenum,locknum,salenum,
+		status)
+		values (#{record.id,jdbcType=BIGINT}, #{record.pid,jdbcType=BIGINT},
+		#{record.barcode,jdbcType=VARCHAR}, #{record.title,jdbcType=VARCHAR},
+		#{record.specids,jdbcType=VARCHAR},#{record.specstr,jdbcType=VARCHAR},
+		#{record.price,jdbcType=DECIMAL},
+		#{record.mkprice,jdbcType=DECIMAL},
+		#{record.storenum,jdbcType=INTEGER},
+		#{record.locknum,jdbcType=INTEGER},
+		#{record.salenum,jdbcType=INTEGER},
+		#{record.status,jdbcType=VARCHAR})
+	</insert>
+
+	<select id="countByExample" parameterType="map"
+		resultType="java.lang.Integer">
+		select count(*) from shop_goods_${sid}
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+
+	<update id="updateByExample" parameterType="map">
+		update shop_goods_${sid}
+		set id = #{record.id,jdbcType=BIGINT},
+		pid = #{record.pid,jdbcType=BIGINT},
+		barcode = #{record.barcode,jdbcType=VARCHAR},
+		title = #{record.title,jdbcType=VARCHAR},
+		specids = #{record.specids,jdbcType=VARCHAR},
+		specstr = #{record.specstr,jdbcType=VARCHAR},
+		price = #{record.price,jdbcType=DECIMAL},
+		mkprice = #{record.mkprice,jdbcType=DECIMAL},
+		storenum = #{record.storenum,jdbcType=INTEGER},
+		locknum = #{record.locknum,jdbcType=INTEGER},
+		salenum = #{record.salenum,jdbcType=INTEGER},
+		status = #{record.status,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="map">
+		update shop_goods_${sid}
+		set pid = #{record.pid,jdbcType=BIGINT},
+		barcode = #{record.barcode,jdbcType=VARCHAR},
+		title = #{record.title,jdbcType=VARCHAR},
+		specids = #{record.specids,jdbcType=VARCHAR},
+		specstr = #{record.specstr,jdbcType=VARCHAR},
+		price = #{record.price,jdbcType=DECIMAL},
+		mkprice = #{record.mkprice,jdbcType=DECIMAL},
+		storenum = #{record.storenum,jdbcType=INTEGER},
+		locknum = #{record.locknum,jdbcType=INTEGER},
+		salenum = #{record.salenum,jdbcType=INTEGER},
+		status = #{record.status,jdbcType=VARCHAR}
+		where id = #{record.id,jdbcType=BIGINT}
+	</update>
+</mapper>

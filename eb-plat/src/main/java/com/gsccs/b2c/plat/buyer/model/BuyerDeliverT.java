@@ -1,6 +1,6 @@
 package com.gsccs.b2c.plat.buyer.model;
 
-import com.gsccs.b2c.api.domain.BuyerDeliver;
+import com.gsccs.eb.api.domain.buyer.BuyerDeliver;
 
 
 /**

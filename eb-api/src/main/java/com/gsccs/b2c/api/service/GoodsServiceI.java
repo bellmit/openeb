@@ -2,12 +2,12 @@ package com.gsccs.b2c.api.service;
 
 import java.util.List;
 
-import com.gsccs.b2c.api.domain.BuyerDiscount;
 import com.gsccs.b2c.api.domain.ItemImg;
-import com.gsccs.b2c.api.domain.Product;
-import com.gsccs.b2c.api.domain.ProductImg;
 import com.gsccs.b2c.api.domain.Sku;
 import com.gsccs.b2c.api.exception.ApiException;
+import com.gsccs.eb.api.domain.buyer.Discount;
+import com.gsccs.eb.api.domain.goods.Attach;
+import com.gsccs.eb.api.domain.goods.Product;
 
 /**
  * 商品API 提供了商品以及商品相关的sku，邮费增加，修改功能
@@ -75,7 +75,7 @@ public interface GoodsServiceI {
 	 *            是否将该图片设为主图.可选值:true,false;默认值:false.
 	 * @return 产品图片结构
 	 */
-	public ProductImg uploadProductImg(Long productid, byte[] img,
+	public Attach uploadProductImg(Long productid, byte[] img,
 			int position, boolean is_major);
 
 	/**
@@ -126,7 +126,7 @@ public interface GoodsServiceI {
 	 * @return
 	 * @throws ApiException
 	 */
-	public List<BuyerDiscount> getBuyerDiscounts(Long sid,Long productId,Long goodsid) throws ApiException;
+	public List<Discount> getBuyerDiscounts(Long sid,Long productId,Long goodsid) throws ApiException;
 	
 	/**
 	 * 新增商品会员折扣信息
@@ -136,7 +136,7 @@ public interface GoodsServiceI {
 	 * @param dislist    折扣列表
 	 * @return
 	 */
-	public Long[] addBuyerDiscount(Long sid,Long productId,Long goodsid,List<BuyerDiscount> dislist) throws ApiException;
+	public Long[] addBuyerDiscount(Long sid,Long productId,Long goodsid,List<Discount> dislist) throws ApiException;
 	
 	/**
 	 * 修改产品状态
@@ -160,9 +160,9 @@ public interface GoodsServiceI {
 	
 	public void editProductPrice(Long sid,Long pid,String price) throws ApiException;
 
-	public List<ProductImg> getProductByPid(Long sid, Long pid) throws ApiException;
+	public List<Attach> getProductByPid(Long sid, Long pid) throws ApiException;
 	
-	public void addPImg(Long sid, Long pid, List<ProductImg> pimg) throws ApiException;
+	public void addPImg(Long sid, Long pid, List<Attach> pimg) throws ApiException;
 	
 
 }

@@ -2,7 +2,7 @@ package com.gsccs.b2c.api.domain;
 
 import java.util.Date;
 
-public class PropImg extends DomainObject {
+public class PropImg extends Domain {
 
 	private static final long serialVersionUID = 7777174413466839242L;
 

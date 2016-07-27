@@ -1,8 +1,8 @@
 package com.gsccs.b2c.plat;
 
-import com.gsccs.b2c.api.domain.Order;
 import com.gsccs.b2c.plat.order.model.OrderT;
 import com.gsccs.b2c.plat.utils.BeanUtilsEx;
+import com.gsccs.eb.api.domain.trade.Order;
 
 /**
  * <p>User: x.d zhang

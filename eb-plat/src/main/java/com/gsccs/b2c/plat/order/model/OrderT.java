@@ -1,6 +1,6 @@
 package com.gsccs.b2c.plat.order.model;
 
-import com.gsccs.b2c.api.domain.Order;
+import com.gsccs.eb.api.domain.trade.Order;
 
 /**
  * 订单实体类
@@ -13,6 +13,7 @@ public class OrderT extends Order{
 	//锁定商品数量
 	private Integer locknum;
 
+	
 	public String getStatus() {
 		return status;
 	}

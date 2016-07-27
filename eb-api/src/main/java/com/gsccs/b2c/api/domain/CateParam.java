@@ -6,7 +6,7 @@ package com.gsccs.b2c.api.domain;
  * @author x.d zhang
  * 
  */
-public class CateParam extends DomainObject {
+public class CateParam extends Domain {
 
 	private Long id;
 	private String title;

@@ -27,9 +27,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.gsccs.b2c.api.domain.EvalGoods;
 import com.gsccs.b2c.api.domain.EvalOrder;
 import com.gsccs.b2c.api.domain.EvalType;
-import com.gsccs.b2c.api.domain.OrderItem;
-import com.gsccs.b2c.api.domain.User;
-import com.gsccs.b2c.api.exception.ApiException;
+import com.gsccs.b2c.api.domain.Account;
 import com.gsccs.b2c.api.service.BuyerServiceI;
 import com.gsccs.b2c.api.service.EvalServiceI;
 import com.gsccs.b2c.api.service.OrderServiceI;
@@ -37,6 +35,7 @@ import com.gsccs.b2c.app.core.FreeMarkerUtil;
 import com.gsccs.b2c.app.core.JsonMsg;
 import com.gsccs.b2c.web.api.service.RedisService;
 import com.gsccs.b2c.web.api.service.SsdbService;
+import com.gsccs.eb.api.domain.trade.OrderItem;
 
 import freemarker.template.TemplateModelException;
 
@@ -104,7 +103,7 @@ public class EvalController {
 		try {
 			Subject subject = SecurityUtils.getSubject();
 			String account = (String) subject.getPrincipal();
-			User user = buyerAPI.findByAccount(siteId, account);
+			Account user = buyerAPI.findByAccount(siteId, account);
 			List<OrderItem> items = orderAPI.getIsNotEvalItems(siteId,
 					user.getUserId(), page, pagesize);
 			if (null != items) {
@@ -149,7 +148,7 @@ public class EvalController {
 		Subject subject = SecurityUtils.getSubject();
 		String username = (String) subject.getPrincipal();
 		try {
-			User user = buyerAPI.findByAccount(siteId, username);
+			Account user = buyerAPI.findByAccount(siteId, username);
 			Long buyerid = user.getUserId();
 			List<EvalOrder> evalscoreList= new ArrayList<EvalOrder>();
 			if (null != productid){

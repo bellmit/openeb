@@ -1,6 +1,6 @@
 package com.gsccs.b2c.api.domain;
 
-public class Templet extends DomainObject{
+public class Templet extends Domain{
 
 	/**
 	 * 

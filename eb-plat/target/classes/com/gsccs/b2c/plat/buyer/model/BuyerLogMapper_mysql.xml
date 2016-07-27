@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gsccs.b2c.plat.buyer.dao.BuyerLogMapper" >
+
+  <resultMap id="BaseResultMap" type="com.gsccs.b2c.plat.buyer.model.BuyerLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="broswer" property="broswer" jdbcType="VARCHAR" />
+    <result column="logcontent" property="logcontent" jdbcType="VARCHAR" />
+    <result column="ipnote" property="ipnote" jdbcType="VARCHAR" />
+    <result column="operatetime" property="operatetime" jdbcType="TIMESTAMP" />
+    <result column="accountid" property="accountid" jdbcType="VARCHAR" />
+    <result column="loglevel" property="loglevel" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, broswer, logcontent, ipnote, operatetime, accountid, loglevel
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gsccs.b2c.plat.buyer.model.BuyerLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from buyer_account_login_log_${sid}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from buyer_account_login_log_${sid}
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from buyer_account_login_log_${sid}
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.buyer.model.BuyerLogExample" >
+    delete from buyer_account_login_log_${sid}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  
+  <insert id="insertSelective" parameterType="com.gsccs.b2c.plat.buyer.model.BuyerLog" >
+    insert into buyer_account_login_log_${sid}
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="broswer != null" >
+        broswer,
+      </if>
+      <if test="logcontent != null" >
+        logcontent,
+      </if>
+      <if test="ipnote != null" >
+        ipnote,
+      </if>
+      <if test="operatetime != null" >
+        operatetime,
+      </if>
+      <if test="accountid != null" >
+        accountid,
+      </if>
+      <if test="loglevel != null" >
+        loglevel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="broswer != null" >
+        #{broswer,jdbcType=VARCHAR},
+      </if>
+      <if test="logcontent != null" >
+        #{logcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="ipnote != null" >
+        #{ipnote,jdbcType=VARCHAR},
+      </if>
+      <if test="operatetime != null" >
+        #{operatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accountid != null" >
+        #{accountid,jdbcType=VARCHAR},
+      </if>
+      <if test="loglevel != null" >
+        #{loglevel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="countByExample" parameterType="com.gsccs.b2c.plat.buyer.model.BuyerLogExample" resultType="java.lang.Integer" >
+    select count(*) from buyer_account_login_log_${sid}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  
+  <update id="updateByExampleSelective" parameterType="map" >
+    update buyer_account_login_log_${sid}
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.broswer != null" >
+        broswer = #{record.broswer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logcontent != null" >
+        logcontent = #{record.logcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ipnote != null" >
+        ipnote = #{record.ipnote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatetime != null" >
+        operatetime = #{record.operatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.accountid != null" >
+        accountid = #{record.accountid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loglevel != null" >
+        loglevel = #{record.loglevel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  <update id="updateByExample" parameterType="map" >
+    update buyer_account_login_log_${sid}
+    set id = #{record.id,jdbcType=BIGINT},
+      broswer = #{record.broswer,jdbcType=VARCHAR},
+      logcontent = #{record.logcontent,jdbcType=VARCHAR},
+      ipnote = #{record.ipnote,jdbcType=VARCHAR},
+      operatetime = #{record.operatetime,jdbcType=TIMESTAMP},
+      accountid = #{record.accountid,jdbcType=VARCHAR},
+      loglevel = #{record.loglevel,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.gsccs.b2c.plat.buyer.model.BuyerLog" >
+    update buyer_account_login_log_${sid}
+    <set >
+      <if test="broswer != null" >
+        broswer = #{broswer,jdbcType=VARCHAR},
+      </if>
+      <if test="logcontent != null" >
+        logcontent = #{logcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="ipnote != null" >
+        ipnote = #{ipnote,jdbcType=VARCHAR},
+      </if>
+      <if test="operatetime != null" >
+        operatetime = #{operatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accountid != null" >
+        accountid = #{accountid,jdbcType=VARCHAR},
+      </if>
+      <if test="loglevel != null" >
+        loglevel = #{loglevel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.gsccs.b2c.plat.buyer.model.BuyerLog" >
+    update buyer_account_login_log_${sid}
+    set broswer = #{broswer,jdbcType=VARCHAR},
+      logcontent = #{logcontent,jdbcType=VARCHAR},
+      ipnote = #{ipnote,jdbcType=VARCHAR},
+      operatetime = #{operatetime,jdbcType=TIMESTAMP},
+      accountid = #{accountid,jdbcType=VARCHAR},
+      loglevel = #{loglevel,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+  <!-- 记录会员登录或退出日志 -->
+  <insert id="insert" parameterType="map" >
+    insert into buyer_account_login_log_${sid} (id, broswer, logcontent, ipnote, operatetime, accountid, loglevel)
+    values (#{id,jdbcType=BIGINT}, #{broswer,jdbcType=VARCHAR}, #{logcontent,jdbcType=VARCHAR}, 
+      #{ipnote,jdbcType=VARCHAR}, #{operatetime,jdbcType=TIMESTAMP}, #{accountid,jdbcType=VARCHAR}, 
+      #{loglevel,jdbcType=VARCHAR})
+  </insert>
+  
+</mapper>

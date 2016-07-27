@@ -7,8 +7,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gsccs.b2c.api.domain.Product;
 import com.gsccs.b2c.web.api.service.RedisService;
+import com.gsccs.eb.api.domain.goods.Product;
 
 import freemarker.core.Environment;
 import freemarker.ext.beans.BeanModel;

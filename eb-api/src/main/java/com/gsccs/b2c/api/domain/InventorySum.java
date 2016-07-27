@@ -6,7 +6,7 @@ package com.gsccs.b2c.api.domain;
  * @author x.d zhang
  * 
  */
-public class InventorySum extends DomainObject {
+public class InventorySum extends Domain {
 	
 	
 	private static final long serialVersionUID = 6139976869269869221L;

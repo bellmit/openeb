@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONArray;
 import com.gsccs.b2c.api.domain.Collect;
 import com.gsccs.b2c.api.domain.Collect.CollectType;
-import com.gsccs.b2c.api.domain.User;
+import com.gsccs.b2c.api.domain.Account;
 import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.BuyerServiceI;
 import com.gsccs.b2c.api.service.CollectServiceI;
@@ -104,7 +104,7 @@ public class CollectController {
 		try {
 			Subject subject = SecurityUtils.getSubject();
 			String username = (String) subject.getPrincipal();
-			User user = buyerAPI.findByAccount(siteId, username);
+			Account user = buyerAPI.findByAccount(siteId, username);
 			Long buyerid = user.getUserId();
 			
 			Collect collect = new Collect();

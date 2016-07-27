@@ -2,11 +2,11 @@ package com.gsccs.b2c.plat.shop.service;
 
 import java.util.List;
 
-import com.gsccs.b2c.api.domain.Goods;
 import com.gsccs.b2c.plat.shop.model.BuyerDisT;
 import com.gsccs.b2c.plat.shop.model.GoodsT;
 import com.gsccs.b2c.plat.shop.model.ProductImgT;
 import com.gsccs.b2c.plat.shop.model.ProductT;
+import com.gsccs.eb.api.domain.goods.Goods;
 
 public interface GoodsService {
 

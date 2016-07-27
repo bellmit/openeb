@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gsccs.b2c.api.domain.User;
+import com.gsccs.b2c.api.domain.Account;
 import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.BuyerServiceI;
 import com.gsccs.b2c.api.service.ConfigServiceI;
@@ -89,7 +89,7 @@ public class RegistController {
 	 */
 	@RequestMapping(value = "/{site}/regist", method = RequestMethod.POST)
 	@ResponseBody
-	public JsonMsg showLoginForm(@PathVariable("site") Long siteId, User user,
+	public JsonMsg showLoginForm(@PathVariable("site") Long siteId, Account user,
 			HttpServletRequest req, Model model) {
 		JsonMsg json = new JsonMsg();
 		
@@ -171,7 +171,7 @@ public class RegistController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/{site}/doForget", method = RequestMethod.POST)
-	public String doForget(@PathVariable("site") Long siteId, User e,
+	public String doForget(@PathVariable("site") Long siteId, Account e,
 			ModelMap model) throws Exception {
 		// accountService.doForget(e);
 		// 等待用户检查短信或邮件
@@ -193,7 +193,7 @@ public class RegistController {
 			msg.setMsg("用户名不能为空!");
 		} else {
 			try {
-				User user = buyerAPI.findByAccount(siteId, account);
+				Account user = buyerAPI.findByAccount(siteId, account);
 				if (null != user) {
 					msg.setSuccess(false);
 					msg.setMsg("用户名已存在！");

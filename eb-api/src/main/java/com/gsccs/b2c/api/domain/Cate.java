@@ -2,7 +2,7 @@ package com.gsccs.b2c.api.domain;
 
 import java.util.List;
 
-public class Cate extends DomainObject {
+public class Cate extends Domain {
 
 	private static final long serialVersionUID = -767111557461889171L;
 	

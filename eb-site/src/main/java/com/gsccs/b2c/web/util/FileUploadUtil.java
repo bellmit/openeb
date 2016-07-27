@@ -10,7 +10,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import com.gsccs.b2c.alipay.util.Cons;
-import com.gsccs.b2c.api.domain.User;
+import com.gsccs.b2c.api.domain.Account;
 
 public class FileUploadUtil {
 	public static void inputstreamtofile(InputStream in,String filePath,String fileName) throws IOException{
@@ -49,7 +49,7 @@ public class FileUploadUtil {
 		}
 		
 		//创建文件夹
-		savePath += ((User)request.getSession().getAttribute(Cons.USER_CONTEXT)).getUserId() + "/";
+		savePath += ((Account)request.getSession().getAttribute(Cons.USER_CONTEXT)).getUserId() + "/";
 		File saveDirFile = new File(savePath);
 		if (!saveDirFile.exists()) {
 			saveDirFile.mkdirs();

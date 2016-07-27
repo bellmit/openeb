@@ -5,7 +5,7 @@ package com.gsccs.b2c.api.domain;
  * @author niu x j 
  *
  */
-public class EvalConf extends DomainObject{
+public class EvalConf extends Domain{
     /**
 	 * 
 	 */

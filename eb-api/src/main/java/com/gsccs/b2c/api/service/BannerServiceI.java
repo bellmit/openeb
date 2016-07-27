@@ -1,6 +1,6 @@
 package com.gsccs.b2c.api.service;
 
-import com.gsccs.b2c.api.domain.Banner;
+import com.gsccs.eb.api.domain.site.Banner;
 
 /**
  * 首页Banner

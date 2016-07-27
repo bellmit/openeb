@@ -2,7 +2,7 @@ package com.gsccs.b2c.api.service;
 
 import java.util.List;
 
-import com.gsccs.b2c.api.domain.FileTreeGrid;
+import com.gsccs.eb.api.utils.FileTreeGrid;
 
 /**
  * 模板API

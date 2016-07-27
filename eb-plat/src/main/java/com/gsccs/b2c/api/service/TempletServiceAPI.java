@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import com.gsccs.b2c.api.domain.FileTreeGrid;
 import com.gsccs.b2c.plat.Constants;
 import com.gsccs.b2c.plat.common.model.Config;
 import com.gsccs.b2c.plat.common.service.ConfigService;
@@ -17,6 +16,7 @@ import com.gsccs.b2c.plat.shop.model.Templet;
 import com.gsccs.b2c.plat.shop.service.StoreTempletService;
 import com.gsccs.b2c.plat.shop.service.TempletService;
 import com.gsccs.b2c.plat.utils.FileUtil;
+import com.gsccs.eb.api.utils.FileTreeGrid;
 
 
 public class TempletServiceAPI implements TempletServiceI{
@@ -53,7 +53,7 @@ public class TempletServiceAPI implements TempletServiceI{
 	 * 根据模板Id查询模板文件
 	 */
 	@Override
-	public List<com.gsccs.b2c.api.domain.FileTreeGrid> getTemplet(long templetId) {
+	public List<com.gsccs.eb.api.utils.FileTreeGrid> getTemplet(long templetId) {
 		
 		
 		List<FileTreeGrid> fList = new ArrayList<FileTreeGrid>() ;

@@ -6,7 +6,7 @@ package com.gsccs.b2c.api.domain;
  * @author x.d zhang
  * 
  */
-public class Sku extends DomainObject {
+public class Sku extends Domain {
 
 	private static final long serialVersionUID = 8558524674393512748L;
 

@@ -9,7 +9,7 @@ import java.util.List;
  * @author x.d zhang
  * 
  */
-public class PropValue extends DomainObject {
+public class PropValue extends Domain {
 	
 	private static final long serialVersionUID = 5442686669772618479L;
 

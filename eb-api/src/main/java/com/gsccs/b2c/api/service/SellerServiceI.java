@@ -2,9 +2,9 @@ package com.gsccs.b2c.api.service;
 
 import java.util.List;
 
-import com.gsccs.b2c.api.domain.Payment;
-import com.gsccs.b2c.api.domain.User;
+import com.gsccs.b2c.api.domain.Account;
 import com.gsccs.b2c.api.exception.ApiException;
+import com.gsccs.eb.api.domain.trade.Payment;
 
 
 /**
@@ -17,13 +17,13 @@ public interface SellerServiceI {
 	/**
 	 * 查询卖家用户信息（只能查询有店铺的用户） 
 	 */
-	public User getSeller(Long userId) throws ApiException;
+	public Account getSeller(Long userId) throws ApiException;
 	
 	/**
 	 * 添加商城卖家账户
 	 * @param account
 	 */
-	public void addStoreAccount(User account);
+	public void addStoreAccount(Account account);
 	
 	/**
 	 * 查询卖家用户信息（根据账号查询）
@@ -31,7 +31,7 @@ public interface SellerServiceI {
 	 * @return
 	 * @throws ApiException
 	 */
-	public User getSeller(String account) throws ApiException;
+	public Account getSeller(String account) throws ApiException;
 	
 	public List<Payment> getStorePays(String storeid);
 	

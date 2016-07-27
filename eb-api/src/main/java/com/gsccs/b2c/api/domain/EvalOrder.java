@@ -6,7 +6,7 @@ package com.gsccs.b2c.api.domain;
  * @author x.d zhang
  * 
  */
-public class EvalOrder extends DomainObject {
+public class EvalOrder extends Domain {
 
 	private static final long serialVersionUID = 4145351793736355994L;
 

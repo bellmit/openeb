@@ -2,9 +2,9 @@ package com.gsccs.b2c.api.service;
 
 import java.util.List;
 
-import com.gsccs.b2c.api.domain.Shop;
-import com.gsccs.b2c.api.domain.StoreNav;
 import com.gsccs.b2c.api.exception.ApiException;
+import com.gsccs.eb.api.domain.seller.Shop;
+import com.gsccs.eb.api.domain.site.StoreNav;
 
 /**
  * 店铺API 提供了店铺查询，店铺自定义类目的查询和更新。

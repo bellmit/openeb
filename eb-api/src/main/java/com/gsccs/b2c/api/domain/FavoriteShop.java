@@ -5,7 +5,7 @@ package com.gsccs.b2c.api.domain;
  * @author x.d zhang
  *
  */
-public class FavoriteShop extends DomainObject {
+public class FavoriteShop extends Domain {
 	
 	private static final long serialVersionUID = 8456588325597953576L;
 

@@ -7,7 +7,7 @@ import java.util.List;
  * @author niu x j 
  *
  */
-public class EvalModel extends DomainObject {
+public class EvalModel extends Domain {
 	/**
 	 * 
 	 */

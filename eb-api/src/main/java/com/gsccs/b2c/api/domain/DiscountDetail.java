@@ -8,7 +8,7 @@ import java.util.Date;
  * @author x.d zhang
  *
  */
-public class DiscountDetail extends DomainObject {
+public class DiscountDetail extends Domain {
 	
 	
 	private static final long serialVersionUID = 6369914341788122315L;

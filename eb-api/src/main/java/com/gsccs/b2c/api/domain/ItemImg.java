@@ -7,7 +7,7 @@ import java.util.Date;
  * @author x.d zhang
  *
  */
-public class ItemImg extends DomainObject {
+public class ItemImg extends Domain {
 	
 	private static final long serialVersionUID = 4626594717913552816L;
 

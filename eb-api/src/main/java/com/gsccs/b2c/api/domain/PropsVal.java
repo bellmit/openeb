@@ -1,6 +1,6 @@
 package com.gsccs.b2c.api.domain;
 
-public class PropsVal extends DomainObject{
+public class PropsVal extends Domain{
     /**
 	 * 
 	 */

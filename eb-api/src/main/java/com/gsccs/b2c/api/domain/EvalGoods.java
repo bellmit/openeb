@@ -9,7 +9,7 @@ import java.util.Date;
  * @author x.d zhang
  *
  */
-public class EvalGoods extends DomainObject{
+public class EvalGoods extends Domain{
 	
 	
 	private static final long serialVersionUID = 1824833393882688421L;

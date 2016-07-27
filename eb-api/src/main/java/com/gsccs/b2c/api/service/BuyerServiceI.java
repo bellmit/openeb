@@ -4,11 +4,11 @@ import java.util.List;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.gsccs.b2c.api.domain.BuyerDeliver;
-import com.gsccs.b2c.api.domain.BuyerLevel;
-import com.gsccs.b2c.api.domain.BuyerScore;
-import com.gsccs.b2c.api.domain.User;
+import com.gsccs.b2c.api.domain.Account;
 import com.gsccs.b2c.api.exception.ApiException;
+import com.gsccs.eb.api.domain.buyer.BuyerDeliver;
+import com.gsccs.eb.api.domain.buyer.BuyerLevel;
+import com.gsccs.eb.api.domain.buyer.BuyerScore;
 
 /**
  * 用户API 提供了用户基本信息查询功能
@@ -25,23 +25,23 @@ public interface BuyerServiceI {
 	 * @param userId
 	 *            用户ID
 	 */
-	public User getBuyer(Long siteId, Long userId) throws ApiException;
+	public Account getBuyer(Long siteId, Long userId) throws ApiException;
 
 	/**
 	 * 会员注册
 	 */
-	public void addAccount(Long sid, User user) throws ApiException;
+	public void addAccount(Long sid, Account user) throws ApiException;
 
 	/**
 	 * 会员登录
 	 */
-	public User loginAccount(Long sid, String account, String pwd)
+	public Account loginAccount(Long sid, String account, String pwd)
 			throws ApiException;
 
 	/**
 	 * 根据店铺ID查询所有会员
 	 */
-	public List<User> getAllAcountBySid(Long siteId) throws ApiException;
+	public List<Account> getAllAcountBySid(Long siteId) throws ApiException;
 
 	/**
 	 * 根据买家帐号查询买家API
@@ -51,12 +51,12 @@ public interface BuyerServiceI {
 	 * @param account
 	 *            登录帐号
 	 */
-	public User findByAccount(Long siteId, String account) throws ApiException;
+	public Account findByAccount(Long siteId, String account) throws ApiException;
 
 	/**
 	 * 添加并更新会员资料
 	 */
-	public void updateBuyerInfo(Long siteId, User user) throws ApiException;
+	public void updateBuyerInfo(Long siteId, Account user) throws ApiException;
 
 	/**
 	 * 会员所有收货地址

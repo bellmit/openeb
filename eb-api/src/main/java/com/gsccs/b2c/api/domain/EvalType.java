@@ -4,7 +4,7 @@ package com.gsccs.b2c.api.domain;
  * @author niu x j
  *
  */
-public class EvalType extends DomainObject{
+public class EvalType extends Domain{
 	
 	
 	private Long id;

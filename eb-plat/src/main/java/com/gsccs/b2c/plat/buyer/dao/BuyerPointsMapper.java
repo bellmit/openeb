@@ -4,20 +4,20 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.gsccs.b2c.plat.buyer.model.BuyerPoints;
 import com.gsccs.b2c.plat.buyer.model.BuyerPointsExample;
+import com.gsccs.eb.api.domain.buyer.BuyerScore;
 
 public interface BuyerPointsMapper {
 
 	int countByExample(@Param("sid") Long sid,@Param("example") BuyerPointsExample example);
 
-	int insert(@Param("sid") Long sid, @Param("record") BuyerPoints record);
+	int insert(@Param("sid") Long sid, @Param("record") BuyerScore record);
 
-	List<BuyerPoints> selectPageByExample(@Param("sid") Long sid,@Param("example") BuyerPointsExample example);
+	List<BuyerScore> selectPageByExample(@Param("sid") Long sid,@Param("example") BuyerPointsExample example);
 
-	BuyerPoints selectByPrimaryKey(Long id);
+	BuyerScore selectByPrimaryKey(Long id);
 
-	int updateByPrimaryKey(BuyerPoints record);
+	int updateByPrimaryKey(BuyerScore record);
 	
 	int deleteByExample(BuyerPointsExample example);
 

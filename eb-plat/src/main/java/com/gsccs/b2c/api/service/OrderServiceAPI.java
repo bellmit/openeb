@@ -13,9 +13,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.APIConst;
-import com.gsccs.b2c.api.domain.Order;
-import com.gsccs.b2c.api.domain.Order.OrderState;
-import com.gsccs.b2c.api.domain.OrderItem;
 import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.plat.order.model.OrderItemT;
 import com.gsccs.b2c.plat.order.model.OrderPayT;
@@ -28,6 +25,9 @@ import com.gsccs.b2c.plat.seller.service.StoreService;
 import com.gsccs.b2c.plat.shop.model.ProductT;
 import com.gsccs.b2c.plat.shop.service.GoodsService;
 import com.gsccs.b2c.plat.utils.BeanUtilsEx;
+import com.gsccs.eb.api.domain.trade.Order;
+import com.gsccs.eb.api.domain.trade.Order.OrderState;
+import com.gsccs.eb.api.domain.trade.OrderItem;
 
 /**
  * 订单服务接口

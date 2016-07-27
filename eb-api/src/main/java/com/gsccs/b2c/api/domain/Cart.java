@@ -5,7 +5,7 @@ package com.gsccs.b2c.api.domain;
  * @author ZhangTao
  *
  */
-public class Cart extends DomainObject {
+public class Cart extends Domain {
 
 	private static final long serialVersionUID = 1L;
 

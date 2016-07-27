@@ -5,7 +5,7 @@ package com.gsccs.b2c.api.domain;
  * @author x.d zhang
  *
  */
-public class SkuSpec extends DomainObject {
+public class SkuSpec extends Domain {
 
 	private Long specId;
 	private Long specValId;

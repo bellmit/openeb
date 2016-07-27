@@ -8,7 +8,7 @@ import java.util.List;
  * @author x.d zhang
  * 
  */
-public class AuctionSkuDO extends DomainObject {
+public class AuctionSkuDO extends Domain {
 
 	private static final long serialVersionUID = 3358862828146538635L;
 

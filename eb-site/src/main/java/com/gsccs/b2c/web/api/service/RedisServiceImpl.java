@@ -13,10 +13,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.CacheConst;
 import com.gsccs.b2c.api.domain.Brand;
 import com.gsccs.b2c.api.domain.Category;
-import com.gsccs.b2c.api.domain.Product;
-import com.gsccs.b2c.api.domain.Shop;
-import com.gsccs.b2c.api.domain.StoreNav;
-import com.gsccs.b2c.api.domain.User;
+import com.gsccs.b2c.api.domain.Account;
 import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.BrandServiceI;
 import com.gsccs.b2c.api.service.BuyerServiceI;
@@ -28,6 +25,9 @@ import com.gsccs.b2c.api.service.ShopServiceI;
 import com.gsccs.b2c.api.service.StoreyServiceI;
 import com.gsccs.b2c.api.service.TradeServiceI;
 import com.gsccs.b2c.api.service.TypeServiceI;
+import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.domain.seller.Shop;
+import com.gsccs.eb.api.domain.site.StoreNav;
 
 @Service
 public class RedisServiceImpl implements RedisService {
@@ -275,10 +275,10 @@ public class RedisServiceImpl implements RedisService {
 	}
 
 	@Override
-	public User getBuyer(Long sid, String account) {
-		User user = null;
+	public Account getBuyer(Long sid, String account) {
+		Account user = null;
 		try {
-			user = (User) redisTemplate.boundValueOps(
+			user = (Account) redisTemplate.boundValueOps(
 					CacheConst.BUYER_OBJ_ + sid + "_" + account).get();
 			if (user == null) {
 				user = buyerAPI.findByAccount(sid, account);

@@ -9,12 +9,12 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.gsccs.b2c.api.domain.DeliverType;
-import com.gsccs.b2c.api.domain.DlyCorp;
 import com.gsccs.b2c.plat.site.model.DeliverCorpT;
 import com.gsccs.b2c.plat.site.model.DeliverTypeT;
 import com.gsccs.b2c.plat.site.service.DeliverService;
 import com.gsccs.b2c.plat.utils.BeanUtilsEx;
+import com.gsccs.eb.api.domain.deliver.DeliverType;
+import com.gsccs.eb.api.domain.deliver.DlyCorp;
 
 /**
  * 物流服务层

@@ -2,9 +2,9 @@ package com.gsccs.b2c.api.service;
 
 import java.util.List;
 
-import com.gsccs.b2c.api.domain.DeliverType;
-import com.gsccs.b2c.api.domain.DlyCorp;
-import com.gsccs.b2c.api.domain.DlyType;
+import com.gsccs.eb.api.domain.deliver.DeliverType;
+import com.gsccs.eb.api.domain.deliver.DlyCorp;
+import com.gsccs.eb.api.domain.deliver.DlyType;
 
 /**
  * @说明 物流公司登记数据操作类
