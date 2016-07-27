@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.solr.service.SolrService;
+import com.gsccs.eb.api.exception.ApiException;
 
 /**
  * 自动补全查询

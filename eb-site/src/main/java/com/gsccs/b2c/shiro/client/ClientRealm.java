@@ -15,8 +15,8 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
 
 import com.gsccs.b2c.api.domain.Account;
-import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.BuyerServiceI;
+import com.gsccs.eb.api.exception.ApiException;
 
 /**
  * 

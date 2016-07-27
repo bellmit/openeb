@@ -14,9 +14,9 @@ import org.apache.shiro.util.ByteSource;
 
 import com.gsccs.b2c.api.domain.Account;
 import com.gsccs.b2c.api.domain.PermissionContext;
-import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.PermissionServiceI;
 import com.gsccs.b2c.api.service.SellerServiceI;
+import com.gsccs.eb.api.exception.ApiException;
 
 /**
  * <p>

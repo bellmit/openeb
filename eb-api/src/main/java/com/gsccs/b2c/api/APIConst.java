@@ -6,7 +6,7 @@ package com.gsccs.b2c.api;
  * @author x.d zhang
  * @since 1.0
  */
-public abstract class APIConst {
+public class APIConst {
 
 	
 	/** TOP默认时间格式 **/

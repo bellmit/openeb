@@ -10,11 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gsccs.b2c.api.domain.CateParam;
 import com.gsccs.b2c.api.domain.CateProp;
-import com.gsccs.b2c.api.domain.CateReqInfo;
 import com.gsccs.b2c.api.domain.CateSpec;
 import com.gsccs.b2c.api.domain.CateSpecVal;
-import com.gsccs.b2c.api.domain.PropValue;
-import com.gsccs.b2c.api.domain.PropsVal;
 import com.gsccs.b2c.plat.shop.model.CategoryT;
 import com.gsccs.b2c.plat.shop.model.ProductT;
 import com.gsccs.b2c.plat.shop.model.Property;
@@ -25,6 +22,7 @@ import com.gsccs.b2c.plat.shop.service.CategoryService;
 import com.gsccs.b2c.plat.shop.service.GoodsService;
 import com.gsccs.b2c.plat.shop.service.TypeService;
 import com.gsccs.b2c.plat.utils.BeanUtilsEx;
+import com.gsccs.eb.api.domain.goods.PropsVal;
 
 
 public class TypeServiceAPI implements TypeServiceI {
@@ -136,30 +134,6 @@ public class TypeServiceAPI implements TypeServiceI {
 					dp = new CateParam();
 					PropertyUtils.copyProperties(dp, t);
 					list.add(dp);
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					e.printStackTrace();
-				} catch (NoSuchMethodException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return list;
-	}
-
-	@Override
-	public List<CateReqInfo> getCateRequireInfo(Long typeId) {
-		List<CateReqInfo> list = null;
-		List<Property> propList = typeService.getPropList(typeId);
-		if (null != propList && propList.size() > 0) {
-			CateReqInfo ri;
-			list = new ArrayList<CateReqInfo>();
-			for (Property t : propList) {
-				try {
-					ri = new CateReqInfo();
-					PropertyUtils.copyProperties(ri, t);
-					list.add(ri);
 				} catch (IllegalAccessException e) {
 					e.printStackTrace();
 				} catch (InvocationTargetException e) {

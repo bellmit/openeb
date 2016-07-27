@@ -22,13 +22,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.gsccs.b2c.api.domain.Account;
-import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.BuyerServiceI;
 import com.gsccs.b2c.api.service.ShopServiceI;
 import com.gsccs.b2c.app.core.FreeMarkerUtil;
 import com.gsccs.b2c.web.api.service.RedisService;
 import com.gsccs.b2c.web.api.service.SsdbService;
-import com.gsccs.eb.api.domain.buyer.BuyerScore;
+import com.gsccs.eb.api.domain.buyer.Points;
+import com.gsccs.eb.api.exception.ApiException;
 
 import freemarker.template.TemplateModelException;
 
@@ -111,9 +111,9 @@ public class PointController {
 			Subject subject = SecurityUtils.getSubject();
 			String username = (String) subject.getPrincipal();
 			Account user = buyerAPI.findByAccount(siteId, username);
-			BuyerScore param = new BuyerScore();
+			Points param = new Points();
 			param.setBuyerid(user.getUserId());
-			List<BuyerScore> scores = buyerAPI.getBuyerPoints(siteId, param,
+			List<Points> scores = buyerAPI.getBuyerPoints(siteId, param,
 					page, pagesize);
 			json = (JSONArray) json.toJSON(scores);
 		} catch (ApiException e) {

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gsccs.b2c.plat.shop.dao.StoreNavMapper" >
+  
+  <resultMap id="BaseResultMap" type="com.gsccs.b2c.plat.shop.model.StoreNavT" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="href" property="href" jdbcType="VARCHAR" />
+    <result column="iscate" property="iscate" jdbcType="VARCHAR" />
+    <result column="cateid" property="cateid" jdbcType="VARCHAR" />
+    <result column="blank" property="blank" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="siteid" property="siteid" jdbcType="BIGINT" />
+  </resultMap>
+  
+  
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, href, iscate, cateid, blank, state, siteid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gsccs.b2c.plat.shop.model.StoreNavTExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from shop_store_nav
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from shop_store_nav
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from shop_store_nav
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.shop.model.StoreNavTExample" >
+    delete from shop_store_nav
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gsccs.b2c.plat.shop.model.StoreNavT" >
+    insert into shop_store_nav (id, title, href, 
+      iscate, cateid, blank, 
+      state, siteid)
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{href,jdbcType=VARCHAR}, 
+      #{iscate,jdbcType=VARCHAR}, #{cateid,jdbcType=VARCHAR}, #{blank,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{siteid,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gsccs.b2c.plat.shop.model.StoreNavT" >
+    insert into shop_store_nav
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="href != null" >
+        href,
+      </if>
+      <if test="iscate != null" >
+        iscate,
+      </if>
+      <if test="cateid != null" >
+        cateid,
+      </if>
+      <if test="blank != null" >
+        blank,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="siteid != null" >
+        siteid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="href != null" >
+        #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="iscate != null" >
+        #{iscate,jdbcType=VARCHAR},
+      </if>
+      <if test="cateid != null" >
+        #{cateid,jdbcType=VARCHAR},
+      </if>
+      <if test="blank != null" >
+        #{blank,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="siteid != null" >
+        #{siteid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gsccs.b2c.plat.shop.model.StoreNavTExample" resultType="java.lang.Integer" >
+    select count(*) from shop_store_nav
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update shop_store_nav
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.href != null" >
+        href = #{record.href,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iscate != null" >
+        iscate = #{record.iscate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cateid != null" >
+        cateid = #{record.cateid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blank != null" >
+        blank = #{record.blank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.siteid != null" >
+        siteid = #{record.siteid,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update shop_store_nav
+    set id = #{record.id,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      href = #{record.href,jdbcType=VARCHAR},
+      iscate = #{record.iscate,jdbcType=VARCHAR},
+      cateid = #{record.cateid,jdbcType=VARCHAR},
+      blank = #{record.blank,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      siteid = #{record.siteid,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gsccs.b2c.plat.shop.model.StoreNavT" >
+    update shop_store_nav
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="href != null" >
+        href = #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="iscate != null" >
+        iscate = #{iscate,jdbcType=VARCHAR},
+      </if>
+      <if test="cateid != null" >
+        cateid = #{cateid,jdbcType=VARCHAR},
+      </if>
+      <if test="blank != null" >
+        blank = #{blank,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="siteid != null" >
+        siteid = #{siteid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gsccs.b2c.plat.shop.model.StoreNavT" >
+    update shop_store_nav
+    set title = #{title,jdbcType=VARCHAR},
+      href = #{href,jdbcType=VARCHAR},
+      iscate = #{iscate,jdbcType=VARCHAR},
+      cateid = #{cateid,jdbcType=VARCHAR},
+      blank = #{blank,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      siteid = #{siteid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

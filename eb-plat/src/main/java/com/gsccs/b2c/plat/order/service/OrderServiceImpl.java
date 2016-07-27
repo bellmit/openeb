@@ -14,17 +14,16 @@ import com.gsccs.b2c.plat.order.dao.OrderTraceMapper;
 import com.gsccs.b2c.plat.order.model.OrderExample;
 import com.gsccs.b2c.plat.order.model.OrderExample.Criteria;
 import com.gsccs.b2c.plat.order.model.OrderItemExample;
-import com.gsccs.b2c.plat.order.model.OrderItemT;
 import com.gsccs.b2c.plat.order.model.OrderStatist;
-import com.gsccs.b2c.plat.order.model.OrderT;
 import com.gsccs.b2c.plat.order.model.OrderTrace;
 import com.gsccs.b2c.plat.order.model.OrderTraceExample;
 import com.gsccs.b2c.plat.shop.dao.ProductTMapper;
 import com.gsccs.b2c.plat.shop.model.ProductT;
 import com.gsccs.b2c.plat.utils.DateUtil;
+import com.gsccs.eb.api.domain.trade.Order;
+import com.gsccs.eb.api.domain.trade.OrderItem;
 
-
-@Service(value="orderService")
+@Service(value = "orderService")
 public class OrderServiceImpl implements OrderService {
 
 	@Autowired
@@ -37,8 +36,8 @@ public class OrderServiceImpl implements OrderService {
 	private ProductTMapper productTMapper;
 
 	@Override
-	public List<OrderT> find(OrderT orders, Long sid, String order,
-			int currPage, int pageSize) {
+	public List<Order> find(Order orders, Long sid, String order, int currPage,
+			int pageSize) {
 		OrderExample example = new OrderExample();
 		Criteria criteria = example.createCriteria();
 		proSearchParam(orders, criteria);
@@ -53,7 +52,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public String insert(Long sid, OrderT order, List<OrderItemT> items) {
+	public String insert(Long sid, Order order, List<OrderItem> items) {
 		Date date = new Date();
 		String ordersn = DateUtil.getOrderNum(date);
 		order.setId(Long.valueOf(ordersn));
@@ -83,19 +82,19 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public void update(OrderT order, Long sid) {
+	public void update(Order order, Long sid) {
 		if (null != order) {
 			orderMapper.updateByPrimaryKey(sid, order);
 		}
 	}
 
 	@Override
-	public OrderT findById(Long sid, Long id) {
+	public Order findById(Long sid, Long id) {
 		return orderMapper.selectByPrimaryKey(sid, id);
 	}
 
 	@Override
-	public int count(Long sid, OrderT order) {
+	public int count(Long sid, Order order) {
 		OrderExample example = new OrderExample();
 		Criteria criteria = example.createCriteria();
 		proSearchParam(order, criteria);
@@ -109,34 +108,33 @@ public class OrderServiceImpl implements OrderService {
 	 * @param sid
 	 * @param criteria
 	 */
-	private void proSearchParam(OrderT orders, Criteria criteria) {
-		if (orders != null) {
-			if (orders.getStatus() != null) {
-				criteria.andStatusEqualTo(orders.getStatus());
+	private void proSearchParam(Order order, Criteria criteria) {
+		if (order != null) {
+			if (order.getStatus() != null) {
+				criteria.andStatusEqualTo(order.getStatus());
 			}
 
-			if (orders.getSerialnum() != null
-					&& !orders.getSerialnum().equals(0)) {
-				criteria.andSerialnumEqualTo(orders.getSerialnum());
+			if (order.getSerialnum() != null && !order.getSerialnum().equals(0)) {
+				criteria.andSerialnumEqualTo(order.getSerialnum());
 			}
 
-			if (orders.getBuyerid() != null && !orders.getBuyerid().equals(0)) {
-				criteria.andBuyeridEqualTo(orders.getBuyerid());
+			if (order.getBuyerid() != null && !order.getBuyerid().equals(0)) {
+				criteria.andBuyeridEqualTo(order.getBuyerid());
 			}
 
-			if (orders.getStoreid() != null && !orders.getStoreid().equals(0)) {
-				criteria.andStoreidEqualTo(orders.getStoreid());
+			if (order.getStoreid() != null && !order.getStoreid().equals(0)) {
+				criteria.andStoreidEqualTo(order.getStoreid());
 			}
 		}
 	}
 
 	@Override
-	public List<OrderItemT> findOItems(Long sid, Long oid) {
+	public List<OrderItem> findOItems(Long sid, Long oid) {
 		return orderItemMapper.selectOrderItems(sid, oid);
 	}
 
 	@Override
-	public List<OrderItemT> findProductSaleItems(Long sid, Long pid) {
+	public List<OrderItem> findProductSaleItems(Long sid, Long pid) {
 		return orderItemMapper.selectProductItems(sid, pid);
 	}
 
@@ -146,7 +144,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<OrderItemT> findIsNotEvalItems(Long sid, Long uid, int page,
+	public List<OrderItem> findIsNotEvalItems(Long sid, Long uid, int page,
 			int pageSize) {
 		OrderItemExample example = new OrderItemExample();
 		example.setCurrPage(page);
@@ -155,19 +153,18 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<OrderStatist> orderBuyerStatist(Long sid, Long buyerid)
-			{
+	public List<OrderStatist> orderBuyerStatist(Long sid, Long buyerid) {
 		return orderMapper.orderStatistGroupState(sid, buyerid);
 	}
 
 	@Override
 	public List<OrderStatist> orderStoreStatist(Long sid) {
-		
+
 		return null;
 	}
-	
+
 	@Override
-	public OrderT findByOrdersn(Long sid, String ordersn) {
+	public Order findByOrdersn(Long sid, String ordersn) {
 		return orderMapper.selectByOrdersn(sid, ordersn);
 	}
 
@@ -200,7 +197,5 @@ public class OrderServiceImpl implements OrderService {
 		// orderItemMapper.u
 
 	}
-
-	
 
 }

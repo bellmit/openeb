@@ -22,8 +22,6 @@ import com.gsccs.b2c.api.domain.Brand;
 import com.gsccs.b2c.api.domain.CateProp;
 import com.gsccs.b2c.api.domain.CateSpec;
 import com.gsccs.b2c.api.domain.Category;
-import com.gsccs.b2c.api.domain.Sku;
-import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.BrandServiceI;
 import com.gsccs.b2c.api.service.BuyerServiceI;
 import com.gsccs.b2c.api.service.CateServiceI;
@@ -37,10 +35,12 @@ import com.gsccs.b2c.solr.service.SolrService;
 import com.gsccs.b2c.store.base.JsonMsg;
 import com.gsccs.b2c.store.service.SsdbService;
 import com.gsccs.eb.api.domain.deliver.DeliverType;
-import com.gsccs.eb.api.domain.goods.Attach;
+import com.gsccs.eb.api.domain.goods.Album;
 import com.gsccs.eb.api.domain.goods.Product;
 import com.gsccs.eb.api.domain.goods.ProductProp;
+import com.gsccs.eb.api.domain.goods.Sku;
 import com.gsccs.eb.api.domain.seller.Shop;
+import com.gsccs.eb.api.exception.ApiException;
 import com.gsccs.eb.api.utils.Datagrid;
 
 
@@ -270,11 +270,11 @@ public class BabyController {
 			if(null !=picPaths && picPaths.length >0){
 				JSONArray jsonArray= new JSONArray();
 				
-				List<Attach> piList = new ArrayList<Attach>();
+				List<Album> piList = new ArrayList<Album>();
 				
 				for(int i = 0; i < picPaths.length; i ++) {
 					
-					Attach pi = new Attach();
+					Album pi = new Album();
 					pi.setUrl(picPaths[i]);
 					pi.setProductId(productId);
 					piList.add(pi);
@@ -763,10 +763,10 @@ public class BabyController {
 				}
 				//获得商品图片
 				
-				List<Attach> pimList = goodsServiceAPI.getProductByPid(sid, Long.valueOf(id));
+				List<Album> pimList = goodsServiceAPI.getProductByPid(sid, Long.valueOf(id));
 				if(null != pimList && pimList.size() > 0){
 					String imgurls = "";
-					for (Attach productImg : pimList) {
+					for (Album productImg : pimList) {
 						imgurls +=productImg.getUrl() + "|";
 					}
 					if(null !=imgurls && imgurls.trim().length() >0 ){
@@ -847,11 +847,11 @@ public class BabyController {
 			if(null !=picPaths && picPaths.length >0){
 				JSONArray jsonArray= new JSONArray();
 				
-				List<Attach> piList = new ArrayList<Attach>();
+				List<Album> piList = new ArrayList<Album>();
 				
 				for(int i = 0; i < picPaths.length; i ++) {
 					
-					Attach pi = new Attach();
+					Album pi = new Album();
 					pi.setUrl(picPaths[i]);
 					pi.setProductId(productId);
 					piList.add(pi);

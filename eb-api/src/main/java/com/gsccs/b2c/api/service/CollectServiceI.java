@@ -3,7 +3,7 @@ package com.gsccs.b2c.api.service;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.domain.Collect;
-import com.gsccs.b2c.api.exception.ApiException;
+import com.gsccs.eb.api.exception.ApiException;
 
 /**
  * 收藏服务接口

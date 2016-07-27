@@ -23,13 +23,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.CacheConst;
-import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.ConfigServiceI;
 import com.gsccs.b2c.api.service.ShopServiceI;
 import com.gsccs.b2c.app.core.FreeMarkerUtil;
 import com.gsccs.b2c.solr.service.QueryParam;
 import com.gsccs.b2c.solr.service.SolrService;
 import com.gsccs.b2c.web.api.service.RedisService;
+import com.gsccs.eb.api.exception.ApiException;
 
 import freemarker.template.TemplateModelException;
 

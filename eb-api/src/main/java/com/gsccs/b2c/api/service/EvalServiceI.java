@@ -7,7 +7,7 @@ import com.gsccs.b2c.api.domain.EvalItem;
 import com.gsccs.b2c.api.domain.EvalModel;
 import com.gsccs.b2c.api.domain.EvalOrder;
 import com.gsccs.b2c.api.domain.EvalType;
-import com.gsccs.b2c.api.exception.ApiException;
+import com.gsccs.eb.api.exception.ApiException;
 
 /**
  * 评价服务接口

@@ -23,7 +23,7 @@ import com.gsccs.b2c.plat.buyer.model.BuyerPointsExample.Criteria;
 import com.gsccs.b2c.plat.shop.dao.BuyerLevelTMapper;
 import com.gsccs.b2c.plat.shop.model.BuyerLevelT;
 import com.gsccs.b2c.plat.shop.model.BuyerLevelTExample;
-import com.gsccs.eb.api.domain.buyer.BuyerScore;
+import com.gsccs.eb.api.domain.buyer.Points;
 
 @Service
 public class BuyerServiceImpl implements BuyerService {
@@ -89,13 +89,13 @@ public class BuyerServiceImpl implements BuyerService {
 
 	// 添加会员积分
 	@Override
-	public void insert(Long sid, BuyerScore record) {
+	public void insert(Long sid, Points record) {
 		buyerPointsMapper.insert(sid, record);
 	}
 
 	// 查询会员积分列表
 	@Override
-	public List<BuyerScore> getBuyerScores(Long sid, BuyerScore record,
+	public List<Points> getBuyerScores(Long sid, Points record,
 			int page, int rows) {
 		BuyerPointsExample example = new BuyerPointsExample();
 		Criteria c = example.createCriteria();

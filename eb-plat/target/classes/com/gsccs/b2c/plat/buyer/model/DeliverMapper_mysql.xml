@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gsccs.b2c.plat.buyer.dao.BuyerDeliverMapper">
+
+	<!-- 会员中心收货地址数据操作映射 -->
+	<resultMap id="BaseResultMap" type="com.gsccs.b2c.plat.buyer.model.BuyerDeliverT">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="region" property="region" jdbcType="VARCHAR" />
+		<result column="details" property="details" jdbcType="VARCHAR" />
+		<result column="zipCode" property="zipcode" jdbcType="VARCHAR" />
+		<result column="receiver" property="receiver" jdbcType="VARCHAR" />
+		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
+		<result column="telephone" property="telephone" jdbcType="VARCHAR" />
+		<result column="isdefault" property="isdefault" jdbcType="VARCHAR" />
+		<result column="buyerid" property="buyerid" jdbcType="BIGINT" />
+	</resultMap>
+
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+
+	<sql id="Base_Column_List">
+		id, region, details, zipCode, receiver, mobile, telephone,
+		isdefault,
+		buyerid
+	</sql>
+
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.gsccs.b2c.plat.buyer.model.BuyerDeliverExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from buyer_deliver_${sid}
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from buyer_deliver_${sid}
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.buyer.model.BuyerDeliverExample">
+		delete from buyer_deliver_${sid}
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.gsccs.b2c.plat.buyer.model.BuyerDeliverT">
+		insert into buyer_deliver_${sid}
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="region != null">
+				region,
+			</if>
+			<if test="details != null">
+				details,
+			</if>
+			<if test="zipcode != null">
+				zipCode,
+			</if>
+			<if test="receiver != null">
+				receiver,
+			</if>
+			<if test="mobile != null">
+				mobile,
+			</if>
+			<if test="telephone != null">
+				telephone,
+			</if>
+			<if test="isdefault != null">
+				isdefault,
+			</if>
+			<if test="buyerid != null">
+				buyerid,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="region != null">
+				#{region,jdbcType=VARCHAR},
+			</if>
+			<if test="details != null">
+				#{details,jdbcType=VARCHAR},
+			</if>
+			<if test="zipcode != null">
+				#{zipcode,jdbcType=VARCHAR},
+			</if>
+			<if test="receiver != null">
+				#{receiver,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null">
+				#{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="telephone != null">
+				#{telephone,jdbcType=VARCHAR},
+			</if>
+			<if test="isdefault != null">
+				#{isdefault,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerid != null">
+				#{buyerid,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+
+
+	<select id="countByExample" parameterType="com.gsccs.b2c.plat.buyer.model.BuyerDeliverExample"
+		resultType="java.lang.Integer">
+		select count(*) from buyer_deliver_${sid}
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+
+
+	<update id="updateByExampleSelective" parameterType="map">
+		update buyer_deliver_${sid}
+		<set>
+			<if test="record.id != null">
+				id = #{record.id,jdbcType=BIGINT},
+			</if>
+			<if test="record.region != null">
+				region = #{record.region,jdbcType=VARCHAR},
+			</if>
+			<if test="record.details != null">
+				details = #{record.details,jdbcType=VARCHAR},
+			</if>
+			<if test="record.zipcode != null">
+				zipCode = #{record.zipcode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.receiver != null">
+				receiver = #{record.receiver,jdbcType=VARCHAR},
+			</if>
+			<if test="record.mobile != null">
+				mobile = #{record.mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="record.telephone != null">
+				telephone = #{record.telephone,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isdefault != null">
+				isdefault = #{record.isdefault,jdbcType=VARCHAR},
+			</if>
+			<if test="record.buyerid != null">
+				buyerid = #{record.buyerid,jdbcType=BIGINT},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+
+	<update id="updateByExample" parameterType="map">
+		update buyer_deliver_${sid}
+		set id = #{record.id,jdbcType=BIGINT},
+		region = #{record.region,jdbcType=VARCHAR},
+		details =
+		#{record.details,jdbcType=VARCHAR},
+		zipCode =
+		#{record.zipcode,jdbcType=VARCHAR},
+		receiver =
+		#{record.receiver,jdbcType=VARCHAR},
+		mobile =
+		#{record.mobile,jdbcType=VARCHAR},
+		telephone =
+		#{record.telephone,jdbcType=VARCHAR},
+		isdefault =
+		#{record.isdefault,jdbcType=VARCHAR},
+		buyerid =
+		#{record.buyerid,jdbcType=BIGINT}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.gsccs.b2c.plat.buyer.model.BuyerDeliverT">
+		update buyer_deliver_${sid}
+		<set>
+			<if test="region != null">
+				region = #{region,jdbcType=VARCHAR},
+			</if>
+			<if test="details != null">
+				details = #{details,jdbcType=VARCHAR},
+			</if>
+			<if test="zipcode != null">
+				zipCode = #{zipcode,jdbcType=VARCHAR},
+			</if>
+			<if test="receiver != null">
+				receiver = #{receiver,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null">
+				mobile = #{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="telephone != null">
+				telephone = #{telephone,jdbcType=VARCHAR},
+			</if>
+			<if test="isdefault != null">
+				isdefault = #{isdefault,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerid != null">
+				buyerid = #{buyerid,jdbcType=BIGINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<!-- 保存会员收货地址 ID自增 -->
+	<insert id="insert" parameterType="map" useGeneratedKeys="true"
+		keyProperty="record.id">
+		insert into buyer_deliver_${sid} (region, details,zipCode,
+		receiver, mobile,
+		telephone, isdefault, buyerid)
+		values
+		(#{record.region,jdbcType=VARCHAR},
+		#{record.details,jdbcType=VARCHAR},
+		#{record.zipcode,jdbcType=VARCHAR},
+		#{record.receiver,jdbcType=VARCHAR},
+		#{record.mobile,jdbcType=VARCHAR},
+		#{record.telephone,jdbcType=VARCHAR},
+		#{record.isdefault,jdbcType=VARCHAR},
+		#{record.buyerid,jdbcType=BIGINT})
+	</insert>
+
+	<!-- 更新收货地址 -->
+	<update id="updateByPrimaryKey" parameterType="com.gsccs.b2c.plat.buyer.model.BuyerDeliverT">
+		update
+		buyer_deliver_${sid}
+		set region = #{record.region,jdbcType=VARCHAR},
+		details = #{record.details,jdbcType=VARCHAR},
+		zipCode =
+		#{record.zipcode,jdbcType=VARCHAR},
+		receiver =
+		#{record.receiver,jdbcType=VARCHAR},
+		mobile =
+		#{record.mobile,jdbcType=VARCHAR},
+		telephone =
+		#{record.telephone,jdbcType=VARCHAR},
+		isdefault =
+		#{record.isdefault,jdbcType=VARCHAR},
+		buyerid =
+		#{record.buyerid,jdbcType=BIGINT}
+		where id =
+		#{record.id,jdbcType=BIGINT}
+	</update>
+
+	<!-- 根据会员ID查询 会员多条收货地址 --><!-- com.gsccs.b2c.plat.buyer.model.BuyerDeliverT -->
+	<select id="findByUid" parameterType="map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from buyer_deliver_${sid}
+		where buyerid = ${uid}
+	</select>
+
+
+
+	<!-- 删除一条收货地址 -->
+	<delete id="deleteByPrimaryKey" parameterType="map">
+		delete from
+		buyer_deliver_${sid}
+		where id = ${aid}
+	</delete>
+
+
+</mapper>

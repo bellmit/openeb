@@ -4,48 +4,32 @@ import java.util.Date;
 
 import com.gsccs.b2c.api.domain.Domain;
 
-
-/**
- * 产品属性图片
- * @author x.d zhang
- *
- */
 public class PropImg extends Domain {
 
-	private static final long serialVersionUID = 5157889266738967481L;
+	private static final long serialVersionUID = 7777174413466839242L;
 
 	/**
-	 * 添加时间.格式:yyyy-mm-dd hh:mm:ss
+	 * 图片创建时间 时间格式：yyyy-MM-dd HH:mm:ss
 	 */
 	private Date created;
 
 	/**
-	 * 产品属性图片ID
+	 * 属性图片的id，和商品相对应
 	 */
 	private Long id;
 
 	/**
-	 * 修改时间.格式:yyyy-mm-dd hh:mm:ss
-	 */
-	private Date modified;
-
-	/**
-	 * 图片序号。产品里的图片展示顺序，数据越小越靠前。要求是正整数。
+	 * 图片放在第几张（多图时可设置）
 	 */
 	private Long position;
 
 	/**
-	 * 图片所属产品的ID
+	 * 图片所对应的属性组合的字符串
 	 */
-	private Long productId;
+	private String properties;
 
 	/**
-	 * 属性串(pid:vid),目前只有颜色属性.如:颜色:红色表示为　1627207:28326
-	 */
-	private String props;
-
-	/**
-	 * 图片地址.(绝对地址,格式:http://host/image_path)
+	 * 图片链接地址
 	 */
 	private String url;
 }

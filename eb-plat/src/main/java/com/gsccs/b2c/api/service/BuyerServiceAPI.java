@@ -13,7 +13,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.gsccs.b2c.api.APIConst;
 import com.gsccs.b2c.api.domain.Account;
-import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.plat.buyer.model.BuyerAccount;
 import com.gsccs.b2c.plat.buyer.model.BuyerDeliverT;
 import com.gsccs.b2c.plat.buyer.service.BuyerAddrService;
@@ -22,9 +21,10 @@ import com.gsccs.b2c.plat.seller.service.StoreService;
 import com.gsccs.b2c.plat.shop.model.BuyerLevelT;
 import com.gsccs.b2c.plat.shop.model.StoreT;
 import com.gsccs.b2c.plat.utils.BeanUtilsEx;
-import com.gsccs.eb.api.domain.buyer.BuyerDeliver;
-import com.gsccs.eb.api.domain.buyer.BuyerLevel;
-import com.gsccs.eb.api.domain.buyer.BuyerScore;
+import com.gsccs.eb.api.domain.buyer.Deliver;
+import com.gsccs.eb.api.domain.buyer.Level;
+import com.gsccs.eb.api.domain.buyer.Points;
+import com.gsccs.eb.api.exception.ApiException;
 
 /**
  * 会员服务接口API
@@ -156,8 +156,8 @@ public class BuyerServiceAPI implements BuyerServiceI {
 	}
 
 	@Override
-	public List<BuyerLevel> getBuyerLevels(Long sid) throws ApiException {
-		List<BuyerLevel> result = null;
+	public List<Level> getBuyerLevels(Long sid) throws ApiException {
+		List<Level> result = null;
 		if (null == sid) {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
@@ -169,10 +169,10 @@ public class BuyerServiceAPI implements BuyerServiceI {
 		}
 		List<BuyerLevelT> levels = buyerService.findBuyerLevels(sid);
 		if (null != levels && levels.size() > 0) {
-			result = new ArrayList<BuyerLevel>();
-			BuyerLevel level = null;
+			result = new ArrayList<Level>();
+			Level level = null;
 			for (BuyerLevelT l : levels) {
-				level = new BuyerLevel();
+				level = new Level();
 				result.add(level);
 				try {
 					BeanUtils.copyProperties(level, l);
@@ -198,7 +198,7 @@ public class BuyerServiceAPI implements BuyerServiceI {
 	}
 
 	@Override
-	public void addBuyerDelivers(Long sid, BuyerDeliver dlv)
+	public void addBuyerDelivers(Long sid, Deliver dlv)
 			throws ApiException {
 		if (null == sid && null == dlv) {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
@@ -215,15 +215,15 @@ public class BuyerServiceAPI implements BuyerServiceI {
 	}
 
 	@Override
-	public BuyerDeliver getbuyerDeliver(Long sid, Long uid, Long addressid)
+	public Deliver getbuyerDeliver(Long sid, Long uid, Long addressid)
 			throws ApiException {
 		return buyerAddrService.getDeliver(sid, uid, addressid);
 	}
 
 	@Override
-	public List<BuyerScore> getBuyerPoints(Long sid, BuyerScore param,
+	public List<Points> getBuyerPoints(Long sid, Points param,
 			int page, int pagesize) throws ApiException {
-		List<BuyerScore> list = buyerService.getBuyerScores(sid, param, page,
+		List<Points> list = buyerService.getBuyerScores(sid, param, page,
 				pagesize);
 		return list;
 	}

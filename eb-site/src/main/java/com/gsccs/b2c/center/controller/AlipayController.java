@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gsccs.b2c.alipay.config.AlipayConfig;
 import com.gsccs.b2c.alipay.util.AlipaySubmit;
-import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.OrderServiceI;
 import com.gsccs.b2c.api.service.SellerServiceI;
 import com.gsccs.b2c.api.service.ShopServiceI;
@@ -32,6 +31,7 @@ import com.gsccs.b2c.app.core.JsonMsg;
 import com.gsccs.b2c.web.api.service.RedisService;
 import com.gsccs.eb.api.domain.trade.Order;
 import com.gsccs.eb.api.domain.trade.OrderItem;
+import com.gsccs.eb.api.exception.ApiException;
 
 import freemarker.template.TemplateModelException;
 

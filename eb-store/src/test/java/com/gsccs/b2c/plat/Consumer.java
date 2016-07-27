@@ -11,11 +11,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.CacheConst;
 import com.gsccs.b2c.api.domain.EvalGoods;
 import com.gsccs.b2c.api.domain.EvalOrder;
-import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.CateServiceI;
 import com.gsccs.b2c.api.service.EvalServiceI;
 import com.gsccs.b2c.api.service.GoodsServiceI;
-import com.gsccs.eb.api.domain.goods.Attach;
+import com.gsccs.eb.api.domain.goods.Album;
+import com.gsccs.eb.api.exception.ApiException;
 
 
 public class Consumer {
@@ -54,7 +54,7 @@ public class Consumer {
 			jsonArray = new JSONArray();
 			System.out.println("cache is null");
 			try {
-				List<Attach> goodsImgs = goodsAPI.getProductByPid(sid, pid);
+				List<Album> goodsImgs = goodsAPI.getProductByPid(sid, pid);
 				if (null == goodsImgs || goodsImgs.size() <= 0) {
 					for (int i = 0; i < 5; i++) {
 						JSONObject json = new JSONObject();
@@ -65,7 +65,7 @@ public class Consumer {
 					System.out.println("db is null");
 				} else {
 					System.out.println("db is not null");
-					for (Attach img : goodsImgs) {
+					for (Album img : goodsImgs) {
 						JSONObject json = new JSONObject();
 						json.put("url", img.getUrl());
 						jsonArray.add(json);

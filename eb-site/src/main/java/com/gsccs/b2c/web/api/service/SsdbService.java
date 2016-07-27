@@ -9,9 +9,9 @@ import com.gsccs.b2c.api.domain.CateProp;
 import com.gsccs.b2c.api.domain.Collect;
 import com.gsccs.b2c.api.domain.Collect.CollectType;
 import com.gsccs.b2c.api.domain.EvalGoods;
-import com.gsccs.b2c.api.domain.Sku;
 import com.gsccs.eb.api.domain.goods.ProductParam;
 import com.gsccs.eb.api.domain.goods.ProductProp;
+import com.gsccs.eb.api.domain.goods.Sku;
 import com.gsccs.eb.api.domain.trade.OrderItem;
 
 /**

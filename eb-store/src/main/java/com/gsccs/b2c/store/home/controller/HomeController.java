@@ -15,15 +15,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.CacheConst;
-import com.gsccs.b2c.api.domain.IndexBrands;
-import com.gsccs.b2c.api.domain.IndexBrands.HotBrand;
-import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.CateServiceI;
 import com.gsccs.b2c.api.service.StoreyServiceI;
 import com.gsccs.b2c.store.base.JsonMsg;
 import com.gsccs.eb.api.domain.site.Banner;
 import com.gsccs.eb.api.domain.site.Banner.LongBanner;
 import com.gsccs.eb.api.domain.site.Storey;
+import com.gsccs.eb.api.domain.site.Storey.IndexBrand;
+import com.gsccs.eb.api.exception.ApiException;
 
 
 @Controller
@@ -186,28 +185,9 @@ public class HomeController {
 	@RequestMapping("/saveIndexBrands")
 	@ResponseBody
 	public JsonMsg saveIndexBrands(HttpServletRequest request,
-			IndexBrands brands) {
+			IndexBrand brands) {
 		JsonMsg json = new JsonMsg();
 		long siteId = (Long) request.getSession().getAttribute("siteId");
-
-		String brand = brands.getBrand();
-		// List<HotBrand> brds = null;
-		if (brand != null) {
-			// brds = new ArrayList<HotBrand>();
-			for (String br : brand.split("!!")) {
-				String[] bras = br.split(";;");
-				if (bras.length > 1) {
-					HotBrand hotBrand = new HotBrand();
-					hotBrand.setHotBrand(bras[0]);
-					hotBrand.setHotBrandLine(bras[1]);
-					// brds.add(hotBrand);
-					ssdbTemplate.boundListOps(
-							CacheConst.INDEX_HOT_BRAND_ + siteId).leftPush(
-							hotBrand);
-				}
-			}
-			// brands.setHotBrands(brds);
-		}
 
 		json.setSuccess(true);
 		json.setMsg("保存热门品牌信息成功!");

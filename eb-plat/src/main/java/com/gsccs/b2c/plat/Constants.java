@@ -1,6 +1,5 @@
 package com.gsccs.b2c.plat;
 
-import com.gsccs.b2c.plat.order.model.OrderT;
 import com.gsccs.b2c.plat.utils.BeanUtilsEx;
 import com.gsccs.eb.api.domain.trade.Order;
 
@@ -42,7 +41,7 @@ public class Constants {
     public static void main(String[] args) {
     	Order order = new Order();
     	order.setTotalnum(100);
-		OrderT ordert = new OrderT();
+		Order ordert = new Order();
 		try {
 			BeanUtilsEx.copyProperties(ordert, order);
 			System.out.println(ordert.getTotalnum());

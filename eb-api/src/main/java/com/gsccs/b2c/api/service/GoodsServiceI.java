@@ -2,12 +2,12 @@ package com.gsccs.b2c.api.service;
 
 import java.util.List;
 
-import com.gsccs.b2c.api.domain.ItemImg;
-import com.gsccs.b2c.api.domain.Sku;
-import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.eb.api.domain.buyer.Discount;
-import com.gsccs.eb.api.domain.goods.Attach;
+import com.gsccs.eb.api.domain.goods.Album;
+import com.gsccs.eb.api.domain.goods.ItemImg;
 import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.domain.goods.Sku;
+import com.gsccs.eb.api.exception.ApiException;
 
 /**
  * 商品API 提供了商品以及商品相关的sku，邮费增加，修改功能
@@ -75,7 +75,7 @@ public interface GoodsServiceI {
 	 *            是否将该图片设为主图.可选值:true,false;默认值:false.
 	 * @return 产品图片结构
 	 */
-	public Attach uploadProductImg(Long productid, byte[] img,
+	public Album uploadProductImg(Long productid, byte[] img,
 			int position, boolean is_major);
 
 	/**
@@ -160,9 +160,9 @@ public interface GoodsServiceI {
 	
 	public void editProductPrice(Long sid,Long pid,String price) throws ApiException;
 
-	public List<Attach> getProductByPid(Long sid, Long pid) throws ApiException;
+	public List<Album> getProductByPid(Long sid, Long pid) throws ApiException;
 	
-	public void addPImg(Long sid, Long pid, List<Attach> pimg) throws ApiException;
+	public void addPImg(Long sid, Long pid, List<Album> pimg) throws ApiException;
 	
 
 }

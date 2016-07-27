@@ -13,11 +13,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.APIConst;
-import com.gsccs.b2c.api.exception.ApiException;
-import com.gsccs.b2c.plat.order.model.OrderItemT;
 import com.gsccs.b2c.plat.order.model.OrderPayT;
 import com.gsccs.b2c.plat.order.model.OrderStatist;
-import com.gsccs.b2c.plat.order.model.OrderT;
 import com.gsccs.b2c.plat.order.model.OrderTrace;
 import com.gsccs.b2c.plat.order.service.OrderService;
 import com.gsccs.b2c.plat.order.service.PaymentService;
@@ -26,8 +23,9 @@ import com.gsccs.b2c.plat.shop.model.ProductT;
 import com.gsccs.b2c.plat.shop.service.GoodsService;
 import com.gsccs.b2c.plat.utils.BeanUtilsEx;
 import com.gsccs.eb.api.domain.trade.Order;
-import com.gsccs.eb.api.domain.trade.Order.OrderState;
 import com.gsccs.eb.api.domain.trade.OrderItem;
+import com.gsccs.eb.api.domain.trade.Order.OrderState;
+import com.gsccs.eb.api.exception.ApiException;
 
 /**
  * 订单服务接口
@@ -53,46 +51,22 @@ public class OrderServiceAPI implements OrderServiceI {
 					APIConst.ERROR_MSG_0001);
 		}
 
-		OrderT t = orderService.findById(sid, oId);
-		if (null != t) {
-			o = new Order();
-			try {
-				BeanUtils.copyProperties(o, t);
-				o.setState(OrderState.valueOf(t.getStatus()));
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			}
-		}
+		Order t = orderService.findById(sid, oId);
 		return o;
 	}
 
 	@Override
-	public String createOrder(Long sid, Order o, List<OrderItem> items)
+	public String createOrder(Long sid, Order order, List<OrderItem> items)
 			throws ApiException {
 		String oid = null;
-		if (null == sid || null == o) {
+		if (null == sid || null == order) {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
 
-		List<OrderItemT> itemts = new ArrayList<OrderItemT>();
-		OrderT ordert = new OrderT();
 		try {
-			BeanUtilsEx.copyProperties(ordert, o);
-			if (null == items || items.size() <= 0) {
-				throw new ApiException(APIConst.ERROR_CODE_0001,
-						APIConst.ERROR_MSG_0001);
-			} else {
-				for (int i = 0; i < items.size(); i++) {
-					OrderItemT itemt = new OrderItemT();
-					BeanUtils.copyProperties(itemt, items.get(i));
-					itemts.add(itemt);
-				}
-			}
-			ordert.setStatus(OrderState.WAIT_PAY.name());
-			oid = orderService.insert(sid, ordert, itemts);
+			order.setStatus(OrderState.WAIT_PAY.name());
+			oid = orderService.insert(sid, order, items);
 
 			OrderTrace trace = new OrderTrace();
 			trace.setOperate(OrderState.CREATE.name());
@@ -101,142 +75,32 @@ public class OrderServiceAPI implements OrderServiceI {
 			trace.setOperuser("客户");
 			trace.setRemark("您提交了订单，请等待系统确认.");
 			orderService.addTrace(sid, trace);
-			
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return oid;
 	}
 	
 	@Override
-	public List<Order> getOrderList(Long sid, Order o, String order,
+	public List<Order> getOrderList(Long sid, Order order, String orderstr,
 			int currPage, int pageSize) throws ApiException {
-		List<Order> list = null;
-		OrderT t = new OrderT();
-		if (null != o) {
-			BeanUtilsEx.copyProperties(t, o);
-			t.setStatus(null == o.getState() ? "" : o.getState().name());
-		}
-
-		List<OrderT> orderts = orderService.find(t, sid, order, currPage,
+		List<Order> list = orderService.find(order, sid, orderstr, currPage,
 				pageSize);
-
-		if (null != orderts && orderts.size() > 0) {
-			list = new ArrayList<Order>();
-			for (OrderT ordert : orderts) {
-				Order order_ = new Order();
-				BeanUtilsEx.copyProperties(order_, ordert);
-				order_.setState(OrderState.valueOf(ordert.getStatus()));
-				list.add(order_);
-			}
-		}
+		
 		return list;
 	}
 	
-/*
 	@Override
-	public List<Order> getOrderList(Long sid, Order o, String order,
+	public List<Order> getBuyerOrderList(Long sid, Order param, String order,
 			int currPage, int pageSize) throws ApiException {
-		List<Order> list = null;
-		OrderT t = new OrderT();
-		if (null != o) {
-			BeanUtilsEx.copyProperties(t, o);
-			t.setStatus(null == o.getState() ? "" : o.getState().name());
-		}
-
-		List<OrderT> orderts = orderService.find(t, sid, order, currPage,
+		List<Order> ordertList = orderService.find(param, sid, order, currPage,
 				pageSize);
-
-		if (null != orderts && orderts.size() > 0) {
-			list = new ArrayList<Order>();
-			for (OrderT ordert : orderts) {
-				Order order_ = new Order();
-				BeanUtilsEx.copyProperties(order_, ordert);
-				order_.setState(OrderState.valueOf(ordert.getStatus()));
-				// 页面操作
-				String operation = "";
-				// 2,待付款
-				if (ordert.getStatus().equals("WAIT_PAY")) {
-					operation = "<a href=\"#\" onclick=\"javascript:show_order('"
-							+ ordert.getId()
-							+ "')\">查看订单</a>"
-							+ "&nbsp;/&nbsp;"
-							+ "<a href=\"#\" onclick=\"javascript:cancel_order('"
-							+ ordert.getId()
-							+ "')\">取消订单</a>"
-							+ "&nbsp;/&nbsp;"
-							+ "<a href=\"#\" onclick=\"javascript:update_order('"
-							+ ordert.getId() + "')\">修改订单</a>";
-				}
-				// 3,待发货
-				else if (ordert.getStatus().equals("WAIT_SEND")) {
-					operation = "<a href=\"#\" onclick=\"javascript:show_order('"
-							+ ordert.getId()
-							+ "')\">查看订单</a>"
-							+ "&nbsp;/&nbsp;"
-							+ "<a href=\"#\" onclick=\"javascript:shipments_order('"
-							+ ordert.getId() + "')\">发货</a>";
-				}// 4,待确认
-				else if (ordert.getStatus().equals("WAIT_RECEIVE")) {
-					operation = "<a href=\"#\" onclick=\"javascript:show_order('"
-							+ ordert.getId() + "')\">查看订单</a>";
-				} else {
-					operation = "<a href=\"#\" onclick=\"javascript:show_order('"
-							+ ordert.getId() + "')\">查看订单</a>";
-				}
-				order_.setOperation(operation);
-				list.add(order_);
-			}
-		}
-		return list;
-	}*/
-
-	@Override
-	public List<Order> getBuyerOrderList(Long sid, Order o, String order,
-			int currPage, int pageSize) throws ApiException {
-		OrderT t = null;
-		if (null != o) {
-			t = new OrderT();
-			try {
-				BeanUtils.copyProperties(t, o);
-				t.setStatus(null == o.getState() ? null : o.getState().name());
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			}
-		}
-		List<OrderT> ordertList = orderService.find(t, sid, order, currPage,
-				pageSize);
-
-		List<Order> apiOrderList = new ArrayList<Order>();
-		for (OrderT ordert : ordertList) {
-			Order apiOrder = new Order();
-			try {
-				BeanUtils.copyProperties(apiOrder, ordert);
-				apiOrder.setState(OrderState.valueOf(ordert.getStatus()));
-				apiOrderList.add(apiOrder);
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			}
-		}
-		return apiOrderList;
+		return ordertList;
 	}
 
 	@Override
 	public int getOrderCount(Long sid, Order param) throws ApiException {
-		OrderT t = null;
-		if (null != param) {
-			t = new OrderT();
-			BeanUtilsEx.copyProperties(t, param);
-			t.setStatus(null == param.getState() ? null : param.getState()
-					.name());
-		}
-		int count = orderService.count(sid, t);
+		int count = orderService.count(sid, param);
 		return count;
 	}
 
@@ -244,7 +108,7 @@ public class OrderServiceAPI implements OrderServiceI {
 	@Override
 	public Long editOrderRefundStatus(Long sid, Long oid, String refundStatus)
 			throws ApiException {
-		OrderT order = orderService.findById(sid, oid);
+		Order order = orderService.findById(sid, oid);
 		orderService.update(order, sid);
 		return oid;
 	}
@@ -254,7 +118,7 @@ public class OrderServiceAPI implements OrderServiceI {
 	@Override
 	public Long editOrderShipFee(Long sid, Long oid, Double shipfee)
 			throws ApiException {
-		OrderT order = orderService.findById(sid, oid);
+		Order order = orderService.findById(sid, oid);
 		order.setShipfee(Double.valueOf(shipfee));
 		orderService.update(order, sid);
 		return oid;
@@ -263,43 +127,15 @@ public class OrderServiceAPI implements OrderServiceI {
 	@Override
 	public List<OrderItem> getOrderItems(Long sid, Long oid)
 			throws ApiException {
-		List<OrderItem> list = new ArrayList<OrderItem>();
-		List<OrderItemT> its = orderService.findOItems(sid, oid);
-		if (null != its) {
-			for (OrderItemT t : its) {
-				OrderItem item = new OrderItem();
-				try {
-					BeanUtils.copyProperties(item, t);
-					list.add(item);
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		List<OrderItem> list = orderService.findOItems(sid, oid);
 		return list;
 	}
 
 	@Override
 	public List<OrderItem> getIsNotEvalItems(Long sid, Long uid, int page,
 			int pagesize) throws ApiException {
-		List<OrderItemT> its = orderService.findIsNotEvalItems(sid, uid, page,
+		List<OrderItem> list = orderService.findIsNotEvalItems(sid, uid, page,
 				pagesize);
-		List<OrderItem> list = new ArrayList<OrderItem>();
-		if (null != its) {
-			for (OrderItemT t : its) {
-				OrderItem item = new OrderItem();
-				try {
-					BeanUtils.copyProperties(item, t);
-					list.add(item);
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 		return list;
 	}
 
@@ -331,15 +167,15 @@ public class OrderServiceAPI implements OrderServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		OrderT ordert = orderService.findByOrdersn(sid, ordersn);
+		Order ordert = orderService.findByOrdersn(sid, ordersn);
 		if (null != ordert) {
 			ordert.setStatus(OrderState.CANCEL.name());
 			orderService.update(ordert, sid);
 			// 释放锁定的商品
-			List<OrderItemT> itemTs = orderService.findOItems(sid,
+			List<OrderItem> itemTs = orderService.findOItems(sid,
 					ordert.getId());
 			if (null != itemTs && itemTs.size() > 0) {
-				for (OrderItemT itemT : itemTs) {
+				for (OrderItem itemT : itemTs) {
 					ProductT product = goodsService.getProduct(sid,
 							itemT.getProductid(), false);
 					if (null != product && null != itemT.getNum()) {
@@ -365,7 +201,7 @@ public class OrderServiceAPI implements OrderServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		OrderT ordert = orderService.findByOrdersn(sid, ordersn);
+		Order ordert = orderService.findByOrdersn(sid, ordersn);
 		// 待支付订单执行此操作
 		if (null != ordert
 				&& ordert.getStatus().equals(OrderState.WAIT_PAY.name())) {
@@ -388,7 +224,7 @@ public class OrderServiceAPI implements OrderServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		OrderT ordert = orderService.findByOrdersn(sid, ordersn);
+		Order ordert = orderService.findByOrdersn(sid, ordersn);
 		// 待支付订单执行此操作
 		if (null != ordert
 				&& ordert.getStatus().equals(OrderState.WAIT_PAY.name())) {
@@ -420,7 +256,7 @@ public class OrderServiceAPI implements OrderServiceI {
 	@Override
 	public void orderShipMents(Long sid, String ordersn, String code,
 			String logistnum) {
-		OrderT order = orderService.findByOrdersn(sid, ordersn);
+		Order order = orderService.findByOrdersn(sid, ordersn);
 		if (null != order) {
 			order.setLogistnum(logistnum);
 			order.setDelivercode(code);
@@ -428,10 +264,10 @@ public class OrderServiceAPI implements OrderServiceI {
 			orderService.update(order, sid);
 
 			// 更新商品销量(扣减锁定数量)
-			List<OrderItemT> itemTs = orderService.findOItems(sid,
+			List<OrderItem> itemTs = orderService.findOItems(sid,
 					order.getId());
 			if (null != itemTs && itemTs.size() > 0) {
-				for (OrderItemT itemT : itemTs) {
+				for (OrderItem itemT : itemTs) {
 					ProductT product = goodsService.getProduct(sid,
 							itemT.getProductid(), false);
 					if (null != product && null != itemT.getNum()) {
@@ -460,7 +296,7 @@ public class OrderServiceAPI implements OrderServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		OrderT ordert = orderService.findByOrdersn(sid, ordersn);
+		Order ordert = orderService.findByOrdersn(sid, ordersn);
 		if (null != ordert) {
 			ordert.setStatus(OrderState.RECEIVED.name());
 			orderService.update(ordert, sid);
@@ -480,7 +316,7 @@ public class OrderServiceAPI implements OrderServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		OrderT ordert = orderService.findByOrdersn(sid, ordersn);
+		Order ordert = orderService.findByOrdersn(sid, ordersn);
 		// 评价状态商品
 		if (null != ordert
 				&& ordert.getStatus().equals(OrderState.RECEIVED.name())) {
@@ -488,10 +324,10 @@ public class OrderServiceAPI implements OrderServiceI {
 			orderService.update(ordert, sid);
 
 			// 更新商品评价次数
-			List<OrderItemT> itemTs = orderService.findOItems(sid,
+			List<OrderItem> itemTs = orderService.findOItems(sid,
 					ordert.getId());
 			if (null != itemTs && itemTs.size() > 0) {
-				for (OrderItemT itemT : itemTs) {
+				for (OrderItem itemT : itemTs) {
 					ProductT product = goodsService.getProduct(sid,
 							itemT.getProductid(), false);
 					if (null != product && null != itemT.getNum()) {

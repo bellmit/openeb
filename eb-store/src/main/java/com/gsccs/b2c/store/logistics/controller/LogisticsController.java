@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.LogistServiceI;
 import com.gsccs.b2c.store.base.JsonMsg;
 import com.gsccs.eb.api.domain.deliver.DeliverType;
 import com.gsccs.eb.api.domain.deliver.DlyCorp;
+import com.gsccs.eb.api.exception.ApiException;
 import com.gsccs.eb.api.utils.Datagrid;
 
 /**

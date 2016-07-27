@@ -4,10 +4,10 @@ import java.util.List;
 
 import com.alibaba.fastjson.JSONArray;
 import com.gsccs.b2c.api.domain.Account;
-import com.gsccs.b2c.api.exception.ApiException;
-import com.gsccs.eb.api.domain.buyer.BuyerDeliver;
-import com.gsccs.eb.api.domain.buyer.BuyerLevel;
-import com.gsccs.eb.api.domain.buyer.BuyerScore;
+import com.gsccs.eb.api.domain.buyer.Deliver;
+import com.gsccs.eb.api.domain.buyer.Level;
+import com.gsccs.eb.api.domain.buyer.Points;
+import com.gsccs.eb.api.exception.ApiException;
 
 /**
  * 用户API 提供了用户基本信息查询功能
@@ -73,7 +73,7 @@ public interface BuyerServiceI {
 	 * @param address
 	 * @throws ApiException
 	 */
-	public void addBuyerDelivers(Long sid, BuyerDeliver dlv)
+	public void addBuyerDelivers(Long sid, Deliver dlv)
 			throws ApiException;
 
 	/**
@@ -85,7 +85,7 @@ public interface BuyerServiceI {
 	 * @return
 	 * @throws ApiException
 	 */
-	public BuyerDeliver getbuyerDeliver(Long sid, Long uid, Long addressid)
+	public Deliver getbuyerDeliver(Long sid, Long uid, Long addressid)
 			throws ApiException;
 
 	/**
@@ -106,7 +106,7 @@ public interface BuyerServiceI {
 	 * @return
 	 * @throws ApiException
 	 */
-	public List<BuyerLevel> getBuyerLevels(Long sid) throws ApiException;
+	public List<Level> getBuyerLevels(Long sid) throws ApiException;
 
 	/**
 	 * 积分明细
@@ -118,7 +118,7 @@ public interface BuyerServiceI {
 	 * @return
 	 * @throws ApiException
 	 */
-	public List<BuyerScore> getBuyerPoints(Long sid, BuyerScore point,
+	public List<Points> getBuyerPoints(Long sid, Points point,
 			int page, int pagesize) throws ApiException;
 
 	/**

@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.fastjson.JSONArray;
 import com.gsccs.b2c.api.APIConst;
 import com.gsccs.b2c.api.domain.Category;
-import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.plat.seller.service.StoreService;
 import com.gsccs.b2c.plat.shop.model.StoreT;
 import com.gsccs.b2c.plat.shop.service.CategoryService;
+import com.gsccs.eb.api.exception.ApiException;
 
 /**
  * 类目服务接口

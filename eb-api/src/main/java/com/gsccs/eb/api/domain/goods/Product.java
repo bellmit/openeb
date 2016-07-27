@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.gsccs.b2c.api.domain.Domain;
-import com.gsccs.b2c.api.domain.PropImg;
 import com.gsccs.eb.api.domain.site.Video;
+import com.gsccs.eb.api.utils.DateUtil;
 
 /**
  * 产品结构
@@ -137,7 +137,7 @@ public class Product extends Domain {
 	 * 产品的子图片.目前最多支持4张。fields中设置为product_imgs.id、product_imgs.url、product_imgs.
 	 * position 等形式就会返回相应的字段
 	 */
-	private List<Attach> productImgs;
+	private List<Album> productImgs;
 
 	/**
 	 * 产品的属性图片.比如说黄色对应的产品图片,绿色对应的产品图片。fields中设置为product_prop_imgs.id、
@@ -325,7 +325,7 @@ public class Product extends Domain {
 	/**
 	 * 购物必填信息
 	 */
-	private List<ProductReqInfo> reqInfos;
+	private List<ReqInfo> reqInfos;
 
 	public Long getBrand() {
 		return brand;
@@ -471,11 +471,11 @@ public class Product extends Domain {
 		this.price = price;
 	}
 
-	public List<Attach> getProductImgs() {
+	public List<Album> getProductImgs() {
 		return productImgs;
 	}
 
-	public void setProductImgs(List<Attach> productImgs) {
+	public void setProductImgs(List<Album> productImgs) {
 		this.productImgs = productImgs;
 	}
 
@@ -559,11 +559,11 @@ public class Product extends Domain {
 		this.params = params;
 	}
 
-	public List<ProductReqInfo> getReqInfos() {
+	public List<ReqInfo> getReqInfos() {
 		return reqInfos;
 	}
 
-	public void setReqInfos(List<ProductReqInfo> reqInfos) {
+	public void setReqInfos(List<ReqInfo> reqInfos) {
 		this.reqInfos = reqInfos;
 	}
 
@@ -761,7 +761,7 @@ public class Product extends Domain {
 
 	public String getCreatedStr() {
 		if (created != null) {
-			createdStr = com.gsccs.eb.api.utils.DateUtil.format(created,
+			createdStr = DateUtil.format(created,
 					"yyyy-MM-dd");
 		}
 		return createdStr;
@@ -821,7 +821,7 @@ public class Product extends Domain {
 
 	public String getModifiedStr() {
 		if (modified != null) {
-			modifiedStr = com.gsccs.eb.api.utils.DateUtil.format(modified,
+			modifiedStr = DateUtil.format(modified,
 					"yyyy-MM-dd");
 		}
 		return modifiedStr;

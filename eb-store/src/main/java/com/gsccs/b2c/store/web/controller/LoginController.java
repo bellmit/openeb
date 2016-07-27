@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.gsccs.b2c.api.domain.Account;
-import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.SellerServiceI;
+import com.gsccs.eb.api.exception.ApiException;
 
 /**
  * <p>User: x.d zhang

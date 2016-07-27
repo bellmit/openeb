@@ -14,7 +14,6 @@ import com.gsccs.b2c.api.CacheConst;
 import com.gsccs.b2c.api.domain.Brand;
 import com.gsccs.b2c.api.domain.Category;
 import com.gsccs.b2c.api.domain.Account;
-import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.BrandServiceI;
 import com.gsccs.b2c.api.service.BuyerServiceI;
 import com.gsccs.b2c.api.service.CateServiceI;
@@ -28,6 +27,7 @@ import com.gsccs.b2c.api.service.TypeServiceI;
 import com.gsccs.eb.api.domain.goods.Product;
 import com.gsccs.eb.api.domain.seller.Shop;
 import com.gsccs.eb.api.domain.site.StoreNav;
+import com.gsccs.eb.api.exception.ApiException;
 
 @Service
 public class RedisServiceImpl implements RedisService {

@@ -9,13 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gsccs.b2c.api.APIConst;
 import com.gsccs.b2c.api.domain.Account;
-import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.plat.seller.model.SellerPay;
 import com.gsccs.b2c.plat.seller.service.PayService;
 import com.gsccs.b2c.plat.seller.service.SellerService;
 import com.gsccs.b2c.plat.seller.service.StoreService;
 import com.gsccs.b2c.plat.shop.model.SellerAccount;
 import com.gsccs.eb.api.domain.trade.Payment;
+import com.gsccs.eb.api.exception.ApiException;
 
 public class SellerServiceAPI implements SellerServiceI {
 

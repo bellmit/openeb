@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gsccs.b2c.plat.bass.Datagrid;
-import com.gsccs.b2c.plat.order.model.OrderT;
 import com.gsccs.b2c.plat.order.service.OrderService;
+import com.gsccs.eb.api.domain.trade.Order;
 
 /**
  * 平台订单统计
@@ -43,8 +43,8 @@ public class OrderStatistController {
 	public Datagrid list(@RequestParam(defaultValue = " addtime desc ") String order,
 			@RequestParam(defaultValue = "1") int currPage,
 			@RequestParam(defaultValue = "10") int pageSize, ModelMap map,
-			OrderT orderT, HttpServletRequest request) {
-		List<OrderT> orderlist = orderService.find(orderT, 1001L,order, currPage,
+			Order orderT, HttpServletRequest request) {
+		List<Order> orderlist = orderService.find(orderT, 1001L,order, currPage,
 				pageSize);
 		Datagrid datagrid = new Datagrid();
 		datagrid.setRows(orderlist);

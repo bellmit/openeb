@@ -2,7 +2,6 @@ package com.gsccs.b2c.plat.shop.service;
 
 import java.util.List;
 
-import com.gsccs.b2c.api.domain.Collect;
 import com.gsccs.b2c.plat.shop.model.CollectStatist;
 import com.gsccs.b2c.plat.shop.model.CollectT;
 

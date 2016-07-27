@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.gsccs.b2c.api.domain.Domain;
-import com.gsccs.b2c.api.domain.Sku;
 
 /**
  * 商品结构

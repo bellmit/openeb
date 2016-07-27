@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gsccs.b2c.plat.shop.dao.CollectMapper" >
+
+  <resultMap id="BaseResultMap" type="com.gsccs.b2c.plat.shop.model.CollectT" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="targetid" property="targetid" jdbcType="VARCHAR" />
+    <result column="colltype" property="colltype" jdbcType="VARCHAR" />
+    <result column="buyerid" property="buyerid" jdbcType="BIGINT" />
+    <result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="siteid" property="siteid" jdbcType="BIGINT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="picurl" property="picurl" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  
+  
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, targetid, colltype, buyerid, addtime, siteid, remark, picurl
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gsccs.b2c.plat.shop.model.CollectTExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from shop_collect
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+  <!-- 收藏的商品列表 -->
+  <select id="selectProductList" resultMap="BaseResultMap" parameterType="com.gsccs.b2c.plat.shop.model.CollectTExample" >
+    select distinct 
+    <include refid="Base_Column_List" />
+    FROM (
+    	select a.id, a.targetid, a.colltype, a.buyerid, a.addtime, a.siteid, a.remark, b.img as picurl
+    	from shop_collect a,shop_product_1001 b
+    	where a.targetid = b.id
+    	and a.colltype = 'PRODUCT'
+    ) as aa
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    order by addtime desc
+    limit ${skip},${pageSize}
+  </select>
+  
+  
+  <!-- 收藏的商品列表 -->
+  <select id="selectBrandList" resultMap="BaseResultMap" parameterType="com.gsccs.b2c.plat.shop.model.CollectTExample" >
+    select distinct 
+    a.id, a.targetid, a.colltype, a.buyerid, a.addtime, a.siteid, a.remark, b.logo as picurl
+    from shop_collect a,shop_brand b
+    where a.targetid = b.id
+    and a.colltype = 'BRAND'
+    order by a.addtime
+    limit ${skip},${pageSize}
+  </select>
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from shop_collect
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from shop_collect
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+  
+  <delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.shop.model.CollectTExample" >
+    delete from shop_collect
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gsccs.b2c.plat.shop.model.CollectT" >
+    insert into shop_collect (id, targetid, colltype, 
+      buyerid, addtime, siteid, 
+      remark, picurl)
+    values (#{id,jdbcType=VARCHAR}, #{targetid,jdbcType=VARCHAR}, #{colltype,jdbcType=VARCHAR}, 
+      #{buyerid,jdbcType=BIGINT}, #{addtime,jdbcType=TIMESTAMP}, #{siteid,jdbcType=BIGINT}, 
+      #{remark,jdbcType=VARCHAR}, #{picurl,jdbcType=VARCHAR})
+  </insert>
+  
+  <select id="countByExample" parameterType="com.gsccs.b2c.plat.shop.model.CollectTExample" resultType="java.lang.Integer" >
+    select count(*) from shop_collect
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  
+  <update id="updateByExample" parameterType="map" >
+    update shop_collect
+    set id = #{record.id,jdbcType=VARCHAR},
+      targetid = #{record.targetid,jdbcType=VARCHAR},
+      colltype = #{record.colltype,jdbcType=VARCHAR},
+      buyerid = #{record.buyerid,jdbcType=BIGINT},
+      addtime = #{record.addtime,jdbcType=TIMESTAMP},
+      siteid = #{record.siteid,jdbcType=BIGINT},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      picurl = #{record.picurl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.gsccs.b2c.plat.shop.model.CollectT" >
+    update shop_collect
+    set targetid = #{targetid,jdbcType=VARCHAR},
+      colltype = #{colltype,jdbcType=VARCHAR},
+      buyerid = #{buyerid,jdbcType=BIGINT},
+      addtime = #{addtime,jdbcType=TIMESTAMP},
+      siteid = #{siteid,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      picurl = #{picurl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <!-- 收藏量统计 -->
+  <select id="collectStatist" resultMap="BaseResultMap" parameterType="com.gsccs.b2c.plat.shop.model.CollectTExample" >
+    select colltype,count(colltype) as totalnum, buyerid,
+    from shop_collect 
+    group by colltype
+    having buyerid=${buyerid}
+  </select>
+  
+  
+</mapper>

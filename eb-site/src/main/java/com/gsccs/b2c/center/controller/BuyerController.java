@@ -19,12 +19,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.gsccs.b2c.api.domain.Account;
-import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.BuyerServiceI;
 import com.gsccs.b2c.app.core.FreeMarkerUtil;
 import com.gsccs.b2c.app.core.JsonMsg;
 import com.gsccs.b2c.web.api.service.RedisService;
-import com.gsccs.eb.api.domain.buyer.BuyerDeliver;
+import com.gsccs.eb.api.domain.buyer.Deliver;
+import com.gsccs.eb.api.exception.ApiException;
 
 import freemarker.template.TemplateModelException;
 
@@ -187,7 +187,7 @@ public class BuyerController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/adddlv", method = RequestMethod.POST)
-	public JsonMsg adddlv(@PathVariable("site") Long siteId, BuyerDeliver dlv,
+	public JsonMsg adddlv(@PathVariable("site") Long siteId, Deliver dlv,
 			Model model, HttpServletResponse response) {
 		JsonMsg json = new JsonMsg();
 		try {

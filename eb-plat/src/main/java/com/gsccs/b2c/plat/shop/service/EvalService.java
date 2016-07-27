@@ -2,8 +2,6 @@ package com.gsccs.b2c.plat.shop.service;
 
 import java.util.List;
 
-import com.gsccs.b2c.api.domain.EvalOrder;
-import com.gsccs.b2c.plat.order.model.OrderT;
 import com.gsccs.b2c.plat.shop.model.EvalConfT;
 import com.gsccs.b2c.plat.shop.model.EvalGoodsT;
 import com.gsccs.b2c.plat.shop.model.EvalItemT;

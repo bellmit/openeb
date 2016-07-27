@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<dubbo:application name="eb-server-store" />
+
+	<dubbo:registry address="zookeeper://10.209.1.131:2181" />
+	<!-- <dubbo:registry address="zookeeper://61.178.78.89:2181" /> -->
+
+	<dubbo:reference id="shopAPI"
+		interface="com.gsccs.b2c.api.service.ShopServiceI" />
+
+	<dubbo:reference id="sellerAPI"
+		interface="com.gsccs.b2c.api.service.SellerServiceI" />
+	<!-- 买家接口 -->
+	<dubbo:reference id="buyerAPI"
+		interface="com.gsccs.b2c.api.service.BuyerServiceI" check="false" />
+	<!-- 应用授权接口 -->
+	<dubbo:reference id="permissionAPI"
+		interface="com.gsccs.b2c.api.service.PermissionServiceI" />
+	<!-- 类型服务接口 -->
+	<dubbo:reference id="typeAPI"
+		interface="com.gsccs.b2c.api.service.TypeServiceI" />
+	<!-- 类目接口 -->
+	<dubbo:reference id="cateServiceAPI"
+		interface="com.gsccs.b2c.api.service.CateServiceI" />
+	<!-- 品牌接口 -->
+	<dubbo:reference id="brandServiceAPI"
+		interface="com.gsccs.b2c.api.service.BrandServiceI" />
+	<!-- 会员接口 -->
+	<dubbo:reference id="buyerServiceAPI"
+		interface="com.gsccs.b2c.api.service.BuyerServiceI" />
+	<!-- 产品接口 -->
+	<dubbo:reference id="goodsServiceAPI"
+		interface="com.gsccs.b2c.api.service.GoodsServiceI" />
+	<!-- 类目规格接口 -->
+	<dubbo:reference id="typeServiceAPI"
+		interface="com.gsccs.b2c.api.service.TypeServiceI" />
+	<!-- 订单接口 -->
+	<dubbo:reference id="orderAPI"
+		interface="com.gsccs.b2c.api.service.OrderServiceI" />
+	<!-- 退单接口 -->
+	<dubbo:reference id="returnOrderAPI"
+		interface="com.gsccs.b2c.api.service.ReturnOrderServiceI" />
+		
+	<!-- 商城楼层管理接口 -->
+	<dubbo:reference id="storeyAPI"
+		interface="com.gsccs.b2c.api.service.StoreyServiceI" />
+
+	<!-- 首页Banner服务接口 -->
+	<dubbo:reference id="bannerServiceAPI"
+		interface="com.gsccs.b2c.api.service.BannerServiceI" />
+
+	<!-- 物流logist服务接口 -->
+	<dubbo:reference id="logistServiceAPI"
+		interface="com.gsccs.b2c.api.service.LogistServiceI" />
+	<!-- 物流logist服务接口 -->
+	<dubbo:reference id="evalServiceAPI"
+		interface="com.gsccs.b2c.api.service.EvalServiceI" />
+</beans>

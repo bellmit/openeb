@@ -74,11 +74,15 @@ public class Order extends Domain {
 	private String stateStr;
 	// 下单时间
 	private String adddatestr;
-	
+
 	private String lastdatestr;
 	// 订单状态
 	private OrderState state;
-	
+
+	private String status;
+	// 锁定商品数量
+	private Integer locknum;
+
 	public Long getId() {
 		return id;
 	}
@@ -94,7 +98,6 @@ public class Order extends Domain {
 	public void setSerialnum(String serialnum) {
 		this.serialnum = serialnum == null ? null : serialnum.trim();
 	}
-
 
 	public Long getBuyerid() {
 		return buyerid;
@@ -332,7 +335,6 @@ public class Order extends Domain {
 		this.adddatestr = adddatestr;
 	}
 
-	
 	public String getDelivercode() {
 		return delivercode;
 	}
@@ -348,7 +350,7 @@ public class Order extends Domain {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-	
+
 	public OrderState getState() {
 		return state;
 	}
@@ -357,19 +359,10 @@ public class Order extends Domain {
 		this.state = state;
 	}
 
-
 	public static enum OrderState {
-		CREATE("创建"), 
-		WAIT_PAY("待支付"), 
-		PAYED("已支付"), 
-		WAIT_SEND("待发货"),
-		SENDED("已发货"), 
-		WAIT_RECEIVE("待确认收货"), 
-		RECEIVED("已收货"),
-		EVALED("已评价"), 
-		SUCCESSED("交易完成"), 
-		CANCEL("已取消"), 
-		CLOSED("已关闭");
+		CREATE("创建"), WAIT_PAY("待支付"), PAYED("已支付"), WAIT_SEND("待发货"), SENDED(
+				"已发货"), WAIT_RECEIVE("待确认收货"), RECEIVED("已收货"), EVALED("已评价"), SUCCESSED(
+				"交易完成"), CANCEL("已取消"), CLOSED("已关闭");
 
 		private final String type;
 
@@ -401,7 +394,21 @@ public class Order extends Domain {
 	public void setLastdatestr(String lastdatestr) {
 		this.lastdatestr = lastdatestr;
 	}
-	
-	
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Integer getLocknum() {
+		return locknum;
+	}
+
+	public void setLocknum(Integer locknum) {
+		this.locknum = locknum;
+	}
 
 }

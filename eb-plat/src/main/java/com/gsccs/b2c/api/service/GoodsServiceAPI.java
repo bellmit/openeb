@@ -9,9 +9,6 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gsccs.b2c.api.APIConst;
-import com.gsccs.b2c.api.domain.ItemImg;
-import com.gsccs.b2c.api.domain.Sku;
-import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.plat.seller.service.StoreService;
 import com.gsccs.b2c.plat.shop.model.GoodsT;
 import com.gsccs.b2c.plat.shop.model.ProductImgT;
@@ -21,11 +18,14 @@ import com.gsccs.b2c.plat.shop.service.CategoryService;
 import com.gsccs.b2c.plat.shop.service.GoodsService;
 import com.gsccs.b2c.plat.shop.service.ProductImgService;
 import com.gsccs.eb.api.domain.buyer.Discount;
-import com.gsccs.eb.api.domain.goods.Attach;
+import com.gsccs.eb.api.domain.goods.Album;
+import com.gsccs.eb.api.domain.goods.ItemImg;
 import com.gsccs.eb.api.domain.goods.Product;
 import com.gsccs.eb.api.domain.goods.ProductParam;
 import com.gsccs.eb.api.domain.goods.ProductProp;
-import com.gsccs.eb.api.domain.goods.ProductReqInfo;
+import com.gsccs.eb.api.domain.goods.ReqInfo;
+import com.gsccs.eb.api.domain.goods.Sku;
+import com.gsccs.eb.api.exception.ApiException;
 
 /**
  * 商品服务
@@ -210,9 +210,9 @@ public class GoodsServiceAPI implements GoodsServiceI {
 
 		// 购物必填信息
 		String reqInfoStr = "";
-		List<ProductReqInfo> reqInfos = p.getReqInfos();
+		List<ReqInfo> reqInfos = p.getReqInfos();
 		if (null != reqInfos && reqInfos.size() > 0) {
-			for (ProductReqInfo reqInfo : reqInfos) {
+			for (ReqInfo reqInfo : reqInfos) {
 				reqInfoStr = reqInfoStr + reqInfo.getReqInfoStr();
 			}
 		}
@@ -220,7 +220,7 @@ public class GoodsServiceAPI implements GoodsServiceI {
 	}
 
 	@Override
-	public Attach uploadProductImg(Long productid, byte[] img,
+	public Album uploadProductImg(Long productid, byte[] img,
 			int position, boolean is_major) {
 		// TODO Auto-generated method stub
 		return null;
@@ -491,7 +491,7 @@ public class GoodsServiceAPI implements GoodsServiceI {
 	}
 
 	@Override
-	public List<Attach> getProductByPid(Long sid, Long pid)
+	public List<Album> getProductByPid(Long sid, Long pid)
 			throws ApiException {
 		if (null == sid || null == pid) {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
@@ -503,13 +503,13 @@ public class GoodsServiceAPI implements GoodsServiceI {
 					APIConst.ERROR_MSG_0002);
 		}
 
-		List<Attach> list = null;
+		List<Album> list = null;
 		List<ProductImgT> ptmList = pimgService.getImgByPid(sid, pid);
 
 		if (null != ptmList && ptmList.size() > 0) {
-			list = new ArrayList<Attach>();
+			list = new ArrayList<Album>();
 			for (ProductImgT pit : ptmList) {
-				Attach p = new Attach();
+				Album p = new Album();
 				try {
 					// 商品Id
 					BeanUtils.copyProperties(p, pit);
@@ -526,7 +526,7 @@ public class GoodsServiceAPI implements GoodsServiceI {
 	}
 
 	@Override
-	public void addPImg(Long sid, Long pid, List<Attach> pimgs)
+	public void addPImg(Long sid, Long pid, List<Album> pimgs)
 			throws ApiException {
 		if (null == sid || null == pid) {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
@@ -540,7 +540,7 @@ public class GoodsServiceAPI implements GoodsServiceI {
 
 		if (null != pimgs && pimgs.size() > 0) {
 			List<ProductImgT> pimgts = new ArrayList<ProductImgT>();
-			for (Attach pimg : pimgs) {
+			for (Album pimg : pimgs) {
 				ProductImgT gt = new ProductImgT();
 				try {
 					BeanUtils.copyProperties(gt, pimg);

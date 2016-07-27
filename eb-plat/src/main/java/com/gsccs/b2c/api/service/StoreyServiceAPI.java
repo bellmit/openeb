@@ -10,11 +10,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.APIConst;
-import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.plat.site.model.StoreyBanner;
 import com.gsccs.b2c.plat.site.model.StoreyItem;
 import com.gsccs.b2c.plat.site.model.StoreyList;
 import com.gsccs.b2c.plat.site.service.StoreyService;
+import com.gsccs.eb.api.exception.ApiException;
 
 /**
  * 楼层管理API实现类

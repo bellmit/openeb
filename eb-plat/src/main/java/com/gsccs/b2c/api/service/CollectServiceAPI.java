@@ -11,10 +11,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.APIConst;
 import com.gsccs.b2c.api.domain.Collect;
 import com.gsccs.b2c.api.domain.Collect.CollectType;
-import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.plat.shop.model.CollectStatist;
 import com.gsccs.b2c.plat.shop.model.CollectT;
 import com.gsccs.b2c.plat.shop.service.CollectService;
+import com.gsccs.eb.api.exception.ApiException;
 
 public class CollectServiceAPI implements CollectServiceI {
 

@@ -29,9 +29,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.CacheConst;
-import com.gsccs.b2c.api.domain.Sku;
 import com.gsccs.b2c.api.domain.Account;
-import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.BuyerServiceI;
 import com.gsccs.b2c.api.service.EvalServiceI;
 import com.gsccs.b2c.api.service.GoodsServiceI;
@@ -42,11 +40,13 @@ import com.gsccs.b2c.app.core.FreeMarkerUtil;
 import com.gsccs.b2c.app.core.JsonMsg;
 import com.gsccs.b2c.web.api.service.RedisService;
 import com.gsccs.b2c.web.api.service.SsdbService;
-import com.gsccs.eb.api.domain.buyer.BuyerDeliver;
+import com.gsccs.eb.api.domain.buyer.Deliver;
 import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.domain.goods.Sku;
 import com.gsccs.eb.api.domain.trade.Order;
-import com.gsccs.eb.api.domain.trade.Order.OrderState;
 import com.gsccs.eb.api.domain.trade.OrderItem;
+import com.gsccs.eb.api.domain.trade.Order.OrderState;
+import com.gsccs.eb.api.exception.ApiException;
 
 import freemarker.template.TemplateModelException;
 
@@ -461,7 +461,7 @@ public class OrderController {
 			Subject subject = SecurityUtils.getSubject();
 			String account = (String) subject.getPrincipal();
 			Account user = redisService.getBuyer(siteId, account);
-			BuyerDeliver deliver = null;
+			Deliver deliver = null;
 			if (StringUtils.isNotEmpty(addressid)) {
 				deliver = buyerAPI.getbuyerDeliver(siteId, user.getUserId(),
 						Long.valueOf(addressid));

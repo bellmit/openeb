@@ -4,10 +4,8 @@ import java.util.List;
 
 import com.gsccs.b2c.api.domain.CateParam;
 import com.gsccs.b2c.api.domain.CateProp;
-import com.gsccs.b2c.api.domain.CateReqInfo;
 import com.gsccs.b2c.api.domain.CateSpec;
-import com.gsccs.b2c.api.domain.PropValue;
-import com.gsccs.b2c.api.domain.PropsVal;
+import com.gsccs.eb.api.domain.goods.PropsVal;
 
 public interface TypeServiceI {
 	
@@ -35,13 +33,6 @@ public interface TypeServiceI {
 	 */
 	public List<CateParam> getCateDetailParam(Long typeId);
 
-	/**
-	 * 根据类目获取购物必填信息
-	 * 
-	 * @param typeId
-	 * @return
-	 */
-	public List<CateReqInfo> getCateRequireInfo(Long typeId);
 	
 	/**
 	 * 

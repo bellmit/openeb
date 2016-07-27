@@ -1,11 +1,13 @@
 package com.gsccs.eb.api.domain.trade;
 
+import com.gsccs.b2c.api.domain.Domain;
+
 /**
  * 在线支付参数配置
  * @author x.d zhang
  *
  */
-public class Payment {
+public class Payment extends Domain{
 
 	private String id;
 	private String appId;

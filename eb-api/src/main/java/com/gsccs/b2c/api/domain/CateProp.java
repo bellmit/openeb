@@ -2,6 +2,8 @@ package com.gsccs.b2c.api.domain;
 
 import java.util.List;
 
+import com.gsccs.eb.api.domain.goods.PropsVal;
+
 /**
  * 类目属性
  * 

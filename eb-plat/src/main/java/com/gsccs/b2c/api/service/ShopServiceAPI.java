@@ -6,13 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gsccs.b2c.api.APIConst;
-import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.plat.seller.service.StoreService;
 import com.gsccs.b2c.plat.shop.model.StoreNavT;
 import com.gsccs.b2c.plat.shop.model.StoreT;
 import com.gsccs.b2c.plat.utils.BeanUtilsEx;
 import com.gsccs.eb.api.domain.seller.Shop;
 import com.gsccs.eb.api.domain.site.StoreNav;
+import com.gsccs.eb.api.exception.ApiException;
 
 
 public class ShopServiceAPI implements ShopServiceI {

@@ -3,8 +3,6 @@ package com.gsccs.b2c.plat.shop.model;
 import java.util.Date;
 
 public class CollectT {
-	
-	
     private String id;
     private String targetid;
     private String colltype;

@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gsccs.b2c.api.APIConst;
 import com.gsccs.b2c.api.domain.Brand;
-import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.plat.seller.service.StoreService;
 import com.gsccs.b2c.plat.shop.model.StoreT;
 import com.gsccs.b2c.plat.shop.service.BrandService;
+import com.gsccs.eb.api.exception.ApiException;
 
 public class BrandServiceAPI implements BrandServiceI {
 

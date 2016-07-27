@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.alibaba.fastjson.JSONArray;
 import com.gsccs.b2c.api.domain.Category;
-import com.gsccs.b2c.api.exception.ApiException;
+import com.gsccs.eb.api.exception.ApiException;
 
 /**
  * 类目API 提供了标准类目，类目属性和类目属性值的查询功能
