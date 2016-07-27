@@ -15,7 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.gsccs.b2c.api.domain.User;
+import com.gsccs.b2c.api.domain.Account;
 import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.SellerServiceI;
 
@@ -48,7 +48,7 @@ public class LoginController {
 		token.setRememberMe(true);
 		try {
 			subject.login(token);
-			User user = sellerAPI.getSeller(username);
+			Account user = sellerAPI.getSeller(username);
 			Session session = subject.getSession();
 
 			session.setAttribute("siteId", user.getSiteId());

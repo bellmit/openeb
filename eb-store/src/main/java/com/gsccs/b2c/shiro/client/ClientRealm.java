@@ -12,8 +12,8 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 
+import com.gsccs.b2c.api.domain.Account;
 import com.gsccs.b2c.api.domain.PermissionContext;
-import com.gsccs.b2c.api.domain.User;
 import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.PermissionServiceI;
 import com.gsccs.b2c.api.service.SellerServiceI;
@@ -74,7 +74,7 @@ public class ClientRealm extends AuthorizingRealm {
 		String username = (String) token.getPrincipal();
 		SimpleAuthenticationInfo authenticationInfo = null;
 
-		User user=null ;
+		Account user=null ;
 		try {
 			user = sellerAPI.getSeller(username);
 			if (user == null) {

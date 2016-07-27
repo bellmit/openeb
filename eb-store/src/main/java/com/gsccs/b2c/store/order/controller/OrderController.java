@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gsccs.b2c.api.domain.Datagrid;
-import com.gsccs.b2c.api.domain.DeliverType;
-import com.gsccs.b2c.api.domain.DlyCorp;
-import com.gsccs.b2c.api.domain.Order;
-import com.gsccs.b2c.api.domain.Order.OrderState;
-import com.gsccs.b2c.api.domain.OrderItem;
-import com.gsccs.b2c.api.domain.Product;
 import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.GoodsServiceI;
 import com.gsccs.b2c.api.service.LogistServiceI;
 import com.gsccs.b2c.api.service.OrderServiceI;
 import com.gsccs.b2c.store.base.JsonMsg;
+import com.gsccs.eb.api.domain.deliver.DeliverType;
+import com.gsccs.eb.api.domain.deliver.DlyCorp;
+import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.domain.trade.Order;
+import com.gsccs.eb.api.domain.trade.Order.OrderState;
+import com.gsccs.eb.api.domain.trade.OrderItem;
+import com.gsccs.eb.api.utils.Datagrid;
 
 /**
  * 商家订单管理
@@ -63,6 +63,7 @@ public class OrderController {
 	 * @param o
 	 * @param request
 	 * @return
+	 * @throws ApiException 
 	 */
 	@RequestMapping(value = "/datagrid")
 	@ResponseBody
@@ -70,7 +71,7 @@ public class OrderController {
 			@RequestParam(defaultValue = " serialnum  ") String order,
 			@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "10") int rows, ModelMap map,
-			Order o, HttpServletRequest request) {
+			Order o, HttpServletRequest request) throws ApiException {
 		
 		long sid = (Long) request.getSession().getAttribute("siteId");
 		o.setState(OrderState.valueOf(o.getState().name()));

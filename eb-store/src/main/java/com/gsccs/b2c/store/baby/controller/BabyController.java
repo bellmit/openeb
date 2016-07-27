@@ -22,12 +22,6 @@ import com.gsccs.b2c.api.domain.Brand;
 import com.gsccs.b2c.api.domain.CateProp;
 import com.gsccs.b2c.api.domain.CateSpec;
 import com.gsccs.b2c.api.domain.Category;
-import com.gsccs.b2c.api.domain.Datagrid;
-import com.gsccs.b2c.api.domain.DeliverType;
-import com.gsccs.b2c.api.domain.Product;
-import com.gsccs.b2c.api.domain.ProductImg;
-import com.gsccs.b2c.api.domain.ProductProp;
-import com.gsccs.b2c.api.domain.Shop;
 import com.gsccs.b2c.api.domain.Sku;
 import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.BrandServiceI;
@@ -42,6 +36,12 @@ import com.gsccs.b2c.solr.service.GoodsSolrService;
 import com.gsccs.b2c.solr.service.SolrService;
 import com.gsccs.b2c.store.base.JsonMsg;
 import com.gsccs.b2c.store.service.SsdbService;
+import com.gsccs.eb.api.domain.deliver.DeliverType;
+import com.gsccs.eb.api.domain.goods.Attach;
+import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.domain.goods.ProductProp;
+import com.gsccs.eb.api.domain.seller.Shop;
+import com.gsccs.eb.api.utils.Datagrid;
 
 
 @Controller
@@ -270,11 +270,11 @@ public class BabyController {
 			if(null !=picPaths && picPaths.length >0){
 				JSONArray jsonArray= new JSONArray();
 				
-				List<ProductImg> piList = new ArrayList<ProductImg>();
+				List<Attach> piList = new ArrayList<Attach>();
 				
 				for(int i = 0; i < picPaths.length; i ++) {
 					
-					ProductImg pi = new ProductImg();
+					Attach pi = new Attach();
 					pi.setUrl(picPaths[i]);
 					pi.setProductId(productId);
 					piList.add(pi);
@@ -763,10 +763,10 @@ public class BabyController {
 				}
 				//获得商品图片
 				
-				List<ProductImg> pimList = goodsServiceAPI.getProductByPid(sid, Long.valueOf(id));
+				List<Attach> pimList = goodsServiceAPI.getProductByPid(sid, Long.valueOf(id));
 				if(null != pimList && pimList.size() > 0){
 					String imgurls = "";
-					for (ProductImg productImg : pimList) {
+					for (Attach productImg : pimList) {
 						imgurls +=productImg.getUrl() + "|";
 					}
 					if(null !=imgurls && imgurls.trim().length() >0 ){
@@ -776,7 +776,7 @@ public class BabyController {
 					model.addAttribute("imglist", pimList);
 				}
 				
-				/*JSONArray imglist = ssdbService.getProductImgs(sid, Long.valueOf(id));
+				/*JSONArray imglist = ssdbService.getAttachs(sid, Long.valueOf(id));
 				System.out.println("imglist=="+imglist.size());
 				if(null != imglist && imglist.size() > 0){
 					model.addAttribute("imglist", imglist);
@@ -847,11 +847,11 @@ public class BabyController {
 			if(null !=picPaths && picPaths.length >0){
 				JSONArray jsonArray= new JSONArray();
 				
-				List<ProductImg> piList = new ArrayList<ProductImg>();
+				List<Attach> piList = new ArrayList<Attach>();
 				
 				for(int i = 0; i < picPaths.length; i ++) {
 					
-					ProductImg pi = new ProductImg();
+					Attach pi = new Attach();
 					pi.setUrl(picPaths[i]);
 					pi.setProductId(productId);
 					piList.add(pi);

@@ -1,25 +1,21 @@
 package com.gsccs.b2c.plat;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import org.junit.runner.RunWith;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.CacheConst;
 import com.gsccs.b2c.api.domain.EvalGoods;
 import com.gsccs.b2c.api.domain.EvalOrder;
-import com.gsccs.b2c.api.domain.ProductImg;
 import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.CateServiceI;
 import com.gsccs.b2c.api.service.EvalServiceI;
 import com.gsccs.b2c.api.service.GoodsServiceI;
+import com.gsccs.eb.api.domain.goods.Attach;
 
 
 public class Consumer {
@@ -58,7 +54,7 @@ public class Consumer {
 			jsonArray = new JSONArray();
 			System.out.println("cache is null");
 			try {
-				List<ProductImg> goodsImgs = goodsAPI.getProductByPid(sid, pid);
+				List<Attach> goodsImgs = goodsAPI.getProductByPid(sid, pid);
 				if (null == goodsImgs || goodsImgs.size() <= 0) {
 					for (int i = 0; i < 5; i++) {
 						JSONObject json = new JSONObject();
@@ -69,7 +65,7 @@ public class Consumer {
 					System.out.println("db is null");
 				} else {
 					System.out.println("db is not null");
-					for (ProductImg img : goodsImgs) {
+					for (Attach img : goodsImgs) {
 						JSONObject json = new JSONObject();
 						json.put("url", img.getUrl());
 						jsonArray.add(json);

@@ -11,8 +11,6 @@ import com.gsccs.b2c.api.CacheConst;
 import com.gsccs.b2c.api.domain.Brand;
 import com.gsccs.b2c.api.domain.CateProp;
 import com.gsccs.b2c.api.domain.Category;
-import com.gsccs.b2c.api.domain.Product;
-import com.gsccs.b2c.api.domain.ProductProp;
 import com.gsccs.b2c.api.domain.PropsVal;
 import com.gsccs.b2c.api.domain.Sku;
 import com.gsccs.b2c.api.exception.ApiException;
@@ -20,6 +18,8 @@ import com.gsccs.b2c.api.service.BrandServiceI;
 import com.gsccs.b2c.api.service.CateServiceI;
 import com.gsccs.b2c.api.service.GoodsServiceI;
 import com.gsccs.b2c.api.service.TypeServiceI;
+import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.domain.goods.ProductProp;
 
 /**
  * 

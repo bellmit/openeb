@@ -1,7 +1,5 @@
 package com.gsccs.b2c.store.service;
 
-import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.gsccs.b2c.api.CacheConst;
-import com.gsccs.b2c.api.domain.ProductImg;
 
 @Service
 public class SsdbServiceImpl implements SsdbService{

@@ -15,20 +15,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.CacheConst;
-import com.gsccs.b2c.api.domain.Banner;
-import com.gsccs.b2c.api.domain.Banner.LongBanner;
-import com.gsccs.b2c.api.domain.Cate;
-import com.gsccs.b2c.api.domain.Category;
 import com.gsccs.b2c.api.domain.IndexBrands;
 import com.gsccs.b2c.api.domain.IndexBrands.HotBrand;
-import com.gsccs.b2c.api.domain.Storey;
-import com.gsccs.b2c.api.domain.Storey.IndexBrand;
-import com.gsccs.b2c.api.domain.Storey.IndexCate;
-import com.gsccs.b2c.api.domain.Storey.IndexImg;
 import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.CateServiceI;
 import com.gsccs.b2c.api.service.StoreyServiceI;
 import com.gsccs.b2c.store.base.JsonMsg;
+import com.gsccs.eb.api.domain.site.Banner;
+import com.gsccs.eb.api.domain.site.Banner.LongBanner;
+import com.gsccs.eb.api.domain.site.Storey;
 
 
 @Controller

@@ -1,18 +1,14 @@
 package com.gsccs.b2c.store.web.controller;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gsccs.b2c.api.domain.Shop;
 import com.gsccs.b2c.api.service.CateServiceI;
-import com.gsccs.b2c.api.service.SellerServiceI;
 import com.gsccs.b2c.api.service.ShopServiceI;
+import com.gsccs.eb.api.domain.seller.Shop;
 
 
 @Controller

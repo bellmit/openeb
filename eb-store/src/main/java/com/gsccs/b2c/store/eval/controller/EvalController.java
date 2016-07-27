@@ -1,7 +1,5 @@
 package com.gsccs.b2c.store.eval.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,16 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gsccs.b2c.api.domain.Datagrid;
-import com.gsccs.b2c.api.domain.DeliverType;
 import com.gsccs.b2c.api.domain.EvalItem;
 import com.gsccs.b2c.api.domain.EvalModel;
 import com.gsccs.b2c.api.domain.EvalType;
-import com.gsccs.b2c.api.domain.JsonMsg;
-import com.gsccs.b2c.api.domain.Product;
-import com.gsccs.b2c.api.domain.Sku;
 import com.gsccs.b2c.api.exception.ApiException;
 import com.gsccs.b2c.api.service.EvalServiceI;
+import com.gsccs.b2c.store.base.JsonMsg;
+import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.utils.Datagrid;
 
 /**
  * 评论管理
