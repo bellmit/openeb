@@ -32,12 +32,14 @@ public class LoginController {
 		String error = null;
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
-
-		Subject subject = SecurityUtils.getSubject();
+		
+		System.out.println("username:"+username);
+		System.out.println("password:"+password);
 		UsernamePasswordToken token = new UsernamePasswordToken(username,
 				password);
 		token.setRememberMe(true);
 		try {
+			Subject subject = SecurityUtils.getSubject();
 			subject.login(token);
 		} catch (UnknownAccountException e) {
 			error = "用户名不存在";

@@ -2,7 +2,6 @@ package com.gsccs.b2c.api.service;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -12,7 +11,6 @@ import com.gsccs.b2c.api.APIConst;
 import com.gsccs.b2c.plat.seller.service.StoreService;
 import com.gsccs.b2c.plat.shop.model.GoodsT;
 import com.gsccs.b2c.plat.shop.model.ProductImgT;
-import com.gsccs.b2c.plat.shop.model.ProductT;
 import com.gsccs.b2c.plat.shop.model.StoreT;
 import com.gsccs.b2c.plat.shop.service.CategoryService;
 import com.gsccs.b2c.plat.shop.service.GoodsService;
@@ -21,9 +19,6 @@ import com.gsccs.eb.api.domain.buyer.Discount;
 import com.gsccs.eb.api.domain.goods.Album;
 import com.gsccs.eb.api.domain.goods.ItemImg;
 import com.gsccs.eb.api.domain.goods.Product;
-import com.gsccs.eb.api.domain.goods.ProductParam;
-import com.gsccs.eb.api.domain.goods.ProductProp;
-import com.gsccs.eb.api.domain.goods.ReqInfo;
 import com.gsccs.eb.api.domain.goods.Sku;
 import com.gsccs.eb.api.exception.ApiException;
 
@@ -87,26 +82,8 @@ public class GoodsServiceAPI implements GoodsServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0002,
 					APIConst.ERROR_MSG_0002);
 		}
-		ProductT pt = goodsService.getProduct(sid, pid, true);
-		if (null != pt) {
-			Product p = new Product();
-			p.setId(pt.getId());
-			p.setpId(pt.getId());
-			p.setTitle(pt.getTitle());
-			p.setPrice(pt.getPrice());
-			p.setCateId(pt.getCate());
-			p.setBrand(pt.getBrand());
-			p.setPostage(pt.getPostage());
-			p.setMarketPrice(pt.getMktprice());
-			p.setTypeId(pt.getTypeid());
-			p.setPicUrl(pt.getImg());
-			p.setCreated(pt.getAddtime());
-			p.setBrief(pt.getBrief());
-			p.setBarcode(pt.getBarcode());
-			p.setStorenum(pt.getStorenum());
-			return p;
-		}
-		return null;
+		Product pt = goodsService.getProduct(sid, pid, true);
+		return pt;
 	}
 
 	@Override
@@ -116,7 +93,6 @@ public class GoodsServiceAPI implements GoodsServiceI {
 			Integer minStoreNum, String status, String order, int currPage,
 			int pageSize) throws ApiException {
 
-		List<Product> list = null;
 		if (null == sid) {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
@@ -127,36 +103,9 @@ public class GoodsServiceAPI implements GoodsServiceI {
 					APIConst.ERROR_MSG_0002);
 		}
 
-		List<ProductT> ptList = goodsService.getProducts(sid, title, barcode,
+		List<Product> list = goodsService.getProducts(sid, title, barcode,
 				null, maxPrice, minPrice, maxSaleNum, minSaleNum, maxStoreNum,
 				minStoreNum, status, order, currPage, pageSize, true);
-
-		if (null != ptList && ptList.size() > 0) {
-			list = new ArrayList<Product>();
-			for (ProductT pt : ptList) {
-				Product p = new Product();
-
-				try {
-					// 商品Id
-					BeanUtils.copyProperties(p, pt);
-					p.setpId(pt.getId());
-					// 商品图片
-					p.setPicUrl(pt.getImg());
-					// 发布时间
-					p.setCreated(pt.getAddtime());
-					p.setSaleNum(pt.getSalenum());
-					p.setTypeId(pt.getTypeid());
-					p.setCateId(pt.getCate());
-					p.setTsc(pt.getBarcode());
-					list.add(p);
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					e.printStackTrace();
-				}
-
-			}
-		}
 		return list;
 	}
 
@@ -173,50 +122,7 @@ public class GoodsServiceAPI implements GoodsServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0002,
 					APIConst.ERROR_MSG_0002);
 		}
-
-		ProductT pt = new ProductT();
-		pt.setSite(p.getSite());
-		pt.setTitle(p.getTitle());
-		pt.setBarcode(p.getBarcode());
-		pt.setPrice(p.getPrice());
-		pt.setBrief(p.getBrief());
-		pt.setWeight(0.0);
-		pt.setCate(p.getCateId());
-		pt.setBrand(p.getBrand());
-		pt.setAddtime(new Date());
-		pt.setPostage(p.getPostage());
-		pt.setTypeid(p.getTypeId());
-		pt.setStatus(p.getStatus());
-		pt.setBarcode(p.getTsc());
-		pt.setMktprice(p.getMarketPrice());
-		pt.setStorenum(p.getStorenum());
-		// 产品扩展属性
-		String propStr = "";
-		List<ProductProp> props = p.getProps();
-		if (null != props && props.size() > 0) {
-			for (ProductProp prop : props) {
-				propStr = propStr + prop.getPropStr() + ";";
-			}
-		}
-		pt.setPropStr(propStr);
-		// 产品参数属性
-		String paramStr = "";
-		List<ProductParam> params = p.getParams();
-		if (null != params && params.size() > 0) {
-			for (ProductParam param : params) {
-				paramStr = paramStr + param.getParamStr() + ";";
-			}
-		}
-
-		// 购物必填信息
-		String reqInfoStr = "";
-		List<ReqInfo> reqInfos = p.getReqInfos();
-		if (null != reqInfos && reqInfos.size() > 0) {
-			for (ReqInfo reqInfo : reqInfos) {
-				reqInfoStr = reqInfoStr + reqInfo.getReqInfoStr();
-			}
-		}
-		return goodsService.addProduct(sid, pt);
+		return goodsService.addProduct(sid, p);
 	}
 
 	@Override
@@ -364,20 +270,9 @@ public class GoodsServiceAPI implements GoodsServiceI {
 
 	@Override
 	public void editProduct(Long sid, Product product) throws ApiException {
-		ProductT pt = goodsService.getProduct(sid, product.getpId(), true);
-
-		try {
-			BeanUtils.copyProperties(pt, product);
-			pt.setCate(product.getCateId());
-			pt.setImg(product.getPicUrl());
-			goodsService.editProduct(sid, pt);
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
+		goodsService.editProduct(sid, product);
 	}
-
+	
 	@Override
 	public void editSKU(Long sid, Long pid, List<Sku> items)
 			throws ApiException {
@@ -415,68 +310,20 @@ public class GoodsServiceAPI implements GoodsServiceI {
 
 	@Override
 	public List<Product> getHotProducts(Long sid) {
-		List<Product> list = null;
-		List<ProductT> ptList = goodsService.getHotProducts(sid);
-		if (null != ptList) {
-			list = new ArrayList<Product>();
-			for (ProductT pt : ptList) {
-				Product p = new Product();
-				try {
-					// 商品Id
-					BeanUtils.copyProperties(p, pt);
-					p.setpId(pt.getId());
-					// 商品图片
-					p.setPicUrl(pt.getImg());
-					// 发布时间
-					p.setCreated(pt.getAddtime());
-					p.setSaleNum(pt.getSalenum());
-					p.setTsc(pt.getBarcode());
-					p.setIsTop(true);
-					list.add(p);
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		List<Product> list = goodsService.getHotProducts(sid);
 		return list;
 	}
 
 	@Override
 	public List<Product> getTopProducts(Long sid) {
-		List<Product> list = null;
-		List<ProductT> ptList = goodsService.getTopProducts(sid);
-		if (null != ptList) {
-			list = new ArrayList<Product>();
-			for (ProductT pt : ptList) {
-				Product p = new Product();
-				try {
-					// 商品Id
-					BeanUtils.copyProperties(p, pt);
-					p.setpId(pt.getId());
-					// 商品图片
-					p.setPicUrl(pt.getImg());
-					// 发布时间
-					p.setCreated(pt.getAddtime());
-					p.setSaleNum(pt.getSalenum());
-					p.setTsc(pt.getBarcode());
-					p.setIsTop(true);
-					list.add(p);
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		List<Product> list = goodsService.getTopProducts(sid);
 		return list;
 	}
 
 	@Override
 	public void editProductById(Long sid, Long pid, String imgpath)
 			throws ApiException {
-		ProductT pt = goodsService.getProduct(sid, pid, true);
+		Product pt = goodsService.getProduct(sid, pid, true);
 		pt.setImg(imgpath);
 		goodsService.editProduct(sid, pt);
 
@@ -485,7 +332,7 @@ public class GoodsServiceAPI implements GoodsServiceI {
 	@Override
 	public void editProductPrice(Long sid, Long pid, String price)
 			throws ApiException {
-		ProductT pt = goodsService.getProduct(sid, pid, true);
+		Product pt = goodsService.getProduct(sid, pid, true);
 		pt.setPrice(Double.parseDouble(price));
 		goodsService.editProduct(sid, pt);
 	}

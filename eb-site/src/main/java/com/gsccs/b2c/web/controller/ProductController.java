@@ -88,7 +88,7 @@ public class ProductController {
 			if (null != product) {
 				data.put("product", redisService.getProduct(siteId, pid));
 				// 商品品牌
-				Brand brand = redisService.getBrand(siteId, product.getBrand());
+				Brand brand = redisService.getBrand(siteId, product.getBrandid());
 				data.put("brand", brand);
 				// 扩展属性
 				data.put("product_prop", JSON.toJSONString(ssdbService
@@ -193,7 +193,7 @@ public class ProductController {
 		barcodeobj.put("title", "商品编号");
 		barcodeobj.put("value", product.getBarcode());
 		saletimeobj.put("title", "上架时间");
-		saletimeobj.put("value", product.getCreatedStr());
+		//saletimeobj.put("value", product.getCreatedStr());
 		array.add(nameobj);
 		array.add(barcodeobj);
 		array.add(saletimeobj);

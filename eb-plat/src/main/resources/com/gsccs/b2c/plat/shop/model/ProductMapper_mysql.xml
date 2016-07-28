@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gsccs.b2c.plat.shop.dao.ProductTMapper">
-	<resultMap id="BaseResultMap" type="com.gsccs.b2c.plat.shop.model.ProductT">
+<mapper namespace="com.gsccs.b2c.plat.shop.dao.ProductMapper">
+	<resultMap id="BaseResultMap" type="com.gsccs.eb.api.domain.goods.Product">
 		<id column="id" property="id" jdbcType="BIGINT" />
-		<result column="site" property="site" jdbcType="BIGINT" />
-		<result column="brand" property="brand" jdbcType="BIGINT" />
-		<result column="cate" property="cate" jdbcType="BIGINT" />
+		<result column="shopid" property="shopid" jdbcType="BIGINT" />
+		<result column="brandid" property="brandid" jdbcType="BIGINT" />
+		<result column="categoryid" property="categoryid" jdbcType="BIGINT" />
 		<result column="typeid" property="typeid" jdbcType="BIGINT" />
 		<result column="cateids" property="cateids" jdbcType="VARCHAR" />
 		<result column="title" property="title" jdbcType="VARCHAR" />
 		<result column="img" property="img" jdbcType="VARCHAR" />
 		<result column="templet" property="templet" jdbcType="VARCHAR" />
-		<result column="isHot" property="ishot" jdbcType="VARCHAR" />
-		<result column="isTop" property="istop" jdbcType="VARCHAR" />
+		<result column="ishot" property="ishot" jdbcType="VARCHAR" />
+		<result column="istop" property="istop" jdbcType="VARCHAR" />
 		<result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
-		<result column="topEndTime" property="topendtime" jdbcType="TIMESTAMP" />
-		<result column="clickNum" property="clicknum" jdbcType="INTEGER" />
+		<result column="topendtime" property="topendtime" jdbcType="TIMESTAMP" />
+		<result column="clicknum" property="clicknum" jdbcType="INTEGER" />
 		<result column="addUser" property="adduser" jdbcType="VARCHAR" />
 		<result column="status" property="status" jdbcType="VARCHAR" />
 		<result column="kind" property="kind" jdbcType="VARCHAR" />
 		<result column="tags" property="tags" jdbcType="VARCHAR" />
 		<result column="barcode" property="barcode" jdbcType="VARCHAR" />
-		<result column="brief" property="brief" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
 		<result column="price" property="price" jdbcType="DECIMAL" />
-		<result column="mktprice" property="mktprice" jdbcType="DECIMAL" />
+		<result column="mkprice" property="mkprice" jdbcType="DECIMAL" />
 		<result column="weight" property="weight" jdbcType="DECIMAL" />
 		<result column="freight" property="freight" jdbcType="VARCHAR" />
-		<result column="gain_score" property="gainScore" jdbcType="REAL" />
+		<result column="points" property="points" jdbcType="REAL" />
 		<result column="postage" property="postage" jdbcType="VARCHAR" />
 		<result column="storenum" property="storenum" jdbcType="INTEGER" />
 		<result column="salenum" property="salenum" jdbcType="INTEGER" />
@@ -102,11 +102,8 @@
 	
 	
 	<sql id="Base_Column_List">
-		id, site, brand, cate, cateids,typeid,title, img, templet, isHot, isTop, addtime,
-		topEndTime, clickNum,
-		addUser, status, kind, tags, barcode, brief, price, mktprice,
-		weight, storenum,
-		freight, gain_score, postage, salenum,locknum,evalnum
+		id, shopid, brandid, categoryid, cateids,typeid,title, img, templet, ishot, istop, addtime,topendtime, clicknum,
+		addUser, status, kind, tags, barcode, remark, price, mkprice,weight, storenum,freight, points, postage, salenum,locknum,evalnum
 	</sql>
 	
 	
@@ -117,7 +114,7 @@
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from shop_product_${sid}
+		from shop_product
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -133,7 +130,7 @@
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from shop_product_${sid}
+		from shop_product
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -143,22 +140,19 @@
 		limit ${example.skip},${example.pageSize}
 	</select>
 	
-	
-	
-	
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="map">
 		select
 		<include refid="Base_Column_List" />
-		from shop_product_${sid}
+		from shop_product
 		where id = #{id,jdbcType=BIGINT}
 	</select>
 	
 	<delete id="deleteByPrimaryKey" parameterType="map">
-		delete from shop_product_${sid}
+		delete from shop_product
 		where id = #{id,jdbcType=BIGINT}
 	</delete>
-	<delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.shop.model.ProductTExample">
+	<delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.shop.model.ProductExample">
 		delete from shop_product
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
@@ -166,19 +160,21 @@
 	</delete>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="record.id" parameterType="map">
-		insert into shop_product_${sid} (id, site, brand, 
-      cate, cateids, typeid,title, 
-      img, templet, isHot, 
-      isTop, addtime, topEndTime, 
-      clickNum, addUser, status, 
+		insert into shop_product (id, shopid, brandid, 
+      categoryid, cateids, typeid,title, 
+      img, templet, ishot, 
+      istop, addtime, topendtime, 
+      clicknum, addUser, status, 
       kind, tags, 
-      barcode, brief, price, 
-      mktprice, weight, storenum, 
-      freight, gain_score, postage, 
+      barcode, remark, price, 
+      mkprice, weight, storenum, 
+      freight, points, postage, 
       salenum,locknum,evalnum
       )
-    values (#{record.id,jdbcType=BIGINT}, #{record.site,jdbcType=BIGINT}, #{record.brand,jdbcType=BIGINT}, 
-      #{record.cate,jdbcType=VARCHAR}, 
+    values (#{record.id,jdbcType=BIGINT}, 
+    	#{record.shopid,jdbcType=BIGINT}, 
+    	#{record.brandid,jdbcType=BIGINT}, 
+      #{record.categoryid,jdbcType=BIGINT}, 
       #{record.cateids,jdbcType=VARCHAR},
       #{record.typeid,jdbcType=BIGINT},
        #{record.title,jdbcType=VARCHAR}, 
@@ -186,9 +182,9 @@
       #{record.istop,jdbcType=VARCHAR}, #{record.addtime,jdbcType=TIMESTAMP}, #{record.topendtime,jdbcType=TIMESTAMP}, 
       #{record.clicknum,jdbcType=INTEGER}, #{record.adduser,jdbcType=VARCHAR}, #{record.status,jdbcType=VARCHAR}, 
       #{record.kind,jdbcType=VARCHAR}, #{record.tags,jdbcType=VARCHAR}, 
-      #{record.barcode,jdbcType=VARCHAR}, #{record.brief,jdbcType=VARCHAR}, #{record.price,jdbcType=DECIMAL}, 
-      #{record.mktprice,jdbcType=DECIMAL}, #{record.weight,jdbcType=DECIMAL}, #{record.storenum,jdbcType=INTEGER}, 
-      #{record.freight,jdbcType=VARCHAR}, #{record.gainScore,jdbcType=REAL}, #{record.postage,jdbcType=VARCHAR}, 
+      #{record.barcode,jdbcType=VARCHAR}, #{record.remark,jdbcType=VARCHAR}, #{record.price,jdbcType=DECIMAL}, 
+      #{record.mkprice,jdbcType=DECIMAL}, #{record.weight,jdbcType=DECIMAL}, #{record.storenum,jdbcType=INTEGER}, 
+      #{record.freight,jdbcType=VARCHAR}, #{record.points,jdbcType=REAL}, #{record.postage,jdbcType=VARCHAR}, 
       #{record.salenum,jdbcType=INTEGER},
       #{record.locknum,jdbcType=INTEGER},
       #{record.evalnum,jdbcType=INTEGER}
@@ -197,7 +193,7 @@
 
 	<select id="countByExample" parameterType="map"
 		resultType="java.lang.Integer">
-		select count(*) from shop_product_${sid}
+		select count(*) from shop_product
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -205,31 +201,31 @@
 	
 	
 	<update id="updateByExample" parameterType="map">
-		update shop_product_${sid}
+		update shop_product
 		set id = #{record.id,jdbcType=BIGINT},
-		site = #{record.site,jdbcType=BIGINT},
-		brand = #{record.brand,jdbcType=BIGINT},
-		cate = #{record.cate,jdbcType=BIGINT},
+		shopid = #{record.shopid,jdbcType=BIGINT},
+		brandid = #{record.brandid,jdbcType=BIGINT},
+		categoryid = #{record.categoryid,jdbcType=BIGINT},
 		typeid = #{record.typeid,jdbcType=BIGINT},
 		title = #{record.title,jdbcType=VARCHAR},
 		img = #{record.img,jdbcType=VARCHAR},
 		templet = #{record.templet,jdbcType=VARCHAR},
-		isHot = #{record.ishot,jdbcType=VARCHAR},
-		isTop = #{record.istop,jdbcType=VARCHAR},
+		ishot = #{record.ishot,jdbcType=VARCHAR},
+		istop = #{record.istop,jdbcType=VARCHAR},
 		addtime = #{record.addtime,jdbcType=TIMESTAMP},
-		topEndTime = #{record.topendtime,jdbcType=TIMESTAMP},
-		clickNum = #{record.clicknum,jdbcType=INTEGER},
+		topendtime = #{record.topendtime,jdbcType=TIMESTAMP},
+		clicknum = #{record.clicknum,jdbcType=INTEGER},
 		addUser = #{record.adduser,jdbcType=VARCHAR},
 		status = #{record.status,jdbcType=VARCHAR},
 		kind = #{record.kind,jdbcType=VARCHAR},
 		tags = #{record.tags,jdbcType=VARCHAR},
 		barcode = #{record.barcode,jdbcType=VARCHAR},
-		brief = #{record.brief,jdbcType=VARCHAR},
+		remark = #{record.remark,jdbcType=VARCHAR},
 		price = #{record.price,jdbcType=DECIMAL},
-		mktprice = #{record.mktprice,jdbcType=DECIMAL},
+		mkprice = #{record.mkprice,jdbcType=DECIMAL},
 		weight = #{record.weight,jdbcType=DECIMAL},
 		freight = #{record.freight,jdbcType=VARCHAR},
-		gain_score = #{record.gainScore,jdbcType=REAL},
+		points = #{record.points,jdbcType=REAL},
 		postage = #{record.postage,jdbcType=VARCHAR},
 		storenum = #{record.storenum,jdbcType=INTEGER},
 		salenum = #{record.salenum,jdbcType=INTEGER},
@@ -242,30 +238,30 @@
 
 
 	<update id="updateByPrimaryKey" parameterType="map">
-		update shop_product_${sid}
-		set site = #{record.site,jdbcType=BIGINT},
-		brand = #{record.brand,jdbcType=BIGINT},
-		cate = #{record.cate,jdbcType=BIGINT},
+		update shop_product
+		set shopid = #{record.shopid,jdbcType=BIGINT},
+		brandid = #{record.brandid,jdbcType=BIGINT},
+		categoryid = #{record.categoryid,jdbcType=BIGINT},
 		typeid = #{record.typeid,jdbcType=BIGINT},
 		title = #{record.title,jdbcType=VARCHAR},
 		img = #{record.img,jdbcType=VARCHAR},
 		templet = #{record.templet,jdbcType=VARCHAR},
-		isHot = #{record.ishot,jdbcType=VARCHAR},
-		isTop = #{record.istop,jdbcType=VARCHAR},
+		ishot = #{record.ishot,jdbcType=VARCHAR},
+		istop = #{record.istop,jdbcType=VARCHAR},
 		addtime = #{record.addtime,jdbcType=TIMESTAMP},
-		topEndTime = #{record.topendtime,jdbcType=TIMESTAMP},
-		clickNum = #{record.clicknum,jdbcType=INTEGER},
+		topendtime = #{record.topendtime,jdbcType=TIMESTAMP},
+		clicknum = #{record.clicknum,jdbcType=INTEGER},
 		addUser = #{record.adduser,jdbcType=VARCHAR},
 		status = #{record.status,jdbcType=VARCHAR},
 		kind = #{record.kind,jdbcType=VARCHAR},
 		tags = #{record.tags,jdbcType=VARCHAR},
 		barcode = #{record.barcode,jdbcType=VARCHAR},
-		brief = #{record.brief,jdbcType=VARCHAR},
+		remark = #{record.remark,jdbcType=VARCHAR},
 		price = #{record.price,jdbcType=DECIMAL},
-		mktprice = #{record.mktprice,jdbcType=DECIMAL},
+		mkprice = #{record.mkprice,jdbcType=DECIMAL},
 		weight = #{record.weight,jdbcType=DECIMAL},
 		freight = #{record.freight,jdbcType=VARCHAR},
-		gain_score = #{record.gainScore,jdbcType=INTEGER},
+		points = #{record.points,jdbcType=INTEGER},
 		postage = #{record.postage,jdbcType=VARCHAR},
 		storenum = #{record.storenum,jdbcType=INTEGER},
 		salenum = #{record.salenum,jdbcType=INTEGER},
@@ -277,7 +273,7 @@
 	<!-- 商品下架 -->
 	<update id="updateProductUnsale" parameterType="map">
 	<![CDATA[  
-		update shop_product_${sid}
+		update shop_product
 		set status='2'
 		where storenum <= ${storenum}
 	]]>

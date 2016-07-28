@@ -4,9 +4,7 @@ import java.util.List;
 
 import com.gsccs.b2c.plat.shop.model.BuyerDisT;
 import com.gsccs.b2c.plat.shop.model.GoodsT;
-import com.gsccs.b2c.plat.shop.model.ProductImgT;
-import com.gsccs.b2c.plat.shop.model.ProductT;
-import com.gsccs.eb.api.domain.goods.Goods;
+import com.gsccs.eb.api.domain.goods.Product;
 
 public interface GoodsService {
 
@@ -16,7 +14,7 @@ public interface GoodsService {
 	 * @param p
 	 * @return
 	 */
-	public Long addProduct(Long sid, ProductT p);
+	public Long addProduct(Long sid, Product p);
 
 	/**
 	 * 添加商品
@@ -41,9 +39,9 @@ public interface GoodsService {
 	 * @param pid
 	 * @return
 	 */
-	public ProductT getProduct(Long sid, Long pid, boolean extra);
+	public Product getProduct(Long sid, Long pid, boolean extra);
 
-	public List<ProductT> getProduct(Long sid);
+	public List<Product> getProduct(Long sid);
 
 	/**
 	 * 查询热销商品
@@ -51,7 +49,7 @@ public interface GoodsService {
 	 * @param sid
 	 * @return
 	 */
-	public List<ProductT> getHotProducts(Long sid);
+	public List<Product> getHotProducts(Long sid);
 
 	/**
 	 * 查询置顶商品
@@ -59,7 +57,7 @@ public interface GoodsService {
 	 * @param sid
 	 * @return
 	 */
-	public List<ProductT> getTopProducts(Long sid);
+	public List<Product> getTopProducts(Long sid);
 
 	/**
 	 * 获得商品
@@ -102,7 +100,7 @@ public interface GoodsService {
 	 * @param iscache
 	 * @return
 	 */
-	public List<ProductT> getProducts(Long sid, String title, String barcode,
+	public List<Product> getProducts(Long sid, String title, String barcode,
 			Long cateId, Double maxPrice, Double minPrice, Integer maxSaleNum,
 			Integer minSaleNum, Integer maxStoreNum, Integer minStoreNum,
 			String state, String order, int currPage, int pageSize,
@@ -129,6 +127,9 @@ public interface GoodsService {
 			Double maxPrice, Double minPrice, Integer maxSaleNum,
 			Integer minSaleNum, Integer maxStoreNum, Integer minStoreNum,
 			String state);
+
+	public List<Product> getProducts(Product param, String order, int currPage,
+			int pageSize);
 
 	/**
 	 * 获取产品对应的货品
@@ -194,7 +195,7 @@ public interface GoodsService {
 	 * @param sid
 	 * @param pt
 	 */
-	public void editProduct(Long sid, ProductT pt);
+	public void editProduct(Long sid, Product pt);
 
 	/**
 	 * 编辑商品
@@ -203,12 +204,11 @@ public interface GoodsService {
 	 * @param goods
 	 */
 	public void editGoods(Long sid, GoodsT goodsT);
-	
-	
+
 	/**
 	 * 商品自动下架
 	 * 
-	 * @param sid 
+	 * @param sid
 	 */
 	public void productUnsale(Long sid);
 

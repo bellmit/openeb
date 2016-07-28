@@ -80,7 +80,7 @@
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from plat_props_val
+		from eb_props_val
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -92,28 +92,28 @@
 		parameterType="java.lang.Long">
 		select
 		<include refid="Base_Column_List" />
-		from plat_props_val
+		from eb_props_val
 		where id = #{id,jdbcType=BIGINT}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-		delete from plat_props_val
+		delete from eb_props_val
 		where id = #{id,jdbcType=BIGINT}
 	</delete>
 	<delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.shop.model.PropsValExample">
-		delete from plat_props_val
+		delete from eb_props_val
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
 	</delete>
 	<insert id="insert" parameterType="com.gsccs.eb.api.domain.goods.PropsVal">
-		insert into plat_props_val (id, prod_id, vals,
+		insert into eb_props_val (id, prod_id, vals,
 		ordernum)
 		values (#{id,jdbcType=BIGINT}, #{prodId,jdbcType=BIGINT},
 		#{vals,jdbcType=VARCHAR},
 		#{ordernum,jdbcType=BIGINT})
 	</insert>
 	<insert id="insertSelective" parameterType="com.gsccs.eb.api.domain.goods.PropsVal">
-		insert into plat_props_val
+		insert into eb_props_val
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
 				id,
@@ -145,13 +145,13 @@
 	</insert>
 	<select id="countByExample" parameterType="com.gsccs.b2c.plat.shop.model.PropsValExample"
 		resultType="java.lang.Integer">
-		select count(*) from plat_props_val
+		select count(*) from eb_props_val
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
 	</select>
 	<update id="updateByExampleSelective" parameterType="map">
-		update plat_props_val
+		update eb_props_val
 		<set>
 			<if test="record.id != null">
 				id = #{record.id,jdbcType=BIGINT},
@@ -173,7 +173,7 @@
 	
 	
 	<update id="updateByExample" parameterType="map">
-		update plat_props_val
+		update eb_props_val
 		set id = #{record.id,jdbcType=BIGINT},
 		prod_id = #{record.prodId,jdbcType=BIGINT},
 		vals = #{record.vals,jdbcType=VARCHAR},
@@ -184,7 +184,7 @@
 	</update>
 	
 	<update id="updateByPrimaryKeySelective" parameterType="com.gsccs.eb.api.domain.goods.PropsVal">
-		update plat_props_val
+		update eb_props_val
 		<set>
 			<if test="prodId != null">
 				prod_id = #{prodId,jdbcType=BIGINT},
@@ -199,7 +199,7 @@
 		where id = #{id,jdbcType=BIGINT}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.gsccs.eb.api.domain.goods.PropsVal">
-		update plat_props_val
+		update eb_props_val
 		set prod_id = #{prodId,jdbcType=BIGINT},
 		vals = #{vals,jdbcType=VARCHAR},
 		ordernum = #{ordernum,jdbcType=BIGINT}

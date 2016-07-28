@@ -48,11 +48,14 @@ public class ResourceServiceImpl implements ResourceService {
 	public List<Resource> findAll(Resource param) {
 		ResourceExample rexample = new ResourceExample();
 		Criteria c = rexample.createCriteria();
-		/*if (null != param){
+		if (null != param){
 			if (null != param.getParentId()){
 				c.andParentIdEqualTo(param.getParentId());
 			}
-		}*/
+			/*if (null != param.getAvailable()){
+				c.andParentIdEqualTo(param.getParentId());
+			}*/
+		}
 		return resourceMapper.selectByExample(rexample);
 	}
 	
@@ -108,28 +111,31 @@ public class ResourceServiceImpl implements ResourceService {
 	@Override
 	public List<Resource> findMenus(Set<String> permissions, Resource param) {
 		List<Resource> allResources = findAll(param);
-		List<Resource> menus = new ArrayList<Resource>();
-		//menus = findMenus(permissions,allResources,param);
 		System.out.println("allResources:"+allResources.size());
+		List<Resource> menus = new ArrayList<Resource>();
 		for (Resource resource : allResources) {
+			System.out.println("name:"+resource.getName());
 			if (resource.isRootNode()) {
+				System.out.println("isroot");
 				continue;
 			}
 			if (resource.getType() != Resource.ResourceType.menu) {
+				System.out.println(""+Resource.ResourceType.menu);
 				continue;
 			}
 			if (!hasPermission(permissions, resource)) {
+				System.out.println("not has Permission");
 				continue;
 			}
-			//Resource tempParam = new Resource();
-			//tempParam.setParentId(resource.getParentId());
-			resource.setSubs(findMenus(permissions,allResources,resource));
-			menus.add(resource);
+			/*resource.setSubs(findMenus(permissions,allResources,resource));
+			menus.add(resource);*/
+			if (null != resource.getParentId()
+					&& resource.getParentId().equals(param.getId())) {
+				System.out.println("add");
+				resource.setSubs(findMenus(permissions,allResources,resource));
+				menus.add(resource);
+			}
 		}
-		
-		//JSONArray jsonarray = (JSONArray) JSON.toJSON(menus);
-		//System.out.println(jsonarray);
-		
 		return menus;
 	}
 	

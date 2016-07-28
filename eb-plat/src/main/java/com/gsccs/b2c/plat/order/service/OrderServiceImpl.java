@@ -17,9 +17,9 @@ import com.gsccs.b2c.plat.order.model.OrderItemExample;
 import com.gsccs.b2c.plat.order.model.OrderStatist;
 import com.gsccs.b2c.plat.order.model.OrderTrace;
 import com.gsccs.b2c.plat.order.model.OrderTraceExample;
-import com.gsccs.b2c.plat.shop.dao.ProductTMapper;
-import com.gsccs.b2c.plat.shop.model.ProductT;
+import com.gsccs.b2c.plat.shop.dao.ProductMapper;
 import com.gsccs.b2c.plat.utils.DateUtil;
+import com.gsccs.eb.api.domain.goods.Product;
 import com.gsccs.eb.api.domain.trade.Order;
 import com.gsccs.eb.api.domain.trade.OrderItem;
 
@@ -33,7 +33,7 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderItemMapper orderItemMapper;
 	@Autowired
-	private ProductTMapper productTMapper;
+	private ProductMapper productTMapper;
 
 	@Override
 	public List<Order> find(Order orders, Long sid, String order, int currPage,
@@ -64,7 +64,7 @@ public class OrderServiceImpl implements OrderService {
 			items.get(i).setOrderid(ordersn);
 			orderItemMapper.insert(sid, items.get(i));
 			// 锁定产品数量
-			ProductT productT = productTMapper.selectByPrimaryKey(sid, items
+			Product productT = productTMapper.selectByPrimaryKey(sid, items
 					.get(i).getProductid());
 			if (null != productT) {
 				if (null == productT.getLocknum()) {

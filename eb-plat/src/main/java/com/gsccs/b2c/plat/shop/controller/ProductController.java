@@ -17,12 +17,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gsccs.b2c.plat.bass.Datagrid;
-import com.gsccs.b2c.plat.shop.model.ProductT;
 import com.gsccs.b2c.plat.shop.service.BrandService;
+import com.gsccs.b2c.plat.shop.service.CategoryService;
 import com.gsccs.b2c.plat.shop.service.GoodsService;
+import com.gsccs.eb.api.domain.goods.Product;
 
 /**
- * 平台产品管理
+ * 产品管理
  * 
  * @author x.d zhang
  * 
@@ -35,6 +36,8 @@ public class ProductController {
 	private BrandService brandService;
 	@Autowired
 	private GoodsService goodsService;
+	@Autowired
+	private CategoryService categoryService;
 
 	@RequiresPermissions("goods:view")
 	@RequestMapping(method = RequestMethod.GET)
@@ -46,36 +49,19 @@ public class ProductController {
 	@RequestMapping(value = "/datagrid", method = RequestMethod.POST)
 	@ResponseBody
 	public Datagrid list(
-			@RequestParam(defaultValue = " orderNum ") String order,
-			@RequestParam(defaultValue = "1") int currPage,
-			@RequestParam(defaultValue = "10") int pageSize, ModelMap map,
-			ProductT pt, HttpServletRequest request) {
-
-		Long sid = Long.valueOf(1001), cateId = null;
-		String title = null, barcode = null, state = null;String approvestatus=null;
-		Double maxPrice = null, minPrice = null, maxSaleNum = null, minSaleNum = null, maxStoreNum = null, minStoreNum = null;
-		if (null != pt) {
-			// sid = pt.getSite();
-			title = pt.getTitle();
-		}
-		
-		List<ProductT> prodList = null;
-		int totalCount = 0;
-		/*List<ProductT> prodList = goodsService.getProducts(sid, title, barcode,
-				cateId, maxPrice, minPrice, maxSaleNum, minSaleNum,
-				maxStoreNum, minStoreNum, state, approvestatus,order, currPage, pageSize,
-				true);
-		int totalCount = goodsService.count(sid, title, barcode, cateId,
-				maxPrice, minPrice, maxSaleNum, minSaleNum, maxStoreNum,
-				minStoreNum, state);*/
+			@RequestParam(defaultValue = " ordernum ") String order,
+			@RequestParam(defaultValue = "1") int page,
+			@RequestParam(defaultValue = "10") int rows, ModelMap map,
+			Product param, HttpServletRequest request) {
 		Datagrid datagrid = new Datagrid();
-		datagrid.setRows(prodList);
-		datagrid.setTotal(Long.valueOf(totalCount));
+		List<Product> list = goodsService.getProducts(param, order, page, rows);
+		datagrid.setRows(list);
+		datagrid.setTotal(Long.valueOf(30));
 		return datagrid;
 	}
 	
 	@RequiresPermissions("goods:update")
-	@RequestMapping(value = "/{sid}/{pid}/update", method = RequestMethod.GET)
+	@RequestMapping(value = "/{pid}/update", method = RequestMethod.GET)
 	public String showUpdateForm(@PathVariable("sid") Long sid,@PathVariable("pid") Long pid, Model model) {
 		model.addAttribute("product", goodsService.getProduct(sid, pid, false));
 		model.addAttribute("op", "修改");
@@ -83,8 +69,8 @@ public class ProductController {
 	}
 	
 	@RequiresPermissions("goods:update")
-	@RequestMapping(value = "/{sid}/{pid}/update", method = RequestMethod.POST)
-	public String update(@PathVariable("pid") Long pid, ProductT product,
+	@RequestMapping(value = "/{pid}/update", method = RequestMethod.POST)
+	public String update(@PathVariable("pid") Long pid, Product product,
 			RedirectAttributes redirectAttributes) {
 		//brandService.update(brand);
 		redirectAttributes.addFlashAttribute("msg", "修改成功");

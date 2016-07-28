@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gsccs.b2c.api.domain.Cart;
 import com.gsccs.b2c.plat.shop.model.GoodsT;
-import com.gsccs.b2c.plat.shop.model.ProductT;
 import com.gsccs.b2c.plat.shop.service.GoodsService;
 import com.gsccs.b2c.plat.site.service.CartService;
+import com.gsccs.eb.api.domain.goods.Product;
 
 /**
  * 购物车API实现类
@@ -32,18 +32,18 @@ public class CartServiceAPI implements CartServiceI {
 		
 		if(carts.size() > 0) {
 			for (com.gsccs.b2c.plat.site.model.Cart car : carts) {
-				ProductT product = goodsService.getProduct(siteId, car.getProductId(), true);
+				Product product = goodsService.getProduct(siteId, car.getProductId(), true);
 				GoodsT goods = goodsService.getGoods(siteId, car.getSku());
 				
 				Cart cart = new Cart();
 				//cart.setId(car.getId());
 				cart.setAmount(car.getNumber() * product.getPrice());
-				cart.setDesc(product.getBrief());
+				cart.setDesc(product.getRemark());
 				cart.setNumber(car.getNumber());
 				cart.setPicUrl(product.getImg());
 				cart.setPid(car.getProductId());
 				cart.setPrice(product.getPrice());
-				cart.setMktPrice(product.getMktprice());
+				cart.setMktPrice(product.getMkprice());
 				cart.setSku(goods.getSpecstr());
 				
 				cars.add(cart);
@@ -90,19 +90,19 @@ public class CartServiceAPI implements CartServiceI {
 	public Cart getCart(Long siteId, Long id) {
 		com.gsccs.b2c.plat.site.model.Cart car = cartService.getCart(siteId, id);
 		
-		ProductT product = goodsService.getProduct(siteId, car.getProductId(), true);
+		Product product = goodsService.getProduct(siteId, car.getProductId(), true);
 		GoodsT goods = goodsService.getGoods(siteId, car.getSku());
 		
 		Cart cart = new Cart();
 		
 		//cart.setId(car.getId());
 		cart.setAmount(car.getNumber() * product.getPrice());
-		cart.setDesc(product.getBrief());
+		cart.setDesc(product.getRemark());
 		cart.setNumber(car.getNumber());
 		cart.setPicUrl(product.getImg());
 		cart.setPid(car.getProductId());
 		cart.setPrice(product.getPrice());
-		cart.setMktPrice(product.getMktprice());
+		cart.setMktPrice(product.getMkprice());
 		cart.setSku(goods.getSpecstr());
 		
 		return cart;
@@ -117,7 +117,7 @@ public class CartServiceAPI implements CartServiceI {
 			Double amount = 0.0;
 			int number = 0;
 			for (com.gsccs.b2c.plat.site.model.Cart car : carts) {
-				ProductT product = goodsService.getProduct(siteId, car.getProductId(), true);
+				Product product = goodsService.getProduct(siteId, car.getProductId(), true);
 				
 				amount += car.getNumber() * product.getPrice();
 				number ++;

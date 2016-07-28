@@ -14,11 +14,11 @@
 		$('.title').live("click",function() {
 			var $ul = $(this).next('ul');
 			//$('dd').find('ul').slideUp();
-			$(".menuson").slideUp();
+			//$(".menuson").slideUp();
 			if ($ul.is(':visible')) {
-				$(this).next('ul').slideUp();
+				//$(this).next('ul').slideUp();
 			} else {
-				$(this).next('ul').slideDown();
+				//$(this).next('ul').slideDown();
 			}
 		});
 		

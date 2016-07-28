@@ -27,7 +27,7 @@ public class IndexController {
 	@Autowired
 	private ResourceService resourceService;
 	@Autowired
-	private AuthService authorizationService;
+	private AuthService authService;
 
 	@RequestMapping("/")
 	public String index(@CurrentUser User loginUser, Model model) {
@@ -42,10 +42,10 @@ public class IndexController {
 	
 	@RequestMapping("/top")
 	public String top(@CurrentUser User loginUser, Model model) {
-		Set<String> permissions = authorizationService.findPermissions(
+		Set<String> permissions = authService.findPermissions(
 				Constants.SERVER_APP_KEY, loginUser.getUsername());
 		Resource param = new Resource();
-		param.setParentId(1l);
+		param.setId(1l);
 		List<Resource> menus = resourceService.findMenus(permissions, param);
 		model.addAttribute("menus", menus);
 		return "top";
@@ -55,14 +55,13 @@ public class IndexController {
 	@ResponseBody
 	public List<Resource> menu(@CurrentUser User loginUser, Long pid,
 			Model model) {
-		Set<String> permissions = authorizationService.findPermissions(
+		Set<String> permissions = authService.findPermissions(
 				Constants.SERVER_APP_KEY, loginUser.getUsername());
 		if (null == pid) {
-			pid = 1l;
+			pid = 0l;
 		}
 		Resource param = new Resource();
-		param.setParentId(pid);
-		
+		param.setId(pid);
 		List<Resource> menutree = resourceService.findMenus(permissions, param);
 		return menutree;
 	}

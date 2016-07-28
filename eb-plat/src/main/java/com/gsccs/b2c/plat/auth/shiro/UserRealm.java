@@ -1,5 +1,8 @@
 package com.gsccs.b2c.plat.auth.shiro;
 
+import java.util.Iterator;
+import java.util.Set;
+
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -35,18 +38,20 @@ public class UserRealm extends AuthorizingRealm {
         String username = (String)principals.getPrimaryPrincipal();
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         authorizationInfo.setRoles(authService.findRoles(Constants.SERVER_APP_KEY, username));
+        
+        Set<String> authlist = authService.findPermissions(Constants.SERVER_APP_KEY, username);
+        Iterator<String> its = authlist.iterator();
+        while(its.hasNext()){
+        	System.out.println(its.next());
+        }
         authorizationInfo.setStringPermissions(authService.findPermissions(Constants.SERVER_APP_KEY, username));
         return authorizationInfo;
     }
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-
         String username = (String)token.getPrincipal();
         User user = userService.findByUsername(username);
-        System.out.println("###################");
-        System.out.println("username:"+username);
-        System.out.println("###################");
         if(user == null) {
             throw new UnknownAccountException();//没找到帐号
         }

@@ -82,7 +82,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from plat_type
+    from eb_type
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -97,7 +97,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from plat_type
+    from eb_type
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -114,22 +114,22 @@
     -->
     select 
     <include refid="Base_Column_List" />
-    from plat_type
+    from eb_type
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from plat_type
+    delete from eb_type
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.shop.model.TypeExample" >
-    delete from plat_type
+    delete from eb_type
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   
   <insert id="insert" useGeneratedKeys="true" keyProperty="id"  parameterType="com.gsccs.eb.api.domain.goods.Type" >
-    insert into plat_type (id, title, alias, 
+    insert into eb_type (id, title, alias, 
       is_physical, use_brand, use_props, 
       use_params, use_minfo, use_floatstore, 
       state, orderNum)
@@ -139,7 +139,7 @@
       #{state,jdbcType=VARCHAR}, #{ordernum,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.gsccs.eb.api.domain.goods.Type" >
-    insert into plat_type
+    insert into eb_type
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -212,13 +212,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.gsccs.b2c.plat.shop.model.TypeExample" resultType="java.lang.Integer" >
-    select count(*) from plat_type
+    select count(*) from eb_type
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update plat_type
+    update eb_type
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
@@ -259,7 +259,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update plat_type
+    update eb_type
     set id = #{record.id,jdbcType=BIGINT},
       title = #{record.title,jdbcType=VARCHAR},
       alias = #{record.alias,jdbcType=VARCHAR},
@@ -276,7 +276,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.gsccs.eb.api.domain.goods.Type" >
-    update plat_type
+    update eb_type
     <set >
       <if test="title != null" >
         title = #{title,jdbcType=VARCHAR},
@@ -312,7 +312,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.gsccs.eb.api.domain.goods.Type" >
-    update plat_type
+    update eb_type
     set title = #{title,jdbcType=VARCHAR},
       alias = #{alias,jdbcType=VARCHAR},
       is_physical = #{isPhysical,jdbcType=VARCHAR},

@@ -119,9 +119,10 @@
                 /login = authc
                 /logout = logout
                 /authenticated = authc
-                /** = user,sysUser
+               	/** = user,sysUser
             </value>
         </property>
+        <!--  /** = user,sysUser -->
     </bean>
 
     <!-- Shiro生命周期处理器-->

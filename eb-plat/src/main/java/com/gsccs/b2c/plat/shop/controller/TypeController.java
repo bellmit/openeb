@@ -37,11 +37,11 @@ public class TypeController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String list() {
 
-		return "type/list";
+		return "goods/type_list";
 	}
 
 	@RequiresPermissions("type:view")
-	@RequestMapping(value = "/datagrid",method = RequestMethod.POST)
+	@RequestMapping(value = "/datagrid", method = RequestMethod.POST)
 	@ResponseBody
 	public Datagrid list(
 			@RequestParam(defaultValue = " orderNum  ") String order,
@@ -62,7 +62,7 @@ public class TypeController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String showCreateForm(Model model) {
 		model.addAttribute("op", "新增");
-		return "type/edit";
+		return "goods/type_edit";
 	}
 
 	@RequiresPermissions("type:create")
@@ -81,7 +81,7 @@ public class TypeController {
 			Model model) {
 		model.addAttribute("type", typeService.getType(typeId));
 		model.addAttribute("op", "修改");
-		return "type/edit";
+		return "goods/type_edit";
 	}
 
 	@RequiresPermissions("type:update")

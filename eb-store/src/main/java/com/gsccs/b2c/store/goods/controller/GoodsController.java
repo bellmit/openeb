@@ -205,21 +205,9 @@ public class GoodsController {
 		long siteId = (Long) request.getSession().getAttribute("siteId");
 
 		// 1、保存产品信息
-		Product p = new Product();
-		p.setSite(siteId);
-		p.setCateId(product.getCateId()); // 产品分类
-		p.setCateName(product.getCateName()); // 类目名称
-		p.setTitle(product.getTitle()); // 商品名称
-		p.setTsc(product.getTsc()); // 商品编号
-		p.setKeyWords(product.getKeyWords()); // 商品关键字
-		p.setBrief(product.getBrief()); // 商品简介
-		p.setBrand(product.getBrand()); // 商品品牌
-		p.setPostage(product.getPostage()); // 运费模板
-		p.setStatus(product.getStatus());
-		long productId = 0;
-
+		Long productid = null;
 		try {
-			productId = this.goodsServiceAPI.addProduct(siteId, p);
+			productid = this.goodsServiceAPI.addProduct(siteId, product);
 		} catch (ApiException e) {
 			e.printStackTrace();
 		}
@@ -231,7 +219,7 @@ public class GoodsController {
 		 */
 
 		// 3、保存产品图片信息
-		String picPath = product.getPicUrl();// 商品图片
+		String picPath = product.getImg();// 商品图片
 
 		if (picPath.trim().length() > 0 && null != picPath) {
 			String[] picPaths = picPath.substring(0, picPath.length() - 1)
@@ -246,14 +234,14 @@ public class GoodsController {
 
 					Album pi = new Album();
 					pi.setUrl(picPaths[i]);
-					pi.setProductId(productId);
+					pi.setProductId(productid);
 					piList.add(pi);
 				}
 				imgPath = picPaths[0];
 				if (null != piList && piList.size() > 0) {
 					try {
-						goodsServiceAPI.addPImg(siteId, productId, piList);
-						goodsServiceAPI.editProductById(siteId, productId,
+						goodsServiceAPI.addPImg(siteId, productid, piList);
+						goodsServiceAPI.editProductById(siteId, productid,
 								imgPath);
 					} catch (ApiException e) {
 						e.printStackTrace();
@@ -269,7 +257,7 @@ public class GoodsController {
 			String[] skuValue = skuArray[0].split(";");
 			try {
 				goodsServiceAPI
-						.editProductPrice(siteId, productId, skuValue[4]);
+						.editProductPrice(siteId, productid, skuValue[4]);
 			} catch (ApiException e) {
 				e.printStackTrace();
 			}
@@ -300,32 +288,26 @@ public class GoodsController {
 				sku.setMkprice(Double.parseDouble(skuValue[6]));
 				sku.setGoodsWeight(Double.parseDouble(skuValue[7]));
 				sku.setSalenum(Integer.parseInt(skuValue[8]));
-				sku.setProductId(productId);
+				sku.setProductId(productid);
 				sku.setCreated(new Date().toString());
 
 				skus.add(sku);
 			}
 
 			try {
-				this.goodsServiceAPI.addSKU(siteId, productId, skus);
+				this.goodsServiceAPI.addSKU(siteId, productid, skus);
 			} catch (ApiException e) {
 				e.printStackTrace();
 			}
-		} else {
-			p.setPrice(product.getPrice()); // 销售价
-			p.setMarketPrice(product.getMarketPrice()); // 市场价
-			p.setBarcode(product.getBarcode()); // 货号
-			// p.setItemWeight(product.getItemWeight()); //重量
-			p.setLocknum(product.getLocknum()); // 库存
-		}
+		} 
 
 		// 5.保存商品描述 desc
 
-		System.out.println("商品描述=========" + product.getDesc());
-		if (null != product.getDesc() && product.getDesc().trim().length() > 0) {
+		System.out.println("商品描述=========" + product.getContent());
+		if (null != product.getContent() && product.getContent().trim().length() > 0) {
 			// 商品描述，缓存中存的键是(常亮+siteID + 商品编号)：CacheConst.PRODUCT_ + siteId _tsc
 			// ssdbTemplate.boundValueOps(CacheConst.PRODUCT_DESC_+ siteId + "_"
-			// + productId).set(product.getDesc());
+			// + productid).set(product.getContent());
 		}
 
 		// 6.保存属性
@@ -345,7 +327,7 @@ public class GoodsController {
 				}
 				// ippList.add(ipp);
 				// ssdbTemplate.boundValueOps(CacheConst.STOREY_ + siteId + "_"
-				// + productId + "_input_"+propId).set(ipp);
+				// + productid + "_input_"+propId).set(ipp);
 				// .rightPush(ipp);
 			}
 		}
@@ -370,7 +352,7 @@ public class GoodsController {
 							cpp.setPropVal(pvId[0]);
 							// cppList.add(cpp);
 							// ssdbTemplate.boundListOps(CacheConst.STOREY_ +
-							// siteId + "_" + productId +
+							// siteId + "_" + productid +
 							// "_check"+propId).rightPush(cpp);
 						}
 					}
@@ -392,7 +374,7 @@ public class GoodsController {
 					spp.setPropVal(pVa[0]);
 				}
 				// ssdbTemplate.boundListOps(CacheConst.STOREY_ + siteId + "_" +
-				// productId + "_select").rightPush(spp);
+				// productid + "_select").rightPush(spp);
 			}
 
 		}
@@ -406,17 +388,17 @@ public class GoodsController {
 		List<GoodsSolr> list = new ArrayList<GoodsSolr>();
 
 		GoodsSolr tg = new GoodsSolr();
-		tg.setId(siteId + "_" + productId + "");
+		tg.setId(siteId + "_" + productid + "");
 		tg.setSiteid(siteId + "");
-		tg.setCateid(product.getCateId());
-		tg.setCatestr(product.getCateId() + "-" + product.getCateName());
+		tg.setCateid(product.getCategoryid()+"");
+		tg.setCatestr(product.getCategoryid() + "-" + product.getCatetitle());
 
-		Brand b = brandServiceAPI.getBrand(product.getBrand());
+		Brand b = brandServiceAPI.getBrand(product.getBrandid());
 
-		tg.setBrandid(product.getBrand() + "");
-		tg.setBrandstr(product.getBrand() + "-" + b.getName());
+		tg.setBrandid(product.getBrandid() + "");
+		tg.setBrandstr(product.getBrandid() + "-" + b.getName());
 		tg.setTitle(product.getTitle());
-		tg.setProductid(productId + "");
+		tg.setProductid(productid + "");
 
 		String price = "";
 		if (null != skuArray && skuArray.length > 0) {
@@ -429,7 +411,7 @@ public class GoodsController {
 		tg.setPrice(Float.valueOf(price));
 
 		// 图片
-		// String picPath1 = product.getPicUrl();//商品图片
+		// String picPath1 = product.getImg();//商品图片
 		if (picPath.trim().length() > 0 && null != picPath) {
 			String[] picPaths = picPath.substring(0, picPath.length() - 1)
 					.split("\\|");
@@ -733,13 +715,11 @@ public class GoodsController {
 		if (null != id) {
 			try {
 				product = goodsServiceAPI.getProduct(sid, Long.valueOf(id));
-				System.out.println("getBrief==" + product.getBrief());
 				System.out.println("getBarcode==" + product.getBarcode());
 
-				if (null != product && product.getCateId() != null
-						&& product.getCateId().trim().length() > 0) {
-					cate = cateServiceAPI.getCate(Long.valueOf(product
-							.getCateId()));
+				if (null != product && product.getCategoryid() != null) {
+					cate = cateServiceAPI.getCate(product
+							.getCategoryid());
 					model.addAttribute("cate", cate);
 				}
 				// 获得商品描述
@@ -790,37 +770,18 @@ public class GoodsController {
 	public JsonMsg productEditDo(Product product, String[] skuArray,
 			String checkVals, String inputVals, String selectVals,
 			HttpServletRequest request) throws ApiException {
-		long sid = (Long) request.getSession().getAttribute("siteId");
 		JsonMsg msg = new JsonMsg();
+		Long productid = null;
+		Long sid = null;
 		// 1、保存产品信息
-		Product p = new Product();
-		Long productId = product.getpId();
-		p.setSite(sid);
-		p.setStatus(product.getStatus());
-		p.setpId(product.getpId());
-		p.setCateId(product.getCateId()); // 产品分类
-		p.setCateName(product.getCateName()); // 类目名称
-		p.setTitle(product.getTitle()); // 商品名称
-		p.setTsc(product.getTsc()); // 商品编号
-		p.setKeyWords(product.getKeyWords()); // 商品关键字
-		p.setBrief(product.getBrief()); // 商品简介
-		p.setBrand(product.getBrand()); // 商品品牌
-		p.setPostage(product.getPostage()); // 运费模板
-		// p.setPicUrl(product.getPicUrl());
-		p.setBarcode(product.getBarcode());
-
-		System.out.println("===========" + product.getPicUrl());
-		/*
-		 * p.setPrice(product.getPrice()); //销售价
-		 * p.setMarketPrice(product.getMarketPrice()); //市场价
-		 * p.setBarcode(product.getBarcode()); //货号
-		 * p.setItemWeight(product.getItemWeight()); //重量
-		 * p.setWithHoldQuantity(product.getWithHoldQuantity());
-		 */// 库存
-		goodsServiceAPI.editProduct(sid, p);
+		if (null !=product){
+			sid = product.getShopid();
+			productid = product.getId();
+		}
+		goodsServiceAPI.editProduct(sid, product);
 
 		// 3、保存产品图片信息
-		String picPath = product.getPicUrl();// 商品图片
+		String picPath = product.getImg();// 商品图片
 
 		System.out.println("picPaht==" + picPath);
 
@@ -837,15 +798,15 @@ public class GoodsController {
 
 					Album pi = new Album();
 					pi.setUrl(picPaths[i]);
-					pi.setProductId(productId);
+					pi.setProductId(productid);
 					piList.add(pi);
 				}
 				imgPath = picPaths[0];
 				if (null != piList && piList.size() > 0) {
 					try {
-						goodsServiceAPI.addPImg(sid, productId, piList);
+						goodsServiceAPI.addPImg(sid, productid, piList);
 						goodsServiceAPI
-								.editProductById(sid, productId, imgPath);
+								.editProductById(sid, productid, imgPath);
 					} catch (ApiException e) {
 						e.printStackTrace();
 					}
@@ -859,7 +820,7 @@ public class GoodsController {
 		if (null != skuArray) {
 			String[] skuValue = skuArray[0].split("=");
 			try {
-				goodsServiceAPI.editProductPrice(sid, productId, skuValue[4]);
+				goodsServiceAPI.editProductPrice(sid, productid, skuValue[4]);
 			} catch (ApiException e) {
 				e.printStackTrace();
 			}
@@ -875,7 +836,7 @@ public class GoodsController {
 			String[] skuVs = skuArray[0].split("=");
 			// 判断sku是修改还是添加 。skuVa==10的时候。是要修改sku信息。skuVa==9的时候。添加sku信息
 			//
-			long pid = product.getpId();
+			long pid = product.getId();
 			if (skuVs.length == 10) {
 				Sku sku;
 				for (String s : skuArray) {
@@ -901,7 +862,7 @@ public class GoodsController {
 						sku.setSalenum(Integer.parseInt(skuValue[8]));
 					}
 
-					sku.setProductId(product.getpId());
+					sku.setProductId(product.getId());
 					sku.setCreated(new Date().toString());
 
 					skus.add(sku);
@@ -923,35 +884,35 @@ public class GoodsController {
 					sku.setGoodsWeight(Double.parseDouble(skuValue[7]));
 					sku.setSalenum(Integer.parseInt(skuValue[8]));
 					// sku.setGoodsQuantity(Long.parseLong(skuValue[8]));
-					sku.setProductId(product.getpId());
+					sku.setProductId(product.getId());
 					sku.setCreated(new Date().toString());
 
 					skus.add(sku);
 				}
 				try {
-					this.goodsServiceAPI.addSKU(sid, productId, skus);
+					this.goodsServiceAPI.addSKU(sid, productid, skus);
 				} catch (ApiException e) {
 					e.printStackTrace();
 				}
 			}
 
 		} else {
-			p.setPrice(product.getPrice()); // 销售价
-			p.setMarketPrice(product.getMarketPrice()); // 市场价
-			p.setBarcode(product.getBarcode()); // 货号
+			product.setPrice(product.getPrice()); // 销售价
+			product.setMkprice(product.getMkprice()); // 市场价
+			product.setBarcode(product.getBarcode()); // 货号
 			// p.setItemWeight(product.getItemWeight()); //重量
-			p.setLocknum(product.getLocknum()); // 库存
+			product.setLocknum(product.getLocknum()); // 库存
 		}
 
 		// 5.保存商品描述 desc
-		if (null != product.getDesc() && product.getDesc().trim().length() > 0) {
+		if (null != product.getContent() && product.getContent().trim().length() > 0) {
 
-			System.out.println("desc==" + product.getDesc());
+			System.out.println("desc==" + product.getContent());
 			// 商品描述，缓存中存的键是(常亮+siteID + 商品编号)：CacheConst.PRODUCT_ + siteId _tsc
 			System.out.println("key=" + CacheConst.PRODUCT_DESC_ + sid + "_"
-					+ product.getpId());
+					+ product.getId());
 			// ssdbTemplate.boundValueOps(CacheConst.PRODUCT_DESC_+ sid + "_"+
-			// product.getpId()).set(product.getDesc());
+			// product.getpId()).set(product.getContent());
 		}
 
 		// 6.保存属性
@@ -971,7 +932,7 @@ public class GoodsController {
 				}
 				// ippList.add(ipp);
 				// ssdbTemplate.boundValueOps(CacheConst.STOREY_ + sid + "_" +
-				// productId + "_input_"+propId).set(ipp);
+				// productid + "_input_"+propId).set(ipp);
 				// .rightPush(ipp);
 			}
 		}
@@ -996,7 +957,7 @@ public class GoodsController {
 							cpp.setPropVal(pvId[0]);
 							// cppList.add(cpp);
 							// ssdbTemplate.boundListOps(CacheConst.STOREY_ +
-							// sid + "_" + productId +
+							// sid + "_" + productid +
 							// "_check"+propId).rightPush(cpp);
 						}
 					}
@@ -1018,7 +979,7 @@ public class GoodsController {
 					spp.setPropVal(pVa[0]);
 				}
 				// ssdbTemplate.boundListOps(CacheConst.STOREY_ + sid + "_" +
-				// productId + "_select").rightPush(spp);
+				// productid + "_select").rightPush(spp);
 			}
 
 		}
@@ -1032,17 +993,17 @@ public class GoodsController {
 		List<GoodsSolr> list = new ArrayList<GoodsSolr>();
 
 		GoodsSolr tg = new GoodsSolr();
-		tg.setId(sid + "_" + productId + "");
+		tg.setId(sid + "_" + productid + "");
 		tg.setSiteid(sid + "");
-		tg.setCateid(product.getCateId());
-		tg.setCatestr(product.getCateId() + "-" + product.getCateName());
+		tg.setCateid(product.getCategoryid()+"");
+		tg.setCatestr(product.getCategoryid() + "-" + product.getCatetitle());
 
-		Brand b = brandServiceAPI.getBrand(product.getBrand());
+		Brand b = brandServiceAPI.getBrand(product.getBrandid());
 
-		tg.setBrandid(product.getBrand() + "");
-		tg.setBrandstr(product.getBrand() + "-" + b.getName());
+		tg.setBrandid(product.getBrandid() + "");
+		tg.setBrandstr(product.getBrandid() + "-" + b.getName());
 		tg.setTitle(product.getTitle());
-		tg.setProductid(productId + "");
+		tg.setProductid(productid + "");
 
 		String price = "";
 		if (null != skuArray && skuArray.length > 0) {
@@ -1055,7 +1016,7 @@ public class GoodsController {
 		tg.setPrice(Float.valueOf(price));
 
 		// 图片
-		// String picPath1 = product.getPicUrl();//商品图片
+		// String picPath1 = product.getImg();//商品图片
 		if (null != picPath && picPath.trim().length() > 0) {
 			String[] picPaths = picPath.substring(0, picPath.length() - 1)
 					.split("\\|");

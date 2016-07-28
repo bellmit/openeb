@@ -493,7 +493,7 @@ public class OrderController {
 				shiptypeid = p.getPostage();
 				
 				item.setPtitle(p.getTitle());
-				item.setPurl(p.getPicUrl());
+				item.setPurl(p.getImg());
 				item.setAccout(totalfee);
 				item.setBuyer(user.getUserId().toString());
 				item.setSeller(siteId.toString());

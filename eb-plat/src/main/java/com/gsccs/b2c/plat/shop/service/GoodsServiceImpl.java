@@ -10,14 +10,14 @@ import com.gsccs.b2c.plat.shop.dao.BuyerDisTMapper;
 import com.gsccs.b2c.plat.shop.dao.BuyerLevelTMapper;
 import com.gsccs.b2c.plat.shop.dao.GoodsTMapper;
 import com.gsccs.b2c.plat.shop.dao.ProductExtraMapper;
-import com.gsccs.b2c.plat.shop.dao.ProductTMapper;
+import com.gsccs.b2c.plat.shop.dao.ProductMapper;
 import com.gsccs.b2c.plat.shop.model.BuyerDisT;
 import com.gsccs.b2c.plat.shop.model.BuyerDisTExample;
 import com.gsccs.b2c.plat.shop.model.GoodsT;
 import com.gsccs.b2c.plat.shop.model.GoodsTExample;
+import com.gsccs.b2c.plat.shop.model.ProductExample;
 import com.gsccs.b2c.plat.shop.model.ProductExtra;
-import com.gsccs.b2c.plat.shop.model.ProductT;
-import com.gsccs.b2c.plat.shop.model.ProductTExample;
+import com.gsccs.eb.api.domain.goods.Product;
 
 /**
  * 商品服务
@@ -29,7 +29,7 @@ import com.gsccs.b2c.plat.shop.model.ProductTExample;
 public class GoodsServiceImpl implements GoodsService {
 
 	@Autowired
-	private ProductTMapper productTMapper;
+	private ProductMapper productMapper;
 	@Autowired
 	private GoodsTMapper goodsTMapper;
 	@Autowired
@@ -40,17 +40,17 @@ public class GoodsServiceImpl implements GoodsService {
 	private BuyerDisTMapper buyerDisTMapper;
 
 	@Override
-	public Long addProduct(Long sid, ProductT p) {
+	public Long addProduct(Long sid, Product p) {
 		if (null != p) {
-			int salenum = p.getSalenum()==null?0:p.getSalenum();
-			int storenum = p.getStorenum()==null?0:p.getStorenum();
-			int evalnum = p.getEvalnum()==null?0:p.getEvalnum();
-			int locknum = p.getLocknum()==null?0:p.getLocknum();
+			int salenum = p.getSalenum() == null ? 0 : p.getSalenum();
+			int storenum = p.getStorenum() == null ? 0 : p.getStorenum();
+			int evalnum = p.getEvalnum() == null ? 0 : p.getEvalnum();
+			int locknum = p.getLocknum() == null ? 0 : p.getLocknum();
 			p.setSalenum(salenum);
 			p.setStorenum(storenum);
 			p.setEvalnum(evalnum);
 			p.setLocknum(locknum);
-			productTMapper.insert(sid, p);
+			productMapper.insert(sid, p);
 			if (StringUtils.isNotEmpty(p.getParamStr())
 					|| StringUtils.isNotEmpty(p.getPropStr())
 					|| StringUtils.isNotEmpty(p.getReqInfoStr())) {
@@ -86,7 +86,6 @@ public class GoodsServiceImpl implements GoodsService {
 		return goodsTMapper.selectPageByExample(sid, example);
 	}
 
-	
 	public void proSearchParam(GoodsT p, GoodsTExample.Criteria criteria) {
 		if (p != null) {
 			if (p.getId() != null) {
@@ -102,10 +101,10 @@ public class GoodsServiceImpl implements GoodsService {
 	/**
 	 * 处理查询条件
 	 * 
-	 * @param ProductT
+	 * @param Product
 	 * @param criteria
 	 */
-	public void proSearchParam(ProductT p, ProductTExample.Criteria criteria) {
+	public void proSearchParam(Product p, ProductExample.Criteria criteria) {
 		if (p != null) {
 			if (p.getId() != null) {
 				criteria.andIdEqualTo(p.getId());
@@ -137,8 +136,8 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public ProductT getProduct(Long sid, Long pid, boolean extra) {
-		ProductT pt = productTMapper.selectByPrimaryKey(sid, pid);
+	public Product getProduct(Long sid, Long pid, boolean extra) {
+		Product pt = productMapper.selectByPrimaryKey(sid, pid);
 		if (null != pt && extra) {
 			ProductExtra pe = productExtraMapper.selectByPrimaryKey(pid);
 			if (null != pe) {
@@ -151,13 +150,13 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public List<ProductT> getProducts(Long sid, String title, String barcode,
+	public List<Product> getProducts(Long sid, String title, String barcode,
 			Long cateId, Double maxPrice, Double minPrice, Integer maxSaleNum,
 			Integer minSaleNum, Integer maxStoreNum, Integer minStoreNum,
 			String status, String order, int currPage, int pageSize,
 			boolean iscache) {
-		ProductTExample example = new ProductTExample();
-		ProductTExample.Criteria c = example.createCriteria();
+		ProductExample example = new ProductExample();
+		ProductExample.Criteria c = example.createCriteria();
 		if (StringUtils.isNotEmpty(title)) {
 			c.andTitleLike("%" + title.trim() + "%");
 		}
@@ -193,7 +192,7 @@ public class GoodsServiceImpl implements GoodsService {
 		example.setOrderByClause(order);
 		example.setCurrPage(currPage);
 		example.setPageSize(pageSize);
-		return productTMapper.selectPageByExample(sid, example);
+		return productMapper.selectPageByExample(example);
 	}
 
 	@Override
@@ -201,8 +200,8 @@ public class GoodsServiceImpl implements GoodsService {
 			Double maxPrice, Double minPrice, Integer maxSaleNum,
 			Integer minSaleNum, Integer maxStoreNum, Integer minStoreNum,
 			String status) {
-		ProductTExample example = new ProductTExample();
-		ProductTExample.Criteria c = example.createCriteria();
+		ProductExample example = new ProductExample();
+		ProductExample.Criteria c = example.createCriteria();
 		if (StringUtils.isNotEmpty(title)) {
 			c.andTitleLike("%" + title.trim() + "%");
 		}
@@ -236,8 +235,8 @@ public class GoodsServiceImpl implements GoodsService {
 		if (null != minStoreNum) {
 			c.andStorenumGreaterThanOrEqualTo(minStoreNum);
 		}
-		
-		return productTMapper.countByExample(sid, example);
+
+		return productMapper.countByExample(sid, example);
 	}
 
 	@Override
@@ -272,11 +271,11 @@ public class GoodsServiceImpl implements GoodsService {
 
 	@Override
 	public void editProductStatus(Long sid, Long productId, String status) {
-		ProductT pt = null;
+		Product pt = null;
 		if (null != sid && null != productId && null != status) {
-			pt = productTMapper.selectByPrimaryKey(sid, productId);
+			pt = productMapper.selectByPrimaryKey(sid, productId);
 			pt.setStatus(status);
-			productTMapper.updateByPrimaryKey(sid, pt);
+			productMapper.updateByPrimaryKey(sid, pt);
 		}
 
 	}
@@ -284,7 +283,7 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public void delProduct(Long sid, Long pId) {
 		if (null != sid && null != pId) {
-			productTMapper.deleteByPrimaryKey(sid, pId);
+			productMapper.deleteByPrimaryKey(sid, pId);
 		}
 	}
 
@@ -297,8 +296,8 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public void editProduct(Long sid, ProductT pt) {
-		productTMapper.updateByPrimaryKey(sid, pt);
+	public void editProduct(Long sid, Product pt) {
+		productMapper.updateByPrimaryKey(sid, pt);
 	}
 
 	@Override
@@ -307,31 +306,39 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public List<ProductT> getHotProducts(Long sid) {
-		ProductTExample example = new ProductTExample();
-		ProductTExample.Criteria c = example.createCriteria();
+	public List<Product> getHotProducts(Long sid) {
+		ProductExample example = new ProductExample();
+		ProductExample.Criteria c = example.createCriteria();
 		c.andIshotEqualTo("1");
-		return productTMapper.selectByExample(sid, example);
+		return productMapper.selectByExample(sid, example);
 	}
 
 	@Override
-	public List<ProductT> getTopProducts(Long sid) {
-		ProductTExample example = new ProductTExample();
-		ProductTExample.Criteria c = example.createCriteria();
+	public List<Product> getTopProducts(Long sid) {
+		ProductExample example = new ProductExample();
+		ProductExample.Criteria c = example.createCriteria();
 		c.andIstopEqualTo("1");
-		return productTMapper.selectByExample(sid, example);
+		return productMapper.selectByExample(sid, example);
 	}
 
 	@Override
-	public List<ProductT> getProduct(Long sid) {
-		ProductTExample example = new ProductTExample();
-		ProductTExample.Criteria c = example.createCriteria();
-		return productTMapper.selectByExample(sid, example);
+	public List<Product> getProduct(Long sid) {
+		ProductExample example = new ProductExample();
+		ProductExample.Criteria c = example.createCriteria();
+		return productMapper.selectByExample(sid, example);
 	}
 
 	@Override
 	public void productUnsale(Long sid) {
-		productTMapper.updateProductUnsale(sid, 0);
+		productMapper.updateProductUnsale(sid, 0);
+	}
+
+	@Override
+	public List<Product> getProducts(Product param, String order, int currPage,
+			int pageSize) {
+		ProductExample example = new ProductExample();
+		ProductExample.Criteria c = example.createCriteria();
+		return productMapper.selectPageByExample(example);
 	}
 
 }

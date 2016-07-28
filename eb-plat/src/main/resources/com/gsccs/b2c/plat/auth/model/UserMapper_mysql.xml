@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gsccs.b2c.plat.auth.dao.UserMapper">
+
 	<resultMap id="BaseResultMap" type="com.gsccs.b2c.plat.auth.model.User">
 		<id column="id" property="id" jdbcType="BIGINT" />
 		<result column="orgid" property="orgid" jdbcType="BIGINT" />
@@ -12,6 +13,7 @@
 		<!-- 组织机构名称 -->
 		<result column="orgname" property="orgname" jdbcType="VARCHAR" />
 	</resultMap>
+	
 	<sql id="Example_Where_Clause">
 		<where>
 			<foreach collection="oredCriteria" item="criteria" separator="or">
@@ -103,7 +105,7 @@
 		(SELECT
 				a.id, orgid,title, username, password, salt, locked,b.name as orgname
 			FROM plat_sys_user a
-			LEFT JOIN sys_organization b
+			LEFT JOIN plat_sys_org b
 			ON a.orgid = b.id
 		) as aa
 		<if test="_parameter != null">

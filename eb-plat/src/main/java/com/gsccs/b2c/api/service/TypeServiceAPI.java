@@ -12,12 +12,12 @@ import com.gsccs.b2c.api.domain.CateParam;
 import com.gsccs.b2c.api.domain.CateProp;
 import com.gsccs.b2c.api.domain.CateSpec;
 import com.gsccs.b2c.api.domain.CateSpecVal;
-import com.gsccs.b2c.plat.shop.model.ProductT;
 import com.gsccs.b2c.plat.shop.service.CategoryService;
 import com.gsccs.b2c.plat.shop.service.GoodsService;
 import com.gsccs.b2c.plat.shop.service.TypeService;
 import com.gsccs.b2c.plat.utils.BeanUtilsEx;
 import com.gsccs.eb.api.domain.goods.Category;
+import com.gsccs.eb.api.domain.goods.Product;
 import com.gsccs.eb.api.domain.goods.Property;
 import com.gsccs.eb.api.domain.goods.PropsVal;
 import com.gsccs.eb.api.domain.goods.SpecVal;
@@ -160,10 +160,10 @@ public class TypeServiceAPI implements TypeServiceI {
 	@Override
 	public List<CateProp> getCatePropsByPid(Long sid, Long pid) {
 		List<CateProp> cpList =null;
-		ProductT pt = goodsService.getProduct(sid, pid, true);
+		Product pt = goodsService.getProduct(sid, pid, true);
 		Category ct = null;
-		if(null !=pt && pt.getCate().trim().length()> 0){
-			ct =categoryService.findById(Long.valueOf(pt.getCate()));
+		if(null !=pt && pt.getCategoryid()!=null){
+			ct =categoryService.findById(pt.getCategoryid());
 			if(null !=ct && null !=ct.getTypeId()){
 				cpList = this.getCateProps(ct.getTypeId());
 			}

@@ -1,10 +1,7 @@
 package com.gsccs.b2c.api.service;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,12 +16,11 @@ import com.gsccs.b2c.plat.order.model.OrderTrace;
 import com.gsccs.b2c.plat.order.service.OrderService;
 import com.gsccs.b2c.plat.order.service.PaymentService;
 import com.gsccs.b2c.plat.seller.service.StoreService;
-import com.gsccs.b2c.plat.shop.model.ProductT;
 import com.gsccs.b2c.plat.shop.service.GoodsService;
-import com.gsccs.b2c.plat.utils.BeanUtilsEx;
+import com.gsccs.eb.api.domain.goods.Product;
 import com.gsccs.eb.api.domain.trade.Order;
-import com.gsccs.eb.api.domain.trade.OrderItem;
 import com.gsccs.eb.api.domain.trade.Order.OrderState;
+import com.gsccs.eb.api.domain.trade.OrderItem;
 import com.gsccs.eb.api.exception.ApiException;
 
 /**
@@ -176,7 +172,7 @@ public class OrderServiceAPI implements OrderServiceI {
 					ordert.getId());
 			if (null != itemTs && itemTs.size() > 0) {
 				for (OrderItem itemT : itemTs) {
-					ProductT product = goodsService.getProduct(sid,
+					Product product = goodsService.getProduct(sid,
 							itemT.getProductid(), false);
 					if (null != product && null != itemT.getNum()) {
 						int locknum = product.getLocknum() - itemT.getNum();
@@ -268,7 +264,7 @@ public class OrderServiceAPI implements OrderServiceI {
 					order.getId());
 			if (null != itemTs && itemTs.size() > 0) {
 				for (OrderItem itemT : itemTs) {
-					ProductT product = goodsService.getProduct(sid,
+					Product product = goodsService.getProduct(sid,
 							itemT.getProductid(), false);
 					if (null != product && null != itemT.getNum()) {
 						int salenum = product.getSalenum() + itemT.getNum();
@@ -328,7 +324,7 @@ public class OrderServiceAPI implements OrderServiceI {
 					ordert.getId());
 			if (null != itemTs && itemTs.size() > 0) {
 				for (OrderItem itemT : itemTs) {
-					ProductT product = goodsService.getProduct(sid,
+					Product product = goodsService.getProduct(sid,
 							itemT.getProductid(), false);
 					if (null != product && null != itemT.getNum()) {
 						int evalnum = product.getEvalnum() == null ? 0

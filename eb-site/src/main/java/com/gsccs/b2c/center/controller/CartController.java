@@ -137,10 +137,10 @@ public class CartController {
 
 		OrderItem item = new OrderItem();
 		item.setId(productId.toString());
-		item.setProductid(product.getpId());
+		item.setProductid(product.getId());
 		item.setTitle(product.getTitle());
 		item.setPrice(product.getPrice());
-		item.setPurl(product.getPicUrl());
+		item.setPurl(product.getImg());
 		item.setNum(1);
 		item.setAddtime(new Date());
 		if (null != skuId) {

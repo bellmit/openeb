@@ -32,16 +32,18 @@ public class SpecController {
 
 	@Autowired
 	private SpecService specService;
-	
+
 	@RequiresPermissions("spec:view")
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(){
-		return "spec/list";
+	public String list() {
+		return "goods/spec_list";
 	}
+
 	@RequiresPermissions("spec:view")
 	@RequestMapping(value = "/datagrid")
 	@ResponseBody
-	public Datagrid list(@RequestParam(defaultValue = " orderNum ") String order,
+	public Datagrid list(
+			@RequestParam(defaultValue = " orderNum ") String order,
 			@RequestParam(defaultValue = "1") int currPage,
 			@RequestParam(defaultValue = "10") int pageSize, ModelMap map,
 			Specific spec, HttpServletRequest request) {
@@ -58,7 +60,7 @@ public class SpecController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String showCreateForm(Model model) {
 		model.addAttribute("op", "新增");
-		return "spec/edit";
+		return "goods/spec_edit";
 	}
 
 	@RequiresPermissions("spec:create")
@@ -77,7 +79,7 @@ public class SpecController {
 			Model model) {
 		model.addAttribute("spec", specService.getSpec(specId));
 		model.addAttribute("op", "修改");
-		return "spec/edit";
+		return "goods/spec_edit";
 	}
 
 	@RequiresPermissions("spec:update")

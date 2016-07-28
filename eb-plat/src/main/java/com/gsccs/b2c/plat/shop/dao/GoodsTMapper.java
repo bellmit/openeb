@@ -1,12 +1,11 @@
 package com.gsccs.b2c.plat.shop.dao;
 
-import com.gsccs.b2c.plat.shop.model.GoodsT;
-import com.gsccs.b2c.plat.shop.model.GoodsTExample;
-import com.gsccs.b2c.plat.shop.model.ProductT;
-
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+
+import com.gsccs.b2c.plat.shop.model.GoodsT;
+import com.gsccs.b2c.plat.shop.model.GoodsTExample;
 
 public interface GoodsTMapper {
 	

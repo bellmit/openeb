@@ -70,22 +70,22 @@ public class GoodsSolrServiceImpl implements GoodsSolrService{
 					tg = new GoodsSolr();
 					tg.setId(sid+"_"+pList.get(i).getId());
 					tg.setProductid(pList.get(i).getId()+"");
-					tg.setBrandid(pList.get(i).getBrand()+"");
-					tg.setPicurl(pList.get(i).getPicUrl());
-					if(null !=pList.get(i).getBrand() && pList.get(i).getBrand().toString().length() >0){
-						b =brandServiceAPI.getBrand(Long.valueOf(pList.get(i).getBrand()));
+					tg.setBrandid(pList.get(i).getBrandid()+"");
+					tg.setPicurl(pList.get(i).getImg());
+					if(null !=pList.get(i).getBrandid() && pList.get(i).getBrandid().toString().length() >0){
+						b =brandServiceAPI.getBrand(Long.valueOf(pList.get(i).getBrandid()));
 						if(null !=b){
-							tg.setBrandstr(pList.get(i).getBrand() + "-" + b.getName());
+							tg.setBrandstr(pList.get(i).getBrandid() + "-" + b.getName());
 						}
 					}
 					tg.setPrice( pList.get(i).getPrice().floatValue());
 					
-					tg.setSiteid(pList.get(i).getSite().toString());
-					if(null !=pList.get(i).getCateId() && pList.get(i).getCateId().trim().length() >0){
-						tg.setCateid(pList.get(i).getCateId());
-						category = cateServiceAPI.getCate(Long.valueOf(pList.get(i).getCateId()));
+					tg.setSiteid(pList.get(i).getShopid().toString());
+					if(null !=pList.get(i).getCategoryid()){
+						tg.setCateid(pList.get(i).getCategoryid()+"");
+						category = cateServiceAPI.getCate(Long.valueOf(pList.get(i).getCategoryid()));
 						if(null !=category){
-							tg.setCatestr(pList.get(i).getCateId()+"-"+category.getTitle());
+							tg.setCatestr(pList.get(i).getCategoryid()+"-"+category.getTitle());
 						}
 					}
 					

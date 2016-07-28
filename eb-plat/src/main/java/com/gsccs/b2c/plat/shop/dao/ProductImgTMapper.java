@@ -3,7 +3,7 @@ package com.gsccs.b2c.plat.shop.dao;
 import com.gsccs.b2c.plat.shop.model.GoodsT;
 import com.gsccs.b2c.plat.shop.model.ProductImgT;
 import com.gsccs.b2c.plat.shop.model.ProductImgTExample;
-import com.gsccs.b2c.plat.shop.model.ProductTExample;
+import com.gsccs.b2c.plat.shop.model.ProductExample;
 
 import java.util.List;
 
