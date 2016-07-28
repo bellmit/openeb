@@ -19,12 +19,13 @@
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 
+		<!-- 
 		<dependency>
 			<groupId>com.gsccs.b2c</groupId>
 			<artifactId>eb-core</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
-
+ 		-->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -62,13 +63,11 @@
 			<version>3.1</version>
 		</dependency>
 
-
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.3</version>
 		</dependency>
-
 
 		<dependency>
 			<groupId>org.springframework.data</groupId>

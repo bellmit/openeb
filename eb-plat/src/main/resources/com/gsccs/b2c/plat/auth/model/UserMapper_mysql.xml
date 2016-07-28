@@ -86,7 +86,7 @@
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from sys_user
+		from plat_sys_user
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -102,7 +102,7 @@
 		FROM
 		(SELECT
 				a.id, orgid,title, username, password, salt, locked,b.name as orgname
-			FROM sys_user a
+			FROM plat_sys_user a
 			LEFT JOIN sys_organization b
 			ON a.orgid = b.id
 		) as aa
@@ -120,16 +120,16 @@
 		parameterType="java.lang.Long">
 		select
 		<include refid="Base_Column_List" />
-		from sys_user
+		from plat_sys_user
 		where id = #{id,jdbcType=BIGINT}
 	</select>
 	
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-		delete from sys_user
+		delete from plat_sys_user
 		where id = #{id,jdbcType=BIGINT}
 	</delete>
 	<delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.auth.model.UserExample">
-		delete from sys_user
+		delete from plat_sys_user
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -137,7 +137,7 @@
 	
 	
 	<insert id="insert" parameterType="com.gsccs.b2c.plat.auth.model.User">
-		insert into sys_user (id, orgid, username,title,
+		insert into plat_sys_user (id, orgid, username,title,
 		password, salt, locked)
 		values (
 		#{id,jdbcType=BIGINT}, 
@@ -152,14 +152,14 @@
 
 	<select id="countByExample" parameterType="com.gsccs.b2c.plat.auth.model.UserExample"
 		resultType="java.lang.Integer">
-		select count(*) from sys_user
+		select count(*) from plat_sys_user
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
 	</select>
 
 	<update id="updateByExample" parameterType="map">
-		update sys_user
+		update plat_sys_user
 		set id = #{record.id,jdbcType=BIGINT},
 		orgid = #{record.orgid,jdbcType=BIGINT},
 		username = #{record.username,jdbcType=VARCHAR},
@@ -173,7 +173,7 @@
 	</update>
 
 	<update id="updateByPrimaryKey" parameterType="com.gsccs.b2c.plat.auth.model.User">
-		update sys_user
+		update plat_sys_user
 		set orgid = #{orgid,jdbcType=BIGINT},
 		username = #{username,jdbcType=VARCHAR},
 		title = #{title,jdbcType=VARCHAR},

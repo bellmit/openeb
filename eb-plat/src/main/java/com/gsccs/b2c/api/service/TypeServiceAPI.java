@@ -12,17 +12,16 @@ import com.gsccs.b2c.api.domain.CateParam;
 import com.gsccs.b2c.api.domain.CateProp;
 import com.gsccs.b2c.api.domain.CateSpec;
 import com.gsccs.b2c.api.domain.CateSpecVal;
-import com.gsccs.b2c.plat.shop.model.CategoryT;
 import com.gsccs.b2c.plat.shop.model.ProductT;
-import com.gsccs.b2c.plat.shop.model.Property;
-import com.gsccs.b2c.plat.shop.model.PropsValT;
-import com.gsccs.b2c.plat.shop.model.SpecVal;
-import com.gsccs.b2c.plat.shop.model.Specific;
 import com.gsccs.b2c.plat.shop.service.CategoryService;
 import com.gsccs.b2c.plat.shop.service.GoodsService;
 import com.gsccs.b2c.plat.shop.service.TypeService;
 import com.gsccs.b2c.plat.utils.BeanUtilsEx;
+import com.gsccs.eb.api.domain.goods.Category;
+import com.gsccs.eb.api.domain.goods.Property;
 import com.gsccs.eb.api.domain.goods.PropsVal;
+import com.gsccs.eb.api.domain.goods.SpecVal;
+import com.gsccs.eb.api.domain.goods.Specific;
 
 
 public class TypeServiceAPI implements TypeServiceI {
@@ -86,7 +85,7 @@ public class TypeServiceAPI implements TypeServiceI {
 		if (null != propList && propList.size() > 0) {
 			CateProp prop;
 			list = new ArrayList<CateProp>();
-			List<PropsValT> pvtList;
+			List<PropsVal> pvtList;
 			for (Property t : propList) {
 				try {
 					prop = new CateProp();
@@ -96,7 +95,7 @@ public class TypeServiceAPI implements TypeServiceI {
 						PropsVal pv;
 						pvtList = typeService.getPropsValList(t.getId());
 						if( null !=pvtList && pvtList.size() >0){
-							for (PropsValT propsValT : pvtList) {
+							for (PropsVal propsValT : pvtList) {
 								pv = new PropsVal();
 								System.out.println("propsValT=="+propsValT.getVals());
 								BeanUtilsEx.copyProperties(pv, propsValT);
@@ -162,7 +161,7 @@ public class TypeServiceAPI implements TypeServiceI {
 	public List<CateProp> getCatePropsByPid(Long sid, Long pid) {
 		List<CateProp> cpList =null;
 		ProductT pt = goodsService.getProduct(sid, pid, true);
-		CategoryT ct = null;
+		Category ct = null;
 		if(null !=pt && pt.getCate().trim().length()> 0){
 			ct =categoryService.findById(Long.valueOf(pt.getCate()));
 			if(null !=ct && null !=ct.getTypeId()){
@@ -175,9 +174,7 @@ public class TypeServiceAPI implements TypeServiceI {
 
 	@Override
 	public PropsVal getPropsVal(Long pvId) {
-		PropsValT pvt = typeService.getPropsVal(pvId);
-		PropsVal pv = new PropsVal();
-		BeanUtilsEx.copyProperties(pv, pvt);
+		PropsVal pv = typeService.getPropsVal(pvId);
 		return pv;
 	}
 

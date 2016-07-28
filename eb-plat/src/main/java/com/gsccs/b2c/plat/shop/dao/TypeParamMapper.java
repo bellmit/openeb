@@ -1,9 +1,11 @@
 package com.gsccs.b2c.plat.shop.dao;
 
-import com.gsccs.b2c.plat.shop.model.TypeParam;
-import com.gsccs.b2c.plat.shop.model.TypeParamExample;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
+
+import com.gsccs.b2c.plat.shop.model.TypeParamExample;
+import com.gsccs.eb.api.domain.goods.TypeParam;
 
 public interface TypeParamMapper {
 	int countByExample(TypeParamExample example);

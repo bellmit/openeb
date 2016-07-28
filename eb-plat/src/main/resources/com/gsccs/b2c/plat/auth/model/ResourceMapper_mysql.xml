@@ -79,7 +79,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from sys_resource
+    from plat_sys_resource
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,21 +90,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from sys_resource
+    from plat_sys_resource
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from sys_resource
+    delete from plat_sys_resource
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.auth.model.ResourceExample" >
-    delete from sys_resource
+    delete from plat_sys_resource
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.gsccs.b2c.plat.auth.model.Resource" >
-    insert into sys_resource (id, name, type, 
+    insert into plat_sys_resource (id, name, type, 
       url, parent_id, parent_ids, 
       permission, available,icon)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
@@ -113,7 +113,7 @@
       #{icon,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.gsccs.b2c.plat.auth.model.Resource" >
-    insert into sys_resource
+    insert into plat_sys_resource
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -174,13 +174,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.gsccs.b2c.plat.auth.model.ResourceExample" resultType="java.lang.Integer" >
-    select count(*) from sys_resource
+    select count(*) from plat_sys_resource
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update sys_resource
+    update plat_sys_resource
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
@@ -215,7 +215,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update sys_resource
+    update plat_sys_resource
     set id = #{record.id,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
       type = #{record.type,jdbcType=VARCHAR},
@@ -231,7 +231,7 @@
   </update>
   
   <update id="updateByPrimaryKey" parameterType="com.gsccs.b2c.plat.auth.model.Resource" >
-    update sys_resource
+    update plat_sys_resource
     set name = #{name,jdbcType=VARCHAR},
       type = #{type,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},

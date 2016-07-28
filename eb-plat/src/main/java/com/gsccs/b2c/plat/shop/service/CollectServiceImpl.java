@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gsccs.b2c.plat.shop.dao.CollectMapper;
+import com.gsccs.b2c.plat.shop.model.CollectExample;
+import com.gsccs.b2c.plat.shop.model.CollectExample.Criteria;
 import com.gsccs.b2c.plat.shop.model.CollectStatist;
-import com.gsccs.b2c.plat.shop.model.CollectT;
-import com.gsccs.b2c.plat.shop.model.CollectTExample;
-import com.gsccs.b2c.plat.shop.model.CollectTExample.Criteria;
+import com.gsccs.eb.api.domain.site.Collect;
 
 /**
  * 收藏数据接口
@@ -26,7 +26,7 @@ public class CollectServiceImpl implements CollectService {
 	private CollectMapper collectTMapper;
 
 	@Override
-	public void addCollect(CollectT collect) {
+	public void addCollect(Collect collect) {
 		if (null != collect) {
 			collect.setId(UUID.randomUUID().toString());
 			collect.setAddtime(new Date());
@@ -40,9 +40,9 @@ public class CollectServiceImpl implements CollectService {
 	}
 
 	@Override
-	public List<CollectT> getCollectProducts(CollectT collect, int page,
+	public List<Collect> getCollectProducts(Collect collect, int page,
 			int pagesize) {
-		CollectTExample example = new CollectTExample();
+		CollectExample example = new CollectExample();
 		Criteria criteria = example.createCriteria();
 		if (null != collect) {
 			proSearchParam(collect, criteria);
@@ -53,9 +53,9 @@ public class CollectServiceImpl implements CollectService {
 	}
 
 	@Override
-	public List<CollectT> getCollectBrands(CollectT collect, int page,
+	public List<Collect> getCollectBrands(Collect collect, int page,
 			int pagesize) {
-		CollectTExample example = new CollectTExample();
+		CollectExample example = new CollectExample();
 		Criteria criteria = example.createCriteria();
 		if (null != collect) {
 			proSearchParam(collect, criteria);
@@ -71,8 +71,8 @@ public class CollectServiceImpl implements CollectService {
 	 * @param evalItemT
 	 * @param criteria
 	 */
-	public void proSearchParam(CollectT collectT,
-			CollectTExample.Criteria criteria) {
+	public void proSearchParam(Collect collectT,
+			CollectExample.Criteria criteria) {
 		if (null != collectT) {
 
 			if (collectT.getId() != null) {
@@ -86,9 +86,9 @@ public class CollectServiceImpl implements CollectService {
 				criteria.andBuyeridEqualTo(collectT.getBuyerid());
 			}
 
-			if (collectT.getColltype() != null) {
+			/*if (collectT.getColltype() != null) {
 				criteria.andTypeEqualTo(collectT.getColltype());
-			}
+			}*/
 		}
 	}
 

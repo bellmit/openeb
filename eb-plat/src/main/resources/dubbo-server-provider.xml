@@ -77,9 +77,9 @@
 		ref="storeyAPI" />
 		
 	<!-- 物流服务接口 -->
-	<bean id="logistAPI" class="com.gsccs.b2c.api.service.LogistServiceAPI" />
-	<dubbo:service interface="com.gsccs.b2c.api.service.LogistServiceI"
-		ref="logistAPI" />
+	<bean id="deliverAPI" class="com.gsccs.b2c.api.service.DeliverServiceAPI" />
+	<dubbo:service interface="com.gsccs.b2c.api.service.DeliverServiceI"
+		ref="deliverAPI" />
 	
 	<!-- 评价服务接口 -->
 	<bean id="evalAPI" class="com.gsccs.b2c.api.service.EvalServiceAPI" />

@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gsccs.b2c.plat.bass.Datagrid;
-import com.gsccs.b2c.plat.shop.model.BrandT;
 import com.gsccs.b2c.plat.shop.service.BrandService;
+import com.gsccs.eb.api.domain.goods.Brand;
 
 /**
  * 平台品牌管理
@@ -47,9 +47,9 @@ public class BrandController {
 	public Datagrid list(@RequestParam(defaultValue = " orderNum ") String order,
 			@RequestParam(defaultValue = "1") int currPage,
 			@RequestParam(defaultValue = "10") int pageSize, ModelMap map,
-			BrandT brand, HttpServletRequest request) {
+			Brand brand, HttpServletRequest request) {
 		
-		List<BrandT> brandList = brandService.find(brand, order, currPage,
+		List<Brand> brandList = brandService.find(brand, order, currPage,
 				pageSize, true);
 		int totalCount = brandService.count(brand);
 		Datagrid datagrid = new Datagrid();
@@ -68,7 +68,7 @@ public class BrandController {
 
 	@RequiresPermissions("brand:create")
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String create(BrandT brand, RedirectAttributes redirectAttributes) {
+	public String create(Brand brand, RedirectAttributes redirectAttributes) {
 		if (null != brand) {
 			brandService.add(brand);
 		}
@@ -87,7 +87,7 @@ public class BrandController {
 
 	@RequiresPermissions("brand:update")
 	@RequestMapping(value = "/{brandId}/update", method = RequestMethod.POST)
-	public String update(BrandT brand, RedirectAttributes redirectAttributes) {
+	public String update(Brand brand, RedirectAttributes redirectAttributes) {
 		brandService.update(brand);
 		redirectAttributes.addFlashAttribute("msg", "修改成功");
 		return "redirect:/brand";

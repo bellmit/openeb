@@ -2,7 +2,7 @@ package com.gsccs.b2c.plat.shop.service;
 
 import java.util.List;
 
-import com.gsccs.b2c.plat.shop.model.Specific;
+import com.gsccs.eb.api.domain.goods.Specific;
 
 public interface SpecService {
 	

@@ -5,7 +5,7 @@ package com.gsccs.b2c.plat.shop.service;
 
 import java.util.List;
 
-import com.gsccs.b2c.plat.shop.model.BrandT;
+import com.gsccs.eb.api.domain.goods.Brand;
 
 /**
  * 品牌管理服务
@@ -18,19 +18,19 @@ public interface BrandService {
 	/**
 	 * 分页查询
 	 */
-	public List<BrandT> find(BrandT brands, String order, int currPage,
+	public List<Brand> find(Brand brands, String order, int currPage,
 			int pageSize, boolean iscache);
 	
 	
-	public List<BrandT> findStoreBrand(Long sid,int currPage,
+	public List<Brand> findStoreBrand(Long sid,int currPage,
 			int pageSize, boolean iscache);
 	
-	public int count(BrandT brands);
+	public int count(Brand brands);
 
 	/**
 	 * 查询
 	 */
-	public List<BrandT> find(BrandT brands, String order);
+	public List<Brand> find(Brand brands, String order);
 
 	/**
 	 * 统计
@@ -38,7 +38,7 @@ public interface BrandService {
 	 * @param info
 	 * @return
 	 */
-	public int count(BrandT brands, boolean iscache);
+	public int count(Brand brands, boolean iscache);
 
 	/**
 	 * 根据id查询
@@ -47,14 +47,14 @@ public interface BrandService {
 	 * @param cache
 	 * @return
 	 */
-	public BrandT findById(Long id);
+	public Brand findById(Long id);
 
 	/**
 	 * 更新
 	 * 
-	 * @param BrandT
+	 * @param Brand
 	 */
-	public void update(BrandT brands);
+	public void update(Brand brands);
 
 	/**
 	 * 添加
@@ -62,7 +62,7 @@ public interface BrandService {
 	 * @param brands
 	 * @return
 	 */
-	public Long add(BrandT brands);
+	public Long add(Brand brands);
 
 	/**
 	 * 删除

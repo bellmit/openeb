@@ -1,9 +1,11 @@
 package com.gsccs.b2c.plat.shop.dao;
 
-import com.gsccs.b2c.plat.shop.model.Property;
-import com.gsccs.b2c.plat.shop.model.PropertyExample;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
+
+import com.gsccs.b2c.plat.shop.model.PropertyExample;
+import com.gsccs.eb.api.domain.goods.Property;
 
 /**
  * 

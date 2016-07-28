@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gsccs.b2c.plat.shop.dao.CategoryMapper">
-	<resultMap id="BaseResultMap" type="com.gsccs.b2c.plat.shop.model.CategoryT">
+	<resultMap id="BaseResultMap" type="com.gsccs.eb.api.domain.goods.Category">
 		<id column="id" property="id" jdbcType="BIGINT" />
 		<result column="title" property="title" jdbcType="VARCHAR" />
-		<result column="type_id" property="typeId" jdbcType="VARCHAR" />
+		<result column="type_id" property="typeId" jdbcType="BIGINT" />
+		<result column="shop_id" property="shopId" jdbcType="BIGINT" />
 		<result column="logo" property="logo" jdbcType="VARCHAR" />
 		<result column="parid" property="parid" jdbcType="BIGINT" />
 		<result column="templet" property="templet" jdbcType="VARCHAR" />
@@ -86,13 +87,13 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		id, title, type_id, logo, parid, templet, url, state, parids, clickNum,
+		id, title, type_id,shop_id, logo, parid, templet, url, state, parids, clickNum,
 		pagemark,
 		indexnum, meta_title, meta_keywords, meta_descr
 	</sql>
 	
 	<sql id="JOIN_Column_List">
-		id, title, type_id, logo, parid, templet, url, state, parids, clickNum,
+		id, title, type_id,shop_id, logo, parid, templet, url, state, parids, clickNum,
 		pagemark,
 		indexnum, meta_title, meta_keywords, meta_descr,typename
 	</sql>
@@ -106,7 +107,7 @@
 		<include refid="JOIN_Column_List" />
 		from (
 			SELECT a.*,b.title as typename 
-			FROM plat_category a
+			FROM shop_category a
 			LEFT JOIN plat_type b
 			ON a.type_id = b.id
 		) as aa
@@ -128,7 +129,7 @@
 		<include refid="JOIN_Column_List" />
 		from (
 			SELECT a.*,b.title as typename 
-			FROM plat_category a
+			FROM shop_category a
 			LEFT JOIN plat_type b
 			ON a.type_id = b.id
 		) as aa
@@ -146,32 +147,39 @@
 		parameterType="java.lang.Long">
 		select
 		<include refid="Base_Column_List" />
-		from plat_category
+		from shop_category
 		where id = #{id,jdbcType=BIGINT}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-		delete from plat_category
+		delete from shop_category
 		where id = #{id,jdbcType=BIGINT}
 	</delete>
 	<delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.shop.model.CategoryExample">
-		delete from plat_category
+		delete from shop_category
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
 	</delete>
 
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id"
-		parameterType="com.gsccs.b2c.plat.shop.model.CategoryT">
-		insert into plat_category (id, title, type_id,
+		parameterType="com.gsccs.eb.api.domain.goods.Category">
+		insert into shop_category (id, title, 
+		type_id,
+		shop_id,
 		logo, parid, templet,
 		url, state, parids,
 		clickNum, pagemark, indexnum,
 		meta_title, meta_keywords, meta_descr
 		)
-		values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR},
-		#{typeId,jdbcType=VARCHAR},
-		#{logo,jdbcType=VARCHAR}, #{parid,jdbcType=BIGINT}, #{templet,jdbcType=VARCHAR},
-		#{url,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR},
+		values (#{id,jdbcType=BIGINT}, 
+		#{title,jdbcType=VARCHAR},
+		#{typeId,jdbcType=BIGINT},
+		#{shopId,jdbcType=BIGINT},
+		#{logo,jdbcType=VARCHAR}, 
+		#{parid,jdbcType=BIGINT}, 
+		#{templet,jdbcType=VARCHAR},
+		#{url,jdbcType=VARCHAR}, 
+		#{state,jdbcType=VARCHAR},
 		#{parids,jdbcType=VARCHAR},
 		#{clicknum,jdbcType=INTEGER}, #{pagemark,jdbcType=VARCHAR}, #{indexnum,jdbcType=INTEGER},
 		#{metaTitle,jdbcType=VARCHAR}, #{metaKeywords,jdbcType=VARCHAR},
@@ -181,7 +189,7 @@
 
 	<select id="countByExample" parameterType="com.gsccs.b2c.plat.shop.model.CategoryExample"
 		resultType="java.lang.Integer">
-		select count(*) from plat_category
+		select count(*) from shop_category
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -189,10 +197,11 @@
 
 
 	<update id="updateByExample" parameterType="map">
-		update plat_category
+		update shop_category
 		set id = #{record.id,jdbcType=BIGINT},
 		title = #{record.title,jdbcType=VARCHAR},
-		type_id = #{record.typeId,jdbcType=VARCHAR},
+		type_id = #{record.typeId,jdbcType=BIGINT},
+		shop_id = #{record.shopId,jdbcType=BIGINT},
 		logo = #{record.logo,jdbcType=VARCHAR},
 		parid = #{record.parid,jdbcType=BIGINT},
 		templet = #{record.templet,jdbcType=VARCHAR},
@@ -210,10 +219,11 @@
 		</if>
 	</update>
 
-	<update id="updateByPrimaryKey" parameterType="com.gsccs.b2c.plat.shop.model.CategoryT">
-		update plat_category
+	<update id="updateByPrimaryKey" parameterType="com.gsccs.eb.api.domain.goods.Category">
+		update shop_category
 		set title = #{title,jdbcType=VARCHAR},
 		type_id = #{typeId,jdbcType=VARCHAR},
+		shop_id = #{shopId,jdbcType=BIGINT},
 		logo = #{logo,jdbcType=VARCHAR},
 		parid = #{parid,jdbcType=BIGINT},
 		templet = #{templet,jdbcType=VARCHAR},
@@ -229,8 +239,4 @@
 		where id = #{id,jdbcType=BIGINT}
 	</update>
 
-	<select id="selectMaxid" resultType="java.lang.Long"
-		parameterType="java.lang.Long">
-		select max(id) from plat_category where parid = #{parid,jdbcType=BIGINT}
-	</select>
 </mapper>

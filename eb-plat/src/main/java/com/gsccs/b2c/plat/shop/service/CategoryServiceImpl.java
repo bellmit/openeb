@@ -13,31 +13,29 @@ import com.gsccs.b2c.plat.shop.dao.CategoryMapper;
 import com.gsccs.b2c.plat.shop.dao.StoreCateMapper;
 import com.gsccs.b2c.plat.shop.model.CategoryExample;
 import com.gsccs.b2c.plat.shop.model.CategoryExample.Criteria;
-import com.gsccs.b2c.plat.shop.model.CategoryT;
 import com.gsccs.b2c.plat.shop.model.StoreCate;
 import com.gsccs.b2c.plat.shop.model.StoreCateExample;
 import com.gsccs.b2c.plat.utils.SqlUtil;
+import com.gsccs.eb.api.domain.goods.Category;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
 	private CategoryMapper categoryMapper;
-	@Autowired
-	private StoreCateMapper storeCateMapper;
 
 	@Override
-	public void down(CategoryT category) {
+	public void down(Category category) {
 
 	}
 
 	@Override
-	public void up(CategoryT category) {
+	public void up(Category category) {
 
 	}
 
 	@Override
-	public List<CategoryT> find(CategoryT category, String order, int currPage,
+	public List<Category> find(Category category, String order, int currPage,
 			int pageSize) {
 		CategoryExample example = new CategoryExample();
 		Criteria criteria = example.createCriteria();
@@ -47,7 +45,7 @@ public class CategoryServiceImpl implements CategoryService {
 		return categoryMapper.selectPageByExample(example);
 	}
 
-	public List<CategoryT> findRootCates() {
+	public List<Category> findRootCates() {
 		CategoryExample example = new CategoryExample();
 		Criteria criteria = example.createCriteria();
 		criteria.andParidEqualTo(0l);
@@ -59,7 +57,7 @@ public class CategoryServiceImpl implements CategoryService {
 		CategoryExample example = new CategoryExample();
 		Criteria c = example.createCriteria();
 		c.andParidEqualTo(parId);
-		List<CategoryT> cList = categoryMapper.selectByExample(example);
+		List<Category> cList = categoryMapper.selectByExample(example);
 		if (cList.size() > 0) {
 			return true;
 		} else {
@@ -68,16 +66,16 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public CategoryT findById(Long id) {
+	public Category findById(Long id) {
 		return categoryMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	public List<CategoryT> findByPar(Long parid) {
+	public List<Category> findByPar(Long parid) {
 		if (null == parid) {
 			return findRootCates();
 		} else {
-			CategoryT t = new CategoryT();
+			Category t = new Category();
 			t.setParid(parid);
 			CategoryExample example = new CategoryExample();
 			Criteria criteria = example.createCriteria();
@@ -87,8 +85,8 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public List<CategoryT> findByPar(Long parid, String state) {
-		CategoryT t = new CategoryT();
+	public List<Category> findByPar(Long parid, String state) {
+		Category t = new Category();
 		t.setParid(parid);
 		t.setState(state);
 		CategoryExample example = new CategoryExample();
@@ -97,43 +95,35 @@ public class CategoryServiceImpl implements CategoryService {
 		return categoryMapper.selectByExample(example);
 	}
 
-	public List<CategoryT> findCatesByParId(Long storeid, Long parid) {
+	public List<Category> findCatesByParId(Long storeid, Long parid) {
 		CategoryExample example = new CategoryExample();
 		Criteria criteria = example.createCriteria();
-		CategoryT param = new CategoryT();
+		Category param = new Category();
 		param.setParid(parid);
 		proSearchParam(param, criteria);
 		return categoryMapper.selectByExample(example);
 	}
 
-	public List<CategoryT> findCatesBySiteId(Long storeid) {
+	public List<Category> findCatesBySiteId(Long storeid) {
 		return findCatesBySiteId(storeid, null);
 	}
 
-	public List<CategoryT> findCatesBySiteId(Long storeid, Long parid) {
-		StoreCateExample e1 = new StoreCateExample();
-		StoreCateExample.Criteria c1 = e1.createCriteria();
-		c1.andSiteIdEqualTo(storeid);
-		StoreCate storeCate = storeCateMapper.selectByPrimaryKey(storeid);
-		if (null != storeCate && StringUtils.isNotEmpty(storeCate.getCateids())) {
-			CategoryExample example = new CategoryExample();
-			Criteria criteria = example.createCriteria();
-			CategoryT param = new CategoryT();
-			param.setParid(parid);
-			proSearchParam(param, criteria);
-			criteria.andSQL(" id in (" + storeCate.getCateids() + ")");
-			return categoryMapper.selectByExample(example);
-		}
-		return null;
+	public List<Category> findCatesBySiteId(Long storeid, Long parid) {
+		CategoryExample example = new CategoryExample();
+		Criteria criteria = example.createCriteria();
+		Category param = new Category();
+		param.setParid(parid);
+		proSearchParam(param, criteria);
+		return categoryMapper.selectByExample(example);
 	}
 
 	@Override
-	public void update(CategoryT category) {
+	public void update(Category category) {
 		categoryMapper.updateByPrimaryKey(category);
 	}
 
 	@Override
-	public Long insert(CategoryT category) {
+	public Long insert(Category category) {
 		if (null != category) {
 			if (null == category.getParid()) {
 				category.setParid(0l);
@@ -153,7 +143,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public void delPar(Long parId) {
-		CategoryT t = new CategoryT();
+		Category t = new Category();
 		t.setParid(parId);
 		CategoryExample example = new CategoryExample();
 		Criteria criteria = example.createCriteria();
@@ -161,7 +151,7 @@ public class CategoryServiceImpl implements CategoryService {
 		categoryMapper.deleteByExample(example);
 	}
 
-	public List<CategoryT> findAll() {
+	public List<Category> findAll() {
 		CategoryExample example = new CategoryExample();
 		Criteria criteria = example.createCriteria();
 		// proSearchParam(t, criteria);
@@ -170,13 +160,13 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public JSONArray findAll(String state) {
-		List<CategoryT> categoryList = findAll();
+		List<Category> categoryList = findAll();
 		return java2JsonArray(categoryList);
 	}
 
-	private JSONArray java2JsonArray(List<CategoryT> categoryList) {
+	private JSONArray java2JsonArray(List<Category> categoryList) {
 		JSONArray array = new JSONArray();
-		for (CategoryT tg : categoryList) {
+		for (Category tg : categoryList) {
 			JSONObject object = new JSONObject();
 			object.put("id", tg.getId().toString());
 			object.put("parentId", tg.getParid().toString());
@@ -195,7 +185,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public int count(CategoryT category) {
+	public int count(Category category) {
 		CategoryExample example = new CategoryExample();
 		Criteria criteria = example.createCriteria();
 		proSearchParam(category, criteria);
@@ -205,7 +195,7 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public String findParPro(Long id) {
 		String parids = id.toString();
-		CategoryT ct = this.findById(id);
+		Category ct = this.findById(id);
 		if (null != ct) {
 			if (!ct.getParid().equals("0")) {
 				findParPro(ct.getParid());
@@ -216,28 +206,10 @@ public class CategoryServiceImpl implements CategoryService {
 		return parids;
 	}
 
-	@Override
-	public StoreCate findStoreCateIds(Long siteid) {
-		return storeCateMapper.selectByPrimaryKey(siteid);
-	}
-
-	@Override
-	public void addStoreCate(Long siteid, String cateids) {
-		StoreCate storeCate = storeCateMapper.selectByPrimaryKey(siteid);
-		if (null == storeCate) {
-			StoreCate storeCate_ = new StoreCate();
-			storeCate_.setSiteId(siteid);
-			storeCate_.setCateids(cateids);
-			storeCateMapper.insert(storeCate_);
-		} else {
-			storeCate.setCateids(cateids);
-			storeCateMapper.updateByPrimaryKey(storeCate);
-		}
-	}
 
 	@Override
 	public JSONArray findByStore(Long storeid) {
-		List<CategoryT> cateList = findCatesBySiteId(storeid);
+		List<Category> cateList = findCatesBySiteId(storeid);
 		if (null != cateList) {
 			return java2JsonArray(cateList);
 			// (JSONArray) JSON.toJSON(cateList);
@@ -247,7 +219,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public JSONArray findByStore(Long storeid, Long parid) {
-		List<CategoryT> nodes = findCatesByParId(storeid, parid);
+		List<Category> nodes = findCatesByParId(storeid, parid);
 		// findCatesBySiteId(storeid, parid);
 		if (null != nodes) {
 			return (JSONArray) JSON.toJSON(nodes);
@@ -256,7 +228,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	public JSONArray findBySite(Long siteid) {
-		List<CategoryT> roots = findAll();
+		List<Category> roots = findAll();
 		if (null != roots) {
 			JSONArray rootArray = (JSONArray) JSON.toJSON(roots);
 			return treeList(rootArray, 0l);
@@ -285,7 +257,7 @@ public class CategoryServiceImpl implements CategoryService {
 	 * @param info
 	 * @param criteria
 	 */
-	public void proSearchParam(CategoryT c, Criteria criteria) {
+	public void proSearchParam(Category c, Criteria criteria) {
 		if (c != null) {
 			if (c.getId() != null) {
 				criteria.andIdEqualTo(c.getId());

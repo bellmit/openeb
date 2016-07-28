@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.gsccs.b2c.plat.shop.model.Specific;
 import com.gsccs.b2c.plat.shop.model.SpecificExample;
+import com.gsccs.eb.api.domain.goods.Specific;
 
 public interface SpecificMapper {
 	

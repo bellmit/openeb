@@ -29,7 +29,6 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 
-	
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(){
 		return "order/list";
@@ -48,8 +47,5 @@ public class OrderController {
 		datagrid.setRows(orderlist);
 		return datagrid;
 	}
-	
-	
-	
 	
 }

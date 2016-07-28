@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gsccs.b2c.api.service.GoodsServiceI;
-import com.gsccs.b2c.api.service.LogistServiceI;
+import com.gsccs.b2c.api.service.DeliverServiceI;
 import com.gsccs.b2c.api.service.OrderServiceI;
 import com.gsccs.b2c.store.base.JsonMsg;
 import com.gsccs.eb.api.domain.deliver.DeliverType;
@@ -39,7 +39,7 @@ public class OrderController {
 	private OrderServiceI orderAPI;
 	
 	@Autowired
-	private LogistServiceI logistServiceAPI;
+	private DeliverServiceI logistServiceAPI;
 	
 	@Autowired
 	private GoodsServiceI goodsServiceAPI;

@@ -1,35 +1,37 @@
 package com.gsccs.b2c.plat.shop.dao;
 
-import com.gsccs.b2c.plat.shop.model.BrandT;
-import com.gsccs.b2c.plat.shop.model.BrandTExample;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
+
+import com.gsccs.b2c.plat.shop.model.BrandExample;
+import com.gsccs.eb.api.domain.goods.Brand;
 
 
 public interface BrandMapper {
 
-	int countByExample(BrandTExample example);
+	int countByExample(BrandExample example);
 
-	int deleteByExample(BrandTExample example);
+	int deleteByExample(BrandExample example);
 
 	int deleteByPrimaryKey(Long id);
 
-	int insert(BrandT record);
+	int insert(Brand record);
 
-	int insertSelective(BrandT record);
+	int insertSelective(Brand record);
 
-	List<BrandT> selectByExample(BrandTExample example);
-	List<BrandT> selectPageByExample(BrandTExample example);
+	List<Brand> selectByExample(BrandExample example);
+	List<Brand> selectPageByExample(BrandExample example);
 
-	BrandT selectByPrimaryKey(Long id);
+	Brand selectByPrimaryKey(Long id);
 
-	int updateByExampleSelective(@Param("record") BrandT record,
-			@Param("example") BrandTExample example);
+	int updateByExampleSelective(@Param("record") Brand record,
+			@Param("example") BrandExample example);
 
-	int updateByExample(@Param("record") BrandT record,
-			@Param("example") BrandTExample example);
+	int updateByExample(@Param("record") Brand record,
+			@Param("example") BrandExample example);
 
-	int updateByPrimaryKeySelective(BrandT record);
+	int updateByPrimaryKeySelective(Brand record);
 
-	int updateByPrimaryKey(BrandT record);
+	int updateByPrimaryKey(Brand record);
 }

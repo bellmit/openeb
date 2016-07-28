@@ -25,7 +25,7 @@
 	<mvc:annotation-driven>
 		<mvc:argument-resolvers>
 			<bean
-				class="com.gsccs.b2c.plat.web.bind.method.CurrentUserMethodArgumentResolver" />
+				class="com.gsccs.b2c.plat.auth.shiro.CurrentUserMethodArgumentResolver" />
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 

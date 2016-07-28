@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gsccs.b2c.api.domain.Brand;
+import com.gsccs.eb.api.domain.goods.Brand;
 
 public class ProductDataInit {
 

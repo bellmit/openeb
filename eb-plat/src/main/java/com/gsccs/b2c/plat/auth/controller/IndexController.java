@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gsccs.b2c.plat.Constants;
-import com.gsccs.b2c.plat.auth.bind.CurrentUser;
 import com.gsccs.b2c.plat.auth.model.Resource;
 import com.gsccs.b2c.plat.auth.model.User;
 import com.gsccs.b2c.plat.auth.service.AuthService;
 import com.gsccs.b2c.plat.auth.service.ResourceService;
+import com.gsccs.b2c.plat.auth.shiro.CurrentUser;
 
 /**
  * 系统首页

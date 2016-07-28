@@ -26,7 +26,6 @@ public interface UserService {
 
     User find(Long userId);
 
-    List<User> findAll();
     List<User> find(User user, String order, int currPage, int pageSize);
 	public int count(User user);
 

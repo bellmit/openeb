@@ -3,10 +3,6 @@ package com.gsccs.eb.api.domain.goods;
 import com.gsccs.b2c.api.domain.Domain;
 
 public class PropsVal extends Domain{
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	private Long id;
 

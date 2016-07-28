@@ -83,7 +83,7 @@
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from sys_role
+		from plat_sys_role
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -95,28 +95,28 @@
 		parameterType="java.lang.Long">
 		select
 		<include refid="Base_Column_List" />
-		from sys_role
+		from plat_sys_role
 		where id = #{id,jdbcType=BIGINT}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-		delete from sys_role
+		delete from plat_sys_role
 		where id = #{id,jdbcType=BIGINT}
 	</delete>
 	<delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.auth.model.RoleExample">
-		delete from sys_role
+		delete from plat_sys_role
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
 	</delete>
 	<insert id="insert" parameterType="com.gsccs.b2c.plat.auth.model.Role">
-		insert into sys_role (id, role, description,
+		insert into plat_sys_role (id, role, description,
 		resource_ids, available)
 		values (#{id,jdbcType=BIGINT}, #{role,jdbcType=VARCHAR},
 		#{description,jdbcType=VARCHAR},
 		#{resourceIds,jdbcType=VARCHAR}, #{available,jdbcType=BIT})
 	</insert>
 	<insert id="insertSelective" parameterType="com.gsccs.b2c.plat.auth.model.Role">
-		insert into sys_role
+		insert into plat_sys_role
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
 				id,
@@ -154,13 +154,13 @@
 	</insert>
 	<select id="countByExample" parameterType="com.gsccs.b2c.plat.auth.model.RoleExample"
 		resultType="java.lang.Integer">
-		select count(*) from sys_role
+		select count(*) from plat_sys_role
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
 	</select>
 	<update id="updateByExampleSelective" parameterType="map">
-		update sys_role
+		update plat_sys_role
 		<set>
 			<if test="record.id != null">
 				id = #{record.id,jdbcType=BIGINT},
@@ -183,7 +183,7 @@
 		</if>
 	</update>
 	<update id="updateByExample" parameterType="map">
-		update sys_role
+		update plat_sys_role
 		set id = #{record.id,jdbcType=BIGINT},
 		role = #{record.role,jdbcType=VARCHAR},
 		description = #{record.description,jdbcType=VARCHAR},
@@ -194,7 +194,7 @@
 		</if>
 	</update>
 	<update id="updateByPrimaryKeySelective" parameterType="com.gsccs.b2c.plat.auth.model.Role">
-		update sys_role
+		update plat_sys_role
 		<set>
 			<if test="role != null">
 				role = #{role,jdbcType=VARCHAR},
@@ -212,7 +212,7 @@
 		where id = #{id,jdbcType=BIGINT}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.gsccs.b2c.plat.auth.model.Role">
-		update sys_role
+		update plat_sys_role
 		set role = #{role,jdbcType=VARCHAR},
 		description = #{description,jdbcType=VARCHAR},
 		resource_ids = #{resourceIds,jdbcType=VARCHAR},

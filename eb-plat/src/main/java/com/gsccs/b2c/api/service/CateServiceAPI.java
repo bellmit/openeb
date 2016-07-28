@@ -1,18 +1,15 @@
 package com.gsccs.b2c.api.service;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.fastjson.JSONArray;
 import com.gsccs.b2c.api.APIConst;
-import com.gsccs.b2c.api.domain.Category;
 import com.gsccs.b2c.plat.seller.service.StoreService;
 import com.gsccs.b2c.plat.shop.model.StoreT;
 import com.gsccs.b2c.plat.shop.service.CategoryService;
+import com.gsccs.eb.api.domain.goods.Category;
 import com.gsccs.eb.api.exception.ApiException;
 
 /**
@@ -35,43 +32,14 @@ public class CateServiceAPI implements CateServiceI {
 
 	@Override
 	public Category getCate(Long cateId) {
-		com.gsccs.b2c.plat.shop.model.CategoryT t = categoryService
-				.findById(cateId);
-		if (null != t) {
-			Category c = new Category();
-			try {
-				BeanUtils.copyProperties(c, t);
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			}
-			return c;
-		}
-		return null;
+		Category t = categoryService.findById(cateId);
+		return t;
 	}
 
 	@Override
 	public List<Category> getRootCates(Long siteId) {
-		List<Category> result = null;
-		List<com.gsccs.b2c.plat.shop.model.CategoryT> list = categoryService
-				.findByPar(null);
-		if (null != list && list.size() > 0) {
-			result = new ArrayList<Category>();
-			Category cate;
-			for (com.gsccs.b2c.plat.shop.model.CategoryT t : list) {
-				cate = new Category();
-				try {
-					BeanUtils.copyProperties(cate, t);
-					result.add(cate);
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return result;
+		List<Category> list = categoryService.findByPar(null);
+		return list;
 	}
 
 	@Override
@@ -102,7 +70,6 @@ public class CateServiceAPI implements CateServiceI {
 		return categoryService.findByStore(storeId);
 	}
 
-	
 	@Override
 	public JSONArray getStoreCates(Long siteId, Long parid) throws ApiException {
 		return categoryService.findByStore(siteId, parid);

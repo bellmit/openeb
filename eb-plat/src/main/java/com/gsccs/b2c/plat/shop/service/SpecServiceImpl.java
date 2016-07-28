@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.gsccs.b2c.plat.shop.dao.SpecValMapper;
 import com.gsccs.b2c.plat.shop.dao.SpecificMapper;
-import com.gsccs.b2c.plat.shop.model.SpecVal;
-import com.gsccs.b2c.plat.shop.model.Specific;
 import com.gsccs.b2c.plat.shop.model.SpecificExample;
+import com.gsccs.eb.api.domain.goods.SpecVal;
+import com.gsccs.eb.api.domain.goods.Specific;
 
 @Service
 public class SpecServiceImpl implements SpecService {

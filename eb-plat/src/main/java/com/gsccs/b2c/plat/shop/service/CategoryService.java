@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.List;
 
 import com.alibaba.fastjson.JSONArray;
-import com.gsccs.b2c.plat.shop.model.CategoryT;
 import com.gsccs.b2c.plat.shop.model.StoreCate;
+import com.gsccs.eb.api.domain.goods.Category;
 
 /**
  * 类目服务
@@ -18,20 +18,20 @@ public interface CategoryService {
 	/**
 	 * 下降
 	 */
-	public void down(CategoryT category);
+	public void down(Category category);
 
 	/**
 	 * 上升
 	 */
-	public void up(CategoryT category);
+	public void up(Category category);
 
 	/**
 	 * 分页查询
 	 */
-	public List<CategoryT> find(CategoryT category, String order, int currPage,
+	public List<Category> find(Category category, String order, int currPage,
 			int pageSize);
 
-	public int count(CategoryT category);
+	public int count(Category category);
 
 	/**
 	 * 查询所有类目
@@ -55,7 +55,7 @@ public interface CategoryService {
 	 * @param parid
 	 * @return
 	 */
-	public List<CategoryT> findByPar(Long parid);
+	public List<Category> findByPar(Long parid);
 
 	/**
 	 * 根据父id查询
@@ -64,7 +64,7 @@ public interface CategoryService {
 	 * @param state
 	 * @return
 	 */
-	public List<CategoryT> findByPar(Long parid, String state);
+	public List<Category> findByPar(Long parid, String state);
 
 	/**
 	 * 根据id查询
@@ -72,21 +72,21 @@ public interface CategoryService {
 	 * @param id
 	 * @return
 	 */
-	public CategoryT findById(Long id);
+	public Category findById(Long id);
 
 	/**
 	 * 更新
 	 * 
 	 * @param category
 	 */
-	public void update(CategoryT category);
+	public void update(Category category);
 
 	/**
 	 * 添加
 	 * 
 	 * @param category
 	 */
-	public Long insert(CategoryT category);
+	public Long insert(Category category);
 
 	/**
 	 * 删除
@@ -112,9 +112,6 @@ public interface CategoryService {
 	 */
 	public String findParPro(Long id);
 
-	public void addStoreCate(Long siteid, String cateids);
-
-	public StoreCate findStoreCateIds(Long siteid);
 
 	/**
 	 * 商城站点类目列表

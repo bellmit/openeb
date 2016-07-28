@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gsccs.b2c.plat.bass.Datagrid;
-import com.gsccs.b2c.plat.shop.model.Specific;
 import com.gsccs.b2c.plat.shop.service.SpecService;
+import com.gsccs.eb.api.domain.goods.Specific;
 
 /**
  * 平台商品规格控制类

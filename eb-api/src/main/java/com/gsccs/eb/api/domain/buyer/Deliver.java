@@ -3,10 +3,9 @@ package com.gsccs.eb.api.domain.buyer;
 import com.gsccs.b2c.api.domain.Domain;
 
 /**
- * @说明 API---会员收货地址
- * @开发者 ma hong
- * @年月日 2015年4月14日
- * @时分秒 下午3:57:47
+ * 会员收货地址
+ * @author x.d zhang
+ *
  */
 public class Deliver extends Domain {
 
@@ -19,9 +18,9 @@ public class Deliver extends Domain {
 	private String receiver; // 收货人姓名
 	private String mobile; // 手机号码
 	private String telephone; // 电话号码
-	private String email;		//邮箱地址
+	private String email; // 邮箱地址
 	private String isdefault; // 是否设置为默认地址
-	private Long buyerid; 	// 会员ID
+	private Long buyerid; // 会员ID
 
 	public Long getId() {
 		return id;
@@ -31,10 +30,6 @@ public class Deliver extends Domain {
 		this.id = id;
 	}
 
-	/*
-	 * ==========================================================================
-	 * =========
-	 */
 	public String getRegion() {
 		return region;
 	}
@@ -43,10 +38,6 @@ public class Deliver extends Domain {
 		this.region = region == null ? null : region.trim();
 	}
 
-	/*
-	 * ==========================================================================
-	 * =========
-	 */
 	public String getDetails() {
 		return details;
 	}
@@ -55,10 +46,6 @@ public class Deliver extends Domain {
 		this.details = details == null ? null : details.trim();
 	}
 
-	/*
-	 * ==========================================================================
-	 * =========
-	 */
 	public String getZipcode() {
 		return zipcode;
 	}
@@ -67,10 +54,6 @@ public class Deliver extends Domain {
 		this.zipcode = zipcode == null ? null : zipcode.trim();
 	}
 
-	/*
-	 * ==========================================================================
-	 * =========
-	 */
 	public String getReceiver() {
 		return receiver;
 	}
@@ -95,10 +78,6 @@ public class Deliver extends Domain {
 		this.telephone = telephone == null ? null : telephone.trim();
 	}
 
-	/*
-	 * ==========================================================================
-	 * =========
-	 */
 	public String getIsdefault() {
 		return isdefault;
 	}
@@ -126,6 +105,5 @@ public class Deliver extends Domain {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
+
 }

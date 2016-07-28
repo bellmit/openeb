@@ -3,7 +3,7 @@ package com.gsccs.b2c.api.service;
 import java.util.List;
 
 import com.alibaba.fastjson.JSONArray;
-import com.gsccs.b2c.api.domain.Category;
+import com.gsccs.eb.api.domain.goods.Category;
 import com.gsccs.eb.api.exception.ApiException;
 
 /**

@@ -21,8 +21,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.CacheConst;
-import com.gsccs.b2c.api.domain.Category;
 import com.gsccs.b2c.shiro.redis.SerializeUtils;
+import com.gsccs.eb.api.domain.goods.Category;
 import com.gsccs.eb.api.domain.trade.OrderItem;
 
 @RunWith(SpringJUnit4ClassRunner.class)

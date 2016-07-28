@@ -25,7 +25,7 @@ import com.gsccs.b2c.plat.auth.service.UserService;
 public class AuthorizController {
 
     @Autowired
-    private AuthService authorizationService;
+    private AuthService authService;
     @Autowired
     private UserService userService;
     @Autowired
@@ -37,14 +37,13 @@ public class AuthorizController {
     @RequiresPermissions("authorization:view")
     @RequestMapping(method = RequestMethod.GET)
     public String list(Model model) {
-        model.addAttribute("authorizationList", authorizationService.findAll());
+        model.addAttribute("authorizationList", authService.findAll());
         return "authorization/list";
     }
 
     @RequiresPermissions("authorization:create")
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String showCreateForm(Model model) {
-        setCommonData(model);
         Authorization authorization = new Authorization();
         model.addAttribute("authorization", authorization);
         model.addAttribute("op", "新增");
@@ -55,7 +54,7 @@ public class AuthorizController {
     @RequiresPermissions("authorization:create")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(Authorization authorization, RedirectAttributes redirectAttributes) {
-        authorizationService.createAuthorization(authorization);
+        authService.createAuthorization(authorization);
         redirectAttributes.addFlashAttribute("msg", "新增成功");
         return "redirect:/authorization";
     }
@@ -63,8 +62,7 @@ public class AuthorizController {
     @RequiresPermissions("authorization:update")
     @RequestMapping(value = "/{id}/update", method = RequestMethod.GET)
     public String showUpdateForm(@PathVariable("id") Long id, Model model) {
-        setCommonData(model);
-        model.addAttribute("authorization", authorizationService.findOne(id));
+        model.addAttribute("authorization", authService.findOne(id));
         model.addAttribute("op", "修改");
         return "authorization/edit";
     }
@@ -72,7 +70,7 @@ public class AuthorizController {
     @RequiresPermissions("authorization:update")
     @RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
     public String update(Authorization authorization, RedirectAttributes redirectAttributes) {
-        authorizationService.updateAuthorization(authorization);
+        authService.updateAuthorization(authorization);
         redirectAttributes.addFlashAttribute("msg", "修改成功");
         return "redirect:/authorization";
     }
@@ -80,8 +78,7 @@ public class AuthorizController {
     @RequiresPermissions("authorization:delete")
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
     public String showDeleteForm(@PathVariable("id") Long id, Model model) {
-        setCommonData(model);
-        model.addAttribute("authorization", authorizationService.findOne(id));
+        model.addAttribute("authorization", authService.findOne(id));
         model.addAttribute("op", "删除");
         return "authorization/edit";
     }
@@ -89,16 +86,11 @@ public class AuthorizController {
     @RequiresPermissions("authorization:delete")
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.POST)
     public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-        authorizationService.deleteAuthorization(id);
+        authService.deleteAuthorization(id);
         redirectAttributes.addFlashAttribute("msg", "删除成功");
         return "redirect:/authorization";
     }
 
-    private void setCommonData(Model model) {
-        model.addAttribute("userList", userService.findAll());
-        model.addAttribute("roleList", roleService.findAll());
-        model.addAttribute("appList", appService.findAll());
-    }
 
 
 }

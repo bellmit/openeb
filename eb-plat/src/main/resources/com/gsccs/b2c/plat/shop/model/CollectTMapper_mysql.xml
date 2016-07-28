@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gsccs.b2c.plat.shop.dao.CollectMapper" >
 
-  <resultMap id="BaseResultMap" type="com.gsccs.b2c.plat.shop.model.CollectT" >
+  <resultMap id="BaseResultMap" type="com.gsccs.eb.api.domain.site.Collect" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="targetid" property="targetid" jdbcType="VARCHAR" />
     <result column="colltype" property="colltype" jdbcType="VARCHAR" />
@@ -77,7 +77,7 @@
   <sql id="Base_Column_List" >
     id, targetid, colltype, buyerid, addtime, siteid, remark, picurl
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gsccs.b2c.plat.shop.model.CollectTExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gsccs.b2c.plat.shop.model.CollectExample" >
     select
     <if test="distinct" >
       distinct
@@ -93,7 +93,7 @@
   </select>
   
   <!-- 收藏的商品列表 -->
-  <select id="selectProductList" resultMap="BaseResultMap" parameterType="com.gsccs.b2c.plat.shop.model.CollectTExample" >
+  <select id="selectProductList" resultMap="BaseResultMap" parameterType="com.gsccs.b2c.plat.shop.model.CollectExample" >
     select distinct 
     <include refid="Base_Column_List" />
     FROM (
@@ -111,7 +111,7 @@
   
   
   <!-- 收藏的商品列表 -->
-  <select id="selectBrandList" resultMap="BaseResultMap" parameterType="com.gsccs.b2c.plat.shop.model.CollectTExample" >
+  <select id="selectBrandList" resultMap="BaseResultMap" parameterType="com.gsccs.b2c.plat.shop.model.CollectExample" >
     select distinct 
     a.id, a.targetid, a.colltype, a.buyerid, a.addtime, a.siteid, a.remark, b.logo as picurl
     from shop_collect a,shop_brand b
@@ -135,13 +135,13 @@
   </delete>
   
   
-  <delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.shop.model.CollectTExample" >
+  <delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.shop.model.CollectExample" >
     delete from shop_collect
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.gsccs.b2c.plat.shop.model.CollectT" >
+  <insert id="insert" parameterType="com.gsccs.eb.api.domain.site.Collect" >
     insert into shop_collect (id, targetid, colltype, 
       buyerid, addtime, siteid, 
       remark, picurl)
@@ -150,7 +150,7 @@
       #{remark,jdbcType=VARCHAR}, #{picurl,jdbcType=VARCHAR})
   </insert>
   
-  <select id="countByExample" parameterType="com.gsccs.b2c.plat.shop.model.CollectTExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.gsccs.b2c.plat.shop.model.CollectExample" resultType="java.lang.Integer" >
     select count(*) from shop_collect
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -172,7 +172,7 @@
     </if>
   </update>
   
-  <update id="updateByPrimaryKey" parameterType="com.gsccs.b2c.plat.shop.model.CollectT" >
+  <update id="updateByPrimaryKey" parameterType="com.gsccs.eb.api.domain.site.Collect" >
     update shop_collect
     set targetid = #{targetid,jdbcType=VARCHAR},
       colltype = #{colltype,jdbcType=VARCHAR},
@@ -186,7 +186,7 @@
   
   
   <!-- 收藏量统计 -->
-  <select id="collectStatist" resultMap="BaseResultMap" parameterType="com.gsccs.b2c.plat.shop.model.CollectTExample" >
+  <select id="collectStatist" resultMap="BaseResultMap" parameterType="com.gsccs.b2c.plat.shop.model.CollectExample" >
     select colltype,count(colltype) as totalnum, buyerid,
     from shop_collect 
     group by colltype

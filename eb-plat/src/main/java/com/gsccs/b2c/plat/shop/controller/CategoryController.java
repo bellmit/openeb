@@ -1,7 +1,5 @@
 package com.gsccs.b2c.plat.shop.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -16,10 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.plat.bass.JsonMsg;
-import com.gsccs.b2c.plat.shop.model.CategoryT;
 import com.gsccs.b2c.plat.shop.service.CategoryService;
+import com.gsccs.eb.api.domain.goods.Category;
 
 /**
  * 平台类目控制类
@@ -42,7 +39,7 @@ public class CategoryController {
 
 	@RequestMapping(value = "/treeGrid")
 	@ResponseBody
-	public JSONArray cateTree(ModelMap map, CategoryT cate,
+	public JSONArray cateTree(ModelMap map, Category cate,
 			HttpServletRequest request) {
 		return categoryService.findAll(null);
 	}
@@ -58,7 +55,7 @@ public class CategoryController {
 	@RequiresPermissions("category:create")
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	@ResponseBody
-	public JsonMsg create(CategoryT category,
+	public JsonMsg create(Category category,
 			RedirectAttributes redirectAttributes, String pid) {
 		JsonMsg json = new JsonMsg();
 		if (null != category) {
@@ -88,7 +85,7 @@ public class CategoryController {
 	
 	@RequiresPermissions("category:update")
 	@RequestMapping(value = "/{categoryId}/update", method = RequestMethod.POST)
-	public String update(CategoryT category,
+	public String update(Category category,
 			RedirectAttributes redirectAttributes) {
 		categoryService.update(category);
 		redirectAttributes.addFlashAttribute("msg", "修改成功");

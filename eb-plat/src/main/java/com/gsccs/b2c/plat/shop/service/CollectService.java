@@ -3,7 +3,7 @@ package com.gsccs.b2c.plat.shop.service;
 import java.util.List;
 
 import com.gsccs.b2c.plat.shop.model.CollectStatist;
-import com.gsccs.b2c.plat.shop.model.CollectT;
+import com.gsccs.eb.api.domain.site.Collect;
 
 /**
  * 收藏业务接口
@@ -17,7 +17,7 @@ public interface CollectService {
 	 * @param evalTypeT
 	 * @return
 	 */
-	public void addCollect(CollectT collect);
+	public void addCollect(Collect collect);
 	
 	/**
 	 * 取消收藏
@@ -29,10 +29,10 @@ public interface CollectService {
 	/**
 	 * 根据条件查询收藏列表
 	 */
-	public List<CollectT> getCollectProducts(CollectT collect, int page,
+	public List<Collect> getCollectProducts(Collect collect, int page,
 			int pagesize);
 	
-	public List<CollectT> getCollectBrands(CollectT collect, int page,
+	public List<Collect> getCollectBrands(Collect collect, int page,
 			int pagesize);
 	
 	public List<CollectStatist> collectStatist(Long siteid,Long buyerid);

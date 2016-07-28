@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.gsccs.b2c.api.domain.Brand;
-import com.gsccs.b2c.api.domain.Category;
 import com.gsccs.b2c.api.domain.Account;
+import com.gsccs.eb.api.domain.goods.Brand;
+import com.gsccs.eb.api.domain.goods.Category;
 import com.gsccs.eb.api.domain.goods.Product;
 import com.gsccs.eb.api.domain.seller.Shop;
 import com.gsccs.eb.api.domain.site.StoreNav;

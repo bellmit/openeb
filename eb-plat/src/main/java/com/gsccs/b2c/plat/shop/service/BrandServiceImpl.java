@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.gsccs.b2c.plat.shop.dao.BrandMapper;
 import com.gsccs.b2c.plat.shop.dao.StoreCateMapper;
-import com.gsccs.b2c.plat.shop.model.BrandT;
-import com.gsccs.b2c.plat.shop.model.BrandTExample;
+import com.gsccs.b2c.plat.shop.model.BrandExample;
+import com.gsccs.b2c.plat.shop.model.BrandExample.Criteria;
 import com.gsccs.b2c.plat.shop.model.StoreCate;
 import com.gsccs.b2c.plat.shop.model.StoreCateExample;
-import com.gsccs.b2c.plat.shop.model.BrandTExample.Criteria;
+import com.gsccs.eb.api.domain.goods.Brand;
 
 @Service
 public class BrandServiceImpl implements BrandService {
@@ -23,9 +23,9 @@ public class BrandServiceImpl implements BrandService {
 	private StoreCateMapper storeCateMapper;
 
 	@Override
-	public List<BrandT> find(BrandT brands, String order, int currPage,
+	public List<Brand> find(Brand brands, String order, int currPage,
 			int pageSize, boolean iscache) {
-		BrandTExample example = new BrandTExample();
+		BrandExample example = new BrandExample();
 		Criteria criteria = example.createCriteria();
 		proSearchParam(brands, criteria);
 		example.setCurrPage(currPage);
@@ -34,31 +34,31 @@ public class BrandServiceImpl implements BrandService {
 	}
 
 	@Override
-	public List<BrandT> find(BrandT brands, String order) {
-		BrandTExample example = new BrandTExample();
+	public List<Brand> find(Brand brands, String order) {
+		BrandExample example = new BrandExample();
 		Criteria criteria = example.createCriteria();
 		proSearchParam(brands, criteria);
 		return brandMapper.selectByExample(example);
 	}
 
 	@Override
-	public int count(BrandT brands, boolean iscache) {
+	public int count(Brand brands, boolean iscache) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public BrandT findById(Long id) {
+	public Brand findById(Long id) {
 		return brandMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	public void update(BrandT brands) {
+	public void update(Brand brands) {
 
 	}
 
 	@Override
-	public Long add(BrandT brands) {
+	public Long add(Brand brands) {
 		if (null != brands) {
 			brandMapper.insert(brands);
 			return brands.getId();
@@ -77,12 +77,17 @@ public class BrandServiceImpl implements BrandService {
 	 * @param info
 	 * @param criteria
 	 */
-	public void proSearchParam(BrandT brand, Criteria criteria) {
+	public void proSearchParam(Brand brand, Criteria criteria) {
 		if (brand != null) {
 			if (brand.getId() != null) {
 				criteria.andIdEqualTo(brand.getId());
 			}
 
+			if (brand.getShopid() != null) {
+				criteria.andShopidEqualTo(brand.getShopid());
+			}
+
+			
 			if (brand.getName() != null && brand.getName().trim().length() > 0) {
 				criteria.andNameLike("%" + brand.getName() + "%");
 			}
@@ -95,15 +100,15 @@ public class BrandServiceImpl implements BrandService {
 	}
 
 	@Override
-	public int count(BrandT brands) {
-		BrandTExample example = new BrandTExample();
+	public int count(Brand brands) {
+		BrandExample example = new BrandExample();
 		Criteria criteria = example.createCriteria();
 		proSearchParam(brands, criteria);
 		return brandMapper.countByExample(example);
 	}
 
 	@Override
-	public List<BrandT> findStoreBrand(Long sid, int currPage, int pageSize,
+	public List<Brand> findStoreBrand(Long sid, int currPage, int pageSize,
 			boolean iscache) {
 		StoreCateExample e1 = new StoreCateExample();
 		StoreCateExample.Criteria c1 = e1.createCriteria();
@@ -111,8 +116,8 @@ public class BrandServiceImpl implements BrandService {
 		StoreCate storeCate = storeCateMapper.selectByPrimaryKey(sid);
 		if (null != storeCate
 				&& StringUtils.isNotEmpty(storeCate.getBrandids())) {
-			BrandTExample example = new BrandTExample();
-			BrandTExample.Criteria c = example.createCriteria();
+			BrandExample example = new BrandExample();
+			BrandExample.Criteria c = example.createCriteria();
 			c.andSQL(" id in (" + storeCate.getBrandids() + ")");
 			example.setCurrPage(currPage);
 			example.setPageSize(pageSize);

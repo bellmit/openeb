@@ -33,7 +33,7 @@ import com.gsccs.b2c.api.domain.Account;
 import com.gsccs.b2c.api.service.BuyerServiceI;
 import com.gsccs.b2c.api.service.EvalServiceI;
 import com.gsccs.b2c.api.service.GoodsServiceI;
-import com.gsccs.b2c.api.service.LogistServiceI;
+import com.gsccs.b2c.api.service.DeliverServiceI;
 import com.gsccs.b2c.api.service.OrderServiceI;
 import com.gsccs.b2c.api.service.ShopServiceI;
 import com.gsccs.b2c.app.core.FreeMarkerUtil;
@@ -70,7 +70,7 @@ public class OrderController {
 	@Autowired
 	private OrderServiceI orderAPI;
 	@Autowired
-	private LogistServiceI logistAPI;
+	private DeliverServiceI logistAPI;
 	@Autowired
 	private EvalServiceI evalAPI;
 	@Autowired

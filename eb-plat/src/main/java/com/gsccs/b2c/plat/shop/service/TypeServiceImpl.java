@@ -6,26 +6,26 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gsccs.b2c.plat.shop.dao.PropsValTMapper;
-import com.gsccs.b2c.plat.shop.dao.TypeParamMapper;
 import com.gsccs.b2c.plat.shop.dao.PropertyMapper;
+import com.gsccs.b2c.plat.shop.dao.PropsValMapper;
 import com.gsccs.b2c.plat.shop.dao.RequirInfoMapper;
 import com.gsccs.b2c.plat.shop.dao.SpecValMapper;
 import com.gsccs.b2c.plat.shop.dao.SpecificMapper;
 import com.gsccs.b2c.plat.shop.dao.TypeMapper;
+import com.gsccs.b2c.plat.shop.dao.TypeParamMapper;
 import com.gsccs.b2c.plat.shop.dao.TypeSpecMapper;
-import com.gsccs.b2c.plat.shop.model.PropsValT;
-import com.gsccs.b2c.plat.shop.model.PropsValTExample;
-import com.gsccs.b2c.plat.shop.model.TypeParam;
-import com.gsccs.b2c.plat.shop.model.Property;
 import com.gsccs.b2c.plat.shop.model.PropertyExample;
-import com.gsccs.b2c.plat.shop.model.RequirInfo;
-import com.gsccs.b2c.plat.shop.model.SpecVal;
+import com.gsccs.b2c.plat.shop.model.PropsValExample;
 import com.gsccs.b2c.plat.shop.model.SpecValExample;
-import com.gsccs.b2c.plat.shop.model.Specific;
-import com.gsccs.b2c.plat.shop.model.Type;
 import com.gsccs.b2c.plat.shop.model.TypeExample;
-import com.gsccs.b2c.plat.shop.model.TypeSpec;
+import com.gsccs.eb.api.domain.goods.Property;
+import com.gsccs.eb.api.domain.goods.PropsVal;
+import com.gsccs.eb.api.domain.goods.RequirInfo;
+import com.gsccs.eb.api.domain.goods.SpecVal;
+import com.gsccs.eb.api.domain.goods.Specific;
+import com.gsccs.eb.api.domain.goods.Type;
+import com.gsccs.eb.api.domain.goods.TypeParam;
+import com.gsccs.eb.api.domain.goods.TypeSpec;
 
 @Service
 public class TypeServiceImpl implements TypeService {
@@ -45,7 +45,7 @@ public class TypeServiceImpl implements TypeService {
 	@Autowired
 	private RequirInfoMapper requirInfoMapper;
 	@Autowired
-	private PropsValTMapper propvalTMapper;
+	private PropsValMapper propvalTMapper;
 
 	@Override
 	public List<Specific> getSpecList(Long typeId) {
@@ -126,7 +126,7 @@ public class TypeServiceImpl implements TypeService {
 			int pageSize) {
 		TypeExample example = new TypeExample();
 		TypeExample.Criteria c = example.createCriteria();
-		proSearchParam(type,c);
+		proSearchParam(type, c);
 		if (order != null && order.trim().length() > 0) {
 			example.setOrderByClause(order);
 		}
@@ -134,12 +134,12 @@ public class TypeServiceImpl implements TypeService {
 		example.setPageSize(pageSize);
 		return typeMapper.selectPageByExample(example);
 	}
-	
+
 	@Override
 	public int count(Type type) {
 		TypeExample example = new TypeExample();
 		TypeExample.Criteria c = example.createCriteria();
-		proSearchParam(type,c);
+		proSearchParam(type, c);
 		return typeMapper.countByExample(example);
 	}
 
@@ -147,8 +147,6 @@ public class TypeServiceImpl implements TypeService {
 	public Type getType(Long typeId) {
 		return typeMapper.selectByPrimaryKey(typeId);
 	}
-	
-	
 
 	@Override
 	public void UpdateType(Type type) {
@@ -156,7 +154,6 @@ public class TypeServiceImpl implements TypeService {
 
 	}
 
-	
 	public void proSearchParam(Type type, TypeExample.Criteria c) {
 		if (null != type) {
 			if (null != type.getId()) {
@@ -174,20 +171,20 @@ public class TypeServiceImpl implements TypeService {
 	}
 
 	@Override
-	public List<PropsValT> getPropsValList(Long proId) {
-		PropsValTExample example = new PropsValTExample();
-		PropsValTExample.Criteria c = example.createCriteria();
+	public List<PropsVal> getPropsValList(Long proId) {
+		PropsValExample example = new PropsValExample();
+		PropsValExample.Criteria c = example.createCriteria();
 		c.andProdIdEqualTo(proId);
-		List<PropsValT> list = propvalTMapper.selectByExample(example);
-		
-		if(list.size() >0){
+		List<PropsVal> list = propvalTMapper.selectByExample(example);
+
+		if (list.size() > 0) {
 			return list;
 		}
 		return null;
 	}
 
 	@Override
-	public PropsValT getPropsVal(Long pvId) {
+	public PropsVal getPropsVal(Long pvId) {
 		return propvalTMapper.selectByPrimaryKey(pvId);
 	}
 

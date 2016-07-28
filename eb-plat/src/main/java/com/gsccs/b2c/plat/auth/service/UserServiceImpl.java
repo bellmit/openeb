@@ -69,12 +69,6 @@ public class UserServiceImpl implements UserService {
 		return userMapper.selectByPrimaryKey(userId);
 	}
 
-	@Override
-	public List<User> findAll() {
-		// return userMapper.selectByExample(null);
-		return null;
-	}
-
 	/**
 	 * 根据用户名查找用户
 	 * 

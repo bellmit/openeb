@@ -8,13 +8,13 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.gsccs.b2c.api.CacheConst;
-import com.gsccs.b2c.api.domain.Brand;
 import com.gsccs.b2c.api.domain.CateProp;
-import com.gsccs.b2c.api.domain.Category;
 import com.gsccs.b2c.api.service.BrandServiceI;
 import com.gsccs.b2c.api.service.CateServiceI;
 import com.gsccs.b2c.api.service.GoodsServiceI;
 import com.gsccs.b2c.api.service.TypeServiceI;
+import com.gsccs.eb.api.domain.goods.Brand;
+import com.gsccs.eb.api.domain.goods.Category;
 import com.gsccs.eb.api.domain.goods.Product;
 import com.gsccs.eb.api.domain.goods.ProductProp;
 import com.gsccs.eb.api.domain.goods.PropsVal;

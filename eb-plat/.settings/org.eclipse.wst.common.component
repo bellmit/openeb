@@ -7,9 +7,6 @@
         <dependent-module archiveName="eb-api-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/eb-api/eb-api">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="eb-core-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/eb-core/eb-core">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <property name="context-root" value="eb-plat"/>
         <property name="java-output-path" value="/eb-plat/target/classes"/>
     </wb-module>
