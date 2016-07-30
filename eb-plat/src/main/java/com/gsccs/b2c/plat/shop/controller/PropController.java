@@ -86,7 +86,7 @@ public class PropController {
 	@RequiresPermissions("type:update")
 	@RequestMapping(value = "/{typeId}/update", method = RequestMethod.POST)
 	public String update(Type type, RedirectAttributes redirectAttributes) {
-		typeService.UpdateType(type);
+		typeService.updateType(type);
 		redirectAttributes.addFlashAttribute("msg", "修改成功");
 		return "redirect:/type";
 	}

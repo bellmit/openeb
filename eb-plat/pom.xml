@@ -55,8 +55,6 @@
 			<version>0.2.23</version>
 		</dependency>
 
-
-
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
@@ -123,10 +121,6 @@
 			<systemPath>${basedir}/lib/apache-ant-zip.jar</systemPath>
 		</dependency>
 
-
-
-		<!-- <dependency> <groupId>org.json</groupId> <artifactId>json</artifactId> 
-			<version>20140107</version> </dependency> -->
 
 
 		<!-- fileupload -->

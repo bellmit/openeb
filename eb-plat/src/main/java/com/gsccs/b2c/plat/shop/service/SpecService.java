@@ -19,6 +19,27 @@ public interface SpecService {
 	 */
 	public void updateSpecific(Specific spec);
 	
+	
+	/**
+	 * 删除规格
+	 * @param spec
+	 */
+	public void deleteSpecific(Long id);
+	
+	
+	/**
+	 * 删除规格值
+	 * @param spec
+	 */
+	public void deleteSpecVal(Long id);
+	
+	/**
+	 * 
+	 * @param specname
+	 * @return
+	 */
+	public List<Specific> queryBySpecName(String specname);
+	
 	/**
 	 * 根据规格ID获取规格
 	 * @param specId

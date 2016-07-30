@@ -1,0 +1,1416 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0101)http://b2b2c.leimingtech.com/leimingtech-admin/goods/type/forward?id=240b94dc876e49c0807c25999dbf0df8 -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+    
+    <title>管理后台</title>
+    <link href="./管理后台-类型编辑_files/skin_0.css" rel="stylesheet" type="text/css" id="cssfile">
+
+    <script type="text/javascript" src="./管理后台-类型编辑_files/jquery.js"></script>
+    <script type="text/javascript" src="./管理后台-类型编辑_files/jquery.validation.min.js"></script>
+    <script type="text/javascript" src="./管理后台-类型编辑_files/admincp.js"></script>
+    <script type="text/javascript" src="./管理后台-类型编辑_files/jquery.cookie.js"></script>
+    <script type="text/javascript" src="./管理后台-类型编辑_files/common.js"></script>
+
+    <script type="text/javascript">
+        var APP_BASE = '/leimingtech-admin';
+        LOADING_IMAGE = "/leimingtech-admin/res/images/loading.gif";
+    </script>
+<script type="text/javascript" src="./管理后台-类型编辑_files/jquery.ui.js"></script>
+<script type="text/javascript" src="./管理后台-类型编辑_files/zh-CN.js" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="./管理后台-类型编辑_files/jquery.ui.css">
+<script type="text/javascript" src="./管理后台-类型编辑_files/admincp.js" charset="utf-8"></script>
+<script type="text/javascript" src="./管理后台-类型编辑_files/common_select.js" charset="utf-8"></script>
+<script type="text/javascript" src="./管理后台-类型编辑_files/perfect-scrollbar.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="./管理后台-类型编辑_files/common.js" charset="utf-8"></script>
+<script type="text/javascript" src="./管理后台-类型编辑_files/jquery.mousewheel.js" charset="utf-8"></script>
+<script type="text/javascript" src="./管理后台-类型编辑_files/goodsType.js" charset="utf-8"></script>
+</head>
+<body>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+<div class="fixed-bar">
+    <div class="item-title">
+        <h3>类型管理</h3>
+        <ul class="tab-base">
+            <li><a href="http://b2b2c.leimingtech.com/leimingtech-admin/goods/type/list"><span>列表</span></a></li>
+            <li><a href="http://b2b2c.leimingtech.com/leimingtech-admin/goods/type/forward?id=0"><span>新增</span></a></li>
+            <li><a href="javascript:void(0);" class="current"><span>编辑</span></a></li>
+
+        </ul>
+    </div>
+</div>
+<div class="fixed-empty"></div>
+<form id="type_form" method="post" action="http://b2b2c.leimingtech.com/leimingtech-admin/goods/type/save">
+<table id="prompt" class="table tb-type2">
+    <tbody>
+    <tr class="space odd">
+        <th colspan="12" class="nobg"> <div class="title">
+            <h5>操作提示</h5>
+            <span class="arrow"></span> </div>
+        </th>
+    </tr>
+    <tr class="odd" style="display: none;">
+        <td>
+            <ul>
+                <li>关联规格不是必选项，它会影响商品发布时的规格及价格的录入。不选为没有规格。</li>
+                <li>关联品牌不是必选项，它会影响商品发布时的品牌选择。</li>
+                <li>属性值可以添加多个，每个属性值之间需要使用逗号隔开。</li>
+                <li>选中属性的“显示”选项，该属性将会在商品列表页显示。</li>
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<input type="hidden" name="form_submit" value="ok">
+<input type="hidden" name="goodsType.typeId" value="240b94dc876e49c0807c25999dbf0df8">
+<table class="table tb-type2">
+    <tbody>
+    <tr class="noborder">
+        <td class="required" colspan="2"><label class="validation" for="goodsType.typeName">类型：</label></td>
+    </tr>
+    <tr class="noborder">
+        <td class="vatop rowform"><input type="text" class="txt" name="goodsType.typeName" id="t_mane" value="555555"></td>
+        <td class="vatop tips"></td>
+    </tr>
+    <tr style="background: rgb(255, 255, 255);">
+        <td class="required" colspan="2"><label class="validation" for="goodsType.typeSort">排序：</label></td>
+    </tr>
+    <tr class="noborder">
+        <td class="vatop rowform"><input type="text" class="txt" name="goodsType.typeSort" id="t_sort" value="1"></td>
+        <td class="vatop tips">请填写自然数。类型列表将会根据排序进行由小到大排列显示。</td>
+    </tr>
+    </tbody>
+</table>
+<div style="width: 100%; float: left; margin: 10px 0; border: solid #DEEFFB; border-width: 0 0 1px 0;">
+    <table class="table tb-type2">
+        <thead class="thead">
+        <tr class="space">
+            <th class="required" colspan="15"><label style=" float: left; margin-right: 10px;">选择关联规格：</label>
+                <input type="hidden" name="spec_checkbox" id="spec_checkbox" value="">
+            </th>
+        </tr>
+        <tr>
+        	<th></th>
+           	<th>规格名称</th>
+           	<th>规格值</th>
+            <th style="text-align: right;" colspan="15"><a class="btns" nctype="spec_hide" href="javascript:viod(0);"><span>隐藏未选项</span></a></th>
+        </tr>
+        </thead>
+    </table>
+    <div style="position:relative; overflow: hidden;" id="spec_div" class="ps-container">
+        <table class="table tb-type2" id="spec_table">
+            <input type="hidden" value="" name="spec[form_submit]" nc_type="submit_value">
+                <tbody>
+                    <tr class="hover edit" style="background: rgb(255, 255, 255);">
+                        <td width="50px">
+                            <ul class="nofloat">
+                                 <li class="left w33pre h36">
+                                     <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="b684e638f6b24fb887f9925b66291810" name="specList[0].spId">
+                                 </li>
+                            </ul>
+                        </td>
+                        <td width="300px"> 75*38*61 </td>
+                        <td>22,yu</td>
+                    </tr>
+                    <tr class="hover edit">
+                        <td width="50px">
+                            <ul class="nofloat">
+                                 <li class="left w33pre h36">
+                                     <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="1" name="specList[1].spId">
+                                 </li>
+                            </ul>
+                        </td>
+                        <td width="300px"> 颜色 </td>
+                        <td>红色,黑色,蓝色,金色,银色,深空灰,绿色,紫色,白色,玫瑰金,粉色,黄色,牛仔蓝,宝蓝,酒红</td>
+                    </tr>
+                    <tr class="hover edit">
+                        <td width="50px">
+                            <ul class="nofloat">
+                                 <li class="left w33pre h36">
+                                     <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="3" name="specList[2].spId">
+                                 </li>
+                            </ul>
+                        </td>
+                        <td width="300px"> 屏幕尺寸 </td>
+                        <td>4.7,5.5,5.7,15,16,14</td>
+                    </tr>
+                    <tr class="hover edit" style="background: rgb(251, 251, 251);">
+                        <td width="50px">
+                            <ul class="nofloat">
+                                 <li class="left w33pre h36">
+                                     <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="4" name="specList[3].spId">
+                                 </li>
+                            </ul>
+                        </td>
+                        <td width="300px"> 版本 </td>
+                        <td>移动4G,联通4G,电信4G,5000毫安,10000毫安,11.6英寸128GB,13.3英寸128GB</td>
+                    </tr>
+                    <tr class="hover edit" style="background: rgb(255, 255, 255);">
+                        <td width="50px">
+                            <ul class="nofloat">
+                                 <li class="left w33pre h36">
+                                     <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="5" name="specList[4].spId">
+                                 </li>
+                            </ul>
+                        </td>
+                        <td width="300px"> 容量 </td>
+                        <td>16G,32G,64G,128G</td>
+                    </tr>
+                    <tr class="hover edit">
+                        <td width="50px">
+                            <ul class="nofloat">
+                                 <li class="left w33pre h36">
+                                     <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="9" name="specList[5].spId">
+                                 </li>
+                            </ul>
+                        </td>
+                        <td width="300px"> 尺码 </td>
+                        <td>L,M,S,35,36,38,37,39,可调节大小(54-60cm),可调节大小</td>
+                    </tr>
+                    <tr class="hover edit">
+                        <td width="50px">
+                            <ul class="nofloat">
+                                 <li class="left w33pre h36">
+                                     <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="10" name="specList[6].spId">
+                                 </li>
+                            </ul>
+                        </td>
+                        <td width="300px"> 电视版本 </td>
+                        <td>50英寸2.5年新版,50英寸2.5年老版,50英寸超高清,40英寸特价款</td>
+                    </tr>
+                    <tr class="hover edit">
+                        <td width="50px">
+                            <ul class="nofloat">
+                                 <li class="left w33pre h36">
+                                     <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="19" name="specList[7].spId">
+                                 </li>
+                            </ul>
+                        </td>
+                        <td width="300px"> 尺寸（床铺） </td>
+                        <td>1.8米,2.0米,1.5米</td>
+                    </tr>
+                    <tr class="hover edit">
+                        <td width="50px">
+                            <ul class="nofloat">
+                                 <li class="left w33pre h36">
+                                     <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="22" name="specList[8].spId">
+                                 </li>
+                            </ul>
+                        </td>
+                        <td width="300px"> 课时 </td>
+                        <td>大</td>
+                    </tr>
+                    <tr class="hover edit">
+                        <td width="50px">
+                            <ul class="nofloat">
+                                 <li class="left w33pre h36">
+                                     <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="27" name="specList[9].spId">
+                                 </li>
+                            </ul>
+                        </td>
+                        <td width="300px"> 包装 </td>
+                        <td>罐装,纸包装,盒装</td>
+                    </tr>
+                    <tr class="hover edit">
+                        <td width="50px">
+                            <ul class="nofloat">
+                                 <li class="left w33pre h36">
+                                     <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="00cc14a047ae4fd2b86ef4f0d88ff504" name="specList[10].spId">
+                                 </li>
+                            </ul>
+                        </td>
+                        <td width="300px"> 毫升 </td>
+                        <td>50,100,200</td>
+                    </tr>
+                    <tr class="hover edit">
+                        <td width="50px">
+                            <ul class="nofloat">
+                                 <li class="left w33pre h36">
+                                     <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="02dd97ba838346bfb938e3612756983d" name="specList[11].spId">
+                                 </li>
+                            </ul>
+                        </td>
+                        <td width="300px"> 香型 </td>
+                        <td>茉莉香,玫瑰香,古龙水</td>
+                    </tr>
+                    <tr class="hover edit">
+                        <td width="50px">
+                            <ul class="nofloat">
+                                 <li class="left w33pre h36">
+                                     <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="18d661612fd7415588cb74c8503c5dc1" name="specList[12].spId">
+                                 </li>
+                            </ul>
+                        </td>
+                        <td width="300px"> 大小 </td>
+                        <td>大,中,小</td>
+                    </tr>
+                    <tr class="hover edit">
+                        <td width="50px">
+                            <ul class="nofloat">
+                                 <li class="left w33pre h36">
+                                     <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="1f401a1750364c72a7ce6ca8cabb78ca" name="specList[13].spId">
+                                 </li>
+                            </ul>
+                        </td>
+                        <td width="300px"> 好好爱好 </td>
+                        <td>222</td>
+                    </tr>
+                    <tr class="hover edit">
+                        <td width="50px">
+                            <ul class="nofloat">
+                                 <li class="left w33pre h36">
+                                     <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="22f7b62371754565abf29e025823f1d5" name="specList[14].spId">
+                                 </li>
+                            </ul>
+                        </td>
+                        <td width="300px"> 材质 </td>
+                        <td>玉,珍珠</td>
+                    </tr>
+                    <tr class="hover edit">
+                        <td width="50px">
+                            <ul class="nofloat">
+                                 <li class="left w33pre h36">
+                                     <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="47c2f8d581a74943846d414a6f41c361" name="specList[15].spId">
+                                 </li>
+                            </ul>
+                        </td>
+                        <td width="300px"> 尺寸大小 </td>
+                        <td>HIGH,MIDOM,LOW</td>
+                    </tr>
+                    <tr class="hover edit">
+                        <td width="50px">
+                            <ul class="nofloat">
+                                 <li class="left w33pre h36">
+                                     <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="5d0a225ea01e43fea7bca5f1a0ae7ee3" name="specList[16].spId">
+                                 </li>
+                            </ul>
+                        </td>
+                        <td width="300px"> 酒水分类 </td>
+                        <td>啤酒,白酒,红酒,葡萄酒</td>
+                    </tr>
+                    <tr class="hover edit">
+                        <td width="50px">
+                            <ul class="nofloat">
+                                 <li class="left w33pre h36">
+                                     <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="67dafb81d1dd48efb18d5fd05c577f8d" name="specList[17].spId">
+                                 </li>
+                            </ul>
+                        </td>
+                        <td width="300px"> 尺寸大小2 </td>
+                        <td>1,2,3</td>
+                    </tr>
+                    <tr class="hover edit">
+                        <td width="50px">
+                            <ul class="nofloat">
+                                 <li class="left w33pre h36">
+                                     <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="90ebdeec509942c29f9780680f500fc1" name="specList[18].spId">
+                                 </li>
+                            </ul>
+                        </td>
+                        <td width="300px"> 美妆效果 </td>
+                        <td>美白,祛痘,遮瑕</td>
+                    </tr>
+                    <tr class="hover edit">
+                        <td width="50px">
+                            <ul class="nofloat">
+                                 <li class="left w33pre h36">
+                                     <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="cc9823d78a5e4e0fa5e99249e57a9fc1" name="specList[19].spId">
+                                 </li>
+                            </ul>
+                        </td>
+                        <td width="300px"> 2 </td>
+                        <td>22,22</td>
+                    </tr>
+                    <tr class="hover edit">
+                        <td width="50px">
+                            <ul class="nofloat">
+                                 <li class="left w33pre h36">
+                                     <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="d74d77a38ae0404993ca45b6756b8228" name="specList[20].spId">
+                                 </li>
+                            </ul>
+                        </td>
+                        <td width="300px"> 口味 </td>
+                        <td>原味,微辣,麻辣,奶香味,咸味,甜味,烤肉味,烧烤味</td>
+                    </tr>
+                    <tr class="hover edit">
+                        <td width="50px">
+                            <ul class="nofloat">
+                                 <li class="left w33pre h36">
+                                     <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="de56f4af63fc48908e91b7c1c11bb4d7" name="specList[21].spId">
+                                 </li>
+                            </ul>
+                        </td>
+                        <td width="300px"> kk </td>
+                        <td>23</td>
+                    </tr>
+                    <tr class="hover edit">
+                        <td width="50px">
+                            <ul class="nofloat">
+                                 <li class="left w33pre h36">
+                                     <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="de6c87ce170e4b28a6eae11a0d4ef41c" name="specList[22].spId">
+                                 </li>
+                            </ul>
+                        </td>
+                        <td width="300px"> 屏幕尺寸 </td>
+                        <td>4.7,5.0</td>
+                    </tr>
+                    <tr class="hover edit">
+                        <td width="50px">
+                            <ul class="nofloat">
+                                 <li class="left w33pre h36">
+                                     <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="f842b17ae525458da57340eaf9ddff03" name="specList[23].spId">
+                                 </li>
+                            </ul>
+                        </td>
+                        <td width="300px"> 厚度 </td>
+                        <td>薄款,厚款,拉绒</td>
+                    </tr>
+                </tbody>
+        </table>
+    <div class="ps-scrollbar-x" style="left: 0px; bottom: 3px; width: 0px;"></div><div class="ps-scrollbar-y" style="top: 0px; right: 3px; height: 0px;"></div></div>
+</div>
+<div style="width: 100%; float: right; margin: 10px 0; border: solid #DEEFFB; border-width: 0 0 1px 0;">
+    <table class="table tb-type2">
+        <thead class="thead">
+        <tr class="space">
+            <th colspan="15"> <label for="member_name" style=" float: left; margin-right: 10px;">选择关联品牌：</label>
+            </th>
+        </tr>
+        <tr>
+            <th style="text-align: right;" colspan="15"><a class="btns" nctype="brand_hide" href="javascript:viod(0);"><span>隐藏未选项</span></a></th>
+        </tr>
+        </thead>
+    </table>
+    <div style="position:relative; max-height:240px; overflow: hidden;" id="brand_div" class="ps-container">
+        <table class="table tb-type2" id="brand_table">
+                <tbody>
+                	<tr class="hover">
+                        <td>
+	                        <h6 class="clear" id="brand_h6_0">
+	                            食品饮料
+	                        </h6>
+	                        <ul class="nofloat">
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[0].brandId" value="110" id="brand_110">
+	                                    <label for="brand_110">佐丹奴</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[1].brandId" value="81" id="brand_81">
+	                                    <label for="brand_81">HTC</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[2].brandId" value="82" id="brand_82">
+	                                    <label for="brand_82">罗技</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[3].brandId" value="83" id="brand_83">
+	                                    <label for="brand_83">TP-LINK</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[4].brandId" value="84" id="brand_84">
+	                                    <label for="brand_84">金士顿</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[5].brandId" value="85" id="brand_85">
+	                                    <label for="brand_85">雷蛇</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[6].brandId" value="86" id="brand_86">
+	                                    <label for="brand_86">爱普生</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[7].brandId" value="87" id="brand_87">
+	                                    <label for="brand_87">DELL</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[8].brandId" value="89" id="brand_89">
+	                                    <label for="brand_89">富勒</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[9].brandId" value="90" id="brand_90">
+	                                    <label for="brand_90">雷柏</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[10].brandId" value="91" id="brand_91">
+	                                    <label for="brand_91">双飞燕</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[11].brandId" value="92" id="brand_92">
+	                                    <label for="brand_92">山泽</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[12].brandId" value="93" id="brand_93">
+	                                    <label for="brand_93">三木</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[13].brandId" value="94" id="brand_94">
+	                                    <label for="brand_94">迈乐</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[14].brandId" value="95" id="brand_95">
+	                                    <label for="brand_95">惠普</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[15].brandId" value="96" id="brand_96">
+	                                    <label for="brand_96">索爱</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[16].brandId" value="98" id="brand_98">
+	                                    <label for="brand_98">阿尔卡特</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[17].brandId" value="99" id="brand_99">
+	                                    <label for="brand_99">D-Link</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[18].brandId" value="100" id="brand_100">
+	                                    <label for="brand_100">台电</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[19].brandId" value="102" id="brand_102">
+	                                    <label for="brand_102">得力</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[20].brandId" value="103" id="brand_103">
+	                                    <label for="brand_103">acer</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[21].brandId" value="104" id="brand_104">
+	                                    <label for="brand_104">清华同方</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[22].brandId" value="105" id="brand_105">
+	                                    <label for="brand_105">富士通</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[23].brandId" value="106" id="brand_106">
+	                                    <label for="brand_106">微软</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[24].brandId" value="59" id="brand_59">
+	                                    <label for="brand_59">海尔</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[25].brandId" value="61" id="brand_61">
+	                                    <label for="brand_61">飞利浦</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[26].brandId" value="62" id="brand_62">
+	                                    <label for="brand_62">松下</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[27].brandId" value="63" id="brand_63">
+	                                    <label for="brand_63">奥克斯</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[28].brandId" value="64" id="brand_64">
+	                                    <label for="brand_64">三洋</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[29].brandId" value="65" id="brand_65">
+	                                    <label for="brand_65">奔腾</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[30].brandId" value="66" id="brand_66">
+	                                    <label for="brand_66">西门子</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[31].brandId" value="68" id="brand_68">
+	                                    <label for="brand_68">格兰仕</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[32].brandId" value="69" id="brand_69">
+	                                    <label for="brand_69">艾力斯特</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[33].brandId" value="70" id="brand_70">
+	                                    <label for="brand_70">苏泊尔</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[34].brandId" value="71" id="brand_71">
+	                                    <label for="brand_71">伊莱克斯</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[35].brandId" value="72" id="brand_72">
+	                                    <label for="brand_72">创维</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[36].brandId" value="73" id="brand_73">
+	                                    <label for="brand_73">三菱电机</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[37].brandId" value="74" id="brand_74">
+	                                    <label for="brand_74">TCL</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[38].brandId" value="75" id="brand_75">
+	                                    <label for="brand_75">夏普</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[39].brandId" value="42" id="brand_42">
+	                                    <label for="brand_42">护舒宝</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[40].brandId" value="43" id="brand_43">
+	                                    <label for="brand_43">娇兰</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[41].brandId" value="45" id="brand_45">
+	                                    <label for="brand_45">妮维雅</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[42].brandId" value="46" id="brand_46">
+	                                    <label for="brand_46">高丝洁</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[43].brandId" value="47" id="brand_47">
+	                                    <label for="brand_47">高丝</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[44].brandId" value="48" id="brand_48">
+	                                    <label for="brand_48">佳洁士</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[45].brandId" value="49" id="brand_49">
+	                                    <label for="brand_49">纪梵希</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[46].brandId" value="50" id="brand_50">
+	                                    <label for="brand_50">卡尼尔</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[47].brandId" value="51" id="brand_51">
+	                                    <label for="brand_51">娇爽</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[48].brandId" value="52" id="brand_52">
+	                                    <label for="brand_52">苏菲</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[49].brandId" value="53" id="brand_53">
+	                                    <label for="brand_53">芙丽芳丝</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[50].brandId" value="54" id="brand_54">
+	                                    <label for="brand_54">波斯顿</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[51].brandId" value="56" id="brand_56">
+	                                    <label for="brand_56">资生堂</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[52].brandId" value="57" id="brand_57">
+	                                    <label for="brand_57">相宜本草</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[53].brandId" value="58" id="brand_58">
+	                                    <label for="brand_58">薇姿</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[54].brandId" value="37" id="brand_37">
+	                                    <label for="brand_37">高仕</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[55].brandId" value="39" id="brand_39">
+	                                    <label for="brand_39">瑞士军刀</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[56].brandId" value="29" id="brand_29">
+	                                    <label for="brand_29">同仁堂</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[57].brandId" value="31" id="brand_31">
+	                                    <label for="brand_31">长城葡萄酒</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[58].brandId" value="33" id="brand_33">
+	                                    <label for="brand_33">Lumi</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[59].brandId" value="34" id="brand_34">
+	                                    <label for="brand_34">养生堂</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[60].brandId" value="19" id="brand_19">
+	                                    <label for="brand_19">金史密斯（KINGSMITH）</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[61].brandId" value="20" id="brand_20">
+	                                    <label for="brand_20">BH (必艾奇)</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[62].brandId" value="21" id="brand_21">
+	                                    <label for="brand_21">威尔胜</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[63].brandId" value="22" id="brand_22">
+	                                    <label for="brand_22">皮尔瑜伽</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[64].brandId" value="23" id="brand_23">
+	                                    <label for="brand_23">以诗萜</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[65].brandId" value="25" id="brand_25">
+	                                    <label for="brand_25">远洋瑜伽</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[66].brandId" value="26" id="brand_26">
+	                                    <label for="brand_26">捷安特</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[67].brandId" value="4" id="brand_4">
+	                                    <label for="brand_4">费雪</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[68].brandId" value="6" id="brand_6">
+	                                    <label for="brand_6">惠氏</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[69].brandId" value="7" id="brand_7">
+	                                    <label for="brand_7">美赞臣</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[70].brandId" value="9" id="brand_9">
+	                                    <label for="brand_9">乐高</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[71].brandId" value="10" id="brand_10">
+	                                    <label for="brand_10">嘉宝</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[72].brandId" value="11" id="brand_11">
+	                                    <label for="brand_11">多美</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[73].brandId" value="12" id="brand_12">
+	                                    <label for="brand_12">雀巢</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[74].brandId" value="13" id="brand_13">
+	                                    <label for="brand_13">妈咪宝贝</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[75].brandId" value="14" id="brand_14">
+	                                    <label for="brand_14">强生</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[76].brandId" value="15" id="brand_15">
+	                                    <label for="brand_15">澳优</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[77].brandId" value="16" id="brand_16">
+	                                    <label for="brand_16">雅培</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[78].brandId" value="17" id="brand_17">
+	                                    <label for="brand_17">亨氏</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[79].brandId" value="18" id="brand_18">
+	                                    <label for="brand_18">十月妈咪</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[80].brandId" value="9ab40cefedb6471596ee2056fb0b5642" id="brand_9ab40cefedb6471596ee2056fb0b5642">
+	                                    <label for="brand_9ab40cefedb6471596ee2056fb0b5642">索尼（测）</label>
+	                                </li>
+	                        </ul>
+	                        <h6 class="clear" id="brand_h6_1">
+	                            大家电
+	                        </h6>
+	                        <ul class="nofloat">
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[81].brandId" value="3f10529f5e034d619d389ced4cafb0b1" id="brand_3f10529f5e034d619d389ced4cafb0b1">
+	                                    <label for="brand_3f10529f5e034d619d389ced4cafb0b1">R</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[82].brandId" value="cc7961b3eee44dbea3b4ba29e6f9618f" id="brand_cc7961b3eee44dbea3b4ba29e6f9618f">
+	                                    <label for="brand_cc7961b3eee44dbea3b4ba29e6f9618f">B</label>
+	                                </li>
+	                        </ul>
+	                        <h6 class="clear" id="brand_h6_2">
+	                            平板电视
+	                        </h6>
+	                        <ul class="nofloat">
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[83].brandId" value="141" id="brand_141">
+	                                    <label for="brand_141">乐视</label>
+	                                </li>
+	                        </ul>
+	                        <h6 class="clear" id="brand_h6_3">
+	                            家居家纺
+	                        </h6>
+	                        <ul class="nofloat">
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[84].brandId" value="137" id="brand_137">
+	                                    <label for="brand_137">溢彩年华</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[85].brandId" value="139" id="brand_139">
+	                                    <label for="brand_139">博洋家纺</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[86].brandId" value="109" id="brand_109">
+	                                    <label for="brand_109">宝姿</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[87].brandId" value="112" id="brand_112">
+	                                    <label for="brand_112">百丽</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[88].brandId" value="115" id="brand_115">
+	                                    <label for="brand_115">猫人</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[89].brandId" value="120" id="brand_120">
+	                                    <label for="brand_120">享爱.</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[90].brandId" value="77" id="brand_77">
+	                                    <label for="brand_77">九阳</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[91].brandId" value="38" id="brand_38">
+	                                    <label for="brand_38">佐卡伊</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[92].brandId" value="40" id="brand_40">
+	                                    <label for="brand_40">蓝色多瑙河</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[93].brandId" value="32" id="brand_32">
+	                                    <label for="brand_32">新西兰十一坊</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[94].brandId" value="24" id="brand_24">
+	                                    <label for="brand_24">斯伯丁</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[95].brandId" value="142" id="brand_142">
+	                                    <label for="brand_142">格莱帝</label>
+	                                </li>
+	                        </ul>
+	                        <h6 class="clear" id="brand_h6_4">
+	                            钻戒
+	                        </h6>
+	                        <ul class="nofloat">
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[96].brandId" value="179" id="brand_179">
+	                                    <label for="brand_179">DR</label>
+	                                </li>
+	                        </ul>
+	                        <h6 class="clear" id="brand_h6_5">
+	                            休闲零食
+	                        </h6>
+	                        <ul class="nofloat">
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[97].brandId" value="136" id="brand_136">
+	                                    <label for="brand_136">希格</label>
+	                                </li>
+	                        </ul>
+	                        <h6 class="clear" id="brand_h6_6">
+	                            手机、数码搞
+	                        </h6>
+	                        <ul class="nofloat">
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[98].brandId" value="78" id="brand_78">
+	                                    <label for="brand_78">诺基亚</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[99].brandId" value="79" id="brand_79">
+	                                    <label for="brand_79">摩托罗拉</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[100].brandId" value="80" id="brand_80">
+	                                    <label for="brand_80">苹果2</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[101].brandId" value="97" id="brand_97">
+	                                    <label for="brand_97">飞毛腿</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[102].brandId" value="101" id="brand_101">
+	                                    <label for="brand_101">ThinkPad</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[103].brandId" value="140" id="brand_140">
+	                                    <label for="brand_140">小米</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[104].brandId" value="60" id="brand_60">
+	                                    <label for="brand_60">LG</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[105].brandId" value="67" id="brand_67">
+	                                    <label for="brand_67">三星</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[106].brandId" value="76" id="brand_76">
+	                                    <label for="brand_76">格力</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[107].brandId" value="1" id="brand_1">
+	                                    <label for="brand_1">中国移动</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[108].brandId" value="2" id="brand_2">
+	                                    <label for="brand_2">中国电信</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[109].brandId" value="3" id="brand_3">
+	                                    <label for="brand_3">中国联通</label>
+	                                </li>
+	                        </ul>
+	                        <h6 class="clear" id="brand_h6_7">
+	                            美妆洗护
+	                        </h6>
+	                        <ul class="nofloat">
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[110].brandId" value="41" id="brand_41">
+	                                    <label for="brand_41">珀莱雅</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[111].brandId" value="44" id="brand_44">
+	                                    <label for="brand_44">兰蔻</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[112].brandId" value="55" id="brand_55">
+	                                    <label for="brand_55">雅诗兰黛</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[113].brandId" value="0ecb21243cbc4b738e4cf34b8eac10ac" id="brand_0ecb21243cbc4b738e4cf34b8eac10ac">
+	                                    <label for="brand_0ecb21243cbc4b738e4cf34b8eac10ac">赫莲娜</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[114].brandId" value="2c0e850a4fdc415ab1f2daf1706063a2" id="brand_2c0e850a4fdc415ab1f2daf1706063a2">
+	                                    <label for="brand_2c0e850a4fdc415ab1f2daf1706063a2">倩碧</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[115].brandId" value="421b3381fcfa4d4eb9d8990d19540360" id="brand_421b3381fcfa4d4eb9d8990d19540360">
+	                                    <label for="brand_421b3381fcfa4d4eb9d8990d19540360">Olay</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[116].brandId" value="4268cc45ead84fc1aa89a5c4b3e806ad" id="brand_4268cc45ead84fc1aa89a5c4b3e806ad">
+	                                    <label for="brand_4268cc45ead84fc1aa89a5c4b3e806ad">悦诗风吟</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[117].brandId" value="4a708b19ca944b3dac6ad3d3a0de9b17" id="brand_4a708b19ca944b3dac6ad3d3a0de9b17">
+	                                    <label for="brand_4a708b19ca944b3dac6ad3d3a0de9b17">迪奥</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[118].brandId" value="52f155010e784411bc9ae24ea1457052" id="brand_52f155010e784411bc9ae24ea1457052">
+	                                    <label for="brand_52f155010e784411bc9ae24ea1457052">香奈儿</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[119].brandId" value="72ecd2dc993949228ad6d9be46edbba6" id="brand_72ecd2dc993949228ad6d9be46edbba6">
+	                                    <label for="brand_72ecd2dc993949228ad6d9be46edbba6">贝玲妃</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[120].brandId" value="91a21c818e234ab0bc23dc2dd91d4b32" id="brand_91a21c818e234ab0bc23dc2dd91d4b32">
+	                                    <label for="brand_91a21c818e234ab0bc23dc2dd91d4b32">蜜丝佛陀</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[121].brandId" value="c1fb012c18fe40e284d50c10eedcda99" id="brand_c1fb012c18fe40e284d50c10eedcda99">
+	                                    <label for="brand_c1fb012c18fe40e284d50c10eedcda99">NARS</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[122].brandId" value="ea6c637f5c0a4abcabcacd8247099c03" id="brand_ea6c637f5c0a4abcabcacd8247099c03">
+	                                    <label for="brand_ea6c637f5c0a4abcabcacd8247099c03">植村秀</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[123].brandId" value="f110930dfffe46809d5c54afd9b4d99d" id="brand_f110930dfffe46809d5c54afd9b4d99d">
+	                                    <label for="brand_f110930dfffe46809d5c54afd9b4d99d">阿玛尼</label>
+	                                </li>
+	                        </ul>
+	                        <h6 class="clear" id="brand_h6_8">
+	                            鞋靴、箱包、钟表、奢侈品
+	                        </h6>
+	                        <ul class="nofloat">
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[124].brandId" value="132" id="brand_132">
+	                                    <label for="brand_132">天堂伞</label>
+	                                </li>
+	                        </ul>
+	                        <h6 class="clear" id="brand_h6_9">
+	                            24
+	                        </h6>
+	                        <ul class="nofloat">
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[125].brandId" value="c66f117297fa4b46a31d1bb6ddc6d56a" id="brand_c66f117297fa4b46a31d1bb6ddc6d56a">
+	                                    <label for="brand_c66f117297fa4b46a31d1bb6ddc6d56a">消费娱乐</label>
+	                                </li>
+	                        </ul>
+	                        <h6 class="clear" id="brand_h6_10">
+	                            酒类 生鲜 食品
+	                        </h6>
+	                        <ul class="nofloat">
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[126].brandId" value="27" id="brand_27">
+	                                    <label for="brand_27">汤臣倍健</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[127].brandId" value="28" id="brand_28">
+	                                    <label for="brand_28">白兰氏</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[128].brandId" value="30" id="brand_30">
+	                                    <label for="brand_30">善存</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[129].brandId" value="180" id="brand_180">
+	                                    <label for="brand_180">三只松鼠</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[130].brandId" value="181" id="brand_181">
+	                                    <label for="brand_181">星巴克</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[131].brandId" value="182" id="brand_182">
+	                                    <label for="brand_182">无名缘米粉</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[132].brandId" value="183" id="brand_183">
+	                                    <label for="brand_183">零食铺</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[133].brandId" value="184" id="brand_184">
+	                                    <label for="brand_184">大白兔</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[134].brandId" value="185" id="brand_185">
+	                                    <label for="brand_185">恰恰</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[135].brandId" value="186" id="brand_186">
+	                                    <label for="brand_186">零舍梧桐</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[136].brandId" value="187" id="brand_187">
+	                                    <label for="brand_187">达利园</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[137].brandId" value="188" id="brand_188">
+	                                    <label for="brand_188">猪手</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[138].brandId" value="09939d90d9744b37ad06eeb986675e00" id="brand_09939d90d9744b37ad06eeb986675e00">
+	                                    <label for="brand_09939d90d9744b37ad06eeb986675e00">C</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[139].brandId" value="d870e3e7a7c74691b12ef6332316280d" id="brand_d870e3e7a7c74691b12ef6332316280d">
+	                                    <label for="brand_d870e3e7a7c74691b12ef6332316280d">C</label>
+	                                </li>
+	                        </ul>
+	                        <h6 class="clear" id="brand_h6_11">
+	                            32
+	                        </h6>
+	                        <ul class="nofloat">
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[140].brandId" value="128" id="brand_128">
+	                                    <label for="brand_128">富安娜</label>
+	                                </li>
+	                        </ul>
+	                        <h6 class="clear" id="brand_h6_12">
+	                            长虹电视
+	                        </h6>
+	                        <ul class="nofloat">
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[141].brandId" value="e5f8e0f24de54b9ba00e4a323c54da99" id="brand_e5f8e0f24de54b9ba00e4a323c54da99">
+	                                    <label for="brand_e5f8e0f24de54b9ba00e4a323c54da99">长虹电视</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[142].brandId" value="69daa4c17840427aa3dc8110c6e37c21" id="brand_69daa4c17840427aa3dc8110c6e37c21">
+	                                    <label for="brand_69daa4c17840427aa3dc8110c6e37c21">sony</label>
+	                                </li>
+	                        </ul>
+	                        <h6 class="clear" id="brand_h6_13">
+	                            手机 数码 电脑 家电
+	                        </h6>
+	                        <ul class="nofloat">
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[143].brandId" value="88" id="brand_88">
+	                                    <label for="brand_88">索尼</label>
+	                                </li>
+	                        </ul>
+	                        <h6 class="clear" id="brand_h6_14">
+	                            生活服务
+	                        </h6>
+	                        <ul class="nofloat">
+	                        </ul>
+	                        <h6 class="clear" id="brand_h6_15">
+	                            母婴用品 玩具图书
+	                        </h6>
+	                        <ul class="nofloat">
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[144].brandId" value="133" id="brand_133">
+	                                    <label for="brand_133">世家洁具</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[145].brandId" value="135" id="brand_135">
+	                                    <label for="brand_135">慧乐家</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[146].brandId" value="138" id="brand_138">
+	                                    <label for="brand_138">美好家</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[147].brandId" value="3807b748f2264f5b83769e2025ad315e" id="brand_3807b748f2264f5b83769e2025ad315e">
+	                                    <label for="brand_3807b748f2264f5b83769e2025ad315e">阿尼亚斯贝</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[148].brandId" value="114" id="brand_114">
+	                                    <label for="brand_114">骆驼</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[149].brandId" value="116" id="brand_116">
+	                                    <label for="brand_116">皮尔卡丹</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[150].brandId" value="117" id="brand_117">
+	                                    <label for="brand_117">RDK</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[151].brandId" value="121" id="brand_121">
+	                                    <label for="brand_121">派丽蒙</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[152].brandId" value="125" id="brand_125">
+	                                    <label for="brand_125">真维斯</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[153].brandId" value="126" id="brand_126">
+	                                    <label for="brand_126">金利来</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[154].brandId" value="5" id="brand_5">
+	                                    <label for="brand_5">美斯特伦</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[155].brandId" value="8" id="brand_8">
+	                                    <label for="brand_8">布朗博士</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[156].brandId" value="183c9d9cb01248a092b3aa2cb81f1502" id="brand_183c9d9cb01248a092b3aa2cb81f1502">
+	                                    <label for="brand_183c9d9cb01248a092b3aa2cb81f1502">好奇</label>
+	                                </li>
+	                        </ul>
+	                        <h6 class="clear" id="brand_h6_16">
+	                            家用电器
+	                        </h6>
+	                        <ul class="nofloat">
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[157].brandId" value="322de12474e048c6a4c6975aa0319c55" id="brand_322de12474e048c6a4c6975aa0319c55">
+	                                    <label for="brand_322de12474e048c6a4c6975aa0319c55">呵呵呵商品</label>
+	                                </li>
+	                        </ul>
+	                        <h6 class="clear" id="brand_h6_17">
+	                            女装 男装 鞋靴 箱包
+	                        </h6>
+	                        <ul class="nofloat">
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[158].brandId" value="129" id="brand_129">
+	                                    <label for="brand_129">爱仕达</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[159].brandId" value="130" id="brand_130">
+	                                    <label for="brand_130">罗莱</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[160].brandId" value="131" id="brand_131">
+	                                    <label for="brand_131">麦包包</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[161].brandId" value="107" id="brand_107">
+	                                    <label for="brand_107">阿迪达斯</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[162].brandId" value="108" id="brand_108">
+	                                    <label for="brand_108">李宁</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[163].brandId" value="113" id="brand_113">
+	                                    <label for="brand_113">梦特娇</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[164].brandId" value="118" id="brand_118">
+	                                    <label for="brand_118">康妮雅</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[165].brandId" value="119" id="brand_119">
+	                                    <label for="brand_119">justyle</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[166].brandId" value="122" id="brand_122">
+	                                    <label for="brand_122">茵曼（INMAN）</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[167].brandId" value="123" id="brand_123">
+	                                    <label for="brand_123">她他/tata</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[168].brandId" value="124" id="brand_124">
+	                                    <label for="brand_124">缪诗</label>
+	                                </li>
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[169].brandId" value="aa222bc30cec4655be8e87a2fb7cfa37" id="brand_aa222bc30cec4655be8e87a2fb7cfa37">
+	                                    <label for="brand_aa222bc30cec4655be8e87a2fb7cfa37">韩都衣舍</label>
+	                                </li>
+	                        </ul>
+	                        <h6 class="clear" id="brand_h6_18">
+	                            7777
+	                        </h6>
+	                        <ul class="nofloat">
+	                                <li class="left w33pre h36">
+	                                    <input type="checkbox" name="brandList[170].brandId" value="7e12a0c0333944c09d34d2ef96e360c1" id="brand_7e12a0c0333944c09d34d2ef96e360c1">
+	                                    <label for="brand_7e12a0c0333944c09d34d2ef96e360c1">1111</label>
+	                                </li>
+	                        </ul>
+	                    </td>
+                    </tr>
+                </tbody>
+        </table>
+    <div class="ps-scrollbar-x" style="left: 0px; bottom: 3px; width: 0px;"></div><div class="ps-scrollbar-y" style="top: 0px; right: 3px; height: 19px;"></div></div>
+</div>
+<table class="table tb-type2">
+    <thead class="thead">
+    <tr class="space">
+        <th colspan="15">添加属性：</th>
+    </tr>
+    <tr>
+        <!--<th>删除</th>-->
+        <th>排序</th>
+        <th>属性名称</th>
+        <th>属性可选值</th>
+        <th class="align-center">显示</th>
+        <th class="align-center">操作</th>
+    </tr>
+    </thead>
+
+
+        <tbody id="tr_model">
+        <tr></tr>
+    </tbody>
+    <tbody>
+    <tr>
+        <td colspan="15"><a id="add_type" class="btn-add marginleft" href="JavaScript:void(0);"> <span>添加一个属性</span> </a></td>
+    </tr>
+    </tbody>
+</table>
+
+<table class="table tb-type2">
+    <tfoot>
+    <tr class="tfoot">
+        <td colspan="15"><a id="submitBtn" class="btn" href="JavaScript:void(0);"> <span>提交</span> </a></td>
+    </tr>
+    </tfoot>
+</table>
+</form>
+</div>
+<script>
+    $(function(){
+        // 编辑分类时清除分类信息
+        $('.edit_gcategory').click(function(){
+            $('input[name="class_id"]').val('');
+            $('input[name="class_name"]').val('');
+        });
+
+        $('#spec_div').perfectScrollbar();
+        $('#brand_div').perfectScrollbar();
+
+        var i = 0;
+        var tr_model = '<tr class="hover edit">'+
+                '<td class="w48 sort"><input type="text" name="attrList[key].attrSort" value="0" /></td>'+
+                '<td class="w25pre name"><input type="text" name="attrList[key].attrName" value="" /></td>'+
+                '<td class="w50pre name"><input type="text" name="attrList[key].attrValue" value="" style="width:400px;"  placeholder="如要增加多个属性值，请以英文半角“ , ”隔开"/></td>'+
+                '<td class="align-center power-onoff"><input type="checkbox" checked="checked" nc_type="checked_show" /><input type="hidden" name="attrList[key].attrShow" value="1" /></td>'+
+                '<td class="align-center w60"><a onclick="remove_tr($(this));" href="JavaScript:void(0);">移除</a></td>'+
+                '</tr>';
+        $("#add_type").click(function(){
+            var trLength = $('#tr_model > tr').length;
+            if(trLength > 1){
+                i = trLength -1;
+            }
+            $('#tr_model > tr:last').after(tr_model.replace(/key/g, i));
+            $.getScript(APP_BASE+"/res/js/admincp.js");
+            i++;
+        });
+
+        $('input[nc_type="checked_show"]').live('click', function(){
+            var o = $(this).next();
+            //alert(o.val());
+            if(o.val() == '1'){
+                o.val('0');
+            }else if(o.val() == '0'){
+                o.val('1');
+            }
+        });
+
+
+        //表单验证
+        $('#type_form').validate({
+            errorPlacement: function(error, element){
+                error.appendTo(element.parent().parent().prev().find('td:first'));
+            },
+
+            rules : {
+                t_mane: {
+                    required : true,
+                    maxlength: 20,
+                    minlength: 1
+                },
+                t_sort: {
+                    required : true,
+                    digits	 : true
+                }
+            },
+            messages : {
+                t_mane : {
+                    required : '请填写类型名称',
+                    maxlength: '类型名称长度应在1-20个字符之间',
+                    minlength: '类型名称长度应在1-20个字符之间'
+                },
+                t_sort: {
+                    required : '请填写类型排序',
+                    digits : '请填写整数'
+                }
+            }
+        });
+
+        //按钮先执行验证再提交表单
+        $("#submitBtn").click(function(){
+            spec_check();
+            if($("#type_form").valid()){
+                $("#type_form").submit();
+            }
+        });
+
+        $('input[nc_type="change_default_spec_value"]').click(function(){
+            $(this).parents('table:first').find("input[nc_type='submit_value']").val('ok');
+        });
+
+        $('input[class="change_default_submit_value"]').change(function(){
+            $(this).parents('tr:first').find("input[nc_type='submit_value']").val('ok');
+        });
+
+        $('input[class="brand_change_default_submit_value"]').change(function(){
+            $(this).parents('tbody:first').find("input[nc_type='submit_value']").val('ok');
+        });
+
+        // 所属分类
+        $("#gcategory > select").live('change',function(){
+            spec_scroll($(this));
+            brand_scroll($(this));
+        });
+
+        // 规格搜索
+        $("#speccategory > select").live('change',function(){
+            spec_scroll($(this));
+        });
+        // 品牌搜索
+        $("#brandcategory > select").live('change',function(){
+            brand_scroll($(this));
+        });
+
+        // 规格隐藏未选项
+        $('a[nctype="spec_hide"]').live('click',function(){
+        	spec_hide('spec');
+        });
+        // 规格全部显示
+        $('a[nctype="spec_show"]').live('click',function(){
+        	spec_show('spec');
+        });
+        // 品牌隐藏未选项
+        $('a[nctype="brand_hide"]').live('click',function(){
+            checked_hide('brand');
+        });
+        // 品牌全部显示
+        $('a[nctype="brand_show"]').live('click',function(){
+            checked_show('brand');
+        });
+    });
+    var specScroll = 0;
+    function spec_scroll(o){
+        var id = o.val();
+        if(!$('#spec_h6_'+id).is('h6')){
+            return false;
+        }
+        $('#spec_div').scrollTop(-specScroll);
+        var sp_top = $('#spec_h6_'+id).offset().top;
+        var div_top = $('#spec_div').offset().top;
+        $('#spec_div').scrollTop(sp_top-div_top);
+        specScroll = sp_top-div_top;
+    }
+
+    var brandScroll = 0;
+    function brand_scroll(o){
+        var id = o.val();
+        if(!$('#brand_h6_'+id).is('h6')){
+            return false;
+        }
+        $('#brand_div').scrollTop(-brandScroll);
+        var sp_top = $('#brand_h6_'+id).offset().top;
+        var div_top = $('#brand_div').offset().top;
+        $('#brand_div').scrollTop(sp_top-div_top);
+        brandScroll = sp_top-div_top;
+    }
+
+    // 隐藏未选项
+    function checked_show(str) {
+        $('#'+str+'_table').find('h6').show().end().find('li').show();
+        $('a[nctype="'+str+'_show"]').attr('nctype',str+'_hide').children().html('隐藏未选项');
+    }
+
+    // 显示全部选项
+    function checked_hide(str) {
+        $('#'+str+'_table').find('h6').hide();
+        $('#'+str+'_table').find('input[type="checkbox"]').parents('li').hide();
+        $('#'+str+'_table').find('input[type="checkbox"]:checked').parents('li').show();
+        $('a[nctype="'+str+'_hide"]').attr('nctype',str+'_show').children().html('全部显示');
+    }
+
+    function spec_check(){
+        var id='';
+        $('input[nc_type="change_default_spec_value"]:checked').each(function(){
+            if(!isNaN($(this).val())){
+                id += $(this).val();
+            }
+        });
+        if(id != ''){
+            $('#spec_checkbox').val('ok');
+        }else{
+            $('#spec_checkbox').val('');
+        }
+    }
+
+    function remove_tr(o){
+        o.parents('tr:first').remove();
+    }
+    // 所属分类
+    //gcategoryInit('gcategory');
+    // 规格搜索
+    //gcategoryInit('speccategory');
+    // 品牌搜索
+    //gcategoryInit('brandcategory');
+    
+    function deleteAttr(id,o){
+    	$.ajax({
+	    	url : "/leimingtech-admin/goods/type/deleteAttr",
+	        type : 'post',
+	        data : {'attrId' : id},
+	        dataType : 'json',
+	        success : function(data){
+	            if(data.success){
+	            	o.parents('tr:first').remove();
+	            }else{
+	            	alert("删除失败!");
+	            }
+	        }
+	    });
+    }
+
+</script>
+
+
+</body></html>

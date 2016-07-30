@@ -93,6 +93,20 @@
 		</if>
 	</select>
 	
+	<!-- 根据类型查询规格 -->
+	<select id="selectByTypeid" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select distinct 
+		<include refid="Base_Column_List" />
+		from (
+			select a.* from 
+			eb_specific a,eb_type_spec b
+			where a.id = b.spec_id
+			and b.type_id = #{typeid,jdbcType=BIGINT}
+		) as aa
+		order by ordernum
+	</select>
+	
 	
 	<select id="selectPageByExample" resultMap="BaseResultMap"
 		parameterType="com.gsccs.b2c.plat.shop.model.SpecificExample">
@@ -120,16 +134,6 @@
 		where id = #{id,jdbcType=BIGINT}
 	</select>
 
-	<!-- 根据类型查询规格 -->
-	<select id="selectByType" resultMap="BaseResultMap"
-		parameterType="map">
-		select distinct
-		a.id as id,  a.title as title, a.memo as memo, a.alias as alias, a.show_type as show_type, a.show_model as show_model, a.state as state, a.ordernum as ordernum 
-		from eb_specific a,plat_type_spec b
-		where a.id = b.spec_id
-		And b.type_id=#{typeId}
-		order by a.ordernum;
-	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
 		delete from eb_specific
 		where id = #{id,jdbcType=BIGINT}

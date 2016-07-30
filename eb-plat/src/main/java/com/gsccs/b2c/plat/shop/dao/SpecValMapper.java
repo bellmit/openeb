@@ -19,7 +19,9 @@ public interface SpecValMapper {
 	int insertSelective(SpecVal record);
 
 	List<SpecVal> selectByExample(SpecValExample example);
-
+	
+	List<SpecVal> selectBySpecid(Long specid);
+	
 	SpecVal selectByPrimaryKey(Long id);
 
 	int updateByExampleSelective(@Param("record") SpecVal record,

@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.gsccs.b2c.plat.shop.model.TypeSpecExample;
+import com.gsccs.eb.api.domain.goods.Specific;
+import com.gsccs.eb.api.domain.goods.Type;
 import com.gsccs.eb.api.domain.goods.TypeSpec;
 
 public interface TypeSpecMapper {

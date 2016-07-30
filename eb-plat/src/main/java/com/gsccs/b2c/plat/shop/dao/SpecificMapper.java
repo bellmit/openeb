@@ -19,7 +19,8 @@ public interface SpecificMapper {
 
 	List<Specific> selectByExample(SpecificExample example);
 	List<Specific> selectPageByExample(SpecificExample example);
-
+	List<Specific> selectByTypeid(@Param("typeid") Long typeid);
+	
 	Specific selectByPrimaryKey(Long id);
 
 	int updateByExampleSelective(@Param("record") Specific record,
@@ -27,8 +28,6 @@ public interface SpecificMapper {
 
 	int updateByExample(@Param("record") Specific record,
 			@Param("example") SpecificExample example);
-	
-	List<Specific> selectByType(@Param("typeId") Long typeId);
 	
 	int updateByPrimaryKeySelective(Specific record);
 

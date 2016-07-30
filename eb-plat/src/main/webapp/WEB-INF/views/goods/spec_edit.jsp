@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -35,7 +36,8 @@
             <h3>规格管理</h3>
             <ul class="tab-base">
                 <li><a href="${pageContext.request.contextPath}/spec"><span>管理</span></a></li>
-                <li><a href="JavaScript:void(0);" class="current"><span>新增</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/spec/form"><span>新增</span></a></li>
+                <li><a href="JavaScript:void(0);" class="current"><span>编辑</span></a></li>
             </ul>
         </div>
     </div>
@@ -46,15 +48,15 @@
             <tr class="noborder">
                 <td class="required" colspan="2"><label class="validation" for="s_name">规格：</label></td>
             </tr>
-            <tr class="noborder" style="background: rgb(255, 255, 255);">
-                <td class="vatop rowform"><input type="text" class="txt" name="spName" id="s_name"></td>
+            <tr class="noborder">
+                <td class="vatop rowform"><input type="text" class="txt" name="spName" id="s_name" value="${spec.title }"></td>
                 <td class="vatop tips">请填写常用的商品规格的名称；例如：颜色；尺寸等。</td>
             </tr>
-             <tr>
+             <tr style="background: rgb(255, 255, 255);">
                 <td class="required" colspan="2"><label class="validation" for="s_sort">排序：</label></td>
             </tr>
             <tr class="noborder" style="background: rgb(255, 255, 255);">
-                <td class="vatop rowform"><input type="text" class="txt" name="spSort" id="s_sort" value="0"></td>
+                <td class="vatop rowform"><input type="text" class="txt" name="spSort" id="s_sort" value="${spec.ordernum }"></td>
                 <td class="vatop tips">请填写自然数。规格列表将会根据排序进行由小到大排列显示。</td>
             </tr>
             <tr style="background: rgb(255, 255, 255);">
@@ -62,54 +64,73 @@
             </tr>
             <tr class="noborder" style="background: rgb(255, 255, 255);">
                 <td class="vatop rowform">
-	                <input type="radio" name="spFormat" checked="checked" spectype="wenzi" value="0">文字
-	                <input type="radio" name="spFormat" spectype="tupian">图片
+                		<input type="radio" name="spFormat" checked="checked" spectype="wenzi" value="0">文字
+	                	<input type="radio" name="spFormat" spectype="tupian">图片
 				</td>
                 <td class="vatop tips">图片类型的规格值用于直观表现某些特殊规格类型，例如颜色规格，可用对应的色彩图片来表现其各种颜色值。</td>
             </tr>
             
-            <tr style="background: rgb(255, 255, 255);">
-                <td class="required" colspan="4"><label class="validation" for="s_value">添加规格值：</label></td>
+            <tr>
+                <td class="required" colspan="2"><label class="validation" for="s_value">添加规格值：</label></td>
             </tr>
-            	<tr style="background: rgb(255, 255, 255);">
-            		<td>
-            			<span style="margin:10px ">排序</span>
-            			<span style="margin:100px ">规格值</span>
-            		</td>
-            	</tr>
-	            <tr class="noborder" name="specValueDiv" style="background: rgb(251, 251, 251);">
-	                <td class="vatop rowform" colspan="1.5">
-	                	<input type="text" name="spValueSort" placeholder="排序">
-	                	<input type="text" name="spValueName" placeholder="规格值">
-	                	<p href="javascript:void(0);" style="display: none;" name="spValueImage">
-	                		<input type="file" id="myBlogImage1" name="files" class="file" multiple="multiple" onchange="ajaxFileUploads(&#39;myBlogImage1&#39;,this);">
+            <tr style="background: rgb(251, 251, 251);">
+            	<td>
+            		<span style="margin:0px ">排序</span>
+            		<span style="margin:120px ">规格值</span>
+            	</td>
+            </tr>
+            <c:forEach items="${spec.specVals }" var="spceval">
+		     <tr class="noborder" name="specValueDiv">
+				<td class="vatop rowform" colspan="1.5">
+					<input type="hidden" name="spValueId" value="${spceval.id }">
+		        	<input type="text" name="spValueSort" placeholder="排序" value="${spceval.ordernum }">
+		            <input type="text" name="spValueName" placeholder="规格值" value="${spceval.title }">
+		            <p href="javascript:void(0);" style="display: none;" name="spValueImage">
+		               	<input type="file" id="myBlogImage0" name="files" class="file" multiple="multiple" onchange="ajaxFileUploads('myBlogImage0',this);">
 							<img style="width:30px;height:30px" src="${pageContext.request.contextPath}/static/ui-v2/picture.gif">
-							<input type="hidden">
-						</p>
-	                </td>
-					<td class="vatop rowform">
-	                	<a href="javascript:void(0);" onclick="deleteSpecValue(this)">移除</a>
-					</td>
-	            </tr>
-            <tr style="background: rgb(255, 255, 255);">
-                <td colspan="2">
-                	<a class="btn-add marginleft" href="JavaScript:void(0);" id="addSpecValue">新增一个规格值</a>
-                </td>
-            </tr>
-            </tbody>
-            <tfoot>
-            <tr class="tfoot">
-                <td colspan="15"><a id="submitBtn" class="btn" href="JavaScript:void(0);"> <span>提交</span> </a></td>
-            </tr>
-            </tfoot>
+						<input type="hidden" value="">
+					</p>
+		        </td>
+				<td class="vatop rowform">
+		             <a href="javascript:void(0);" onclick="deleteSpecValue(this)">移除</a>
+				</td>        
+		     </tr>
+		     </c:forEach>      
+		     <tr>
+		     	<td colspan="2">
+		        	<a class="btn-add marginleft" href="JavaScript:void(0);" id="addSpecValue">新增一个规格值</a>
+		        </td>
+		     </tr>
+           	</tbody>
+	        <tfoot>
+		       	<tr class="tfoot">
+		            <td colspan="15"><a id="submitBtn" class="btn" href="JavaScript:void(0);"> <span>提交</span> </a></td>
+		        </tr>
+	        </tfoot>
         </table>
     </form>
 </div>
 <script type="text/javascript">
-//全局变量,是图片还是文字
-var specFormat='text';
-//全局变量,文件上传的编号
-var specImage = 2;
+var specFormat;
+var specImage;
+function initEdit(){
+	//全局变量,是图片还是文字
+	if($("[name=spFormat]:checked").attr("value")=="0"){
+		specFormat ='text';
+		$("[name=spValueImage]").each(function(){
+			$(this).css("display","none");
+		});
+	}else{
+		specFormat ='image';
+		$("[name=spValueImage]").each(function(){
+			$(this).css("display","");
+		});
+	}
+	//全局变量,文件上传的编号
+	specImage = $("[name=specValueDiv]").length;
+	specImage++;
+}
+
 
 //上传规格图片
 function ajaxFileUploads(imageid,ob) {
@@ -117,7 +138,7 @@ function ajaxFileUploads(imageid,ob) {
 	var $img = $obj.next();
 	var $hid = $obj.next().next();
     $.ajaxFileUpload({
-        url: '/leimingtech-admin/upload/specImage',
+        url: APP_BASE+'/upload/specImage',
         data: '',
         secureuri: false,
         fileElementId: imageid,
@@ -145,10 +166,15 @@ function ajaxFileUploads(imageid,ob) {
 			$(obj).parent().parent().remove();
 		}
 	}
+	
+	
     $(function(){
+    	//初始化
+    	initEdit();
+    	
     	//新增一个规格值
     	$("#addSpecValue").click(function(){
-    		var len = $("[name=specValueDiv]").length
+    		var len = $("[name=specValueDiv]").length;
     		var i = 0;
     		$("[name=specValueDiv]").each(function(){
     			if(i == (len-1)){
@@ -156,6 +182,7 @@ function ajaxFileUploads(imageid,ob) {
     				if(specFormat == 'image'){
     					$(this).after('<tr class="noborder" name="specValueDiv">'+
         		                '<td  class="vatop rowform" colspan="1.5">'+
+        		                '<input type="hidden" name="spValueId" /> '+
         	                	'<input type="text" name="spValueSort" placeholder="排序"/> '+
         	                	'<input type="text" name="spValueName" placeholder="规格值"/>'+
         	                	'<p href="javascript:void(0);" name="spValueImage">'+
@@ -171,6 +198,7 @@ function ajaxFileUploads(imageid,ob) {
     				}else{
     					 $(this).after('<tr class="noborder" name="specValueDiv">'+
         		                '<td class="vatop rowform" colspan="1.5">'+
+        		                '<input type="hidden" name="spValueId" /> '+
         	                	'<input type="text" name="spValueSort" placeholder="排序"/> '+
         	                	'<input type="text" name="spValueName" placeholder="规格值"/>'+
         	                	'<p href="javascript:void(0);" style="display: none;" name="spValueImage">'+
@@ -217,11 +245,6 @@ function ajaxFileUploads(imageid,ob) {
             rules : {
                 spName: {
                     required : true,
-                    remote   : {
-                        url : '/leimingtech-admin/goods/spec/checkSpecName',
-						data: {specName : function(){return $("#s_name").val();}},
-                        type: 'post'
-                    },
                     maxlength: 10,
                     minlength: 1
                 },
@@ -244,7 +267,6 @@ function ajaxFileUploads(imageid,ob) {
             messages : {
                 spName : {
                     required : '请填写规格名称',
-                    remote   : '规格名称已存在',
                     maxlength: '规格名称长度应在1-10个字符之间',
                     minlength: '规格名称长度应在1-10个字符之间'
                 },
@@ -278,50 +300,74 @@ function ajaxFileUploads(imageid,ob) {
             	});
             	spValue = spValue.substring(0,spValue.length-1);
             	//获取规格值对象的集合
-            	var SpecValues = '[';
+            	var specVals = new Array();
             	var tag = true;
             	$("[name=specValueDiv]").each(function(){
+            		var spValueId = $(this).find("[name=spValueId]").val();
             		var spValueName = $(this).find("[name=spValueName]").val();
             		var spValueSort = $(this).find("[name=spValueSort]").val();
             		//判断是否有图片
             		if(spFormat == "1"){
             			var spValueImage = $(this).find(":hidden").val();
-           				if(tag!=false && (spValueName==null||spValueName==""||spValueSort==null||spValueSort==""||isNaN(spValueSort))){
+            			if(spValueName==null||spValueName==""||spValueSort==null||spValueSort==""||isNaN(spValueSort)){
            					/* alert("规格值输入不合法"); */
            					tag = false;
            					layer.alert("规格值输入不合法",{icon:2});
            					return false
            				}
-            			SpecValues += '{"spValueName":"' + spValueName + '","spValueImage":"' + spValueImage + '","spValueSort":"' + spValueSort + '"},'
+            			
+            			var specval = {
+            				id:spValueId,
+               				title:spValueName,
+               				spValueImage:spValueImage,
+               				ordernum:spValueSort
+               			};
+               			specVals.push(specval);
             		}else{
-            			SpecValues += '{"spValueName":"' + spValueName + '","spValueSort":"' + spValueSort + '"},'
-            			if(spValueName == "" || spValueName == null ||spValueSort == "" || spValueSort == null||isNaN(spValueSort)){
+            			//SpecValues += '{"spValueName":"' + spValueName + '","spValueSort":"' + spValueSort + '"},'
+            			if(spValueName == "" || spValueName == null ||spValueSort == "" || spValueSort == null){
             				tag = false;
-           					layer.alert("规格值输入不合法",{icon:2});
-           					return false
+            				layer.alert("规格值输入不合法",{icon:2});
+            				return false
             			}
+            			var specval = {
+            				id:spValueId,
+                   			title:spValueName,
+                   			ordernum:spValueSort
+                   		};
+                   		specVals.push(specval);
             		}
             	});
-            	SpecValues = SpecValues.substring(0,SpecValues.length-1);
-            	SpecValues += ']';
             	var args = {
-            			"spName":spName,
-            			"spFormat":spFormat,
-            			"spSort":spSort,
-            			"spValue":spValue,
-            			"specValues":SpecValues
-            	}
-            	var url = "/leimingtech-admin/goods/spec/saveOrUpdate";
+            		"id":'${spec.id}',
+            		"title":spName,
+            		"showType":spFormat,
+            		"ordernum":spSort,
+            		//"spValue":spValue,
+            		"specVals":specVals
+            	};
+            	console.log(args);
+            	var url = APP_BASE+"/spec/save";
             	if(tag){
-            		$.post(url,args,function(data){
+            		$.ajax({ 
+                        type:"POST", 
+                        url:url, 
+                        dataType:"json",      
+                        contentType:"application/json",               
+                        data:JSON.stringify(args),
+                        success:function(data){ 
+                                                   
+                        } 
+                    }); 
+            		/* $.post(url,args,function(data){
                 		$(".page").empty();
                 		$(".page").append(data);
-            	});
+            		}); */
             	}
-            	
             }
         });
     });
+
 </script>
 </body>
 </html>

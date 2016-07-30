@@ -20,7 +20,9 @@ import com.gsccs.b2c.plat.bass.Datagrid;
 import com.gsccs.b2c.plat.shop.service.BrandService;
 import com.gsccs.b2c.plat.shop.service.CategoryService;
 import com.gsccs.b2c.plat.shop.service.GoodsService;
+import com.gsccs.b2c.plat.shop.service.TypeService;
 import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.domain.goods.Type;
 
 /**
  * 产品管理
@@ -38,6 +40,8 @@ public class ProductController {
 	private GoodsService goodsService;
 	@Autowired
 	private CategoryService categoryService;
+	@Autowired
+	private TypeService typeService;
 
 	@RequiresPermissions("goods:view")
 	@RequestMapping(method = RequestMethod.GET)
@@ -60,12 +64,17 @@ public class ProductController {
 		return datagrid;
 	}
 	
-	@RequiresPermissions("goods:update")
-	@RequestMapping(value = "/{pid}/update", method = RequestMethod.GET)
-	public String showUpdateForm(@PathVariable("sid") Long sid,@PathVariable("pid") Long pid, Model model) {
-		model.addAttribute("product", goodsService.getProduct(sid, pid, false));
-		model.addAttribute("op", "修改");
-		return "goods/product_edit";
+	
+	@RequestMapping(value = "/form", method = RequestMethod.GET)
+	public String productForm(Long id, Model model) {
+		String view="goods/product_edit";
+		if (null!=id){
+			view = "goods/product_edit";
+		}
+		
+		Type type = typeService.getType(1005l);
+		model.addAttribute("type", type);
+		return view;
 	}
 	
 	@RequiresPermissions("goods:update")

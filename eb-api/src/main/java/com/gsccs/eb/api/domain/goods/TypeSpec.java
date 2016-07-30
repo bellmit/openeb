@@ -13,7 +13,6 @@ public class TypeSpec {
     private Long specId;
     private String showModel;
     private Integer ordernum;
-
     
     public Long getId() {
         return id;

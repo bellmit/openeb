@@ -83,6 +83,14 @@
       order by ${orderByClause}
     </if>
   </select>
+  
+  <select id="selectBySpecid" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from eb_spec_vals
+    where specid = #{specid,jdbcType=BIGINT}
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

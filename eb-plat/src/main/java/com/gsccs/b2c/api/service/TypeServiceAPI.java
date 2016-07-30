@@ -39,7 +39,7 @@ public class TypeServiceAPI implements TypeServiceI {
 	public List<CateSpec> getCateSpecs(Long typeId) {
 		List<CateSpec> list = null;
 
-		List<Specific> specList = typeService.getSpecList(typeId);
+		List<Specific> specList = typeService.getSpecByTypeId(typeId);
 		if (null != specList && specList.size() > 0) {
 			list = new ArrayList<CateSpec>();
 			CateSpec cateSpec;

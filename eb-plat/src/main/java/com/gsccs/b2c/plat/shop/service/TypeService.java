@@ -25,7 +25,17 @@ public interface TypeService {
 	public List<Type> getTypeList(Type type, String order, int currPage,
 			int pageSize);
 
+	public List<Type> queryByTypeName(String typename);
+
 	public int count(Type type);
+	
+	/**
+	 * 删除类型
+	 * 
+	 * @param typeid
+	 * @return
+	 */
+	public void deleteTypeById(Long typeid);
 
 	/**
 	 * 根据类型获取商品规格
@@ -33,7 +43,7 @@ public interface TypeService {
 	 * @param typeId
 	 * @return
 	 */
-	public List<Specific> getSpecList(Long typeId);
+	public List<Specific> getSpecByTypeId(Long typeId);
 
 	/**
 	 * 根据类型获取商品属性
@@ -42,6 +52,14 @@ public interface TypeService {
 	 * @return
 	 */
 	public List<Property> getPropList(Long typeId);
+	
+	/**
+	 * 根据类型获取商品属性
+	 * 
+	 * @param propId
+	 * @return
+	 */
+	public void deletePropById(Long propid);
 
 	/**
 	 * 根据属性Id
@@ -61,12 +79,6 @@ public interface TypeService {
 	 */
 	public List<SpecVal> getSpecvalList(Long specId);
 
-	/**
-	 * 添加规格,规格可独立于类型添加
-	 * 
-	 * @param spec
-	 */
-	public Long addSpecific(Specific spec);
 
 	/**
 	 * 添加类型。属性、规格等操作在同一事务中完成。
@@ -86,7 +98,7 @@ public interface TypeService {
 	 * 
 	 * @param type
 	 */
-	public void UpdateType(Type type);
+	public void updateType(Type type);
 
 	public Property getProp(Long propid);
 
