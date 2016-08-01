@@ -1,8 +1,5 @@
 package com.gsccs.b2c.store.home.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
@@ -19,7 +16,6 @@ import com.gsccs.b2c.api.service.CateServiceI;
 import com.gsccs.b2c.api.service.StoreyServiceI;
 import com.gsccs.b2c.store.base.JsonMsg;
 import com.gsccs.eb.api.domain.site.Banner;
-import com.gsccs.eb.api.domain.site.Banner.LongBanner;
 import com.gsccs.eb.api.domain.site.Storey;
 import com.gsccs.eb.api.domain.site.Storey.IndexBrand;
 import com.gsccs.eb.api.exception.ApiException;
@@ -148,24 +144,6 @@ public class HomeController {
 	public JsonMsg saveBanner(HttpServletRequest request, Banner banner) {
 		JsonMsg json = new JsonMsg();
 		long siteId = (Long) request.getSession().getAttribute("siteId");
-
-		String ban = banner.getLongBanner();
-
-		List<LongBanner> lbs = null;
-		if (ban != null) {
-			lbs = new ArrayList<LongBanner>();
-			for (String ba : ban.split("!!")) {
-				String[] bars = ba.split(";;");
-				if (bars.length > 1) {
-					LongBanner lBanner = new LongBanner();
-					lBanner.setBanner(bars[0]);
-					lBanner.setBannerLine(bars[1]);
-					lbs.add(lBanner);
-				}
-			}
-			banner.setLongBanners(lbs);
-		}
-
 		ssdbTemplate.boundListOps(CacheConst.INDEX_BANNER_ + siteId).leftPush(
 				banner);
 

@@ -5,25 +5,25 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gsccs.b2c.plat.shop.dao.StoreTempletMapper;
-import com.gsccs.b2c.plat.shop.model.StoreTemplet;
-import com.gsccs.b2c.plat.shop.model.StoreTempletExample;
-import com.gsccs.b2c.plat.shop.model.StoreTempletExample.Criteria;
+import com.gsccs.b2c.plat.site.dao.SiteTempletMapper;
+import com.gsccs.b2c.plat.site.model.SiteTemplet;
+import com.gsccs.b2c.plat.site.model.SiteTempletExample;
+import com.gsccs.b2c.plat.site.model.SiteTempletExample.Criteria;
 
 @Service
 public class StoreTempletServiceImpl implements StoreTempletService{
 
 	@Autowired
-	private StoreTempletMapper storeTempletMapper;
+	private SiteTempletMapper storeTempletMapper;
 
 	@Override
-	public StoreTemplet findById(long id) {
+	public SiteTemplet findById(long id) {
 		return storeTempletMapper.selectByPrimaryKey(id);
 	}
 	
 	@Override
-	public List<StoreTemplet> find(StoreTemplet storeTemplet , String order){
-		StoreTempletExample  example = new StoreTempletExample();
+	public List<SiteTemplet> find(SiteTemplet storeTemplet , String order){
+		SiteTempletExample  example = new SiteTempletExample();
 		Criteria criteria = example.createCriteria();
 		proSearchParam(storeTemplet, criteria);
 		if (order!=null && order.trim().length()>0) {
@@ -37,7 +37,7 @@ public class StoreTempletServiceImpl implements StoreTempletService{
 	 * @param example
 	 * @param criteria
 	 */
-	public void proSearchParam(StoreTemplet storeTemplet,Criteria criteria){
+	public void proSearchParam(SiteTemplet storeTemplet,Criteria criteria){
 		if(storeTemplet != null){
 			if(storeTemplet.getStoreid() != null){
 				criteria.andStoreidEqualTo(storeTemplet.getStoreid());

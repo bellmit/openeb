@@ -9,7 +9,7 @@ import com.gsccs.eb.api.domain.goods.Brand;
 import com.gsccs.eb.api.domain.goods.Category;
 import com.gsccs.eb.api.domain.goods.Product;
 import com.gsccs.eb.api.domain.seller.Shop;
-import com.gsccs.eb.api.domain.site.StoreNav;
+import com.gsccs.eb.api.domain.site.Navigation;
 
 
 public interface RedisService {
@@ -27,7 +27,7 @@ public interface RedisService {
 	public JSONObject getStoreyList(Long sid);
 	
 	public Category getCategory(Long sid,Long cid);
-	public List<StoreNav> getStoreNavs(Long sid);
+	public List<Navigation> getStoreNavs(Long sid);
 	public Brand getBrand(Long sid,Long brandid);
 	public Product getProduct(Long sid,Long pid);
 	

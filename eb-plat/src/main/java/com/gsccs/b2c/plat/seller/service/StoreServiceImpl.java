@@ -11,14 +11,14 @@ import org.springframework.stereotype.Service;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidPooledConnection;
 import com.alibaba.fastjson.JSONObject;
-import com.gsccs.b2c.plat.shop.dao.SellerAccountMapper;
-import com.gsccs.b2c.plat.shop.dao.StoreMapper;
-import com.gsccs.b2c.plat.shop.dao.StoreNavMapper;
-import com.gsccs.b2c.plat.shop.model.StoreNavT;
-import com.gsccs.b2c.plat.shop.model.StoreNavTExample;
-import com.gsccs.b2c.plat.shop.model.StoreT;
-import com.gsccs.b2c.plat.shop.model.StoreTExample;
-import com.gsccs.b2c.plat.shop.model.StoreTExample.Criteria;
+import com.gsccs.b2c.plat.seller.dao.SellerAccountMapper;
+import com.gsccs.b2c.plat.seller.dao.StoreMapper;
+import com.gsccs.b2c.plat.seller.model.Store;
+import com.gsccs.b2c.plat.seller.model.StoreExample;
+import com.gsccs.b2c.plat.seller.model.StoreExample.Criteria;
+import com.gsccs.b2c.plat.site.dao.NavigationMapper;
+import com.gsccs.b2c.plat.site.model.NavigationExample;
+import com.gsccs.eb.api.domain.site.Navigation;
 
 /**
  * 
@@ -35,7 +35,7 @@ public class StoreServiceImpl implements StoreService {
 	@Autowired
 	private StoreMapper storeMapper;
 	@Autowired
-	private StoreNavMapper storeNavMapper;
+	private NavigationMapper navigationMapper;
 	// 卖家账号
 	@Autowired
 	private SellerAccountMapper sellerAccountMapper;
@@ -44,7 +44,7 @@ public class StoreServiceImpl implements StoreService {
 	 * 创建店铺
 	 */
 	@Override
-	public Long insert(StoreT store) {
+	public Long insert(Store store) {
 		// 创建店铺
 		if (null != store){
 			store.setAddtime(new Date());
@@ -58,14 +58,14 @@ public class StoreServiceImpl implements StoreService {
 	 * 根据id查询店铺信息
 	 */
 	@Override
-	public StoreT findById(Long id) {
+	public Store findById(Long id) {
 		return storeMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	public List<StoreT> find(StoreT store, String order) {
+	public List<Store> find(Store store, String order) {
 
-		StoreTExample example = new StoreTExample();
+		StoreExample example = new StoreExample();
 		Criteria criteria = example.createCriteria();
 		proSearchParam(store, criteria);
 		if (order != null && order.trim().length() > 0) {
@@ -87,7 +87,7 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public void update(StoreT store) {
+	public void update(Store store) {
 		storeMapper.updateByPrimaryKey(store);
 	}
 
@@ -97,9 +97,9 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public List<StoreT> find(StoreT store, String order, int currPage,
+	public List<Store> find(Store store, String order, int currPage,
 			int pageSize) {
-		StoreTExample example = new StoreTExample();
+		StoreExample example = new StoreExample();
 		Criteria criteria = example.createCriteria();
 		proSearchParam(store, criteria);
 		if (order != null && order.trim().length() > 0) {
@@ -111,13 +111,13 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public StoreT findByDomain(String domain, boolean cache) {
+	public Store findByDomain(String domain, boolean cache) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public StoreT findBySourcepath(String sourcepath) {
+	public Store findBySourcepath(String sourcepath) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -129,19 +129,19 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public int count(StoreT site) {
-		StoreTExample example = new StoreTExample();
+	public int count(Store site) {
+		StoreExample example = new StoreExample();
 		Criteria criteria = example.createCriteria();
 		proSearchParam(site, criteria);
 		return storeMapper.countByExample(example);
 	}
 
 	@Override
-	public List<StoreNavT> findStoreNavs(Long siteid) {
-		StoreNavTExample example = new StoreNavTExample();
-		StoreNavTExample.Criteria c = example.createCriteria();
-		c.andSiteidEqualTo(siteid);
-		return storeNavMapper.selectByExample(example);
+	public List<Navigation> findStoreNavs(Long siteid) {
+		NavigationExample example = new NavigationExample();
+		NavigationExample.Criteria c = example.createCriteria();
+		c.andShopidEqualTo(siteid);
+		return navigationMapper.selectByExample(example);
 	}
 
 	// 初始化表结构
@@ -157,7 +157,7 @@ public class StoreServiceImpl implements StoreService {
 		}
 	}
 
-	public void proSearchParam(StoreT store, Criteria criteria) {
+	public void proSearchParam(Store store, Criteria criteria) {
 
 	}
 

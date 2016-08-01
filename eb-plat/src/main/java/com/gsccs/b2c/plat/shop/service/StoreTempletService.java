@@ -2,7 +2,7 @@ package com.gsccs.b2c.plat.shop.service;
 
 import java.util.List;
 
-import com.gsccs.b2c.plat.shop.model.StoreTemplet;
+import com.gsccs.b2c.plat.site.model.SiteTemplet;
 
 /**
  * 站点模板管理
@@ -12,8 +12,8 @@ import com.gsccs.b2c.plat.shop.model.StoreTemplet;
  */
 public interface StoreTempletService {
 	
-	public StoreTemplet findById(long id);
+	public SiteTemplet findById(long id);
 	
-	public List<StoreTemplet> find(StoreTemplet storeTemplet , String order);
+	public List<SiteTemplet> find(SiteTemplet storeTemplet , String order);
 	
 }

@@ -9,9 +9,9 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.gsccs.b2c.plat.site.model.DeliverCorpT;
-import com.gsccs.b2c.plat.site.model.DeliverTypeT;
-import com.gsccs.b2c.plat.site.service.DeliverService;
+import com.gsccs.b2c.plat.deliver.model.Corp;
+import com.gsccs.b2c.plat.deliver.model.Templet;
+import com.gsccs.b2c.plat.deliver.service.DeliverService;
 import com.gsccs.b2c.plat.utils.BeanUtilsEx;
 import com.gsccs.eb.api.domain.deliver.DeliverType;
 import com.gsccs.eb.api.domain.deliver.DlyCorp;
@@ -29,7 +29,7 @@ public class DeliverServiceAPI implements DeliverServiceI {
 	// 物流公司信息保存
 	@Override
 	public void saveDlyCorp(DlyCorp d) {
-		DeliverCorpT t = new DeliverCorpT();
+		Corp t = new Corp();
 		try {
 			BeanUtils.copyProperties(t, d);
 		} catch (IllegalAccessException e) {
@@ -43,7 +43,7 @@ public class DeliverServiceAPI implements DeliverServiceI {
 	// 根据ID更新物流公司信息
 	@Override
 	public void updateDlyCorp(DlyCorp d) {
-		DeliverCorpT t = new DeliverCorpT();
+		Corp t = new Corp();
 		try {
 			BeanUtils.copyProperties(t, d);
 		} catch (IllegalAccessException e) {
@@ -58,7 +58,7 @@ public class DeliverServiceAPI implements DeliverServiceI {
 	@Override
 	public DlyCorp findDlyCorp(Integer id) {
 
-		DeliverCorpT t = deliverService.find(id);
+		Corp t = deliverService.find(id);
 		if(null !=t){
 			DlyCorp d = new DlyCorp();
 			BeanUtilsEx.copyProperties(d, t);
@@ -72,8 +72,8 @@ public class DeliverServiceAPI implements DeliverServiceI {
 	@Override
 	public List<DlyCorp> findCorps(DlyCorp param, int currPage, int pageSize) {
 		List<DlyCorp> domianList = new ArrayList<DlyCorp>();
-		List<DeliverCorpT> datas = null;
-		DeliverCorpT param_ = new DeliverCorpT();
+		List<Corp> datas = null;
+		Corp param_ = new Corp();
 		if (null != param) {
 			try {
 				BeanUtils.copyProperties(param_, param);
@@ -86,7 +86,7 @@ public class DeliverServiceAPI implements DeliverServiceI {
 		datas = deliverService.find(param_, "", currPage, pageSize, true);
 
 		DlyCorp d = null;
-		for (DeliverCorpT t : datas) {
+		for (Corp t : datas) {
 			d = new DlyCorp();
 			try {
 				BeanUtils.copyProperties(d, t);
@@ -103,8 +103,8 @@ public class DeliverServiceAPI implements DeliverServiceI {
 	@Override
 	public List<DeliverType> findDeliverTypeList(DeliverType param, int currPage, int pageSize) {
 		List<DeliverType> typeList = new ArrayList<DeliverType>();
-		List<DeliverTypeT> datas = null;
-		DeliverTypeT param_ = new DeliverTypeT();
+		List<Templet> datas = null;
+		Templet param_ = new Templet();
 		if (null != param) {
 			try {
 				BeanUtils.copyProperties(param_, param);
@@ -117,7 +117,7 @@ public class DeliverServiceAPI implements DeliverServiceI {
 		datas = deliverService.find(param_, "", currPage, pageSize, true);
 
 		DeliverType d = null;
-		for (DeliverTypeT t : datas) {
+		for (Templet t : datas) {
 			d = new DeliverType();
 			try {
 				BeanUtils.copyProperties(d, t);
@@ -150,7 +150,7 @@ public class DeliverServiceAPI implements DeliverServiceI {
 		float protectFee = 0.00f;
 
 		if (null != siteId && StringUtils.isNotEmpty(dlyTypeId)) {
-			DeliverTypeT type = deliverService.get(siteId, dlyTypeId);
+			Templet type = deliverService.get(siteId, dlyTypeId);
 			if (null != type) {
 				firstFee = type.getFirstunit() * type.getFirstprice();
 				if (null != type.getContinueunit()
@@ -180,13 +180,13 @@ public class DeliverServiceAPI implements DeliverServiceI {
 
 	@Override
 	public List<DeliverType> findDeliverTypes(Long siteId) {
-		DeliverTypeT deliverTypeT = new DeliverTypeT();
+		Templet deliverTypeT = new Templet();
 		deliverTypeT.setSiteid(siteId);
 		
 		List<DeliverType> dList = new ArrayList<DeliverType>();
 		DeliverType dType = null;
-		List<DeliverTypeT> dtList =deliverService.get(deliverTypeT);
-		for (DeliverTypeT dTypeT : dtList) {
+		List<Templet> dtList =deliverService.get(deliverTypeT);
+		for (Templet dTypeT : dtList) {
 			dType = new DeliverType();
 			try {
 				BeanUtils.copyProperties(dType, dTypeT);
@@ -213,7 +213,7 @@ public class DeliverServiceAPI implements DeliverServiceI {
 
 	@Override
 	public int count(DeliverType dt) {
-		DeliverTypeT dtt= new DeliverTypeT();
+		Templet dtt= new Templet();
 		if(null != dt){
 			try {
 				BeanUtils.copyProperties(dtt, dt);
@@ -230,9 +230,9 @@ public class DeliverServiceAPI implements DeliverServiceI {
 	public List<DlyCorp> findCorps() {
 		List<DlyCorp> dcList = new ArrayList<DlyCorp>();
 		DlyCorp  dc = null;
-		List<DeliverCorpT> dctList = deliverService.findAllDeliverCorpt();
+		List<Corp> dctList = deliverService.findAllDeliverCorpt();
 		if(null != dctList){
-			for (DeliverCorpT dct : dctList) {
+			for (Corp dct : dctList) {
 				dc = new DlyCorp();
 				try {
 					BeanUtils.copyProperties(dc, dct);
@@ -250,7 +250,7 @@ public class DeliverServiceAPI implements DeliverServiceI {
 
 	@Override
 	public void saveDeliverType(DeliverType deliverType) {
-		DeliverTypeT dtt = new DeliverTypeT();
+		Templet dtt = new Templet();
 		try {
 			BeanUtils.copyProperties(dtt, deliverType);
 		} catch (IllegalAccessException e) {
@@ -263,7 +263,7 @@ public class DeliverServiceAPI implements DeliverServiceI {
 
 	@Override
 	public void updateDeliverType(DeliverType deliverType) {
-		DeliverTypeT dtt = new DeliverTypeT();
+		Templet dtt = new Templet();
 		try {
 			BeanUtils.copyProperties(dtt, deliverType);
 		} catch (IllegalAccessException e) {
@@ -278,7 +278,7 @@ public class DeliverServiceAPI implements DeliverServiceI {
 	@Override
 	public DeliverType findDeliverType(String id) {
 		try {
-			DeliverTypeT dtt = deliverService.find(id);
+			Templet dtt = deliverService.find(id);
 			DeliverType dt = new DeliverType();
 			BeanUtils.copyProperties(dt, dtt);
 			return dt;

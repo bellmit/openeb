@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.gsccs.b2c.plat.auth.model.User;
-import com.gsccs.b2c.plat.shop.model.SellerAccount;
+import com.gsccs.b2c.plat.seller.model.SellerAccount;
 
 /**
  * <p>

@@ -7,11 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gsccs.b2c.plat.shop.dao.BrandMapper;
-import com.gsccs.b2c.plat.shop.dao.StoreCateMapper;
 import com.gsccs.b2c.plat.shop.model.BrandExample;
 import com.gsccs.b2c.plat.shop.model.BrandExample.Criteria;
-import com.gsccs.b2c.plat.shop.model.StoreCate;
-import com.gsccs.b2c.plat.shop.model.StoreCateExample;
 import com.gsccs.eb.api.domain.goods.Brand;
 
 @Service
@@ -19,8 +16,6 @@ public class BrandServiceImpl implements BrandService {
 
 	@Autowired
 	private BrandMapper brandMapper;
-	@Autowired
-	private StoreCateMapper storeCateMapper;
 
 	@Override
 	public List<Brand> find(Brand brands, String order, int currPage,
@@ -87,7 +82,6 @@ public class BrandServiceImpl implements BrandService {
 				criteria.andShopidEqualTo(brand.getShopid());
 			}
 
-			
 			if (brand.getName() != null && brand.getName().trim().length() > 0) {
 				criteria.andNameLike("%" + brand.getName() + "%");
 			}
@@ -110,19 +104,10 @@ public class BrandServiceImpl implements BrandService {
 	@Override
 	public List<Brand> findStoreBrand(Long sid, int currPage, int pageSize,
 			boolean iscache) {
-		StoreCateExample e1 = new StoreCateExample();
-		StoreCateExample.Criteria c1 = e1.createCriteria();
-		c1.andSiteIdEqualTo(sid);
-		StoreCate storeCate = storeCateMapper.selectByPrimaryKey(sid);
-		if (null != storeCate
-				&& StringUtils.isNotEmpty(storeCate.getBrandids())) {
-			BrandExample example = new BrandExample();
-			BrandExample.Criteria c = example.createCriteria();
-			c.andSQL(" id in (" + storeCate.getBrandids() + ")");
-			example.setCurrPage(currPage);
-			example.setPageSize(pageSize);
-			return brandMapper.selectPageByExample(example);
-		}
-		return null;
+		BrandExample example = new BrandExample();
+		BrandExample.Criteria c = example.createCriteria();
+		example.setCurrPage(currPage);
+		example.setPageSize(pageSize);
+		return brandMapper.selectPageByExample(example);
 	}
 }

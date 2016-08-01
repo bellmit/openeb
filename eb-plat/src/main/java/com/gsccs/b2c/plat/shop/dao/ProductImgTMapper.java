@@ -1,13 +1,11 @@
 package com.gsccs.b2c.plat.shop.dao;
 
-import com.gsccs.b2c.plat.shop.model.GoodsT;
-import com.gsccs.b2c.plat.shop.model.ProductImgT;
-import com.gsccs.b2c.plat.shop.model.ProductImgTExample;
-import com.gsccs.b2c.plat.shop.model.ProductExample;
-
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+
+import com.gsccs.b2c.plat.shop.model.ProductImgT;
+import com.gsccs.b2c.plat.shop.model.ProductImgTExample;
 
 public interface ProductImgTMapper {
     int countByExample(ProductImgTExample example);

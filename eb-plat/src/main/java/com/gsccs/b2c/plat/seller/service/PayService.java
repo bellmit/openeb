@@ -2,7 +2,7 @@ package com.gsccs.b2c.plat.seller.service;
 
 import java.util.List;
 
-import com.gsccs.b2c.plat.seller.model.SellerPay;
+import com.gsccs.b2c.plat.seller.model.StorePay;
 
 /**
  * 支付接口
@@ -16,7 +16,7 @@ public interface PayService {
 	 * @param storeid
 	 * @return
 	 */
-	public List<SellerPay> getPayments(String storeid);
+	public List<StorePay> getPayments(String storeid);
 	
 	
 	/**
@@ -25,7 +25,7 @@ public interface PayService {
 	 * @param type(alipay,unionpay,wxpay)
 	 * @return
 	 */
-	public SellerPay getPaymentByType(String storeid,String type);
+	public StorePay getPaymentByType(String storeid,String type);
 	
 
 }

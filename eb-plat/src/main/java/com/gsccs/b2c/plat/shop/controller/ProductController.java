@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.gsccs.b2c.plat.bass.Datagrid;
 import com.gsccs.b2c.plat.shop.service.BrandService;
 import com.gsccs.b2c.plat.shop.service.CategoryService;
-import com.gsccs.b2c.plat.shop.service.GoodsService;
+import com.gsccs.b2c.plat.shop.service.ProductService;
 import com.gsccs.b2c.plat.shop.service.TypeService;
 import com.gsccs.eb.api.domain.goods.Product;
 import com.gsccs.eb.api.domain.goods.Type;
@@ -37,7 +37,7 @@ public class ProductController {
 	@Autowired
 	private BrandService brandService;
 	@Autowired
-	private GoodsService goodsService;
+	private ProductService goodsService;
 	@Autowired
 	private CategoryService categoryService;
 	@Autowired
@@ -45,26 +45,14 @@ public class ProductController {
 
 	@RequiresPermissions("goods:view")
 	@RequestMapping(method = RequestMethod.GET)
-	public String list() {
+	public String list(@RequestParam(defaultValue = "1") int page,
+			@RequestParam(defaultValue = "10") int rows, ModelMap map,
+			Product param) {
+		List<Product> list = goodsService.getProducts(param, "", page, rows);
+		map.addAttribute("productList", list);
 		return "goods/product_list";
 	}
 
-	@RequiresPermissions("goods:view")
-	@RequestMapping(value = "/datagrid", method = RequestMethod.POST)
-	@ResponseBody
-	public Datagrid list(
-			@RequestParam(defaultValue = " ordernum ") String order,
-			@RequestParam(defaultValue = "1") int page,
-			@RequestParam(defaultValue = "10") int rows, ModelMap map,
-			Product param, HttpServletRequest request) {
-		Datagrid datagrid = new Datagrid();
-		List<Product> list = goodsService.getProducts(param, order, page, rows);
-		datagrid.setRows(list);
-		datagrid.setTotal(Long.valueOf(30));
-		return datagrid;
-	}
-	
-	
 	@RequestMapping(value = "/form", method = RequestMethod.GET)
 	public String productForm(Long id, Model model) {
 		String view="goods/product_edit";
@@ -77,12 +65,9 @@ public class ProductController {
 		return view;
 	}
 	
-	@RequiresPermissions("goods:update")
-	@RequestMapping(value = "/{pid}/update", method = RequestMethod.POST)
-	public String update(@PathVariable("pid") Long pid, Product product,
-			RedirectAttributes redirectAttributes) {
-		//brandService.update(brand);
-		redirectAttributes.addFlashAttribute("msg", "修改成功");
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public String productSave(Product product) {
+		
 		return "redirect:/product";
 	}
 

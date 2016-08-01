@@ -15,22 +15,17 @@ public class Sku extends Domain {
 	/**
 	 * sku的id
 	 */
-	private Long skuId;
+	private Long id;
 
 	/**
 	 * 产品ID
 	 */
-	private Long productId;
+	private Long productid;
 
 	/**
 	 * 商品级别的条形码
 	 */
 	private String barcode;
-
-	/**
-	 * 基础色数据
-	 */
-	private String changeProp;
 
 	/**
 	 * sku创建日期 时间格式：yyyy-MM-dd HH:mm:ss
@@ -60,12 +55,14 @@ public class Sku extends Domain {
 	/**
 	 * 商品的重量，用于按重量计费的运费模板。注意：单位为kg
 	 */
-	private Double goodsWeight;
+	private Double weight;
 
 	/**
 	 * sku的销售属性组合字符串（颜色，大小，等等，可通过类目API获取某类目下的销售属性）,格式是p1:v1;p2:v2
 	 */
 	private String specIds;
+
+	private String specValIds;
 
 	/**
 	 * sku所对应的销售属性的中文名字串，格式如：pid1:vid1:pid_name1:vid_name1;pid2:vid2:pid_name2:
@@ -93,12 +90,12 @@ public class Sku extends Domain {
 	 */
 	private Integer salenum;
 
-	public Long getSkuId() {
-		return skuId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setSkuId(Long skuId) {
-		this.skuId = skuId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getBarcode() {
@@ -107,14 +104,6 @@ public class Sku extends Domain {
 
 	public void setBarcode(String barcode) {
 		this.barcode = barcode;
-	}
-
-	public String getChangeProp() {
-		return changeProp;
-	}
-
-	public void setChangeProp(String changeProp) {
-		this.changeProp = changeProp;
 	}
 
 	public String getCreated() {
@@ -149,6 +138,14 @@ public class Sku extends Domain {
 		this.specIds = specIds;
 	}
 
+	public String getSpecValIds() {
+		return specValIds;
+	}
+
+	public void setSpecValIds(String specValIds) {
+		this.specValIds = specValIds;
+	}
+
 	public String getSpecStr() {
 		return specStr;
 	}
@@ -165,12 +162,12 @@ public class Sku extends Domain {
 		this.status = status;
 	}
 
-	public Long getProductId() {
-		return productId;
+	public Long getProductid() {
+		return productid;
 	}
 
-	public void setProductId(Long productId) {
-		this.productId = productId;
+	public void setProductid(Long productid) {
+		this.productid = productid;
 	}
 
 	public Double getMkprice() {
@@ -189,12 +186,12 @@ public class Sku extends Domain {
 		this.cost = cost;
 	}
 
-	public Double getGoodsWeight() {
-		return goodsWeight;
+	public Double getWeight() {
+		return weight;
 	}
 
-	public void setGoodsWeight(Double goodsWeight) {
-		this.goodsWeight = goodsWeight;
+	public void setWeight(Double weight) {
+		this.weight = weight;
 	}
 
 	public Integer getStorenum() {

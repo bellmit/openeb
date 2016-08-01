@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gsccs.b2c.plat.buyer.dao.BuyerAccountMapper">
+<mapper namespace="com.gsccs.b2c.plat.buyer.dao.AccountMapper">
 
-	<resultMap id="BaseResultMap" type="com.gsccs.b2c.plat.buyer.model.BuyerAccount">
+	<resultMap id="BaseResultMap" type="com.gsccs.b2c.plat.buyer.model.Account">
 		<id column="id" property="id" jdbcType="BIGINT" />
 		<result column="account" property="account" jdbcType="VARCHAR" />
 		<result column="pwd" property="pwd" jdbcType="VARCHAR" />
@@ -16,7 +16,7 @@
 
 	<sql id="Example_Where_Clause">
 		<where>
-			<foreach collection="oredCriteria" item="criteria" separator="or">
+			<foreach collection="example.oredCriteria" item="criteria" separator="or">
 				<if test="criteria.valid">
 					<trim prefix="(" suffix=")" prefixOverrides="and">
 						<foreach collection="criteria.criteria" item="criterion">
@@ -86,41 +86,37 @@
 		salt
 	</sql>
 
-	<select id="selectByExample" resultMap="BaseResultMap"
-		parameterType="com.gsccs.b2c.plat.buyer.model.BuyerAccountExample">
-		select
-		<if test="distinct">
-			distinct
-		</if>
+	<select id="selectPageByExample" resultMap="BaseResultMap"
+		parameterType="map">
+		select distinct
 		<include refid="Base_Column_List" />
-		from buyer_account_${sid}
+		from eb_buyer_account
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
-		<if test="orderByClause != null">
-			order by ${orderByClause}
-		</if>
+		order by addtime desc
 	</select>
 
 
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
 		delete from
-		buyer_account_${sid}
+		eb_buyer_account
 		where id = #{id,jdbcType=BIGINT}
 	</delete>
 
-	<delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.buyer.model.BuyerAccountExample">
-		delete from buyer_account_${sid}
+	<delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.buyer.model.AccountExample">
+		delete from eb_buyer_account
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
 	</delete>
 
 	<update id="updateByExample" parameterType="map">
-		update buyer_account_${sid}
+		update eb_buyer_account
 		set id = #{record.id,jdbcType=BIGINT},
-		account = #{record.account,jdbcType=VARCHAR},
+		account =
+		#{record.account,jdbcType=VARCHAR},
 		pwd =
 		#{record.pwd,jdbcType=VARCHAR},
 		nick = #{record.nick,jdbcType=VARCHAR},
@@ -139,9 +135,9 @@
 	</update>
 
 
-	<update id="updateByPrimaryKey" parameterType="com.gsccs.b2c.plat.buyer.model.BuyerAccount">
+	<update id="updateByPrimaryKey" parameterType="com.gsccs.b2c.plat.buyer.model.Account">
 		update
-		buyer_account_${sid}
+		eb_buyer_account
 		set account = #{account,jdbcType=VARCHAR},
 		pwd =
 		#{pwd,jdbcType=VARCHAR},
@@ -159,7 +155,7 @@
 	<!-- 会员注册 -->
 	<insert id="insert" useGeneratedKeys="true" keyProperty="record.id"
 		parameterType="map">
-		insert into buyer_account_${sid} (id, account, pwd,nick,
+		insert into eb_buyer_account (id, account, pwd,nick,
 		addtime,
 		lasttime,state, islock, salt)
 		values
@@ -178,7 +174,7 @@
 	<select id="loginAccount" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
-		from buyer_account_${sid}
+		from eb_buyer_account
 		where account=#{account} and pwd=#{pwd}
 	</select>
 
@@ -187,7 +183,7 @@
 		parameterType="map">
 		select
 		<include refid="Base_Column_List" />
-		from buyer_account_${sid}
+		from eb_buyer_account
 		where id = #{id}
 	</select>
 
@@ -196,7 +192,7 @@
 		parameterType="java.lang.Long">
 		select
 		<include refid="Base_Column_List" />
-		from buyer_account_${sid}
+		from eb_buyer_account
 	</select>
 
 	<!-- 店铺ID与会员账号查询会员信息 -->
@@ -204,7 +200,7 @@
 		parameterType="map">
 		select
 		<include refid="Base_Column_List" />
-		from buyer_account_${sid}
+		from eb_buyer_account
 		where account = #{account}
 	</select>
 

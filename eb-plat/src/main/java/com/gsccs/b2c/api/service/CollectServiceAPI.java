@@ -1,6 +1,5 @@
 package com.gsccs.b2c.api.service;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.APIConst;
 import com.gsccs.b2c.plat.shop.model.CollectStatist;
-import com.gsccs.b2c.plat.shop.service.CollectService;
+import com.gsccs.b2c.plat.site.service.CollectService;
 import com.gsccs.eb.api.domain.site.Collect;
 import com.gsccs.eb.api.domain.site.Collect.CollectType;
 import com.gsccs.eb.api.exception.ApiException;

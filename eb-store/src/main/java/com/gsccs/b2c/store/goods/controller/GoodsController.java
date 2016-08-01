@@ -17,13 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.gsccs.b2c.api.CacheConst;
-import com.gsccs.b2c.api.domain.CateProp;
-import com.gsccs.b2c.api.domain.CateSpec;
 import com.gsccs.b2c.api.service.BrandServiceI;
-import com.gsccs.b2c.api.service.BuyerServiceI;
 import com.gsccs.b2c.api.service.CateServiceI;
-import com.gsccs.b2c.api.service.GoodsServiceI;
 import com.gsccs.b2c.api.service.DeliverServiceI;
+import com.gsccs.b2c.api.service.ProductServiceI;
 import com.gsccs.b2c.api.service.ShopServiceI;
 import com.gsccs.b2c.api.service.TypeServiceI;
 import com.gsccs.b2c.solr.service.GoodsSolr;
@@ -37,7 +34,9 @@ import com.gsccs.eb.api.domain.goods.Brand;
 import com.gsccs.eb.api.domain.goods.Category;
 import com.gsccs.eb.api.domain.goods.Product;
 import com.gsccs.eb.api.domain.goods.ProductProp;
+import com.gsccs.eb.api.domain.goods.Property;
 import com.gsccs.eb.api.domain.goods.Sku;
+import com.gsccs.eb.api.domain.goods.Specific;
 import com.gsccs.eb.api.domain.seller.Shop;
 import com.gsccs.eb.api.exception.ApiException;
 import com.gsccs.eb.api.utils.Datagrid;
@@ -53,7 +52,7 @@ public class GoodsController {
 	private BrandServiceI brandServiceAPI;
 
 	@Autowired
-	private GoodsServiceI goodsServiceAPI;
+	private ProductServiceI goodsServiceAPI;
 
 	@Autowired
 	private TypeServiceI typeServiceAPI;
@@ -150,9 +149,9 @@ public class GoodsController {
 
 		System.out.println("进入加载规格");
 
-		List<CateSpec> cateSpecsEs = this.typeServiceAPI.getCateSpecs(typeId);
+		List<Specific> specList = typeServiceAPI.findSpecList(typeId);
 
-		msg.setData(cateSpecsEs);
+		msg.setData(specList);
 		msg.setSuccess(true);
 		msg.setMsg("成功加载规格!");
 
@@ -164,7 +163,7 @@ public class GoodsController {
 	@ResponseBody
 	public JsonMsg getProps(Long typeId) {
 		JsonMsg msg = new JsonMsg();
-		List<CateProp> propsList = this.typeServiceAPI.getCateProps(typeId);
+		List<Property> propsList = typeServiceAPI.findPropList(typeId);
 		if (null != propsList && propsList.size() > 0) {
 			msg.setData(propsList);
 		}
@@ -286,9 +285,9 @@ public class GoodsController {
 				sku.setPrice(Double.parseDouble(skuValue[4]));
 				sku.setCost(Double.parseDouble(skuValue[5]));
 				sku.setMkprice(Double.parseDouble(skuValue[6]));
-				sku.setGoodsWeight(Double.parseDouble(skuValue[7]));
+				sku.setWeight(Double.parseDouble(skuValue[7]));
 				sku.setSalenum(Integer.parseInt(skuValue[8]));
-				sku.setProductId(productid);
+				sku.setProductid(productid);
 				sku.setCreated(new Date().toString());
 
 				skus.add(sku);
@@ -299,12 +298,13 @@ public class GoodsController {
 			} catch (ApiException e) {
 				e.printStackTrace();
 			}
-		} 
+		}
 
 		// 5.保存商品描述 desc
 
 		System.out.println("商品描述=========" + product.getContent());
-		if (null != product.getContent() && product.getContent().trim().length() > 0) {
+		if (null != product.getContent()
+				&& product.getContent().trim().length() > 0) {
 			// 商品描述，缓存中存的键是(常亮+siteID + 商品编号)：CacheConst.PRODUCT_ + siteId _tsc
 			// ssdbTemplate.boundValueOps(CacheConst.PRODUCT_DESC_+ siteId + "_"
 			// + productid).set(product.getContent());
@@ -390,7 +390,7 @@ public class GoodsController {
 		GoodsSolr tg = new GoodsSolr();
 		tg.setId(siteId + "_" + productid + "");
 		tg.setSiteid(siteId + "");
-		tg.setCateid(product.getCategoryid()+"");
+		tg.setCateid(product.getCategoryid() + "");
 		tg.setCatestr(product.getCategoryid() + "-" + product.getCatetitle());
 
 		Brand b = brandServiceAPI.getBrand(product.getBrandid());
@@ -560,17 +560,7 @@ public class GoodsController {
 			maxStoreNum = stockalertnum;
 		}
 
-		int count = goodsServiceAPI.getProductCount(sid, title, barcode,
-				cateId, maxPrice, minPrice, maxSaleNum, minSaleNum,
-				maxStoreNum, minStoreNum, status);
-		List<Product> pList = goodsServiceAPI
-				.getProducts(sid, title, barcode, String.valueOf(cateId),
-						maxPrice, minPrice, maxSaleNum, minSaleNum,
-						maxStoreNum, minStoreNum, status, order, page, rows);
-
 		Datagrid datagrid = new Datagrid();
-		datagrid.setRows(pList);
-		datagrid.setTotal(Long.valueOf(count));
 		return datagrid;
 	}
 
@@ -718,8 +708,7 @@ public class GoodsController {
 				System.out.println("getBarcode==" + product.getBarcode());
 
 				if (null != product && product.getCategoryid() != null) {
-					cate = cateServiceAPI.getCate(product
-							.getCategoryid());
+					cate = cateServiceAPI.getCate(product.getCategoryid());
 					model.addAttribute("cate", cate);
 				}
 				// 获得商品描述
@@ -774,7 +763,7 @@ public class GoodsController {
 		Long productid = null;
 		Long sid = null;
 		// 1、保存产品信息
-		if (null !=product){
+		if (null != product) {
 			sid = product.getShopid();
 			productid = product.getId();
 		}
@@ -843,7 +832,7 @@ public class GoodsController {
 					String[] skuValue = s.split("=");
 					String skuid = skuValue[9];
 					sku = new Sku();
-					sku.setSkuId(Long.valueOf(skuid));
+					sku.setId(Long.valueOf(skuid));
 					sku.setSpecIds(skuValue[0]);
 					sku.setSpecStr(skuValue[1]);
 					sku.setBarcode(skuValue[2]);
@@ -856,13 +845,13 @@ public class GoodsController {
 						sku.setMkprice(Double.parseDouble(skuValue[6]));
 					}
 					if (null != skuValue[7] && !skuValue[7].equals("")) {
-						sku.setGoodsWeight(Double.parseDouble(skuValue[7]));
+						sku.setWeight(Double.parseDouble(skuValue[7]));
 					}
 					if (null != skuValue[8] && !skuValue[8].equals("")) {
 						sku.setSalenum(Integer.parseInt(skuValue[8]));
 					}
 
-					sku.setProductId(product.getId());
+					sku.setProductid(product.getId());
 					sku.setCreated(new Date().toString());
 
 					skus.add(sku);
@@ -881,10 +870,10 @@ public class GoodsController {
 					sku.setPrice(Double.parseDouble(skuValue[4]));
 					sku.setCost(Double.parseDouble(skuValue[5]));
 					sku.setMkprice(Double.parseDouble(skuValue[6]));
-					sku.setGoodsWeight(Double.parseDouble(skuValue[7]));
+					sku.setWeight(Double.parseDouble(skuValue[7]));
 					sku.setSalenum(Integer.parseInt(skuValue[8]));
 					// sku.setGoodsQuantity(Long.parseLong(skuValue[8]));
-					sku.setProductId(product.getId());
+					sku.setProductid(product.getId());
 					sku.setCreated(new Date().toString());
 
 					skus.add(sku);
@@ -905,7 +894,8 @@ public class GoodsController {
 		}
 
 		// 5.保存商品描述 desc
-		if (null != product.getContent() && product.getContent().trim().length() > 0) {
+		if (null != product.getContent()
+				&& product.getContent().trim().length() > 0) {
 
 			System.out.println("desc==" + product.getContent());
 			// 商品描述，缓存中存的键是(常亮+siteID + 商品编号)：CacheConst.PRODUCT_ + siteId _tsc
@@ -995,7 +985,7 @@ public class GoodsController {
 		GoodsSolr tg = new GoodsSolr();
 		tg.setId(sid + "_" + productid + "");
 		tg.setSiteid(sid + "");
-		tg.setCateid(product.getCategoryid()+"");
+		tg.setCateid(product.getCategoryid() + "");
 		tg.setCatestr(product.getCategoryid() + "-" + product.getCatetitle());
 
 		Brand b = brandServiceAPI.getBrand(product.getBrandid());

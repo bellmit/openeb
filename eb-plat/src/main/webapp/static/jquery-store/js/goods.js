@@ -680,10 +680,11 @@ var initFormData = function(){
 						});
 						if(specCount > 0){
 							specGoodsName = specGoodsName.substring(0, specGoodsName.length-1);
-							specGoodsName += "}"
+							specGoodsName += "}";
 						}
 					}
 					var goodsSpecJson = "[";
+					
 					$("[name=skuDo]").each(function(){
 						var specGoodsSpec = "";
 						var spIds = $(this).attr("spId").split(",");
@@ -708,14 +709,28 @@ var initFormData = function(){
 						}
 						//当前规格下的商品规格序列化
 						specGoodsSpec += "{";
+						var skuSpecArray = new Array();
 						for(var i = 0; i < spIds.length; i++){
 							var specValueName = specValueNames[i];
 							var specValueId = specValueIds[i];
 							specGoodsSpec += "\\\"" + specValueId + "\\\":\\\"" + specValueName + "\\\","
+							
+							//
+							var skuspec = {
+								specid:spIds[i],
+								specvalid:specValueId,
+							};
+							skuSpecArray.push(skuspec);
 						}
 						specGoodsSpec = specGoodsSpec.substring(0, specGoodsSpec.length-1);
 						specGoodsSpec += "}";
 						goodsSpecJson += "{\"goodsSpecId\":\"" + goodsspecid + "\",\"specName\":\""+ specGoodsName +"\",\"specGoodsPrice\":\""+ specGoodsPrice +"\",\"specGoodsSerial\":\""+ specGoodsSerial +"\",\"specGoodsStorage\":\""+ specGoodsStorage +"\",\"specGoodsSpec\":\""+ specGoodsSpec +"\",\"specIsOpen\":\""+specIsOpen+"\"},";
+						
+						var sku = {
+							price:specGoodsPrice,
+							storenum:specGoodsStorage,
+						};
+						skuArray.push(sku);
 					});
 					//去掉最后的逗号
 					goodsSpecJson = goodsSpecJson.substring(0,goodsSpecJson.length-1);
@@ -724,14 +739,14 @@ var initFormData = function(){
 				goods_market_price = $("[name=goods_market_price]").val();
 				goods_cost_price = $("[name=goods_cost_price]").val();
 				var args = {
-					"goodsId":$("[name=goodsId]").val(),
-					"goodsName":goodsName,
-					"goodsSubtitle":goodsSubtitle,//商品副标题
-					"gcId":gcId,
-					"gcName":gcName,
-					"brandId":brandId,
-					"brandName":brandName,
-					"typeId":typeId,
+					"id":$("[name=goodsId]").val(),
+					"title":goodsName,
+					//"goodsSubtitle":goodsSubtitle,//商品副标题
+					"categoryid":gcId,
+					//"gcName":gcName,
+					"brandid":brandId,
+					//"brandName":brandName,
+					"typeid":typeId,
 					"specOpen":specOpen,//规格开关
 					"specName": specName,//规格名称
 					"goodsImage": goodsImage,//商品默认封面图片
@@ -765,6 +780,8 @@ var initFormData = function(){
 					"goodCostPrice":goods_cost_price, // 成本价
 					"goodsIsHaveSpec":$("#goodsIsHaveSpec").val()
 				};
+				
+				console.log(args);
 				var url = APP_BASE + "/pro/updatePro";
 				//加载进度条
 				layer.load(2, {

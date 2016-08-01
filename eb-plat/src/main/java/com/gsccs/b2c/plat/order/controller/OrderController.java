@@ -10,9 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gsccs.b2c.plat.bass.Datagrid;
 import com.gsccs.b2c.plat.order.service.OrderService;
 import com.gsccs.eb.api.domain.trade.Order;
 
@@ -28,24 +26,54 @@ public class OrderController {
 
 	@Autowired
 	private OrderService orderService;
-
-	@RequestMapping(method = RequestMethod.GET)
-	public String list(){
-		return "order/list";
-	}
 	
-	
-	@RequestMapping(value = "/datagrid",method = RequestMethod.POST)
-	@ResponseBody
-	public Datagrid list(@RequestParam(defaultValue = " addtime desc ") String order,
+	/**
+	 * 卖家订单列表
+	 * @param order
+	 * @param currPage
+	 * @param pageSize
+	 * @param map
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value="/list",method = RequestMethod.GET)
+	public String orderList(
+			@RequestParam(defaultValue = " addtime desc ") String order,
 			@RequestParam(defaultValue = "1") int currPage,
 			@RequestParam(defaultValue = "10") int pageSize, ModelMap map,
-			Order orderT, HttpServletRequest request) {
-		List<Order> orderlist = orderService.find(orderT, 1001L,order, currPage,
+			Order param) {
+		List<Order> orderlist = orderService.queryOrderBySeller(param,order, currPage,
 				pageSize);
-		Datagrid datagrid = new Datagrid();
-		datagrid.setRows(orderlist);
-		return datagrid;
+		map.put("orderList", orderlist);
+		return "trade/order_list";
 	}
+	
+	/**
+	 * 订单详情
+	 * @param id
+	 * @param map
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/detail",method = RequestMethod.GET)
+	public String orderDetail(Long id,ModelMap map,HttpServletRequest request) {
+		Order order = orderService.findById(id);
+		map.put("order", order);
+		return "trade/order_detail";
+	}
+	
+	
+	@RequestMapping(value="/refund",method = RequestMethod.GET)
+	public String refundList(
+			@RequestParam(defaultValue = " addtime desc ") String order,
+			@RequestParam(defaultValue = "1") int currPage,
+			@RequestParam(defaultValue = "10") int pageSize, ModelMap map,
+			Order param, HttpServletRequest request) {
+		List<Order> orderlist = orderService.queryOrderBySeller(param,order, currPage,
+				pageSize);
+		map.put("orderList", orderlist);
+		return "trade/refund_list";
+	}
+	
 	
 }

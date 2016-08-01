@@ -22,9 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.CacheConst;
-import com.gsccs.b2c.api.domain.Cart;
 import com.gsccs.b2c.api.service.BuyerServiceI;
-import com.gsccs.b2c.api.service.GoodsServiceI;
+import com.gsccs.b2c.api.service.ProductServiceI;
 import com.gsccs.b2c.api.service.ShopServiceI;
 import com.gsccs.b2c.app.core.FreeMarkerUtil;
 import com.gsccs.b2c.app.core.JsonMsg;
@@ -32,6 +31,7 @@ import com.gsccs.b2c.web.api.service.RedisService;
 import com.gsccs.b2c.web.api.service.SsdbService;
 import com.gsccs.eb.api.domain.goods.Product;
 import com.gsccs.eb.api.domain.goods.Sku;
+import com.gsccs.eb.api.domain.trade.CartItem;
 import com.gsccs.eb.api.domain.trade.OrderItem;
 import com.gsccs.eb.api.exception.ApiException;
 
@@ -52,7 +52,7 @@ public class CartController {
 	@Autowired
 	private BuyerServiceI buyerAPI;
 	@Autowired
-	private GoodsServiceI goodsAPI;
+	private ProductServiceI goodsAPI;
 	@Autowired
 	private SsdbService ssdbService;
 	@Autowired
@@ -146,15 +146,15 @@ public class CartController {
 		if (null != skuId) {
 			item.setId(productId + "_" + skuId);
 			try {
-				Sku sku = goodsAPI.getSKU(siteId, Long.valueOf(productId),
+				Sku sku = goodsAPI.getSku(siteId, Long.valueOf(productId),
 						skuId);
 				if (null != sku) {
-					item.setSkuid(sku.getSkuId());
+					item.setSkuid(sku.getId());
 					item.setPrice(sku.getPrice() == null ? 0.00 : sku
 							.getPrice());
 					item.setSpecstr(sku.getSpecStr());
 				}
-			} catch (ApiException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -236,7 +236,7 @@ public class CartController {
 	 */
 	@RequestMapping("/modifynumber")
 	@ResponseBody
-	public JsonMsg modifyCartNumber(HttpServletRequest request, Cart cart) {
+	public JsonMsg modifyCartNumber(HttpServletRequest request, CartItem cart) {
 		JsonMsg json = new JsonMsg();
 		int modifySize = 1;
 		// cartServiceAPI.upadteCart(siteId, cart);

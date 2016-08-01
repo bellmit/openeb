@@ -2,8 +2,7 @@ package com.gsccs.b2c.plat.seller.service;
 
 import java.util.List;
 
-import com.gsccs.b2c.plat.shop.model.SellerAccount;
-import com.gsccs.b2c.plat.shop.model.StoreT;
+import com.gsccs.b2c.plat.seller.model.SellerAccount;
 
 
 public interface SellerService {

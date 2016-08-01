@@ -19,12 +19,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.CacheConst;
 import com.gsccs.b2c.api.domain.Area;
-import com.gsccs.b2c.api.domain.CateProp;
-import com.gsccs.b2c.api.domain.EvalGoods;
 import com.gsccs.b2c.api.service.CateServiceI;
 import com.gsccs.b2c.api.service.ConfigServiceI;
 import com.gsccs.b2c.api.service.EvalServiceI;
-import com.gsccs.b2c.api.service.GoodsServiceI;
+import com.gsccs.b2c.api.service.ProductServiceI;
 import com.gsccs.b2c.api.service.ShopServiceI;
 import com.gsccs.b2c.api.service.TradeServiceI;
 import com.gsccs.b2c.api.service.TypeServiceI;
@@ -32,6 +30,7 @@ import com.gsccs.eb.api.domain.goods.Album;
 import com.gsccs.eb.api.domain.goods.ProductParam;
 import com.gsccs.eb.api.domain.goods.ProductProp;
 import com.gsccs.eb.api.domain.goods.Sku;
+import com.gsccs.eb.api.domain.rated.EvalGoods;
 import com.gsccs.eb.api.domain.site.Collect;
 import com.gsccs.eb.api.domain.site.Collect.CollectType;
 import com.gsccs.eb.api.domain.trade.OrderItem;
@@ -48,7 +47,7 @@ public class SsdbServiceImpl implements SsdbService {
 	@Autowired
 	private ShopServiceI shopAPI;
 	@Autowired
-	private GoodsServiceI goodsAPI;
+	private ProductServiceI goodsAPI;
 	@Autowired
 	private CateServiceI cateAPI;
 	@Autowired
@@ -187,7 +186,7 @@ public class SsdbServiceImpl implements SsdbService {
 
 			Map<String, String> skuMap = new HashMap<String, String>();
 
-			skuMap.put("skuId", sku.getSkuId().toString());
+			skuMap.put("skuId", sku.getId().toString());
 			skuMap.put("price", sku.getPrice().toString());
 			skuMap.put("mkprice", sku.getMkprice().toString());
 			skuMap.put("storenum", sku.getStorenum().toString());
@@ -290,8 +289,8 @@ public class SsdbServiceImpl implements SsdbService {
 				if (null == goodsImgs || goodsImgs.size() <= 0) {
 					for (int i = 0; i < 5; i++) {
 						JSONObject json = new JSONObject();
-						json.put("url", "http://cdn.titles.top/pic/product-" + i
-								+ ".jpg");
+						json.put("url", "http://cdn.titles.top/pic/product-"
+								+ i + ".jpg");
 						jsonArray.add(json);
 					}
 				} else {
@@ -304,7 +303,8 @@ public class SsdbServiceImpl implements SsdbService {
 							CacheConst.PRODUCT_IMG_LIST_ + sid + "_" + pid)
 							.set(jsonArray);
 					ssdbTemplate.boundValueOps(
-							CacheConst.PRODUCT_IMG_LIST_ + sid + "_" + pid).expireAt(new Date());
+							CacheConst.PRODUCT_IMG_LIST_ + sid + "_" + pid)
+							.expireAt(new Date());
 				}
 			} catch (ApiException e) {
 				e.printStackTrace();
@@ -402,20 +402,6 @@ public class SsdbServiceImpl implements SsdbService {
 		 */
 		json = tradeAPI.getProductSaleList_m(sid, pid, page, rows);
 		return json;
-	}
-
-	@Override
-	public CateProp getProp(Long propid) {
-		CateProp prop = (CateProp) ssdbTemplate.boundValueOps(
-				CacheConst.PROP_OBJ_ + propid).get();
-		if (null == prop) {
-			prop = typeAPI.getCateProp(propid);
-			if (null != prop) {
-				ssdbTemplate.boundValueOps(CacheConst.PROP_OBJ_ + propid).set(
-						prop);
-			}
-		}
-		return prop;
 	}
 
 	@Override

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gsccs.b2c.plat.site.dao.SiteTempletMapper" >
+  <resultMap id="BaseResultMap" type="com.gsccs.b2c.plat.site.model.SiteTemplet" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="storeId" property="storeid" jdbcType="BIGINT" />
+    <result column="templetId" property="templetid" jdbcType="BIGINT" />
+    <result column="key" property="key" jdbcType="VARCHAR" />
+    <result column="usePage" property="usepage" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, storeId, templetId, key, usePage
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gsccs.b2c.plat.site.model.SiteTempletExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from plat_store_templet
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from plat_store_templet
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from plat_store_templet
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.site.model.SiteTempletExample" >
+    delete from plat_store_templet
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gsccs.b2c.plat.site.model.SiteTemplet" >
+    insert into plat_store_templet (id, storeId, templetId, 
+      key, usePage)
+    values (#{id,jdbcType=BIGINT}, #{storeid,jdbcType=BIGINT}, #{templetid,jdbcType=BIGINT}, 
+      #{key,jdbcType=VARCHAR}, #{usepage,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gsccs.b2c.plat.site.model.SiteTemplet" >
+    insert into plat_store_templet
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="storeid != null" >
+        storeId,
+      </if>
+      <if test="templetid != null" >
+        templetId,
+      </if>
+      <if test="key != null" >
+        key,
+      </if>
+      <if test="usepage != null" >
+        usePage,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="storeid != null" >
+        #{storeid,jdbcType=BIGINT},
+      </if>
+      <if test="templetid != null" >
+        #{templetid,jdbcType=BIGINT},
+      </if>
+      <if test="key != null" >
+        #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="usepage != null" >
+        #{usepage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gsccs.b2c.plat.site.model.SiteTempletExample" resultType="java.lang.Integer" >
+    select count(*) from plat_store_templet
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update plat_store_templet
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.storeid != null" >
+        storeId = #{record.storeid,jdbcType=BIGINT},
+      </if>
+      <if test="record.templetid != null" >
+        templetId = #{record.templetid,jdbcType=BIGINT},
+      </if>
+      <if test="record.key != null" >
+        key = #{record.key,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usepage != null" >
+        usePage = #{record.usepage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update plat_store_templet
+    set id = #{record.id,jdbcType=BIGINT},
+      storeId = #{record.storeid,jdbcType=BIGINT},
+      templetId = #{record.templetid,jdbcType=BIGINT},
+      key = #{record.key,jdbcType=VARCHAR},
+      usePage = #{record.usepage,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gsccs.b2c.plat.site.model.SiteTemplet" >
+    update plat_store_templet
+    <set >
+      <if test="storeid != null" >
+        storeId = #{storeid,jdbcType=BIGINT},
+      </if>
+      <if test="templetid != null" >
+        templetId = #{templetid,jdbcType=BIGINT},
+      </if>
+      <if test="key != null" >
+        key = #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="usepage != null" >
+        usePage = #{usepage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gsccs.b2c.plat.site.model.SiteTemplet" >
+    update plat_store_templet
+    set storeId = #{storeid,jdbcType=BIGINT},
+      templetId = #{templetid,jdbcType=BIGINT},
+      key = #{key,jdbcType=VARCHAR},
+      usePage = #{usepage,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,6 +1,6 @@
 package com.gsccs.b2c.plat.site.service;
 
-import com.gsccs.b2c.plat.site.model.Banner;
+import com.gsccs.eb.api.domain.site.Banner;
 
 /**
  * 首页Banner管理

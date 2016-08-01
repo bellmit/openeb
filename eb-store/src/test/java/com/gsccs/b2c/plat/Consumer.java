@@ -9,12 +9,12 @@ import org.springframework.data.redis.core.RedisTemplate;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.CacheConst;
-import com.gsccs.b2c.api.domain.EvalGoods;
-import com.gsccs.b2c.api.domain.EvalOrder;
 import com.gsccs.b2c.api.service.CateServiceI;
 import com.gsccs.b2c.api.service.EvalServiceI;
-import com.gsccs.b2c.api.service.GoodsServiceI;
+import com.gsccs.b2c.api.service.ProductServiceI;
 import com.gsccs.eb.api.domain.goods.Album;
+import com.gsccs.eb.api.domain.rated.EvalGoods;
+import com.gsccs.eb.api.domain.rated.EvalOrder;
 import com.gsccs.eb.api.exception.ApiException;
 
 
@@ -36,12 +36,12 @@ public class Consumer {
 		//testEval(evalAPI);
 		RedisTemplate ssdbTemplate =  (RedisTemplate) context
 				.getBean("ssdbTemplate");
-		GoodsServiceI goodsAPI = (GoodsServiceI) context
+		ProductServiceI goodsAPI = (ProductServiceI) context
 				.getBean("goodsAPI");
 		getProductImgs(ssdbTemplate,goodsAPI);
 	}
 	
-	public static JSONArray getProductImgs(RedisTemplate ssdbTemplate, GoodsServiceI goodsAPI) {
+	public static JSONArray getProductImgs(RedisTemplate ssdbTemplate, ProductServiceI goodsAPI) {
 		Long sid = 1001l;
 		Long pid = 251l;
 		JSONArray jsonArray = (JSONArray) ssdbTemplate.boundValueOps(

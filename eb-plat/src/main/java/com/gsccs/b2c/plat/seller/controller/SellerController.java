@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.plat.bass.Datagrid;
 import com.gsccs.b2c.plat.bass.JsonMsg;
+import com.gsccs.b2c.plat.seller.model.SellerAccount;
 import com.gsccs.b2c.plat.seller.service.SellerService;
 import com.gsccs.b2c.plat.seller.service.StoreService;
-import com.gsccs.b2c.plat.shop.model.SellerAccount;
 
 /**
  * 商城卖家管理控制类

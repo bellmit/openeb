@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gsccs.b2c.api.APIConst;
+import com.gsccs.b2c.plat.seller.model.Store;
 import com.gsccs.b2c.plat.seller.service.StoreService;
-import com.gsccs.b2c.plat.shop.model.StoreT;
 import com.gsccs.b2c.plat.shop.service.BrandService;
 import com.gsccs.eb.api.domain.goods.Brand;
 import com.gsccs.eb.api.exception.ApiException;
@@ -30,7 +30,7 @@ public class BrandServiceAPI implements BrandServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		StoreT store = storeService.findById(sid);
+		Store store = storeService.findById(sid);
 		if (null == store) {
 			throw new ApiException(APIConst.ERROR_CODE_0002,
 					APIConst.ERROR_MSG_0002);

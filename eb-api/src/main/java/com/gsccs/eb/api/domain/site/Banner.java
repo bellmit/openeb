@@ -1,123 +1,75 @@
 package com.gsccs.eb.api.domain.site;
 
-import java.io.Serializable;
-import java.util.List;
+/**
+ * 商城Banner
+ * 
+ * @author x.d zhang
+ * 
+ */
+public class Banner {
 
-import com.gsccs.b2c.api.domain.Domain;
+	private String id;
+	private String title;
+	private String imgurl;
+	private String link;
+	private String type;
+	private Long siteid;
+	private Integer ordernum;
 
-public class Banner extends Domain  {
-
-	private static final long serialVersionUID = 132158652580522323L;
-
-	private Integer id;
-
-	private String maingraph;
-
-	private String maingraphline;
-
-	private String subgraph1;
-
-	private String subgraph2;
-
-	private String subgraphline1;
-
-	private String subgraphline2;
-	
-	private String longBanner;
-	
-	private List<LongBanner> longBanners;
-
-	/**
-	 * 长条幅
-	 */
-	public static class LongBanner implements Serializable{
-		private static final long serialVersionUID = -2026650163184577574L;
-		private String banner;
-		private String bannerLine;
-		
-		public String getBanner() {
-			return banner;
-		}
-		public void setBanner(String banner) {
-			this.banner = banner;
-		}
-		public String getBannerLine() {
-			return bannerLine;
-		}
-		public void setBannerLine(String bannerLine) {
-			this.bannerLine = bannerLine;
-		}
-	}
-	
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getImgurl() {
+		return imgurl;
+	}
+
+	public void setImgurl(String imgurl) {
+		this.imgurl = imgurl;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public Long getSiteid() {
+		return siteid;
+	}
+
+	public void setSiteid(Long siteid) {
+		this.siteid = siteid;
+	}
+
+	public Integer getOrdernum() {
+		return ordernum;
+	}
+
+	public void setOrdernum(Integer ordernum) {
+		this.ordernum = ordernum;
+	}
+
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public String getMaingraph() {
-		return maingraph;
-	}
-
-	public void setMaingraph(String maingraph) {
-		this.maingraph = maingraph;
-	}
-
-	public String getMaingraphline() {
-		return maingraphline;
-	}
-
-	public void setMaingraphline(String maingraphline) {
-		this.maingraphline = maingraphline;
-	}
-
-	public String getSubgraph1() {
-		return subgraph1;
-	}
-
-	public void setSubgraph1(String subgraph1) {
-		this.subgraph1 = subgraph1;
-	}
-
-	public String getSubgraph2() {
-		return subgraph2;
-	}
-
-	public void setSubgraph2(String subgraph2) {
-		this.subgraph2 = subgraph2;
-	}
-
-	public String getSubgraphline1() {
-		return subgraphline1;
-	}
-
-	public void setSubgraphline1(String subgraphline1) {
-		this.subgraphline1 = subgraphline1;
-	}
-
-	public String getSubgraphline2() {
-		return subgraphline2;
-	}
-
-	public void setSubgraphline2(String subgraphline2) {
-		this.subgraphline2 = subgraphline2;
-	}
-
-	public List<LongBanner> getLongBanners() {
-		return longBanners;
-	}
-
-	public void setLongBanners(List<LongBanner> longBanners) {
-		this.longBanners = longBanners;
-	}
-
-	public String getLongBanner() {
-		return longBanner;
-	}
-
-	public void setLongBanner(String longBanner) {
-		this.longBanner = longBanner;
-	}
 }

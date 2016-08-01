@@ -8,17 +8,17 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gsccs.b2c.api.APIConst;
-import com.gsccs.b2c.api.domain.EvalGoods;
-import com.gsccs.b2c.api.domain.EvalItem;
-import com.gsccs.b2c.api.domain.EvalModel;
-import com.gsccs.b2c.api.domain.EvalOrder;
-import com.gsccs.b2c.api.domain.EvalType;
 import com.gsccs.b2c.plat.shop.model.EvalGoodsT;
 import com.gsccs.b2c.plat.shop.model.EvalItemT;
 import com.gsccs.b2c.plat.shop.model.EvalOrderT;
 import com.gsccs.b2c.plat.shop.model.EvalTypeT;
 import com.gsccs.b2c.plat.shop.service.EvalService;
 import com.gsccs.eb.api.domain.deliver.DeliverType;
+import com.gsccs.eb.api.domain.rated.EvalGoods;
+import com.gsccs.eb.api.domain.rated.EvalItem;
+import com.gsccs.eb.api.domain.rated.EvalModel;
+import com.gsccs.eb.api.domain.rated.EvalOrder;
+import com.gsccs.eb.api.domain.rated.EvalType;
 import com.gsccs.eb.api.exception.ApiException;
 
 /**

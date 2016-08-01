@@ -1,5 +1,7 @@
 package com.gsccs.b2c.plat.shop.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -33,10 +35,21 @@ public class CategoryController {
 
 	@RequiresPermissions("category:view")
 	@RequestMapping(method = RequestMethod.GET)
-	public String list() {
-		return "category/list";
+	public String list(ModelMap map) {
+		List<Category> categorieList = categoryService.queryCateList(1001L, 0L);
+		map.put("categorieList", categorieList);
+		return "store/category_list";
 	}
 
+	
+	@RequestMapping(value="/child",method = RequestMethod.GET)
+	@ResponseBody
+	public List<Category> child(Long id) {
+		List<Category> categorieList = categoryService.queryCateList(1001l, id);
+		return categorieList;
+	}
+
+	
 	@RequestMapping(value = "/treeGrid")
 	@ResponseBody
 	public JSONArray cateTree(ModelMap map, Category cate,

@@ -1,0 +1,708 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0065)http://b2b2c.leimingtech.com/leimingtech-admin/platformOrder/list -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+    
+    <title>管理后台</title>
+    <link href="./管理后台-订单管理_files/skin_0.css" rel="stylesheet" type="text/css" id="cssfile">
+
+    <script type="text/javascript" src="./管理后台-订单管理_files/jquery.js"></script>
+    <script type="text/javascript" src="./管理后台-订单管理_files/jquery.validation.min.js"></script>
+    <script type="text/javascript" src="./管理后台-订单管理_files/admincp.js"></script>
+    <script type="text/javascript" src="./管理后台-订单管理_files/jquery.cookie.js"></script>
+    <script type="text/javascript" src="./管理后台-订单管理_files/common.js"></script>
+
+    <script type="text/javascript">
+        var APP_BASE = '/leimingtech-admin';
+        LOADING_IMAGE = "/leimingtech-admin/res/images/loading.gif";
+    </script>
+<script type="text/javascript" src="./管理后台-订单管理_files/jquery.ui.js"></script>
+<script type="text/javascript" src="./管理后台-订单管理_files/zh-CN.js" charset="utf-8"></script>
+<script type="text/javascript" src="./管理后台-订单管理_files/layer.js" charset="utf-8"></script><link rel="stylesheet" href="./管理后台-订单管理_files/layer.css" id="layui_layer_skinlayercss">
+<link rel="stylesheet" type="text/css" href="./管理后台-订单管理_files/jquery.ui.css">
+<script type="text/javascript">
+    $(function(){
+        $('#ncsubmit').click(function(){
+            $('#formSearch').submit();
+        });
+    });
+</script>
+</head>
+<body>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title">
+            <h3>平台订单</h3>
+            <ul class="tab-base">
+                <li><a href="JavaScript:void(0);" class="current"><span>管理</span></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="fixed-empty"></div>
+    <form method="post" action="http://b2b2c.leimingtech.com/leimingtech-admin/platformOrder/list" name="formSearch" id="formSearch">
+        <input type="hidden" name="pageNo" value="1">
+        <table class="tb-type1 noborder search">
+            <tbody>
+            <tr>
+                <th><label>订单号</label></th>
+                <td><input class="txt2" type="text" name="orderSn" value=""></td>
+                <th><label>订单状态</label></th>
+                <td colspan="4"><select name="orderState" class="querySelect">
+                    <option value="" selected="selected">请选择</option>
+                    <option value="10">待付款</option>
+                    <option value="20">待发货</option>
+                    <option value="30">待收货</option>
+                    <option value="40">交易完成</option>
+                    <option value="50">已提交</option>
+					<option value="60">已确认</option>
+                    <option value="0">已取消</option>
+                </select></td>
+
+            </tr>
+            <tr style="background: rgb(255, 255, 255);">
+                <th><label for="query_start_time">下单时间</label></th>
+                <td><input class="txt date hasDatepicker" type="text" id="query_start_time" name="startTime" value="" readonly="readonly">
+                    <label for="query_start_time">~</label>
+                    <input class="txt date hasDatepicker" type="text" id="query_end_time" name="endTime" value="" readonly="readonly"></td>
+                <th>买家</th>
+                <td><input class="txt-short" type="text" name="buyerName" value=""></td>
+                <td><a href="javascript:void(0);" id="ncsubmit" class="btn-search " title="查询">&nbsp;</a>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <table class="table tb-type2" id="prompt">
+        <tbody>
+        <tr class="space odd" style="background: rgb(255, 255, 255);">
+            <th colspan="12"><div class="title"><h5>操作提示</h5><span class="arrow"></span></div></th>
+        </tr>
+        <tr class="odd" style="display: none; background: rgb(255, 255, 255);">
+            <td>
+                <ul>
+                    <li>点击查看操作将显示订单（包括订单物品）的详细信息</li>
+                    <li>点击取消操作可以取消订单（在线支付但未付款的订单和货到付款但未发货的订单）</li>
+                    <li>如果平台已确认收到买家的付款，但系统支付状态并未变更，可以点击收到货款操作，并填写相关信息后更改订单支付状态</li>
+                </ul></td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="table tb-type2 nobdb">
+        <thead>
+        <tr class="thead">
+            <th>订单号</th>
+            <th>买家</th>
+            <th class="align-center">下单时间</th>
+            <th class="align-center">订单总额</th>
+            <th class="align-center">支付总额</th>
+            <th class="align-center">支付方式</th>
+            <th class="align-center">订单状态</th>
+            <th class="align-center">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="hover">
+            <td>20160630100250335</td>
+            <td>15932110597</td>
+            <td class="nowrap align-center">2016-07-29  15:39:05</td>
+            <td class="align-center">1356</td>
+            <td class="align-center">1356</td>
+            <td class="align-center">支付宝</td>
+            <td class="align-center">
+                
+                
+                
+                
+                
+                
+                已取消
+            </td>
+            <td class="w144 align-center"><a href="http://b2b2c.leimingtech.com/leimingtech-admin/orders/show?id=fcb190ea2a9a4ef5a54a8410e051d7f0">查看</a>
+                <!-- 取消订单 -->
+            </td>
+        </tr>
+        <tr class="hover">
+            <td>20160720163342576</td>
+            <td>15932110597</td>
+            <td class="nowrap align-center">2016-07-20  16:33:42</td>
+            <td class="align-center">128</td>
+            <td class="align-center">128</td>
+            <td class="align-center">在线支付</td>
+            <td class="align-center">
+                待付款
+                
+                
+                
+                
+                
+                
+            </td>
+            <td class="w144 align-center"><a href="http://b2b2c.leimingtech.com/leimingtech-admin/orders/show?id=d3c50389090444eab07d55684e7375b2">查看</a>
+                <!-- 取消订单 -->
+                | <a href="javascript:void(0)" onclick="updateAmount(&#39;d3c50389090444eab07d55684e7375b2&#39;)" class="ncu-btn6 mt5" id="order1_action_confirm">调整费用</a>
+            </td>
+        </tr>
+        <tr class="hover">
+            <td>20160720163056105</td>
+            <td>15932110597</td>
+            <td class="nowrap align-center">2016-07-20  16:30:56</td>
+            <td class="align-center">155</td>
+            <td class="align-center">155</td>
+            <td class="align-center">在线支付</td>
+            <td class="align-center">
+                待付款
+                
+                
+                
+                
+                
+                
+            </td>
+            <td class="w144 align-center"><a href="http://b2b2c.leimingtech.com/leimingtech-admin/orders/show?id=42a295cfd4da4cafb2ab279ee282e067">查看</a>
+                <!-- 取消订单 -->
+                | <a href="javascript:void(0)" onclick="updateAmount(&#39;42a295cfd4da4cafb2ab279ee282e067&#39;)" class="ncu-btn6 mt5" id="order1_action_confirm">调整费用</a>
+            </td>
+        </tr>
+        <tr class="hover">
+            <td>20160630125812456</td>
+            <td>18210050755</td>
+            <td class="nowrap align-center">2016-06-30  12:58:12</td>
+            <td class="align-center">873</td>
+            <td class="align-center">873</td>
+            <td class="align-center">货到付款</td>
+            <td class="align-center">
+                
+                
+                
+                
+                已提交
+                
+                
+            </td>
+            <td class="w144 align-center"><a href="http://b2b2c.leimingtech.com/leimingtech-admin/orders/show?id=8512b9c9f59546b3b03016dd43b221fc">查看</a>
+                <!-- 取消订单 -->
+                | <a href="javascript:void(0)" onclick="confirmOrder(&#39;8512b9c9f59546b3b03016dd43b221fc&#39;)" class="ncu-btn2 mt5">订单确认</a>
+            </td>
+        </tr>
+        <tr class="hover">
+            <td>20160627170026720</td>
+            <td>18210050755</td>
+            <td class="nowrap align-center">2016-06-27  17:00:26</td>
+            <td class="align-center">299</td>
+            <td class="align-center">0</td>
+            <td class="align-center">在线支付</td>
+            <td class="align-center">
+                
+                
+                待收货
+                
+                
+                
+                
+            </td>
+            <td class="w144 align-center"><a href="http://b2b2c.leimingtech.com/leimingtech-admin/orders/show?id=74f2ae170c4f4db3afd65d10c127aa3e">查看</a>
+                <!-- 取消订单 -->
+            </td>
+        </tr>
+        <tr class="hover">
+            <td>20160623213219714</td>
+            <td>18210050755</td>
+            <td class="nowrap align-center">2016-06-23  21:32:19</td>
+            <td class="align-center">299</td>
+            <td class="align-center">0</td>
+            <td class="align-center">在线支付</td>
+            <td class="align-center">
+                
+                
+                待收货
+                
+                
+                
+                
+            </td>
+            <td class="w144 align-center"><a href="http://b2b2c.leimingtech.com/leimingtech-admin/orders/show?id=b6c10b2b43f14eab99ce467ce5f58e25">查看</a>
+                <!-- 取消订单 -->
+            </td>
+        </tr>
+        <tr class="hover" style="background: rgb(251, 251, 251);">
+            <td>20160621183211704</td>
+            <td>18311340545</td>
+            <td class="nowrap align-center">2016-06-21  18:32:11</td>
+            <td class="align-center">5382</td>
+            <td class="align-center">0</td>
+            <td class="align-center">在线支付</td>
+            <td class="align-center">
+                
+                
+                待收货
+                
+                
+                
+                
+            </td>
+            <td class="w144 align-center"><a href="http://b2b2c.leimingtech.com/leimingtech-admin/orders/show?id=83afbe9888804e698faf402df1991a4e">查看</a>
+                <!-- 取消订单 -->
+            </td>
+        </tr>
+        <tr class="hover" style="background: rgb(255, 255, 255);">
+            <td>20160621112754338</td>
+            <td>18210050755</td>
+            <td class="nowrap align-center">2016-06-21  11:27:54</td>
+            <td class="align-center">1994</td>
+            <td class="align-center">0</td>
+            <td class="align-center">在线支付</td>
+            <td class="align-center">
+                
+                
+                待收货
+                
+                
+                
+                
+            </td>
+            <td class="w144 align-center"><a href="http://b2b2c.leimingtech.com/leimingtech-admin/orders/show?id=c3f99719fe274cc78f482da2fd653b4c">查看</a>
+                <!-- 取消订单 -->
+            </td>
+        </tr>
+        <tr class="hover" style="background: rgb(255, 255, 255);">
+            <td>20160621093615795</td>
+            <td>　</td>
+            <td class="nowrap align-center">2016-06-21  09:36:15</td>
+            <td class="align-center">339</td>
+            <td class="align-center">339</td>
+            <td class="align-center">银联</td>
+            <td class="align-center">
+                待付款
+                
+                
+                
+                
+                
+                
+            </td>
+            <td class="w144 align-center"><a href="http://b2b2c.leimingtech.com/leimingtech-admin/orders/show?id=b2d9d50484244fac9ab7a46577b2a88f">查看</a>
+                <!-- 取消订单 -->
+                | <a href="javascript:void(0)" onclick="updateAmount(&#39;b2d9d50484244fac9ab7a46577b2a88f&#39;)" class="ncu-btn6 mt5" id="order1_action_confirm">调整费用</a>
+            </td>
+        </tr>
+        <tr class="hover">
+            <td>20160614110051421</td>
+            <td>test99</td>
+            <td class="nowrap align-center">2016-06-14  11:00:51</td>
+            <td class="align-center">314</td>
+            <td class="align-center">314</td>
+            <td class="align-center">货到付款</td>
+            <td class="align-center">
+                
+                
+                
+                交易完成
+                
+                
+                
+            </td>
+            <td class="w144 align-center"><a href="http://b2b2c.leimingtech.com/leimingtech-admin/orders/show?id=a4007f2d879441c1a898f11af9d95088">查看</a>
+                <!-- 取消订单 -->
+            </td>
+        </tr>
+        <tr class="hover">
+            <td>20160614104653390</td>
+            <td>test99</td>
+            <td class="nowrap align-center">2016-06-14  10:46:53</td>
+            <td class="align-center">128</td>
+            <td class="align-center">128</td>
+            <td class="align-center">货到付款</td>
+            <td class="align-center">
+                
+                
+                
+                交易完成
+                
+                
+                
+            </td>
+            <td class="w144 align-center"><a href="http://b2b2c.leimingtech.com/leimingtech-admin/orders/show?id=7b61a0f7521d42f28e459db9f8734ff6">查看</a>
+                <!-- 取消订单 -->
+            </td>
+        </tr>
+        <tr class="hover">
+            <td>20160608104658032</td>
+            <td>18813035210</td>
+            <td class="nowrap align-center">2016-06-08  10:46:58</td>
+            <td class="align-center">128</td>
+            <td class="align-center">128</td>
+            <td class="align-center">货到付款</td>
+            <td class="align-center">
+                
+                
+                待收货
+                
+                
+                
+                
+            </td>
+            <td class="w144 align-center"><a href="http://b2b2c.leimingtech.com/leimingtech-admin/orders/show?id=e9ffb87abf1e414eb761f55ec2ba9069">查看</a>
+                <!-- 取消订单 -->
+            </td>
+        </tr>
+        <tr class="hover">
+            <td>20160606145236602</td>
+            <td>jiankai</td>
+            <td class="nowrap align-center">2016-06-06  14:52:36</td>
+            <td class="align-center">204</td>
+            <td class="align-center">204</td>
+            <td class="align-center">银联</td>
+            <td class="align-center">
+                待付款
+                
+                
+                
+                
+                
+                
+            </td>
+            <td class="w144 align-center"><a href="http://b2b2c.leimingtech.com/leimingtech-admin/orders/show?id=4aabe2affe8b45bab5a16d4c3bb501f6">查看</a>
+                <!-- 取消订单 -->
+                | <a href="javascript:void(0)" onclick="updateAmount(&#39;4aabe2affe8b45bab5a16d4c3bb501f6&#39;)" class="ncu-btn6 mt5" id="order1_action_confirm">调整费用</a>
+            </td>
+        </tr>
+        <tr class="hover">
+            <td>20160605180247351</td>
+            <td>15618313869</td>
+            <td class="nowrap align-center">2016-06-05  18:02:47</td>
+            <td class="align-center">159</td>
+            <td class="align-center">159</td>
+            <td class="align-center">银联</td>
+            <td class="align-center">
+                待付款
+                
+                
+                
+                
+                
+                
+            </td>
+            <td class="w144 align-center"><a href="http://b2b2c.leimingtech.com/leimingtech-admin/orders/show?id=a256aadd1fea471ca451239c8102dfa8">查看</a>
+                <!-- 取消订单 -->
+                | <a href="javascript:void(0)" onclick="updateAmount(&#39;a256aadd1fea471ca451239c8102dfa8&#39;)" class="ncu-btn6 mt5" id="order1_action_confirm">调整费用</a>
+            </td>
+        </tr>
+        <tr class="hover">
+            <td>20160530223947205</td>
+            <td>18580281677</td>
+            <td class="nowrap align-center">2016-05-30  22:39:47</td>
+            <td class="align-center">339</td>
+            <td class="align-center">339</td>
+            <td class="align-center">在线支付</td>
+            <td class="align-center">
+                
+                
+                待收货
+                
+                
+                
+                
+            </td>
+            <td class="w144 align-center"><a href="http://b2b2c.leimingtech.com/leimingtech-admin/orders/show?id=49baad02205044d9a798c23ebf6a318b">查看</a>
+                <!-- 取消订单 -->
+            </td>
+        </tr>
+        <tr class="hover">
+            <td>20160529233725162</td>
+            <td>13761155163</td>
+            <td class="nowrap align-center">2016-05-29  23:37:25</td>
+            <td class="align-center">88</td>
+            <td class="align-center">88</td>
+            <td class="align-center">银联</td>
+            <td class="align-center">
+                
+                
+                待收货
+                
+                
+                
+                
+            </td>
+            <td class="w144 align-center"><a href="http://b2b2c.leimingtech.com/leimingtech-admin/orders/show?id=d380cca98d8b4c868dfb6b8b4e5807aa">查看</a>
+                <!-- 取消订单 -->
+            </td>
+        </tr>
+        <tr class="hover">
+            <td>20160527101010459</td>
+            <td>18210050755</td>
+            <td class="nowrap align-center">2016-05-27  10:10:10</td>
+            <td class="align-center">299</td>
+            <td class="align-center">299</td>
+            <td class="align-center">在线支付</td>
+            <td class="align-center">
+                待付款
+                
+                
+                
+                
+                
+                
+            </td>
+            <td class="w144 align-center"><a href="http://b2b2c.leimingtech.com/leimingtech-admin/orders/show?id=6b487e39dc824fcd9d26f4f04eec0fa0">查看</a>
+                <!-- 取消订单 -->
+                | <a href="javascript:void(0)" onclick="updateAmount(&#39;6b487e39dc824fcd9d26f4f04eec0fa0&#39;)" class="ncu-btn6 mt5" id="order1_action_confirm">调整费用</a>
+            </td>
+        </tr>
+        <tr class="hover">
+            <td>20160526121538079</td>
+            <td>18311340545</td>
+            <td class="nowrap align-center">2016-05-26  14:31:27</td>
+            <td class="align-center">128</td>
+            <td class="align-center">128</td>
+            <td class="align-center">在线支付</td>
+            <td class="align-center">
+                
+                
+                
+                
+                
+                
+                已取消
+            </td>
+            <td class="w144 align-center"><a href="http://b2b2c.leimingtech.com/leimingtech-admin/orders/show?id=8854df36d03b4115bf26f33e04f118fe">查看</a>
+                <!-- 取消订单 -->
+            </td>
+        </tr>
+        <tr class="hover">
+            <td>20160526142746220</td>
+            <td>18311340545</td>
+            <td class="nowrap align-center">2016-05-26  14:27:46</td>
+            <td class="align-center">339</td>
+            <td class="align-center">0</td>
+            <td class="align-center">在线支付</td>
+            <td class="align-center">
+                
+                
+                待收货
+                
+                
+                
+                
+            </td>
+            <td class="w144 align-center"><a href="http://b2b2c.leimingtech.com/leimingtech-admin/orders/show?id=a989d3df5c164938b5c0b18d11c39289">查看</a>
+                <!-- 取消订单 -->
+            </td>
+        </tr>
+        <tr class="hover">
+            <td>20160519173829200</td>
+            <td>18311340545</td>
+            <td class="nowrap align-center">2016-05-26  10:54:03</td>
+            <td class="align-center">4324</td>
+            <td class="align-center">4324</td>
+            <td class="align-center">微信支付</td>
+            <td class="align-center">
+                
+                
+                
+                
+                
+                
+                已取消
+            </td>
+            <td class="w144 align-center"><a href="http://b2b2c.leimingtech.com/leimingtech-admin/orders/show?id=dc07280d42724291b3b03a4e5aad8845">查看</a>
+                <!-- 取消订单 -->
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr class="tfoot">
+            <td colspan="15" id="dataFuncs">
+<div class="pagination">
+    <ul><li>
+                </li><li><span>首页</span></li>
+                    <li><span class="currentpage">1</span></li>
+                    <li><a class="demo" href="javascript:void(0);" onclick="turnOverPage(2)"><span>2</span></a></li>
+                <li><span>...</span></li>
+                <li><a class="demo" href="javascript:void(0);" onclick="turnOverPage(12)"><span>12</span></a></li>
+                <li><a class="demo" href="javascript:void(0);" onclick="turnOverPage(13)"><span>13</span></a></li>
+                <li><a class="demo" href="javascript:void(0);" onclick="turnOverPage(2)"><span>下一页</span></a></li>
+                <li><a class="demo" href="javascript:void(0);" onclick="turnOverPage(13)"><span>末页</span></a></li>
+        <script language="javascript">
+            function turnOverPage(no) {
+                var queryForm = document.formSearch;
+                if (no >13) {
+                    no =13;
+                }
+                if (no < 1) {
+                    no = 1;
+                }
+                queryForm.pageNo.value=no;
+                queryForm.submit();
+            }
+        </script>
+    </ul>
+</div>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $('#query_start_time').datepicker({dateFormat: 'yy-mm-dd'});
+        $('#query_end_time').datepicker({dateFormat: 'yy-mm-dd'});
+        $('#ncsubmit').click(function(){
+            $('#formSearch').submit();
+        });
+    });
+    
+    /**调整费用**/
+	function updateAmount(id) {
+	   	layer.open({
+		    type: 2,
+		    area: ['400px', '200px'],
+		    skin: 'layui-layer-rim',
+		    title: '调整订单费用',
+		    //content: APP_BASE + '/cart/addresslist'
+		    content :  ['/leimingtech-admin/platformOrder/updateAmountIndex?orderId=' + id, 'no'],
+		    success: function(layero, index){
+		    	layer.getChildFrame('#confirm_button',index).on('click', function(){
+					var orderId=layer.getChildFrame("#orderId",index).val();
+					var orderAmount=layer.getChildFrame("#orderAmount",index).val();
+					var fmUrl = '/leimingtech-admin/platformOrder/updateAmount';
+					$.ajax({
+			             type: "post",
+			             url: fmUrl,
+			             data: {orderId:orderId,orderAmount:orderAmount},
+			             dataType: "json",
+						 async:false,
+						 success:function(data) {
+							if(data.success){
+								parent.layer.msg("订单修改成功",{icon:1},function(){
+									location.reload();
+								});	
+							}else{
+								parent.layer.msg("订单修改失败",{icon:2},function(){
+									location.reload();
+								});		
+							}
+						}
+			         });  
+				});	
+		    }
+		});
+	}
+	
+	/**订单确认**/
+	function confirmOrder(id) {
+	   	layer.open({
+		    type: 2,
+		    area: ['400px', '200px'],
+		    skin: 'layui-layer-rim',
+		    title: '订单确认',
+		    //content: APP_BASE + '/cart/addresslist'
+		    content :  ['/leimingtech-admin/platformOrder/confirmOrderIndex?orderId=' + id, 'no'],
+		    success: function(layero, index){
+		    	layer.getChildFrame('#confirm_button',index).on('click', function(){
+					var orderSn=layer.getChildFrame("#orderSn",index).val();
+					var fmUrl = '/leimingtech-admin/platformOrder/confirmOrder';
+					$.ajax({
+			             type: "post",
+			             url: fmUrl,
+			             data: {orderSn:orderSn},
+			             dataType: "json",
+						 async:false,
+						 success:function(data) {
+							if(data.success){
+								parent.layer.msg("订单确认成功",{icon:1},function(){
+									location.reload();
+								});	
+							}else{
+								parent.layer.msg("订单确认失败",{icon:2},function(){
+									location.reload();
+								});		
+							}
+						}
+			         });  
+				});	
+		    }
+		});
+	}
+	
+	/**退款审核**/
+	function refund(id) {
+	   	layer.open({
+		    type: 2,
+		    area: ['500px', '400px'],
+		    skin: 'layui-layer-rim',
+		    title: '订单退款',
+		    //content: APP_BASE + '/cart/addresslist'
+		    content :  ['/leimingtech-admin/platformOrder/refundOrderIndex?logId=' + id, 'no'],
+		    success: function(layero, index){
+		    	layer.getChildFrame('#confirm_button',index).on('click', function(){
+					var logId=layer.getChildFrame("input[name='logId']",index).val();
+					var refundState = layer.getChildFrame("input[name='refund_state']:checked",index).val();
+					var refundMessage = layer.getChildFrame("input[name='refund_message']",index).val();
+					var fmUrl = '/leimingtech-admin/platformOrder/refundOrder';
+					$.ajax({
+			             type: "post",
+			             url: fmUrl,
+			             data: {logId:logId,refundState:refundState,refundMessage:refundMessage},
+			             dataType: "json",
+						 async:false,
+						 success:function(data) {
+							if(data.success){
+								parent.layer.msg("审核成功!",{icon:1},function(){
+									location.reload();
+								});	
+							}else{
+								parent.layer.msg("审核失败!",{icon:2},function(){
+									location.reload();
+								});		
+							}
+						}
+			         });  
+				});	
+		    }
+		});
+	}
+	
+	/**退货审核**/
+	function returnOrder(id){
+		layer.open({
+		    type: 2,
+		    area: ['500px', '400px'],
+		    skin: 'layui-layer-rim',
+		    title: '订单退货',
+		    //content: APP_BASE + '/cart/addresslist'
+		    content :  ['/leimingtech-admin/platformOrder/returnOrderIndex?returnId=' + id, 'no'],
+		    success: function(layero, index){
+		    	layer.getChildFrame('#confirm_button',index).on('click', function(){
+					var returnId=layer.getChildFrame("input[name='returnId']",index).val();
+					var returnState = layer.getChildFrame("input[name='return_state']:checked",index).val();
+					var returnMessage = layer.getChildFrame("input[name='return_message']",index).val();
+					var fmUrl = '/leimingtech-admin/platformOrder/returnOrder';
+					$.ajax({
+			             type: "post",
+			             url: fmUrl,
+			             data: {returnId:returnId,returnState:returnState,returnMessage:returnMessage},
+			             dataType: "json",
+						 async:false,
+						 success:function(data) {
+							if(data.success){
+								parent.layer.msg("审核成功!",{icon:1},function(){
+									location.reload();
+								});	
+							}else{
+								parent.layer.msg("审核失败!",{icon:2},function(){
+									location.reload();
+								});		
+							}
+						}
+			         });   
+				});	
+		    }
+		});
+	}
+</script>
+
+
+<div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div></body></html>

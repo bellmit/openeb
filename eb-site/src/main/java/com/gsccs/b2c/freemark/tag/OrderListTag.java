@@ -72,7 +72,7 @@ public class OrderListTag extends BaseDirective implements TemplateDirectiveMode
 				//param.setState(state);
 				List<Order> orders = null;
 				try {
-					orders = orderAPI.getOrderList(siteId, param, "", 1, Integer.MAX_VALUE);
+					orders = orderAPI.getBuyerOrderList(siteId, param, "", 1, Integer.MAX_VALUE);
 				} catch (ApiException e) {
 					e.printStackTrace();
 				}

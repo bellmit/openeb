@@ -9,7 +9,6 @@ import com.gsccs.b2c.plat.bass.BaseExample;
 
 public class ProductImgTExample extends BaseExample{
     protected String orderByClause;
-
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gsccs.b2c.plat.buyer.dao.BuyerPointsMapper">
+<mapper namespace="com.gsccs.b2c.plat.buyer.dao.PointsMapper">
 
 	<resultMap id="BaseResultMap" type="com.gsccs.eb.api.domain.buyer.Points">
 		<id column="id" property="id" jdbcType="BIGINT" />
@@ -116,7 +116,7 @@
 		buyer_points_${sid}
 		where id = #{id,jdbcType=BIGINT}
 	</delete>
-	<delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.buyer.model.BuyerPointsExample">
+	<delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.buyer.model.PointsExample">
 		delete from buyer_points_${sid}
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />

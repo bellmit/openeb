@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gsccs.b2c.plat.shop.dao.SkuSpecMapper">
+	<resultMap id="BaseResultMap" type="com.gsccs.eb.api.domain.goods.SkuSpec">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="specid" property="specid" jdbcType="BIGINT" />
+		<result column="specvalid" property="specvalid" jdbcType="BIGINT" />
+		<result column="productid" property="productid" jdbcType="BIGINT" />
+		<result column="skuid" property="skuid" jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id, specid, specvalid, productid,skuid
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.gsccs.b2c.plat.shop.model.SkuSpecExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from eb_sku_spec
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from eb_sku_spec
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from eb_sku_spec
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.shop.model.SkuSpecExample">
+		delete from eb_sku_spec
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.gsccs.eb.api.domain.goods.SkuSpec">
+		insert into eb_sku_spec (id, specid, specvalid,
+		productid)
+		values (#{id,jdbcType=BIGINT}, 
+		#{specid,jdbcType=BIGINT},
+		#{specvalid,jdbcType=BIGINT},
+		#{productid,jdbcType=BIGINT},
+		#{skuid,jdbcType=BIGINT})
+	</insert>
+	
+	<select id="countByExample" parameterType="com.gsccs.b2c.plat.shop.model.SkuSpecExample"
+		resultType="java.lang.Integer">
+		select count(*) from eb_sku_spec
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update eb_sku_spec
+		<set>
+			<if test="record.id != null">
+				id = #{record.id,jdbcType=BIGINT},
+			</if>
+			<if test="record.specid != null">
+				specid = #{record.specid,jdbcType=BIGINT},
+			</if>
+			<if test="record.specvalid != null">
+				specvalid = #{record.specvalid,jdbcType=BIGINT},
+			</if>
+			<if test="record.productid != null">
+				productid = #{record.productid,jdbcType=BIGINT},
+			</if>
+			<if test="record.skuid != null">
+				skuid = #{record.skuid,jdbcType=BIGINT},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update eb_sku_spec
+		set id = #{record.id,jdbcType=BIGINT},
+		specid = #{record.specid,jdbcType=BIGINT},
+		specvalid = #{record.specvalid,jdbcType=BIGINT},
+		productid = #{record.productid,jdbcType=BIGINT},
+		skuid = #{record.skuid,jdbcType=BIGINT}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.gsccs.eb.api.domain.goods.SkuSpec">
+		update eb_sku_spec
+		<set>
+			<if test="specid != null">
+				specid = #{specid,jdbcType=BIGINT},
+			</if>
+			<if test="specvalid != null">
+				specvalid = #{specvalid,jdbcType=BIGINT},
+			</if>
+			<if test="productid != null">
+				productid = #{productid,jdbcType=BIGINT},
+			</if>
+			<if test="skuid != null">
+				skuid = #{skuid,jdbcType=BIGINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.gsccs.eb.api.domain.goods.SkuSpec">
+		update eb_sku_spec
+		set specid = #{specid,jdbcType=BIGINT},
+		specvalid = #{specvalid,jdbcType=BIGINT},
+		productid = #{productid,jdbcType=BIGINT},
+		skuid = #{skuid,jdbcType=BIGINT}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+</mapper>

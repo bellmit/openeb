@@ -3,9 +3,8 @@ package com.gsccs.b2c.plat.seller.service;
 import java.util.List;
 
 import com.alibaba.fastjson.JSONObject;
-import com.gsccs.b2c.plat.shop.model.SellerAccount;
-import com.gsccs.b2c.plat.shop.model.StoreNavT;
-import com.gsccs.b2c.plat.shop.model.StoreT;
+import com.gsccs.b2c.plat.seller.model.Store;
+import com.gsccs.eb.api.domain.site.Navigation;
 
 /**
  * 
@@ -22,14 +21,14 @@ public interface StoreService {
 	 * @param GoodsStore
 	 * @return
 	 */
-	public Long insert(StoreT store);
+	public Long insert(Store store);
 
 	/**
 	 * 更新
 	 * 
 	 * @param GoodsStore
 	 */
-	public void update(StoreT store);
+	public void update(Store store);
 
 	/**
 	 * 删除
@@ -41,20 +40,12 @@ public interface StoreService {
 	/**
 	 * 分页查询
 	 */
-	public List<StoreT> find(StoreT site, String order, int currPage,
+	public List<Store> find(Store site, String order, int currPage,
 			int pageSize);
 
-	public List<StoreT> find(StoreT site, String order);
+	public List<Store> find(Store site, String order);
 
-	public int count(StoreT site);
-
-	/**
-	 * 根据id查询
-	 * 
-	 * @param id
-	 * @return
-	 */
-	public StoreT findById(Long id);
+	public int count(Store site);
 
 	/**
 	 * 根据id查询
@@ -62,7 +53,15 @@ public interface StoreService {
 	 * @param id
 	 * @return
 	 */
-	public StoreT findByDomain(String domain, boolean cache);
+	public Store findById(Long id);
+
+	/**
+	 * 根据id查询
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Store findByDomain(String domain, boolean cache);
 
 	/**
 	 * 根据sourcepath查询
@@ -70,7 +69,7 @@ public interface StoreService {
 	 * @param id
 	 * @return
 	 */
-	public StoreT findBySourcepath(String sourcepath);
+	public Store findBySourcepath(String sourcepath);
 
 	/**
 	 * 查询是否有此目录
@@ -86,7 +85,7 @@ public interface StoreService {
 	 * @param siteid
 	 * @return
 	 */
-	public List<StoreNavT> findStoreNavs(Long siteid);
+	public List<Navigation> findStoreNavs(Long siteid);
 	
 	/**
 	 * 平台商家统计

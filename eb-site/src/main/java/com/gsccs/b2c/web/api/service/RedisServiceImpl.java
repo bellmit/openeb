@@ -17,7 +17,7 @@ import com.gsccs.b2c.api.service.BuyerServiceI;
 import com.gsccs.b2c.api.service.CateServiceI;
 import com.gsccs.b2c.api.service.ConfigServiceI;
 import com.gsccs.b2c.api.service.EvalServiceI;
-import com.gsccs.b2c.api.service.GoodsServiceI;
+import com.gsccs.b2c.api.service.ProductServiceI;
 import com.gsccs.b2c.api.service.ShopServiceI;
 import com.gsccs.b2c.api.service.StoreyServiceI;
 import com.gsccs.b2c.api.service.TradeServiceI;
@@ -26,7 +26,7 @@ import com.gsccs.eb.api.domain.goods.Brand;
 import com.gsccs.eb.api.domain.goods.Category;
 import com.gsccs.eb.api.domain.goods.Product;
 import com.gsccs.eb.api.domain.seller.Shop;
-import com.gsccs.eb.api.domain.site.StoreNav;
+import com.gsccs.eb.api.domain.site.Navigation;
 import com.gsccs.eb.api.exception.ApiException;
 
 @Service
@@ -40,7 +40,7 @@ public class RedisServiceImpl implements RedisService {
 	@Autowired
 	private ShopServiceI shopAPI;
 	@Autowired
-	private GoodsServiceI goodsAPI;
+	private ProductServiceI goodsAPI;
 	@Autowired
 	private CateServiceI cateAPI;
 	@Autowired
@@ -116,13 +116,13 @@ public class RedisServiceImpl implements RedisService {
 	
 	
 	@Override
-	public List<StoreNav> getStoreNavs(Long sid) {
-		List<StoreNav> navs = redisTemplate.boundListOps(
+	public List<Navigation> getStoreNavs(Long sid) {
+		List<Navigation> navs = redisTemplate.boundListOps(
 				CacheConst.SITE_NAV_LIST_ + sid).range(0, -1);
 		if (null == navs || navs.size() <= 0) {
 			navs = shopAPI.getStoreNav(sid);
 			if (null != navs && navs.size() > 0) {
-				for (StoreNav nav : navs) {
+				for (Navigation nav : navs) {
 					redisTemplate.boundListOps(CacheConst.SITE_NAV_LIST_ + sid)
 							.leftPush(nav);
 				}

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gsccs.b2c.plat.shop.dao.ProductImgTMapper;
-import com.gsccs.b2c.plat.shop.model.GoodsT;
 import com.gsccs.b2c.plat.shop.model.ProductImgT;
 
 @Service

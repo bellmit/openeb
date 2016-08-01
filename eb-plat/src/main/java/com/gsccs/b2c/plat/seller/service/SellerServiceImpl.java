@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gsccs.b2c.plat.auth.service.PasswordHelper;
-import com.gsccs.b2c.plat.shop.dao.SellerAccountMapper;
-import com.gsccs.b2c.plat.shop.model.SellerAccount;
-import com.gsccs.b2c.plat.shop.model.SellerAccountExample;
+import com.gsccs.b2c.plat.seller.dao.SellerAccountMapper;
+import com.gsccs.b2c.plat.seller.model.SellerAccount;
+import com.gsccs.b2c.plat.seller.model.SellerAccountExample;
 
 /**
  * 卖家信息

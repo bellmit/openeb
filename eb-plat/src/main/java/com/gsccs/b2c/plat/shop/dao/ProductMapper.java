@@ -22,7 +22,7 @@ public interface ProductMapper {
 
 	int deleteByPrimaryKey(@Param("sid") Long sid, @Param("id") Long id);
 
-	int insert(@Param("sid") Long sid, @Param("record") Product record);
+	int insert(@Param("record") Product record);
 
 	List<Product> selectByExample(@Param("sid") Long sid,
 			@Param("example") ProductExample example);

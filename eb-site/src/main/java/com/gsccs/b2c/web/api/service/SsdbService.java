@@ -5,11 +5,10 @@ import java.util.List;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.domain.Area;
-import com.gsccs.b2c.api.domain.CateProp;
-import com.gsccs.b2c.api.domain.EvalGoods;
 import com.gsccs.eb.api.domain.goods.ProductParam;
 import com.gsccs.eb.api.domain.goods.ProductProp;
 import com.gsccs.eb.api.domain.goods.Sku;
+import com.gsccs.eb.api.domain.rated.EvalGoods;
 import com.gsccs.eb.api.domain.site.Collect;
 import com.gsccs.eb.api.domain.site.Collect.CollectType;
 import com.gsccs.eb.api.domain.trade.OrderItem;
@@ -40,8 +39,6 @@ public interface SsdbService {
 	public JSONArray getProductImgs(Long sid,Long pid);
 	public List<ProductProp> getProductProps(Long sid,Long pid);
 	public List<ProductParam> getProductParam(Long sid,Long pid);
-	
-	public CateProp getProp(Long propid);
 	
 	public List<Sku> getSKUList(Long sid,Long pid);
 	

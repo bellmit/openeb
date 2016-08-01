@@ -2,7 +2,6 @@ package com.gsccs.b2c.plat.shop.service;
 
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +9,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.plat.shop.dao.CategoryMapper;
-import com.gsccs.b2c.plat.shop.dao.StoreCateMapper;
 import com.gsccs.b2c.plat.shop.model.CategoryExample;
 import com.gsccs.b2c.plat.shop.model.CategoryExample.Criteria;
-import com.gsccs.b2c.plat.shop.model.StoreCate;
-import com.gsccs.b2c.plat.shop.model.StoreCateExample;
 import com.gsccs.b2c.plat.utils.SqlUtil;
 import com.gsccs.eb.api.domain.goods.Category;
 
@@ -23,16 +19,6 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
 	private CategoryMapper categoryMapper;
-
-	@Override
-	public void down(Category category) {
-
-	}
-
-	@Override
-	public void up(Category category) {
-
-	}
 
 	@Override
 	public List<Category> find(Category category, String order, int currPage,
@@ -71,12 +57,13 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public List<Category> findByPar(Long parid) {
+	public List<Category> queryCateList(Long shopid, Long parid) {
 		if (null == parid) {
 			return findRootCates();
 		} else {
 			Category t = new Category();
 			t.setParid(parid);
+			t.setShopId(shopid);
 			CategoryExample example = new CategoryExample();
 			Criteria criteria = example.createCriteria();
 			proSearchParam(t, criteria);
@@ -205,7 +192,6 @@ public class CategoryServiceImpl implements CategoryService {
 		}
 		return parids;
 	}
-
 
 	@Override
 	public JSONArray findByStore(Long storeid) {

@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
-import com.gsccs.b2c.api.service.GoodsServiceI;
+import com.gsccs.b2c.api.service.ProductServiceI;
 import com.gsccs.b2c.web.api.service.RedisService;
 import com.gsccs.eb.api.domain.goods.Product;
 
@@ -46,7 +46,7 @@ public class GoodsTopTag extends BaseDirective implements
 		TemplateDirectiveModel {
 
 	@Resource
-	private GoodsServiceI goodsAPI;
+	private ProductServiceI goodsAPI;
 	@Resource
 	private RedisService redisService;
 

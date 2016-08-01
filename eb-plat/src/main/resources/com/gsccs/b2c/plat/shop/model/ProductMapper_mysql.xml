@@ -32,9 +32,13 @@
 		<result column="salenum" property="salenum" jdbcType="INTEGER" />
 		<result column="locknum" property="locknum" jdbcType="INTEGER" />
 		<result column="evalnum" property="evalnum" jdbcType="INTEGER" />
+		
+		<!--  -->
+		<result column="shoptitle" property="shoptitle" jdbcType="VARCHAR" />
+		<result column="brandtitle" property="brandtitle" jdbcType="VARCHAR" />
+		<result column="catetitle" property="catetitle" jdbcType="VARCHAR" />
+		
 	</resultMap>
-	
-	
 	
 	<sql id="Example_Where_Clause">
 		<where>
@@ -106,6 +110,9 @@
 		addUser, status, kind, tags, barcode, remark, price, mkprice,weight, storenum,freight, points, postage, salenum,locknum,evalnum
 	</sql>
 	
+	<sql id="Shop_Column_List">
+		shoptitle
+	</sql>
 	
 	<select id="selectByExample" resultMap="BaseResultMap"
 		parameterType="map">
@@ -114,7 +121,7 @@
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from shop_product
+		from eb_product
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -125,12 +132,15 @@
 	
 	<select id="selectPageByExample" resultMap="BaseResultMap"
 		parameterType="map">
-		select
-		<if test="example.distinct">
-			distinct
-		</if>
+		select distinct
 		<include refid="Base_Column_List" />
-		from shop_product
+		,
+		<include refid="Shop_Column_List" />
+		from (
+			select a.*,b.name as shoptitle
+			from eb_product a,plat_store b
+			where a.shopid = b.id
+		) as aa
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -140,60 +150,74 @@
 		limit ${example.skip},${example.pageSize}
 	</select>
 	
+	
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="map">
 		select
 		<include refid="Base_Column_List" />
-		from shop_product
+		from eb_product
 		where id = #{id,jdbcType=BIGINT}
 	</select>
 	
 	<delete id="deleteByPrimaryKey" parameterType="map">
-		delete from shop_product
+		delete from eb_product
 		where id = #{id,jdbcType=BIGINT}
 	</delete>
+	
 	<delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.shop.model.ProductExample">
-		delete from shop_product
+		delete from eb_product
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
 	</delete>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="record.id" parameterType="map">
-		insert into shop_product (id, shopid, brandid, 
-      categoryid, cateids, typeid,title, 
-      img, templet, ishot, 
-      istop, addtime, topendtime, 
-      clicknum, addUser, status, 
-      kind, tags, 
-      barcode, remark, price, 
-      mkprice, weight, storenum, 
-      freight, points, postage, 
-      salenum,locknum,evalnum
+		insert into eb_product (id, shopid, brandid, 
+	      categoryid, cateids, typeid,title, 
+	      img, templet, ishot, 
+	      istop, addtime, topendtime, 
+	      clicknum, addUser, status, 
+	      kind, tags, 
+	      barcode, remark, price, 
+	      mkprice, weight, storenum, 
+	      freight, points, postage, 
+	      salenum,locknum,evalnum
       )
-    values (#{record.id,jdbcType=BIGINT}, 
-    	#{record.shopid,jdbcType=BIGINT}, 
-    	#{record.brandid,jdbcType=BIGINT}, 
-      #{record.categoryid,jdbcType=BIGINT}, 
-      #{record.cateids,jdbcType=VARCHAR},
-      #{record.typeid,jdbcType=BIGINT},
-       #{record.title,jdbcType=VARCHAR}, 
-      #{record.img,jdbcType=VARCHAR}, #{record.templet,jdbcType=VARCHAR}, #{record.ishot,jdbcType=VARCHAR}, 
-      #{record.istop,jdbcType=VARCHAR}, #{record.addtime,jdbcType=TIMESTAMP}, #{record.topendtime,jdbcType=TIMESTAMP}, 
-      #{record.clicknum,jdbcType=INTEGER}, #{record.adduser,jdbcType=VARCHAR}, #{record.status,jdbcType=VARCHAR}, 
-      #{record.kind,jdbcType=VARCHAR}, #{record.tags,jdbcType=VARCHAR}, 
-      #{record.barcode,jdbcType=VARCHAR}, #{record.remark,jdbcType=VARCHAR}, #{record.price,jdbcType=DECIMAL}, 
-      #{record.mkprice,jdbcType=DECIMAL}, #{record.weight,jdbcType=DECIMAL}, #{record.storenum,jdbcType=INTEGER}, 
-      #{record.freight,jdbcType=VARCHAR}, #{record.points,jdbcType=REAL}, #{record.postage,jdbcType=VARCHAR}, 
-      #{record.salenum,jdbcType=INTEGER},
-      #{record.locknum,jdbcType=INTEGER},
-      #{record.evalnum,jdbcType=INTEGER}
+    values (
+	    	#{record.id,jdbcType=BIGINT}, 
+	    	#{record.shopid,jdbcType=BIGINT}, 
+	    	#{record.brandid,jdbcType=BIGINT}, 
+	      #{record.categoryid,jdbcType=BIGINT}, 
+	      #{record.cateids,jdbcType=VARCHAR},
+	      #{record.typeid,jdbcType=BIGINT},
+	       #{record.title,jdbcType=VARCHAR}, 
+	      #{record.img,jdbcType=VARCHAR}, 
+	      #{record.templet,jdbcType=VARCHAR}, 
+	      #{record.ishot,jdbcType=VARCHAR}, 
+	      #{record.istop,jdbcType=VARCHAR}, 
+	      #{record.addtime,jdbcType=TIMESTAMP}, 
+	      #{record.topendtime,jdbcType=TIMESTAMP}, 
+	      #{record.clicknum,jdbcType=INTEGER}, 
+	      #{record.adduser,jdbcType=VARCHAR}, 
+	      #{record.status,jdbcType=VARCHAR}, 
+	      #{record.kind,jdbcType=VARCHAR}, 
+	      #{record.tags,jdbcType=VARCHAR}, 
+	      #{record.barcode,jdbcType=VARCHAR}, 
+	      #{record.remark,jdbcType=VARCHAR}, 
+	      #{record.price,jdbcType=DECIMAL}, 
+	      #{record.mkprice,jdbcType=DECIMAL}, 
+	      #{record.weight,jdbcType=DECIMAL}, 
+	      #{record.storenum,jdbcType=INTEGER}, 
+	      #{record.freight,jdbcType=VARCHAR}, #{record.points,jdbcType=REAL}, #{record.postage,jdbcType=VARCHAR}, 
+	      #{record.salenum,jdbcType=INTEGER},
+	      #{record.locknum,jdbcType=INTEGER},
+	      #{record.evalnum,jdbcType=INTEGER}
       )
 	</insert>
 
 	<select id="countByExample" parameterType="map"
 		resultType="java.lang.Integer">
-		select count(*) from shop_product
+		select count(*) from eb_product
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -201,7 +225,7 @@
 	
 	
 	<update id="updateByExample" parameterType="map">
-		update shop_product
+		update eb_product
 		set id = #{record.id,jdbcType=BIGINT},
 		shopid = #{record.shopid,jdbcType=BIGINT},
 		brandid = #{record.brandid,jdbcType=BIGINT},
@@ -238,7 +262,7 @@
 
 
 	<update id="updateByPrimaryKey" parameterType="map">
-		update shop_product
+		update eb_product
 		set shopid = #{record.shopid,jdbcType=BIGINT},
 		brandid = #{record.brandid,jdbcType=BIGINT},
 		categoryid = #{record.categoryid,jdbcType=BIGINT},
@@ -273,7 +297,7 @@
 	<!-- 商品下架 -->
 	<update id="updateProductUnsale" parameterType="map">
 	<![CDATA[  
-		update shop_product
+		update eb_product
 		set status='2'
 		where storenum <= ${storenum}
 	]]>

@@ -3,7 +3,7 @@ package com.gsccs.b2c.api.service;
 import java.util.List;
 
 import com.gsccs.eb.api.domain.seller.Shop;
-import com.gsccs.eb.api.domain.site.StoreNav;
+import com.gsccs.eb.api.domain.site.Navigation;
 import com.gsccs.eb.api.exception.ApiException;
 
 /**
@@ -22,7 +22,6 @@ public interface ShopServiceI {
 
 	public Shop getShop(Long sid) throws ApiException;
 
-
 	public void editStore(Long sid, Integer stockalertnum) throws ApiException;
 
 	/**
@@ -31,5 +30,5 @@ public interface ShopServiceI {
 	 * @param sid
 	 * @return
 	 */
-	public List<StoreNav> getStoreNav(Long sid);
+	public List<Navigation> getStoreNav(Long sid);
 }

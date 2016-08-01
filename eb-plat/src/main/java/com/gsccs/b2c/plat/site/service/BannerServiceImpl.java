@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gsccs.b2c.plat.site.dao.BannerMapper;
-import com.gsccs.b2c.plat.site.model.Banner;
+import com.gsccs.eb.api.domain.site.Banner;
 
 
 @Service
@@ -16,7 +16,7 @@ public class BannerServiceImpl implements BannerService {
 	@Override
 	public Long add(Long siteId, Banner banner) {
 		if(banner != null) {
-			return (long) bannerMapper.insert(siteId, banner);
+			return (long) bannerMapper.insert(banner);
 		}
 		return null;
 	}

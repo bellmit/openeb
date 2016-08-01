@@ -3,7 +3,7 @@
 <mapper namespace="com.gsccs.b2c.plat.buyer.dao.BuyerDeliverMapper">
 
 	<!-- 会员中心收货地址数据操作映射 -->
-	<resultMap id="BaseResultMap" type="com.gsccs.b2c.plat.buyer.model.BuyerDeliverT">
+	<resultMap id="BaseResultMap" type="com.gsccs.eb.api.domain.buyer.Deliver">
 		<id column="id" property="id" jdbcType="BIGINT" />
 		<result column="region" property="region" jdbcType="VARCHAR" />
 		<result column="details" property="details" jdbcType="VARCHAR" />
@@ -89,13 +89,13 @@
 	</sql>
 
 	<select id="selectByExample" resultMap="BaseResultMap"
-		parameterType="com.gsccs.b2c.plat.buyer.model.BuyerDeliverExample">
+		parameterType="com.gsccs.b2c.plat.buyer.model.DeliverExample">
 		select
 		<if test="distinct">
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from buyer_deliver_${sid}
+		from eb_buyer_deliver
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -108,19 +108,19 @@
 		parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
-		from buyer_deliver_${sid}
+		from eb_buyer_deliver
 		where id = #{id,jdbcType=BIGINT}
 	</select>
 
-	<delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.buyer.model.BuyerDeliverExample">
-		delete from buyer_deliver_${sid}
+	<delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.buyer.model.DeliverExample">
+		delete from eb_buyer_deliver
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
 	</delete>
 
-	<insert id="insertSelective" parameterType="com.gsccs.b2c.plat.buyer.model.BuyerDeliverT">
-		insert into buyer_deliver_${sid}
+	<insert id="insertSelective" parameterType="com.gsccs.eb.api.domain.buyer.Deliver">
+		insert into eb_buyer_deliver
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
 				id,
@@ -182,9 +182,9 @@
 	</insert>
 
 
-	<select id="countByExample" parameterType="com.gsccs.b2c.plat.buyer.model.BuyerDeliverExample"
+	<select id="countByExample" parameterType="com.gsccs.b2c.plat.buyer.model.DeliverExample"
 		resultType="java.lang.Integer">
-		select count(*) from buyer_deliver_${sid}
+		select count(*) from eb_buyer_deliver
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -192,7 +192,7 @@
 
 
 	<update id="updateByExampleSelective" parameterType="map">
-		update buyer_deliver_${sid}
+		update eb_buyer_deliver
 		<set>
 			<if test="record.id != null">
 				id = #{record.id,jdbcType=BIGINT},
@@ -228,9 +228,10 @@
 	</update>
 
 	<update id="updateByExample" parameterType="map">
-		update buyer_deliver_${sid}
+		update eb_buyer_deliver
 		set id = #{record.id,jdbcType=BIGINT},
-		region = #{record.region,jdbcType=VARCHAR},
+		region =
+		#{record.region,jdbcType=VARCHAR},
 		details =
 		#{record.details,jdbcType=VARCHAR},
 		zipCode =
@@ -250,8 +251,8 @@
 		</if>
 	</update>
 
-	<update id="updateByPrimaryKeySelective" parameterType="com.gsccs.b2c.plat.buyer.model.BuyerDeliverT">
-		update buyer_deliver_${sid}
+	<update id="updateByPrimaryKeySelective" parameterType="com.gsccs.eb.api.domain.buyer.Deliver">
+		update eb_buyer_deliver
 		<set>
 			<if test="region != null">
 				region = #{region,jdbcType=VARCHAR},
@@ -284,7 +285,7 @@
 	<!-- 保存会员收货地址 ID自增 -->
 	<insert id="insert" parameterType="map" useGeneratedKeys="true"
 		keyProperty="record.id">
-		insert into buyer_deliver_${sid} (region, details,zipCode,
+		insert into eb_buyer_deliver (region, details,zipCode,
 		receiver, mobile,
 		telephone, isdefault, buyerid)
 		values
@@ -299,9 +300,9 @@
 	</insert>
 
 	<!-- 更新收货地址 -->
-	<update id="updateByPrimaryKey" parameterType="com.gsccs.b2c.plat.buyer.model.BuyerDeliverT">
+	<update id="updateByPrimaryKey" parameterType="com.gsccs.eb.api.domain.buyer.Deliver">
 		update
-		buyer_deliver_${sid}
+		eb_buyer_deliver
 		set region = #{record.region,jdbcType=VARCHAR},
 		details = #{record.details,jdbcType=VARCHAR},
 		zipCode =
@@ -324,7 +325,7 @@
 	<select id="findByUid" parameterType="map" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
-		from buyer_deliver_${sid}
+		from eb_buyer_deliver
 		where buyerid = ${uid}
 	</select>
 
@@ -333,7 +334,7 @@
 	<!-- 删除一条收货地址 -->
 	<delete id="deleteByPrimaryKey" parameterType="map">
 		delete from
-		buyer_deliver_${sid}
+		eb_buyer_deliver
 		where id = ${aid}
 	</delete>
 

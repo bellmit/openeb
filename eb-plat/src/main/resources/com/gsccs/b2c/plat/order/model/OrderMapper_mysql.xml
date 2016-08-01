@@ -3,7 +3,7 @@
 <mapper namespace="com.gsccs.b2c.plat.order.dao.OrderMapper">
 	<resultMap id="BaseResultMap" type="com.gsccs.eb.api.domain.trade.Order">
 		<id column="id" property="id" jdbcType="BIGINT" />
-		<result column="serialnum" property="serialnum" jdbcType="VARCHAR" />
+		<result column="serial" property="serial" jdbcType="VARCHAR" />
 		<result column="status" property="status" jdbcType="VARCHAR" />
 		<result column="buyerid" property="buyerid" jdbcType="BIGINT" />
 		<result column="storeId" property="storeid" jdbcType="BIGINT" />
@@ -32,6 +32,7 @@
 		
 		<result column="totalfee" property="totalfee" jdbcType="DECIMAL" />
 		<result column="totalnum" property="totalnum" jdbcType="INTEGER" />
+		<result column="payfee" property="payfee" jdbcType="DECIMAL" />
 		
 		<result column="platsource" property="platsource" jdbcType="VARCHAR" />
 		<result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
@@ -113,9 +114,9 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		id, serialnum, status, buyerid, buyernick, storeId, storename, paytype,
+		id, serial, status, buyerid, buyernick, storeId, storename, paytype,
 		telnum, phone,
-		shiptype, shipfee, consignee, receaddress, ordertype, isdelay, totalfee,
+		shiptype, shipfee, consignee, receaddress, ordertype, isdelay, totalfee,payfee,
 		isdistrib,
 		distribfee, isbilling, gainscore, couponid, couponfee, activityid, activityfee,
 		totalnum,
@@ -170,7 +171,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from shop_order
-		where serialnum = #{ordersn,jdbcType=VARCHAR}
+		where serial = #{ordersn,jdbcType=VARCHAR}
 	</select>
 
 
@@ -181,7 +182,7 @@
 	
 	<delete id="deleteByOrdersn" parameterType="map">
 		delete from shop_order
-		where serialnum = #{ordersn,jdbcType=VARCHAR}
+		where serial = #{ordersn,jdbcType=VARCHAR}
 	</delete>
 
 
@@ -194,18 +195,18 @@
 
 
 	<insert id="insert" parameterType="map">
-		insert into shop_order (id, serialnum, status,
+		insert into shop_order (id, serial, status,
 		buyerid, buyernick, storeId,
 		storename, paytype, telnum,
 		phone, shiptype, shipfee,
 		consignee, receaddress, ordertype,
-		isdelay, totalfee, isdistrib,
+		isdelay, totalfee,payfee, isdistrib,
 		distribfee, isbilling, gainscore,
 		couponid, couponfee, activityid,
 		activityfee, totalnum, logistnum,
 		platsource, addtime, lasttime
 		)
-		values (#{record.id,jdbcType=BIGINT}, #{record.serialnum,jdbcType=VARCHAR},
+		values (#{record.id,jdbcType=BIGINT}, #{record.serial,jdbcType=VARCHAR},
 		#{record.status,jdbcType=VARCHAR},
 		#{record.buyerid,jdbcType=BIGINT}, #{record.buyernick,jdbcType=VARCHAR},
 		#{record.storeid,jdbcType=BIGINT},
@@ -218,6 +219,7 @@
 		#{record.ordertype,jdbcType=VARCHAR},
 		#{record.isdelay,jdbcType=VARCHAR},
 		#{record.totalfee,jdbcType=DECIMAL},
+		#{record.payfee,jdbcType=DECIMAL},
 		#{record.isdistrib,jdbcType=VARCHAR},
 		#{record.distribfee,jdbcType=DECIMAL},
 		#{record.isbilling,jdbcType=VARCHAR},
@@ -242,12 +244,10 @@
 		</if>
 	</select>
 
-
-
 	<update id="updateByExample" parameterType="map">
 		update shop_order
 		set id = #{record.id,jdbcType=BIGINT},
-		serialnum = #{record.serialnum,jdbcType=VARCHAR},
+		serial = #{record.serial,jdbcType=VARCHAR},
 		status = #{record.status,jdbcType=VARCHAR},
 		buyerid = #{record.buyerid,jdbcType=BIGINT},
 		buyernick = #{record.buyernick,jdbcType=VARCHAR},
@@ -263,6 +263,7 @@
 		ordertype = #{record.ordertype,jdbcType=VARCHAR},
 		isdelay = #{record.isdelay,jdbcType=VARCHAR},
 		totalfee = #{record.totalfee,jdbcType=DECIMAL},
+		payfee = #{record.payfee,jdbcType=DECIMAL},
 		isdistrib = #{record.isdistrib,jdbcType=VARCHAR},
 		distribfee = #{record.distribfee,jdbcType=DECIMAL},
 		isbilling = #{record.isbilling,jdbcType=VARCHAR},
@@ -284,7 +285,7 @@
 
 	<update id="updateByPrimaryKey" parameterType="map">
 		update shop_order
-		set serialnum = #{record.serialnum,jdbcType=VARCHAR},
+		set serial = #{record.serial,jdbcType=VARCHAR},
 		status = #{record.status,jdbcType=VARCHAR},
 		buyerid = #{record.buyerid,jdbcType=BIGINT},
 		buyernick = #{record.buyernick,jdbcType=VARCHAR},
@@ -300,6 +301,7 @@
 		ordertype = #{record.ordertype,jdbcType=VARCHAR},
 		isdelay = #{record.isdelay,jdbcType=VARCHAR},
 		totalfee = #{record.totalfee,jdbcType=DECIMAL},
+		payfee = #{record.payfee,jdbcType=DECIMAL},
 		isdistrib = #{record.isdistrib,jdbcType=VARCHAR},
 		distribfee = #{record.distribfee,jdbcType=DECIMAL},
 		isbilling = #{record.isbilling,jdbcType=VARCHAR},

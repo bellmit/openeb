@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 
 import com.alibaba.fastjson.JSONArray;
-import com.gsccs.b2c.plat.shop.model.StoreCate;
 import com.gsccs.eb.api.domain.goods.Category;
 
 /**
@@ -14,16 +13,6 @@ import com.gsccs.eb.api.domain.goods.Category;
  * @version 1.0
  */
 public interface CategoryService {
-
-	/**
-	 * 下降
-	 */
-	public void down(Category category);
-
-	/**
-	 * 上升
-	 */
-	public void up(Category category);
 
 	/**
 	 * 分页查询
@@ -55,7 +44,7 @@ public interface CategoryService {
 	 * @param parid
 	 * @return
 	 */
-	public List<Category> findByPar(Long parid);
+	public List<Category> queryCateList(Long shopid, Long parid);
 
 	/**
 	 * 根据父id查询
@@ -112,7 +101,6 @@ public interface CategoryService {
 	 */
 	public String findParPro(Long id);
 
-
 	/**
 	 * 商城站点类目列表
 	 * 
@@ -128,13 +116,13 @@ public interface CategoryService {
 	 * @return
 	 */
 	public JSONArray findByStore(Long storeid);
-	
+
 	/**
 	 * 商城管理类目列表
 	 * 
 	 * @param siteid
 	 * @return
 	 */
-	public JSONArray findByStore(Long storeid,Long parid);
+	public JSONArray findByStore(Long storeid, Long parid);
 
 }

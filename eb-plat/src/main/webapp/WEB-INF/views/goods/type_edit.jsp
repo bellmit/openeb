@@ -27,7 +27,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/static/ui-v2/common_select.js" charset="utf-8"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/static/ui-v2/perfect-scrollbar.min.js" charset="utf-8"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/static/ui-v2/jquery.mousewheel.js" charset="utf-8"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-plat/goodsType.js" charset="utf-8"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-plat/goods-type.js" charset="utf-8"></script>
 </head>
 <body>
 <div id="append_parent"></div>

@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gsccs.b2c.plat.bass.Datagrid;
 import com.gsccs.b2c.plat.bass.JsonMsg;
+import com.gsccs.b2c.plat.seller.model.Store;
 import com.gsccs.b2c.plat.seller.service.StoreService;
-import com.gsccs.b2c.plat.shop.model.StoreT;
 
 /**
  * 平台店铺管理
@@ -50,13 +50,13 @@ public class StoreController {
 	 */
 	@RequestMapping(value = "/datagrid", method = RequestMethod.POST)
 	@ResponseBody
-	public Datagrid storeList(StoreT store,
+	public Datagrid storeList(Store store,
 			@RequestParam(defaultValue = "") String order,
 			@RequestParam(defaultValue = "1") int currPage,
 			@RequestParam(defaultValue = "10") int pageSize, ModelMap map,
 			HttpServletRequest request) {
 		Datagrid datagrid = new Datagrid();
-		List<StoreT> storeList = storeService.find(store, order, currPage,
+		List<Store> storeList = storeService.find(store, order, currPage,
 				pageSize);
 		int count = storeService.count(store);
 		datagrid.setRows(storeList);
@@ -73,7 +73,7 @@ public class StoreController {
 	 */
 	@RequestMapping("/dataform")
 	public String storeEdit(Long id, ModelMap map) {
-		StoreT store = null;
+		Store store = null;
 		if (null != id) {
 			store = storeService.findById(id);
 		}
@@ -84,7 +84,7 @@ public class StoreController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public JsonMsg create(ModelMap map, StoreT store) {
+	public JsonMsg create(ModelMap map, Store store) {
 		JsonMsg json = new JsonMsg();
 		try {
 			storeService.insert(store);

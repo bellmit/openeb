@@ -25,7 +25,7 @@ import com.gsccs.b2c.app.core.JsonMsg;
 import com.gsccs.b2c.web.api.service.RedisService;
 import com.gsccs.b2c.web.api.service.SsdbService;
 import com.gsccs.eb.api.domain.seller.Shop;
-import com.gsccs.eb.api.domain.site.StoreNav;
+import com.gsccs.eb.api.domain.site.Navigation;
 
 import freemarker.template.TemplateModelException;
 
@@ -92,8 +92,6 @@ public class SiteController {
 		}
 		return null;
 	}
-	
-	
 
 	/**
 	 * 店铺导航
@@ -108,7 +106,7 @@ public class SiteController {
 	public JsonMsg storenav(@PathVariable("site") Long siteId, Model model,
 			HttpServletResponse response) {
 		JsonMsg json = new JsonMsg();
-		List<StoreNav> navlist = redisService.getStoreNavs(siteId);
+		List<Navigation> navlist = redisService.getStoreNavs(siteId);
 		json.setSuccess(true);
 		json.setData(navlist);
 		return json;

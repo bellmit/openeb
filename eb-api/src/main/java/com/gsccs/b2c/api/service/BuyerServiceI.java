@@ -5,7 +5,7 @@ import java.util.List;
 import com.alibaba.fastjson.JSONArray;
 import com.gsccs.b2c.api.domain.Account;
 import com.gsccs.eb.api.domain.buyer.Deliver;
-import com.gsccs.eb.api.domain.buyer.Level;
+import com.gsccs.eb.api.domain.buyer.Grade;
 import com.gsccs.eb.api.domain.buyer.Points;
 import com.gsccs.eb.api.exception.ApiException;
 
@@ -38,9 +38,9 @@ public interface BuyerServiceI {
 			throws ApiException;
 
 	/**
-	 * 根据店铺ID查询所有会员
+	 * 根据店铺所有会员
 	 */
-	public List<Account> getAllAcountBySid(Long siteId) throws ApiException;
+	public List<Account> getBuyerByShopid(Long siteId,int page,int rows) throws ApiException;
 
 	/**
 	 * 根据买家帐号查询买家API
@@ -106,7 +106,7 @@ public interface BuyerServiceI {
 	 * @return
 	 * @throws ApiException
 	 */
-	public List<Level> getBuyerLevels(Long sid) throws ApiException;
+	public List<Grade> getBuyerLevels(Long sid) throws ApiException;
 
 	/**
 	 * 积分明细

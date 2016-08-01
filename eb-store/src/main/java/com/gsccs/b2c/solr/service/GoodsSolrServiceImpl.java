@@ -8,15 +8,15 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.gsccs.b2c.api.CacheConst;
-import com.gsccs.b2c.api.domain.CateProp;
 import com.gsccs.b2c.api.service.BrandServiceI;
 import com.gsccs.b2c.api.service.CateServiceI;
-import com.gsccs.b2c.api.service.GoodsServiceI;
+import com.gsccs.b2c.api.service.ProductServiceI;
 import com.gsccs.b2c.api.service.TypeServiceI;
 import com.gsccs.eb.api.domain.goods.Brand;
 import com.gsccs.eb.api.domain.goods.Category;
 import com.gsccs.eb.api.domain.goods.Product;
 import com.gsccs.eb.api.domain.goods.ProductProp;
+import com.gsccs.eb.api.domain.goods.Property;
 import com.gsccs.eb.api.domain.goods.PropsVal;
 import com.gsccs.eb.api.domain.goods.Sku;
 import com.gsccs.eb.api.exception.ApiException;
@@ -31,7 +31,7 @@ import com.gsccs.eb.api.exception.ApiException;
 public class GoodsSolrServiceImpl implements GoodsSolrService{
 	
 	@Autowired
-	private GoodsServiceI goodsServiceAPI;
+	private ProductServiceI goodsServiceAPI;
 	
 	@Autowired
 	private CateServiceI cateServiceAPI;
@@ -61,7 +61,8 @@ public class GoodsSolrServiceImpl implements GoodsSolrService{
 		
 		try {
 			
-			pList = goodsServiceAPI.getProducts(sid, null, null, null, null, null, null, null, null, null, null, null, page, rows);
+			pList = null;
+					//goodsServiceAPI.getProducts(sid, null, null, null, null, null, null, null, null, null, null, null, page, rows);
 			if(null !=pList && pList.size() > 0){
 				GoodsSolr tg;
 				Brand b;
@@ -100,11 +101,12 @@ public class GoodsSolrServiceImpl implements GoodsSolrService{
 					int count = 0;
 					
 					long pid = pList.get(i).getId();
+					Long typeid = pList.get(i).getTypeid();
 					String checkKey="";
 					List<ProductProp> cppList = null;
-					List<CateProp> cpList = typeServiceAPI.getCatePropsByPid(sid, pid);
+					List<Property> cpList = typeServiceAPI.findPropList(typeid);
 					if(null !=cpList && cpList.size() > 0){
-						for (CateProp cateProp : cpList) {
+						for (Property cateProp : cpList) {
 							checkKey = CacheConst.STOREY_ + sid + "_" + pList.get(i).getId() + "_check_"+cateProp.getId();
 							cppList = ssdbTemplate.boundListOps(checkKey).range(0, -1);
 							count += count+cppList.size();
@@ -131,7 +133,7 @@ public class GoodsSolrServiceImpl implements GoodsSolrService{
 					
 					int num = 0;
 					if(null !=cpList && cpList.size() > 0){
-						for (CateProp cateProp : cpList) {
+						for (Property cateProp : cpList) {
 							checkKey = CacheConst.STOREY_ + sid + "_" + pList.get(i).getId() + "_check_"+cateProp.getId();
 							cppList = ssdbTemplate.boundListOps(checkKey).range(0, -1);
 							if(null !=cppList && cppList.size() >0){

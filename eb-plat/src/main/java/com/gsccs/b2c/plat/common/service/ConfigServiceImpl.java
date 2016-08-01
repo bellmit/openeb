@@ -9,7 +9,7 @@ import com.gsccs.b2c.plat.common.dao.ConfigMapper;
 import com.gsccs.b2c.plat.common.model.Config;
 import com.gsccs.b2c.plat.common.model.ConfigExample;
 import com.gsccs.b2c.plat.common.model.ConfigExample.Criteria;
-import com.gsccs.b2c.plat.shop.model.StoreT;
+import com.gsccs.b2c.plat.seller.model.Store;
 
 /**
  * 系统配置服务类

@@ -81,12 +81,10 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-store/js/store_goods.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-store/js/jquery.validation.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-store/js/area.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-store/js/layer.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-store/js/kindeditor.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-store/js/prettify.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-store/js/zh_CN.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-store/js/WdatePicker.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-store/js/jquery.cookie.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-store/js/perfect-scrollbar.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-store/js/jquery.masonry.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-store/js/jquery.scrollLoading-min.js"></script>
@@ -579,7 +577,9 @@
                         <dt>商品推荐：</dt>
                         <dd>
                             <p>
-                                <label style="padding-right: 8px;"> <input name="goods_commend" value="1" type="radio" checked="checked">
+                                <label style="padding-right: 8px;"> 
+                                <input name="goods_commend" value="1" type="radio" checked="checked">
+                                
                                     是
                                 </label> <label> <input name="goods_commend" value="0" type="radio"> 否
                             </label>
@@ -817,11 +817,7 @@
 </div>
 
 
-<script type="text/javascript" src="./商家中心-商品修改_files/jquery.cookie.js"></script>
-<script type="text/javascript" src="./商家中心-商品修改_files/perfect-scrollbar.min.js"></script>
-<script type="text/javascript" src="./商家中心-商品修改_files/jquery.mousewheel.js"></script>
-<script type="text/javascript" src="./商家中心-商品修改_files/jquery.masonry.js"></script>
-<script type="text/javascript" src="./商家中心-商品修改_files/jquery.scrollLoading-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-store/js/jquery.mousewheel.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         //实现图片慢慢浮现出来的效果

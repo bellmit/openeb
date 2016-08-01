@@ -32,7 +32,7 @@ import com.gsccs.b2c.api.CacheConst;
 import com.gsccs.b2c.api.domain.Account;
 import com.gsccs.b2c.api.service.BuyerServiceI;
 import com.gsccs.b2c.api.service.EvalServiceI;
-import com.gsccs.b2c.api.service.GoodsServiceI;
+import com.gsccs.b2c.api.service.ProductServiceI;
 import com.gsccs.b2c.api.service.DeliverServiceI;
 import com.gsccs.b2c.api.service.OrderServiceI;
 import com.gsccs.b2c.api.service.ShopServiceI;
@@ -64,7 +64,7 @@ public class OrderController {
 	@Autowired
 	private ShopServiceI shopAPI;
 	@Autowired
-	private GoodsServiceI goodsAPI;
+	private ProductServiceI goodsAPI;
 	@Autowired
 	private BuyerServiceI buyerAPI;
 	@Autowired
@@ -107,7 +107,7 @@ public class OrderController {
 			item.setProductid(pid);
 			item.setTitle(product.getTitle());
 			item.setNum(null == num ? 1 : num);
-			Sku sku = goodsAPI.getSKU(siteId, pid, skuid);
+			Sku sku = goodsAPI.getSku(siteId, pid, skuid);
 			if (null != sku) {
 				item.setSkuid(skuid);
 				item.setSpecstr(sku.getSpecStr());

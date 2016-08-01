@@ -4,46 +4,56 @@ import com.gsccs.b2c.api.domain.Domain;
 
 /**
  * SKU 规格
+ * 
  * @author x.d zhang
- *
+ * 
  */
 public class SkuSpec extends Domain {
 
-	private Long specId;
-	private Long specValId;
-	private String specTitle;
-	private String specVal;
+	private Long id;
+	private Long specid;
+	private Long specvalid;
+	private Long productid;
+	private Long skuid;
 
-	public Long getSpecId() {
-		return specId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setSpecId(Long specId) {
-		this.specId = specId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public Long getSpecValId() {
-		return specValId;
+	public Long getSpecid() {
+		return specid;
 	}
 
-	public void setSpecValId(Long specValId) {
-		this.specValId = specValId;
+	public void setSpecid(Long specid) {
+		this.specid = specid;
 	}
 
-	public String getSpecTitle() {
-		return specTitle;
+	public Long getSpecvalid() {
+		return specvalid;
 	}
 
-	public void setSpecTitle(String specTitle) {
-		this.specTitle = specTitle;
+	public void setSpecvalid(Long specvalid) {
+		this.specvalid = specvalid;
 	}
 
-	public String getSpecVal() {
-		return specVal;
+	public Long getProductid() {
+		return productid;
 	}
 
-	public void setSpecVal(String specVal) {
-		this.specVal = specVal;
+	public void setProductid(Long productid) {
+		this.productid = productid;
+	}
+
+	public Long getSkuid() {
+		return skuid;
+	}
+
+	public void setSkuid(Long skuid) {
+		this.skuid = skuid;
 	}
 
 }

@@ -2,11 +2,11 @@ package com.gsccs.b2c.api.service;
 
 import java.util.List;
 
-import com.gsccs.b2c.api.domain.EvalGoods;
-import com.gsccs.b2c.api.domain.EvalItem;
-import com.gsccs.b2c.api.domain.EvalModel;
-import com.gsccs.b2c.api.domain.EvalOrder;
-import com.gsccs.b2c.api.domain.EvalType;
+import com.gsccs.eb.api.domain.rated.EvalGoods;
+import com.gsccs.eb.api.domain.rated.EvalItem;
+import com.gsccs.eb.api.domain.rated.EvalModel;
+import com.gsccs.eb.api.domain.rated.EvalOrder;
+import com.gsccs.eb.api.domain.rated.EvalType;
 import com.gsccs.eb.api.exception.ApiException;
 
 /**

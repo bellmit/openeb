@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gsccs.b2c.plat.seller.dao.SellerAccountMapper">
+	<resultMap id="BaseResultMap" type="com.gsccs.b2c.plat.seller.model.SellerAccount">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="account" property="account" jdbcType="VARCHAR" />
+		<result column="pwd" property="pwd" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="store_id" property="storeId" jdbcType="BIGINT" />
+		<result column="add_date" property="addDate" jdbcType="TIMESTAMP" />
+		<result column="login_date" property="loginDate" jdbcType="TIMESTAMP" />
+		<result column="state" property="state" jdbcType="VARCHAR" />
+		<result column="salt" property="salt" jdbcType="VARCHAR" />
+		<!-- 字段不保存该表 -->
+		<result column="storename" property="storename" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id, account, pwd, name, email, phone, store_id, add_date, login_date,
+		state,salt
+	</sql>
+	
+	<sql id="JOIN_Column_List">
+		id, account, pwd, name, email, phone, store_id, add_date, login_date,
+		state,storename,salt
+	</sql>
+	
+	
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.gsccs.b2c.plat.seller.model.SellerAccountExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="JOIN_Column_List" />
+		from (
+			SELECT a.*,b.name as storename 
+			from shop_seller_account a
+			LEFT JOIN plat_store b
+			ON a.store_id = b.id 
+		) as aa
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	
+	<!--  -->
+	<select id="selectPageByExample" resultMap="BaseResultMap"
+		parameterType="com.gsccs.b2c.plat.seller.model.SellerAccountExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="JOIN_Column_List" />
+		from (
+			SELECT a.*,b.name as storename 
+			from shop_seller_account a
+			LEFT JOIN plat_store b
+			ON a.store_id = b.id 
+		) as aa
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		
+		limit ${skip},${pageSize}
+	</select>
+	
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from shop_seller_account
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from shop_seller_account
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.seller.model.SellerAccountExample">
+		delete from shop_seller_account
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id"
+		parameterType="com.gsccs.b2c.plat.seller.model.SellerAccount">
+		insert into shop_seller_account (id, account, pwd,
+		name, email, phone,
+		store_id, add_date, login_date,
+		state,salt)
+		values (#{id,jdbcType=BIGINT}, #{account,jdbcType=VARCHAR},
+		#{pwd,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+		#{storeId,jdbcType=BIGINT}, #{addDate,jdbcType=TIMESTAMP},
+		#{loginDate,jdbcType=TIMESTAMP},
+		#{state,jdbcType=VARCHAR},
+		#{salt,jdbcType=VARCHAR})
+	</insert>
+
+
+	<select id="countByExample" parameterType="com.gsccs.b2c.plat.seller.model.SellerAccountExample"
+		resultType="java.lang.Integer">
+		select count(*) from shop_seller_account
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+
+
+	<update id="updateByExample" parameterType="map">
+		update shop_seller_account
+		set id = #{record.id,jdbcType=BIGINT},
+		account = #{record.account,jdbcType=VARCHAR},
+		pwd = #{record.pwd,jdbcType=VARCHAR},
+		name = #{record.name,jdbcType=VARCHAR},
+		email = #{record.email,jdbcType=VARCHAR},
+		phone = #{record.phone,jdbcType=VARCHAR},
+		store_id = #{record.storeId,jdbcType=BIGINT},
+		add_date = #{record.addDate,jdbcType=TIMESTAMP},
+		login_date = #{record.loginDate,jdbcType=TIMESTAMP},
+		state = #{record.state,jdbcType=VARCHAR},
+		salt = #{record.salt,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	
+	<update id="updateByPrimaryKey" parameterType="com.gsccs.b2c.plat.seller.model.SellerAccount">
+		update shop_seller_account
+		set account = #{account,jdbcType=VARCHAR},
+		pwd = #{pwd,jdbcType=VARCHAR},
+		name = #{name,jdbcType=VARCHAR},
+		email = #{email,jdbcType=VARCHAR},
+		phone = #{phone,jdbcType=VARCHAR},
+		store_id = #{storeId,jdbcType=BIGINT},
+		add_date = #{addDate,jdbcType=TIMESTAMP},
+		login_date = #{loginDate,jdbcType=TIMESTAMP},
+		state = #{state,jdbcType=VARCHAR},
+		salt = #{salt,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="selectByAccount" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from shop_seller_account
+		where account = #{account,jdbcType=VARCHAR}
+	</select>
+</mapper>

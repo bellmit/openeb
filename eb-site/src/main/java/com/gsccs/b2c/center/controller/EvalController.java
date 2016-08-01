@@ -24,9 +24,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.gsccs.b2c.api.domain.EvalGoods;
-import com.gsccs.b2c.api.domain.EvalOrder;
-import com.gsccs.b2c.api.domain.EvalType;
 import com.gsccs.b2c.api.domain.Account;
 import com.gsccs.b2c.api.service.BuyerServiceI;
 import com.gsccs.b2c.api.service.EvalServiceI;
@@ -35,6 +32,9 @@ import com.gsccs.b2c.app.core.FreeMarkerUtil;
 import com.gsccs.b2c.app.core.JsonMsg;
 import com.gsccs.b2c.web.api.service.RedisService;
 import com.gsccs.b2c.web.api.service.SsdbService;
+import com.gsccs.eb.api.domain.rated.EvalGoods;
+import com.gsccs.eb.api.domain.rated.EvalOrder;
+import com.gsccs.eb.api.domain.rated.EvalType;
 import com.gsccs.eb.api.domain.trade.OrderItem;
 
 import freemarker.template.TemplateModelException;

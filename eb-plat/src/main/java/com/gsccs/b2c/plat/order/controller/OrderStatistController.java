@@ -44,7 +44,7 @@ public class OrderStatistController {
 			@RequestParam(defaultValue = "1") int currPage,
 			@RequestParam(defaultValue = "10") int pageSize, ModelMap map,
 			Order orderT, HttpServletRequest request) {
-		List<Order> orderlist = orderService.find(orderT, 1001L,order, currPage,
+		List<Order> orderlist = orderService.queryOrderBySeller(orderT, order, currPage,
 				pageSize);
 		Datagrid datagrid = new Datagrid();
 		datagrid.setRows(orderlist);

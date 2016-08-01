@@ -21,13 +21,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gsccs.b2c.plat.Constants;
+import com.gsccs.b2c.plat.bass.Datagrid;
 import com.gsccs.b2c.plat.bass.FileTreeGrid;
 import com.gsccs.b2c.plat.bass.JsonMsg;
-import com.gsccs.b2c.plat.bass.Datagrid;
 import com.gsccs.b2c.plat.common.model.Config;
 import com.gsccs.b2c.plat.common.service.ConfigService;
-import com.gsccs.b2c.plat.shop.model.Templet;
-import com.gsccs.b2c.plat.shop.service.TempletService;
+import com.gsccs.b2c.plat.site.model.Templet;
+import com.gsccs.b2c.plat.site.service.TempletService;
 import com.gsccs.b2c.plat.utils.FileUtil;
 import com.gsccs.b2c.plat.utils.ZipTools;
 

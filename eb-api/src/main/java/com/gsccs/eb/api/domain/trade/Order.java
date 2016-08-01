@@ -18,7 +18,7 @@ public class Order extends Domain {
 
 	private Long id;
 	// 订单序列号
-	private String serialnum;
+	private String serial;
 	// 买家ID
 	private Long buyerid;
 	// 买家昵称
@@ -47,6 +47,8 @@ public class Order extends Domain {
 	private Double totalfee;
 	// 商品总数
 	private Integer totalnum;
+	// 支付总额
+	private Double payfee;
 
 	private String isdistrib;
 	private Double distribfee;
@@ -91,12 +93,12 @@ public class Order extends Domain {
 		this.id = id;
 	}
 
-	public String getSerialnum() {
-		return serialnum;
+	public String getSerial() {
+		return serial;
 	}
 
-	public void setSerialnum(String serialnum) {
-		this.serialnum = serialnum == null ? null : serialnum.trim();
+	public void setSerial(String serial) {
+		this.serial = serial;
 	}
 
 	public Long getBuyerid() {

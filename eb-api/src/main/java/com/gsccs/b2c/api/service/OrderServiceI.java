@@ -150,7 +150,7 @@ public interface OrderServiceI {
 	 * @return
 	 * @throws ApiException
 	 */
-	public List<Order> getOrderList(Long sid, Order o, String order,
+	public List<Order> getSellerOrderList(Long sid, Order o, String order,
 			int currPage, int pageSize) throws ApiException;
 
 	/**

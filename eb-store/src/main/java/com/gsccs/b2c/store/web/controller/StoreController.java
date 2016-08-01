@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.gsccs.b2c.api.service.GoodsServiceI;
+import com.gsccs.b2c.api.service.ProductServiceI;
 import com.gsccs.b2c.api.service.OrderServiceI;
 import com.gsccs.b2c.api.service.ShopServiceI;
 import com.gsccs.eb.api.domain.goods.Product;
@@ -30,7 +30,7 @@ public class StoreController {
 	private ShopServiceI shopAPI;
 	
 	@Autowired
-	private GoodsServiceI goodsServiceAPI;
+	private ProductServiceI goodsServiceAPI;
 	
 	@Autowired
 	private OrderServiceI orderAPI;
@@ -92,8 +92,9 @@ public class StoreController {
 			
 			//出售中的商品
 			String status ="1";
-			int onsaleNum = goodsServiceAPI.getProductCount(sid, "", "", null, null,
-					null, null, null, null, null, status);
+			int onsaleNum = 0;
+					/*goodsServiceAPI.getProductCount(sid, "", "", null, null,
+					null, null, null, null, null, status);*/
 			
 			System.out.println("onsaleNum=="+onsaleNum);
 			
@@ -106,9 +107,10 @@ public class StoreController {
 				maxStoreNum = stockalertnum;
 			}
 			
-			int stockalertNum = goodsServiceAPI.getProductCount(sid, "", "", null, null,
+			int stockalertNum = 0;
+			/*int stockalertNum = goodsServiceAPI.getProductCount(sid, "", "", null, null,
 					null, null, null, maxStoreNum, null, status);
-			
+			*/
 			model.addAttribute("stockalertNum", stockalertNum);
 			
 			System.out.println("预警中的值=="+stockalertNum);

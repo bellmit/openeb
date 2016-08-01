@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.fastjson.JSONArray;
 import com.gsccs.b2c.api.APIConst;
+import com.gsccs.b2c.plat.seller.model.Store;
 import com.gsccs.b2c.plat.seller.service.StoreService;
-import com.gsccs.b2c.plat.shop.model.StoreT;
 import com.gsccs.b2c.plat.shop.service.CategoryService;
 import com.gsccs.eb.api.domain.goods.Category;
 import com.gsccs.eb.api.exception.ApiException;
@@ -38,7 +38,7 @@ public class CateServiceAPI implements CateServiceI {
 
 	@Override
 	public List<Category> getRootCates(Long siteId) {
-		List<Category> list = categoryService.findByPar(null);
+		List<Category> list = categoryService.queryCateList(siteId, null);
 		return list;
 	}
 
@@ -48,7 +48,7 @@ public class CateServiceAPI implements CateServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		StoreT store = storeService.findById(sid);
+		Store store = storeService.findById(sid);
 		if (null == store) {
 			throw new ApiException(APIConst.ERROR_CODE_0002,
 					APIConst.ERROR_MSG_0002);
@@ -62,7 +62,7 @@ public class CateServiceAPI implements CateServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		StoreT store = storeService.findById(storeId);
+		Store store = storeService.findById(storeId);
 		if (null == store) {
 			throw new ApiException(APIConst.ERROR_CODE_0002,
 					APIConst.ERROR_MSG_0002);

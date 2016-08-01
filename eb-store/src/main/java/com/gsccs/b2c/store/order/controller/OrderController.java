@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gsccs.b2c.api.service.GoodsServiceI;
+import com.gsccs.b2c.api.service.ProductServiceI;
 import com.gsccs.b2c.api.service.DeliverServiceI;
 import com.gsccs.b2c.api.service.OrderServiceI;
 import com.gsccs.b2c.store.base.JsonMsg;
@@ -42,7 +42,7 @@ public class OrderController {
 	private DeliverServiceI logistServiceAPI;
 	
 	@Autowired
-	private GoodsServiceI goodsServiceAPI;
+	private ProductServiceI goodsServiceAPI;
 	
 	/**
 	 * 跳转到订单页面
@@ -76,7 +76,7 @@ public class OrderController {
 		long sid = (Long) request.getSession().getAttribute("siteId");
 		o.setState(OrderState.valueOf(o.getState().name()));
 		int count = orderAPI.getOrderCount(sid, o);
-		List<Order> orderList = orderAPI.getOrderList(sid, o, order, page, rows);
+		List<Order> orderList = orderAPI.getSellerOrderList(sid, o, order, page, rows);
 		if(null !=orderList && orderList.size() > 0){
 			for (Order o2 : orderList) {
 				if(o2.getState().name().equals("WAIT_PAY")){

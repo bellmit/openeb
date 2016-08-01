@@ -14,16 +14,27 @@ import com.gsccs.eb.api.domain.trade.OrderItem;
 public interface OrderService {
 
 	/**
-	 * 获取订单分页列表
+	 * 获取商家订单分页列表
 	 * 
 	 * @param orders
-	 * @param sid
 	 * @param order
 	 * @param currPage
 	 * @param pageSize
 	 * @return
 	 */
-	public List<Order> find(Order orders, Long sid, String order, int currPage,
+	public List<Order> queryOrderBySeller(Order orders,String order, int currPage,
+			int pageSize);
+	
+	/**
+	 * 获取会员订单分页列表
+	 * 
+	 * @param orders
+	 * @param order
+	 * @param currPage
+	 * @param pageSize
+	 * @return
+	 */
+	public List<Order> queryOrderByBuyer(Order orders,String order, int currPage,
 			int pageSize);
 
 	/**
@@ -57,7 +68,7 @@ public interface OrderService {
 	 * @param id
 	 * @return
 	 */
-	public Order findById(Long sid, Long id);
+	public Order findById(Long id);
 
 	/**
 	 * 根据序列号查询订单

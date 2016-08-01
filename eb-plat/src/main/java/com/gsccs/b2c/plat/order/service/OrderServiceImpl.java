@@ -36,27 +36,25 @@ public class OrderServiceImpl implements OrderService {
 	private ProductMapper productTMapper;
 
 	@Override
-	public List<Order> find(Order orders, Long sid, String order, int currPage,
-			int pageSize) {
+	public List<Order> queryOrderBySeller(Order param, String order,
+			int currPage, int pageSize) {
 		OrderExample example = new OrderExample();
 		Criteria criteria = example.createCriteria();
-		proSearchParam(orders, criteria);
+		proSearchParam(param, criteria);
 
 		example.setCurrPage(currPage);
 		example.setPageSize(pageSize);
 		if (StringUtils.isNotEmpty(order)) {
 			example.setOrderByClause(order);
 		}
-
-		return orderMapper.selectPageByExample(sid, example);
+		return orderMapper.selectPageByExample(example);
 	}
 
 	@Override
 	public String insert(Long sid, Order order, List<OrderItem> items) {
 		Date date = new Date();
 		String ordersn = DateUtil.getOrderNum(date);
-		order.setId(Long.valueOf(ordersn));
-		order.setSerialnum(ordersn);
+		order.setSerial(ordersn);
 		order.setAddtime(new Date());
 		orderMapper.insert(sid, order);
 		for (int i = 0; i < items.size(); i++) {
@@ -89,8 +87,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Order findById(Long sid, Long id) {
-		return orderMapper.selectByPrimaryKey(sid, id);
+	public Order findById(Long id) {
+		return orderMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
@@ -114,15 +112,15 @@ public class OrderServiceImpl implements OrderService {
 				criteria.andStatusEqualTo(order.getStatus());
 			}
 
-			if (order.getSerialnum() != null && !order.getSerialnum().equals(0)) {
-				criteria.andSerialnumEqualTo(order.getSerialnum());
+			if (order.getSerial() != null) {
+				criteria.andSerialnumEqualTo(order.getSerial());
 			}
 
-			if (order.getBuyerid() != null && !order.getBuyerid().equals(0)) {
+			if (order.getBuyerid() != null) {
 				criteria.andBuyeridEqualTo(order.getBuyerid());
 			}
 
-			if (order.getStoreid() != null && !order.getStoreid().equals(0)) {
+			if (order.getStoreid() != null) {
 				criteria.andStoreidEqualTo(order.getStoreid());
 			}
 		}
@@ -196,6 +194,13 @@ public class OrderServiceImpl implements OrderService {
 		// criteria.andSellerEqualTo(sid);
 		// orderItemMapper.u
 
+	}
+
+	@Override
+	public List<Order> queryOrderByBuyer(Order orders, String order,
+			int currPage, int pageSize) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

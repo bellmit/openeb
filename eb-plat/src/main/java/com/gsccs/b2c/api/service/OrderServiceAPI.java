@@ -16,7 +16,7 @@ import com.gsccs.b2c.plat.order.model.OrderTrace;
 import com.gsccs.b2c.plat.order.service.OrderService;
 import com.gsccs.b2c.plat.order.service.PaymentService;
 import com.gsccs.b2c.plat.seller.service.StoreService;
-import com.gsccs.b2c.plat.shop.service.GoodsService;
+import com.gsccs.b2c.plat.shop.service.ProductService;
 import com.gsccs.eb.api.domain.goods.Product;
 import com.gsccs.eb.api.domain.trade.Order;
 import com.gsccs.eb.api.domain.trade.Order.OrderState;
@@ -35,20 +35,17 @@ public class OrderServiceAPI implements OrderServiceI {
 	@Autowired
 	private StoreService storeService;
 	@Autowired
-	private GoodsService goodsService;
+	private ProductService goodsService;
 	@Autowired
 	private PaymentService paymentService;
 
 	@Override
 	public Order getOrder(Long sid, Long oId) throws ApiException {
-		Order o = null;
 		if (null == sid || null == oId) {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-
-		Order t = orderService.findById(sid, oId);
-		return o;
+		return orderService.findById(oId);
 	}
 
 	@Override
@@ -78,9 +75,9 @@ public class OrderServiceAPI implements OrderServiceI {
 	}
 	
 	@Override
-	public List<Order> getOrderList(Long sid, Order order, String orderstr,
+	public List<Order> getSellerOrderList(Long sid, Order order, String orderstr,
 			int currPage, int pageSize) throws ApiException {
-		List<Order> list = orderService.find(order, sid, orderstr, currPage,
+		List<Order> list = orderService.queryOrderBySeller(order, orderstr, currPage,
 				pageSize);
 		
 		return list;
@@ -89,7 +86,7 @@ public class OrderServiceAPI implements OrderServiceI {
 	@Override
 	public List<Order> getBuyerOrderList(Long sid, Order param, String order,
 			int currPage, int pageSize) throws ApiException {
-		List<Order> ordertList = orderService.find(param, sid, order, currPage,
+		List<Order> ordertList = orderService.queryOrderByBuyer(param, order, currPage,
 				pageSize);
 		return ordertList;
 	}
@@ -104,7 +101,7 @@ public class OrderServiceAPI implements OrderServiceI {
 	@Override
 	public Long editOrderRefundStatus(Long sid, Long oid, String refundStatus)
 			throws ApiException {
-		Order order = orderService.findById(sid, oid);
+		Order order = orderService.findById(oid);
 		orderService.update(order, sid);
 		return oid;
 	}
@@ -114,7 +111,7 @@ public class OrderServiceAPI implements OrderServiceI {
 	@Override
 	public Long editOrderShipFee(Long sid, Long oid, Double shipfee)
 			throws ApiException {
-		Order order = orderService.findById(sid, oid);
+		Order order = orderService.findById(oid);
 		order.setShipfee(Double.valueOf(shipfee));
 		orderService.update(order, sid);
 		return oid;

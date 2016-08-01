@@ -2,7 +2,6 @@ package com.gsccs.b2c.api.service;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -13,16 +12,12 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.gsccs.b2c.api.APIConst;
 import com.gsccs.b2c.api.domain.Account;
-import com.gsccs.b2c.plat.buyer.model.BuyerAccount;
-import com.gsccs.b2c.plat.buyer.model.BuyerDeliverT;
-import com.gsccs.b2c.plat.buyer.service.BuyerAddrService;
+import com.gsccs.b2c.plat.buyer.model.BuyerDeliver;
 import com.gsccs.b2c.plat.buyer.service.BuyerService;
+import com.gsccs.b2c.plat.seller.model.Store;
 import com.gsccs.b2c.plat.seller.service.StoreService;
-import com.gsccs.b2c.plat.shop.model.BuyerLevelT;
-import com.gsccs.b2c.plat.shop.model.StoreT;
-import com.gsccs.b2c.plat.utils.BeanUtilsEx;
 import com.gsccs.eb.api.domain.buyer.Deliver;
-import com.gsccs.eb.api.domain.buyer.Level;
+import com.gsccs.eb.api.domain.buyer.Grade;
 import com.gsccs.eb.api.domain.buyer.Points;
 import com.gsccs.eb.api.exception.ApiException;
 
@@ -36,8 +31,6 @@ public class BuyerServiceAPI implements BuyerServiceI {
 	private StoreService storeService;
 	@Autowired
 	private BuyerService buyerService;
-	@Autowired
-	private BuyerAddrService buyerAddrService;
 
 	// 根据店铺ID查询会员信息
 	@Override
@@ -46,12 +39,12 @@ public class BuyerServiceAPI implements BuyerServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		StoreT store = storeService.findById(sid);
+		Store store = storeService.findById(sid);
 		if (null == store) {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		BuyerAccount baccount = buyerService.getBuyerAccount(uid, sid);
+		com.gsccs.b2c.plat.buyer.model.Account baccount = buyerService.getBuyerAccount(uid, sid);
 		if (null != baccount) {
 			Account o = new Account();
 			o.setUserId(uid);
@@ -70,28 +63,28 @@ public class BuyerServiceAPI implements BuyerServiceI {
 					APIConst.ERROR_MSG_0001);
 		}
 
-		BuyerAccount buyerAccount = new BuyerAccount();
+		Account buyerAccount = new Account();
 		buyerAccount.setAccount(user.getAccount());
 		buyerAccount.setNick(user.getAccount());
-		buyerAccount.setPwd(user.getPassword());
+		/*buyerAccount.setPwd(user.getPassword());
 		buyerAccount.setState("1");
 		buyerAccount.setAddtime(new Date());
 		buyerAccount.setIslock("1");
-		buyerService.addBuyer(sid, buyerAccount);
+		buyerService.addBuyer(sid, buyerAccount);*/
 	}
 
 	// 根据店铺ID查询所有会员
 	@Override
-	public List<Account> getAllAcountBySid(Long sid) throws ApiException {
+	public List<Account> getBuyerByShopid(Long sid,int page,int rows) throws ApiException {
 		if (null == sid) {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		List<BuyerAccount> buyerAccounts = buyerService.getAllAcountBySid(sid);
-		if (null != buyerAccounts) {
+		List<com.gsccs.b2c.plat.buyer.model.Account> accountList = buyerService.getBuyerList(null, page, rows);
+		if (null != accountList) {
 			List<Account> users = new ArrayList<Account>();
 			Account user = null;
-			for (BuyerAccount buyerAccount : buyerAccounts) {
+			for (com.gsccs.b2c.plat.buyer.model.Account buyerAccount : accountList) {
 				user = new Account();
 				user.setUserId(buyerAccount.getId());
 				user.setAccount(buyerAccount.getAccount());
@@ -111,7 +104,7 @@ public class BuyerServiceAPI implements BuyerServiceI {
 					APIConst.ERROR_MSG_0001);
 		}
 
-		BuyerAccount baccount = buyerService.getBuyerAccount(sid, account);
+		com.gsccs.b2c.plat.buyer.model.Account baccount = buyerService.getBuyerAccount(sid, account);
 		if (null != baccount) {
 			com.gsccs.b2c.api.domain.Account o = new com.gsccs.b2c.api.domain.Account();
 			o.setUserId(baccount.getId());
@@ -144,7 +137,7 @@ public class BuyerServiceAPI implements BuyerServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		BuyerAccount ba = buyerService.loginAccount(sid, account, pwd);
+		com.gsccs.b2c.plat.buyer.model.Account ba = buyerService.loginAccount(sid, account, pwd);
 		if (null != ba) {
 			Account user = new Account();
 			user.setAccount(ba.getAccount());
@@ -156,23 +149,23 @@ public class BuyerServiceAPI implements BuyerServiceI {
 	}
 
 	@Override
-	public List<Level> getBuyerLevels(Long sid) throws ApiException {
-		List<Level> result = null;
+	public List<Grade> getBuyerLevels(Long sid) throws ApiException {
+		List<Grade> result = null;
 		if (null == sid) {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		StoreT store = storeService.findById(sid);
+		Store store = storeService.findById(sid);
 		if (null == store) {
 			throw new ApiException(APIConst.ERROR_CODE_0002,
 					APIConst.ERROR_MSG_0002);
 		}
-		List<BuyerLevelT> levels = buyerService.findBuyerLevels(sid);
+		List<Grade> levels = buyerService.findBuyerLevels(sid);
 		if (null != levels && levels.size() > 0) {
-			result = new ArrayList<Level>();
-			Level level = null;
-			for (BuyerLevelT l : levels) {
-				level = new Level();
+			result = new ArrayList<Grade>();
+			Grade level = null;
+			for (Grade l : levels) {
+				level = new Grade();
 				result.add(level);
 				try {
 					BeanUtils.copyProperties(level, l);
@@ -189,7 +182,7 @@ public class BuyerServiceAPI implements BuyerServiceI {
 	@Override
 	public JSONArray buyerDelivers(Long sid, Long uid) throws ApiException {
 		JSONArray array = new JSONArray();
-		List<BuyerDeliverT> delivers = buyerAddrService.deliverAddressList(sid,
+		List<BuyerDeliver> delivers = buyerService.findDeliverList(sid,
 				uid);
 		if (null != delivers) {
 			array = (JSONArray) JSON.toJSON(delivers);
@@ -204,33 +197,31 @@ public class BuyerServiceAPI implements BuyerServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		StoreT store = storeService.findById(sid);
+		Store store = storeService.findById(sid);
 		if (null == store) {
 			throw new ApiException(APIConst.ERROR_CODE_0002,
 					APIConst.ERROR_MSG_0002);
 		}
-		BuyerDeliverT buyerDeliverT = new BuyerDeliverT();
-		BeanUtilsEx.copyProperties(buyerDeliverT, dlv);
-		buyerAddrService.saveDeliverAddress(sid, buyerDeliverT);
+		buyerService.saveDeliver(sid, dlv);
 	}
 
 	@Override
 	public Deliver getbuyerDeliver(Long sid, Long uid, Long addressid)
 			throws ApiException {
-		return buyerAddrService.getDeliver(sid, uid, addressid);
+		return buyerService.getDeliver(uid, addressid);
 	}
 
 	@Override
 	public List<Points> getBuyerPoints(Long sid, Points param,
 			int page, int pagesize) throws ApiException {
-		List<Points> list = buyerService.getBuyerScores(sid, param, page,
+		List<Points> list = buyerService.getBuyerPoints(sid, param, page,
 				pagesize);
 		return list;
 	}
 
 	@Override
 	public int getBuyerPoint(Long sid, Long buyerid) throws ApiException {
-		return buyerService.getBuyerScore(sid, buyerid);
+		return buyerService.getBuyerPoints(sid, buyerid);
 	}
 
 	@Override
