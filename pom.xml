@@ -181,7 +181,6 @@
 	<modules>
 		<module>eb-nginx</module>
 		<module>eb-api</module>
-		<module>eb-core</module>
 		<module>eb-client</module>
 		<module>eb-plat</module>
 		<module>eb-site</module>
