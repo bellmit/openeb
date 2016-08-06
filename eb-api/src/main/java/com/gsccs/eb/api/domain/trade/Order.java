@@ -4,7 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.gsccs.b2c.api.domain.Domain;
+import com.gsccs.eb.api.domain.base.Domain;
 
 /**
  * 订单结构
@@ -24,9 +24,9 @@ public class Order extends Domain {
 	// 买家昵称
 	private String buyernick;
 	// 商城ID
-	private Long storeid;
+	private Long shopid;
 	// 商城名称
-	private String storename;
+	private String shopname;
 	private String paytype;
 
 	// 物流类型
@@ -48,7 +48,7 @@ public class Order extends Domain {
 	// 商品总数
 	private Integer totalnum;
 	// 支付总额
-	private Double payfee;
+	private Double payedfee;
 
 	private String isdistrib;
 	private Double distribfee;
@@ -76,7 +76,7 @@ public class Order extends Domain {
 	private String stateStr;
 	// 下单时间
 	private String adddatestr;
-
+	// 更新时间
 	private String lastdatestr;
 	// 订单状态
 	private OrderState state;
@@ -117,20 +117,20 @@ public class Order extends Domain {
 		this.buyernick = buyernick == null ? null : buyernick.trim();
 	}
 
-	public Long getStoreid() {
-		return storeid;
+	public Long getShopid() {
+		return shopid;
 	}
 
-	public void setStoreid(Long storeid) {
-		this.storeid = storeid;
+	public void setShopid(Long shopid) {
+		this.shopid = shopid;
 	}
 
-	public String getStorename() {
-		return storename;
+	public String getShopname() {
+		return shopname;
 	}
 
-	public void setStorename(String storename) {
-		this.storename = storename == null ? null : storename.trim();
+	public void setShopname(String shopname) {
+		this.shopname = shopname;
 	}
 
 	public String getPaytype() {
@@ -411,6 +411,14 @@ public class Order extends Domain {
 
 	public void setLocknum(Integer locknum) {
 		this.locknum = locknum;
+	}
+
+	public Double getPayedfee() {
+		return payedfee;
+	}
+
+	public void setPayedfee(Double payedfee) {
+		this.payedfee = payedfee;
 	}
 
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gsccs.b2c.plat.shop.service.CartService;
-import com.gsccs.b2c.plat.shop.service.ProductService;
+import com.gsccs.b2c.plat.shop.service.GoodsService;
 import com.gsccs.eb.api.domain.goods.Product;
 import com.gsccs.eb.api.domain.trade.CartItem;
 
@@ -21,15 +21,14 @@ public class CartServiceAPI implements CartServiceI {
 	private CartService cartService;
 
 	@Autowired
-	private ProductService goodsService;
+	private GoodsService goodsService;
 
 	@Override
 	public List<CartItem> getCarts(Long siteId, Long buyerid) {
 		List<CartItem> carts = cartService.find(siteId, buyerid);
 		if (carts.size() > 0) {
 			for (CartItem cartItem : carts) {
-				Product product = goodsService.getProduct(siteId,
-						cartItem.getPid(), true);
+				Product product = goodsService.getGoods(cartItem.getPid());
 				cartItem.setDesc(product.getRemark());
 				cartItem.setPicUrl(product.getImg());
 				cartItem.setPrice(product.getPrice());
@@ -65,8 +64,7 @@ public class CartServiceAPI implements CartServiceI {
 	@Override
 	public CartItem getCart(Long siteId, Long id) {
 		CartItem cartItem = cartService.getCart(siteId, id);
-		Product product = goodsService.getProduct(siteId, cartItem.getPid(),
-				true);
+		Product product = goodsService.getGoods(cartItem.getPid());
 
 		cartItem.setDesc(product.getRemark());
 		cartItem.setPicUrl(product.getImg());

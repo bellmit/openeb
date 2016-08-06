@@ -1,6 +1,6 @@
 package com.gsccs.eb.api.domain.trade;
 
-import com.gsccs.b2c.api.domain.Domain;
+import com.gsccs.eb.api.domain.base.Domain;
 
 /**
  * 在线支付参数配置
@@ -18,6 +18,7 @@ public class Payment extends Domain{
 	private String payType;
 	private String service;
 	private String status;
+	
 	public String getId() {
 		return id;
 	}

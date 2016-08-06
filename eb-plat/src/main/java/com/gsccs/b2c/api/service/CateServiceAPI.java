@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.fastjson.JSONArray;
 import com.gsccs.b2c.api.APIConst;
-import com.gsccs.b2c.plat.seller.model.Store;
-import com.gsccs.b2c.plat.seller.service.StoreService;
+import com.gsccs.b2c.plat.seller.service.ShopService;
 import com.gsccs.b2c.plat.shop.service.CategoryService;
 import com.gsccs.eb.api.domain.goods.Category;
+import com.gsccs.eb.api.domain.seller.Shop;
 import com.gsccs.eb.api.exception.ApiException;
 
 /**
@@ -23,7 +23,7 @@ public class CateServiceAPI implements CateServiceI {
 	@Autowired
 	private CategoryService categoryService;
 	@Autowired
-	private StoreService storeService;
+	private ShopService storeService;
 
 	@Override
 	public JSONArray getAllCategorys(String state) {
@@ -48,7 +48,7 @@ public class CateServiceAPI implements CateServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		Store store = storeService.findById(sid);
+		Shop store = storeService.findById(sid);
 		if (null == store) {
 			throw new ApiException(APIConst.ERROR_CODE_0002,
 					APIConst.ERROR_MSG_0002);
@@ -62,7 +62,7 @@ public class CateServiceAPI implements CateServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		Store store = storeService.findById(storeId);
+		Shop store = storeService.findById(storeId);
 		if (null == store) {
 			throw new ApiException(APIConst.ERROR_CODE_0002,
 					APIConst.ERROR_MSG_0002);

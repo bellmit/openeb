@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.CacheConst;
-import com.gsccs.b2c.api.domain.Account;
 import com.gsccs.b2c.api.service.BrandServiceI;
 import com.gsccs.b2c.api.service.BuyerServiceI;
 import com.gsccs.b2c.api.service.CateServiceI;
@@ -19,9 +18,10 @@ import com.gsccs.b2c.api.service.ConfigServiceI;
 import com.gsccs.b2c.api.service.EvalServiceI;
 import com.gsccs.b2c.api.service.ProductServiceI;
 import com.gsccs.b2c.api.service.ShopServiceI;
-import com.gsccs.b2c.api.service.StoreyServiceI;
+import com.gsccs.b2c.api.service.FloorServiceI;
 import com.gsccs.b2c.api.service.TradeServiceI;
 import com.gsccs.b2c.api.service.TypeServiceI;
+import com.gsccs.eb.api.domain.base.Account;
 import com.gsccs.eb.api.domain.goods.Brand;
 import com.gsccs.eb.api.domain.goods.Category;
 import com.gsccs.eb.api.domain.goods.Product;
@@ -52,7 +52,7 @@ public class RedisServiceImpl implements RedisService {
 	@Autowired
 	private BrandServiceI brandAPI;
 	@Autowired
-	private StoreyServiceI storeyAPI;
+	private FloorServiceI storeyAPI;
 	@Autowired
 	private BuyerServiceI buyerAPI;
 

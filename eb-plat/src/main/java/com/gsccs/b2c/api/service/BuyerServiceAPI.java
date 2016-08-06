@@ -1,24 +1,22 @@
 package com.gsccs.b2c.api.service;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.gsccs.b2c.api.APIConst;
-import com.gsccs.b2c.api.domain.Account;
-import com.gsccs.b2c.plat.buyer.model.BuyerDeliver;
 import com.gsccs.b2c.plat.buyer.service.BuyerService;
-import com.gsccs.b2c.plat.seller.model.Store;
-import com.gsccs.b2c.plat.seller.service.StoreService;
+import com.gsccs.b2c.plat.common.service.AccountService;
+import com.gsccs.b2c.plat.seller.service.ShopService;
+import com.gsccs.eb.api.domain.base.Account;
+import com.gsccs.eb.api.domain.buyer.Buyer;
 import com.gsccs.eb.api.domain.buyer.Deliver;
 import com.gsccs.eb.api.domain.buyer.Grade;
 import com.gsccs.eb.api.domain.buyer.Points;
+import com.gsccs.eb.api.domain.seller.Shop;
 import com.gsccs.eb.api.exception.ApiException;
 
 /**
@@ -28,9 +26,11 @@ import com.gsccs.eb.api.exception.ApiException;
 public class BuyerServiceAPI implements BuyerServiceI {
 
 	@Autowired
-	private StoreService storeService;
+	private ShopService storeService;
 	@Autowired
 	private BuyerService buyerService;
+	@Autowired
+	private AccountService accountService;
 
 	// 根据店铺ID查询会员信息
 	@Override
@@ -39,19 +39,13 @@ public class BuyerServiceAPI implements BuyerServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		Store store = storeService.findById(sid);
+		Shop store = storeService.findById(sid);
 		if (null == store) {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		com.gsccs.b2c.plat.buyer.model.Account baccount = buyerService.getBuyerAccount(uid, sid);
-		if (null != baccount) {
-			Account o = new Account();
-			o.setUserId(uid);
-			o.setNick(baccount.getNick());
-			return o;
-		}
-		return null;
+		Account account = accountService.getAccount(uid, sid);
+		return account;
 	}
 
 	// 会员注册
@@ -75,25 +69,13 @@ public class BuyerServiceAPI implements BuyerServiceI {
 
 	// 根据店铺ID查询所有会员
 	@Override
-	public List<Account> getBuyerByShopid(Long sid,int page,int rows) throws ApiException {
+	public List<Buyer> getBuyerByShopid(Long sid,int page,int rows) throws ApiException {
 		if (null == sid) {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		List<com.gsccs.b2c.plat.buyer.model.Account> accountList = buyerService.getBuyerList(null, page, rows);
-		if (null != accountList) {
-			List<Account> users = new ArrayList<Account>();
-			Account user = null;
-			for (com.gsccs.b2c.plat.buyer.model.Account buyerAccount : accountList) {
-				user = new Account();
-				user.setUserId(buyerAccount.getId());
-				user.setAccount(buyerAccount.getAccount());
-				user.setNick(buyerAccount.getNick());
-				users.add(user);
-			}
-			return users;
-		}
-		return null;
+		List<Buyer> buyerList = buyerService.getBuyerList(null, page, rows);
+		return buyerList;
 	}
 
 	// 根据店铺ID与会员账号查询用户
@@ -103,20 +85,7 @@ public class BuyerServiceAPI implements BuyerServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-
-		com.gsccs.b2c.plat.buyer.model.Account baccount = buyerService.getBuyerAccount(sid, account);
-		if (null != baccount) {
-			com.gsccs.b2c.api.domain.Account o = new com.gsccs.b2c.api.domain.Account();
-			o.setUserId(baccount.getId());
-			o.setNick(baccount.getNick());
-			o.setAccount(baccount.getAccount());
-			o.setPassword(baccount.getPwd());
-			o.setSalt(baccount.getSalt());
-			boolean isLocked = baccount.getIslock() == "1" ? true : false;
-			o.setLocked(isLocked);
-			return o;
-		}
-		return null;
+		return accountService.getAccount(sid, account);
 	}
 
 	// 会员资料添加并更新
@@ -137,52 +106,27 @@ public class BuyerServiceAPI implements BuyerServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		com.gsccs.b2c.plat.buyer.model.Account ba = buyerService.loginAccount(sid, account, pwd);
-		if (null != ba) {
-			Account user = new Account();
-			user.setAccount(ba.getAccount());
-			user.setUserId(ba.getId());
-			user.setNick(ba.getNick());
-			return user;
-		}
-		return null;
+		return accountService.loginAccount(sid, account, pwd);
 	}
 
 	@Override
 	public List<Grade> getBuyerLevels(Long sid) throws ApiException {
-		List<Grade> result = null;
 		if (null == sid) {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		Store store = storeService.findById(sid);
+		Shop store = storeService.findById(sid);
 		if (null == store) {
 			throw new ApiException(APIConst.ERROR_CODE_0002,
 					APIConst.ERROR_MSG_0002);
 		}
-		List<Grade> levels = buyerService.findBuyerLevels(sid);
-		if (null != levels && levels.size() > 0) {
-			result = new ArrayList<Grade>();
-			Grade level = null;
-			for (Grade l : levels) {
-				level = new Grade();
-				result.add(level);
-				try {
-					BeanUtils.copyProperties(level, l);
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return result;
+		return buyerService.findGradeList();
 	}
 
 	@Override
 	public JSONArray buyerDelivers(Long sid, Long uid) throws ApiException {
 		JSONArray array = new JSONArray();
-		List<BuyerDeliver> delivers = buyerService.findDeliverList(sid,
+		List<Deliver> delivers = buyerService.findDeliverList(sid,
 				uid);
 		if (null != delivers) {
 			array = (JSONArray) JSON.toJSON(delivers);
@@ -197,7 +141,7 @@ public class BuyerServiceAPI implements BuyerServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		Store store = storeService.findById(sid);
+		Shop store = storeService.findById(sid);
 		if (null == store) {
 			throw new ApiException(APIConst.ERROR_CODE_0002,
 					APIConst.ERROR_MSG_0002);

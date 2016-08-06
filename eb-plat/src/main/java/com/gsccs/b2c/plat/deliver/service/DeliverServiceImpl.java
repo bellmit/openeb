@@ -4,14 +4,15 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.gsccs.b2c.plat.deliver.dao.DeliverCorpMapper;
 import com.gsccs.b2c.plat.deliver.dao.DeliverSetMapper;
-import com.gsccs.b2c.plat.deliver.model.Corp;
 import com.gsccs.b2c.plat.deliver.model.CorpExample;
-import com.gsccs.b2c.plat.deliver.model.Templet;
 import com.gsccs.b2c.plat.deliver.model.TempletExample;
+import com.gsccs.eb.api.domain.deliver.Corp;
+import com.gsccs.eb.api.domain.deliver.Templet;
 
 /**
  * @说明 商品货运物流接口 快递物流订单查询服务比如申通快递、顺丰快递、圆通快递、EMS快递、汇通快递、宅急送快递等
@@ -29,25 +30,27 @@ public class DeliverServiceImpl implements DeliverService {
 
 	// 物流公司信息保存
 	@Override
-	public void saveDeliver(Corp logisticsCompany) {
-		deliverCorpMapper.insert(logisticsCompany);
-	}
+	public void saveCorp(Corp corp) {
+		if (null == corp) {
+			return;
+		}
+		if (null != corp.getId()) {
+			deliverCorpMapper.updateByPrimaryKey(corp);
+		} else {
+			deliverCorpMapper.insert(corp);
+		}
 
-	// 根据ID更新物流公司信息
-	@Override
-	public void updateDeliver(Corp logisticsCompany) {
-		deliverCorpMapper.updateByPrimaryKey(logisticsCompany);
 	}
 
 	// 根据ID删除物流公司信息
 	@Override
-	public void delete(Integer id) {
+	public void deleteCorp(Integer id) {
 		deliverCorpMapper.deleteByPrimaryKey(id);
 	}
 
 	// 根据ID查询一条物流公司信息
 	@Override
-	public Corp find(Integer id) {
+	public Corp getCorp(Integer id) {
 		return deliverCorpMapper.selectByPrimaryKey(id);
 	}
 
@@ -108,8 +111,7 @@ public class DeliverServiceImpl implements DeliverService {
 	}
 
 	public Templet get(Long siteid, String id) {
-
-		return null;
+		return deliverSetMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
@@ -127,18 +129,14 @@ public class DeliverServiceImpl implements DeliverService {
 	}
 
 	@Override
-	public List<Corp> findAllDeliverCorpt() {
-		return deliverCorpMapper.selectAll();
-	}
-
-	@Override
-	public void saveDeliverTypeT(Templet dtt) {
+	public void saveType(Templet dtt) {
+		if (null == dtt) {
+			return;
+		}
+		if (StringUtils.isNotEmpty(dtt.getId())) {
+			deliverSetMapper.updateByPrimaryKey(dtt);
+		}
 		deliverSetMapper.insert(dtt);
-	}
-
-	@Override
-	public void updateDeliverTypeT(Templet deliverCorpT) {
-		deliverSetMapper.updateByPrimaryKey(deliverCorpT);
 	}
 
 	@Override
@@ -146,5 +144,15 @@ public class DeliverServiceImpl implements DeliverService {
 		return deliverSetMapper.selectByPrimaryKey(id);
 	}
 
-	
+	@Override
+	public Templet getType(String id) {
+		return deliverSetMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public Templet getType(Long siteid, String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

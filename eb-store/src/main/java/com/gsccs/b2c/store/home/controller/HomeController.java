@@ -13,7 +13,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.CacheConst;
 import com.gsccs.b2c.api.service.CateServiceI;
-import com.gsccs.b2c.api.service.StoreyServiceI;
+import com.gsccs.b2c.api.service.FloorServiceI;
 import com.gsccs.b2c.store.base.JsonMsg;
 import com.gsccs.eb.api.domain.site.Banner;
 import com.gsccs.eb.api.domain.site.Storey;
@@ -25,7 +25,7 @@ import com.gsccs.eb.api.exception.ApiException;
 public class HomeController {
 
 	@Autowired
-	private StoreyServiceI storeyAPI;
+	private FloorServiceI storeyAPI;
 	/*
 	 * @Autowired private BannerServiceI bannerServiceAPI;
 	 */

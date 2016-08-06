@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gsccs.b2c.api.domain.Area;
 import com.gsccs.b2c.api.service.AreaServiceI;
 import com.gsccs.b2c.app.core.JsonMsg;
 import com.gsccs.b2c.web.api.service.SsdbService;
+import com.gsccs.eb.api.domain.base.Area;
 
 
 /**

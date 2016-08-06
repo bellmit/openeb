@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gsccs.b2c.plat.buyer.dao.BuyerDeliverMapper">
-
+<mapper namespace="com.gsccs.b2c.plat.buyer.dao.DeliverMapper">
 	<!-- 会员中心收货地址数据操作映射 -->
 	<resultMap id="BaseResultMap" type="com.gsccs.eb.api.domain.buyer.Deliver">
 		<id column="id" property="id" jdbcType="BIGINT" />
@@ -321,7 +320,7 @@
 		#{record.id,jdbcType=BIGINT}
 	</update>
 
-	<!-- 根据会员ID查询 会员多条收货地址 --><!-- com.gsccs.b2c.plat.buyer.model.BuyerDeliverT -->
+	<!-- 根据会员ID查询 会员多条收货地址 -->
 	<select id="findByUid" parameterType="map" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
@@ -329,14 +328,11 @@
 		where buyerid = ${uid}
 	</select>
 
-
-
 	<!-- 删除一条收货地址 -->
 	<delete id="deleteByPrimaryKey" parameterType="map">
 		delete from
 		eb_buyer_deliver
 		where id = ${aid}
 	</delete>
-
 
 </mapper>

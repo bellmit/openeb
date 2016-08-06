@@ -152,7 +152,7 @@ public class CartController {
 					item.setSkuid(sku.getId());
 					item.setPrice(sku.getPrice() == null ? 0.00 : sku
 							.getPrice());
-					item.setSpecstr(sku.getSpecStr());
+					item.setSpecstr(sku.getSpecstr());
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

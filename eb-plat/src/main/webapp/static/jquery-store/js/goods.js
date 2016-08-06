@@ -476,334 +476,337 @@ var ajaxFileUploads = function(imageid,ob,imgDiv,type) {
  * 初始化表单数据
  */
 var initFormData = function(){
-	$("#sub").click(function(){
+	$("#btn-sub").click(function(){
 		var goodsImages = "";
 		var imgLength = $("#photoView01").find("li").length;
 		if(imgLength <= 0){
 			layer.msg("请上传商品图片" , {icon:2});
 		}else{
-			if($('#goods_form').valid()){
-				//商品名称
-				goodsName = $("[name=goods_name]").val();
-				//商品副标题
-				goodsSubtitle = $("[name=goods_subtitle]").val();
-				//分类id
-				gcId = $("#cate_id").val();
-				//分类名称
-				gcName = $("#cate_name").val();
-				//品牌id
-				brandId = $("#brand").val();
-				//品牌名
-				if(brandId != ''){
-					brandName = $("#brand").find(":selected").html();
-				}
-				//类型id
-				typeId = $("[name=type_id]").val();
-				//规格的数量
-				specCount = $("[nctype=spec_group_dl]").length;
-				if($("[name=skuDo]").length > 0){
-					if(specCount != 0 && specCount != ""){
-						specName += "{";
-						var specNameOne = "";
-						$("[nctype=spec_group_dl]").each(function(){
-							specId = $(this).attr("spId");
-							specNameOne = $(this).attr("spName");
-							specName += "\"" + specId + "\":\"" + specNameOne + "\",";
-						});
-						if(specName != ""){
-							specName = specName.substring(0, specName.length-1);
-							specName += "}"
-						}
+			console.log("no img");
+		}
+
+		if($('#goods_form').valid()){
+			//商品名称
+			goodsName = $("[name=goods_name]").val();
+			//商品副标题
+			goodsSubtitle = $("[name=goods_subtitle]").val();
+			//分类id
+			gcId = $("#cate_id").val();
+			//分类名称
+			gcName = $("#cate_name").val();
+			//品牌id
+			brandId = $("#brand").val();
+			//品牌名
+			if(brandId != ''){
+				brandName = $("#brand").find(":selected").html();
+			}
+			//类型id
+			typeId = $("[name=type_id]").val();
+			//规格的数量
+			specCount = $("[nctype=spec_group_dl]").length;
+			if($("[name=skuDo]").length > 0){
+				if(specCount != 0 && specCount != ""){
+					specName += "{";
+					var specNameOne = "";
+					$("[nctype=spec_group_dl]").each(function(){
+						specId = $(this).attr("spId");
+						specNameOne = $(this).attr("spName");
+						specName += "\"" + specId + "\":\"" + specNameOne + "\",";
+					});
+					if(specName != ""){
+						specName = specName.substring(0, specName.length-1);
+						specName += "}"
 					}
 				}
-				goodsImage = $("[name=deletePhoto]").attr("imageSrc");
-				$("[name=deletePhoto]").each(function(){
-					goodsImageMore += $(this).attr("imageSrc") + ",";
-				});
-				goodsStorePrice = $("[name=goods_store_price]").val();
-				goodsSerial = $("[name=goods_serial]").val();
-				goodsShow = $("[name=goods_show]:checked").attr("value");
-				if(goodsShow == "0"){
-					goodsShow = "1";
-					var timeTo = $("#time_to").val();
-					if(timeTo != ''){
-						prepareUp = timeTo;
-					}
+			}
+			goodsImage = $("[name=deletePhoto]").attr("imageSrc");
+			$("[name=deletePhoto]").each(function(){
+				goodsImageMore += $(this).attr("imageSrc") + ",";
+			});
+			goodsStorePrice = $("[name=goods_store_price]").val();
+			goodsSerial = $("[name=goods_serial]").val();
+			goodsShow = $("[name=goods_show]:checked").attr("value");
+			if(goodsShow == "0"){
+				goodsShow = "1";
+				var timeTo = $("#time_to").val();
+				if(timeTo != ''){
+					prepareUp = timeTo;
 				}
-				goodsCommend = $("[name=goods_commend]:checked").attr("value");
-				goodsKeywords = $("[name=seo_keywords]").val();
-				goodsDescription = $("[name=seo_description]").val();
-				goodsBody = $("#goods_body").val();
-				$("[name=attrSelect]").each(function(){
-					if($(this).val()==''){
-						attrTag = false;
-					}
-				});
-				if($("[name=attrSelect]").length == 0){
+			}
+			goodsCommend = $("[name=goods_commend]:checked").attr("value");
+			goodsKeywords = $("[name=seo_keywords]").val();
+			goodsDescription = $("[name=seo_description]").val();
+			goodsBody = $("#goods_body").val();
+			$("[name=attrSelect]").each(function(){
+				if($(this).val()==''){
 					attrTag = false;
 				}
-				if(attrTag){
-					var goodsAttrCount = $("[nc_type=attr_select]").length;
-					if(goodsAttrCount > 0){
-						goodsAttr += "{";
-					}
-					$("[nc_type=attr_select]").each(function(){
-						var attrId = $(this).attr("attrId");
-						var attrName = $(this).attr("attrName");
-						var $choice = $(this).find(":selected");
-						var attrValueName = $choice.attr("value");
-						var attrValueId = $choice.attr("attrValueId");
-						goodsAttr += "\"" + attrId + "\":\"{\\\"name\\\":\\\""+ attrName +"\\\",\\\"" + attrValueId + "\\\":\\\"" + attrValueName + "\\\"}\","
-					});
-					if(goodsAttrCount > 0){
-						goodsAttr = goodsAttr.substring(0, goodsAttr.length-1);
-						goodsAttr += "}";
-					}
+			});
+			if($("[name=attrSelect]").length == 0){
+				attrTag = false;
+			}
+			if(attrTag){
+				var goodsAttrCount = $("[nc_type=attr_select]").length;
+				if(goodsAttrCount > 0){
+					goodsAttr += "{";
 				}
-				//首先判断规格的数量
-				if($("[name=skuDo]").length > 0){
-					//设置规格开关开启
-					specOpen = "1";
-					goodsSpec += "{";
-					var specTag = 0;
-					//循环获得所选择的规格值
-					$("[nctype=spec_group_dl]").each(function(){
-						//得到规格id,和所选择规格值的数量
-						var goodsSpecId = $(this).attr("spId");
-						var goodsSpecValueCount = $(this).find(":checked").length;
-						//拼接字符串
-						goodsSpec += "\"" + goodsSpecId + "\":\"{";
-						//判断是否有选择规格
-						if(goodsSpecValueCount > 0 && goodsSpecValueCount != ""){
-
-							//循环获得每一个规格值的属性
-							$(this).find(":checked").each(function(){
-								//规格值id
-								var goodsSpecValueId = $(this).attr("value");
-								//规格值名称
-								var goodsSpecValueName = $(this).attr("spValueName");
-								//拼接字符串
-								goodsSpec += "\\\"" + goodsSpecValueId + "\\\":\\\"" + goodsSpecValueName + "\\\",";
-								specTag++;
-							});
-							//结束当前这个规格,进入下一个规格
-							goodsSpec = goodsSpec.substring(0, goodsSpec.length-1);
-							goodsSpec += "}\",";
-						}
-					});
-					if(specTag > 0){
-						//整个规格值结束
-						goodsSpec = goodsSpec.substring(0, goodsSpec.length-1);
-						goodsSpec += "}";
-					}
-				}else{
-					//设置规格开关关闭
-					specOpen = "0";
-				}
-
-				if($("[name=skuDo]").length > 0){
-					goodsColImg = "{";
-					$("[name=customSpecImage]").each(function(){
-						if("" != $(this).attr("imageSrc") && $(this).attr("imageState") == "1"){
-							goodsColImg += "\"" + $(this).attr("spValueId") + "\":\"" + $(this).attr("imageSrc") + "\",";
-							imageSrcCount += 1;
-						}
-					});
-					if(imageSrcCount > 0){
-						goodsColImg = goodsColImg.substring(0, goodsColImg.length-1);
-						goodsColImg += "}";
-					}else{
-						goodsColImg = "";
-					}
-				}
-				goodsForm = $("[name=goods_form]:checked").attr("value");
-				cityIdSelect = $("#city").val();
-				cityName = $("#city").find("option:selected").html();
-				provinceIdSelect = $("#area").val();
-				provinceName = $("#area").find("option:selected").html();
-				goodsTransfeeCharge = $("[name=goods_transfee_charge]:checked").val();
-				//如果是买家承担运费
-				if(goodsTransfeeCharge == "0"){
-					if($("[name=isApplyPostage]:checked").val() == "1"){
-						//运费模板ID，不使用运费模板值为0
-						transportId = $("#transportSelected").val();
-					}/* else{
-					 //平邮
-					 var pyPrice = "";
-					 pyPrice = $("[name=py_price]").val();
-
-					 //快递
-					 var kdPrice = "";
-					 kdPrice = $("[name=kd_price]").val();
-
-					 //ems
-					 var esPrice = "";
-					 esPrice = $("[name=es_price]").val();
-					 } */
-				}
-				StoreClassId = $("[name=storeGoodsClass]").val();
-				//判断是否有选择规格,如果没有规格则没有价格区间
-				if($("[name=skuDo]").length > 0){
-					//获得所有的价格
-					var $allPrice = $("[name=price]")
-					//如果只有一个的价格,则价格区间为:x-x
-					if($("[name=skuDo]").length == 1){
-						goodsStorePriceInterval = $allPrice.val() + "-" + $allPrice.val();
-					}else{
-						var arrPriceLength = $("[name=skuDo]").length;
-						//循环放入数组
-						var arrPrice = new Array(arrPriceLength);
-						$allPrice.each(function(j,val){
-							arrPrice[j] = parseFloat($(this).val());
-						});
-						var maxPrice = Math.max.apply(null,arrPrice);
-						var minPrice = Math.min.apply(null,arrPrice);
-						goodsStorePriceInterval = minPrice + "-" + maxPrice;
-					}
-				}
-
-
-				//定义goodsSpec的实体类json数据
-				//首先获得规格名称
-				//规格名称
-				if($("[name=skuDo]").length > 0){
-					var specGoodsName = "";
-					//规格的数量
-					var specCount = $("[nctype=spec_group_dl]").length;
-					if(specCount != 0 && specCount != ""){
-						specGoodsName += "{";
-						var specNameOne = "";
-						$("[nctype=spec_group_dl]").each(function(){
-							specId = $(this).attr("spId");
-							specNameOne = $(this).attr("spName");
-							specGoodsName += "\\\"" + specId + "\\\":\\\"" + specNameOne + "\\\",";
-						});
-						if(specCount > 0){
-							specGoodsName = specGoodsName.substring(0, specGoodsName.length-1);
-							specGoodsName += "}";
-						}
-					}
-					var goodsSpecJson = "[";
-					
-					$("[name=skuDo]").each(function(){
-						var specGoodsSpec = "";
-						var spIds = $(this).attr("spId").split(",");
-						var spNames = $(this).attr("spName").split(",");
-						var specValueNames = $(this).attr("specValueName").split(",");
-						var specValueIds = $(this).attr("specValueId").split(",");
-						var goodsSpecJsonCount = spIds.length;
-						//当前规格下的商品价格
-						var specGoodsPrice = $(this).find("[name=price]").val();
-						//当前规格下的规格商品编号
-						var specGoodsSerial = $(this).find("[name=huohao]").val();
-						//当前规格下的商品sku
-						var specGoodsStorage = $(this).find("[name=sku]").val();
-						//是否开启规格
-						var specIsOpen = $(this).find("[name=isopen]").attr("checked");
-						//商品规格id
-						var goodsspecid = $(this).find("[name=goodsspecid]").val();
-						if(specIsOpen){
-							specIsOpen = 1;
-						}else{
-							specIsOpen = 0;
-						}
-						//当前规格下的商品规格序列化
-						specGoodsSpec += "{";
-						var skuSpecArray = new Array();
-						for(var i = 0; i < spIds.length; i++){
-							var specValueName = specValueNames[i];
-							var specValueId = specValueIds[i];
-							specGoodsSpec += "\\\"" + specValueId + "\\\":\\\"" + specValueName + "\\\","
-							
-							//
-							var skuspec = {
-								specid:spIds[i],
-								specvalid:specValueId,
-							};
-							skuSpecArray.push(skuspec);
-						}
-						specGoodsSpec = specGoodsSpec.substring(0, specGoodsSpec.length-1);
-						specGoodsSpec += "}";
-						goodsSpecJson += "{\"goodsSpecId\":\"" + goodsspecid + "\",\"specName\":\""+ specGoodsName +"\",\"specGoodsPrice\":\""+ specGoodsPrice +"\",\"specGoodsSerial\":\""+ specGoodsSerial +"\",\"specGoodsStorage\":\""+ specGoodsStorage +"\",\"specGoodsSpec\":\""+ specGoodsSpec +"\",\"specIsOpen\":\""+specIsOpen+"\"},";
-						
-						var sku = {
-							price:specGoodsPrice,
-							storenum:specGoodsStorage,
-						};
-						skuArray.push(sku);
-					});
-					//去掉最后的逗号
-					goodsSpecJson = goodsSpecJson.substring(0,goodsSpecJson.length-1);
-					goodsSpecJson += "]";
-				}
-				goods_market_price = $("[name=goods_market_price]").val();
-				goods_cost_price = $("[name=goods_cost_price]").val();
-				var args = {
-					"id":$("[name=goodsId]").val(),
-					"title":goodsName,
-					//"goodsSubtitle":goodsSubtitle,//商品副标题
-					"categoryid":gcId,
-					//"gcName":gcName,
-					"brandid":brandId,
-					//"brandName":brandName,
-					"typeid":typeId,
-					"specOpen":specOpen,//规格开关
-					"specName": specName,//规格名称
-					"goodsImage": goodsImage,//商品默认封面图片
-					"goodsImageMore": goodsImageMore,//商品多图
-					"goodsStorePrice": goodsStorePrice,//商品店铺价格
-					"goodsStorePriceInterval": goodsStorePriceInterval,//区间价格
-					"goodsSerial": goodsSerial,//商品货号
-					"goodsShow": goodsShow,//商品上架1上架0下架
-					"prepareUp": prepareUp,//上架时间
-					"goodsCommend": goodsCommend,//商品推荐
-					"goodsKeywords": goodsKeywords,//商品关键字
-					"goodsDescription": goodsDescription,//商品描述 
-					"goodsBody": goodsBody,//商品详细内容
-					"goodsAttr": goodsAttr,// 商品属性 
-					"goodsSpec": goodsSpec,//商品规格
-					"goodsColImg": goodsColImg,//颜色自定义图片
-					"goodsForm": goodsForm,//商品类型,1为全新、2为二手
-					"transportId": 0,//运费模板ID，不使用运费模板值为0
-					/* "pyPrice": pyPrice,
-					 "kdPrice": kdPrice,
-					 "esPrice": esPrice, */
-					"cityId": cityIdSelect,//商品所在地(市)
-					"cityName": cityName,
-					"provinceId": provinceIdSelect,//商品所在地(省)
-					"provinceName": provinceName,
-					"goodsTransfeeCharge": goodsTransfeeCharge,//商品运费承担方式 默认 0为买家承担 1为卖家承担
-					"StoreClassId": StoreClassId,//店铺自定义分类id
-					"goodsSpecJson": goodsSpecJson,//goodsSpec的实体类json串
-					"goodsTotalStorage": $("[name=goods_storage]").val(),//总库存
-					"goodsMarketPrice":goods_market_price, // 市场价
-					"goodCostPrice":goods_cost_price, // 成本价
-					"goodsIsHaveSpec":$("#goodsIsHaveSpec").val()
-				};
-				
-				console.log(args);
-				var url = APP_BASE + "/pro/updatePro";
-				//加载进度条
-				layer.load(2, {
-					shade: [0.2,'#999999'] //0.1透明度的白色背景
+				$("[nc_type=attr_select]").each(function(){
+					var attrId = $(this).attr("attrId");
+					var attrName = $(this).attr("attrName");
+					var $choice = $(this).find(":selected");
+					var attrValueName = $choice.attr("value");
+					var attrValueId = $choice.attr("attrValueId");
+					goodsAttr += "\"" + attrId + "\":\"{\\\"name\\\":\\\""+ attrName +"\\\",\\\"" + attrValueId + "\\\":\\\"" + attrValueName + "\\\"}\","
 				});
-				$.post(url, args, function(data){
-					//保存成功
-					if(data.result == "1"){
-						layer.msg(data.message , {icon:1});
-						setTimeout("ok("+goodsShow+")",1500);
-					}else{
-						//失败
-						layer.msg(data.message , {icon:2});
-						//关闭
-						//layer.close(indexlayer);
-						layer.closeAll('loading');
+				if(goodsAttrCount > 0){
+					goodsAttr = goodsAttr.substring(0, goodsAttr.length-1);
+					goodsAttr += "}";
+				}
+			}
+			//首先判断规格的数量
+			if($("[name=skuDo]").length > 0){
+				//设置规格开关开启
+				specOpen = "1";
+				goodsSpec += "{";
+				var specTag = 0;
+				//循环获得所选择的规格值
+				$("[nctype=spec_group_dl]").each(function(){
+					//得到规格id,和所选择规格值的数量
+					var goodsSpecId = $(this).attr("spId");
+					var goodsSpecValueCount = $(this).find(":checked").length;
+					//拼接字符串
+					goodsSpec += "\"" + goodsSpecId + "\":\"{";
+					//判断是否有选择规格
+					if(goodsSpecValueCount > 0 && goodsSpecValueCount != ""){
+
+						//循环获得每一个规格值的属性
+						$(this).find(":checked").each(function(){
+							//规格值id
+							var goodsSpecValueId = $(this).attr("value");
+							//规格值名称
+							var goodsSpecValueName = $(this).attr("spValueName");
+							//拼接字符串
+							goodsSpec += "\\\"" + goodsSpecValueId + "\\\":\\\"" + goodsSpecValueName + "\\\",";
+							specTag++;
+						});
+						//结束当前这个规格,进入下一个规格
+						goodsSpec = goodsSpec.substring(0, goodsSpec.length-1);
+						goodsSpec += "}\",";
 					}
-				}, "json");
+				});
+				if(specTag > 0){
+					//整个规格值结束
+					goodsSpec = goodsSpec.substring(0, goodsSpec.length-1);
+					goodsSpec += "}";
+				}
 			}else{
-				//返回信息错误的地方
-				$("html,body").animate({scrollTop:$(".error:visible").offset().top},1000);
+				//设置规格开关关闭
+				specOpen = "0";
+			}
+
+			if($("[name=skuDo]").length > 0){
+				goodsColImg = "{";
+				$("[name=customSpecImage]").each(function(){
+					if("" != $(this).attr("imageSrc") && $(this).attr("imageState") == "1"){
+						goodsColImg += "\"" + $(this).attr("spValueId") + "\":\"" + $(this).attr("imageSrc") + "\",";
+						imageSrcCount += 1;
+					}
+				});
+				if(imageSrcCount > 0){
+					goodsColImg = goodsColImg.substring(0, goodsColImg.length-1);
+					goodsColImg += "}";
+				}else{
+					goodsColImg = "";
+				}
+			}
+			goodsForm = $("[name=goods_form]:checked").attr("value");
+			cityIdSelect = $("#city").val();
+			cityName = $("#city").find("option:selected").html();
+			provinceIdSelect = $("#area").val();
+			provinceName = $("#area").find("option:selected").html();
+			goodsTransfeeCharge = $("[name=goods_transfee_charge]:checked").val();
+			//如果是买家承担运费
+			if(goodsTransfeeCharge == "0"){
+				if($("[name=isApplyPostage]:checked").val() == "1"){
+					//运费模板ID，不使用运费模板值为0
+					transportId = $("#transportSelected").val();
+				}/* else{
+				 //平邮
+				 var pyPrice = "";
+				 pyPrice = $("[name=py_price]").val();
+
+				 //快递
+				 var kdPrice = "";
+				 kdPrice = $("[name=kd_price]").val();
+
+				 //ems
+				 var esPrice = "";
+				 esPrice = $("[name=es_price]").val();
+				 } */
+			}
+			StoreClassId = $("[name=storeGoodsClass]").val();
+			//判断是否有选择规格,如果没有规格则没有价格区间
+			if($("[name=skuDo]").length > 0){
+				//获得所有的价格
+				var $allPrice = $("[name=price]")
+				//如果只有一个的价格,则价格区间为:x-x
+				if($("[name=skuDo]").length == 1){
+					goodsStorePriceInterval = $allPrice.val() + "-" + $allPrice.val();
+				}else{
+					var arrPriceLength = $("[name=skuDo]").length;
+					//循环放入数组
+					var arrPrice = new Array(arrPriceLength);
+					$allPrice.each(function(j,val){
+						arrPrice[j] = parseFloat($(this).val());
+					});
+					var maxPrice = Math.max.apply(null,arrPrice);
+					var minPrice = Math.min.apply(null,arrPrice);
+					goodsStorePriceInterval = minPrice + "-" + maxPrice;
+				}
+			}
+
+
+			//定义goodsSpec的实体类json数据
+			//首先获得规格名称
+			//规格名称
+			if($("[name=skuDo]").length > 0){
+				var specGoodsName = "";
+				//规格的数量
+				var specCount = $("[nctype=spec_group_dl]").length;
+				if(specCount != 0 && specCount != ""){
+					specGoodsName += "{";
+					var specNameOne = "";
+					$("[nctype=spec_group_dl]").each(function(){
+						specId = $(this).attr("spId");
+						specNameOne = $(this).attr("spName");
+						specGoodsName += "\\\"" + specId + "\\\":\\\"" + specNameOne + "\\\",";
+					});
+					if(specCount > 0){
+						specGoodsName = specGoodsName.substring(0, specGoodsName.length-1);
+						specGoodsName += "}";
+					}
+				}
+				var goodsSpecJson = "[";
+				
+				$("[name=skuDo]").each(function(){
+					var specGoodsSpec = "";
+					var spIds = $(this).attr("spId").split(",");
+					var spNames = $(this).attr("spName").split(",");
+					var specValueNames = $(this).attr("specValueName").split(",");
+					var specValueIds = $(this).attr("specValueId").split(",");
+					var goodsSpecJsonCount = spIds.length;
+					//当前规格下的商品价格
+					var specGoodsPrice = $(this).find("[name=price]").val();
+					//当前规格下的规格商品编号
+					var specGoodsSerial = $(this).find("[name=huohao]").val();
+					//当前规格下的商品sku
+					var specGoodsStorage = $(this).find("[name=sku]").val();
+					//是否开启规格
+					var specIsOpen = $(this).find("[name=isopen]").attr("checked");
+					//商品规格id
+					var goodsspecid = $(this).find("[name=goodsspecid]").val();
+					if(specIsOpen){
+						specIsOpen = 1;
+					}else{
+						specIsOpen = 0;
+					}
+					//当前规格下的商品规格序列化
+					specGoodsSpec += "{";
+					var skuSpecArray = new Array();
+					for(var i = 0; i < spIds.length; i++){
+						var specValueName = specValueNames[i];
+						var specValueId = specValueIds[i];
+						specGoodsSpec += "\\\"" + specValueId + "\\\":\\\"" + specValueName + "\\\","
+						
+						//
+						var skuspec = {
+							specid:spIds[i],
+							specvalid:specValueId,
+						};
+						skuSpecArray.push(skuspec);
+					}
+					specGoodsSpec = specGoodsSpec.substring(0, specGoodsSpec.length-1);
+					specGoodsSpec += "}";
+					goodsSpecJson += "{\"goodsSpecId\":\"" + goodsspecid + "\",\"specName\":\""+ specGoodsName +"\",\"specGoodsPrice\":\""+ specGoodsPrice +"\",\"specGoodsSerial\":\""+ specGoodsSerial +"\",\"specGoodsStorage\":\""+ specGoodsStorage +"\",\"specGoodsSpec\":\""+ specGoodsSpec +"\",\"specIsOpen\":\""+specIsOpen+"\"},";
+					
+					var sku = {
+						price:specGoodsPrice,
+						storenum:specGoodsStorage,
+					};
+					//skuArray.push(sku);
+				});
+				//去掉最后的逗号
+				goodsSpecJson = goodsSpecJson.substring(0,goodsSpecJson.length-1);
+				goodsSpecJson += "]";
+			}
+			goods_market_price = $("[name=goods_market_price]").val();
+			goods_cost_price = $("[name=goods_cost_price]").val();
+			var args = {
+				"id":$("[name=goodsId]").val(),
+				"title":goodsName,
+				"subtitle":goodsSubtitle,//商品副标题
+				"categoryid":gcId,
+				//"gcName":gcName,
+				"brandid":brandId,
+				"brandName":brandName,
+				"typeid":typeId,
+				"specOpen":specOpen,//规格开关
+				"specName": specName,//规格名称
+				"mianImage": goodsImage,//商品默认封面图片
+				"moreImage": goodsImageMore,//商品多图
+				"price": goodsStorePrice,//商品店铺价格
+				"priceInterval": goodsStorePriceInterval,//区间价格
+				"serial": goodsSerial,//商品货号
+				"isonsale": goodsShow,//商品上架1上架0下架
+				"prepareUp": prepareUp,//上架时间
+				"iscommend": goodsCommend,//商品推荐
+				"keywords": goodsKeywords,//商品关键字
+				"descript": goodsDescription,//商品描述 
+				"goodsBody": goodsBody,//商品详细内容
+				"goodsAttr": goodsAttr,// 商品属性 
+				"goodsSpec": goodsSpec,//商品规格
+				"goodsColImg": goodsColImg,//颜色自定义图片
+				"goodsForm": goodsForm,//商品类型,1为全新、2为二手
+				"transportId": 0,//运费模板ID，不使用运费模板值为0
+				/* "pyPrice": pyPrice,
+				 "kdPrice": kdPrice,
+				 "esPrice": esPrice, */
+				"cityId": cityIdSelect,//商品所在地(市)
+				"cityName": cityName,
+				"provinceId": provinceIdSelect,//商品所在地(省)
+				"provinceName": provinceName,
+				"shiptype": goodsTransfeeCharge,//商品运费承担方式 默认 0为买家承担 1为卖家承担
+				//"StoreClassId": StoreClassId,//店铺自定义分类id
+				"specJson": goodsSpecJson,//goodsSpec的实体类json串
+				"totalStore": $("[name=goods_storage]").val(),//总库存
+				"mketPrice":goods_market_price, // 市场价
+				"costPrice":goods_cost_price, // 成本价
+				"isHaveSpec":$("#goodsIsHaveSpec").val()
 			};
+			
+			console.log(args);
+			var url = APP_BASE + "/goods/update";
+			//加载进度条
+			layer.load(2, {
+				shade: [0.2,'#999999'] //0.1透明度的白色背景
+			});
+			
+			$.post(url, args, function(data){
+				//保存成功
+				if(data.result == "1"){
+					layer.msg(data.message , {icon:1});
+					setTimeout("ok("+goodsShow+")",1500);
+				}else{
+					//失败
+					layer.msg(data.message , {icon:2});
+					//关闭
+					//layer.close(indexlayer);
+					layer.closeAll('loading');
+				}
+			}, "json");
+		}else{
+			//返回信息错误的地方
+			$("html,body").animate({scrollTop:$(".error:visible").offset().top},1000);
 		}
 	});
 };
@@ -1011,7 +1014,9 @@ var specCheckBoxFun = function(){
 	});
 };
 
+//规格特征组合
 var specGroupFun = function(){
+	console.log("specGroupFun");
 	var skuTrArr = new Array($("[name=skuDo]").length);
 	var goodsPrice = $("[name=goods_store_price]").val();
 	if(goodsPrice == ""){

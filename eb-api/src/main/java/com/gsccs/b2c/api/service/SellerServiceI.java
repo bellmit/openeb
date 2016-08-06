@@ -2,7 +2,8 @@ package com.gsccs.b2c.api.service;
 
 import java.util.List;
 
-import com.gsccs.b2c.api.domain.Account;
+import com.gsccs.eb.api.domain.base.Account;
+import com.gsccs.eb.api.domain.trade.PayArgs;
 import com.gsccs.eb.api.domain.trade.Payment;
 import com.gsccs.eb.api.exception.ApiException;
 
@@ -33,8 +34,8 @@ public interface SellerServiceI {
 	 */
 	public Account getSeller(String account) throws ApiException;
 	
-	public List<Payment> getStorePays(String storeid);
+	public List<PayArgs> getPayArgs(Long shopid);
 	
-	public Payment getAlipay(String storeid);
+	public PayArgs getPayArgs(String id);
 
 }

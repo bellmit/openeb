@@ -207,103 +207,64 @@ public class SkuExample extends BaseExample {
 			return (Criteria) this;
 		}
 
-		public Criteria andProductidIsNull() {
-			addCriterion("productid is null");
+		public Criteria andGoodsidIsNull() {
+			addCriterion("goodsid is null");
 			return (Criteria) this;
 		}
 
-		public Criteria andProductidIsNotNull() {
-			addCriterion("productid is not null");
+		public Criteria andGoodsidIsNotNull() {
+			addCriterion("goodsid is not null");
 			return (Criteria) this;
 		}
 
-		public Criteria andProductidEqualTo(Long value) {
-			addCriterion("productid =", value, "productid");
+		public Criteria andGoodsidEqualTo(Long value) {
+			addCriterion("goodsid =", value, "goodsid");
 			return (Criteria) this;
 		}
 
-		public Criteria andProductidNotEqualTo(Long value) {
-			addCriterion("productid <>", value, "productid");
+		public Criteria andGoodsidNotEqualTo(Long value) {
+			addCriterion("goodsid <>", value, "goodsid");
 			return (Criteria) this;
 		}
 
-		public Criteria andProductidIn(List<Long> values) {
-			addCriterion("productid in", values, "productid");
+		public Criteria andGoodsidIn(List<Long> values) {
+			addCriterion("goodsid in", values, "goodsid");
 			return (Criteria) this;
 		}
 
-		public Criteria andProductidNotIn(List<Long> values) {
-			addCriterion("productid not in", values, "productid");
+		public Criteria andGoodsidNotIn(List<Long> values) {
+			addCriterion("goodsid not in", values, "goodsid");
 			return (Criteria) this;
 		}
 
-		public Criteria andBarcodeIsNull() {
-			addCriterion("barcode is null");
+		public Criteria andSerialIsNull() {
+			addCriterion("serial is null");
 			return (Criteria) this;
 		}
 
-		public Criteria andBarcodeIsNotNull() {
-			addCriterion("barcode is not null");
+		public Criteria andSerialIsNotNull() {
+			addCriterion("serial is not null");
 			return (Criteria) this;
 		}
 
-		public Criteria andBarcodeEqualTo(String value) {
-			addCriterion("barcode =", value, "barcode");
+		public Criteria andSerialEqualTo(String value) {
+			addCriterion("serial =", value, "serial");
 			return (Criteria) this;
 		}
 
-		public Criteria andBarcodeNotEqualTo(String value) {
-			addCriterion("barcode <>", value, "barcode");
+		public Criteria andSerialNotEqualTo(String value) {
+			addCriterion("serial <>", value, "serial");
 			return (Criteria) this;
 		}
 
-		public Criteria andBarcodeGreaterThan(String value) {
-			addCriterion("barcode >", value, "barcode");
+
+		public Criteria andSerialLike(String value) {
+			addCriterion("serial like", value, "serial");
 			return (Criteria) this;
 		}
 
-		public Criteria andBarcodeGreaterThanOrEqualTo(String value) {
-			addCriterion("barcode >=", value, "barcode");
-			return (Criteria) this;
-		}
-
-		public Criteria andBarcodeLessThan(String value) {
-			addCriterion("barcode <", value, "barcode");
-			return (Criteria) this;
-		}
-
-		public Criteria andBarcodeLessThanOrEqualTo(String value) {
-			addCriterion("barcode <=", value, "barcode");
-			return (Criteria) this;
-		}
-
-		public Criteria andBarcodeLike(String value) {
-			addCriterion("barcode like", value, "barcode");
-			return (Criteria) this;
-		}
-
-		public Criteria andBarcodeNotLike(String value) {
-			addCriterion("barcode not like", value, "barcode");
-			return (Criteria) this;
-		}
-
-		public Criteria andBarcodeIn(List<String> values) {
-			addCriterion("barcode in", values, "barcode");
-			return (Criteria) this;
-		}
-
-		public Criteria andBarcodeNotIn(List<String> values) {
-			addCriterion("barcode not in", values, "barcode");
-			return (Criteria) this;
-		}
-
-		public Criteria andBarcodeBetween(String value1, String value2) {
-			addCriterion("barcode between", value1, value2, "barcode");
-			return (Criteria) this;
-		}
-
-		public Criteria andBarcodeNotBetween(String value1, String value2) {
-			addCriterion("barcode not between", value1, value2, "barcode");
+		public Criteria andSerialNotLike(String value) {
+			addCriterion("serial not like", value, "serial");
 			return (Criteria) this;
 		}
 

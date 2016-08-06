@@ -1,6 +1,6 @@
 package com.gsccs.eb.api.domain.goods;
 
-import com.gsccs.b2c.api.domain.Domain;
+import com.gsccs.eb.api.domain.base.Domain;
 
 /**
  * 品牌
@@ -15,11 +15,11 @@ public class Brand extends Domain {
 	private Long id;
 	private String name;
 	private Integer ordernum;
-	private String description;
-	private Long shopid;
-	private String state;
 	private Integer clicknum;
 	private String templet;
+	private String content;
+	private String state;
+	private Long shopid;
 
 	public Long getId() {
 		return id;
@@ -43,14 +43,6 @@ public class Brand extends Domain {
 
 	public void setOrdernum(Integer ordernum) {
 		this.ordernum = ordernum;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public String getState() {

@@ -1,38 +1,38 @@
 package com.gsccs.b2c.plat.seller.dao;
 
-import com.gsccs.b2c.plat.seller.model.Store;
-import com.gsccs.b2c.plat.seller.model.StoreExample;
-
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-public interface StoreMapper {
-	int countByExample(StoreExample example);
+import com.gsccs.b2c.plat.seller.model.ShopExample;
+import com.gsccs.eb.api.domain.seller.Shop;
 
-	int deleteByExample(StoreExample example);
+public interface StoreMapper {
+	int countByExample(ShopExample example);
+
+	int deleteByExample(ShopExample example);
 
 	int deleteByPrimaryKey(Long id);
 
-	int insert(Store record);
+	int insert(Shop record);
 
-	int insertSelective(Store record);
+	int insertSelective(Shop record);
 
-	List<Store> selectByExample(StoreExample example);
+	List<Shop> selectByExample(ShopExample example);
 
-	List<Store> selectPageByExample(StoreExample example);
+	List<Shop> selectPageByExample(ShopExample example);
 
-	Store selectByPrimaryKey(Long id);
+	Shop selectByPrimaryKey(Long id);
 
-	int updateByExampleSelective(@Param("record") Store record,
-			@Param("example") StoreExample example);
+	int updateByExampleSelective(@Param("record") Shop record,
+			@Param("example") ShopExample example);
 
-	int updateByExample(@Param("record") Store record,
-			@Param("example") StoreExample example);
+	int updateByExample(@Param("record") Shop record,
+			@Param("example") ShopExample example);
 
-	int updateByPrimaryKeySelective(Store record);
+	int updateByPrimaryKeySelective(Shop record);
 
-	int updateByPrimaryKey(Store record);
+	int updateByPrimaryKey(Shop record);
 
 	long selectMaxId();
 }

@@ -108,7 +108,7 @@
 		from (
 			SELECT a.*,b.title as typename 
 			FROM shop_category a
-			LEFT JOIN plat_type b
+			LEFT JOIN eb_type b
 			ON a.type_id = b.id
 		) as aa
 		<if test="_parameter != null">
@@ -130,7 +130,7 @@
 		from (
 			SELECT a.*,b.title as typename 
 			FROM shop_category a
-			LEFT JOIN plat_type b
+			LEFT JOIN eb_type b
 			ON a.type_id = b.id
 		) as aa
 		<if test="_parameter != null">

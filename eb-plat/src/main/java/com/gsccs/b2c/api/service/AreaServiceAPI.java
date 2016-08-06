@@ -7,9 +7,9 @@ import java.util.List;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.gsccs.b2c.api.domain.Area;
 import com.gsccs.b2c.plat.common.model.AreaT;
 import com.gsccs.b2c.plat.common.service.AreaService;
+import com.gsccs.eb.api.domain.base.Area;
 
 /**
  * 

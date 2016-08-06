@@ -33,7 +33,7 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderItemMapper orderItemMapper;
 	@Autowired
-	private ProductMapper productTMapper;
+	private ProductMapper productMapper;
 
 	@Override
 	public List<Order> queryOrderBySeller(Order param, String order,
@@ -62,8 +62,8 @@ public class OrderServiceImpl implements OrderService {
 			items.get(i).setOrderid(ordersn);
 			orderItemMapper.insert(sid, items.get(i));
 			// 锁定产品数量
-			Product productT = productTMapper.selectByPrimaryKey(sid, items
-					.get(i).getProductid());
+			Product productT = productMapper.selectByPrimaryKey(
+					items.get(i).getProductid());
 			if (null != productT) {
 				if (null == productT.getLocknum()) {
 					productT.setLocknum(items.get(i).getNum());
@@ -73,7 +73,7 @@ public class OrderServiceImpl implements OrderService {
 				}
 				productT.setStorenum(productT.getStorenum()
 						- items.get(i).getNum());
-				productTMapper.updateByPrimaryKey(sid, productT);
+				productMapper.updateByPrimaryKey(sid, productT);
 			}
 		}
 		return ordersn;
@@ -120,8 +120,8 @@ public class OrderServiceImpl implements OrderService {
 				criteria.andBuyeridEqualTo(order.getBuyerid());
 			}
 
-			if (order.getStoreid() != null) {
-				criteria.andStoreidEqualTo(order.getStoreid());
+			if (order.getShopid() != null) {
+				criteria.andShopidEqualTo(order.getShopid());
 			}
 		}
 	}

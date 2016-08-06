@@ -1,26 +1,22 @@
 package com.gsccs.b2c.api.service;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gsccs.b2c.api.APIConst;
-import com.gsccs.b2c.api.domain.Account;
+import com.gsccs.b2c.plat.pay.service.PayService;
 import com.gsccs.b2c.plat.seller.model.SellerAccount;
-import com.gsccs.b2c.plat.seller.model.StorePay;
-import com.gsccs.b2c.plat.seller.service.PayService;
 import com.gsccs.b2c.plat.seller.service.SellerService;
-import com.gsccs.b2c.plat.seller.service.StoreService;
-import com.gsccs.eb.api.domain.trade.Payment;
+import com.gsccs.b2c.plat.seller.service.ShopService;
+import com.gsccs.eb.api.domain.base.Account;
+import com.gsccs.eb.api.domain.trade.PayArgs;
 import com.gsccs.eb.api.exception.ApiException;
 
 public class SellerServiceAPI implements SellerServiceI {
 
 	@Autowired
-	private StoreService storeService;
+	private ShopService storeService;
 	@Autowired
 	private SellerService sellerService;
 	@Autowired
@@ -57,46 +53,6 @@ public class SellerServiceAPI implements SellerServiceI {
 		}
 		return null;
 	}
-	
-	
-
-	public List<Payment> getStorePays(String storeid) {
-		List<Payment> list = null;
-		List<StorePay> pays = payService.getPayments(storeid);
-		if (null != pays) {
-			list = new ArrayList<Payment>();
-			Payment payment;
-			for (int i = 0; i < pays.size(); i++) {
-				payment = new Payment();
-				try {
-					BeanUtils.copyProperties(payment, pays.get(i));
-					list.add(payment);
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return list;
-	}
-
-	@Override
-	public Payment getAlipay(String storeid) {
-		Payment payment = null;
-		StorePay sellerPay = payService.getPaymentByType(storeid,
-				APIConst.PAYMENT_TYPE_ALIPAY);
-		if (null != sellerPay) {
-			try {
-				BeanUtils.copyProperties(payment, sellerPay);
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			}
-		}
-		return payment;
-	}
 
 	@Override
 	public void addStoreAccount(Account user) {
@@ -109,6 +65,20 @@ public class SellerServiceAPI implements SellerServiceI {
 			account.setEmail(user.getEmail());
 			sellerService.insert(account);
 		}
+	}
+
+	@Override
+	public List<PayArgs> getPayArgs(Long shopid) {
+		PayArgs param = new PayArgs();
+		param.setShopid(shopid);
+		List<PayArgs> payargList = payService.queryPayArgs(param, 1,
+				Integer.MAX_VALUE);
+		return payargList;
+	}
+
+	@Override
+	public PayArgs getPayArgs(String id) {
+		return payService.getPayArgs(id);
 	}
 
 }

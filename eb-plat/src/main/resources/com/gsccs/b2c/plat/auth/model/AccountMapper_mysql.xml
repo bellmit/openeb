@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gsccs.b2c.plat.common.dao.AccountMapper">
+
+	<resultMap id="BaseResultMap" type="com.gsccs.eb.api.domain.base.Account">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="account" property="account" jdbcType="VARCHAR" />
+		<result column="pwd" property="pwd" jdbcType="VARCHAR" />
+		<result column="nick" property="nick" jdbcType="VARCHAR" />
+		<result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="lasttime" property="lasttime" jdbcType="TIMESTAMP" />
+		<result column="state" property="state" jdbcType="VARCHAR" />
+		<result column="islock" property="islock" jdbcType="VARCHAR" />
+		<result column="salt" property="salt" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+
+	<sql id="Base_Column_List">
+		id, account, pwd, nick, addtime, lasttime, state, islock,
+		salt
+	</sql>
+
+	<select id="selectPageByExample" resultMap="BaseResultMap"
+		parameterType="map">
+		select distinct
+		<include refid="Base_Column_List" />
+		from eb_buyer_account
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		order by addtime desc
+	</select>
+
+
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		eb_buyer_account
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.common.model.AccountExample">
+		delete from eb_buyer_account
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+
+	<update id="updateByExample" parameterType="map">
+		update eb_buyer_account
+		set id = #{record.id,jdbcType=BIGINT},
+		account =
+		#{record.account,jdbcType=VARCHAR},
+		pwd =
+		#{record.pwd,jdbcType=VARCHAR},
+		nick = #{record.nick,jdbcType=VARCHAR},
+		addtime = #{record.addtime,jdbcType=TIMESTAMP},
+		lasttime =
+		#{record.lasttime,jdbcType=TIMESTAMP},
+		state =
+		#{record.state,jdbcType=VARCHAR},
+		islock =
+		#{record.islock,jdbcType=VARCHAR},
+		salt =
+		#{record.salt,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+
+
+	<update id="updateByPrimaryKey" parameterType="com.gsccs.eb.api.domain.base.Account">
+		update
+		eb_buyer_account
+		set account = #{account,jdbcType=VARCHAR},
+		pwd =
+		#{pwd,jdbcType=VARCHAR},
+		nick = #{nick,jdbcType=VARCHAR},
+		addtime =
+		#{addtime,jdbcType=TIMESTAMP},
+		lasttime =
+		#{lasttime,jdbcType=TIMESTAMP},
+		state = #{state,jdbcType=VARCHAR},
+		islock = #{islock,jdbcType=VARCHAR},
+		salt = #{salt,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<!-- 会员注册 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="record.id"
+		parameterType="map">
+		insert into eb_buyer_account (id, account, pwd,nick,
+		addtime,
+		lasttime,state, islock, salt)
+		values
+		(#{record.id,jdbcType=BIGINT},
+		#{record.account,jdbcType=VARCHAR},
+		#{record.pwd,jdbcType=VARCHAR},
+		#{record.nick,jdbcType=VARCHAR},
+		#{record.addtime,jdbcType=TIMESTAMP},
+		#{record.lasttime,jdbcType=TIMESTAMP},
+		#{record.state,jdbcType=VARCHAR},
+		#{record.islock,jdbcType=VARCHAR},
+		#{record.salt,jdbcType=VARCHAR})
+	</insert>
+
+	<!-- 会员登录 -->
+	<select id="loginAccount" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from eb_buyer_account
+		where account=#{account} and pwd=#{pwd}
+	</select>
+
+	<!-- 根据商铺Id查询与会员Id查询指定人员 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from eb_buyer_account
+		where id = #{id}
+	</select>
+
+	<!-- 根据商铺Id查询所有会员 -->
+	<select id="selectAllAcountBySid" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from eb_buyer_account
+	</select>
+
+	<!-- 店铺ID与会员账号查询会员信息 -->
+	<select id="selectByAccount" resultMap="BaseResultMap"
+		parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from eb_buyer_account
+		where account = #{account}
+	</select>
+
+</mapper>

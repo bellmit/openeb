@@ -10,7 +10,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import com.gsccs.b2c.alipay.util.Cons;
-import com.gsccs.b2c.api.domain.Account;
+import com.gsccs.eb.api.domain.base.Account;
 
 public class FileUploadUtil {
 	public static void inputstreamtofile(InputStream in,String filePath,String fileName) throws IOException{

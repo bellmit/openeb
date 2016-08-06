@@ -3,7 +3,7 @@ package com.gsccs.eb.api.domain.trade;
 import java.util.Date;
 
 import com.gsccs.b2c.api.APIConst;
-import com.gsccs.b2c.api.domain.Domain;
+import com.gsccs.eb.api.domain.base.Domain;
 
 public class ReturnOrder extends Domain{
     /**

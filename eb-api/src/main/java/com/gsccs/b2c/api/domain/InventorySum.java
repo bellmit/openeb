@@ -1,5 +1,7 @@
 package com.gsccs.b2c.api.domain;
 
+import com.gsccs.eb.api.domain.base.Domain;
+
 /**
  * 商品库存对象
  * 

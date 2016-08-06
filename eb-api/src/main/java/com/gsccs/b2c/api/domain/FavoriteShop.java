@@ -1,5 +1,7 @@
 package com.gsccs.b2c.api.domain;
 
+import com.gsccs.eb.api.domain.base.Domain;
+
 /**
  * 推荐关联店铺信息
  * @author x.d zhang

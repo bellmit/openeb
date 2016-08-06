@@ -15,8 +15,8 @@ import com.gsccs.b2c.plat.order.model.OrderStatist;
 import com.gsccs.b2c.plat.order.model.OrderTrace;
 import com.gsccs.b2c.plat.order.service.OrderService;
 import com.gsccs.b2c.plat.order.service.PaymentService;
-import com.gsccs.b2c.plat.seller.service.StoreService;
-import com.gsccs.b2c.plat.shop.service.ProductService;
+import com.gsccs.b2c.plat.seller.service.ShopService;
+import com.gsccs.b2c.plat.shop.service.GoodsService;
 import com.gsccs.eb.api.domain.goods.Product;
 import com.gsccs.eb.api.domain.trade.Order;
 import com.gsccs.eb.api.domain.trade.Order.OrderState;
@@ -33,9 +33,9 @@ public class OrderServiceAPI implements OrderServiceI {
 	@Autowired
 	private OrderService orderService;
 	@Autowired
-	private StoreService storeService;
+	private ShopService storeService;
 	@Autowired
-	private ProductService goodsService;
+	private GoodsService goodsService;
 	@Autowired
 	private PaymentService paymentService;
 
@@ -169,8 +169,8 @@ public class OrderServiceAPI implements OrderServiceI {
 					ordert.getId());
 			if (null != itemTs && itemTs.size() > 0) {
 				for (OrderItem itemT : itemTs) {
-					Product product = goodsService.getProduct(sid,
-							itemT.getProductid(), false);
+					Product product = goodsService.getGoods(
+							itemT.getProductid());
 					if (null != product && null != itemT.getNum()) {
 						int locknum = product.getLocknum() - itemT.getNum();
 						int storenum = product.getStorenum() + itemT.getNum();
@@ -261,8 +261,8 @@ public class OrderServiceAPI implements OrderServiceI {
 					order.getId());
 			if (null != itemTs && itemTs.size() > 0) {
 				for (OrderItem itemT : itemTs) {
-					Product product = goodsService.getProduct(sid,
-							itemT.getProductid(), false);
+					Product product = goodsService.getGoods(
+							itemT.getProductid());
 					if (null != product && null != itemT.getNum()) {
 						int salenum = product.getSalenum() + itemT.getNum();
 						int locknum = product.getLocknum() - itemT.getNum();
@@ -321,8 +321,8 @@ public class OrderServiceAPI implements OrderServiceI {
 					ordert.getId());
 			if (null != itemTs && itemTs.size() > 0) {
 				for (OrderItem itemT : itemTs) {
-					Product product = goodsService.getProduct(sid,
-							itemT.getProductid(), false);
+					Product product = goodsService.getGoods(
+							itemT.getProductid());
 					if (null != product && null != itemT.getNum()) {
 						int evalnum = product.getEvalnum() == null ? 0
 								: product.getEvalnum();

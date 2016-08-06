@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.gsccs.b2c.plat.deliver.model.Corp;
 import com.gsccs.b2c.plat.deliver.model.CorpExample;
+import com.gsccs.eb.api.domain.deliver.Corp;
 
 /**
  * @说明   物流公司登记数据操作类

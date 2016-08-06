@@ -120,7 +120,7 @@ public class GoodsSolrServiceImpl implements GoodsSolrService{
 					
 					if(null !=skuList && skuList.size() > 0){
 						for (int j = 0; j < skuList.size(); j++) {
-							String skuV = skuList.get(j).getSpecIds();
+							String skuV = skuList.get(j).getSpecids();
 							String[] specVlas = skuV.split(";");
 							skuSize += specVlas.length;
 						}
@@ -168,8 +168,8 @@ public class GoodsSolrServiceImpl implements GoodsSolrService{
 					
 					if(null !=skuList && skuList.size() > 0){
 						for (int k = 0; k < skuList.size(); k++) {
-							String speI = skuList.get(k).getSpecIds();
-							String speV = skuList.get(k).getSpecStr();
+							String speI = skuList.get(k).getSpecids();
+							String speV = skuList.get(k).getSpecstr();
 							String[] speIs = speI.split(";");
 							String[] speVs = speV.split(";");
 							for (int m = 0; m < speIs.length; m++) {

@@ -6,7 +6,7 @@
 		<result column="serial" property="serial" jdbcType="VARCHAR" />
 		<result column="status" property="status" jdbcType="VARCHAR" />
 		<result column="buyerid" property="buyerid" jdbcType="BIGINT" />
-		<result column="storeId" property="storeid" jdbcType="BIGINT" />
+		<result column="shopid" property="shopid" jdbcType="BIGINT" />
 
 		<result column="paytype" property="paytype" jdbcType="VARCHAR" />
 		<!-- 物流信息 -->
@@ -32,7 +32,7 @@
 		
 		<result column="totalfee" property="totalfee" jdbcType="DECIMAL" />
 		<result column="totalnum" property="totalnum" jdbcType="INTEGER" />
-		<result column="payfee" property="payfee" jdbcType="DECIMAL" />
+		<result column="payedfee" property="payedfee" jdbcType="DECIMAL" />
 		
 		<result column="platsource" property="platsource" jdbcType="VARCHAR" />
 		<result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
@@ -40,7 +40,7 @@
 		
 		<!-- 不保存数据库 -->
 		<result column="buyernick" property="buyernick" jdbcType="VARCHAR" />
-		<result column="storename" property="storename" jdbcType="VARCHAR" />
+		<result column="shopname" property="shopname" jdbcType="VARCHAR" />
 	</resultMap>
 	
 	<!-- 统计结果 -->
@@ -114,9 +114,9 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		id, serial, status, buyerid, buyernick, storeId, storename, paytype,
+		id, serial, status, buyerid, buyernick, shopid, shopname, paytype,
 		telnum, phone,
-		shiptype, shipfee, consignee, receaddress, ordertype, isdelay, totalfee,payfee,
+		shiptype, shipfee, consignee, receaddress, ordertype, isdelay, totalfee,payedfee,
 		isdistrib,
 		distribfee, isbilling, gainscore, couponid, couponfee, activityid, activityfee,
 		totalnum,
@@ -196,30 +196,34 @@
 
 	<insert id="insert" parameterType="map">
 		insert into shop_order (id, serial, status,
-		buyerid, buyernick, storeId,
-		storename, paytype, telnum,
+		buyerid, buyernick, shopid,
+		shopname, paytype, telnum,
 		phone, shiptype, shipfee,
 		consignee, receaddress, ordertype,
-		isdelay, totalfee,payfee, isdistrib,
+		isdelay, totalfee,payedfee, isdistrib,
 		distribfee, isbilling, gainscore,
 		couponid, couponfee, activityid,
 		activityfee, totalnum, logistnum,
 		platsource, addtime, lasttime
 		)
-		values (#{record.id,jdbcType=BIGINT}, #{record.serial,jdbcType=VARCHAR},
+		values (#{record.id,jdbcType=BIGINT}, 
+		#{record.serial,jdbcType=VARCHAR},
 		#{record.status,jdbcType=VARCHAR},
-		#{record.buyerid,jdbcType=BIGINT}, #{record.buyernick,jdbcType=VARCHAR},
-		#{record.storeid,jdbcType=BIGINT},
-		#{record.storename,jdbcType=VARCHAR},
-		#{record.paytype,jdbcType=VARCHAR}, #{record.telnum,jdbcType=VARCHAR},
-		#{record.phone,jdbcType=VARCHAR}, #{record.shiptype,jdbcType=VARCHAR},
+		#{record.buyerid,jdbcType=BIGINT}, 
+		#{record.buyernick,jdbcType=VARCHAR},
+		#{record.shopid,jdbcType=BIGINT},
+		#{record.shopname,jdbcType=VARCHAR},
+		#{record.paytype,jdbcType=VARCHAR}, 
+		#{record.telnum,jdbcType=VARCHAR},
+		#{record.phone,jdbcType=VARCHAR}, 
+		#{record.shiptype,jdbcType=VARCHAR},
 		#{record.shipfee,jdbcType=DECIMAL},
 		#{record.consignee,jdbcType=VARCHAR},
 		#{record.receaddress,jdbcType=VARCHAR},
 		#{record.ordertype,jdbcType=VARCHAR},
 		#{record.isdelay,jdbcType=VARCHAR},
 		#{record.totalfee,jdbcType=DECIMAL},
-		#{record.payfee,jdbcType=DECIMAL},
+		#{record.payedfee,jdbcType=DECIMAL},
 		#{record.isdistrib,jdbcType=VARCHAR},
 		#{record.distribfee,jdbcType=DECIMAL},
 		#{record.isbilling,jdbcType=VARCHAR},
@@ -251,8 +255,8 @@
 		status = #{record.status,jdbcType=VARCHAR},
 		buyerid = #{record.buyerid,jdbcType=BIGINT},
 		buyernick = #{record.buyernick,jdbcType=VARCHAR},
-		storeId = #{record.storeid,jdbcType=BIGINT},
-		storename = #{record.storename,jdbcType=VARCHAR},
+		shopid = #{record.shopid,jdbcType=BIGINT},
+		shopname = #{record.shopname,jdbcType=VARCHAR},
 		paytype = #{record.paytype,jdbcType=VARCHAR},
 		telnum = #{record.telnum,jdbcType=VARCHAR},
 		phone = #{record.phone,jdbcType=VARCHAR},
@@ -263,7 +267,7 @@
 		ordertype = #{record.ordertype,jdbcType=VARCHAR},
 		isdelay = #{record.isdelay,jdbcType=VARCHAR},
 		totalfee = #{record.totalfee,jdbcType=DECIMAL},
-		payfee = #{record.payfee,jdbcType=DECIMAL},
+		payedfee = #{record.payedfee,jdbcType=DECIMAL},
 		isdistrib = #{record.isdistrib,jdbcType=VARCHAR},
 		distribfee = #{record.distribfee,jdbcType=DECIMAL},
 		isbilling = #{record.isbilling,jdbcType=VARCHAR},
@@ -289,8 +293,8 @@
 		status = #{record.status,jdbcType=VARCHAR},
 		buyerid = #{record.buyerid,jdbcType=BIGINT},
 		buyernick = #{record.buyernick,jdbcType=VARCHAR},
-		storeId = #{record.storeid,jdbcType=BIGINT},
-		storename = #{record.storename,jdbcType=VARCHAR},
+		shopid = #{record.shopid,jdbcType=BIGINT},
+		shopname = #{record.shopname,jdbcType=VARCHAR},
 		paytype = #{record.paytype,jdbcType=VARCHAR},
 		telnum = #{record.telnum,jdbcType=VARCHAR},
 		phone = #{record.phone,jdbcType=VARCHAR},
@@ -301,7 +305,7 @@
 		ordertype = #{record.ordertype,jdbcType=VARCHAR},
 		isdelay = #{record.isdelay,jdbcType=VARCHAR},
 		totalfee = #{record.totalfee,jdbcType=DECIMAL},
-		payfee = #{record.payfee,jdbcType=DECIMAL},
+		payedfee = #{record.payedfee,jdbcType=DECIMAL},
 		isdistrib = #{record.isdistrib,jdbcType=VARCHAR},
 		distribfee = #{record.distribfee,jdbcType=DECIMAL},
 		isbilling = #{record.isbilling,jdbcType=VARCHAR},

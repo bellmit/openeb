@@ -2,8 +2,8 @@ package com.gsccs.b2c.plat.buyer.service;
 
 import java.util.List;
 
-import com.gsccs.b2c.plat.buyer.model.Account;
-import com.gsccs.b2c.plat.buyer.model.BuyerDeliver;
+import com.gsccs.eb.api.domain.base.Account;
+import com.gsccs.eb.api.domain.buyer.Buyer;
 import com.gsccs.eb.api.domain.buyer.Deliver;
 import com.gsccs.eb.api.domain.buyer.Grade;
 import com.gsccs.eb.api.domain.buyer.Points;
@@ -15,17 +15,7 @@ import com.gsccs.eb.api.domain.buyer.Points;
  */
 public interface BuyerService {
 
-	public Long addBuyer(Long sid, Account account);
-
-	public Account loginAccount(Long sid, String account, String pwd);
-
-	public Account getBuyerAccount(Long uid, Long sid);
-
-	public List<Account> getBuyerList(Account param, int page, int rows);
-
-	public Account getBuyerAccount(Long sid, String account);
-
-	public List<Grade> findBuyerLevels(Long sid);
+	public List<Buyer> getBuyerList(Buyer param, int page, int rows);
 
 	// 添加会员积分
 	public void insert(Long sid, Points record);
@@ -46,8 +36,13 @@ public interface BuyerService {
 	public void updateDeliver(Long sid, Deliver deliver);
 
 	// 查询会员多个收货地址
-	List<BuyerDeliver> findDeliverList(Long sid, Long uid);
+	List<Deliver> findDeliverList(Long sid, Long uid);
 
-	BuyerDeliver getDeliver(Long userid, Long deliverid);
+	Deliver getDeliver(Long userid, Long deliverid);
 
+	public List<Grade> findGradeList();
+
+	public Grade getGrade(Long id);
+
+	public void saveGrade(Grade param);
 }

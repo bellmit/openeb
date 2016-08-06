@@ -22,10 +22,10 @@ import com.gsccs.eb.api.exception.ApiException;
  * @author x.d zhang
  * 
  */
-public class FloorServiceAPI implements StoreyServiceI {
+public class FloorServiceAPI implements FloorServiceI {
 
 	@Autowired
-	private FloorService storeyService;
+	private FloorService floorService;
 
 	/**
 	 * 添加楼层
@@ -63,37 +63,28 @@ public class FloorServiceAPI implements StoreyServiceI {
 				storeyItem.setType(itemObject.getString("type"));
 				storeyItem.setOrdernum(i);
 				storeyItem.setId(UUID.randomUUID().toString());
-				storeyItem.setStoreyid(id);
-				storeyItem.setSiteid(sid);
 				storeyItems.add(storeyItem);
 			}
 		}
-		storeyService.addStorey(sid, storeyList, storeyItems);
+		//floorService.addStorey(sid, storeyList, storeyItems);
 	}
 
 	@Override
 	public JSONObject findStoreyList(Long sid) {
 		JSONObject json = new JSONObject();
-		List<StoreyList> storeylist = storeyService.findStoreyList(sid);
-		List<Floor> storeyitems = storeyService.findStoreyItems(sid);
-		List<Banner> storeyBanners = storeyService.findStoreyBanners(sid);
-		if (null != storeylist && storeylist.size() > 0) {
-			JSONArray storeys = new JSONArray();
-			for (StoreyList storey : storeylist) {
-				JSONObject jsonObject = (JSONObject) JSON.toJSON(storey);
-				JSONArray itemsJson = new JSONArray();
-				for (Floor item : storeyitems) {
-					if (item.getStoreyid().equals(storey.getId())) {
-						itemsJson.add(JSON.toJSON(item));
-					}
-				}
-				jsonObject.put("items", itemsJson);
-				storeys.add(jsonObject);
-			}
-			json.put("total", storeylist.size());
-			json.put("storeys", storeys);
-		}
-
+		List<Banner> storeyBanners = floorService.findBannerList(sid);
+		/*
+		 * List<Floor> storeyitems = floorService.findStoreyItems(sid);
+		 * List<Banner> storeyBanners = floorService.findStoreyBanners(sid); if
+		 * (null != storeylist && storeylist.size() > 0) { JSONArray storeys =
+		 * new JSONArray(); for (StoreyList storey : storeylist) { JSONObject
+		 * jsonObject = (JSONObject) JSON.toJSON(storey); JSONArray itemsJson =
+		 * new JSONArray(); for (Floor item : storeyitems) { if
+		 * (item.getStoreyid().equals(storey.getId())) {
+		 * itemsJson.add(JSON.toJSON(item)); } } jsonObject.put("items",
+		 * itemsJson); storeys.add(jsonObject); } json.put("total",
+		 * storeylist.size()); json.put("storeys", storeys); }
+		 */
 		if (null != storeyBanners && storeyBanners.size() > 0) {
 			json.put("banners", JSON.toJSON(storeyBanners));
 		}
@@ -107,7 +98,7 @@ public class FloorServiceAPI implements StoreyServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		storeyService.deleteStorey(sid, storeyid);
+		floorService.deleteFloor(storeyid);
 	}
 
 	@Override
@@ -119,13 +110,12 @@ public class FloorServiceAPI implements StoreyServiceI {
 		List<Banner> list = new ArrayList<Banner>();
 		for (int i = 0; i < banners.size(); i++) {
 			JSONObject jsonObject = (JSONObject) banners.get(i);
-			Banner banner = JSON.toJavaObject(jsonObject,
-					Banner.class);
+			Banner banner = JSON.toJavaObject(jsonObject, Banner.class);
 			banner.setId(UUID.randomUUID().toString());
 			banner.setSiteid(sid);
 			banner.setOrdernum(i);
 			list.add(banner);
 		}
-		storeyService.addBanners(sid, list);
+		floorService.addBanners(sid, list);
 	}
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.gsccs.b2c.api.domain.Area;
+import com.gsccs.eb.api.domain.base.Area;
 import com.gsccs.eb.api.domain.goods.ProductParam;
 import com.gsccs.eb.api.domain.goods.ProductProp;
 import com.gsccs.eb.api.domain.goods.Sku;

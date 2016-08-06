@@ -185,12 +185,6 @@ public class BrandExample extends BaseExample {
 			addCriterion("id not in", values, "id");
 			return (Criteria) this;
 		}
-
-		
-		public Criteria andShopidEqualTo(Long value) {
-			addCriterion("shopid =", value, "shopid");
-			return (Criteria) this;
-		}
 		
 		public Criteria andSQL(String sql) {
 			addCriterion(sql);
@@ -217,26 +211,6 @@ public class BrandExample extends BaseExample {
 			return (Criteria) this;
 		}
 
-		public Criteria andNameGreaterThan(String value) {
-			addCriterion("name >", value, "name");
-			return (Criteria) this;
-		}
-
-		public Criteria andNameGreaterThanOrEqualTo(String value) {
-			addCriterion("name >=", value, "name");
-			return (Criteria) this;
-		}
-
-		public Criteria andNameLessThan(String value) {
-			addCriterion("name <", value, "name");
-			return (Criteria) this;
-		}
-
-		public Criteria andNameLessThanOrEqualTo(String value) {
-			addCriterion("name <=", value, "name");
-			return (Criteria) this;
-		}
-
 		public Criteria andNameLike(String value) {
 			addCriterion("name like", value, "name");
 			return (Criteria) this;
@@ -247,163 +221,76 @@ public class BrandExample extends BaseExample {
 			return (Criteria) this;
 		}
 
-		public Criteria andNameIn(List<String> values) {
-			addCriterion("name in", values, "name");
+	
+		
+
+		public Criteria andShopidIsNull() {
+			addCriterion("shopid is null");
 			return (Criteria) this;
 		}
 
-		public Criteria andNameNotIn(List<String> values) {
-			addCriterion("name not in", values, "name");
+		public Criteria andShopidIsNotNull() {
+			addCriterion("shopid is not null");
 			return (Criteria) this;
 		}
 
-		public Criteria andNameBetween(String value1, String value2) {
-			addCriterion("name between", value1, value2, "name");
+		public Criteria andShopidEqualTo(Long value) {
+			addCriterion("shopid =", value, "parid");
 			return (Criteria) this;
 		}
 
-		public Criteria andNameNotBetween(String value1, String value2) {
-			addCriterion("name not between", value1, value2, "name");
+		public Criteria andShopidNotEqualTo(Long value) {
+			addCriterion("shopid <>", value, "parid");
 			return (Criteria) this;
 		}
 
-		public Criteria andTempletIsNull() {
-			addCriterion("templet is null");
+		public Criteria andShopidGreaterThan(String value) {
+			addCriterion("shopid >", value, "parid");
 			return (Criteria) this;
 		}
 
-		public Criteria andTempletIsNotNull() {
-			addCriterion("templet is not null");
+		public Criteria andShopidGreaterThanOrEqualTo(String value) {
+			addCriterion("shopid >=", value, "parid");
 			return (Criteria) this;
 		}
 
-		public Criteria andTempletEqualTo(String value) {
-			addCriterion("templet =", value, "templet");
+		public Criteria andShopidLessThan(String value) {
+			addCriterion("shopid <", value, "parid");
 			return (Criteria) this;
 		}
 
-		public Criteria andTempletNotEqualTo(String value) {
-			addCriterion("templet <>", value, "templet");
+		public Criteria andShopidLessThanOrEqualTo(String value) {
+			addCriterion("shopid <=", value, "parid");
 			return (Criteria) this;
 		}
 
-		public Criteria andTempletGreaterThan(String value) {
-			addCriterion("templet >", value, "templet");
+		public Criteria andShopidLike(String value) {
+			addCriterion("shopid like", value, "parid");
 			return (Criteria) this;
 		}
 
-		public Criteria andTempletGreaterThanOrEqualTo(String value) {
-			addCriterion("templet >=", value, "templet");
+		public Criteria andShopidNotLike(String value) {
+			addCriterion("shopid not like", value, "parid");
 			return (Criteria) this;
 		}
 
-		public Criteria andTempletLessThan(String value) {
-			addCriterion("templet <", value, "templet");
+		public Criteria andShopidIn(List<String> values) {
+			addCriterion("shopid in", values, "parid");
 			return (Criteria) this;
 		}
 
-		public Criteria andTempletLessThanOrEqualTo(String value) {
-			addCriterion("templet <=", value, "templet");
+		public Criteria andShopidNotIn(List<String> values) {
+			addCriterion("shopid not in", values, "parid");
 			return (Criteria) this;
 		}
 
-		public Criteria andTempletLike(String value) {
-			addCriterion("templet like", value, "templet");
+		public Criteria andShopidBetween(String value1, String value2) {
+			addCriterion("shopid between", value1, value2, "parid");
 			return (Criteria) this;
 		}
 
-		public Criteria andTempletNotLike(String value) {
-			addCriterion("templet not like", value, "templet");
-			return (Criteria) this;
-		}
-
-		public Criteria andTempletIn(List<String> values) {
-			addCriterion("templet in", values, "templet");
-			return (Criteria) this;
-		}
-
-		public Criteria andTempletNotIn(List<String> values) {
-			addCriterion("templet not in", values, "templet");
-			return (Criteria) this;
-		}
-
-		public Criteria andTempletBetween(String value1, String value2) {
-			addCriterion("templet between", value1, value2, "templet");
-			return (Criteria) this;
-		}
-
-		public Criteria andTempletNotBetween(String value1, String value2) {
-			addCriterion("templet not between", value1, value2, "templet");
-			return (Criteria) this;
-		}
-
-		public Criteria andParidIsNull() {
-			addCriterion("parId is null");
-			return (Criteria) this;
-		}
-
-		public Criteria andParidIsNotNull() {
-			addCriterion("parId is not null");
-			return (Criteria) this;
-		}
-
-		public Criteria andParidEqualTo(String value) {
-			addCriterion("parId =", value, "parid");
-			return (Criteria) this;
-		}
-
-		public Criteria andParidNotEqualTo(String value) {
-			addCriterion("parId <>", value, "parid");
-			return (Criteria) this;
-		}
-
-		public Criteria andParidGreaterThan(String value) {
-			addCriterion("parId >", value, "parid");
-			return (Criteria) this;
-		}
-
-		public Criteria andParidGreaterThanOrEqualTo(String value) {
-			addCriterion("parId >=", value, "parid");
-			return (Criteria) this;
-		}
-
-		public Criteria andParidLessThan(String value) {
-			addCriterion("parId <", value, "parid");
-			return (Criteria) this;
-		}
-
-		public Criteria andParidLessThanOrEqualTo(String value) {
-			addCriterion("parId <=", value, "parid");
-			return (Criteria) this;
-		}
-
-		public Criteria andParidLike(String value) {
-			addCriterion("parId like", value, "parid");
-			return (Criteria) this;
-		}
-
-		public Criteria andParidNotLike(String value) {
-			addCriterion("parId not like", value, "parid");
-			return (Criteria) this;
-		}
-
-		public Criteria andParidIn(List<String> values) {
-			addCriterion("parId in", values, "parid");
-			return (Criteria) this;
-		}
-
-		public Criteria andParidNotIn(List<String> values) {
-			addCriterion("parId not in", values, "parid");
-			return (Criteria) this;
-		}
-
-		public Criteria andParidBetween(String value1, String value2) {
-			addCriterion("parId between", value1, value2, "parid");
-			return (Criteria) this;
-		}
-
-		public Criteria andParidNotBetween(String value1, String value2) {
-			addCriterion("parId not between", value1, value2, "parid");
+		public Criteria andShopidNotBetween(String value1, String value2) {
+			addCriterion("shopid not between", value1, value2, "parid");
 			return (Criteria) this;
 		}
 
@@ -517,26 +404,7 @@ public class BrandExample extends BaseExample {
 			return (Criteria) this;
 		}
 
-		public Criteria andOrdernumIn(List<Integer> values) {
-			addCriterion("ordernum in", values, "ordernum");
-			return (Criteria) this;
-		}
-
-		public Criteria andOrdernumNotIn(List<Integer> values) {
-			addCriterion("ordernum not in", values, "ordernum");
-			return (Criteria) this;
-		}
-
-		public Criteria andOrdernumBetween(Integer value1, Integer value2) {
-			addCriterion("ordernum between", value1, value2, "ordernum");
-			return (Criteria) this;
-		}
-
-		public Criteria andOrdernumNotBetween(Integer value1, Integer value2) {
-			addCriterion("ordernum not between", value1, value2, "ordernum");
-			return (Criteria) this;
-		}
-
+		
 		public Criteria andClicknumIsNull() {
 			addCriterion("clicknum is null");
 			return (Criteria) this;
@@ -577,16 +445,6 @@ public class BrandExample extends BaseExample {
 			return (Criteria) this;
 		}
 
-		public Criteria andClicknumIn(List<Integer> values) {
-			addCriterion("clicknum in", values, "clicknum");
-			return (Criteria) this;
-		}
-
-		public Criteria andClicknumNotIn(List<Integer> values) {
-			addCriterion("clicknum not in", values, "clicknum");
-			return (Criteria) this;
-		}
-
 		public Criteria andClicknumBetween(Integer value1, Integer value2) {
 			addCriterion("clicknum between", value1, value2, "clicknum");
 			return (Criteria) this;
@@ -611,12 +469,6 @@ public class BrandExample extends BaseExample {
 		}
 	}
 
-	/**
-	 * This class was generated by MyBatis Generator. This class corresponds to
-	 * the database table shop_brand
-	 * 
-	 * @mbggenerated Mon Mar 16 15:17:19 CST 2015
-	 */
 	public static class Criterion {
 		private String condition;
 

@@ -9,12 +9,9 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.gsccs.b2c.plat.deliver.model.Corp;
-import com.gsccs.b2c.plat.deliver.model.Templet;
 import com.gsccs.b2c.plat.deliver.service.DeliverService;
-import com.gsccs.b2c.plat.utils.BeanUtilsEx;
-import com.gsccs.eb.api.domain.deliver.DeliverType;
-import com.gsccs.eb.api.domain.deliver.DlyCorp;
+import com.gsccs.eb.api.domain.deliver.Corp;
+import com.gsccs.eb.api.domain.deliver.Templet;
 
 /**
  * 物流服务层
@@ -28,106 +25,27 @@ public class DeliverServiceAPI implements DeliverServiceI {
 
 	// 物流公司信息保存
 	@Override
-	public void saveDlyCorp(DlyCorp d) {
-		Corp t = new Corp();
-		try {
-			BeanUtils.copyProperties(t, d);
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
-		deliverService.saveDeliver(t);
+	public void saveCorp(Corp corp) {
+		deliverService.saveCorp(corp);
 	}
 
-	// 根据ID更新物流公司信息
-	@Override
-	public void updateDlyCorp(DlyCorp d) {
-		Corp t = new Corp();
-		try {
-			BeanUtils.copyProperties(t, d);
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
-		deliverService.updateDeliver(t);
-	}
-
+	
 	// 通过ID查询一条物流公司
 	@Override
-	public DlyCorp findDlyCorp(Integer id) {
-
-		Corp t = deliverService.find(id);
-		if(null !=t){
-			DlyCorp d = new DlyCorp();
-			BeanUtilsEx.copyProperties(d, t);
-			return d;
-		}
-		return null;
-		
+	public Corp findCorp(Integer id) {
+		return deliverService.getCorp(id);
 	}
 
 	// 查询所有物流公司列表
 	@Override
-	public List<DlyCorp> findCorps(DlyCorp param, int currPage, int pageSize) {
-		List<DlyCorp> domianList = new ArrayList<DlyCorp>();
-		List<Corp> datas = null;
-		Corp param_ = new Corp();
-		if (null != param) {
-			try {
-				BeanUtils.copyProperties(param_, param);
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			}
-		}
-		datas = deliverService.find(param_, "", currPage, pageSize, true);
-
-		DlyCorp d = null;
-		for (Corp t : datas) {
-			d = new DlyCorp();
-			try {
-				BeanUtils.copyProperties(d, t);
-				domianList.add(d);
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			}
-		}
-		return domianList;
+	public List<Corp> findCorps(Corp param, int currPage, int pageSize) {
+		List<Corp> corpList = deliverService.find(param, "", currPage, pageSize, true);
+		return corpList;
 	}
 
 	@Override
-	public List<DeliverType> findDeliverTypeList(DeliverType param, int currPage, int pageSize) {
-		List<DeliverType> typeList = new ArrayList<DeliverType>();
-		List<Templet> datas = null;
-		Templet param_ = new Templet();
-		if (null != param) {
-			try {
-				BeanUtils.copyProperties(param_, param);
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			}
-		}
-		datas = deliverService.find(param_, "", currPage, pageSize, true);
-
-		DeliverType d = null;
-		for (Templet t : datas) {
-			d = new DeliverType();
-			try {
-				BeanUtils.copyProperties(d, t);
-				typeList.add(d);
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			}
-		}
+	public List<Templet> findTypeList(Templet param, int currPage, int pageSize) {
+		List<Templet> typeList = deliverService.find(param, "", currPage, pageSize, true);
 		return typeList;
 	}
 
@@ -179,15 +97,15 @@ public class DeliverServiceAPI implements DeliverServiceI {
 	}
 
 	@Override
-	public List<DeliverType> findDeliverTypes(Long siteId) {
+	public List<Templet> findDeliverTypes(Long siteId) {
 		Templet deliverTypeT = new Templet();
 		deliverTypeT.setSiteid(siteId);
 		
-		List<DeliverType> dList = new ArrayList<DeliverType>();
-		DeliverType dType = null;
+		List<Templet> dList = new ArrayList<Templet>();
+		Templet dType = null;
 		List<Templet> dtList =deliverService.get(deliverTypeT);
 		for (Templet dTypeT : dtList) {
-			dType = new DeliverType();
+			dType = new Templet();
 			try {
 				BeanUtils.copyProperties(dType, dTypeT);
 				dList.add(dType);
@@ -202,7 +120,7 @@ public class DeliverServiceAPI implements DeliverServiceI {
 	}
 
 	@Override
-	public void delDeliverType(String ids) {
+	public void delType(String ids) {
 		String[] pids = ids.split(",");
 		if(pids !=null){
 			for (String s : pids) {
@@ -212,7 +130,7 @@ public class DeliverServiceAPI implements DeliverServiceI {
 	}
 
 	@Override
-	public int count(DeliverType dt) {
+	public int count(Templet dt) {
 		Templet dtt= new Templet();
 		if(null != dt){
 			try {
@@ -226,67 +144,17 @@ public class DeliverServiceAPI implements DeliverServiceI {
 		return deliverService.count(dtt);
 	}
 
-	@Override
-	public List<DlyCorp> findCorps() {
-		List<DlyCorp> dcList = new ArrayList<DlyCorp>();
-		DlyCorp  dc = null;
-		List<Corp> dctList = deliverService.findAllDeliverCorpt();
-		if(null != dctList){
-			for (Corp dct : dctList) {
-				dc = new DlyCorp();
-				try {
-					BeanUtils.copyProperties(dc, dct);
-					dcList.add(dc);
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		return dcList;
-	}
+	
 
 	@Override
-	public void saveDeliverType(DeliverType deliverType) {
-		Templet dtt = new Templet();
-		try {
-			BeanUtils.copyProperties(dtt, deliverType);
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
-		deliverService.saveDeliverTypeT(dtt);
+	public void saveType(Templet templet) {
+		deliverService.saveType(templet);
 	}
 
-	@Override
-	public void updateDeliverType(DeliverType deliverType) {
-		Templet dtt = new Templet();
-		try {
-			BeanUtils.copyProperties(dtt, deliverType);
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
-		deliverService.updateDeliverTypeT(dtt);
-		
-	}
 
 	@Override
-	public DeliverType findDeliverType(String id) {
-		try {
-			Templet dtt = deliverService.find(id);
-			DeliverType dt = new DeliverType();
-			BeanUtils.copyProperties(dt, dtt);
-			return dt;
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
-		return null;
+	public Templet findType(String id) {
+		Templet templet = deliverService.find(id);
+		return templet;
 	}
 }

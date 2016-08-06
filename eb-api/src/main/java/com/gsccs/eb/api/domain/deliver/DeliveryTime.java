@@ -1,6 +1,6 @@
 package com.gsccs.eb.api.domain.deliver;
 
-import com.gsccs.b2c.api.domain.Domain;
+import com.gsccs.eb.api.domain.base.Domain;
 
 /**
  * 发货时间数据结构

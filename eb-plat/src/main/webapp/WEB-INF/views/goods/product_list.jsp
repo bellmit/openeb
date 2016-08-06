@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
     
     <title>管理后台</title>
-    <title>管理后台</title>
     <link href="${pageContext.request.contextPath}/static/ui-v2/css/skin_0.css" rel="stylesheet" type="text/css" id="cssfile" />
 
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/ui-v2/jquery.js"></script>
@@ -95,13 +94,13 @@
             <h3>商品管理</h3>
             <ul class="tab-base">
                 <li><a href="JavaScript:void(0);" class="current"><span>所有商品</span></a></li>
-                <li><a href="http://b2b2c.leimingtech.com/leimingtech-admin/goods/goodsCommon/downList"><span>违规下架商品</span></a></li>
-                <li><a href="http://b2b2c.leimingtech.com/leimingtech-admin/goods/goodsCommon/goodsApply"><span>待审核商品</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/goods/downList"><span>违规下架商品</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/goods/applyList"><span>待审核商品</span></a></li>
             </ul>
         </div>
     </div>
     <div class="fixed-empty"></div>
-    <form method="post" name="formSearch" id="formSearch" action="http://b2b2c.leimingtech.com/leimingtech-admin/goods/goodsCommon/list">
+    <form method="post" name="formSearch" id="formSearch" action="${pageContext.request.contextPath}/goods">
         <input type="hidden" name="pageNo" value="1">
         <table class="tb-type1 noborder search">
             <tbody>
@@ -150,167 +149,9 @@
                     <option value="137">溢彩年华</option>
                     <option value="138">美好家</option>
                     <option value="139">博洋家纺</option>
-                    <option value="3807b748f2264f5b83769e2025ad315e">阿尼亚斯贝</option>
-                    <option value="107">阿迪达斯</option>
-                    <option value="108">李宁</option>
-                    <option value="109">宝姿</option>
-                    <option value="110">佐丹奴</option>
-                    <option value="112">百丽</option>
-                    <option value="113">梦特娇</option>
-                    <option value="114">骆驼</option>
-                    <option value="115">猫人</option>
-                    <option value="116">皮尔卡丹</option>
-                    <option value="117">RDK</option>
-                    <option value="118">康妮雅</option>
-                    <option value="119">justyle</option>
-                    <option value="120">享爱.</option>
-                    <option value="121">派丽蒙</option>
-                    <option value="122">茵曼（INMAN）</option>
-                    <option value="123">她他/tata</option>
-                    <option value="124">缪诗</option>
-                    <option value="125">真维斯</option>
-                    <option value="126">金利来</option>
-                    <option value="78">诺基亚</option>
-                    <option value="79">摩托罗拉</option>
-                    <option value="80">苹果2</option>
-                    <option value="81">HTC</option>
-                    <option value="82">罗技</option>
-                    <option value="83">TP-LINK</option>
-                    <option value="84">金士顿</option>
-                    <option value="85">雷蛇</option>
-                    <option value="86">爱普生</option>
-                    <option value="87">DELL</option>
-                    <option value="88">索尼</option>
-                    <option value="89">富勒</option>
-                    <option value="90">雷柏</option>
-                    <option value="91">双飞燕</option>
-                    <option value="92">山泽</option>
-                    <option value="93">三木</option>
-                    <option value="94">迈乐</option>
-                    <option value="95">惠普</option>
-                    <option value="96">索爱</option>
-                    <option value="97">飞毛腿</option>
-                    <option value="98">阿尔卡特</option>
-                    <option value="99">D-Link</option>
-                    <option value="100">台电</option>
-                    <option value="101">ThinkPad</option>
-                    <option value="102">得力</option>
-                    <option value="103">acer</option>
-                    <option value="104">清华同方</option>
-                    <option value="105">富士通</option>
-                    <option value="106">微软</option>
-                    <option value="140">小米</option>
-                    <option value="59">海尔</option>
-                    <option value="60">LG</option>
-                    <option value="61">飞利浦</option>
-                    <option value="62">松下</option>
-                    <option value="63">奥克斯</option>
-                    <option value="64">三洋</option>
-                    <option value="65">奔腾</option>
-                    <option value="66">西门子</option>
-                    <option value="67">三星</option>
-                    <option value="68">格兰仕</option>
-                    <option value="69">艾力斯特</option>
-                    <option value="70">苏泊尔</option>
-                    <option value="71">伊莱克斯</option>
-                    <option value="72">创维</option>
-                    <option value="73">三菱电机</option>
-                    <option value="74">TCL</option>
-                    <option value="75">夏普</option>
-                    <option value="76">格力</option>
-                    <option value="77">九阳</option>
-                    <option value="41">珀莱雅</option>
-                    <option value="42">护舒宝</option>
-                    <option value="43">娇兰</option>
-                    <option value="44">兰蔻</option>
-                    <option value="45">妮维雅</option>
-                    <option value="46">高丝洁</option>
-                    <option value="47">高丝</option>
-                    <option value="48">佳洁士</option>
                     <option value="49">纪梵希</option>
                     <option value="50">卡尼尔</option>
                     <option value="51">娇爽</option>
-                    <option value="52">苏菲</option>
-                    <option value="53">芙丽芳丝</option>
-                    <option value="54">波斯顿</option>
-                    <option value="55">雅诗兰黛</option>
-                    <option value="56">资生堂</option>
-                    <option value="57">相宜本草</option>
-                    <option value="58">薇姿</option>
-                    <option value="37">高仕</option>
-                    <option value="38">佐卡伊</option>
-                    <option value="39">瑞士军刀</option>
-                    <option value="40">蓝色多瑙河</option>
-                    <option value="27">汤臣倍健</option>
-                    <option value="28">白兰氏</option>
-                    <option value="29">同仁堂</option>
-                    <option value="30">善存</option>
-                    <option value="31">长城葡萄酒</option>
-                    <option value="32">新西兰十一坊</option>
-                    <option value="33">Lumi</option>
-                    <option value="34">养生堂</option>
-                    <option value="19">金史密斯（KINGSMITH）</option>
-                    <option value="20">BH (必艾奇)</option>
-                    <option value="21">威尔胜</option>
-                    <option value="22">皮尔瑜伽</option>
-                    <option value="23">以诗萜</option>
-                    <option value="24">斯伯丁</option>
-                    <option value="25">远洋瑜伽</option>
-                    <option value="26">捷安特</option>
-                    <option value="4">费雪</option>
-                    <option value="5">美斯特伦</option>
-                    <option value="6">惠氏</option>
-                    <option value="7">美赞臣</option>
-                    <option value="8">布朗博士</option>
-                    <option value="9">乐高</option>
-                    <option value="10">嘉宝</option>
-                    <option value="11">多美</option>
-                    <option value="12">雀巢</option>
-                    <option value="13">妈咪宝贝</option>
-                    <option value="14">强生</option>
-                    <option value="15">澳优</option>
-                    <option value="16">雅培</option>
-                    <option value="17">亨氏</option>
-                    <option value="18">十月妈咪</option>
-                    <option value="1">中国移动</option>
-                    <option value="2">中国电信</option>
-                    <option value="3">中国联通</option>
-                    <option value="141">乐视</option>
-                    <option value="142">格莱帝</option>
-                    <option value="322de12474e048c6a4c6975aa0319c55">呵呵呵商品</option>
-                    <option value="7e12a0c0333944c09d34d2ef96e360c1">1111</option>
-                    <option value="c66f117297fa4b46a31d1bb6ddc6d56a">消费娱乐</option>
-                    <option value="e5f8e0f24de54b9ba00e4a323c54da99">长虹电视</option>
-                    <option value="179">DR</option>
-                    <option value="180">三只松鼠</option>
-                    <option value="181">星巴克</option>
-                    <option value="182">无名缘米粉</option>
-                    <option value="183">零食铺</option>
-                    <option value="184">大白兔</option>
-                    <option value="185">恰恰</option>
-                    <option value="186">零舍梧桐</option>
-                    <option value="187">达利园</option>
-                    <option value="188">猪手</option>
-                    <option value="09939d90d9744b37ad06eeb986675e00">C</option>
-                    <option value="0ecb21243cbc4b738e4cf34b8eac10ac">赫莲娜</option>
-                    <option value="183c9d9cb01248a092b3aa2cb81f1502">好奇</option>
-                    <option value="2c0e850a4fdc415ab1f2daf1706063a2">倩碧</option>
-                    <option value="3f10529f5e034d619d389ced4cafb0b1">R</option>
-                    <option value="421b3381fcfa4d4eb9d8990d19540360">Olay</option>
-                    <option value="4268cc45ead84fc1aa89a5c4b3e806ad">悦诗风吟</option>
-                    <option value="4a708b19ca944b3dac6ad3d3a0de9b17">迪奥</option>
-                    <option value="52f155010e784411bc9ae24ea1457052">香奈儿</option>
-                    <option value="69daa4c17840427aa3dc8110c6e37c21">sony</option>
-                    <option value="72ecd2dc993949228ad6d9be46edbba6">贝玲妃</option>
-                    <option value="91a21c818e234ab0bc23dc2dd91d4b32">蜜丝佛陀</option>
-                    <option value="9ab40cefedb6471596ee2056fb0b5642">索尼（测）</option>
-                    <option value="aa222bc30cec4655be8e87a2fb7cfa37">韩都衣舍</option>
-                    <option value="b1bacd67919246a8beedd7bbba643d40">eeeee</option>
-                    <option value="c1fb012c18fe40e284d50c10eedcda99">NARS</option>
-                    <option value="cc7961b3eee44dbea3b4ba29e6f9618f">B</option>
-                    <option value="d870e3e7a7c74691b12ef6332316280d">C</option>
-                    <option value="ea6c637f5c0a4abcabcacd8247099c03">植村秀</option>
-                    <option value="f110930dfffe46809d5c54afd9b4d99d">阿玛尼</option>
                 </select></td>
                 <th><label>商品状态:</label></th>
                 <td>
@@ -436,7 +277,8 @@
 	                <td class="align-center">上架</td>
                     <td class="align-center">已通过</td>
 	                <td class="align-center">
-	                	<p><a href="/product/detail?id=${product.id }" target="_blank">查看</a></p>
+	                	<p><a href="${pageContext.request.contextPath}//goods/form?id=${product.id }" target="_blank">修改</a></p>
+	                	<p><a href="${pageContext.request.contextPath}//goods/detail?id=${product.id }" target="_blank">查看</a></p>
 	                	<p><a href="javascript:void(0);" onclick="goods_lockup('${product.id }');">违规下架</a></p>
 	                </td>
 	            </tr>
@@ -450,31 +292,31 @@
                 <td><input type="checkbox" class="checkall" id="checkallBottom"></td>
                 <td colspan="16"><label for="checkallBottom">全选</label>
                     &nbsp;&nbsp;<a href="JavaScript:void(0);" class="btn" nctype="lockup_batch" onclick="wgxjGoods()"><span>违规下架</span></a> <a href="JavaScript:void(0);" class="btn" nctype="del_batch" onclick="deleteGoods()"><span>删除</span></a>
-<div class="pagination">
-    <ul><li>
-                </li><li><span>首页</span></li>
-                    <li><span class="currentpage">1</span></li>
-                    <li><a class="demo" href="javascript:void(0);" onclick="turnOverPage(2)"><span>2</span></a></li>
-                <li><span>...</span></li>
-                <li><a class="demo" href="javascript:void(0);" onclick="turnOverPage(4)"><span>4</span></a></li>
-                <li><a class="demo" href="javascript:void(0);" onclick="turnOverPage(5)"><span>5</span></a></li>
-                <li><a class="demo" href="javascript:void(0);" onclick="turnOverPage(2)"><span>下一页</span></a></li>
-                <li><a class="demo" href="javascript:void(0);" onclick="turnOverPage(5)"><span>末页</span></a></li>
-        <script language="javascript">
-            function turnOverPage(no) {
-                var queryForm = document.formSearch;
-                if (no >5) {
-                    no =5;
-                }
-                if (no < 1) {
-                    no = 1;
-                }
-                queryForm.pageNo.value=no;
-                queryForm.submit();
-            }
-        </script>
-    </ul>
-</div>
+				<div class="pagination">
+				    <ul><li>
+				                </li><li><span>首页</span></li>
+				                    <li><span class="currentpage">1</span></li>
+				                    <li><a class="demo" href="javascript:void(0);" onclick="turnOverPage(2)"><span>2</span></a></li>
+				                <li><span>...</span></li>
+				                <li><a class="demo" href="javascript:void(0);" onclick="turnOverPage(4)"><span>4</span></a></li>
+				                <li><a class="demo" href="javascript:void(0);" onclick="turnOverPage(5)"><span>5</span></a></li>
+				                <li><a class="demo" href="javascript:void(0);" onclick="turnOverPage(2)"><span>下一页</span></a></li>
+				                <li><a class="demo" href="javascript:void(0);" onclick="turnOverPage(5)"><span>末页</span></a></li>
+				        <script language="javascript">
+				            function turnOverPage(no) {
+				                var queryForm = document.formSearch;
+				                if (no >5) {
+				                    no =5;
+				                }
+				                if (no < 1) {
+				                    no = 1;
+				                }
+				                queryForm.pageNo.value=no;
+				                queryForm.submit();
+				            }
+				        </script>
+				    </ul>
+				</div>
             </td></tr>
             </tfoot>
         </table>

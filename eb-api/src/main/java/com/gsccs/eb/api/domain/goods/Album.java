@@ -2,7 +2,7 @@ package com.gsccs.eb.api.domain.goods;
 
 import java.util.Date;
 
-import com.gsccs.b2c.api.domain.Domain;
+import com.gsccs.eb.api.domain.base.Domain;
 
 /**
  * 产品图片

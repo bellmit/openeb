@@ -29,7 +29,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.CacheConst;
-import com.gsccs.b2c.api.domain.Account;
 import com.gsccs.b2c.api.service.BuyerServiceI;
 import com.gsccs.b2c.api.service.EvalServiceI;
 import com.gsccs.b2c.api.service.ProductServiceI;
@@ -40,6 +39,7 @@ import com.gsccs.b2c.app.core.FreeMarkerUtil;
 import com.gsccs.b2c.app.core.JsonMsg;
 import com.gsccs.b2c.web.api.service.RedisService;
 import com.gsccs.b2c.web.api.service.SsdbService;
+import com.gsccs.eb.api.domain.base.Account;
 import com.gsccs.eb.api.domain.buyer.Deliver;
 import com.gsccs.eb.api.domain.goods.Product;
 import com.gsccs.eb.api.domain.goods.Sku;
@@ -110,7 +110,7 @@ public class OrderController {
 			Sku sku = goodsAPI.getSku(siteId, pid, skuid);
 			if (null != sku) {
 				item.setSkuid(skuid);
-				item.setSpecstr(sku.getSpecStr());
+				item.setSpecstr(sku.getSpecstr());
 			}
 
 			ssdbService.addOrderItems(CacheConst.ORDER_LIST_ + username + "_"
@@ -505,7 +505,7 @@ public class OrderController {
 						+ account, item.getId());
 			}
 			Order order = new Order();
-			order.setStoreid(siteId);
+			order.setShopid(siteId);
 			order.setBuyerid(user.getUserId());
 			order.setShipfee(Double.valueOf(shipfee));
 			order.setTotalfee(totalfee);

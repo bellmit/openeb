@@ -33,7 +33,7 @@ public interface ProductMapper {
 	List<Product> selectPageByExample(
 			@Param("example") ProductExample example);
 	
-	Product selectByPrimaryKey(@Param("sid") Long sid, @Param("id") Long id);
+	Product selectByPrimaryKey(@Param("id") Long id);
 
 	int updateByExampleSelective(@Param("record") Product record,
 			@Param("example") ProductExample example);

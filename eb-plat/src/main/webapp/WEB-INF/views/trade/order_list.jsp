@@ -110,9 +110,9 @@
 	        <tr class="hover">
 	            <td>${order.id }-${order.serial }</td>
 	            <td>${order.buyerid }</td>
-	            <td class="nowrap align-center">${order.addtime }</td>
+	            <td class="nowrap align-center">${order.adddatestr }</td>
 	            <td class="align-center">${order.totalfee }</td>
-	            <td class="align-center">${order.payfee }</td>
+	            <td class="align-center">${order.payedfee }</td>
 	            <td class="align-center">支付宝</td>
 	            <td class="align-center">已取消</td>
 	            <td class="w144 align-center"><a href="${pageContext.request.contextPath}/orders/show?id=${order.id}">查看</a>

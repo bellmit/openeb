@@ -1,6 +1,6 @@
 package com.gsccs.eb.api.domain.goods;
 
-import com.gsccs.b2c.api.domain.Domain;
+import com.gsccs.eb.api.domain.base.Domain;
 
 /**
  * Sku结构
@@ -20,12 +20,12 @@ public class Sku extends Domain {
 	/**
 	 * 产品ID
 	 */
-	private Long productid;
+	private Long goodsid;
 
 	/**
 	 * 商品级别的条形码
 	 */
-	private String barcode;
+	private String serial;
 
 	/**
 	 * sku创建日期 时间格式：yyyy-MM-dd HH:mm:ss
@@ -50,7 +50,7 @@ public class Sku extends Domain {
 	/**
 	 * 产品的成本价格
 	 */
-	private Double cost;
+	private Double costprice;
 
 	/**
 	 * 商品的重量，用于按重量计费的运费模板。注意：单位为kg
@@ -58,27 +58,9 @@ public class Sku extends Domain {
 	private Double weight;
 
 	/**
-	 * sku的销售属性组合字符串（颜色，大小，等等，可通过类目API获取某类目下的销售属性）,格式是p1:v1;p2:v2
-	 */
-	private String specIds;
-
-	private String specValIds;
-
-	/**
-	 * sku所对应的销售属性的中文名字串，格式如：pid1:vid1:pid_name1:vid_name1;pid2:vid2:pid_name2:
-	 * vid_name2……
-	 */
-	private String specStr;
-
-	/**
 	 * 属于这个sku的商品的数量，（库存）
 	 */
 	private Integer storenum;
-
-	/**
-	 * sku状态。 normal:正常 ；delete:删除
-	 */
-	private String status;
 
 	/**
 	 * 商品在付款减库存的状态下，该sku上未付款的订单数量
@@ -90,6 +72,14 @@ public class Sku extends Domain {
 	 */
 	private Integer salenum;
 
+	/**
+	 * sku状态。 normal:正常 ；delete:删除
+	 */
+	private String status;
+
+	private String specids;
+	private String specstr;
+
 	public Long getId() {
 		return id;
 	}
@@ -98,12 +88,20 @@ public class Sku extends Domain {
 		this.id = id;
 	}
 
-	public String getBarcode() {
-		return barcode;
+	public Long getGoodsid() {
+		return goodsid;
 	}
 
-	public void setBarcode(String barcode) {
-		this.barcode = barcode;
+	public void setGoodsid(Long goodsid) {
+		this.goodsid = goodsid;
+	}
+
+	public String getSerial() {
+		return serial;
+	}
+
+	public void setSerial(String serial) {
+		this.serial = serial;
 	}
 
 	public String getCreated() {
@@ -130,46 +128,6 @@ public class Sku extends Domain {
 		this.price = price;
 	}
 
-	public String getSpecIds() {
-		return specIds;
-	}
-
-	public void setSpecIds(String specIds) {
-		this.specIds = specIds;
-	}
-
-	public String getSpecValIds() {
-		return specValIds;
-	}
-
-	public void setSpecValIds(String specValIds) {
-		this.specValIds = specValIds;
-	}
-
-	public String getSpecStr() {
-		return specStr;
-	}
-
-	public void setSpecStr(String specStr) {
-		this.specStr = specStr;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public Long getProductid() {
-		return productid;
-	}
-
-	public void setProductid(Long productid) {
-		this.productid = productid;
-	}
-
 	public Double getMkprice() {
 		return mkprice;
 	}
@@ -178,12 +136,12 @@ public class Sku extends Domain {
 		this.mkprice = mkprice;
 	}
 
-	public Double getCost() {
-		return cost;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setCost(Double cost) {
-		this.cost = cost;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public Double getWeight() {
@@ -216,6 +174,30 @@ public class Sku extends Domain {
 
 	public void setSalenum(Integer salenum) {
 		this.salenum = salenum;
+	}
+
+	public Double getCostprice() {
+		return costprice;
+	}
+
+	public void setCostprice(Double costprice) {
+		this.costprice = costprice;
+	}
+
+	public String getSpecids() {
+		return specids;
+	}
+
+	public void setSpecids(String specids) {
+		this.specids = specids;
+	}
+
+	public String getSpecstr() {
+		return specstr;
+	}
+
+	public void setSpecstr(String specstr) {
+		this.specstr = specstr;
 	}
 
 }

@@ -18,7 +18,7 @@ import com.gsccs.b2c.plat.bass.Datagrid;
 import com.gsccs.b2c.plat.bass.JsonMsg;
 import com.gsccs.b2c.plat.seller.model.SellerAccount;
 import com.gsccs.b2c.plat.seller.service.SellerService;
-import com.gsccs.b2c.plat.seller.service.StoreService;
+import com.gsccs.b2c.plat.seller.service.ShopService;
 
 /**
  * 商城卖家管理控制类
@@ -31,38 +31,32 @@ import com.gsccs.b2c.plat.seller.service.StoreService;
 public class SellerController {
 
 	@Autowired
-	private StoreService storeService;
+	private ShopService storeService;
 	@Autowired
 	private SellerService sellerService;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String list() {
-		return "store/seller-list";
-	}
-
+	
 	/**
 	 * 店铺列表信息
-	 * 
-	 * @param store
+	 * @param account
+	 * @param order
+	 * @param currPage
+	 * @param pageSize
 	 * @param map
-	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value = "/datagrid", method = RequestMethod.POST)
-	@ResponseBody
-	public Datagrid sellerList(SellerAccount account,
+	@RequestMapping(method = RequestMethod.GET)
+	public String list(SellerAccount account,
 			@RequestParam(defaultValue = "") String order,
 			@RequestParam(defaultValue = "1") int currPage,
-			@RequestParam(defaultValue = "10") int pageSize, ModelMap map,
-			HttpServletRequest request) {
-		Datagrid datagrid = new Datagrid();
+			@RequestParam(defaultValue = "10") int pageSize,
+			ModelMap map) {
 		List<SellerAccount> sellerlist = sellerService.find(account, order,
 				currPage, pageSize);
-		int count = sellerService.count(account);
-		datagrid.setRows(sellerlist);
-		datagrid.setTotal(Long.valueOf(count));
-		return datagrid;
+		map.put("sellerList", sellerlist);
+		return "seller/seller-list";
 	}
+
 
 	/**
 	 * 卖家表单
@@ -71,8 +65,8 @@ public class SellerController {
 	 * @param map
 	 * @return
 	 */
-	@RequestMapping("/dataform")
-	public String dataform(Long id,Long storeId,ModelMap map) {
+	@RequestMapping("/form")
+	public String sellerform(Long id,Long storeId,ModelMap map) {
 		SellerAccount account = null;
 		if (null != id) {
 			account = sellerService.findById(id);

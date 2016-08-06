@@ -3,8 +3,8 @@ package com.gsccs.b2c.store.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gsccs.b2c.api.domain.Account;
 import com.gsccs.b2c.api.service.SellerServiceI;
+import com.gsccs.eb.api.domain.base.Account;
 
 
 @Service

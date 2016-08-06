@@ -1,6 +1,6 @@
 package com.gsccs.eb.api.domain.goods;
 
-import com.gsccs.b2c.api.domain.Domain;
+import com.gsccs.eb.api.domain.base.Domain;
 
 /**
  * SKU 规格
@@ -13,7 +13,7 @@ public class SkuSpec extends Domain {
 	private Long id;
 	private Long specid;
 	private Long specvalid;
-	private Long productid;
+	private Long goodsid;
 	private Long skuid;
 
 	public Long getId() {
@@ -40,12 +40,12 @@ public class SkuSpec extends Domain {
 		this.specvalid = specvalid;
 	}
 
-	public Long getProductid() {
-		return productid;
+	public Long getGoodsid() {
+		return goodsid;
 	}
 
-	public void setProductid(Long productid) {
-		this.productid = productid;
+	public void setGoodsid(Long goodsid) {
+		this.goodsid = goodsid;
 	}
 
 	public Long getSkuid() {

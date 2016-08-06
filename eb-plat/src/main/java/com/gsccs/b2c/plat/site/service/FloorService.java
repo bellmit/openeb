@@ -8,48 +8,46 @@ import com.gsccs.eb.api.domain.site.Floor;
 
 /**
  * 首页楼层管理
+ * 
  * @author ZhangTao
- *
+ * 
  */
 public interface FloorService {
 
 	/**
 	 * 添加楼层
-	 * @param siteId
-	 * @param StoreyList
+	 * 
+	 * @param floor
 	 * @return
 	 */
-	public boolean addStorey(Long siteId, StoreyList storeyList,List<Floor> items);
-	
-	public boolean addBanners(Long siteId, List<Banner> items);
-	
+	public void saveFloor(Floor floor);
+
 	/**
 	 * 删除楼层
-	 * @param siteId
+	 * 
 	 * @param storeyid
 	 * @return
 	 */
-	public boolean deleteStorey(Long siteId, String storeyid);
-	
+	public boolean deleteFloor(String id);
+
+	public Floor getFloor(String id);
+
 	/**
 	 * 获取楼层列表
+	 * 
 	 * @param siteid
 	 * @return
 	 */
-	public List<StoreyList> findStoreyList(Long siteid);
-	
-	/**
-	 * 获取楼层内容
-	 * @param siteid
-	 * @return
-	 */
-	public List<Floor> findStoreyItems(Long siteid);
-	
+	public List<Floor> findFloorList(Long shopid);
+
 	/**
 	 * 获取楼层banner
+	 * 
 	 * @param siteid
 	 * @return
 	 */
-	public List<Banner> findStoreyBanners(Long siteid);
-	
+	public List<Banner> findBannerList(Long shopid);
+
+	public boolean addBanners(Long siteId, List<Banner> items);
+
 }

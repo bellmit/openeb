@@ -28,7 +28,7 @@ import com.gsccs.b2c.solr.service.GoodsSolrService;
 import com.gsccs.b2c.solr.service.SolrService;
 import com.gsccs.b2c.store.base.JsonMsg;
 import com.gsccs.b2c.store.service.SsdbService;
-import com.gsccs.eb.api.domain.deliver.DeliverType;
+import com.gsccs.eb.api.domain.deliver.Templet;
 import com.gsccs.eb.api.domain.goods.Album;
 import com.gsccs.eb.api.domain.goods.Brand;
 import com.gsccs.eb.api.domain.goods.Category;
@@ -182,7 +182,7 @@ public class GoodsController {
 
 		long siteId = (Long) request.getSession().getAttribute("siteId");
 
-		List<DeliverType> dtList = deliverServiceAPI.findDeliverTypes(siteId);
+		List<Templet> dtList = deliverServiceAPI.findDeliverTypes(siteId);
 
 		msg.setData(dtList);
 		msg.setSuccess(true);
@@ -273,21 +273,21 @@ public class GoodsController {
 				Sku sku = new Sku();
 				if (null != skuValue[0]) {
 					String specIds = skuValue[0].replaceAll("_", ";");
-					sku.setSpecIds(specIds);
+					sku.setSpecids(specIds);
 				}
 				if (null != skuValue[1]) {
 					String specStr = skuValue[1].replaceAll("  ", ";");
-					sku.setSpecStr(specStr);
+					sku.setSpecstr(specStr);
 				}
-				sku.setBarcode(skuValue[2]);
+				sku.setSerial(skuValue[2]);
 				sku.setStorenum(Integer.parseInt(skuValue[3]));
 				// sku.setQuantity(Long.parseLong(skuValue[3]));
 				sku.setPrice(Double.parseDouble(skuValue[4]));
-				sku.setCost(Double.parseDouble(skuValue[5]));
+				sku.setCostprice(Double.parseDouble(skuValue[5]));
 				sku.setMkprice(Double.parseDouble(skuValue[6]));
 				sku.setWeight(Double.parseDouble(skuValue[7]));
 				sku.setSalenum(Integer.parseInt(skuValue[8]));
-				sku.setProductid(productid);
+				sku.setGoodsid(productid);
 				sku.setCreated(new Date().toString());
 
 				skus.add(sku);
@@ -833,14 +833,14 @@ public class GoodsController {
 					String skuid = skuValue[9];
 					sku = new Sku();
 					sku.setId(Long.valueOf(skuid));
-					sku.setSpecIds(skuValue[0]);
-					sku.setSpecStr(skuValue[1]);
-					sku.setBarcode(skuValue[2]);
+					sku.setSpecids(skuValue[0]);
+					sku.setSpecstr(skuValue[1]);
+					sku.setSerial(skuValue[2]);
 
 					sku.setStorenum(Integer.parseInt(skuValue[3]));
 					// sku.setQuantity(Long.parseLong(skuValue[3]));
 					sku.setPrice(Double.parseDouble(skuValue[4]));
-					sku.setCost(Double.parseDouble(skuValue[5]));
+					sku.setCostprice(Double.parseDouble(skuValue[5]));
 					if (null != skuValue[6] && !skuValue[6].equals("")) {
 						sku.setMkprice(Double.parseDouble(skuValue[6]));
 					}
@@ -851,7 +851,7 @@ public class GoodsController {
 						sku.setSalenum(Integer.parseInt(skuValue[8]));
 					}
 
-					sku.setProductid(product.getId());
+					sku.setGoodsid(product.getId());
 					sku.setCreated(new Date().toString());
 
 					skus.add(sku);
@@ -862,18 +862,18 @@ public class GoodsController {
 					String[] skuValue = s.split("=");
 
 					Sku sku = new Sku();
-					sku.setSpecIds(skuValue[0]);
-					sku.setSpecStr(skuValue[1]);
-					sku.setBarcode(skuValue[2]);
+					sku.setSpecids(skuValue[0]);
+					sku.setSpecstr(skuValue[1]);
+					sku.setSerial(skuValue[2]);
 					sku.setStorenum(Integer.parseInt(skuValue[3]));
 					// sku.setQuantity(Long.parseLong(skuValue[3]));
 					sku.setPrice(Double.parseDouble(skuValue[4]));
-					sku.setCost(Double.parseDouble(skuValue[5]));
+					sku.setCostprice(Double.parseDouble(skuValue[5]));
 					sku.setMkprice(Double.parseDouble(skuValue[6]));
 					sku.setWeight(Double.parseDouble(skuValue[7]));
 					sku.setSalenum(Integer.parseInt(skuValue[8]));
 					// sku.setGoodsQuantity(Long.parseLong(skuValue[8]));
-					sku.setProductid(product.getId());
+					sku.setGoodsid(product.getId());
 					sku.setCreated(new Date().toString());
 
 					skus.add(sku);

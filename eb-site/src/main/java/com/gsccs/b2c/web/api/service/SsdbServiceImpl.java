@@ -18,7 +18,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.CacheConst;
-import com.gsccs.b2c.api.domain.Area;
 import com.gsccs.b2c.api.service.CateServiceI;
 import com.gsccs.b2c.api.service.ConfigServiceI;
 import com.gsccs.b2c.api.service.EvalServiceI;
@@ -26,6 +25,7 @@ import com.gsccs.b2c.api.service.ProductServiceI;
 import com.gsccs.b2c.api.service.ShopServiceI;
 import com.gsccs.b2c.api.service.TradeServiceI;
 import com.gsccs.b2c.api.service.TypeServiceI;
+import com.gsccs.eb.api.domain.base.Area;
 import com.gsccs.eb.api.domain.goods.Album;
 import com.gsccs.eb.api.domain.goods.ProductParam;
 import com.gsccs.eb.api.domain.goods.ProductProp;
@@ -172,13 +172,13 @@ public class SsdbServiceImpl implements SsdbService {
 
 		Map<String, Map<String, String>> valsMap = new LinkedHashMap<String, Map<String, String>>();
 		for (Sku sku : skus) {
-			if (sku == null || StringUtils.isEmpty(sku.getSpecIds().trim())) {
+			if (sku == null || StringUtils.isEmpty(sku.getSpecids().trim())) {
 				break;
 			}
 			// 规格ID
-			String[] specIds = sku.getSpecIds().split(";");
+			String[] specIds = sku.getSpecids().split(";");
 			// 规格标题
-			String[] specStr = sku.getSpecStr().split(";");
+			String[] specStr = sku.getSpecstr().split(";");
 			if (null == specIds || specIds.length <= 0 || null == specStr
 					|| specStr.length <= 0) {
 				break;
@@ -190,7 +190,7 @@ public class SsdbServiceImpl implements SsdbService {
 			skuMap.put("price", sku.getPrice().toString());
 			skuMap.put("mkprice", sku.getMkprice().toString());
 			skuMap.put("storenum", sku.getStorenum().toString());
-			skuMaps.put(sku.getSpecIds(), skuMap);
+			skuMaps.put(sku.getSpecids(), skuMap);
 
 			// String s : specIds
 			for (int i = 0; i < specIds.length; i++) {

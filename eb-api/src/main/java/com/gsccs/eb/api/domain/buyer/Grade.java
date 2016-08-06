@@ -1,9 +1,9 @@
 package com.gsccs.eb.api.domain.buyer;
 
-import com.gsccs.b2c.api.domain.Domain;
+import com.gsccs.eb.api.domain.base.Domain;
 
 /**
- * 品牌
+ * 会员等级
  * 
  * @author x.d zhang
  * 

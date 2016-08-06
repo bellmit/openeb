@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.gsccs.b2c.plat.shop.service.ProductService;
+import com.gsccs.b2c.plat.shop.service.GoodsService;
 import com.gsccs.b2c.plat.shop.service.TypeService;
 import com.gsccs.eb.api.domain.goods.Property;
 import com.gsccs.eb.api.domain.goods.PropsVal;
@@ -17,7 +17,7 @@ public class TypeServiceAPI implements TypeServiceI {
 	private TypeService typeService;
 	
 	@Autowired
-	private ProductService goodsService;
+	private GoodsService goodsService;
 	
 	@Override
 	public List<Specific> findSpecList(Long typeId) {

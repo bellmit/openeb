@@ -31,7 +31,7 @@ public class SellerServiceTest {
 		long s =1001;
 		Shop shop = shopAPI.getShop(s);
 		Assert.assertNull(shop);
-		System.out.println(shop.getTitle());
-		Assert.assertEquals("ss", shop.getTitle());
+		//System.out.println(shop.getTitle());
+		//Assert.assertEquals("ss", shop.getTitle());
 	}
 }

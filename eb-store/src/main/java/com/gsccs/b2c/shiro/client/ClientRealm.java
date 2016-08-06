@@ -12,10 +12,10 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 
-import com.gsccs.b2c.api.domain.Account;
 import com.gsccs.b2c.api.domain.PermissionContext;
 import com.gsccs.b2c.api.service.PermissionServiceI;
 import com.gsccs.b2c.api.service.SellerServiceI;
+import com.gsccs.eb.api.domain.base.Account;
 import com.gsccs.eb.api.exception.ApiException;
 
 /**

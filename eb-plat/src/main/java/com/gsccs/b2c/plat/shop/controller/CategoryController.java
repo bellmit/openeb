@@ -38,18 +38,16 @@ public class CategoryController {
 	public String list(ModelMap map) {
 		List<Category> categorieList = categoryService.queryCateList(1001L, 0L);
 		map.put("categorieList", categorieList);
-		return "store/category_list";
+		return "goods/category-list";
 	}
 
-	
-	@RequestMapping(value="/child",method = RequestMethod.GET)
+	@RequestMapping(value = "/child", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Category> child(Long id) {
 		List<Category> categorieList = categoryService.queryCateList(1001l, id);
 		return categorieList;
 	}
 
-	
 	@RequestMapping(value = "/treeGrid")
 	@ResponseBody
 	public JSONArray cateTree(ModelMap map, Category cate,
@@ -57,19 +55,21 @@ public class CategoryController {
 		return categoryService.findAll(null);
 	}
 
-	@RequiresPermissions("category:create")
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public String showCreateForm(Model model, String pid) {
-		model.addAttribute("op", "新增");
-		model.addAttribute("pid", pid);
-		return "category/edit";
+	@RequestMapping(value = "/form", method = RequestMethod.GET)
+	public String cateForm(Long id,Long parid,Model model) {
+		Category category = null;
+		if (null != id){
+			category = categoryService.findById(id);
+		}
+		model.addAttribute("category", category);
+		model.addAttribute("parid", parid);
+		return "goods/category-edit";
 	}
 
 	@RequiresPermissions("category:create")
-	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@ResponseBody
-	public JsonMsg create(Category category,
-			RedirectAttributes redirectAttributes, String pid) {
+	public JsonMsg cateSave(Category category, String pid) {
 		JsonMsg json = new JsonMsg();
 		if (null != category) {
 			System.out.println("categoryName=" + pid + "=========="
@@ -95,7 +95,6 @@ public class CategoryController {
 		return "category/edit";
 	}
 
-	
 	@RequiresPermissions("category:update")
 	@RequestMapping(value = "/{categoryId}/update", method = RequestMethod.POST)
 	public String update(Category category,

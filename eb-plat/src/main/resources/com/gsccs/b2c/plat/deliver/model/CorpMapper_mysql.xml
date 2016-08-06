@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gsccs.b2c.plat.deliver.dao.DeliverCorpMapper">
-	<!-- 物流公司数据登记 -->
-	<resultMap id="BaseResultMap" type="com.gsccs.b2c.plat.deliver.model.Corp">
+	<resultMap id="BaseResultMap" type="com.gsccs.eb.api.domain.deliver.Corp">
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="name" property="name" jdbcType="VARCHAR" />
 		<result column="code" property="code" jdbcType="VARCHAR" />
@@ -86,7 +85,7 @@
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from plat_deliver
+		from plat_deliver_corp
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -102,7 +101,7 @@
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from plat_deliver
+		from plat_deliver_corp
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -116,31 +115,31 @@
 		parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
-		from plat_deliver
+		from plat_deliver_corp
 		where id = #{id,jdbcType=INTEGER}
 	</select>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from plat_deliver
+		delete from plat_deliver_corp
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 
 	<delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.deliver.model.CorpExample">
-		delete from plat_deliver
+		delete from plat_deliver_corp
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
 	</delete>
 
-	<insert id="insert" parameterType="com.gsccs.b2c.plat.deliver.model.Corp">
-		insert into plat_deliver (id, name, code, website, sort)
+	<insert id="insert" parameterType="com.gsccs.eb.api.domain.deliver.Corp">
+		insert into plat_deliver_corp (id, name, code, website, sort)
 		values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
 		#{code,jdbcType=VARCHAR},
 		#{website,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER})
 	</insert>
 
-	<insert id="insertSelective" parameterType="com.gsccs.b2c.plat.deliver.model.Corp">
-		insert into plat_deliver
+	<insert id="insertSelective" parameterType="com.gsccs.eb.api.domain.deliver.Corp">
+		insert into plat_deliver_corp
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
 				id,
@@ -179,14 +178,14 @@
 
 	<select id="countByExample" parameterType="com.gsccs.b2c.plat.deliver.model.CorpExample"
 		resultType="java.lang.Integer">
-		select count(*) from plat_deliver
+		select count(*) from plat_deliver_corp
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
 	</select>
 
 	<update id="updateByExampleSelective" parameterType="map">
-		update plat_deliver
+		update plat_deliver_corp
 		<set>
 			<if test="record.id != null">
 				id = #{record.id,jdbcType=INTEGER},
@@ -210,7 +209,7 @@
 	</update>
 
 	<update id="updateByExample" parameterType="map">
-		update plat_deliver
+		update plat_deliver_corp
 		set id = #{record.id,jdbcType=INTEGER},
 		name = #{record.name,jdbcType=VARCHAR},
 		code = #{record.code,jdbcType=VARCHAR},
@@ -221,8 +220,8 @@
 		</if>
 	</update>
 
-	<update id="updateByPrimaryKeySelective" parameterType="com.gsccs.b2c.plat.deliver.model.Corp">
-		update plat_deliver
+	<update id="updateByPrimaryKeySelective" parameterType="com.gsccs.eb.api.domain.deliver.Corp">
+		update plat_deliver_corp
 		<set>
 			<if test="name != null">
 				name = #{name,jdbcType=VARCHAR},
@@ -240,8 +239,8 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 
-	<update id="updateByPrimaryKey" parameterType="com.gsccs.b2c.plat.deliver.model.Corp">
-		update plat_deliver
+	<update id="updateByPrimaryKey" parameterType="com.gsccs.eb.api.domain.deliver.Corp">
+		update plat_deliver_corp
 		set name = #{name,jdbcType=VARCHAR},
 		code = #{code,jdbcType=VARCHAR},
 		website = #{website,jdbcType=VARCHAR},
@@ -249,11 +248,11 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 
-	<select id="selectAll" parameterType="com.gsccs.b2c.plat.deliver.model.Corp"
+	<select id="selectAll" parameterType="com.gsccs.eb.api.domain.deliver.Corp"
 		resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
-		from plat_deliver
+		from plat_deliver_corp
 	</select>
 
 </mapper>

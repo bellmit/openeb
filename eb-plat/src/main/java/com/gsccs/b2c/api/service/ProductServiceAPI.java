@@ -8,17 +8,17 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gsccs.b2c.api.APIConst;
-import com.gsccs.b2c.plat.seller.model.Store;
-import com.gsccs.b2c.plat.seller.service.StoreService;
+import com.gsccs.b2c.plat.seller.service.ShopService;
 import com.gsccs.b2c.plat.shop.model.ProductImgT;
 import com.gsccs.b2c.plat.shop.service.CategoryService;
-import com.gsccs.b2c.plat.shop.service.ProductService;
 import com.gsccs.b2c.plat.shop.service.ProductImgService;
+import com.gsccs.b2c.plat.shop.service.GoodsService;
 import com.gsccs.eb.api.domain.buyer.Discount;
 import com.gsccs.eb.api.domain.goods.Album;
 import com.gsccs.eb.api.domain.goods.ItemImg;
 import com.gsccs.eb.api.domain.goods.Product;
 import com.gsccs.eb.api.domain.goods.Sku;
+import com.gsccs.eb.api.domain.seller.Shop;
 import com.gsccs.eb.api.exception.ApiException;
 
 /**
@@ -32,9 +32,9 @@ public class ProductServiceAPI implements ProductServiceI {
 	@Autowired
 	private CategoryService categoryService;
 	@Autowired
-	private ProductService goodsService;
+	private GoodsService goodsService;
 	@Autowired
-	private StoreService storeService;
+	private ShopService shopService;
 	@Autowired
 	private ProductImgService pimgService;
 
@@ -45,7 +45,7 @@ public class ProductServiceAPI implements ProductServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		Store store = storeService.findById(sid);
+		Shop store = shopService.findById(sid);
 		if (null == store) {
 			throw new ApiException(APIConst.ERROR_CODE_0002,
 					APIConst.ERROR_MSG_0002);
@@ -60,12 +60,12 @@ public class ProductServiceAPI implements ProductServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		Store store = storeService.findById(sid);
+		Shop store = shopService.findById(sid);
 		if (null == store) {
 			throw new ApiException(APIConst.ERROR_CODE_0002,
 					APIConst.ERROR_MSG_0002);
 		}
-		Product pt = goodsService.getProduct(sid, pid, true);
+		Product pt = goodsService.getGoods(pid);
 		return pt;
 	}
 
@@ -77,7 +77,7 @@ public class ProductServiceAPI implements ProductServiceI {
 					APIConst.ERROR_MSG_0001);
 		}
 
-		Store store = storeService.findById(sid);
+		Shop store = shopService.findById(sid);
 		if (null == store) {
 			throw new ApiException(APIConst.ERROR_CODE_0002,
 					APIConst.ERROR_MSG_0002);
@@ -107,7 +107,7 @@ public class ProductServiceAPI implements ProductServiceI {
 					APIConst.ERROR_MSG_0001);
 		}
 
-		Store store = storeService.findById(sid);
+		Shop store = shopService.findById(sid);
 		if (null == store) {
 			throw new ApiException(APIConst.ERROR_CODE_0002,
 					APIConst.ERROR_MSG_0002);
@@ -124,7 +124,7 @@ public class ProductServiceAPI implements ProductServiceI {
 					APIConst.ERROR_MSG_0001);
 		}
 
-		Store store = storeService.findById(sid);
+		Shop store = shopService.findById(sid);
 		if (null == store) {
 			throw new ApiException(APIConst.ERROR_CODE_0002,
 					APIConst.ERROR_MSG_0002);
@@ -139,7 +139,6 @@ public class ProductServiceAPI implements ProductServiceI {
 		// goodsService.getProduct(sid, pid, extra)
 		return null;
 	}
-
 
 	@Override
 	public void editProductStatus(Long sid, String ids, String status)
@@ -177,7 +176,7 @@ public class ProductServiceAPI implements ProductServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		Store store = storeService.findById(sid);
+		Shop store = shopService.findById(sid);
 		if (null == store) {
 			throw new ApiException(APIConst.ERROR_CODE_0002,
 					APIConst.ERROR_MSG_0002);
@@ -205,7 +204,7 @@ public class ProductServiceAPI implements ProductServiceI {
 	@Override
 	public void editProductById(Long sid, Long pid, String imgpath)
 			throws ApiException {
-		Product pt = goodsService.getProduct(sid, pid, true);
+		Product pt = goodsService.getGoods(pid);
 		pt.setImg(imgpath);
 		goodsService.editProduct(sid, pt);
 
@@ -214,7 +213,7 @@ public class ProductServiceAPI implements ProductServiceI {
 	@Override
 	public void editProductPrice(Long sid, Long pid, String price)
 			throws ApiException {
-		Product pt = goodsService.getProduct(sid, pid, true);
+		Product pt = goodsService.getGoods(pid);
 		pt.setPrice(Double.parseDouble(price));
 		goodsService.editProduct(sid, pt);
 	}
@@ -225,7 +224,7 @@ public class ProductServiceAPI implements ProductServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		Store store = storeService.findById(sid);
+		Shop store = shopService.findById(sid);
 		if (null == store) {
 			throw new ApiException(APIConst.ERROR_CODE_0002,
 					APIConst.ERROR_MSG_0002);
@@ -260,7 +259,7 @@ public class ProductServiceAPI implements ProductServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		Store store = storeService.findById(sid);
+		Shop store = shopService.findById(sid);
 		if (null == store) {
 			throw new ApiException(APIConst.ERROR_CODE_0002,
 					APIConst.ERROR_MSG_0002);
