@@ -30,9 +30,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.CacheConst;
 import com.gsccs.b2c.api.service.BuyerServiceI;
-import com.gsccs.b2c.api.service.EvalServiceI;
-import com.gsccs.b2c.api.service.ProductServiceI;
 import com.gsccs.b2c.api.service.DeliverServiceI;
+import com.gsccs.b2c.api.service.EvalServiceI;
+import com.gsccs.b2c.api.service.GoodsServiceI;
 import com.gsccs.b2c.api.service.OrderServiceI;
 import com.gsccs.b2c.api.service.ShopServiceI;
 import com.gsccs.b2c.app.core.FreeMarkerUtil;
@@ -41,11 +41,11 @@ import com.gsccs.b2c.web.api.service.RedisService;
 import com.gsccs.b2c.web.api.service.SsdbService;
 import com.gsccs.eb.api.domain.base.Account;
 import com.gsccs.eb.api.domain.buyer.Deliver;
-import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.domain.goods.Goods;
 import com.gsccs.eb.api.domain.goods.Sku;
 import com.gsccs.eb.api.domain.trade.Order;
-import com.gsccs.eb.api.domain.trade.OrderItem;
 import com.gsccs.eb.api.domain.trade.Order.OrderState;
+import com.gsccs.eb.api.domain.trade.OrderItem;
 import com.gsccs.eb.api.exception.ApiException;
 
 import freemarker.template.TemplateModelException;
@@ -64,7 +64,7 @@ public class OrderController {
 	@Autowired
 	private ShopServiceI shopAPI;
 	@Autowired
-	private ProductServiceI goodsAPI;
+	private GoodsServiceI goodsAPI;
 	@Autowired
 	private BuyerServiceI buyerAPI;
 	@Autowired
@@ -102,9 +102,9 @@ public class OrderController {
 
 			Date date = new Date();
 			Long rid = date.getTime();
-			Product product = redisService.getProduct(siteId, pid);
+			Goods product = redisService.getGoods(siteId, pid);
 			OrderItem item = new OrderItem();
-			item.setProductid(pid);
+			item.setGoodsid(pid);
 			item.setTitle(product.getTitle());
 			item.setNum(null == num ? 1 : num);
 			Sku sku = goodsAPI.getSku(siteId, pid, skuid);
@@ -408,8 +408,8 @@ public class OrderController {
 				goodsfee = goodsfee + item.getNum() * item.getPrice();
 				try {
 					// 待结算商品
-					Product p = goodsAPI
-							.getProduct(siteId, item.getProductid());
+					Goods p = goodsAPI
+							.getGoods(siteId, item.getGoodsid());
 					// 物流费用
 					float itemshipfee = logistAPI.calculateFee(siteId,
 							p.getPostage(), null, p.getWeight());
@@ -486,14 +486,14 @@ public class OrderController {
 				totalfee = totalfee + item.getPrice() * item.getNum();
 				totalnum = totalnum + item.getNum();
 				
-				Product p = goodsAPI.getProduct(siteId, item.getProductid());
+				Goods p = goodsAPI.getGoods(siteId, item.getGoodsid());
 				float itemshipfee = logistAPI.calculateFee(siteId,
 						p.getPostage(), null, p.getWeight());
 				shipfee = shipfee + itemshipfee;
 				shiptypeid = p.getPostage();
 				
 				item.setPtitle(p.getTitle());
-				item.setPurl(p.getImg());
+				item.setPurl(p.getMainimg());
 				item.setAccout(totalfee);
 				item.setBuyer(user.getUserId().toString());
 				item.setSeller(siteId.toString());

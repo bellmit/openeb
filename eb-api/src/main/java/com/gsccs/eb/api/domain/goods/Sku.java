@@ -1,5 +1,7 @@
 package com.gsccs.eb.api.domain.goods;
 
+import java.util.List;
+
 import com.gsccs.eb.api.domain.base.Domain;
 
 /**
@@ -79,6 +81,8 @@ public class Sku extends Domain {
 
 	private String specids;
 	private String specstr;
+
+	private List<SkuSpec> specList;
 
 	public Long getId() {
 		return id;
@@ -198,6 +202,14 @@ public class Sku extends Domain {
 
 	public void setSpecstr(String specstr) {
 		this.specstr = specstr;
+	}
+
+	public List<SkuSpec> getSpecList() {
+		return specList;
+	}
+
+	public void setSpecList(List<SkuSpec> specList) {
+		this.specList = specList;
 	}
 
 }

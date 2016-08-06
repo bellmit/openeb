@@ -1,5 +1,6 @@
 package com.gsccs.b2c.plat.shop.controller;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -24,8 +25,9 @@ import com.gsccs.b2c.plat.shop.service.GoodsService;
 import com.gsccs.b2c.plat.shop.service.TypeService;
 import com.gsccs.eb.api.domain.base.Area;
 import com.gsccs.eb.api.domain.goods.Category;
-import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.domain.goods.Goods;
 import com.gsccs.eb.api.domain.goods.Sku;
+import com.gsccs.eb.api.domain.goods.SkuSpec;
 import com.gsccs.eb.api.domain.goods.Type;
 import com.gsccs.eb.api.utils.JsonMsg;
 
@@ -54,8 +56,8 @@ public class GoodsController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "10") int rows, ModelMap map,
-			Product param) {
-		List<Product> list = goodsService.getProducts(param, "", page, rows);
+			Goods param) {
+		List<Goods> list = goodsService.getGoodss(param, "", page, rows);
 		map.addAttribute("productList", list);
 		return "goods/goods_list";
 	}
@@ -95,7 +97,7 @@ public class GoodsController {
 		if (null == id) {
 			return "redirect:/goods/checkcate";
 		}
-		Product goods = goodsService.getGoods(id);
+		Goods goods = goodsService.getGoods(id);
 		List<Sku> skuList = goodsService.getSkuList(id);
 		Type type = typeService.getType(1005l);
 
@@ -105,6 +107,7 @@ public class GoodsController {
 		return view;
 	}
 
+	@ResponseBody
 	@RequestMapping(value = "/addsave", method = RequestMethod.POST)
 	public JsonMsg goodsAdd(GoodsForm goodsForm) {
 		JsonMsg jsonMsg = new JsonMsg();
@@ -112,16 +115,17 @@ public class GoodsController {
 			jsonMsg.setSuccess(false);
 			return jsonMsg;
 		}
-		Product product = new Product();
+		Goods product = new Goods();
 		product.setTitle(goodsForm.getTitle());
 		product.setTypeid(goodsForm.getTypeid());
-		product.setCategoryid(goodsForm.getCateid());
+		product.setCateid(goodsForm.getCateid());
 		product.setBrandid(goodsForm.getBrandid());
-		sku(goodsForm);
-		//goodsService.addProduct(product, skulist);
+		List<Sku> skuList = sku(goodsForm);
+		goodsService.addGoods(product, skuList);
 		return jsonMsg;
 	}
 
+	@ResponseBody
 	@RequestMapping(value = "/editsave", method = RequestMethod.POST)
 	public String goodsUpdate(GoodsForm goods) {
 		if (null != goods) {
@@ -144,23 +148,32 @@ public class GoodsController {
 	}
 	
 	
-	private void sku(GoodsForm goodsForm){
-		Sku sku = new Sku();
+	private List<Sku> sku(GoodsForm goodsForm){
+		List<Sku> skuList = new ArrayList<Sku>();
 		String skuStr = goodsForm.getSpecJson();
 		JSONArray skuArray = JSON.parseArray(skuStr);
 		for(int i=0;i<skuArray.size();i++){
+			Sku sku = new Sku();
 			JSONObject skuobj = skuArray.getJSONObject(i);
-			System.out.println(skuobj.get("specName"));
-			System.out.println(skuobj.get("specGoodsPrice"));
-			System.out.println(skuobj.get("specGoodsSerial"));
-			System.out.println();
-			JSONObject specvalobj = (JSONObject) skuobj.get("specGoodsSpec");
+			sku.setPrice(skuobj.getDouble("specGoodsPrice"));
+			sku.setStorenum(skuobj.getInteger("specGoodsStorage"));
+			System.out.println(skuobj.get("specName") +"|"+skuobj.get("specGoodsPrice")+"|");
+			String specvalstr = skuobj.getString("specGoodsSpec");
+			JSONObject specvalobj = JSON.parseObject(specvalstr);
 			Iterator<String> its = specvalobj.keySet().iterator();
+			List<SkuSpec> specList = new ArrayList<SkuSpec>();
 			while (its.hasNext()) {
 				String key = its.next();
 				System.out.println(key + " " + specvalobj.getString(key));
+				SkuSpec skuSpec = new SkuSpec();
+				skuSpec.setSpecvalid(Long.valueOf(key));
+				specList.add(skuSpec);
 			}
+			sku.setSpecList(specList);
+			skuList.add(sku);
 		}
+		
+		return skuList;
 	}
 
 }

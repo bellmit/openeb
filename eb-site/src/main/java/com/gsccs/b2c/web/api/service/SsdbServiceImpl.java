@@ -21,14 +21,14 @@ import com.gsccs.b2c.api.CacheConst;
 import com.gsccs.b2c.api.service.CateServiceI;
 import com.gsccs.b2c.api.service.ConfigServiceI;
 import com.gsccs.b2c.api.service.EvalServiceI;
-import com.gsccs.b2c.api.service.ProductServiceI;
+import com.gsccs.b2c.api.service.GoodsServiceI;
 import com.gsccs.b2c.api.service.ShopServiceI;
 import com.gsccs.b2c.api.service.TradeServiceI;
 import com.gsccs.b2c.api.service.TypeServiceI;
 import com.gsccs.eb.api.domain.base.Area;
 import com.gsccs.eb.api.domain.goods.Album;
-import com.gsccs.eb.api.domain.goods.ProductParam;
-import com.gsccs.eb.api.domain.goods.ProductProp;
+import com.gsccs.eb.api.domain.goods.GoodsParam;
+import com.gsccs.eb.api.domain.goods.GoodsProp;
 import com.gsccs.eb.api.domain.goods.Sku;
 import com.gsccs.eb.api.domain.rated.EvalGoods;
 import com.gsccs.eb.api.domain.site.Collect;
@@ -47,7 +47,7 @@ public class SsdbServiceImpl implements SsdbService {
 	@Autowired
 	private ShopServiceI shopAPI;
 	@Autowired
-	private ProductServiceI goodsAPI;
+	private GoodsServiceI goodsAPI;
 	@Autowired
 	private CateServiceI cateAPI;
 	@Autowired
@@ -262,7 +262,7 @@ public class SsdbServiceImpl implements SsdbService {
 	}
 
 	@Override
-	public String getProductDesc(Long sid, Long pid) {
+	public String getGoodsDesc(Long sid, Long pid) {
 		// 获取产品描述信息 CacheConst.PRODUCT_DESC_+ siteId + "_" + productId
 		String desc = (String) ssdbTemplate.boundValueOps(
 				CacheConst.PRODUCT_DESC_ + sid + "_" + pid).get();
@@ -275,7 +275,7 @@ public class SsdbServiceImpl implements SsdbService {
 	}
 
 	@Override
-	public JSONArray getProductImgs(Long sid, Long pid) {
+	public JSONArray getGoodsImgs(Long sid, Long pid) {
 
 		JSONArray jsonArray = (JSONArray) ssdbTemplate.boundValueOps(
 				CacheConst.PRODUCT_IMG_LIST_ + sid + "_" + pid).get();
@@ -285,7 +285,7 @@ public class SsdbServiceImpl implements SsdbService {
 		} else {
 			jsonArray = new JSONArray();
 			try {
-				List<Album> goodsImgs = goodsAPI.getProductByPid(sid, pid);
+				List<Album> goodsImgs = goodsAPI.getGoodsByPid(sid, pid);
 				if (null == goodsImgs || goodsImgs.size() <= 0) {
 					for (int i = 0; i < 5; i++) {
 						JSONObject json = new JSONObject();
@@ -333,13 +333,13 @@ public class SsdbServiceImpl implements SsdbService {
 	}
 
 	@Override
-	public void addProductEval(Long sid, Long pid, EvalGoods eval) {
+	public void addGoodsEval(Long sid, Long pid, EvalGoods eval) {
 		ssdbTemplate.boundListOps(
 				CacheConst.PRODUCT_EVAL_LIST_ + sid + "_" + pid).leftPush(eval);
 	}
 
 	@Override
-	public JSONObject getProductEvals(Long sid, Long pid, int page, int rows) {
+	public JSONObject getGoodsEvals(Long sid, Long pid, int page, int rows) {
 		JSONObject json = new JSONObject();
 		int start = page - 1 * rows;
 		List<EvalGoods> evals = ssdbTemplate.boundListOps(
@@ -364,21 +364,21 @@ public class SsdbServiceImpl implements SsdbService {
 		return json;
 	}
 
-	public void addProductProp(Long sid, Long pid, ProductProp prop) {
+	public void addGoodsProp(Long sid, Long pid, GoodsProp prop) {
 		ssdbTemplate.boundListOps(
 				CacheConst.PRODUCT_PROP_LIST_ + sid + "_" + pid).leftPush(prop);
 	}
 
 	@Override
-	public List<ProductProp> getProductProps(Long sid, Long pid) {
-		List<ProductProp> props = ssdbTemplate.boundListOps(
+	public List<GoodsProp> getGoodsProps(Long sid, Long pid) {
+		List<GoodsProp> props = ssdbTemplate.boundListOps(
 				CacheConst.PRODUCT_PROP_LIST_ + sid + "_" + pid).range(0, -1);
 		return props;
 	}
 
 	@Override
-	public List<ProductParam> getProductParam(Long sid, Long pid) {
-		List<ProductParam> params = ssdbTemplate.boundListOps(
+	public List<GoodsParam> getGoodsParam(Long sid, Long pid) {
+		List<GoodsParam> params = ssdbTemplate.boundListOps(
 				CacheConst.PRODUCT_PARAM_LIST_ + sid + "_" + pid).range(0, -1);
 		return params;
 	}
@@ -391,16 +391,16 @@ public class SsdbServiceImpl implements SsdbService {
 	}
 
 	@Override
-	public JSONObject getProductSales(Long sid, Long pid, int page, int rows) {
+	public JSONObject getGoodsSales(Long sid, Long pid, int page, int rows) {
 		JSONObject json = new JSONObject();
 		int start = page - 1 * rows;
 		/*
 		 * List<OrderItem> salelist = ssdbTemplate.boundListOps(
 		 * CacheConst.PRODUCT_SALE_LIST_ + sid + "_" + pid).range(start, rows);
 		 * if (null == salelist || salelist.size() <= 0) { json =
-		 * tradeAPI.getProductSaleList_m(sid, pid, page, rows); }
+		 * tradeAPI.getGoodsSaleList_m(sid, pid, page, rows); }
 		 */
-		json = tradeAPI.getProductSaleList_m(sid, pid, page, rows);
+		json = tradeAPI.getGoodsSaleList_m(sid, pid, page, rows);
 		return json;
 	}
 

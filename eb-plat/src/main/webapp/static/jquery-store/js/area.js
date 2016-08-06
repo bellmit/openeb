@@ -29,7 +29,7 @@ $(function(){
 						/*if(area_id!=null&&area_id!=""&&jsonObj[i].areaId==area_id){
 							$li += '<option selected value='+jsonObj[i].areaId+'>'+jsonObj[i].areaName+'</option>'
 						}else{*/
-							$li += '<option value='+jsonObj[i].id+'>'+jsonObj[i].name+'</option>'
+							$li += '<option value='+jsonObj[i].code+'>'+jsonObj[i].name+'</option>'
 						/*}*/
 					}
 			 	}
@@ -91,7 +91,7 @@ function getqu(idtype){
 				 	var jsonObj = data;
 				 		//eval("(" + data.result + ")");
 					for ( var i = 0; i < jsonObj.length; i++) {
-						$li += '<option value='+jsonObj[i].id+'>'+jsonObj[i].name+'</option>'
+						$li += '<option value='+jsonObj[i].code+'>'+jsonObj[i].name+'</option>'
 					}
 			 	}
 			 	$li += "</select>";
@@ -142,10 +142,11 @@ function getqu(idtype){
 					 success:function(data) {
 					 	var $li ='<select name="city" class="select" id="city" onchange="getqu(1);">';
 					 		$li +='<option selected="selected" value="0">请选择</option>';
-					 	if(data.result!='null'){
-						 	var jsonObj = eval("(" + data.result + ")");
+					 	if(data){
+						 	var jsonObj = data;
+						 	//eval("(" + data.result + ")");
 							for ( var i = 0; i < jsonObj.length; i++) {
-								$li += '<option value='+jsonObj[i].areaId+'>'+jsonObj[i].areaName+'</option>'
+								$li += '<option value='+jsonObj[i].code+'>'+jsonObj[i].name+'</option>'
 							}
 					 	}
 					 	$li += "</select>";
@@ -163,10 +164,11 @@ function getqu(idtype){
 	    		   				 success:function(data) {
 	    		   				 	var $li ='<select name="qu" class="select" id="qu" onchange="getqu(2);">';
 	    		   				 		$li +='<option selected="selected" value="0">请选择</option>';
-	    		   				 	if(data.result!='null'){
-	    		   					 	var jsonObj = eval("(" + data.result + ")");
+	    		   				 	if(data){
+	    		   					 	var jsonObj = data;
+	    		   					 	//eval("(" + data.result + ")");
 	    		   						for ( var i = 0; i < jsonObj.length; i++) {
-	    		   							$li += '<option value='+jsonObj[i].areaId+'>'+jsonObj[i].areaName+'</option>'
+	    		   							$li += '<option value='+jsonObj[i].code+'>'+jsonObj[i].name+'</option>'
 	    		   						}
 	    		   				 	}
 	    		   				 	$li += "</select>";

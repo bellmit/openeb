@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gsccs.b2c.plat.shop.service.CartService;
 import com.gsccs.b2c.plat.shop.service.GoodsService;
-import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.domain.goods.Goods;
 import com.gsccs.eb.api.domain.trade.CartItem;
 
 /**
@@ -28,9 +28,9 @@ public class CartServiceAPI implements CartServiceI {
 		List<CartItem> carts = cartService.find(siteId, buyerid);
 		if (carts.size() > 0) {
 			for (CartItem cartItem : carts) {
-				Product product = goodsService.getGoods(cartItem.getPid());
+				Goods product = goodsService.getGoods(cartItem.getPid());
 				cartItem.setDesc(product.getRemark());
-				cartItem.setPicUrl(product.getImg());
+				cartItem.setPicUrl(product.getMainimg());
 				cartItem.setPrice(product.getPrice());
 				cartItem.setMktPrice(product.getMkprice());
 			}
@@ -64,10 +64,10 @@ public class CartServiceAPI implements CartServiceI {
 	@Override
 	public CartItem getCart(Long siteId, Long id) {
 		CartItem cartItem = cartService.getCart(siteId, id);
-		Product product = goodsService.getGoods(cartItem.getPid());
+		Goods product = goodsService.getGoods(cartItem.getPid());
 
 		cartItem.setDesc(product.getRemark());
-		cartItem.setPicUrl(product.getImg());
+		cartItem.setPicUrl(product.getMainimg());
 		cartItem.setMktPrice(product.getMkprice());
 		return cartItem;
 	}

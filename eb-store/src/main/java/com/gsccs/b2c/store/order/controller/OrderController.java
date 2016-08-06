@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gsccs.b2c.api.service.ProductServiceI;
+import com.gsccs.b2c.api.service.GoodsServiceI;
 import com.gsccs.b2c.api.service.DeliverServiceI;
 import com.gsccs.b2c.api.service.OrderServiceI;
 import com.gsccs.b2c.store.base.JsonMsg;
 import com.gsccs.eb.api.domain.deliver.Templet;
 import com.gsccs.eb.api.domain.deliver.Corp;
-import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.domain.goods.Goods;
 import com.gsccs.eb.api.domain.trade.Order;
 import com.gsccs.eb.api.domain.trade.OrderItem;
 import com.gsccs.eb.api.domain.trade.Order.OrderState;
@@ -42,7 +42,7 @@ public class OrderController {
 	private DeliverServiceI deliverAPI;
 
 	@Autowired
-	private ProductServiceI goodsServiceAPI;
+	private GoodsServiceI goodsServiceAPI;
 
 	/**
 	 * 跳转到订单页面
@@ -119,16 +119,16 @@ public class OrderController {
 		long sid = (Long) request.getSession().getAttribute("siteId");
 		Order order;
 		List<OrderItem> oiList = null;
-		Product product;
+		Goods product;
 		try {
 			order = orderAPI.getOrder(sid, Long.valueOf(id));
 			oiList = orderAPI.getOrderItems(sid, order.getId());
 			System.out.println("oilist=" + oiList.size());
 			// 获得产品Id
 			if (null != oiList && oiList.size() > 0) {
-				long pid = oiList.get(0).getProductid();
+				long pid = oiList.get(0).getGoodsid();
 				if (pid > 0) {
-					product = goodsServiceAPI.getProduct(sid, pid);
+					product = goodsServiceAPI.getGoods(sid, pid);
 					model.addAttribute("product", product);
 				}
 				model.addAttribute("oItemsList", oiList);
@@ -213,7 +213,7 @@ public class OrderController {
 		long sid = (Long) request.getSession().getAttribute("siteId");
 		List<OrderItem> oiList = null;
 		Order order;
-		Product product;
+		Goods product;
 		Templet dt;
 		Corp dc;
 		try {
@@ -221,9 +221,9 @@ public class OrderController {
 			oiList = orderAPI.getOrderItems(sid, order.getId());
 			// 获得产品Id
 			if (null != oiList && oiList.size() > 0) {
-				long pid = oiList.get(0).getProductid();
+				long pid = oiList.get(0).getGoodsid();
 				if (pid > 0) {
-					product = goodsServiceAPI.getProduct(sid, pid);
+					product = goodsServiceAPI.getGoods(sid, pid);
 					if (null != product
 							&& product.getPostage().trim().length() > 0) {
 						dt = deliverAPI.findType(product.getPostage());
@@ -263,7 +263,7 @@ public class OrderController {
 		long sid = (Long) request.getSession().getAttribute("siteId");
 		List<OrderItem> oiList = null;
 		Order order;
-		Product product;
+		Goods product;
 		Templet dt;
 		Corp dc;
 		try {
@@ -271,9 +271,9 @@ public class OrderController {
 			oiList = orderAPI.getOrderItems(sid, order.getId());
 			// 获得产品Id
 			if (null != oiList && oiList.size() > 0) {
-				long pid = oiList.get(0).getProductid();
+				long pid = oiList.get(0).getGoodsid();
 				if (pid > 0) {
-					product = goodsServiceAPI.getProduct(sid, pid);
+					product = goodsServiceAPI.getGoods(sid, pid);
 					if (null != product
 							&& product.getPostage().trim().length() > 0) {
 						dt = deliverAPI.findType(product.getPostage());

@@ -8,7 +8,7 @@ import com.gsccs.eb.api.domain.base.Domain;
  * @author x.d zhang
  * 
  */
-public class ProductParam extends Domain {
+public class GoodsParam extends Domain {
 
 	private static final long serialVersionUID = 2374511556384662169L;
 

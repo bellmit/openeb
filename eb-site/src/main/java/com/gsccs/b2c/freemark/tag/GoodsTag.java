@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gsccs.b2c.web.api.service.RedisService;
-import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.domain.goods.Goods;
 
 import freemarker.core.Environment;
 import freemarker.ext.beans.BeanModel;
@@ -39,7 +39,7 @@ import freemarker.template.TemplateModel;
  * 
  */
 @Service
-public class ProductTag extends BaseDirective implements
+public class GoodsTag extends BaseDirective implements
 		TemplateDirectiveModel {
 	
 	@Autowired
@@ -54,9 +54,9 @@ public class ProductTag extends BaseDirective implements
 		if (body != null) {
 			// 设置循环变量
 			if (loopVars != null && loopVars.length > 0) {
-				Product product = null;
+				Goods product = null;
 				if (StringUtils.isNotEmpty(siteid)) {
-					product = redisService.getProduct(Long.valueOf(siteid), Long.valueOf(productid));
+					product = redisService.getGoods(Long.valueOf(siteid), Long.valueOf(productid));
 				}
 				if (product != null) {
 					loopVars[0] = new BeanModel(product, new BeansWrapper());

@@ -30,9 +30,9 @@ public interface OrderItemMapper {
 	List<OrderItem> selectOrderItems(@Param("sid") Long sid,
 			@Param("oid") Long oid);
 	
-	List<OrderItem> selectProductItems(@Param("sid") Long sid,
+	List<OrderItem> selectGoodsItems(@Param("sid") Long sid,
 			@Param("pid") Long pid);
-	int countProductItems(@Param("sid") Long sid,
+	int countGoodsItems(@Param("sid") Long sid,
 			@Param("pid") Long pid);
 	
 	List<OrderItem> selectIsNotEvalItems(@Param("sid") Long sid,

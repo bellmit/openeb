@@ -554,7 +554,7 @@ $(function(){
 				<select name="area" class="select" id="area" check="needCheck"> 
 					<option value="">请选择</option>
 					<c:forEach items="${areaList }" var="area">
-						<option value="${area.id }">${area.name }</option>
+						<option value="${area.code }">${area.name }</option>
 					</c:forEach>
 				</select> 
 				</span>&nbsp;&nbsp;	
@@ -1111,7 +1111,7 @@ $(function(){
 					"goodsSpec": goodsSpec,//商品规格
 					"goodsColImg": goodsColImg,//颜色自定义图片
 					"goodsForm": goodsForm,//商品类型,1为全新、2为二手
-					"transportId": 0,//运费模板ID，不使用运费模板值为0
+					"transportId": transportId,//运费模板ID，不使用运费模板值为0
 					/* "pyPrice": pyPrice,
 					"kdPrice": kdPrice,
 					"esPrice": esPrice, */

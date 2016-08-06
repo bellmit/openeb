@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.gsccs.eb.api.domain.base.Account;
 import com.gsccs.eb.api.domain.goods.Brand;
 import com.gsccs.eb.api.domain.goods.Category;
-import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.domain.goods.Goods;
 import com.gsccs.eb.api.domain.seller.Shop;
 import com.gsccs.eb.api.domain.site.Navigation;
 
@@ -29,11 +29,11 @@ public interface RedisService {
 	public Category getCategory(Long sid,Long cid);
 	public List<Navigation> getStoreNavs(Long sid);
 	public Brand getBrand(Long sid,Long brandid);
-	public Product getProduct(Long sid,Long pid);
+	public Goods getGoods(Long sid,Long pid);
 	
 	
-	public List<Product> getTopProduct(Long sid);
-	public List<Product> getHotProduct(Long sid);
+	public List<Goods> getTopGoods(Long sid);
+	public List<Goods> getHotGoods(Long sid);
 	
 
 }

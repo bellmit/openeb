@@ -137,7 +137,7 @@ public interface OrderService {
 	 * @param oId
 	 * @return
 	 */
-	public List<OrderItem> findProductSaleItems(Long sid, Long pid);
+	public List<OrderItem> findGoodsSaleItems(Long sid, Long pid);
 
 	/**
 	 * 统计产品销售记录
@@ -146,7 +146,7 @@ public interface OrderService {
 	 * @param pid
 	 * @return
 	 */
-	public int countProductSaleItems(Long sid, Long pid);
+	public int countGoodsSaleItems(Long sid, Long pid);
 
 	/**
 	 * 查询订单记录

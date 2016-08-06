@@ -97,7 +97,7 @@ function gcategoryChange()
 	if (this.value != 0)
 	{
 		var _self = this;
-		var url = APP_BASE + '/goods/class/child';
+		var url = APP_BASE + '/category/child';
 		$.getJSON(url, {'id':this.value,'level':0}, function(data){
 			if (data)
 			{
@@ -140,7 +140,7 @@ function getArea(callback){
 }
 
 var loadSelectCategory = function(id, seletedId, obj){
-	var url = APP_BASE + '/goods/class/child';
+	var url = APP_BASE + '/category/child';
 	$.getJSON(url, {'id':id, 'level':0}, function(data){
 		if (data) {
 			if (data.length > 0) {

@@ -9,9 +9,9 @@ import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
-import com.gsccs.b2c.api.service.ProductServiceI;
+import com.gsccs.b2c.api.service.GoodsServiceI;
 import com.gsccs.b2c.web.api.service.RedisService;
-import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.domain.goods.Goods;
 
 import freemarker.core.Environment;
 import freemarker.ext.beans.BeanModel;
@@ -46,7 +46,7 @@ public class GoodsTopTag extends BaseDirective implements
 		TemplateDirectiveModel {
 
 	@Resource
-	private ProductServiceI goodsAPI;
+	private GoodsServiceI goodsAPI;
 	@Resource
 	private RedisService redisService;
 
@@ -63,7 +63,7 @@ public class GoodsTopTag extends BaseDirective implements
 				if (StringUtils.isNotEmpty(siteid)) {
 					siteId = Long.valueOf(siteid);
 				}
-				List<Product> pList = redisService.getTopProduct(siteId);
+				List<Goods> pList = redisService.getTopGoods(siteId);
 				if (pList != null && pList.size() > 0) {
 					for (int i = 0; i < pList.size(); i++) {
 						loopVars[0] = new BeanModel(pList.get(i),

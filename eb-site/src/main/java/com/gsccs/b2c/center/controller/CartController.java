@@ -23,17 +23,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 import com.gsccs.b2c.api.CacheConst;
 import com.gsccs.b2c.api.service.BuyerServiceI;
-import com.gsccs.b2c.api.service.ProductServiceI;
+import com.gsccs.b2c.api.service.GoodsServiceI;
 import com.gsccs.b2c.api.service.ShopServiceI;
 import com.gsccs.b2c.app.core.FreeMarkerUtil;
 import com.gsccs.b2c.app.core.JsonMsg;
 import com.gsccs.b2c.web.api.service.RedisService;
 import com.gsccs.b2c.web.api.service.SsdbService;
-import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.domain.goods.Goods;
 import com.gsccs.eb.api.domain.goods.Sku;
 import com.gsccs.eb.api.domain.trade.CartItem;
 import com.gsccs.eb.api.domain.trade.OrderItem;
-import com.gsccs.eb.api.exception.ApiException;
 
 import freemarker.template.TemplateModelException;
 
@@ -52,7 +51,7 @@ public class CartController {
 	@Autowired
 	private BuyerServiceI buyerAPI;
 	@Autowired
-	private ProductServiceI goodsAPI;
+	private GoodsServiceI goodsAPI;
 	@Autowired
 	private SsdbService ssdbService;
 	@Autowired
@@ -121,14 +120,14 @@ public class CartController {
 		JsonMsg json = new JsonMsg();
 		Subject subject = SecurityUtils.getSubject();
 		String username = (String) subject.getPrincipal();
-		Product product = null;
+		Goods product = null;
 		if (null == productId) {
 			json.setSuccess(false);
 			json.setMsg("添加购物车失败：商品不存在！");
 			return json;
 		}
 
-		product = redisService.getProduct(siteId, productId);
+		product = redisService.getGoods(siteId, productId);
 		if (null == product) {
 			json.setSuccess(false);
 			json.setMsg("添加购物车失败：商品不存在！");
@@ -137,10 +136,10 @@ public class CartController {
 
 		OrderItem item = new OrderItem();
 		item.setId(productId.toString());
-		item.setProductid(product.getId());
+		item.setGoodsid(product.getId());
 		item.setTitle(product.getTitle());
 		item.setPrice(product.getPrice());
-		item.setPurl(product.getImg());
+		item.setPurl(product.getMainimg());
 		item.setNum(1);
 		item.setAddtime(new Date());
 		if (null != skuId) {

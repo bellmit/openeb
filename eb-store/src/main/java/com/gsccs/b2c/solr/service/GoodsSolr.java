@@ -24,7 +24,7 @@ public class GoodsSolr {
 	@Field
 	private String brandstr;
 	@Field
-	private String productid;//产品id
+	private String goodsid;//产品id
 	@Field
 	private String picurl;//图片地址
 	
@@ -45,7 +45,7 @@ public class GoodsSolr {
 	
 
 	public String getId() {
-		return siteid + productid;
+		return siteid + goodsid;
 	}
 
 	public void setId(String id) {
@@ -149,12 +149,12 @@ public class GoodsSolr {
 		this.catestr = catestr;
 	}
 
-	public String getProductid() {
-		return productid;
+	public String getGoodsid() {
+		return goodsid;
 	}
 
-	public void setProductid(String productid) {
-		this.productid = productid;
+	public void setGoodsid(String goodsid) {
+		this.goodsid = goodsid;
 	}
 
 	public String getPicurl() {

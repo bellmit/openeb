@@ -9,14 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gsccs.b2c.api.APIConst;
 import com.gsccs.b2c.plat.seller.service.ShopService;
-import com.gsccs.b2c.plat.shop.model.ProductImgT;
+import com.gsccs.b2c.plat.shop.service.AlbumService;
 import com.gsccs.b2c.plat.shop.service.CategoryService;
-import com.gsccs.b2c.plat.shop.service.ProductImgService;
 import com.gsccs.b2c.plat.shop.service.GoodsService;
 import com.gsccs.eb.api.domain.buyer.Discount;
 import com.gsccs.eb.api.domain.goods.Album;
+import com.gsccs.eb.api.domain.goods.Goods;
 import com.gsccs.eb.api.domain.goods.ItemImg;
-import com.gsccs.eb.api.domain.goods.Product;
 import com.gsccs.eb.api.domain.goods.Sku;
 import com.gsccs.eb.api.domain.seller.Shop;
 import com.gsccs.eb.api.exception.ApiException;
@@ -27,7 +26,7 @@ import com.gsccs.eb.api.exception.ApiException;
  * @author x.d zhang
  * 
  */
-public class ProductServiceAPI implements ProductServiceI {
+public class GoodsServiceAPI implements GoodsServiceI {
 
 	@Autowired
 	private CategoryService categoryService;
@@ -36,25 +35,10 @@ public class ProductServiceAPI implements ProductServiceI {
 	@Autowired
 	private ShopService shopService;
 	@Autowired
-	private ProductImgService pimgService;
+	private AlbumService albumService;
 
 	@Override
-	public void addSKU(Long sid, Long pid, List<Sku> skuList)
-			throws ApiException {
-		if (null == sid || null == pid) {
-			throw new ApiException(APIConst.ERROR_CODE_0001,
-					APIConst.ERROR_MSG_0001);
-		}
-		Shop store = shopService.findById(sid);
-		if (null == store) {
-			throw new ApiException(APIConst.ERROR_CODE_0002,
-					APIConst.ERROR_MSG_0002);
-		}
-		goodsService.addSkuList(pid, skuList);
-	}
-
-	@Override
-	public Product getProduct(Long sid, Long pid) throws ApiException {
+	public Goods getGoods(Long sid, Long pid) throws ApiException {
 
 		if (null == sid || null == pid) {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
@@ -65,28 +49,23 @@ public class ProductServiceAPI implements ProductServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0002,
 					APIConst.ERROR_MSG_0002);
 		}
-		Product pt = goodsService.getGoods(pid);
+		Goods pt = goodsService.getGoods(pid);
 		return pt;
 	}
 
 	@Override
-	public Long addProduct(Long sid, Product p) throws ApiException {
+	public Long addGoods(Goods param, List<Sku> skuList) throws ApiException {
 
-		if (null == sid || null == p) {
+		if (null == param) {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
 
-		Shop store = shopService.findById(sid);
-		if (null == store) {
-			throw new ApiException(APIConst.ERROR_CODE_0002,
-					APIConst.ERROR_MSG_0002);
-		}
-		return goodsService.addProduct(sid, p);
+		return goodsService.addGoods(param, skuList);
 	}
 
 	@Override
-	public Album uploadProductImg(Long productid, byte[] img, int position,
+	public Album uploadGoodsImg(Long productid, byte[] img, int position,
 			boolean is_major) {
 		// TODO Auto-generated method stub
 		return null;
@@ -136,90 +115,69 @@ public class ProductServiceAPI implements ProductServiceI {
 	@Override
 	public List<Discount> getBuyerDiscounts(Long sid, Long productId,
 			Long goodsid) throws ApiException {
-		// goodsService.getProduct(sid, pid, extra)
+		// goodsService.getGoods(sid, pid, extra)
 		return null;
 	}
 
 	@Override
-	public void editProductStatus(Long sid, String ids, String status)
+	public void editGoodsStatus(Long sid, String ids, String status)
 			throws ApiException {
 		String[] pids = ids.split(",");
 		if (pids != null) {
 			for (String s : pids) {
 				Long pid = Long.valueOf(s);
-				goodsService.editProductStatus(sid, pid, status);
+				goodsService.editGoodsStatus(sid, pid, status);
 			}
 		}
 	}
 
 	@Override
-	public void delProduct(Long sid, String ids) throws ApiException {
+	public void delGoods(Long sid, String ids) throws ApiException {
 		String[] pids = ids.split(",");
 		if (pids != null) {
 			for (String s : pids) {
 				Long pid = Long.valueOf(s);
-				goodsService.delProduct(sid, pid);
+				goodsService.delGoods(sid, pid);
 			}
 		}
 	}
 
 	@Override
-	public void editProduct(Long sid, Product product) throws ApiException {
-		goodsService.editProduct(sid, product);
+	public void editGoods(Long sid, Goods product) throws ApiException {
+		goodsService.editGoods(sid, product);
 	}
 
 	@Override
-	public void editSKU(Long sid, Long pid, List<Sku> items)
-			throws ApiException {
-
-		if (null == sid || null == pid) {
-			throw new ApiException(APIConst.ERROR_CODE_0001,
-					APIConst.ERROR_MSG_0001);
-		}
-		Shop store = shopService.findById(sid);
-		if (null == store) {
-			throw new ApiException(APIConst.ERROR_CODE_0002,
-					APIConst.ERROR_MSG_0002);
-		}
-
-		if (null != items && items.size() > 0) {
-			for (Sku sku : items) {
-				goodsService.editGoods(sid, sku);
-			}
-		}
-	}
-
-	@Override
-	public List<Product> getHotProducts(Long sid) {
-		List<Product> list = goodsService.getHotProducts(sid);
+	public List<Goods> getHotGoodss(Long sid) {
+		List<Goods> list = goodsService.getHotGoodss(sid);
 		return list;
 	}
 
 	@Override
-	public List<Product> getTopProducts(Long sid) {
-		List<Product> list = goodsService.getTopProducts(sid);
+	public List<Goods> getTopGoodss(Long sid) {
+		List<Goods> list = goodsService.getTopGoodss(sid);
 		return list;
 	}
 
 	@Override
-	public void editProductById(Long sid, Long pid, String imgpath)
+	public void editGoodsById(Long sid, Long pid, String imgpath)
 			throws ApiException {
-		Product pt = goodsService.getGoods(pid);
-		pt.setImg(imgpath);
-		goodsService.editProduct(sid, pt);
+		Goods pt = goodsService.getGoods(pid);
+		pt.setMainimg(imgpath);
+		goodsService.editGoods(sid, pt);
 
 	}
 
 	@Override
-	public void editProductPrice(Long sid, Long pid, String price)
+	public void editGoodsPrice(Long sid, Long pid, String price)
 			throws ApiException {
-		Product pt = goodsService.getGoods(pid);
+		Goods pt = goodsService.getGoods(pid);
 		pt.setPrice(Double.parseDouble(price));
-		goodsService.editProduct(sid, pt);
+		goodsService.editGoods(sid, pt);
 	}
 
 	@Override
-	public List<Album> getProductByPid(Long sid, Long pid) throws ApiException {
+	public List<Album> getGoodsByPid(Long sid, Long pid) throws ApiException {
 		if (null == sid || null == pid) {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
@@ -230,25 +188,7 @@ public class ProductServiceAPI implements ProductServiceI {
 					APIConst.ERROR_MSG_0002);
 		}
 
-		List<Album> list = null;
-		List<ProductImgT> ptmList = pimgService.getImgByPid(sid, pid);
-
-		if (null != ptmList && ptmList.size() > 0) {
-			list = new ArrayList<Album>();
-			for (ProductImgT pit : ptmList) {
-				Album p = new Album();
-				try {
-					// 商品Id
-					BeanUtils.copyProperties(p, pit);
-					list.add(p);
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					e.printStackTrace();
-				}
-
-			}
-		}
+		List<Album> list = albumService.getImgByPid(sid, pid);
 		return list;
 	}
 
@@ -266,21 +206,7 @@ public class ProductServiceAPI implements ProductServiceI {
 		}
 
 		if (null != pimgs && pimgs.size() > 0) {
-			List<ProductImgT> pimgts = new ArrayList<ProductImgT>();
-			for (Album pimg : pimgs) {
-				ProductImgT gt = new ProductImgT();
-				try {
-					BeanUtils.copyProperties(gt, pimg);
-					gt.setProductid(pimg.getProductId());
-					pimgts.add(gt);
-
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					e.printStackTrace();
-				}
-			}
-			pimgService.addListImg(sid, pimgts);
+			albumService.addListImg(sid, pimgs);
 		}
 	}
 

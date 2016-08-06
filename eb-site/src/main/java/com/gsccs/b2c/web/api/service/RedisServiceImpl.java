@@ -16,7 +16,7 @@ import com.gsccs.b2c.api.service.BuyerServiceI;
 import com.gsccs.b2c.api.service.CateServiceI;
 import com.gsccs.b2c.api.service.ConfigServiceI;
 import com.gsccs.b2c.api.service.EvalServiceI;
-import com.gsccs.b2c.api.service.ProductServiceI;
+import com.gsccs.b2c.api.service.GoodsServiceI;
 import com.gsccs.b2c.api.service.ShopServiceI;
 import com.gsccs.b2c.api.service.FloorServiceI;
 import com.gsccs.b2c.api.service.TradeServiceI;
@@ -24,7 +24,7 @@ import com.gsccs.b2c.api.service.TypeServiceI;
 import com.gsccs.eb.api.domain.base.Account;
 import com.gsccs.eb.api.domain.goods.Brand;
 import com.gsccs.eb.api.domain.goods.Category;
-import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.domain.goods.Goods;
 import com.gsccs.eb.api.domain.seller.Shop;
 import com.gsccs.eb.api.domain.site.Navigation;
 import com.gsccs.eb.api.exception.ApiException;
@@ -40,7 +40,7 @@ public class RedisServiceImpl implements RedisService {
 	@Autowired
 	private ShopServiceI shopAPI;
 	@Autowired
-	private ProductServiceI goodsAPI;
+	private GoodsServiceI goodsAPI;
 	@Autowired
 	private CateServiceI cateAPI;
 	@Autowired
@@ -186,14 +186,14 @@ public class RedisServiceImpl implements RedisService {
 	}
 
 	@Override
-	public Product getProduct(Long sid, Long pid) {
+	public Goods getGoods(Long sid, Long pid) {
 		// 获取产品信息
-		Product product = null;
+		Goods product = null;
 		try {
-			product = (Product) redisTemplate.boundValueOps(
+			product = (Goods) redisTemplate.boundValueOps(
 					CacheConst.PRODUCT_OBJ_ + sid + "_" + pid).get();
 			if (product == null) {
-				product = goodsAPI.getProduct(sid, pid);
+				product = goodsAPI.getGoods(sid, pid);
 				if (null != product) {
 					redisTemplate.boundValueOps(
 							CacheConst.PRODUCT_OBJ_ + sid + "_" + pid).set(
@@ -205,7 +205,7 @@ public class RedisServiceImpl implements RedisService {
 			}
 		} catch (Exception e) {
 			try {
-				product = goodsAPI.getProduct(sid, pid);
+				product = goodsAPI.getGoods(sid, pid);
 			} catch (ApiException e1) {
 				logger.info("错误：请求产品数据 " + sid + "_" + pid + "错误");
 			}
@@ -233,43 +233,43 @@ public class RedisServiceImpl implements RedisService {
 	}
 
 	@Override
-	public List<Product> getTopProduct(Long sid) {
-		List<Product> products = null;
+	public List<Goods> getTopGoods(Long sid) {
+		List<Goods> products = null;
 		try {
 			products = redisTemplate.boundListOps(
 					CacheConst.PRODUCT_TOP_LIST_ + sid).range(0, -1);
 			if (null == products || products.size() <= 0) {
-				products = goodsAPI.getHotProducts(sid);
+				products = goodsAPI.getHotGoodss(sid);
 				if (null != products && products.size() > 0) {
-					for (Product p : products) {
+					for (Goods p : products) {
 						redisTemplate.boundListOps(
 								CacheConst.PRODUCT_TOP_LIST_ + sid).leftPush(p);
 					}
 				}
 			}
 		} catch (Exception e) {
-			products = goodsAPI.getHotProducts(sid);
+			products = goodsAPI.getHotGoodss(sid);
 		}
 		return products;
 	}
 
 	@Override
-	public List<Product> getHotProduct(Long sid) {
-		List<Product> products = null;
+	public List<Goods> getHotGoods(Long sid) {
+		List<Goods> products = null;
 		try {
 			products = redisTemplate.boundListOps(
 					CacheConst.PRODUCT_HOT_LIST_ + sid).range(0, -1);
 			if (null == products || products.size() <= 0) {
-				products = goodsAPI.getHotProducts(sid);
+				products = goodsAPI.getHotGoodss(sid);
 				if (null != products && products.size() > 0) {
-					for (Product p : products) {
+					for (Goods p : products) {
 						redisTemplate.boundListOps(
 								CacheConst.PRODUCT_HOT_LIST_ + sid).leftPush(p);
 					}
 				}
 			}
 		} catch (Exception e) {
-			products = goodsAPI.getHotProducts(sid);
+			products = goodsAPI.getHotGoodss(sid);
 		}
 		return products;
 	}

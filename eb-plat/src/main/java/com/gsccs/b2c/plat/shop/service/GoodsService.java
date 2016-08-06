@@ -3,7 +3,7 @@ package com.gsccs.b2c.plat.shop.service;
 import java.util.List;
 
 import com.gsccs.b2c.plat.buyer.model.Discount;
-import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.domain.goods.Goods;
 import com.gsccs.eb.api.domain.goods.Sku;
 
 public interface GoodsService {
@@ -14,24 +14,7 @@ public interface GoodsService {
 	 * @param p
 	 * @return
 	 */
-	public Long addProduct(Long sid, Product p);
-	
-	
-	/**
-	 * 添加产品
-	 * 
-	 * @param p
-	 * @return
-	 */
-	public Long addProduct(Product product,List<Sku> skulist);
-
-	/**
-	 * 批量添加商品
-	 * 
-	 * @param skulist
-	 * @return
-	 */
-	public Long[] addSkuList(Long productid, List<Sku> skulist);
+	public Long addGoods(Goods goods, List<Sku> skulist);
 
 	/**
 	 * 获得产品
@@ -39,7 +22,7 @@ public interface GoodsService {
 	 * @param pid
 	 * @return
 	 */
-	public Product getGoods(Long id);
+	public Goods getGoods(Long id);
 
 	/**
 	 * 查询热销商品
@@ -47,7 +30,7 @@ public interface GoodsService {
 	 * @param sid
 	 * @return
 	 */
-	public List<Product> getHotProducts(Long shopid);
+	public List<Goods> getHotGoodss(Long shopid);
 
 	/**
 	 * 查询置顶商品
@@ -55,9 +38,9 @@ public interface GoodsService {
 	 * @param sid
 	 * @return
 	 */
-	public List<Product> getTopProducts(Long shopid);
+	public List<Goods> getTopGoodss(Long shopid);
 
-	public List<Product> getProducts(Product param, String order, int currPage,
+	public List<Goods> getGoodss(Goods param, String order, int currPage,
 			int pageSize);
 
 	/**
@@ -97,7 +80,7 @@ public interface GoodsService {
 	 * @param productId
 	 * @param status
 	 */
-	public void editProductStatus(Long sid, Long productId, String status);
+	public void editGoodsStatus(Long sid, Long productId, String status);
 
 	/**
 	 * 删除产品
@@ -105,7 +88,7 @@ public interface GoodsService {
 	 * @param sid
 	 * @param pId
 	 */
-	public void delProduct(Long sid, Long pId);
+	public void delGoods(Long sid, Long pId);
 
 	/**
 	 * 编辑产品
@@ -113,7 +96,7 @@ public interface GoodsService {
 	 * @param sid
 	 * @param pt
 	 */
-	public void editProduct(Long sid, Product pt);
+	public void editGoods(Long sid, Goods pt);
 
 	/**
 	 * 编辑商品

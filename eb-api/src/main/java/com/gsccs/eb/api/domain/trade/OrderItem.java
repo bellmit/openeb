@@ -6,18 +6,17 @@ import java.util.Date;
 
 import com.gsccs.eb.api.domain.base.Domain;
 
-
-
 /**
  * 订单购物项
+ * 
  * @author x.d zhang
- *
+ * 
  */
-public class OrderItem extends Domain{
+public class OrderItem extends Domain {
 
 	private String id;
 	private String orderid;
-	private Long productid;
+	private Long goodsid;
 	private Long skuid;
 	private Integer num;
 	private Double price;
@@ -31,12 +30,12 @@ public class OrderItem extends Domain{
 	private String ptitle;
 	private String purl;
 	private String adddatestr;
-	//是否已评价
+	// 是否已评价
 	private String iseval;
-	
+
 	public String getAdddatestr() {
 		DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
-		if(null != getAddtime()){
+		if (null != getAddtime()) {
 			adddatestr = df.format(getAddtime());
 		}
 		return adddatestr;
@@ -62,12 +61,12 @@ public class OrderItem extends Domain{
 		this.orderid = orderid;
 	}
 
-	public Long getProductid() {
-		return productid;
+	public Long getGoodsid() {
+		return goodsid;
 	}
 
-	public void setProductid(Long productid) {
-		this.productid = productid;
+	public void setGoodsid(Long goodsid) {
+		this.goodsid = goodsid;
 	}
 
 	public Long getSkuid() {
@@ -173,7 +172,5 @@ public class OrderItem extends Domain{
 	public void setIseval(String iseval) {
 		this.iseval = iseval;
 	}
-	
-	
-	
+
 }

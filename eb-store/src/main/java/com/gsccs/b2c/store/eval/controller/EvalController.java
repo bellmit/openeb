@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gsccs.b2c.api.service.EvalServiceI;
 import com.gsccs.b2c.store.base.JsonMsg;
-import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.domain.goods.Goods;
 import com.gsccs.eb.api.domain.rated.EvalItem;
 import com.gsccs.eb.api.domain.rated.EvalModel;
 import com.gsccs.eb.api.domain.rated.EvalType;
@@ -64,7 +64,7 @@ public class EvalController {
 	// 保存评论项目
 	@RequestMapping("/saveEval")
 	@ResponseBody
-	public JsonMsg saveEval(HttpServletRequest request, Product product, String[] evalArray) {
+	public JsonMsg saveEval(HttpServletRequest request, Goods product, String[] evalArray) {
 		JsonMsg msg = new JsonMsg();
 		
 		long siteId = (Long) request.getSession().getAttribute("siteId");

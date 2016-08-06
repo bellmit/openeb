@@ -10,12 +10,12 @@ import com.gsccs.b2c.plat.buyer.dao.DiscountMapper;
 import com.gsccs.b2c.plat.buyer.dao.GradeMapper;
 import com.gsccs.b2c.plat.buyer.model.Discount;
 import com.gsccs.b2c.plat.buyer.model.DiscountExample;
-import com.gsccs.b2c.plat.shop.dao.ProductMapper;
+import com.gsccs.b2c.plat.shop.dao.GoodsMapper;
 import com.gsccs.b2c.plat.shop.dao.SkuMapper;
 import com.gsccs.b2c.plat.shop.dao.SkuSpecMapper;
-import com.gsccs.b2c.plat.shop.model.ProductExample;
+import com.gsccs.b2c.plat.shop.model.GoodsExample;
 import com.gsccs.b2c.plat.shop.model.SkuExample;
-import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.domain.goods.Goods;
 import com.gsccs.eb.api.domain.goods.Sku;
 import com.gsccs.eb.api.domain.goods.SkuSpec;
 
@@ -29,7 +29,7 @@ import com.gsccs.eb.api.domain.goods.SkuSpec;
 public class GoodsServiceImpl implements GoodsService {
 
 	@Autowired
-	private ProductMapper productMapper;
+	private GoodsMapper productMapper;
 	@Autowired
 	private SkuMapper skuMapper;
 	@Autowired
@@ -38,29 +38,6 @@ public class GoodsServiceImpl implements GoodsService {
 	private GradeMapper gradeMapper;
 	@Autowired
 	private DiscountMapper discountMapper;
-
-	@Override
-	public Long addProduct(Long sid, Product p) {
-		if (null != p) {
-			int salenum = p.getSalenum() == null ? 0 : p.getSalenum();
-			int storenum = p.getStorenum() == null ? 0 : p.getStorenum();
-			int evalnum = p.getEvalnum() == null ? 0 : p.getEvalnum();
-			int locknum = p.getLocknum() == null ? 0 : p.getLocknum();
-			p.setSalenum(salenum);
-			p.setStorenum(storenum);
-			p.setEvalnum(evalnum);
-			p.setLocknum(locknum);
-			// productMapper.insert(sid, p);
-			Long productid = p.getId();
-
-			// 保存SKU
-
-			// 保存Sku规格特征
-
-			return productid;
-		}
-		return null;
-	}
 
 	@Override
 	public List<Sku> getSkuList(Long productid) {
@@ -74,8 +51,8 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public Product getGoods(Long id) {
-		Product pt = productMapper.selectByPrimaryKey(id);
+	public Goods getGoods(Long id) {
+		Goods pt = productMapper.selectByPrimaryKey(id);
 		return pt;
 	}
 
@@ -104,8 +81,8 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public void editProductStatus(Long sid, Long productId, String status) {
-		Product pt = null;
+	public void editGoodsStatus(Long sid, Long productId, String status) {
+		Goods pt = null;
 		if (null != sid && null != productId && null != status) {
 			pt = productMapper.selectByPrimaryKey(productId);
 			pt.setStatus(status);
@@ -115,14 +92,14 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public void delProduct(Long sid, Long pId) {
+	public void delGoods(Long sid, Long pId) {
 		if (null != sid && null != pId) {
 			productMapper.deleteByPrimaryKey(sid, pId);
 		}
 	}
 
 	@Override
-	public void editProduct(Long sid, Product pt) {
+	public void editGoods(Long sid, Goods pt) {
 		productMapper.updateByPrimaryKey(sid, pt);
 	}
 
@@ -132,31 +109,31 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public List<Product> getHotProducts(Long sid) {
-		ProductExample example = new ProductExample();
-		ProductExample.Criteria c = example.createCriteria();
+	public List<Goods> getHotGoodss(Long sid) {
+		GoodsExample example = new GoodsExample();
+		GoodsExample.Criteria c = example.createCriteria();
 		c.andIshotEqualTo("1");
 		return productMapper.selectByExample(sid, example);
 	}
 
 	@Override
-	public List<Product> getTopProducts(Long sid) {
-		ProductExample example = new ProductExample();
-		ProductExample.Criteria c = example.createCriteria();
+	public List<Goods> getTopGoodss(Long sid) {
+		GoodsExample example = new GoodsExample();
+		GoodsExample.Criteria c = example.createCriteria();
 		c.andIstopEqualTo("1");
 		return productMapper.selectByExample(sid, example);
 	}
 
 	@Override
 	public void productUnsale(Long sid) {
-		productMapper.updateProductUnsale(sid, 0);
+		productMapper.updateGoodsUnsale(sid, 0);
 	}
 
 	@Override
-	public List<Product> getProducts(Product param, String order, int currPage,
+	public List<Goods> getGoodss(Goods param, String order, int currPage,
 			int pageSize) {
-		ProductExample example = new ProductExample();
-		ProductExample.Criteria c = example.createCriteria();
+		GoodsExample example = new GoodsExample();
+		GoodsExample.Criteria c = example.createCriteria();
 		proSearchParam(param, c);
 		example.setCurrPage(currPage);
 		example.setPageSize(pageSize);
@@ -164,54 +141,37 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public Long addProduct(Product p, List<Sku> skulist) {
-		Long productid = null;
+	public Long addGoods(Goods p, List<Sku> skulist) {
+		Long goodsid = null;
 		// 保存产品基础信息
 		productMapper.insert(p);
-		productid = p.getId();
+		goodsid = p.getId();
 		// 保存产品SKU信息
-		addSkuList(productid, skulist);
-		return productid;
+		addSkuList(goodsid, skulist);
+		return goodsid;
 	}
 
-	@Override
-	public Long[] addSkuList(Long productid, List<Sku> skulist) {
+	
+	public void addSkuList(Long goodsid, List<Sku> skulist) {
 		if (null != skulist && skulist.size() > 0) {
-			Long[] ids = new Long[skulist.size()];
 			int i = 0;
 			for (Sku sku : skulist) {
-				sku.setGoodsid(productid);
+				sku.setGoodsid(goodsid);
 				skuMapper.insert(sku);
-				ids[i] = sku.getId();
-
 				// 保存SKU规格特征
-				saveSkuSpec(productid, sku);
-				i++;
+				saveSkuSpec(goodsid,sku.getId(), sku.getSpecList());
 			}
-			return ids;
 		}
-		return null;
 	}
 
-	private void saveSkuSpec(Long productid, Sku sku) {
-		if (null != productid && null != sku) {
-			String specids = "";
-			String specvarids = "";
-			// String specids = sku.getSpecIds();
-			// String specvarids = sku.getSpecValIds();
-			if (StringUtils.isNotEmpty(specids)
-					&& StringUtils.isNotEmpty(specvarids)) {
-				String[] specidArray = specids.split(",");
-				String[] specvalidArray = specvarids.split(",");
-				for (int i = 0; i < specidArray.length; i++) {
-					SkuSpec skuSpec = new SkuSpec();
-					skuSpec.setSkuid(sku.getId());
-					skuSpec.setGoodsid(productid);
-					skuSpec.setSpecid(Long.valueOf(specidArray[i]));
-					skuSpec.setSpecvalid(Long.valueOf(specvalidArray[i]));
-					skuSpecMapper.insert(skuSpec);
-				}
-			}
+	private void saveSkuSpec(Long goodsid, Long skuid, List<SkuSpec> specList) {
+		if (null == goodsid || null == skuid || specList == null) {
+			return;
+		}
+		for (SkuSpec skuSpec : specList) {
+			skuSpec.setSkuid(skuid);
+			skuSpec.setGoodsid(goodsid);
+			skuSpecMapper.insert(skuSpec);
 		}
 	}
 
@@ -230,10 +190,10 @@ public class GoodsServiceImpl implements GoodsService {
 	/**
 	 * 处理查询条件
 	 * 
-	 * @param Product
+	 * @param Goods
 	 * @param criteria
 	 */
-	public void proSearchParam(Product param, ProductExample.Criteria c) {
+	public void proSearchParam(Goods param, GoodsExample.Criteria c) {
 		if (param != null) {
 			if (param.getId() != null) {
 				c.andIdEqualTo(param.getId());

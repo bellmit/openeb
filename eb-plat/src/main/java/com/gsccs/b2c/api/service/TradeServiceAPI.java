@@ -15,10 +15,10 @@ public class TradeServiceAPI implements TradeServiceI {
 	private OrderService orderService;
 	
 	@Override
-	public JSONObject getProductSaleList_m(Long siteid, Long pid,int page,int rows) {
+	public JSONObject getGoodsSaleList_m(Long siteid, Long pid,int page,int rows) {
 		JSONObject json = new JSONObject();
-		List<OrderItem> items = orderService.findProductSaleItems(siteid, pid);
-		int total = orderService.countProductSaleItems(siteid, pid);
+		List<OrderItem> items = orderService.findGoodsSaleItems(siteid, pid);
+		int total = orderService.countGoodsSaleItems(siteid, pid);
 		JSONArray array = new JSONArray();
 		if (null != items && items.size()>0){
 			for(OrderItem t:items){

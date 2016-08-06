@@ -17,7 +17,7 @@ import com.gsccs.b2c.plat.order.service.OrderService;
 import com.gsccs.b2c.plat.order.service.PaymentService;
 import com.gsccs.b2c.plat.seller.service.ShopService;
 import com.gsccs.b2c.plat.shop.service.GoodsService;
-import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.domain.goods.Goods;
 import com.gsccs.eb.api.domain.trade.Order;
 import com.gsccs.eb.api.domain.trade.Order.OrderState;
 import com.gsccs.eb.api.domain.trade.OrderItem;
@@ -169,14 +169,14 @@ public class OrderServiceAPI implements OrderServiceI {
 					ordert.getId());
 			if (null != itemTs && itemTs.size() > 0) {
 				for (OrderItem itemT : itemTs) {
-					Product product = goodsService.getGoods(
-							itemT.getProductid());
+					Goods product = goodsService.getGoods(
+							itemT.getGoodsid());
 					if (null != product && null != itemT.getNum()) {
 						int locknum = product.getLocknum() - itemT.getNum();
 						int storenum = product.getStorenum() + itemT.getNum();
 						product.setLocknum(locknum < 0 ? 0 : locknum);
 						product.setStorenum(storenum);
-						goodsService.editProduct(sid, product);
+						goodsService.editGoods(sid, product);
 					}
 				}
 			}
@@ -261,14 +261,14 @@ public class OrderServiceAPI implements OrderServiceI {
 					order.getId());
 			if (null != itemTs && itemTs.size() > 0) {
 				for (OrderItem itemT : itemTs) {
-					Product product = goodsService.getGoods(
-							itemT.getProductid());
+					Goods product = goodsService.getGoods(
+							itemT.getGoodsid());
 					if (null != product && null != itemT.getNum()) {
 						int salenum = product.getSalenum() + itemT.getNum();
 						int locknum = product.getLocknum() - itemT.getNum();
 						product.setSalenum(salenum);
 						product.setLocknum(locknum < 0 ? 0 : locknum);
-						goodsService.editProduct(sid, product);
+						goodsService.editGoods(sid, product);
 					}
 				}
 			}
@@ -321,13 +321,13 @@ public class OrderServiceAPI implements OrderServiceI {
 					ordert.getId());
 			if (null != itemTs && itemTs.size() > 0) {
 				for (OrderItem itemT : itemTs) {
-					Product product = goodsService.getGoods(
-							itemT.getProductid());
+					Goods product = goodsService.getGoods(
+							itemT.getGoodsid());
 					if (null != product && null != itemT.getNum()) {
 						int evalnum = product.getEvalnum() == null ? 0
 								: product.getEvalnum();
 						product.setEvalnum(evalnum + 1);
-						goodsService.editProduct(sid, product);
+						goodsService.editGoods(sid, product);
 					}
 				}
 			}

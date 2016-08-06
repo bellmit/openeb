@@ -29,8 +29,8 @@ import com.gsccs.b2c.app.core.JsonMsg;
 import com.gsccs.b2c.web.api.service.RedisService;
 import com.gsccs.b2c.web.api.service.SsdbService;
 import com.gsccs.eb.api.domain.goods.Brand;
-import com.gsccs.eb.api.domain.goods.Product;
-import com.gsccs.eb.api.domain.goods.ProductProp;
+import com.gsccs.eb.api.domain.goods.Goods;
+import com.gsccs.eb.api.domain.goods.GoodsProp;
 import com.gsccs.eb.api.exception.ApiException;
 
 import freemarker.template.TemplateModelException;
@@ -42,7 +42,7 @@ import freemarker.template.TemplateModelException;
  * 
  */
 @Controller
-public class ProductController {
+public class GoodsController {
 
 	@Autowired
 	private ShopServiceI shopAPI;
@@ -84,18 +84,18 @@ public class ProductController {
 			response.setContentType("text/html");
 			response.setCharacterEncoding("UTF-8");
 			// 商品基本信息
-			Product product = redisService.getProduct(siteId, pid);
+			Goods product = redisService.getGoods(siteId, pid);
 			if (null != product) {
-				data.put("product", redisService.getProduct(siteId, pid));
+				data.put("product", redisService.getGoods(siteId, pid));
 				// 商品品牌
 				Brand brand = redisService.getBrand(siteId, product.getBrandid());
 				data.put("brand", brand);
 				// 扩展属性
 				data.put("product_prop", JSON.toJSONString(ssdbService
-						.getProductProps(siteId, pid)));
+						.getGoodsProps(siteId, pid)));
 				// 详细参数
 				data.put("product_param", JSON.toJSONString(ssdbService
-						.getProductParam(siteId, pid)));
+						.getGoodsParam(siteId, pid)));
 			} else {
 				tempPath = "html/product_404.html";
 			}
@@ -130,8 +130,8 @@ public class ProductController {
 	public JSONObject productInfo(@PathVariable("site") Long siteId, Long pid,
 			Model model, HttpServletResponse response) {
 		JSONObject json = new JSONObject();
-		JSONArray imgarray = ssdbService.getProductImgs(siteId, pid);
-		String desc = ssdbService.getProductDesc(siteId, pid);
+		JSONArray imgarray = ssdbService.getGoodsImgs(siteId, pid);
+		String desc = ssdbService.getGoodsDesc(siteId, pid);
 		json.put("images", imgarray);
 		json.put("desc", desc);
 		return json;
@@ -148,17 +148,17 @@ public class ProductController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/{site}/skus", method = RequestMethod.GET)
-	public JSONObject getProductSKU(@PathVariable("site") Long siteId,
+	public JSONObject getGoodsSKU(@PathVariable("site") Long siteId,
 			Long pid, Model model, HttpServletResponse response){
 		return ssdbService.getSkuSpecData(siteId, pid);
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/{site}/desc", method = RequestMethod.GET)
-	public JsonMsg getProductDesc(@PathVariable("site") Long siteId, Long pid,
+	public JsonMsg getGoodsDesc(@PathVariable("site") Long siteId, Long pid,
 			Model model, HttpServletResponse response) {
 		JsonMsg json = new JsonMsg();
-		String desc = ssdbService.getProductDesc(siteId, pid);
+		String desc = ssdbService.getGoodsDesc(siteId, pid);
 		if (StringUtils.isNotEmpty(desc)) {
 			json.setSuccess(true);
 			json.setData(desc);
@@ -179,12 +179,12 @@ public class ProductController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/{site}/props", method = RequestMethod.GET)
-	public JSONArray getProductProp(@PathVariable("site") Long siteId,
+	public JSONArray getGoodsProp(@PathVariable("site") Long siteId,
 			Long pid, Model model, HttpServletResponse response) {
 		JSONArray array = new JSONArray();
 		// 扩展属性
-		List<ProductProp> props = ssdbService.getProductProps(siteId, pid);
-		Product product = redisService.getProduct(siteId, pid);
+		List<GoodsProp> props = ssdbService.getGoodsProps(siteId, pid);
+		Goods product = redisService.getGoods(siteId, pid);
 		JSONObject nameobj = new JSONObject();
 		JSONObject barcodeobj = new JSONObject();
 		JSONObject saletimeobj = new JSONObject();
@@ -198,7 +198,7 @@ public class ProductController {
 		array.add(barcodeobj);
 		array.add(saletimeobj);
 		if (null != props && props.size() > 0) {
-			for (ProductProp prop : props) {
+			for (GoodsProp prop : props) {
 				JSONObject propobj = new JSONObject();
 				propobj.put("title", prop.getPropTitle());
 				propobj.put("value", prop.getPropVal());
@@ -219,13 +219,13 @@ public class ProductController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/{site}/product/evals", method = RequestMethod.GET)
-	public JSONArray getProductEval(@PathVariable("site") Long siteId,
+	public JSONArray getGoodsEval(@PathVariable("site") Long siteId,
 			Long pid, @RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "10") int rows, Model model,
 			HttpServletResponse response) {
 		JSONArray array = new JSONArray();
 		try {
-			ssdbService.getProductEvals(siteId, pid, page, rows);
+			ssdbService.getGoodsEvals(siteId, pid, page, rows);
 		} catch (Exception e) {
 
 		}
@@ -243,10 +243,10 @@ public class ProductController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/{site}/product/sales", method = RequestMethod.GET)
-	public JSONObject getProductSale(@PathVariable("site") Long siteId,
+	public JSONObject getGoodsSale(@PathVariable("site") Long siteId,
 			Long pid, @RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "10") int rows, Model model,
 			HttpServletResponse response) {
-		return ssdbService.getProductSales(siteId, pid, page, rows);
+		return ssdbService.getGoodsSales(siteId, pid, page, rows);
 	}
 }

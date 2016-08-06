@@ -7,13 +7,13 @@ import java.util.List;
 
 import com.gsccs.b2c.plat.bass.BaseExample;
 
-public class ProductImgTExample extends BaseExample{
+public class AlbumExample extends BaseExample{
     protected String orderByClause;
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public ProductImgTExample() {
+    public AlbumExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

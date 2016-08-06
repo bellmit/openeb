@@ -1,86 +1,77 @@
 package com.gsccs.eb.api.domain.goods;
 
 import java.util.Date;
-import java.util.List;
 
 import com.gsccs.eb.api.domain.base.Domain;
 
-/**
- * 商品结构
- * 
- * @author x.d zhang
- * 
- */
 public class Goods extends Domain {
 
-	private static final long serialVersionUID = 1221633842353432629L;
-
-	/**
-	 * 商品级别的条形码
-	 */
-	private String barcode;
-
-	/**
-	 * 商品的子标题，给商品增加卖点等描述
-	 */
-	private String subTitle;
-
-	/**
-	 * 商品标题,不能超过60字节
-	 */
+	private Long id;
+	private Long shopid;
+	private Long brandid;
+	private Long cateid;
+	private Long typeid;
+	private String cateids;
 	private String title;
+	private String mainimg;
+	private String templet;
+	private String ishot;
+	private String istop;
 
-	/**
-	 * 商品数量
-	 */
-	private Long num;
-
-	/**
-	 * 商品价格，格式：5.00；单位：元；精确到：分
-	 */
+	private String adduser;
+	private String status;
+	private String kind;
+	private String tags;
+	private String barcode;
+	private String remark;
 	private Double price;
+	private Double mkprice;
+	// 重量
+	private Integer weight;
+	// 商品单位
+	private String unit;
+	private String freight;
+	// 快递方式
+	private String postage;
+	// 积分
+	private Float points;
+	// 库存量
+	private Integer storenum;
+	// 销量
+	private Integer salenum;
+	// 锁定商品数量
+	private Integer locknum;
+	// 评价次数
+	private Integer evalnum;
+	// 扩展属性字符串
+	private String propStr;
+	// 购物必填信息
+	private String reqInfoStr;
+	// 购物参数属性字符串
+	private String paramStr;
 
-	/**
-	 * 所属产品的id
-	 */
-	private Long productId;
+	// 商品上架后状态
+	private String approvestatus;
+	private String keyWords;
 
-	/**
-	 * Item的发布时间
-	 */
-	private Date created;
+	private Date addtime;
+	private Date topendtime;
+	private Integer clicknum;
 
-	/**
-	 * 上架时间（格式：yyyy-MM-dd HH:mm:ss）
-	 */
-	private Date listTime;
+	// 商品URL
+	private String url;
+	private String content;
 
-	/**
-	 * 商品修改时间（格式：yyyy-MM-dd HH:mm:ss）
-	 */
-	private Date modified;
+	private String shoptitle;
+	private String catetitle;
+	private String brandtitle;
 
-	/**
-	 * 
-	 * Sku列表。fields中只设置sku可以返回Sku结构体中所有字段，如果设置为sku.sku_id、sku.properties、sku.
-	 * quantity等形式就只会返回相应的字段
-	 */
-	private List<Sku> skus;
-
-	public String getBarcode() {
-		return barcode;
+	public Long getId() {
+		return id;
 	}
 
-	public void setBarcode(String barcode) {
-		this.barcode = barcode;
-	}
-
-	public String getSubTitle() {
-		return subTitle;
-	}
-
-	public void setSubTitle(String subTitle) {
-		this.subTitle = subTitle;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
@@ -88,15 +79,111 @@ public class Goods extends Domain {
 	}
 
 	public void setTitle(String title) {
-		this.title = title;
+		this.title = title == null ? null : title.trim();
 	}
 
-	public Long getNum() {
-		return num;
+	public String getMainimg() {
+		return mainimg;
 	}
 
-	public void setNum(Long num) {
-		this.num = num;
+	public void setMainimg(String mainimg) {
+		this.mainimg = mainimg;
+	}
+
+	public String getTemplet() {
+		return templet;
+	}
+
+	public void setTemplet(String templet) {
+		this.templet = templet == null ? null : templet.trim();
+	}
+
+	public String getIshot() {
+		return ishot;
+	}
+
+	public void setIshot(String ishot) {
+		this.ishot = ishot == null ? null : ishot.trim();
+	}
+
+	public String getIstop() {
+		return istop;
+	}
+
+	public void setIstop(String istop) {
+		this.istop = istop == null ? null : istop.trim();
+	}
+
+	public Date getAddtime() {
+		return addtime;
+	}
+
+	public void setAddtime(Date addtime) {
+		this.addtime = addtime;
+	}
+
+	public Date getTopendtime() {
+		return topendtime;
+	}
+
+	public void setTopendtime(Date topendtime) {
+		this.topendtime = topendtime;
+	}
+
+	public Integer getClicknum() {
+		return clicknum;
+	}
+
+	public void setClicknum(Integer clicknum) {
+		this.clicknum = clicknum;
+	}
+
+	public String getAdduser() {
+		return adduser;
+	}
+
+	public void setAdduser(String adduser) {
+		this.adduser = adduser == null ? null : adduser.trim();
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status == null ? null : status.trim();
+	}
+
+	public String getKind() {
+		return kind;
+	}
+
+	public void setKind(String kind) {
+		this.kind = kind == null ? null : kind.trim();
+	}
+
+	public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tags) {
+		this.tags = tags == null ? null : tags.trim();
+	}
+
+	public String getBarcode() {
+		return barcode;
+	}
+
+	public void setBarcode(String barcode) {
+		this.barcode = barcode == null ? null : barcode.trim();
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 	public Double getPrice() {
@@ -107,44 +194,204 @@ public class Goods extends Domain {
 		this.price = price;
 	}
 
-	public Long getProductId() {
-		return productId;
+	public Double getMkprice() {
+		return mkprice;
 	}
 
-	public void setProductId(Long productId) {
-		this.productId = productId;
+	public void setMkprice(Double mkprice) {
+		this.mkprice = mkprice;
 	}
 
-	public Date getCreated() {
-		return created;
+	public Integer getWeight() {
+		return weight;
 	}
 
-	public void setCreated(Date created) {
-		this.created = created;
+	public void setWeight(Integer weight) {
+		this.weight = weight;
 	}
 
-	public Date getListTime() {
-		return listTime;
+	public Integer getStorenum() {
+		return storenum;
 	}
 
-	public void setListTime(Date listTime) {
-		this.listTime = listTime;
+	public void setStorenum(Integer storenum) {
+		this.storenum = storenum;
 	}
 
-	public Date getModified() {
-		return modified;
+	public String getFreight() {
+		return freight;
 	}
 
-	public void setModified(Date modified) {
-		this.modified = modified;
+	public void setFreight(String freight) {
+		this.freight = freight == null ? null : freight.trim();
 	}
 
-	public List<Sku> getSkus() {
-		return skus;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setSkus(List<Sku> skus) {
-		this.skus = skus;
+	public void setUrl(String url) {
+		this.url = url == null ? null : url.trim();
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content == null ? null : content.trim();
+	}
+
+	public Integer getSalenum() {
+		return salenum;
+	}
+
+	public void setSalenum(Integer salenum) {
+		this.salenum = salenum;
+	}
+
+	public String getPropStr() {
+		return propStr;
+	}
+
+	public void setPropStr(String propStr) {
+		this.propStr = propStr;
+	}
+
+	public String getReqInfoStr() {
+		return reqInfoStr;
+	}
+
+	public void setReqInfoStr(String reqInfoStr) {
+		this.reqInfoStr = reqInfoStr;
+	}
+
+	public String getParamStr() {
+		return paramStr;
+	}
+
+	public void setParamStr(String paramStr) {
+		this.paramStr = paramStr;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+
+	public String getKeyWords() {
+		return keyWords;
+	}
+
+	public void setKeyWords(String keyWords) {
+		this.keyWords = keyWords;
+	}
+
+	public String getPostage() {
+		return postage;
+	}
+
+	public void setPostage(String postage) {
+		this.postage = postage;
+	}
+
+	public String getApprovestatus() {
+		return approvestatus;
+	}
+
+	public void setApprovestatus(String approvestatus) {
+		this.approvestatus = approvestatus;
+	}
+
+	public String getCateids() {
+		return cateids;
+	}
+
+	public void setCateids(String cateids) {
+		this.cateids = cateids;
+	}
+
+	public Long getTypeid() {
+		return typeid;
+	}
+
+	public void setTypeid(Long typeid) {
+		this.typeid = typeid;
+	}
+
+	public Long getShopid() {
+		return shopid;
+	}
+
+	public void setShopid(Long shopid) {
+		this.shopid = shopid;
+	}
+
+	public Long getBrandid() {
+		return brandid;
+	}
+
+	public void setBrandid(Long brandid) {
+		this.brandid = brandid;
+	}
+
+	public Long getCateid() {
+		return cateid;
+	}
+
+	public void setCateid(Long cateid) {
+		this.cateid = cateid;
+	}
+
+	public Float getPoints() {
+		return points;
+	}
+
+	public void setPoints(Float points) {
+		this.points = points;
+	}
+
+	public Integer getLocknum() {
+		return locknum;
+	}
+
+	public void setLocknum(Integer locknum) {
+		this.locknum = locknum;
+	}
+
+	public Integer getEvalnum() {
+		return evalnum;
+	}
+
+	public void setEvalnum(Integer evalnum) {
+		this.evalnum = evalnum;
+	}
+
+	public String getShoptitle() {
+		return shoptitle;
+	}
+
+	public void setShoptitle(String shoptitle) {
+		this.shoptitle = shoptitle;
+	}
+
+	public String getCatetitle() {
+		return catetitle;
+	}
+
+	public void setCatetitle(String catetitle) {
+		this.catetitle = catetitle;
+	}
+
+	public String getBrandtitle() {
+		return brandtitle;
+	}
+
+	public void setBrandtitle(String brandtitle) {
+		this.brandtitle = brandtitle;
 	}
 
 }

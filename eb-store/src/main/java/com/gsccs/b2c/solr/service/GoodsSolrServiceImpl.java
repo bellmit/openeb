@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 import com.gsccs.b2c.api.CacheConst;
 import com.gsccs.b2c.api.service.BrandServiceI;
 import com.gsccs.b2c.api.service.CateServiceI;
-import com.gsccs.b2c.api.service.ProductServiceI;
+import com.gsccs.b2c.api.service.GoodsServiceI;
 import com.gsccs.b2c.api.service.TypeServiceI;
 import com.gsccs.eb.api.domain.goods.Brand;
 import com.gsccs.eb.api.domain.goods.Category;
-import com.gsccs.eb.api.domain.goods.Product;
-import com.gsccs.eb.api.domain.goods.ProductProp;
+import com.gsccs.eb.api.domain.goods.Goods;
+import com.gsccs.eb.api.domain.goods.GoodsProp;
 import com.gsccs.eb.api.domain.goods.Property;
 import com.gsccs.eb.api.domain.goods.PropsVal;
 import com.gsccs.eb.api.domain.goods.Sku;
@@ -31,7 +31,7 @@ import com.gsccs.eb.api.exception.ApiException;
 public class GoodsSolrServiceImpl implements GoodsSolrService{
 	
 	@Autowired
-	private ProductServiceI goodsServiceAPI;
+	private GoodsServiceI goodsServiceAPI;
 	
 	@Autowired
 	private CateServiceI cateServiceAPI;
@@ -56,13 +56,13 @@ public class GoodsSolrServiceImpl implements GoodsSolrService{
 		solrS.init();
 
 		
-		List<Product> pList;
+		List<Goods> pList;
 		List<GoodsSolr> glist = new ArrayList<GoodsSolr>();
 		
 		try {
 			
 			pList = null;
-					//goodsServiceAPI.getProducts(sid, null, null, null, null, null, null, null, null, null, null, null, page, rows);
+					//goodsServiceAPI.getGoodss(sid, null, null, null, null, null, null, null, null, null, null, null, page, rows);
 			if(null !=pList && pList.size() > 0){
 				GoodsSolr tg;
 				Brand b;
@@ -70,9 +70,9 @@ public class GoodsSolrServiceImpl implements GoodsSolrService{
 				for (int i = 0; i < pList.size(); i++) {
 					tg = new GoodsSolr();
 					tg.setId(sid+"_"+pList.get(i).getId());
-					tg.setProductid(pList.get(i).getId()+"");
+					tg.setGoodsid(pList.get(i).getId()+"");
 					tg.setBrandid(pList.get(i).getBrandid()+"");
-					tg.setPicurl(pList.get(i).getImg());
+					tg.setPicurl(pList.get(i).getMainimg());
 					if(null !=pList.get(i).getBrandid() && pList.get(i).getBrandid().toString().length() >0){
 						b =brandServiceAPI.getBrand(Long.valueOf(pList.get(i).getBrandid()));
 						if(null !=b){
@@ -82,11 +82,11 @@ public class GoodsSolrServiceImpl implements GoodsSolrService{
 					tg.setPrice( pList.get(i).getPrice().floatValue());
 					
 					tg.setSiteid(pList.get(i).getShopid().toString());
-					if(null !=pList.get(i).getCategoryid()){
-						tg.setCateid(pList.get(i).getCategoryid()+"");
-						category = cateServiceAPI.getCate(Long.valueOf(pList.get(i).getCategoryid()));
+					if(null !=pList.get(i).getCateid()){
+						tg.setCateid(pList.get(i).getCateid()+"");
+						category = cateServiceAPI.getCate(Long.valueOf(pList.get(i).getCateid()));
 						if(null !=category){
-							tg.setCatestr(pList.get(i).getCategoryid()+"-"+category.getTitle());
+							tg.setCatestr(pList.get(i).getCateid()+"-"+category.getTitle());
 						}
 					}
 					
@@ -95,7 +95,7 @@ public class GoodsSolrServiceImpl implements GoodsSolrService{
 					
 					String selectKey=CacheConst.STOREY_ + sid + "_" + pList.get(i).getId() + "_select";
 					
-					List<ProductProp> sppList = ssdbTemplate.boundListOps(selectKey).range(0, -1);
+					List<GoodsProp> sppList = ssdbTemplate.boundListOps(selectKey).range(0, -1);
 					
 					
 					int count = 0;
@@ -103,7 +103,7 @@ public class GoodsSolrServiceImpl implements GoodsSolrService{
 					long pid = pList.get(i).getId();
 					Long typeid = pList.get(i).getTypeid();
 					String checkKey="";
-					List<ProductProp> cppList = null;
+					List<GoodsProp> cppList = null;
 					List<Property> cpList = typeServiceAPI.findPropList(typeid);
 					if(null !=cpList && cpList.size() > 0){
 						for (Property cateProp : cpList) {
@@ -138,7 +138,7 @@ public class GoodsSolrServiceImpl implements GoodsSolrService{
 							cppList = ssdbTemplate.boundListOps(checkKey).range(0, -1);
 							if(null !=cppList && cppList.size() >0){
 								
-								for (ProductProp pp : cppList) {
+								for (GoodsProp pp : cppList) {
 									attrid[num] = pp.getPropId().toString();
 									attrstr[num] = pp.getPropId().toString() +"-"+ pp.getPropTitle();
 									attrvalid[num] = pp.getPropId().toString() + "_" + pp.getPropVal();
@@ -154,7 +154,7 @@ public class GoodsSolrServiceImpl implements GoodsSolrService{
 					}
 					
 					if(null !=sppList  && sppList.size() > 0){
-						for (ProductProp spp : sppList) {
+						for (GoodsProp spp : sppList) {
 							attrid[num] = spp.getPropId().toString();
 							attrstr[num] = spp.getPropId().toString() +"-"+ spp.getPropTitle();
 							attrvalid[num] = spp.getPropId().toString() + "_" + spp.getPropVal();
@@ -219,7 +219,7 @@ public class GoodsSolrServiceImpl implements GoodsSolrService{
 		
 		GoodsSolr tg = new GoodsSolr();
 		
-		/*Product product = goodsServiceAPI.getProduct(siteId, productId);
+		/*Goods product = goodsServiceAPI.getGoods(siteId, productId);
 		
 		tg.setId(siteId+"_"+productId+"");
 		tg.setSiteid(siteId+"");
@@ -231,7 +231,7 @@ public class GoodsSolrServiceImpl implements GoodsSolrService{
 		tg.setBrandid(product.getBrand()+"");
 		tg.setBrandstr(product.getBrand() + "-" + b.getName());
 		tg.setTitle(product.getTitle());
-		tg.setProductid(productId+"");
+		tg.setGoodsid(productId+"");
 		
 		//商品价格
 		String  price = product.getPrice().toString();

@@ -18,7 +18,7 @@ public class GoodsForm {
 	private String priceInterval;
 	private String serial;
 	private String isonsale;	//商品上架1上架0下架
-	private Date prepareUp;		//上架时间
+	private String prepareUp;		//上架时间
 	private String iscommend;	//商品推荐
 	private String keywords;	//商品关键字
 	private String descript;	//商品描述 
@@ -154,11 +154,11 @@ public class GoodsForm {
 		this.isonsale = isonsale;
 	}
 
-	public Date getPrepareUp() {
+	public String getPrepareUp() {
 		return prepareUp;
 	}
 
-	public void setPrepareUp(Date prepareUp) {
+	public void setPrepareUp(String prepareUp) {
 		this.prepareUp = prepareUp;
 	}
 

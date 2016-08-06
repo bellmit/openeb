@@ -8,10 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.gsccs.b2c.api.service.ProductServiceI;
+import com.gsccs.b2c.api.service.GoodsServiceI;
 import com.gsccs.b2c.api.service.OrderServiceI;
 import com.gsccs.b2c.api.service.ShopServiceI;
-import com.gsccs.eb.api.domain.goods.Product;
+import com.gsccs.eb.api.domain.goods.Goods;
 import com.gsccs.eb.api.domain.seller.Shop;
 import com.gsccs.eb.api.domain.trade.Order;
 import com.gsccs.eb.api.domain.trade.Order.OrderState;
@@ -30,7 +30,7 @@ public class StoreController {
 	private ShopServiceI shopAPI;
 	
 	@Autowired
-	private ProductServiceI goodsServiceAPI;
+	private GoodsServiceI goodsServiceAPI;
 	
 	@Autowired
 	private OrderServiceI orderAPI;
@@ -73,7 +73,7 @@ public class StoreController {
     	
     	Order o = new Order();
     	
-    	Product p = new Product();
+    	Goods p = new Goods();
     	try {
     		
     		Shop shop = shopAPI.getShop(sid);
@@ -93,7 +93,7 @@ public class StoreController {
 			//出售中的商品
 			String status ="1";
 			int onsaleNum = 0;
-					/*goodsServiceAPI.getProductCount(sid, "", "", null, null,
+					/*goodsServiceAPI.getGoodsCount(sid, "", "", null, null,
 					null, null, null, null, null, status);*/
 			
 			System.out.println("onsaleNum=="+onsaleNum);
@@ -108,7 +108,7 @@ public class StoreController {
 			}
 			
 			int stockalertNum = 0;
-			/*int stockalertNum = goodsServiceAPI.getProductCount(sid, "", "", null, null,
+			/*int stockalertNum = goodsServiceAPI.getGoodsCount(sid, "", "", null, null,
 					null, null, null, maxStoreNum, null, status);
 			*/
 			model.addAttribute("stockalertNum", stockalertNum);

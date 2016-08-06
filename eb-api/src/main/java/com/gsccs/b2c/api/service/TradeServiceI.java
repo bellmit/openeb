@@ -16,7 +16,7 @@ public interface TradeServiceI {
 	 * @param siteid
 	 * @param pid
 	 */
-	public JSONObject getProductSaleList_m(Long siteid,Long pid,int page,int rows);
+	public JSONObject getGoodsSaleList_m(Long siteid,Long pid,int page,int rows);
 
 	
 }

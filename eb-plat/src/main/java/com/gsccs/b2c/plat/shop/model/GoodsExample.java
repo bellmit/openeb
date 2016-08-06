@@ -6,14 +6,14 @@ import java.util.List;
 
 import com.gsccs.b2c.plat.bass.BaseExample;
 
-public class ProductExample extends BaseExample {
+public class GoodsExample extends BaseExample {
 
 	protected String orderByClause;
 	protected boolean distinct;
 
 	protected List<Criteria> oredCriteria;
 
-	public ProductExample() {
+	public GoodsExample() {
 		oredCriteria = new ArrayList<Criteria>();
 	}
 
