@@ -230,63 +230,63 @@ public class AreaExample extends BaseExample {
 			return (Criteria) this;
 		}
 
-		public Criteria andParentidIsNull() {
-			addCriterion("parentId is null");
+		public Criteria andPcodeIsNull() {
+			addCriterion("pcode is null");
 			return (Criteria) this;
 		}
 
-		public Criteria andParentidIsNotNull() {
-			addCriterion("parentId is not null");
+		public Criteria andPcodeIsNotNull() {
+			addCriterion("pcode is not null");
 			return (Criteria) this;
 		}
 
-		public Criteria andParentidEqualTo(Integer value) {
-			addCriterion("parentId =", value, "parentid");
+		public Criteria andPcodeEqualTo(Integer value) {
+			addCriterion("pcode =", value, "parentid");
 			return (Criteria) this;
 		}
 
-		public Criteria andParentidNotEqualTo(Integer value) {
-			addCriterion("parentId <>", value, "parentid");
+		public Criteria andPcodeNotEqualTo(Integer value) {
+			addCriterion("pcode <>", value, "parentid");
 			return (Criteria) this;
 		}
 
-		public Criteria andParentidGreaterThan(Integer value) {
-			addCriterion("parentId >", value, "parentid");
+		public Criteria andPcodeGreaterThan(Integer value) {
+			addCriterion("pcode >", value, "parentid");
 			return (Criteria) this;
 		}
 
-		public Criteria andParentidGreaterThanOrEqualTo(Integer value) {
-			addCriterion("parentId >=", value, "parentid");
+		public Criteria andPcodeGreaterThanOrEqualTo(Integer value) {
+			addCriterion("pcode >=", value, "parentid");
 			return (Criteria) this;
 		}
 
-		public Criteria andParentidLessThan(Integer value) {
-			addCriterion("parentId <", value, "parentid");
+		public Criteria andPcodeLessThan(Integer value) {
+			addCriterion("pcode <", value, "parentid");
 			return (Criteria) this;
 		}
 
-		public Criteria andParentidLessThanOrEqualTo(Integer value) {
-			addCriterion("parentId <=", value, "parentid");
+		public Criteria andPcodeLessThanOrEqualTo(Integer value) {
+			addCriterion("pcode <=", value, "parentid");
 			return (Criteria) this;
 		}
 
-		public Criteria andParentidIn(List<Integer> values) {
-			addCriterion("parentId in", values, "parentid");
+		public Criteria andPcodeIn(List<Integer> values) {
+			addCriterion("pcode in", values, "parentid");
 			return (Criteria) this;
 		}
 
-		public Criteria andParentidNotIn(List<Integer> values) {
-			addCriterion("parentId not in", values, "parentid");
+		public Criteria andPcodeNotIn(List<Integer> values) {
+			addCriterion("pcode not in", values, "parentid");
 			return (Criteria) this;
 		}
 
-		public Criteria andParentidBetween(Integer value1, Integer value2) {
-			addCriterion("parentId between", value1, value2, "parentid");
+		public Criteria andPcodeBetween(Integer value1, Integer value2) {
+			addCriterion("pcode between", value1, value2, "parentid");
 			return (Criteria) this;
 		}
 
-		public Criteria andParentidNotBetween(Integer value1, Integer value2) {
-			addCriterion("parentId not between", value1, value2, "parentid");
+		public Criteria andPcodeNotBetween(Integer value1, Integer value2) {
+			addCriterion("pcode not between", value1, value2, "parentid");
 			return (Criteria) this;
 		}
 

@@ -17,18 +17,19 @@ $(function(){
 		var area = $(this).find("option:selected").text;
 	  	$.ajax({
              type: "post",
-             url: APP_BASE+"/area/getChildArea?id="+id,
+             url: APP_BASE+"/area/child?id="+id,
              dataType: "json",
 			 success:function(data) {
 			 	var $li ='<select name="city" class="select" id="city" onchange="getqu(1);">';
 			 		$li +='<option selected="selected" value="0">请选择</option>';
-			 	if(data.result!='null'){
-				 	var jsonObj = eval("(" + data.result + ")");
+			 	if(data){
+				 	var jsonObj = data;
+				 	//eval("(" + data.result + ")");
 					for ( var i = 0; i < jsonObj.length; i++) {
 						/*if(area_id!=null&&area_id!=""&&jsonObj[i].areaId==area_id){
 							$li += '<option selected value='+jsonObj[i].areaId+'>'+jsonObj[i].areaName+'</option>'
 						}else{*/
-							$li += '<option value='+jsonObj[i].areaId+'>'+jsonObj[i].areaName+'</option>'
+							$li += '<option value='+jsonObj[i].id+'>'+jsonObj[i].name+'</option>'
 						/*}*/
 					}
 			 	}
@@ -79,17 +80,18 @@ function getqu(idtype){
 		$("#area_info").val();//areainfo + area
 		$.ajax({
 	         type: "post",
-	         url: APP_BASE+"/area/getChildArea?id="+id,
+	         url: APP_BASE+"/area/child?id="+id,
 	         data: '',
 	         dataType: "json",
 			 async:false,
 			 success:function(data) {
 			 	var $li ='<select name="qu" class="select" id="qu" onchange="getqu(2);">';
 			 		$li +='<option selected="selected" value="0">请选择</option>';
-			 	if(data.result!='null'){
-				 	var jsonObj = eval("(" + data.result + ")");
+			 	if(data){
+				 	var jsonObj = data;
+				 		//eval("(" + data.result + ")");
 					for ( var i = 0; i < jsonObj.length; i++) {
-						$li += '<option value='+jsonObj[i].areaId+'>'+jsonObj[i].areaName+'</option>'
+						$li += '<option value='+jsonObj[i].id+'>'+jsonObj[i].name+'</option>'
 					}
 			 	}
 			 	$li += "</select>";
@@ -135,7 +137,7 @@ function getqu(idtype){
 				$(this).attr("selected",true);
 				$.ajax({
 		             type: "post",
-		             url: APP_BASE+"/area/getChildArea?id="+areaId01,
+		             url: APP_BASE+"/area/child?id="+areaId01,
 		             dataType: "json",
 					 success:function(data) {
 					 	var $li ='<select name="city" class="select" id="city" onchange="getqu(1);">';
@@ -154,7 +156,7 @@ function getqu(idtype){
 	    		     			$(this).attr("selected",true);
 	    		     			$.ajax({
 	    		   		         type: "post",
-	    		   		         url: APP_BASE+"/area/getChildArea?id="+areaId02,
+	    		   		         url: APP_BASE+"/area/child?id="+areaId02,
 	    		   		         data: '',
 	    		   		         dataType: "json",
 	    		   				 async:false,

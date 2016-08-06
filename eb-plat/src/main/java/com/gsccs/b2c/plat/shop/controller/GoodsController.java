@@ -11,18 +11,23 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.gsccs.b2c.plat.common.service.AreaService;
 import com.gsccs.b2c.plat.shop.model.GoodsForm;
 import com.gsccs.b2c.plat.shop.service.BrandService;
 import com.gsccs.b2c.plat.shop.service.CategoryService;
 import com.gsccs.b2c.plat.shop.service.GoodsService;
 import com.gsccs.b2c.plat.shop.service.TypeService;
+import com.gsccs.eb.api.domain.base.Area;
 import com.gsccs.eb.api.domain.goods.Category;
 import com.gsccs.eb.api.domain.goods.Product;
 import com.gsccs.eb.api.domain.goods.Sku;
 import com.gsccs.eb.api.domain.goods.Type;
+import com.gsccs.eb.api.utils.JsonMsg;
 
 /**
  * 商品管理
@@ -42,6 +47,8 @@ public class GoodsController {
 	private CategoryService categoryService;
 	@Autowired
 	private TypeService typeService;
+	@Autowired
+	private AreaService areaService;
 
 	@RequiresPermissions("goods:view")
 	@RequestMapping(method = RequestMethod.GET)
@@ -53,45 +60,107 @@ public class GoodsController {
 		return "goods/goods_list";
 	}
 
-	@RequestMapping(value = "/form", method = RequestMethod.GET)
-	public String goodsForm(Long id, Model model) {
+	@RequestMapping(value = "/checkcate", method = RequestMethod.GET)
+	public String checkcate(Model model) {
+		String view = "goods/goods_checkcate";
+		List<Category> categoryList = categoryService.queryCateList(1001l, 0l);
+		model.addAttribute("categoryList", categoryList);
+		return view;
+	}
+
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public String goodsForm(Long cateid, Model model) {
+		Category category = null;
+		Type type = null;
 		String view = "goods/goods_add";
-		Product goods = null;
-		List<Sku> skuList = null;
-		if (null != id) {
-			view = "goods/goods_edit";
-			goods = goodsService.getGoods(id);
-			skuList = goodsService.getSkuList(id);
-		}else{
-			List<Category> categoryList = categoryService.queryCateList(1001l, 0l);
-			model.addAttribute("categoryList", categoryList);
+		if (null == cateid) {
+			return "redirect:/goods/checkcate";
+		} else {
+			category = categoryService.findById(cateid);
+			if (null != category) {
+				type = typeService.getType(category.getTypeId());
+			}
 		}
+
+		List<Area> areaList = areaService.queryByParId(0);
+		model.addAttribute("category", category);
+		model.addAttribute("type", type);
+		model.addAttribute("areaList", areaList);
+		return view;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public String goodsEdit(Long id, Model model) {
+		String view = "goods/goods_edit";
+		if (null == id) {
+			return "redirect:/goods/checkcate";
+		}
+		Product goods = goodsService.getGoods(id);
+		List<Sku> skuList = goodsService.getSkuList(id);
 		Type type = typeService.getType(1005l);
-		
+
 		model.addAttribute("type", type);
 		model.addAttribute("goods", goods);
 		model.addAttribute("skuList", skuList);
 		return view;
 	}
 
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String productSave(Product product) {
-
-		return "redirect:/product";
+	@RequestMapping(value = "/addsave", method = RequestMethod.POST)
+	public JsonMsg goodsAdd(GoodsForm goodsForm) {
+		JsonMsg jsonMsg = new JsonMsg();
+		if(null == goodsForm){
+			jsonMsg.setSuccess(false);
+			return jsonMsg;
+		}
+		Product product = new Product();
+		product.setTitle(goodsForm.getTitle());
+		product.setTypeid(goodsForm.getTypeid());
+		product.setCategoryid(goodsForm.getCateid());
+		product.setBrandid(goodsForm.getBrandid());
+		sku(goodsForm);
+		//goodsService.addProduct(product, skulist);
+		return jsonMsg;
 	}
-	
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/editsave", method = RequestMethod.POST)
 	public String goodsUpdate(GoodsForm goods) {
-		if (null != goods){
+		if (null != goods) {
 			String specVals = goods.getGoodsSpec();
 			JSONObject jsonObject = JSON.parseObject(specVals);
 			Iterator<String> its = jsonObject.keySet().iterator();
-			while(its.hasNext()){
+			while (its.hasNext()) {
 				String key = its.next();
-				System.out.println(key+" "+jsonObject.getString(key));
+				System.out.println(key + " " + jsonObject.getString(key));
 			}
 		}
 		return "redirect:/product";
+	}
+
+	
+	@RequestMapping(value = "/validName", method = RequestMethod.POST)
+	@ResponseBody
+	public Boolean validName(String name) {
+		return true;
+	}
+	
+	
+	private void sku(GoodsForm goodsForm){
+		Sku sku = new Sku();
+		String skuStr = goodsForm.getSpecJson();
+		JSONArray skuArray = JSON.parseArray(skuStr);
+		for(int i=0;i<skuArray.size();i++){
+			JSONObject skuobj = skuArray.getJSONObject(i);
+			System.out.println(skuobj.get("specName"));
+			System.out.println(skuobj.get("specGoodsPrice"));
+			System.out.println(skuobj.get("specGoodsSerial"));
+			System.out.println();
+			JSONObject specvalobj = (JSONObject) skuobj.get("specGoodsSpec");
+			Iterator<String> its = specvalobj.keySet().iterator();
+			while (its.hasNext()) {
+				String key = its.next();
+				System.out.println(key + " " + specvalobj.getString(key));
+			}
+		}
 	}
 
 }

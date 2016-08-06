@@ -52,10 +52,9 @@ public class TypeController {
 		return "goods/type_list";
 	}
 
-	@RequiresPermissions("type:view")
-	@RequestMapping(value = "/checkTypeName")
+	@RequestMapping(value = "/validName")
 	@ResponseBody
-	public Boolean checkTypeName(String typename, HttpServletRequest request) {
+	public Boolean validName(String typename, HttpServletRequest request) {
 		List<Type> list = typeService.queryByTypeName(typename);
 		if (null == list || list.size() <= 0) {
 			return true;

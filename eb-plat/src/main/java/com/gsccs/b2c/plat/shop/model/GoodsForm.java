@@ -1,38 +1,42 @@
 package com.gsccs.b2c.plat.shop.model;
 
+import java.util.Date;
+
 public class GoodsForm {
 
 	private String id;
 	private String title;
 	private String subtitle;
-	private String brandid;
+	private Long cateid;
+	private String cateName;
+	private Long brandid;
 	private String brandName;
-	private String typeid;
+	private Long typeid;
 	private String specOpen;
 	private String specName;
-	private String price;
+	private Double price;
 	private String priceInterval;
 	private String serial;
-	private String isonsale;
-	private String prepareUp;
-	private String iscommend;
-	private String keywords;
-	private String descript;
+	private String isonsale;	//商品上架1上架0下架
+	private Date prepareUp;		//上架时间
+	private String iscommend;	//商品推荐
+	private String keywords;	//商品关键字
+	private String descript;	//商品描述 
 	private String goodsBody;
 	private String goodsAttr;
 	private String goodsSpec;
 	private String goodsForm;
 	private String goodsColImg;
-	private String transportId;
-	private String cityId;
+	private String transportId;	//运费模板ID，不使用运费模板值为0
+	private Integer cityId;
 	private String cityName;
-	private String provinceId;
+	private Integer provinceId;
 	private String provinceName;
-	private String shiptype;
-	private String specJson;
-	private String totalStore;
-	private String mketPrice;
-	private String costPrice;
+	private String shiptype; // 商品运费承担方式 默认 0为买家承担 1为卖家承担
+	private String specJson; // goodsSpec的实体类json串
+	private Integer totalStore; // 总库存
+	private Double mketPrice; // 市场价
+	private Double costPrice; // 成本价
 	private String isHaveSpec;
 
 	private String mainImage;
@@ -62,11 +66,27 @@ public class GoodsForm {
 		this.subtitle = subtitle;
 	}
 
-	public String getBrandid() {
+	public Long getCateid() {
+		return cateid;
+	}
+
+	public void setCateid(Long cateid) {
+		this.cateid = cateid;
+	}
+
+	public String getCateName() {
+		return cateName;
+	}
+
+	public void setCateName(String cateName) {
+		this.cateName = cateName;
+	}
+
+	public Long getBrandid() {
 		return brandid;
 	}
 
-	public void setBrandid(String brandid) {
+	public void setBrandid(Long brandid) {
 		this.brandid = brandid;
 	}
 
@@ -78,11 +98,11 @@ public class GoodsForm {
 		this.brandName = brandName;
 	}
 
-	public String getTypeid() {
+	public Long getTypeid() {
 		return typeid;
 	}
 
-	public void setTypeid(String typeid) {
+	public void setTypeid(Long typeid) {
 		this.typeid = typeid;
 	}
 
@@ -102,11 +122,11 @@ public class GoodsForm {
 		this.specName = specName;
 	}
 
-	public String getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
@@ -126,20 +146,20 @@ public class GoodsForm {
 		this.serial = serial;
 	}
 
-	public String getPrepareUp() {
-		return prepareUp;
-	}
-
-	public void setPrepareUp(String prepareUp) {
-		this.prepareUp = prepareUp;
-	}
-
 	public String getIsonsale() {
 		return isonsale;
 	}
 
 	public void setIsonsale(String isonsale) {
 		this.isonsale = isonsale;
+	}
+
+	public Date getPrepareUp() {
+		return prepareUp;
+	}
+
+	public void setPrepareUp(Date prepareUp) {
+		this.prepareUp = prepareUp;
 	}
 
 	public String getIscommend() {
@@ -214,11 +234,11 @@ public class GoodsForm {
 		this.transportId = transportId;
 	}
 
-	public String getCityId() {
+	public Integer getCityId() {
 		return cityId;
 	}
 
-	public void setCityId(String cityId) {
+	public void setCityId(Integer cityId) {
 		this.cityId = cityId;
 	}
 
@@ -230,11 +250,11 @@ public class GoodsForm {
 		this.cityName = cityName;
 	}
 
-	public String getProvinceId() {
+	public Integer getProvinceId() {
 		return provinceId;
 	}
 
-	public void setProvinceId(String provinceId) {
+	public void setProvinceId(Integer provinceId) {
 		this.provinceId = provinceId;
 	}
 
@@ -262,27 +282,27 @@ public class GoodsForm {
 		this.specJson = specJson;
 	}
 
-	public String getTotalStore() {
+	public Integer getTotalStore() {
 		return totalStore;
 	}
 
-	public void setTotalStore(String totalStore) {
+	public void setTotalStore(Integer totalStore) {
 		this.totalStore = totalStore;
 	}
 
-	public String getMketPrice() {
+	public Double getMketPrice() {
 		return mketPrice;
 	}
 
-	public void setMketPrice(String mketPrice) {
+	public void setMketPrice(Double mketPrice) {
 		this.mketPrice = mketPrice;
 	}
 
-	public String getCostPrice() {
+	public Double getCostPrice() {
 		return costPrice;
 	}
 
-	public void setCostPrice(String costPrice) {
+	public void setCostPrice(Double costPrice) {
 		this.costPrice = costPrice;
 	}
 

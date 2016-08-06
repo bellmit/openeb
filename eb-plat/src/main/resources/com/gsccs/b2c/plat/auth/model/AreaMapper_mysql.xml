@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gsccs.b2c.plat.common.dao.AreaMapper">
 
-	<resultMap id="BaseResultMap" type="com.gsccs.b2c.plat.common.model.AreaT">
+	<resultMap id="BaseResultMap" type="com.gsccs.eb.api.domain.base.Area">
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="code" property="code" jdbcType="INTEGER" />
-		<result column="parentId" property="parentid" jdbcType="INTEGER" />
+		<result column="pcode" property="pcode" jdbcType="INTEGER" />
 		<result column="name" property="name" jdbcType="VARCHAR" />
 		<result column="level" property="level" jdbcType="INTEGER" />
 	</resultMap>
@@ -78,7 +78,7 @@
 	</sql>
 
 	<sql id="Base_Column_List">
-		id, code, parentId, name, level
+		id, code, pcode, name, level
 	</sql>
 
 	<select id="selectByExample" resultMap="BaseResultMap"
@@ -135,19 +135,19 @@
 		</if>
 	</delete>
 
-	<insert id="insert" parameterType="com.gsccs.b2c.plat.common.model.AreaT">
+	<insert id="insert" parameterType="com.gsccs.eb.api.domain.base.Area">
 		insert into
 		plat_area (id,
-		code, parentId, name, level)
+		code, pcode, name, level)
 		values
 		(#{id,jdbcType=INTEGER},
 		#{code,jdbcType=INTEGER},
-		#{parentid,jdbcType=INTEGER},
+		#{pcode,jdbcType=INTEGER},
 		#{name,jdbcType=VARCHAR},
 		#{level,jdbcType=INTEGER})
 	</insert>
 
-	<insert id="insertSelective" parameterType="com.gsccs.b2c.plat.common.model.AreaT">
+	<insert id="insertSelective" parameterType="com.gsccs.eb.api.domain.base.Area">
 		insert into plat_area
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -156,8 +156,8 @@
 			<if test="code != null">
 				code,
 			</if>
-			<if test="parentid != null">
-				parentId,
+			<if test="pcode != null">
+				pcode,
 			</if>
 			<if test="name != null">
 				name,
@@ -173,8 +173,8 @@
 			<if test="code != null">
 				#{code,jdbcType=INTEGER},
 			</if>
-			<if test="parentid != null">
-				#{parentid,jdbcType=INTEGER},
+			<if test="pcode != null">
+				#{pcode,jdbcType=INTEGER},
 			</if>
 			<if test="name != null">
 				#{name,jdbcType=VARCHAR},
@@ -202,8 +202,8 @@
 			<if test="record.code != null">
 				code = #{record.code,jdbcType=INTEGER},
 			</if>
-			<if test="record.parentid != null">
-				parentId = #{record.parentid,jdbcType=INTEGER},
+			<if test="record.pcode != null">
+				pcode = #{record.pcode,jdbcType=INTEGER},
 			</if>
 			<if test="record.name != null">
 				name = #{record.name,jdbcType=VARCHAR},
@@ -222,8 +222,8 @@
 		set id = #{record.id,jdbcType=INTEGER},
 		code =
 		#{record.code,jdbcType=INTEGER},
-		parentId =
-		#{record.parentid,jdbcType=INTEGER},
+		pcode =
+		#{record.pcode,jdbcType=INTEGER},
 		name =
 		#{record.name,jdbcType=VARCHAR},
 		level =
@@ -233,14 +233,14 @@
 		</if>
 	</update>
 
-	<update id="updateByPrimaryKeySelective" parameterType="com.gsccs.b2c.plat.common.model.AreaT">
+	<update id="updateByPrimaryKeySelective" parameterType="com.gsccs.eb.api.domain.base.Area">
 		update plat_area
 		<set>
 			<if test="code != null">
 				code = #{code,jdbcType=INTEGER},
 			</if>
-			<if test="parentid != null">
-				parentId = #{parentid,jdbcType=INTEGER},
+			<if test="pcode != null">
+				pcode = #{pcode,jdbcType=INTEGER},
 			</if>
 			<if test="name != null">
 				name = #{name,jdbcType=VARCHAR},
@@ -252,12 +252,12 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 
-	<update id="updateByPrimaryKey" parameterType="com.gsccs.b2c.plat.common.model.AreaT">
+	<update id="updateByPrimaryKey" parameterType="com.gsccs.eb.api.domain.base.Area">
 		update
 		plat_area
 		set code = #{code,jdbcType=INTEGER},
-		parentId =
-		#{parentid,jdbcType=INTEGER},
+		pcode =
+		#{pcode,jdbcType=INTEGER},
 		name = #{name,jdbcType=VARCHAR},
 		level =
 		#{level,jdbcType=INTEGER}
@@ -270,7 +270,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from plat_area
-		where parentid =#{parentid,jdbcType=INTEGER}
+		where pcode =#{pcode,jdbcType=INTEGER}
 	</select>
 
 </mapper>

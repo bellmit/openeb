@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.gsccs.b2c.plat.common.model.AreaExample;
-import com.gsccs.b2c.plat.common.model.AreaT;
+import com.gsccs.eb.api.domain.base.Area;
 
 /**
  * @说明 省份&城市&区&街道 数据操作
@@ -21,27 +21,26 @@ public interface AreaMapper {
 
 	int deleteByPrimaryKey(Integer id);
 
-	int insert(AreaT record);
+	int insert(Area record);
 
-	int insertSelective(AreaT record);
+	int insertSelective(Area record);
 
-	List<AreaT> selectByExample(AreaExample example);
+	List<Area> selectByExample(AreaExample example);
 
-	List<AreaT> selectPageByExample(AreaExample example);
+	List<Area> selectPageByExample(AreaExample example);
 
-	AreaT selectByPrimaryKey(Integer id);
+	Area selectByPrimaryKey(Integer id);
 
-	int updateByExampleSelective(@Param("record") AreaT record,
+	int updateByExampleSelective(@Param("record") Area record,
 			@Param("example") AreaExample example);
 
-	int updateByExample(@Param("record") AreaT record,
+	int updateByExample(@Param("record") Area record,
 			@Param("example") AreaExample example);
 
-	int updateByPrimaryKeySelective(AreaT record);
+	int updateByPrimaryKeySelective(Area record);
 
-	int updateByPrimaryKey(AreaT record);
+	int updateByPrimaryKey(Area record);
 
-	/* 查询出所有省份&直辖市 */
-	List<AreaT> getByParId(Integer parentid);
+	List<Area> selectByParId(Integer parentid);
 
 }
