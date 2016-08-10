@@ -3,6 +3,7 @@ package com.gsccs.b2c.plat.shop.controller;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,12 +53,13 @@ public class GoodsController {
 	@Autowired
 	private AreaService areaService;
 
+	
 	@RequiresPermissions("goods:view")
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "10") int rows, ModelMap map,
 			Goods param) {
-		List<Goods> list = goodsService.getGoodss(param, "", page, rows);
+		List<Goods> list = goodsService.getGoodsList(param, "", page, rows);
 		map.addAttribute("productList", list);
 		return "goods/goods_list";
 	}
@@ -98,7 +100,7 @@ public class GoodsController {
 			return "redirect:/goods/checkcate";
 		}
 		Goods goods = goodsService.getGoods(id);
-		List<Sku> skuList = goodsService.getSkuList(id);
+		List<Sku> skuList = goodsService.findSkuList(id);
 		Type type = typeService.getType(1005l);
 
 		model.addAttribute("type", type);
@@ -150,6 +152,7 @@ public class GoodsController {
 	
 	private List<Sku> sku(GoodsForm goodsForm){
 		List<Sku> skuList = new ArrayList<Sku>();
+		
 		String skuStr = goodsForm.getSpecJson();
 		JSONArray skuArray = JSON.parseArray(skuStr);
 		for(int i=0;i<skuArray.size();i++){
@@ -158,17 +161,27 @@ public class GoodsController {
 			sku.setPrice(skuobj.getDouble("specGoodsPrice"));
 			sku.setStorenum(skuobj.getInteger("specGoodsStorage"));
 			System.out.println(skuobj.get("specName") +"|"+skuobj.get("specGoodsPrice")+"|");
+			
+			String specstr = skuobj.getString("specName");
 			String specvalstr = skuobj.getString("specGoodsSpec");
+			JSONObject specobj = JSON.parseObject(specstr);
 			JSONObject specvalobj = JSON.parseObject(specvalstr);
-			Iterator<String> its = specvalobj.keySet().iterator();
+			
+			Iterator<String> specits = specobj.keySet().iterator();
+			Iterator<String> specvalits = specvalobj.keySet().iterator();
 			List<SkuSpec> specList = new ArrayList<SkuSpec>();
-			while (its.hasNext()) {
-				String key = its.next();
-				System.out.println(key + " " + specvalobj.getString(key));
+			while (specvalits.hasNext()) {
+				String specid = specits.next();
+				String specvalid = specvalits.next();
 				SkuSpec skuSpec = new SkuSpec();
-				skuSpec.setSpecvalid(Long.valueOf(key));
+				skuSpec.setSpecid(Long.valueOf(specid));
+				skuSpec.setSpecvalid(Long.valueOf(specvalid));
 				specList.add(skuSpec);
 			}
+			//specjson
+			sku.setSpecids(skuobj.getString("specName"));
+			//skuspecjson
+			sku.setSpecstr(skuobj.getString("specGoodsSpec"));
 			sku.setSpecList(specList);
 			skuList.add(sku);
 		}

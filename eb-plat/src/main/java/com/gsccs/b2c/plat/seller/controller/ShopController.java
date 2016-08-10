@@ -52,6 +52,23 @@ public class ShopController {
 		map.put("gradeList", gradeList);
 		return "seller/shop-list";
 	}
+	
+	/**
+	 * 开店申请列表
+	 * @param param
+	 * @param currPage
+	 * @param pageSize
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping(value = "/auditlist", method = RequestMethod.GET)
+	public String joinList(Shop param,
+			@RequestParam(defaultValue = "1") int currPage,
+			@RequestParam(defaultValue = "10") int pageSize, ModelMap map) {
+		List<Shop> storeList = storeService.find(param, "", currPage, pageSize);
+		map.put("storeList", storeList);
+		return "seller/shop-auditlist";
+	}
 
 	/**
 	 * 店铺表单
@@ -72,6 +89,26 @@ public class ShopController {
 		return view;
 	}
 
+	
+	/**
+	 * 店铺表单
+	 * 
+	 * @param id
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping(value = "/audit", method = RequestMethod.GET)
+	public String applyForm(Long id, ModelMap map) {
+		String view = "seller/shop-audit";
+		Shop shop = null;
+		if (null != id) {
+			shop = storeService.findById(id);
+		}
+		map.put("shop", shop);
+		return view;
+	}
+
+	
 	/**
 	 * 店铺查看
 	 * 

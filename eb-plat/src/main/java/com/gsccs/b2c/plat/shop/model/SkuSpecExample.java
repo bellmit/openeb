@@ -147,26 +147,6 @@ public class SkuSpecExample {
 			return (Criteria) this;
 		}
 
-		public Criteria andIdGreaterThan(Long value) {
-			addCriterion("id >", value, "id");
-			return (Criteria) this;
-		}
-
-		public Criteria andIdGreaterThanOrEqualTo(Long value) {
-			addCriterion("id >=", value, "id");
-			return (Criteria) this;
-		}
-
-		public Criteria andIdLessThan(Long value) {
-			addCriterion("id <", value, "id");
-			return (Criteria) this;
-		}
-
-		public Criteria andIdLessThanOrEqualTo(Long value) {
-			addCriterion("id <=", value, "id");
-			return (Criteria) this;
-		}
-
 		public Criteria andIdIn(List<Long> values) {
 			addCriterion("id in", values, "id");
 			return (Criteria) this;
@@ -217,33 +197,33 @@ public class SkuSpecExample {
 			return (Criteria) this;
 		}
 
-		public Criteria andProductidIsNull() {
-			addCriterion("productid is null");
+		public Criteria andGoodsidIsNull() {
+			addCriterion("goodsid is null");
 			return (Criteria) this;
 		}
 
-		public Criteria andProductidIsNotNull() {
-			addCriterion("productid is not null");
+		public Criteria andGoodsidIsNotNull() {
+			addCriterion("goodsid is not null");
 			return (Criteria) this;
 		}
 
-		public Criteria andProductidEqualTo(String value) {
-			addCriterion("productid =", value, "productid");
+		public Criteria andGoodsidEqualTo(Long value) {
+			addCriterion("goodsid =", value, "goodsid");
 			return (Criteria) this;
 		}
 
-		public Criteria andProductidNotEqualTo(String value) {
-			addCriterion("productid <>", value, "productid");
+		public Criteria andGoodsidNotEqualTo(Long value) {
+			addCriterion("goodsid <>", value, "goodsid");
 			return (Criteria) this;
 		}
 
-		public Criteria andProductidIn(List<String> values) {
-			addCriterion("productid in", values, "productid");
+		public Criteria andGoodsidIn(List<Long> values) {
+			addCriterion("goodsid in", values, "goodsid");
 			return (Criteria) this;
 		}
 
-		public Criteria andProductidNotIn(List<String> values) {
-			addCriterion("productid not in", values, "productid");
+		public Criteria andGoodsidNotIn(List<String> values) {
+			addCriterion("goodsid not in", values, "goodsid");
 			return (Criteria) this;
 		}
 
@@ -257,22 +237,22 @@ public class SkuSpecExample {
 			return (Criteria) this;
 		}
 
-		public Criteria andSkuidEqualTo(String value) {
+		public Criteria andSkuidEqualTo(Long value) {
 			addCriterion("skuid =", value, "skuid");
 			return (Criteria) this;
 		}
 
-		public Criteria andSkuidNotEqualTo(String value) {
+		public Criteria andSkuidNotEqualTo(Long value) {
 			addCriterion("skuid <>", value, "skuid");
 			return (Criteria) this;
 		}
 
-		public Criteria andSkuidIn(List<String> values) {
+		public Criteria andSkuidIn(List<Long> values) {
 			addCriterion("skuid in", values, "skuid");
 			return (Criteria) this;
 		}
 
-		public Criteria andSkuidNotIn(List<String> values) {
+		public Criteria andSkuidNotIn(List<Long> values) {
 			addCriterion("skuid not in", values, "skuid");
 			return (Criteria) this;
 		}

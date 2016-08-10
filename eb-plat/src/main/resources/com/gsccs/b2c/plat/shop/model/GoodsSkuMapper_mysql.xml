@@ -15,11 +15,12 @@
 		<result column="specstr" jdbcType="VARCHAR" property="specstr" />
 		<result column="status" jdbcType="VARCHAR" property="status" />
 	</resultMap>
-	
-	
+
+
 	<sql id="Example_Where_Clause">
 		<where>
-			<foreach collection="example.oredCriteria" item="criteria" separator="or">
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
 				<if test="criteria.valid">
 					<trim prefix="(" prefixOverrides="and" suffix=")">
 						<foreach collection="criteria.criteria" item="criterion">
@@ -31,7 +32,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -63,7 +65,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -81,11 +84,10 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		id, goodsid, serial, title, specids,specstr, price,mkprice, storenum,locknum,salenum, status
+		id, goodsid, serial, title, specids,specstr, price,mkprice,
+		storenum,locknum,salenum, status
 	</sql>
-
-	<select id="selectByExample" parameterType="map"
-		resultMap="BaseResultMap">
+	<select id="selectByExample" parameterType="map" resultMap="BaseResultMap">
 		select
 		<if test="example.distinct">
 			distinct
@@ -100,31 +102,37 @@
 		</if>
 	</select>
 
-	<select id="selectByPrimaryKey" parameterType="map"
-		resultMap="BaseResultMap">
+	<select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from eb_goods_sku
 		where id = #{id,jdbcType=BIGINT}
 	</select>
+	
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-		delete from shop_goods
+		delete from
+		eb_goods_sku
 		where id = #{id,jdbcType=BIGINT}
 	</delete>
-	<delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.shop.model.SkuExample">
-		delete from shop_goods
+	
+	<delete id="deleteByExample" parameterType="map">
+		delete from eb_goods_sku
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
 	</delete>
-	
-	<insert id="insert" parameterType="map">
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="record.id"
+		parameterType="map">
 		insert into eb_goods_sku (id, goodsid, serial, title,
 		specids,specstr, price,mkprice, storenum,locknum,salenum,
 		status)
-		values (#{record.id,jdbcType=BIGINT}, #{record.goodsid,jdbcType=BIGINT},
-		#{record.serial,jdbcType=VARCHAR}, #{record.title,jdbcType=VARCHAR},
-		#{record.specids,jdbcType=VARCHAR},#{record.specstr,jdbcType=VARCHAR},
+		values (#{record.id,jdbcType=BIGINT},
+		#{record.goodsid,jdbcType=BIGINT},
+		#{record.serial,jdbcType=VARCHAR},
+		#{record.title,jdbcType=VARCHAR},
+		#{record.specids,jdbcType=VARCHAR},
+		#{record.specstr,jdbcType=VARCHAR},
 		#{record.price,jdbcType=DECIMAL},
 		#{record.mkprice,jdbcType=DECIMAL},
 		#{record.storenum,jdbcType=INTEGER},
@@ -133,8 +141,7 @@
 		#{record.status,jdbcType=VARCHAR})
 	</insert>
 
-	<select id="countByExample" parameterType="map"
-		resultType="java.lang.Integer">
+	<select id="countByExample" parameterType="map" resultType="java.lang.Integer">
 		select count(*) from eb_goods_sku
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
@@ -144,12 +151,17 @@
 	<update id="updateByExample" parameterType="map">
 		update eb_goods_sku
 		set id = #{record.id,jdbcType=BIGINT},
-		goodsid = #{record.goodsid,jdbcType=BIGINT},
-		serial = #{record.serial,jdbcType=VARCHAR},
-		title = #{record.title,jdbcType=VARCHAR},
-		specids = #{record.specids,jdbcType=VARCHAR},
+		goodsid =
+		#{record.goodsid,jdbcType=BIGINT},
+		serial =
+		#{record.serial,jdbcType=VARCHAR},
+		title =
+		#{record.title,jdbcType=VARCHAR},
+		specids =
+		#{record.specids,jdbcType=VARCHAR},
 		specstr = #{record.specstr,jdbcType=VARCHAR},
-		price = #{record.price,jdbcType=DECIMAL},
+		price =
+		#{record.price,jdbcType=DECIMAL},
 		mkprice = #{record.mkprice,jdbcType=DECIMAL},
 		storenum = #{record.storenum,jdbcType=INTEGER},
 		locknum = #{record.locknum,jdbcType=INTEGER},
@@ -161,18 +173,25 @@
 	</update>
 
 	<update id="updateByPrimaryKey" parameterType="map">
-		update eb_goods_sku
+		update
+		eb_goods_sku
 		set goodsid = #{record.goodsid,jdbcType=BIGINT},
-		serial = #{record.serial,jdbcType=VARCHAR},
-		title = #{record.title,jdbcType=VARCHAR},
-		specids = #{record.specids,jdbcType=VARCHAR},
+		serial =
+		#{record.serial,jdbcType=VARCHAR},
+		title =
+		#{record.title,jdbcType=VARCHAR},
+		specids =
+		#{record.specids,jdbcType=VARCHAR},
 		specstr = #{record.specstr,jdbcType=VARCHAR},
-		price = #{record.price,jdbcType=DECIMAL},
+		price =
+		#{record.price,jdbcType=DECIMAL},
 		mkprice = #{record.mkprice,jdbcType=DECIMAL},
 		storenum = #{record.storenum,jdbcType=INTEGER},
 		locknum = #{record.locknum,jdbcType=INTEGER},
 		salenum = #{record.salenum,jdbcType=INTEGER},
-		status = #{record.status,jdbcType=VARCHAR}
-		where id = #{record.id,jdbcType=BIGINT}
+		status =
+		#{record.status,jdbcType=VARCHAR}
+		where id =
+		#{record.id,jdbcType=BIGINT}
 	</update>
 </mapper>

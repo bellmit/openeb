@@ -91,7 +91,7 @@ public class GoodsServiceAPI implements GoodsServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0002,
 					APIConst.ERROR_MSG_0002);
 		}
-		return goodsService.getSkuList(pid);
+		return goodsService.findSkuList(pid);
 	}
 
 	@Override

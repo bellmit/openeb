@@ -14,8 +14,10 @@ import com.gsccs.eb.api.domain.buyer.Points;
  * 
  */
 public interface BuyerService {
+	
+	public Buyer getBuyer(Long id);
 
-	public List<Buyer> getBuyerList(Buyer param, int page, int rows);
+	public List<Buyer> findBuyerList(Buyer param, int page, int rows);
 
 	// 添加会员积分
 	public void insert(Long sid, Points record);

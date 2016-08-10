@@ -192,11 +192,6 @@ public class AccountExample {
 			return (Criteria) this;
 		}
 
-		public Criteria andAccountGreaterThan(String value) {
-			addCriterion("account >", value, "account");
-			return (Criteria) this;
-		}
-
 		public Criteria andAccountLike(String value) {
 			addCriterion("account like", value, "account");
 			return (Criteria) this;
@@ -237,152 +232,123 @@ public class AccountExample {
 			return (Criteria) this;
 		}
 
-		public Criteria andnickIsNull() {
-			addCriterion("nick is null");
+
+		public Criteria andRegtimeIsNull() {
+			addCriterion("regtime is null");
 			return (Criteria) this;
 		}
 
-		public Criteria andnickIsNotNull() {
-			addCriterion("nick is not null");
+		public Criteria andRegtimeIsNotNull() {
+			addCriterion("regtime is not null");
 			return (Criteria) this;
 		}
 
-		public Criteria andnickEqualTo(String value) {
-			addCriterion("nick =", value, "nick");
+		public Criteria andRegtimeEqualTo(Date value) {
+			addCriterion("regtime =", value, "addDate");
 			return (Criteria) this;
 		}
 
-		public Criteria andnickNotEqualTo(String value) {
-			addCriterion("nick <>", value, "nick");
+		public Criteria andRegtimeNotEqualTo(Date value) {
+			addCriterion("regtime <>", value, "addDate");
 			return (Criteria) this;
 		}
 
-		public Criteria andnickLike(String value) {
-			addCriterion("nick like", value, "nick");
+		public Criteria andRegtimeGreaterThan(Date value) {
+			addCriterion("regtime >", value, "addDate");
 			return (Criteria) this;
 		}
 
-		public Criteria andnickNotLike(String value) {
-			addCriterion("nick not like", value, "nick");
+		public Criteria andRegtimeGreaterThanOrEqualTo(Date value) {
+			addCriterion("regtime >=", value, "addDate");
 			return (Criteria) this;
 		}
 
-		public Criteria andAddDateIsNull() {
-			addCriterion("addtime is null");
+		public Criteria andRegtimeLessThan(Date value) {
+			addCriterion("regtime <", value, "addDate");
 			return (Criteria) this;
 		}
 
-		public Criteria andAddDateIsNotNull() {
-			addCriterion("addtime is not null");
+		public Criteria andRegtimeLessThanOrEqualTo(Date value) {
+			addCriterion("regtime <=", value, "addDate");
 			return (Criteria) this;
 		}
 
-		public Criteria andAddDateEqualTo(Date value) {
-			addCriterion("addtime =", value, "addDate");
+		public Criteria andRegtimeIn(List<Date> values) {
+			addCriterion("regtime in", values, "addDate");
 			return (Criteria) this;
 		}
 
-		public Criteria andAddDateNotEqualTo(Date value) {
-			addCriterion("addtime <>", value, "addDate");
+		public Criteria andRegtimeNotIn(List<Date> values) {
+			addCriterion("regtime not in", values, "addDate");
 			return (Criteria) this;
 		}
 
-		public Criteria andAddDateGreaterThan(Date value) {
-			addCriterion("addtime >", value, "addDate");
+		public Criteria andRegtimeBetween(Date value1, Date value2) {
+			addCriterion("regtime between", value1, value2, "addDate");
 			return (Criteria) this;
 		}
 
-		public Criteria andAddDateGreaterThanOrEqualTo(Date value) {
-			addCriterion("addtime >=", value, "addDate");
+		public Criteria andRegtimeNotBetween(Date value1, Date value2) {
+			addCriterion("regtime not between", value1, value2, "addDate");
 			return (Criteria) this;
 		}
 
-		public Criteria andAddDateLessThan(Date value) {
-			addCriterion("addtime <", value, "addDate");
-			return (Criteria) this;
-		}
-
-		public Criteria andAddDateLessThanOrEqualTo(Date value) {
-			addCriterion("addtime <=", value, "addDate");
-			return (Criteria) this;
-		}
-
-		public Criteria andAddDateIn(List<Date> values) {
-			addCriterion("addtime in", values, "addDate");
-			return (Criteria) this;
-		}
-
-		public Criteria andAddDateNotIn(List<Date> values) {
-			addCriterion("addtime not in", values, "addDate");
-			return (Criteria) this;
-		}
-
-		public Criteria andAddDateBetween(Date value1, Date value2) {
-			addCriterion("addtime between", value1, value2, "addDate");
-			return (Criteria) this;
-		}
-
-		public Criteria andAddDateNotBetween(Date value1, Date value2) {
-			addCriterion("addtime not between", value1, value2, "addDate");
-			return (Criteria) this;
-		}
-
-		public Criteria andLoginDateIsNull() {
+		public Criteria andLasttimeIsNull() {
 			addCriterion("lasttime is null");
 			return (Criteria) this;
 		}
 
-		public Criteria andLoginDateIsNotNull() {
+		public Criteria andLasttimeIsNotNull() {
 			addCriterion("lasttime is not null");
 			return (Criteria) this;
 		}
 
-		public Criteria andLoginDateEqualTo(Date value) {
+		public Criteria andLasttimeEqualTo(Date value) {
 			addCriterion("lasttime =", value, "loginDate");
 			return (Criteria) this;
 		}
 
-		public Criteria andLoginDateNotEqualTo(Date value) {
+		public Criteria andLasttimeNotEqualTo(Date value) {
 			addCriterion("lasttime <>", value, "loginDate");
 			return (Criteria) this;
 		}
 
-		public Criteria andLoginDateGreaterThan(Date value) {
+		public Criteria andLasttimeGreaterThan(Date value) {
 			addCriterion("lasttime >", value, "loginDate");
 			return (Criteria) this;
 		}
 
-		public Criteria andLoginDateGreaterThanOrEqualTo(Date value) {
+		public Criteria andLasttimeGreaterThanOrEqualTo(Date value) {
 			addCriterion("lasttime >=", value, "loginDate");
 			return (Criteria) this;
 		}
 
-		public Criteria andLoginDateLessThan(Date value) {
+		public Criteria andLasttimeLessThan(Date value) {
 			addCriterion("lasttime <", value, "loginDate");
 			return (Criteria) this;
 		}
 
-		public Criteria andLoginDateLessThanOrEqualTo(Date value) {
+		public Criteria andLasttimeLessThanOrEqualTo(Date value) {
 			addCriterion("lasttime <=", value, "loginDate");
 			return (Criteria) this;
 		}
 
-		public Criteria andLoginDateIn(List<Date> values) {
+		public Criteria andLasttimeIn(List<Date> values) {
 			addCriterion("lasttime in", values, "loginDate");
 			return (Criteria) this;
 		}
 
-		public Criteria andLoginDateNotIn(List<Date> values) {
+		public Criteria andLasttimeNotIn(List<Date> values) {
 			addCriterion("lasttime not in", values, "loginDate");
 			return (Criteria) this;
 		}
 
-		public Criteria andLoginDateBetween(Date value1, Date value2) {
+		public Criteria andLasttimeBetween(Date value1, Date value2) {
 			addCriterion("lasttime between", value1, value2, "loginDate");
 			return (Criteria) this;
 		}
 
-		public Criteria andLoginDateNotBetween(Date value1, Date value2) {
+		public Criteria andLasttimeNotBetween(Date value1, Date value2) {
 			addCriterion("lasttime not between", value1, value2, "loginDate");
 			return (Criteria) this;
 		}
@@ -444,36 +410,6 @@ public class AccountExample {
 
 		public Criteria andIslockNotEqualTo(String value) {
 			addCriterion("islock <>", value, "islock");
-			return (Criteria) this;
-		}
-
-		public Criteria andIslockGreaterThan(String value) {
-			addCriterion("islock >", value, "islock");
-			return (Criteria) this;
-		}
-
-		public Criteria andIslockGreaterThanOrEqualTo(String value) {
-			addCriterion("islock >=", value, "islock");
-			return (Criteria) this;
-		}
-
-		public Criteria andIslockLessThan(String value) {
-			addCriterion("islock <", value, "islock");
-			return (Criteria) this;
-		}
-
-		public Criteria andIslockLessThanOrEqualTo(String value) {
-			addCriterion("islock <=", value, "islock");
-			return (Criteria) this;
-		}
-
-		public Criteria andIslockLike(String value) {
-			addCriterion("islock like", value, "islock");
-			return (Criteria) this;
-		}
-
-		public Criteria andIslockNotLike(String value) {
-			addCriterion("islock not like", value, "islock");
 			return (Criteria) this;
 		}
 

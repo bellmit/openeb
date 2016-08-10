@@ -71,7 +71,7 @@ public class PointController {
 			String username = (String) subject.getPrincipal();
 			Account user = buyerAPI.findByAccount(siteId, username);
 			Map<String, Object> data = new HashMap<String, Object>();
-			int total = buyerAPI.getBuyerPoint(siteId,user.getUserId());
+			int total = buyerAPI.getBuyerPoint(siteId,user.getId());
 			data.put("store", redisService.getStore(siteId));
 			data.put("total", total);
 			response.setContentType("text/html");
@@ -112,7 +112,7 @@ public class PointController {
 			String username = (String) subject.getPrincipal();
 			Account user = buyerAPI.findByAccount(siteId, username);
 			Points param = new Points();
-			param.setBuyerid(user.getUserId());
+			param.setBuyerid(user.getId());
 			List<Points> scores = buyerAPI.getBuyerPoints(siteId, param,
 					page, pagesize);
 			json = (JSONArray) json.toJSON(scores);

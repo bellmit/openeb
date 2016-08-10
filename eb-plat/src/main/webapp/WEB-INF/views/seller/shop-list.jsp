@@ -64,7 +64,7 @@
             <h3>店铺</h3>
             <ul class="tab-base">
                 <li><a href="JavaScript:void(0);" class="current"><span>管理</span></a></li>
-                <li><a href="${pageContext.request.contextPath}/store/joinlist"><span>开店申请</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/store/auditlist"><span>开店申请</span></a></li>
             </ul>
         </div>
     </div>

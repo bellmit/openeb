@@ -43,16 +43,16 @@ public class DeliverTempController {
 		List<Templet> templetList = deliverService.find(param, "", currPage,
 				pageSize, true);
 		map.addAttribute("templetList", templetList);
-		return "deliver/templet_list";
+		return "deliver/templet-list";
 	}
 
 	@RequestMapping(value = "/form", method = RequestMethod.GET)
 	public String templetForm(String id, ModelMap map) {
 		Templet templet = null;
-		String view = "deliver/templet_add";
+		String view = "deliver/templet-add";
 		if (StringUtils.isNotEmpty(id)) {
 			templet = deliverService.getType(id);
-			view = "deliver/templet_edit";
+			view = "deliver/templet-edit";
 		}
 		map.addAttribute("templet", templet);
 		return view;

@@ -2,7 +2,6 @@ package com.gsccs.b2c.plat.site.service;
 
 import java.util.List;
 
-import com.gsccs.b2c.plat.site.model.StoreyList;
 import com.gsccs.eb.api.domain.site.Banner;
 import com.gsccs.eb.api.domain.site.Floor;
 

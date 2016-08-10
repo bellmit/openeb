@@ -57,16 +57,18 @@ public class CategoryController {
 
 	@RequestMapping(value = "/form", method = RequestMethod.GET)
 	public String cateForm(Long id,Long parid,Model model) {
+		String view = "goods/category-add";
 		Category category = null;
 		if (null != id){
+			view = "goods/category-edit";
 			category = categoryService.findById(id);
 		}
 		model.addAttribute("category", category);
 		model.addAttribute("parid", parid);
-		return "goods/category-edit";
+		return view;
 	}
 
-	@RequiresPermissions("category:create")
+	//@RequiresPermissions("category:create")
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonMsg cateSave(Category category, String pid) {

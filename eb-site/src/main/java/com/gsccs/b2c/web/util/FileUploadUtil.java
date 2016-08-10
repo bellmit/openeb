@@ -49,7 +49,7 @@ public class FileUploadUtil {
 		}
 		
 		//创建文件夹
-		savePath += ((Account)request.getSession().getAttribute(Cons.USER_CONTEXT)).getUserId() + "/";
+		savePath += ((Account)request.getSession().getAttribute(Cons.USER_CONTEXT)).getId() + "/";
 		File saveDirFile = new File(savePath);
 		if (!saveDirFile.exists()) {
 			saveDirFile.mkdirs();

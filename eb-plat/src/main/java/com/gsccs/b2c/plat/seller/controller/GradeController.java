@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.gsccs.b2c.plat.bass.JsonMsg;
 import com.gsccs.b2c.plat.seller.service.ShopService;
 import com.gsccs.eb.api.domain.seller.Grade;
-import com.gsccs.eb.api.domain.seller.Shop;
 
 /**
  * 平台店铺管理
@@ -25,7 +24,7 @@ import com.gsccs.eb.api.domain.seller.Shop;
  * 
  */
 @Controller
-@RequestMapping("/store/grade")
+@RequestMapping("/storegrade")
 public class GradeController {
 
 	@Resource

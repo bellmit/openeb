@@ -27,13 +27,13 @@ public class FloorController {
 	private FloorService floorService;
 
 	/**
-	 * 
+	 * 楼层管理
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Model model) {
-		List<Floor> floorList = floorService.findFloorList(1001L);
+		List<Floor> floorList = floorService.findFloorList(0l);
 		model.addAttribute("floorList", floorList);
 		return "site/floor-list";
 	}

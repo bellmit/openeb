@@ -1,12 +1,14 @@
 package com.gsccs.eb.api.domain.site;
 
+import com.gsccs.eb.api.domain.base.Domain;
+
 /**
  * 商城Banner
  * 
  * @author x.d zhang
  * 
  */
-public class Banner {
+public class Banner extends Domain{
 
 	private String id;
 	private String title;

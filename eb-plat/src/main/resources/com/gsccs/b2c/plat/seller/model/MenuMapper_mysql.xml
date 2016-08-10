@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gsccs.b2c.plat.shop.dao.ProductImgTMapper" >
-  <resultMap id="BaseResultMap" type="com.gsccs.b2c.plat.shop.model.ProductImgT" >
+<mapper namespace="com.gsccs.b2c.plat.seller.dao.ShopMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.gsccs.eb.api.domain.seller.Menu" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="modified" property="modified" jdbcType="DATE" />
-    <result column="position" property="position" jdbcType="BIGINT" />
-    <result column="productId" property="productid" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
     <result column="url" property="url" jdbcType="VARCHAR" />
-    <result column="created" property="created" jdbcType="DATE" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+    <result column="parent_ids" property="parentIds" jdbcType="VARCHAR" />
+    <result column="permission" property="permission" jdbcType="VARCHAR" />
+    <result column="available" property="available" jdbcType="BIT" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,15 +71,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, modified, position, productId, url, created
+    id, name, type, url, parent_id, parent_ids, permission, available,icon
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gsccs.b2c.plat.shop.model.ProductImgTExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gsccs.b2c.plat.seller.model.MenuExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from shop_productImg_1001
+    from plat_sys_resource
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,107 +90,124 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from shop_productImg_1001
+    from plat_sys_resource
     where id = #{id,jdbcType=BIGINT}
   </select>
-  
-  
-  <select id="selectByPid" resultMap="BaseResultMap"
-		parameterType="map">
-		select
-		<include refid="Base_Column_List" />
-		from shop_productImg_${sid}
-		where productId = #{productId,jdbcType=BIGINT}
-	</select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from shop_productImg_1001
+    delete from plat_sys_resource
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.shop.model.ProductImgTExample" >
-    delete from shop_productImg_1001
+  <delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.seller.model.MenuExample" >
+    delete from plat_sys_resource
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  
-  
-  <insert id="insert" parameterType="map" >
-    insert into shop_productImg_${sid} (id, modified, position, 
-      productId, url, created
-      )
-    values (#{record.id,jdbcType=BIGINT}, #{record.modified,jdbcType=DATE}, #{record.position,jdbcType=BIGINT}, 
-      #{record.productid,jdbcType=BIGINT}, #{record.url,jdbcType=VARCHAR}, #{record.created,jdbcType=DATE}
-      )
+  <insert id="insert" parameterType="com.gsccs.eb.api.domain.seller.Menu" >
+    insert into plat_sys_resource (id, name, type, 
+      url, parent_id, parent_ids, 
+      permission, available,icon)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, #{parentIds,jdbcType=VARCHAR}, 
+      #{permission,jdbcType=VARCHAR}, #{available,jdbcType=BIT},
+      #{icon,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.gsccs.b2c.plat.shop.model.ProductImgT" >
-    insert into shop_productImg_1001
+  <insert id="insertSelective" parameterType="com.gsccs.eb.api.domain.seller.Menu" >
+    insert into plat_sys_resource
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="modified != null" >
-        modified,
+      <if test="name != null" >
+        name,
       </if>
-      <if test="position != null" >
-        position,
-      </if>
-      <if test="productid != null" >
-        productId,
+      <if test="type != null" >
+        type,
       </if>
       <if test="url != null" >
         url,
       </if>
-      <if test="created != null" >
-        created,
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="parentIds != null" >
+        parent_ids,
+      </if>
+      <if test="permission != null" >
+        permission,
+      </if>
+      <if test="available != null" >
+        available,
+      </if>
+      <if test="icon != null" >
+        icon,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="modified != null" >
-        #{modified,jdbcType=DATE},
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
       </if>
-      <if test="position != null" >
-        #{position,jdbcType=BIGINT},
-      </if>
-      <if test="productid != null" >
-        #{productid,jdbcType=BIGINT},
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
       </if>
       <if test="url != null" >
         #{url,jdbcType=VARCHAR},
       </if>
-      <if test="created != null" >
-        #{created,jdbcType=DATE},
+      <if test="parentId != null" >
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="parentIds != null" >
+        #{parentIds,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null" >
+        #{permission,jdbcType=VARCHAR},
+      </if>
+      <if test="available != null" >
+        #{available,jdbcType=BIT},
+      </if>
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.gsccs.b2c.plat.shop.model.ProductImgTExample" resultType="java.lang.Integer" >
-    select count(*) from shop_productImg_1001
+  <select id="countByExample" parameterType="com.gsccs.b2c.plat.seller.model.MenuExample" resultType="java.lang.Integer" >
+    select count(*) from plat_sys_resource
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update shop_productImg_1001
+    update plat_sys_resource
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.modified != null" >
-        modified = #{record.modified,jdbcType=DATE},
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.position != null" >
-        position = #{record.position,jdbcType=BIGINT},
-      </if>
-      <if test="record.productid != null" >
-        productId = #{record.productid,jdbcType=BIGINT},
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
       </if>
       <if test="record.url != null" >
         url = #{record.url,jdbcType=VARCHAR},
       </if>
-      <if test="record.created != null" >
-        created = #{record.created,jdbcType=DATE},
+      <if test="record.parentId != null" >
+        parent_id = #{record.parentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.parentIds != null" >
+        parent_ids = #{record.parentIds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.permission != null" >
+        permission = #{record.permission,jdbcType=VARCHAR},
+      </if>
+      <if test="record.available != null" >
+        available = #{record.available,jdbcType=BIT},
+      </if>
+      <if test="record.icon != null" >
+        icon = #{record.icon,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -195,45 +215,31 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update shop_productImg_1001
+    update plat_sys_resource
     set id = #{record.id,jdbcType=BIGINT},
-      modified = #{record.modified,jdbcType=DATE},
-      position = #{record.position,jdbcType=BIGINT},
-      productId = #{record.productid,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
       url = #{record.url,jdbcType=VARCHAR},
-      created = #{record.created,jdbcType=DATE}
+      parent_id = #{record.parentId,jdbcType=BIGINT},
+      parent_ids = #{record.parentIds,jdbcType=VARCHAR},
+      permission = #{record.permission,jdbcType=VARCHAR},
+      available = #{record.available,jdbcType=BIT},
+      icon = #{record.icon,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.gsccs.b2c.plat.shop.model.ProductImgT" >
-    update shop_productImg_1001
-    <set >
-      <if test="modified != null" >
-        modified = #{modified,jdbcType=DATE},
-      </if>
-      <if test="position != null" >
-        position = #{position,jdbcType=BIGINT},
-      </if>
-      <if test="productid != null" >
-        productId = #{productid,jdbcType=BIGINT},
-      </if>
-      <if test="url != null" >
-        url = #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="created != null" >
-        created = #{created,jdbcType=DATE},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.gsccs.b2c.plat.shop.model.ProductImgT" >
-    update shop_productImg_1001
-    set modified = #{modified,jdbcType=DATE},
-      position = #{position,jdbcType=BIGINT},
-      productId = #{productid,jdbcType=BIGINT},
+  
+  <update id="updateByPrimaryKey" parameterType="com.gsccs.eb.api.domain.seller.Menu" >
+    update plat_sys_resource
+    set name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
-      created = #{created,jdbcType=DATE}
+      parent_id = #{parentId,jdbcType=BIGINT},
+      parent_ids = #{parentIds,jdbcType=VARCHAR},
+      permission = #{permission,jdbcType=VARCHAR},
+      available = #{available,jdbcType=BIT},
+      icon = #{icon,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

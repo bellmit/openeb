@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gsccs.b2c.plat.shop.dao.ProductMapper">
-	<resultMap id="BaseResultMap" type="com.gsccs.eb.api.domain.goods.Product">
+<mapper namespace="com.gsccs.b2c.plat.shop.dao.GoodsMapper">
+	<resultMap id="BaseResultMap" type="com.gsccs.eb.api.domain.goods.Goods">
 		<id column="id" property="id" jdbcType="BIGINT" />
 		<result column="shopid" property="shopid" jdbcType="BIGINT" />
 		<result column="brandid" property="brandid" jdbcType="BIGINT" />
-		<result column="categoryid" property="categoryid" jdbcType="BIGINT" />
+		<result column="cateid" property="cateid" jdbcType="BIGINT" />
 		<result column="typeid" property="typeid" jdbcType="BIGINT" />
 		<result column="cateids" property="cateids" jdbcType="VARCHAR" />
 		<result column="title" property="title" jdbcType="VARCHAR" />
-		<result column="img" property="img" jdbcType="VARCHAR" />
+		<result column="mainimg" property="mainimg" jdbcType="VARCHAR" />
 		<result column="templet" property="templet" jdbcType="VARCHAR" />
 		<result column="ishot" property="ishot" jdbcType="VARCHAR" />
 		<result column="istop" property="istop" jdbcType="VARCHAR" />
@@ -106,7 +106,7 @@
 	
 	
 	<sql id="Base_Column_List">
-		id, shopid, brandid, categoryid, cateids,typeid,title, img, templet, ishot, istop, addtime,topendtime, clicknum,
+		id, shopid, brandid, cateid, cateids,typeid,title, mainimg, templet, ishot, istop, addtime,topendtime, clicknum,
 		addUser, status, kind, tags, barcode, remark, price, mkprice,weight, storenum,freight, points, postage, salenum,locknum,evalnum
 	</sql>
 	
@@ -164,7 +164,7 @@
 		where id = #{id,jdbcType=BIGINT}
 	</delete>
 	
-	<delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.shop.model.ProductExample">
+	<delete id="deleteByExample" parameterType="map">
 		delete from eb_goods
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
@@ -173,8 +173,8 @@
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="record.id" parameterType="map">
 		insert into eb_goods (id, shopid, brandid, 
-	      categoryid, cateids, typeid,title, 
-	      img, templet, ishot, 
+	      cateid, cateids, typeid,title, 
+	      mainimg, templet, ishot, 
 	      istop, addtime, topendtime, 
 	      clicknum, addUser, status, 
 	      kind, tags, 
@@ -187,11 +187,11 @@
 	    	#{record.id,jdbcType=BIGINT}, 
 	    	#{record.shopid,jdbcType=BIGINT}, 
 	    	#{record.brandid,jdbcType=BIGINT}, 
-	      #{record.categoryid,jdbcType=BIGINT}, 
+	      #{record.cateid,jdbcType=BIGINT}, 
 	      #{record.cateids,jdbcType=VARCHAR},
 	      #{record.typeid,jdbcType=BIGINT},
 	       #{record.title,jdbcType=VARCHAR}, 
-	      #{record.img,jdbcType=VARCHAR}, 
+	      #{record.mainimg,jdbcType=VARCHAR}, 
 	      #{record.templet,jdbcType=VARCHAR}, 
 	      #{record.ishot,jdbcType=VARCHAR}, 
 	      #{record.istop,jdbcType=VARCHAR}, 
@@ -229,10 +229,10 @@
 		set id = #{record.id,jdbcType=BIGINT},
 		shopid = #{record.shopid,jdbcType=BIGINT},
 		brandid = #{record.brandid,jdbcType=BIGINT},
-		categoryid = #{record.categoryid,jdbcType=BIGINT},
+		cateid = #{record.cateid,jdbcType=BIGINT},
 		typeid = #{record.typeid,jdbcType=BIGINT},
 		title = #{record.title,jdbcType=VARCHAR},
-		img = #{record.img,jdbcType=VARCHAR},
+		mainimg = #{record.mainimg,jdbcType=VARCHAR},
 		templet = #{record.templet,jdbcType=VARCHAR},
 		ishot = #{record.ishot,jdbcType=VARCHAR},
 		istop = #{record.istop,jdbcType=VARCHAR},
@@ -265,10 +265,10 @@
 		update eb_goods
 		set shopid = #{record.shopid,jdbcType=BIGINT},
 		brandid = #{record.brandid,jdbcType=BIGINT},
-		categoryid = #{record.categoryid,jdbcType=BIGINT},
+		cateid = #{record.cateid,jdbcType=BIGINT},
 		typeid = #{record.typeid,jdbcType=BIGINT},
 		title = #{record.title,jdbcType=VARCHAR},
-		img = #{record.img,jdbcType=VARCHAR},
+		mainimg = #{record.mainimg,jdbcType=VARCHAR},
 		templet = #{record.templet,jdbcType=VARCHAR},
 		ishot = #{record.ishot,jdbcType=VARCHAR},
 		istop = #{record.istop,jdbcType=VARCHAR},
@@ -295,7 +295,7 @@
 	</update>
 	
 	<!-- 商品下架 -->
-	<update id="updateProductUnsale" parameterType="map">
+	<update id="updateGoodsUnsale" parameterType="map">
 	<![CDATA[  
 		update eb_goods
 		set status='2'

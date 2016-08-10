@@ -3,16 +3,21 @@
 <mapper namespace="com.gsccs.b2c.plat.buyer.dao.BuyerMapper">
 	<resultMap id="BaseResultMap" type="com.gsccs.eb.api.domain.buyer.Buyer">
 		<id column="id" property="id" jdbcType="BIGINT" />
-		<result column="nick" property="nick" jdbcType="VARCHAR" />
+		<result column="nickname" property="nickname" jdbcType="VARCHAR" />
+		<result column="realname" property="realname" jdbcType="VARCHAR" />
 		<result column="sex" property="sex" jdbcType="VARCHAR" />
 		<result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
-		<result column="domicile" property="domicile" jdbcType="VARCHAR" />
-		<result column="constellation" property="constellation"
-			jdbcType="VARCHAR" />
-		<result column="headPhoto" property="photo" jdbcType="VARCHAR" />
+		<result column="gradeid" property="gradeid" jdbcType="VARCHAR" />
+		<result column="photo" property="photo" jdbcType="VARCHAR" />
 		<result column="phone" property="phone" jdbcType="VARCHAR" />
 		<result column="email" property="email" jdbcType="VARCHAR" />
 		<result column="idcode" property="idcode" jdbcType="VARCHAR" />
+		
+		<!--  -->
+		<result column="account" property="account" jdbcType="VARCHAR" />
+		<result column="state" property="state" jdbcType="VARCHAR" />
+		<result column="shopid" property="shopid" jdbcType="BIGINT" />
+		<result column="shopname" property="shopname" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<!-- 查询过滤条件 -->
@@ -84,19 +89,30 @@
 	</sql>
 	<!-- 查询条件 -->
 	<sql id="Base_Column_List">
-		id, nick, sex, birthday, domicile, constellation,
-		headPhoto,
+		id, nickname, sex, birthday, gradeid, realname,
+		photo,
 		phone, email, idcode
 	</sql>
+	
+	<sql id="Page_Column_List">
+		shopid,shopname, state, account
+	</sql>
 
-	<select id="selectByExample" resultMap="BaseResultMap"
+	<select id="selectPageByExample" resultMap="BaseResultMap"
 		parameterType="com.gsccs.b2c.plat.buyer.model.BuyerExample">
 		select
 		<if test="distinct">
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from eb_buyer
+		,
+		<include refid="Page_Column_List" />
+		from (
+			select a.*,b.account,b.state,b.shopid,c.name as shopname
+			from eb_buyer a,plat_account b,plat_store c
+			where a.id = b.id
+			and b.shopid = c.id
+		) as aa
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -128,14 +144,15 @@
 	<!-- 插入一条记录 -->
 	<insert id="insert" parameterType="map">
 		insert into eb_buyer
-		(id, nick, sex,birthday,
-		domicile, constellation,headPhoto,
+		(id, nickname, sex,birthday,
+		gradeid, realname,photo,
 		phone, email, idcode)
 		values (#{record.id,jdbcType=BIGINT},
-		#{record.nick,jdbcType=VARCHAR}, #{record.sex,jdbcType=VARCHAR},
+		#{record.nickname,jdbcType=VARCHAR}, 
+		#{record.sex,jdbcType=VARCHAR},
 		#{record.birthday,jdbcType=TIMESTAMP},
-		#{record.domicile,jdbcType=VARCHAR},
-		#{record.constellation,jdbcType=VARCHAR},
+		#{record.gradeid,jdbcType=VARCHAR},
+		#{record.realname,jdbcType=VARCHAR},
 		#{record.photo,jdbcType=VARCHAR},
 		#{record.phone,jdbcType=VARCHAR},
 		#{record.email,jdbcType=VARCHAR},
@@ -157,16 +174,16 @@
 	<update id="updateByExample" parameterType="map">
 		update eb_buyer
 		set id = #{record.id,jdbcType=BIGINT},
-		nick = #{record.nick,jdbcType=VARCHAR},
+		nickname = #{record.nickname,jdbcType=VARCHAR},
 		sex =
 		#{record.sex,jdbcType=VARCHAR},
 		birthday =
 		#{record.birthday,jdbcType=TIMESTAMP},
-		domicile =
-		#{record.domicile,jdbcType=VARCHAR},
-		constellation =
-		#{record.constellation,jdbcType=VARCHAR},
-		headPhoto =
+		gradeid =
+		#{record.gradeid,jdbcType=VARCHAR},
+		realname =
+		#{record.realname,jdbcType=VARCHAR},
+		photo =
 		#{record.photo,jdbcType=VARCHAR},
 		phone =
 		#{record.phone,jdbcType=VARCHAR},
@@ -184,20 +201,14 @@
 	<update id="updateByPrimaryKey" parameterType="com.gsccs.eb.api.domain.buyer.Buyer">
 		update
 		eb_buyer
-		set nick = #{record.nick,jdbcType=VARCHAR},
+		set nickname = #{record.nickname,jdbcType=VARCHAR},
+		realname = #{record.realname,jdbcType=VARCHAR},
 		sex = #{record.sex,jdbcType=VARCHAR},
-		birthday =
-		#{record.birthday,jdbcType=TIMESTAMP},
-		domicile =
-		#{record.domicile,jdbcType=VARCHAR},
-		constellation =
-		#{record.constellation,jdbcType=VARCHAR},
-		headPhoto =
-		#{record.photo,jdbcType=VARCHAR},
-		phone =
-		#{record.phone,jdbcType=VARCHAR},
-		email =
-		#{record.email,jdbcType=VARCHAR},
+		birthday = #{record.birthday,jdbcType=TIMESTAMP},
+		gradeid = #{record.gradeid,jdbcType=VARCHAR},
+		photo = #{record.photo,jdbcType=VARCHAR},
+		phone = #{record.phone,jdbcType=VARCHAR},
+		email = #{record.email,jdbcType=VARCHAR},
 		idcode =
 		#{record.idcode,jdbcType=VARCHAR}
 		where id =

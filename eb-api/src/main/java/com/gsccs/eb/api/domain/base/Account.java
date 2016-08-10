@@ -18,21 +18,16 @@ public class Account extends Domain {
 	/**
 	 * 用户数字ID
 	 */
-	private Long userId;
+	private Long id;
 	/**
 	 * 站点ID
 	 */
-	private Long siteId;
+	private Long shopid;
 
 	/**
 	 * 用户头像地址
 	 */
-	private String phone;
-
-	/**
-	 * 生日
-	 */
-	private Date birthday;
+	private String photo;
 
 	/**
 	 * 信用
@@ -40,29 +35,19 @@ public class Account extends Domain {
 	private Credit credit;
 
 	/**
-	 * 用户注册时间。格式:yyyy-MM-dd HH:mm:ss
-	 */
-	private Date created;
-
-	/**
 	 * 联系人email
 	 */
 	private String email;
 
 	/**
-	 * 用户作为卖家是否开过店
+	 * 注册时间
 	 */
-	private Boolean hasShop;
-
-	/**
-	 * 表示用户是否具备修改商品减库存逻辑的权限（一共有拍下减库存和付款减库存两种逻辑） 值含义： 1）true：是 2）false：否。
-	 */
-	private Boolean hasSubStock;
+	private Date regtime;
 
 	/**
 	 * 最近登陆时间。格式:yyyy-MM-dd HH:mm:ss
 	 */
-	private Date lastVisit;
+	private Date lasttime;
 
 	/**
 	 * 用户当前居住地公开信息。如：location.city获取其中的city数据
@@ -96,28 +81,12 @@ public class Account extends Domain {
 	private String password;
 	private String salt;
 
-	public Long getUserId() {
-		return userId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-
-	public Date getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
-
-	public Date getCreated() {
-		return created;
-	}
-
-	public void setCreated(Date created) {
-		this.created = created;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getEmail() {
@@ -128,28 +97,20 @@ public class Account extends Domain {
 		this.email = email;
 	}
 
-	public Boolean getHasShop() {
-		return hasShop;
+	public Date getRegtime() {
+		return regtime;
 	}
 
-	public void setHasShop(Boolean hasShop) {
-		this.hasShop = hasShop;
+	public void setRegtime(Date regtime) {
+		this.regtime = regtime;
 	}
 
-	public Boolean getHasSubStock() {
-		return hasSubStock;
+	public Date getLasttime() {
+		return lasttime;
 	}
 
-	public void setHasSubStock(Boolean hasSubStock) {
-		this.hasSubStock = hasSubStock;
-	}
-
-	public Date getLastVisit() {
-		return lastVisit;
-	}
-
-	public void setLastVisit(Date lastVisit) {
-		this.lastVisit = lastVisit;
+	public void setLasttime(Date lasttime) {
+		this.lasttime = lasttime;
 	}
 
 	public Location getLocation() {
@@ -224,20 +185,20 @@ public class Account extends Domain {
 		this.salt = salt;
 	}
 
-	public Long getSiteId() {
-		return siteId;
+	public Long getShopid() {
+		return shopid;
 	}
 
-	public void setSiteId(Long siteId) {
-		this.siteId = siteId;
+	public void setShopid(Long shopid) {
+		this.shopid = shopid;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getPhoto() {
+		return photo;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 
 	public Credit getCredit() {

@@ -19,7 +19,9 @@ import com.gsccs.eb.api.domain.buyer.Grade;
 import com.gsccs.eb.api.utils.JsonMsg;
 
 /**
- * 会员管理
+ * 会员等级管理
+ * @author x.d zhang
+ *
  */
 @Controller("BuyerGradeCtl")
 @RequestMapping("/bgrade")

@@ -40,7 +40,7 @@ public interface GoodsService {
 	 */
 	public List<Goods> getTopGoodss(Long shopid);
 
-	public List<Goods> getGoodss(Goods param, String order, int currPage,
+	public List<Goods> getGoodsList(Goods param, String order, int currPage,
 			int pageSize);
 
 	/**
@@ -50,29 +50,11 @@ public interface GoodsService {
 	 *            产品ID
 	 * @return
 	 */
-	public List<Sku> getSkuList(Long goodsid);
+	public List<Sku> findSkuList(Long goodsid);
 
 	int count(Long sid, Long pid);
 
-	/**
-	 * 增加商品根据会员等级的折扣价格
-	 * 
-	 * @param sid
-	 * @param dislist
-	 * @return
-	 */
-	public Long[] addBuyerPrice(Long sid, Long productId, Long goodsid,
-			List<Discount> dislist);
-
-	/**
-	 * 查询商品的会员等级的折扣价格
-	 * 
-	 * @param sid
-	 * @param productId
-	 * @return
-	 */
-	public List<Discount> getBuyerPrice(Long sid, Long productId, Long goodsid);
-
+	
 	/**
 	 * 修改产品状态
 	 * 

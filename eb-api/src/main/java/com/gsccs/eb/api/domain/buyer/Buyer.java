@@ -11,15 +11,19 @@ import java.util.Date;
 public class Buyer {
 
 	private Long id;
-	private String nick; // 会员昵称
+	private String nickname; // 会员昵称
+	private String realname; // 居住地
 	private String sex; // 会员性别
 	private Date birthday; // 出生年月
-	private String domicile; // 居住地
-	private String constellation; // 星座
 	private String photo; // 会员头像
 	private String phone; // 移动电话
 	private String email; // 邮箱地址
 	private String idcode; // 身份证号
+	private String account;
+	private String state;
+
+	private String gradeid; // 星座
+	private Long shopid;
 
 	public Long getId() {
 		return id;
@@ -27,14 +31,6 @@ public class Buyer {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getNick() {
-		return nick;
-	}
-
-	public void setNick(String nick) {
-		this.nick = nick;
 	}
 
 	public String getSex() {
@@ -51,22 +47,6 @@ public class Buyer {
 
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
-	}
-
-	public String getDomicile() {
-		return domicile;
-	}
-
-	public void setDomicile(String domicile) {
-		this.domicile = domicile;
-	}
-
-	public String getConstellation() {
-		return constellation;
-	}
-
-	public void setConstellation(String constellation) {
-		this.constellation = constellation;
 	}
 
 	public String getPhoto() {
@@ -99,6 +79,54 @@ public class Buyer {
 
 	public void setIdcode(String idcode) {
 		this.idcode = idcode;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getRealname() {
+		return realname;
+	}
+
+	public void setRealname(String realname) {
+		this.realname = realname;
+	}
+
+	public String getGradeid() {
+		return gradeid;
+	}
+
+	public void setGradeid(String gradeid) {
+		this.gradeid = gradeid;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public Long getShopid() {
+		return shopid;
+	}
+
+	public void setShopid(Long shopid) {
+		this.shopid = shopid;
 	}
 
 }

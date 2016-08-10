@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class BuyerExample {
+import com.gsccs.b2c.plat.bass.BaseExample;
+
+public class BuyerExample extends BaseExample{
 	
     protected String orderByClause;
 
@@ -646,6 +648,12 @@ public class BuyerExample {
             return (Criteria) this;
         }
 
+        
+        public Criteria andShopidEqualTo(Long value) {
+            addCriterion("shopid =", value, "shopid");
+            return (Criteria) this;
+        }
+        
         public Criteria andEmailIsNull() {
             addCriterion("email is null");
             return (Criteria) this;
@@ -665,27 +673,6 @@ public class BuyerExample {
             addCriterion("email <>", value, "email");
             return (Criteria) this;
         }
-
-        public Criteria andEmailGreaterThan(String value) {
-            addCriterion("email >", value, "email");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmailGreaterThanOrEqualTo(String value) {
-            addCriterion("email >=", value, "email");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmailLessThan(String value) {
-            addCriterion("email <", value, "email");
-            return (Criteria) this;
-        }
-
-        public Criteria andEmailLessThanOrEqualTo(String value) {
-            addCriterion("email <=", value, "email");
-            return (Criteria) this;
-        }
-
         public Criteria andEmailLike(String value) {
             addCriterion("email like", value, "email");
             return (Criteria) this;
@@ -716,75 +703,7 @@ public class BuyerExample {
             return (Criteria) this;
         }
 
-        public Criteria andIdentitycardIsNull() {
-            addCriterion("\" identityCard\" is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdentitycardIsNotNull() {
-            addCriterion("\" identityCard\" is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdentitycardEqualTo(String value) {
-            addCriterion("\" identityCard\" =", value, "identitycard");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdentitycardNotEqualTo(String value) {
-            addCriterion("\" identityCard\" <>", value, "identitycard");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdentitycardGreaterThan(String value) {
-            addCriterion("\" identityCard\" >", value, "identitycard");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdentitycardGreaterThanOrEqualTo(String value) {
-            addCriterion("\" identityCard\" >=", value, "identitycard");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdentitycardLessThan(String value) {
-            addCriterion("\" identityCard\" <", value, "identitycard");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdentitycardLessThanOrEqualTo(String value) {
-            addCriterion("\" identityCard\" <=", value, "identitycard");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdentitycardLike(String value) {
-            addCriterion("\" identityCard\" like", value, "identitycard");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdentitycardNotLike(String value) {
-            addCriterion("\" identityCard\" not like", value, "identitycard");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdentitycardIn(List<String> values) {
-            addCriterion("\" identityCard\" in", values, "identitycard");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdentitycardNotIn(List<String> values) {
-            addCriterion("\" identityCard\" not in", values, "identitycard");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdentitycardBetween(String value1, String value2) {
-            addCriterion("\" identityCard\" between", value1, value2, "identitycard");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdentitycardNotBetween(String value1, String value2) {
-            addCriterion("\" identityCard\" not between", value1, value2, "identitycard");
-            return (Criteria) this;
-        }
+        
     }
 
     public static class Criteria extends GeneratedCriteria {

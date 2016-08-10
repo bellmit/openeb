@@ -69,7 +69,7 @@ public class ClientRealm extends AuthorizingRealm {
 			
 			Subject subject = SecurityUtils.getSubject();
 			subject.getSession().setAttribute("siteId", sid);
-			subject.getSession().setAttribute("userId", user.getUserId());
+			subject.getSession().setAttribute("userId", user.getId());
 			
 			// 交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，如果觉得人家的不好可以自定义实现
 			authenticationInfo = new SimpleAuthenticationInfo(

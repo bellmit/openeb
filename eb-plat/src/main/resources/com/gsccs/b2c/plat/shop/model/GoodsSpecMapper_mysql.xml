@@ -83,7 +83,7 @@
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from eb_sku_spec
+		from eb_goods_spec
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -95,24 +95,25 @@
 		parameterType="java.lang.Long">
 		select
 		<include refid="Base_Column_List" />
-		from eb_sku_spec
+		from eb_goods_spec
 		where id = #{id,jdbcType=BIGINT}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
 		delete from
-		eb_sku_spec
+		eb_goods_spec
 		where id = #{id,jdbcType=BIGINT}
 	</delete>
 	<delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.shop.model.SkuSpecExample">
-		delete from eb_sku_spec
+		delete from eb_goods_spec
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
 	</delete>
-	<insert id="insert" parameterType="com.gsccs.eb.api.domain.goods.SkuSpec">
-		insert into eb_sku_spec (id,
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id"
+		parameterType="com.gsccs.eb.api.domain.goods.SkuSpec">
+		insert into eb_goods_spec (id,
 		specid, specvalid,
-		goodsid)
+		goodsid,skuid)
 		values (#{id,jdbcType=BIGINT},
 		#{specid,jdbcType=BIGINT},
 		#{specvalid,jdbcType=BIGINT},
@@ -122,13 +123,13 @@
 
 	<select id="countByExample" parameterType="com.gsccs.b2c.plat.shop.model.SkuSpecExample"
 		resultType="java.lang.Integer">
-		select count(*) from eb_sku_spec
+		select count(*) from eb_goods_spec
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
 	</select>
 	<update id="updateByExampleSelective" parameterType="map">
-		update eb_sku_spec
+		update eb_goods_spec
 		<set>
 			<if test="record.id != null">
 				id = #{record.id,jdbcType=BIGINT},
@@ -151,7 +152,7 @@
 		</if>
 	</update>
 	<update id="updateByExample" parameterType="map">
-		update eb_sku_spec
+		update eb_goods_spec
 		set id = #{record.id,jdbcType=BIGINT},
 		specid =
 		#{record.specid,jdbcType=BIGINT},
@@ -166,7 +167,7 @@
 		</if>
 	</update>
 	<update id="updateByPrimaryKeySelective" parameterType="com.gsccs.eb.api.domain.goods.SkuSpec">
-		update eb_sku_spec
+		update eb_goods_spec
 		<set>
 			<if test="specid != null">
 				specid = #{specid,jdbcType=BIGINT},
@@ -184,10 +185,9 @@
 		where id = #{id,jdbcType=BIGINT}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.gsccs.eb.api.domain.goods.SkuSpec">
-		update eb_sku_spec
+		update eb_goods_spec
 		set specid = #{specid,jdbcType=BIGINT},
-		specvalid =
-		#{specvalid,jdbcType=BIGINT},
+		specvalid = #{specvalid,jdbcType=BIGINT},
 		goodsid = #{goodsid,jdbcType=BIGINT},
 		skuid = #{skuid,jdbcType=BIGINT}
 		where id = #{id,jdbcType=BIGINT}

@@ -23,6 +23,8 @@ public class Sku extends Domain {
 	 * 产品ID
 	 */
 	private Long goodsid;
+	
+	private String title;
 
 	/**
 	 * 商品级别的条形码

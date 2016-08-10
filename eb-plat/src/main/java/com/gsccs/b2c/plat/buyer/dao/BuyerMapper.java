@@ -38,11 +38,6 @@ public interface BuyerMapper {
 
 	int updateByPrimaryKeySelective(Buyer record);
 
-	/*
-	 * ==========================================================================
-	 * ========================================
-	 */
-
 	// 根据ID更新一条记录
 	int updateByPrimaryKey(@Param("sid") Long sid, @Param("record") Buyer record);
 

@@ -105,7 +105,7 @@ public class CollectController {
 			Subject subject = SecurityUtils.getSubject();
 			String username = (String) subject.getPrincipal();
 			Account user = buyerAPI.findByAccount(siteId, username);
-			Long buyerid = user.getUserId();
+			Long buyerid = user.getId();
 			
 			Collect collect = new Collect();
 			collect.setBuyerid(buyerid);

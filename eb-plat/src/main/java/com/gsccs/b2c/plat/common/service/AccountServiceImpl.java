@@ -26,7 +26,7 @@ public class AccountServiceImpl implements AccountService {
 			PasswordHelper pwdhelp = new PasswordHelper();
 			pwdhelp.encryptPassword(account);
 			accountMapper.insert(account);
-			return account.getUserId();
+			return account.getId();
 		}
 		return null;
 	}

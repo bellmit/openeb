@@ -74,7 +74,9 @@ public class BuyerServiceAPI implements BuyerServiceI {
 			throw new ApiException(APIConst.ERROR_CODE_0001,
 					APIConst.ERROR_MSG_0001);
 		}
-		List<Buyer> buyerList = buyerService.getBuyerList(null, page, rows);
+		Buyer param = new Buyer();
+		param.setShopid(sid);
+		List<Buyer> buyerList = buyerService.findBuyerList(param, page, rows);
 		return buyerList;
 	}
 

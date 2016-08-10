@@ -24,7 +24,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -59,7 +60,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -86,7 +88,7 @@
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from shop_pay_args
+		from plat_pay_args
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -98,30 +100,34 @@
 		parameterType="java.lang.String">
 		select
 		<include refid="Base_Column_List" />
-		from shop_pay_args
+		from plat_pay_args
 		where id = #{id,jdbcType=VARCHAR}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-		delete from shop_pay_args
+		delete from
+		plat_pay_args
 		where id = #{id,jdbcType=VARCHAR}
 	</delete>
 	<delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.pay.model.PayArgsExample">
-		delete from shop_pay_args
+		delete from plat_pay_args
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
 	</delete>
 	<insert id="insert" parameterType="com.gsccs.eb.api.domain.trade.PayArgs">
-		insert into shop_pay_args (id, typeid, appid,
+		insert into plat_pay_args (id,
+		typeid, appid,
 		appkey, signtype, email,
 		shopid)
-		values (#{id,jdbcType=VARCHAR}, #{typeid,jdbcType=VARCHAR},
+		values
+		(#{id,jdbcType=VARCHAR}, #{typeid,jdbcType=VARCHAR},
 		#{appid,jdbcType=VARCHAR},
-		#{appkey,jdbcType=VARCHAR}, #{signtype,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
+		#{appkey,jdbcType=VARCHAR},
+		#{signtype,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
 		#{shopid,jdbcType=BIGINT})
 	</insert>
 	<insert id="insertSelective" parameterType="com.gsccs.eb.api.domain.trade.PayArgs">
-		insert into shop_pay_args
+		insert into plat_pay_args
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
 				id,
@@ -171,13 +177,13 @@
 	</insert>
 	<select id="countByExample" parameterType="com.gsccs.b2c.plat.pay.model.PayArgsExample"
 		resultType="java.lang.Integer">
-		select count(*) from shop_pay_args
+		select count(*) from plat_pay_args
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
 	</select>
 	<update id="updateByExampleSelective" parameterType="map">
-		update shop_pay_args
+		update plat_pay_args
 		<set>
 			<if test="record.id != null">
 				id = #{record.id,jdbcType=VARCHAR},
@@ -206,20 +212,26 @@
 		</if>
 	</update>
 	<update id="updateByExample" parameterType="map">
-		update shop_pay_args
+		update plat_pay_args
 		set id = #{record.id,jdbcType=VARCHAR},
-		typeid = #{record.typeid,jdbcType=VARCHAR},
-		appid = #{record.appid,jdbcType=VARCHAR},
-		appkey = #{record.appkey,jdbcType=VARCHAR},
-		signtype = #{record.signtype,jdbcType=VARCHAR},
-		email = #{record.email,jdbcType=VARCHAR},
-		shopid = #{record.shopid,jdbcType=BIGINT}
+		typeid =
+		#{record.typeid,jdbcType=VARCHAR},
+		appid =
+		#{record.appid,jdbcType=VARCHAR},
+		appkey =
+		#{record.appkey,jdbcType=VARCHAR},
+		signtype =
+		#{record.signtype,jdbcType=VARCHAR},
+		email =
+		#{record.email,jdbcType=VARCHAR},
+		shopid =
+		#{record.shopid,jdbcType=BIGINT}
 		<if test="_parameter != null">
 			<include refid="Update_By_Example_Where_Clause" />
 		</if>
 	</update>
 	<update id="updateByPrimaryKeySelective" parameterType="com.gsccs.eb.api.domain.trade.PayArgs">
-		update shop_pay_args
+		update plat_pay_args
 		<set>
 			<if test="typeid != null">
 				typeid = #{typeid,jdbcType=VARCHAR},
@@ -243,13 +255,17 @@
 		where id = #{id,jdbcType=VARCHAR}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.gsccs.eb.api.domain.trade.PayArgs">
-		update shop_pay_args
+		update
+		plat_pay_args
 		set typeid = #{typeid,jdbcType=VARCHAR},
-		appid = #{appid,jdbcType=VARCHAR},
+		appid =
+		#{appid,jdbcType=VARCHAR},
 		appkey = #{appkey,jdbcType=VARCHAR},
 		signtype = #{signtype,jdbcType=VARCHAR},
-		email = #{email,jdbcType=VARCHAR},
+		email =
+		#{email,jdbcType=VARCHAR},
 		shopid = #{shopid,jdbcType=BIGINT}
-		where id = #{id,jdbcType=VARCHAR}
+		where id =
+		#{id,jdbcType=VARCHAR}
 	</update>
 </mapper>

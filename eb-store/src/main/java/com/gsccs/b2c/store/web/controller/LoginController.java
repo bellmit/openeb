@@ -48,11 +48,11 @@ public class LoginController {
 		token.setRememberMe(true);
 		try {
 			subject.login(token);
-			Account user = sellerAPI.getSeller(username);
+			Account account = sellerAPI.getSeller(username);
 			Session session = subject.getSession();
 
-			session.setAttribute("siteId", user.getSiteId());
-			session.setAttribute("userId", user.getUserId());
+			session.setAttribute("siteId", account.getShopid());
+			session.setAttribute("userId", account.getId());
 			
 		} catch (UnknownAccountException e) {
 			error = "用户名不存在";

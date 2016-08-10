@@ -43,6 +43,7 @@ public class DeliverCorpController {
 		return "deliver/corp_list";
 	}
 
+	
 	@RequiresPermissions("deliver:view")
 	@RequestMapping(value="/view",method = RequestMethod.GET)
 	public String corpForm(Integer id, ModelMap map) {
@@ -56,6 +57,7 @@ public class DeliverCorpController {
 		return view;
 	}
 
+	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonMsg corpSave(ModelMap map, Corp deliver) {

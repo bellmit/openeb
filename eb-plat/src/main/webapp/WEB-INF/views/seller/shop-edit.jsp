@@ -43,14 +43,14 @@
         <div class="item-title">
             <h3>店铺</h3>
             <ul class="tab-base">
-                <li><a href="${pageContext.request.contextPath}/store/manager/list"><span>管理</span></a></li>
-                <li><a href="${pageContext.request.contextPath}/store/manager/auditList"><span>开店申请</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/store"><span>管理</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/store/auditlist"><span>开店申请</span></a></li>
                 <li><a href="JavaScript:void(0);" class="current"><span>编辑</span></a></li>
             </ul>
         </div>
     </div>
     <div class="fixed-empty"></div>
-    <form id="store_form" method="post" action="${pageContext.request.contextPath}/store/manager/updateDetail">
+    <form id="store_form" method="post" action="${pageContext.request.contextPath}/store/updateDetail">
         <input type="hidden" name="storeId" value="0">
         <table class="table tb-type2">
             <tbody>
@@ -58,7 +58,7 @@
                 <td colspan="2" class="required"><label>店主账号:</label></td>
             </tr>
             <tr class="noborder">
-                <td class="vatop rowform">pintaiziying</td>
+                <td class="vatop rowform">${shop.account }</td>
                 <td class="vatop tips"></td>
             </tr>
             <tr style="background: rgb(255, 255, 255);">
@@ -72,7 +72,7 @@
                 <td colspan="2"> 店铺:</td>
             </tr>
             <tr class="noborder">
-                <td class="vatop rowform">平台自营</td>
+                <td class="vatop rowform">${shop.name }</td>
                 <td class="vatop tips"></td>
             </tr>
             <tr>
@@ -112,7 +112,7 @@
                 <td colspan="2"><label for="areaInfo">所在地</label></td>
             </tr>
             <tr class="noborder">
-                <td class="vatop rowform">北京北京市</td>
+                <td class="vatop rowform">${shop.adress }</td>
                 <td class="vatop tips"></td>
             </tr>
              <tr>
@@ -133,7 +133,7 @@
                 <td colspan="2"><label class="validation" for="storeTel">联系电话</label></td>
             </tr>
             <tr class="noborder">
-                <td class="vatop rowform"><input type="text" name="storeTel" value="15932110597" id="store_Tel" class="txt"></td>
+                <td class="vatop rowform"><input type="text" name="storeTel" value="${shop.phone }" id="store_Tel" class="txt"></td>
                 <td class="vatop tips"></td>
             </tr>
             </tbody>
@@ -169,8 +169,8 @@
                 <td class="vatop rowform onoff">
                     <label for="store_state1" class="cb-enable selected"><span>开启</span></label>
                     <label for="store_state0" class="cb-disable "><span>关闭</span></label>
-                    <input id="store_state1" name="storeState" checked="checked" onclick="$(&#39;#tr_store_close_info&#39;).hide();" value="1" type="radio">
-                    <input id="store_state0" name="storeState" onclick="$(&#39;#tr_store_close_info&#39;).show();" value="0" type="radio">
+                    <input id="store_state1" name="storeState" checked="checked" onclick="$('#tr_store_close_info').hide();" value="1" type="radio">
+                    <input id="store_state0" name="storeState" onclick="$('#tr_store_close_info').show();" value="0" type="radio">
                 </td>
                 <td class="vatop tips"></td>
             </tr>

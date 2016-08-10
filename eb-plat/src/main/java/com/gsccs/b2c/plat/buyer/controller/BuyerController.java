@@ -32,20 +32,29 @@ public class BuyerController {
 			@RequestParam(defaultValue = "") String order,
 			@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "10") int rows, Model model) {
-		List<Buyer> buyerlist = buyerService.getBuyerList(param, page, rows);
+		List<Buyer> buyerlist = buyerService.findBuyerList(param, page, rows);
 		model.addAttribute("buyerList", buyerlist);
 		return "buyer/buyer-list";
 	}
 
 	@RequestMapping(value = "/form", method = RequestMethod.GET)
 	public String buyerForm(Long id, Model model) {
-		return "buyer/buyer-form";
+		String view = "buyer/buyer-add";
+		Buyer buyer = null;
+		if (null != id){
+			view = "buyer/buyer-edit";
+			buyer = buyerService.getBuyer(id);
+		}
+		model.addAttribute("buyer", buyer);
+		return view;
 	}
 
+	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@ResponseBody
-	public JsonMsg buyerSave(ModelMap map, HttpServletRequest request) {
+	public JsonMsg buyerSave(Buyer buyer,ModelMap map, HttpServletRequest request) {
 		JsonMsg jsonMsg = new JsonMsg();
+		
 		return jsonMsg;
 	}
 

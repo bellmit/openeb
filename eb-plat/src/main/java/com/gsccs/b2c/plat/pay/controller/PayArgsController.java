@@ -24,7 +24,7 @@ import com.gsccs.eb.api.utils.JsonMsg;
  * 
  */
 @Controller
-@RequestMapping("/payarg")
+@RequestMapping("/payargs")
 public class PayArgsController {
 
 	@Autowired
@@ -59,7 +59,7 @@ public class PayArgsController {
 	 * @return
 	 */
 	@RequestMapping(value = "/form", method = RequestMethod.GET)
-	public String payTypeForm(String id, ModelMap map,
+	public String payArgsForm(String id, ModelMap map,
 			HttpServletRequest request) {
 		PayArgs payArgs = null;
 		if (StringUtils.isNotEmpty(id)) {
@@ -71,7 +71,7 @@ public class PayArgsController {
 
 	@ResponseBody
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public JsonMsg paytypeSave(PayArgs payArgs, ModelMap map,
+	public JsonMsg payArgsSave(PayArgs payArgs, ModelMap map,
 			HttpServletRequest request) {
 		JsonMsg jsonMsg = new JsonMsg();
 		if (null == payArgs) {

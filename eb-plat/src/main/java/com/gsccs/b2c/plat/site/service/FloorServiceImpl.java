@@ -9,20 +9,14 @@ import org.springframework.stereotype.Service;
 
 import com.gsccs.b2c.plat.site.dao.BannerMapper;
 import com.gsccs.b2c.plat.site.dao.FloorMapper;
-import com.gsccs.b2c.plat.site.dao.StoreyListMapper;
 import com.gsccs.b2c.plat.site.model.BannerExample;
 import com.gsccs.b2c.plat.site.model.FloorExample;
-import com.gsccs.b2c.plat.site.model.StoreyList;
-import com.gsccs.b2c.plat.site.model.StoreyListExample;
-import com.gsccs.b2c.plat.site.model.StoreyListExample.Criteria;
 import com.gsccs.eb.api.domain.site.Banner;
 import com.gsccs.eb.api.domain.site.Floor;
 
 @Service
 public class FloorServiceImpl implements FloorService {
 
-	@Autowired
-	private StoreyListMapper storeyListMapper;
 	@Autowired
 	private FloorMapper floorMapper;
 	@Autowired

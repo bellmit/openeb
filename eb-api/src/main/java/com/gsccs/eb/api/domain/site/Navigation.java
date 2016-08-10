@@ -1,11 +1,13 @@
 package com.gsccs.eb.api.domain.site;
 
+import com.gsccs.eb.api.domain.base.Domain;
+
 /**
  * 站点导航
  * @author x.d zhang
  *
  */
-public class Navigation {
+public class Navigation extends Domain{
 	
 	private String id;
 	private String title;

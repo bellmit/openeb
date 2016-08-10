@@ -17,7 +17,6 @@ public class Shop extends Domain {
 	private Long id;
 	// 商店名称
 	private String name;
-	private String adress;
 	private String phone;
 	private String email;
 	// 店铺域名
@@ -25,15 +24,21 @@ public class Shop extends Domain {
 	// 店铺path
 	private String sitepath;
 	public String gradeid;
+
+	private Integer areacode;
+	private String address;
+	private String zipcode;
+
 	public String state;
 	// 店铺商品库存预警值
 	private Integer stockalertnum;
 
 	private Date addtime;
 	private String status;
-	// 商城管理员帐户
+	// 店主帐户
+	private Long sellerid;
+	private String idcode;
 	private String account;
-	private String password;
 
 	private String addtimestr;
 
@@ -51,14 +56,6 @@ public class Shop extends Domain {
 
 	public void setName(String name) {
 		this.name = name == null ? null : name.trim();
-	}
-
-	public String getAdress() {
-		return adress;
-	}
-
-	public void setAdress(String adress) {
-		this.adress = adress == null ? null : adress.trim();
 	}
 
 	public String getPhone() {
@@ -149,12 +146,44 @@ public class Shop extends Domain {
 		this.account = account;
 	}
 
-	public String getPassword() {
-		return password;
+	public Integer getAreacode() {
+		return areacode;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setAreacode(Integer areacode) {
+		this.areacode = areacode;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
+	public Long getSellerid() {
+		return sellerid;
+	}
+
+	public void setSellerid(Long sellerid) {
+		this.sellerid = sellerid;
+	}
+
+	public String getIdcode() {
+		return idcode;
+	}
+
+	public void setIdcode(String idcode) {
+		this.idcode = idcode;
 	}
 
 }

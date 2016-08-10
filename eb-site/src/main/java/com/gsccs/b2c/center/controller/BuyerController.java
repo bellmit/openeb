@@ -166,7 +166,7 @@ public class BuyerController {
 			Subject subject = SecurityUtils.getSubject();
 			String account = (String) subject.getPrincipal();
 			Account user = buyerAPI.findByAccount(siteId, account);
-			Long uid = user.getUserId();
+			Long uid = user.getId();
 			JSONArray delivers = buyerAPI.buyerDelivers(siteId, uid);
 			json.setSuccess(true);
 			json.setMsg("获取收货地址信息成功");
@@ -194,7 +194,7 @@ public class BuyerController {
 			Subject subject = SecurityUtils.getSubject();
 			String account = (String) subject.getPrincipal();
 			Account user = buyerAPI.findByAccount(siteId, account);
-			Long uid = user.getUserId();
+			Long uid = user.getId();
 
 			if (null != dlv) {
 				dlv.setBuyerid(uid);

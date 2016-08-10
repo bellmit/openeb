@@ -105,7 +105,7 @@ public class EvalController {
 			String account = (String) subject.getPrincipal();
 			Account user = buyerAPI.findByAccount(siteId, account);
 			List<OrderItem> items = orderAPI.getIsNotEvalItems(siteId,
-					user.getUserId(), page, pagesize);
+					user.getId(), page, pagesize);
 			if (null != items) {
 				json = (JSONArray) JSON.toJSON(items);
 			}
@@ -149,7 +149,7 @@ public class EvalController {
 		String username = (String) subject.getPrincipal();
 		try {
 			Account user = buyerAPI.findByAccount(siteId, username);
-			Long buyerid = user.getUserId();
+			Long buyerid = user.getId();
 			List<EvalOrder> evalscoreList= new ArrayList<EvalOrder>();
 			if (null != productid){
 				if (StringUtils.isNotEmpty(scores)){

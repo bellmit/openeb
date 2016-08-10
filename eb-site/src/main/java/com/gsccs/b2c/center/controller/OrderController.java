@@ -177,7 +177,7 @@ public class OrderController {
 			Subject subject = SecurityUtils.getSubject();
 			String username = (String) subject.getPrincipal();
 			Account user = redisService.getBuyer(siteId, username);
-			Long buyerid = user.getUserId();
+			Long buyerid = user.getId();
 			Order param = new Order();
 			param.setBuyerid(buyerid);
 			int total = orderAPI.getOrderCount(siteId, param);
@@ -463,7 +463,7 @@ public class OrderController {
 			Account user = redisService.getBuyer(siteId, account);
 			Deliver deliver = null;
 			if (StringUtils.isNotEmpty(addressid)) {
-				deliver = buyerAPI.getbuyerDeliver(siteId, user.getUserId(),
+				deliver = buyerAPI.getbuyerDeliver(siteId, user.getId(),
 						Long.valueOf(addressid));
 			}
 
@@ -495,7 +495,7 @@ public class OrderController {
 				item.setPtitle(p.getTitle());
 				item.setPurl(p.getMainimg());
 				item.setAccout(totalfee);
-				item.setBuyer(user.getUserId().toString());
+				item.setBuyer(user.getId().toString());
 				item.setSeller(siteId.toString());
 				
 				lastItems.add(item);
@@ -506,7 +506,7 @@ public class OrderController {
 			}
 			Order order = new Order();
 			order.setShopid(siteId);
-			order.setBuyerid(user.getUserId());
+			order.setBuyerid(user.getId());
 			order.setShipfee(Double.valueOf(shipfee));
 			order.setTotalfee(totalfee);
 			order.setTotalnum(totalnum);
@@ -579,7 +579,7 @@ public class OrderController {
 		String username = (String) subject.getPrincipal();
 		try {
 			Account user = buyerAPI.findByAccount(siteId, username);
-			Long buyerid = user.getUserId();
+			Long buyerid = user.getId();
 			Order param = new Order();
 			if (StringUtils.isNotEmpty(state)) {
 				param.setState(OrderState.valueOf(state));
@@ -754,7 +754,7 @@ public class OrderController {
 		String username = (String) subject.getPrincipal();
 		try {
 			Account user = buyerAPI.findByAccount(siteId, username);
-			Long uid = user.getUserId();
+			Long uid = user.getId();
 			json = orderAPI.orderStatist(siteId, uid);
 		} catch (Exception e) {
 		}

@@ -16,11 +16,13 @@ import com.gsccs.b2c.plat.buyer.model.BuyerExample;
 import com.gsccs.b2c.plat.buyer.model.GradeExample;
 import com.gsccs.b2c.plat.buyer.model.PointsExample;
 import com.gsccs.b2c.plat.buyer.model.PointsExample.Criteria;
+import com.gsccs.b2c.plat.deliver.model.TempletExample;
 import com.gsccs.eb.api.domain.base.Account;
 import com.gsccs.eb.api.domain.buyer.Buyer;
 import com.gsccs.eb.api.domain.buyer.Deliver;
 import com.gsccs.eb.api.domain.buyer.Grade;
 import com.gsccs.eb.api.domain.buyer.Points;
+import com.gsccs.eb.api.domain.deliver.Templet;
 
 @Service
 public class BuyerServiceImpl implements BuyerService {
@@ -34,6 +36,10 @@ public class BuyerServiceImpl implements BuyerService {
 	@Resource
 	private BuyerMapper buyerMapper;
 
+	@Override
+	public Buyer getBuyer(Long id) {
+		return buyerMapper.selectByPrimaryKey(id);
+	}
 
 	// 添加会员积分
 	@Override
@@ -58,12 +64,13 @@ public class BuyerServiceImpl implements BuyerService {
 		return pointsMapper.selectPointsSum(sid, buyerid);
 	}
 
-	
-
 	@Override
-	public List<Buyer> getBuyerList(Buyer param, int page, int rows) {
+	public List<Buyer> findBuyerList(Buyer param, int page, int rows) {
 		BuyerExample example = new BuyerExample();
 		BuyerExample.Criteria c = example.createCriteria();
+		proSearchParam(param,c);
+		example.setCurrPage(page);
+		example.setPageSize(rows);
 		return buyerMapper.selectPageByExample(example);
 	}
 
@@ -118,6 +125,15 @@ public class BuyerServiceImpl implements BuyerService {
 			gradeMapper.updateByPrimaryKey(param);
 		} else {
 			gradeMapper.insert(param);
+		}
+	}
+	
+	
+	public void proSearchParam(Buyer t, BuyerExample.Criteria c) {
+		if (null != t) {
+			if (null != t.getShopid()) {
+				c.andShopidEqualTo(t.getShopid());
+			}
 		}
 	}
 

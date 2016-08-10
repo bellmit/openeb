@@ -24,7 +24,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -56,7 +57,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -122,11 +124,14 @@
 			MyBatis Generator, do not modify. This element was generated on Wed Apr 15 
 			09:50:45 CST 2015. -->
 		insert into eb_buyer_grade (id, name, experience,
-		isdefault, point, dis_count,
+		isdefault, point,
+		dis_count,
 		site_id)
-		values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},
+		values (#{id,jdbcType=BIGINT},
+		#{name,jdbcType=VARCHAR},
 		#{experience,jdbcType=INTEGER},
-		#{isdefault,jdbcType=VARCHAR}, #{point,jdbcType=INTEGER}, #{disCount,jdbcType=REAL},
+		#{isdefault,jdbcType=VARCHAR}, #{point,jdbcType=INTEGER},
+		#{disCount,jdbcType=REAL},
 		#{siteId,jdbcType=BIGINT})
 	</insert>
 	<insert id="insertSelective" parameterType="com.gsccs.eb.api.domain.buyer.Grade">
@@ -229,12 +234,18 @@
 			09:50:45 CST 2015. -->
 		update eb_buyer_grade
 		set id = #{record.id,jdbcType=BIGINT},
-		name = #{record.name,jdbcType=VARCHAR},
-		experience = #{record.experience,jdbcType=INTEGER},
-		isdefault = #{record.isdefault,jdbcType=VARCHAR},
-		point = #{record.point,jdbcType=INTEGER},
-		dis_count = #{record.disCount,jdbcType=REAL},
-		site_id = #{record.siteId,jdbcType=BIGINT}
+		name =
+		#{record.name,jdbcType=VARCHAR},
+		experience =
+		#{record.experience,jdbcType=INTEGER},
+		isdefault =
+		#{record.isdefault,jdbcType=VARCHAR},
+		point =
+		#{record.point,jdbcType=INTEGER},
+		dis_count =
+		#{record.disCount,jdbcType=REAL},
+		site_id =
+		#{record.siteId,jdbcType=BIGINT}
 		<if test="_parameter != null">
 			<include refid="Update_By_Example_Where_Clause" />
 		</if>
@@ -267,13 +278,17 @@
 		where id = #{id,jdbcType=BIGINT}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.gsccs.eb.api.domain.buyer.Grade">
-		update eb_buyer_grade
+		update
+		eb_buyer_grade
 		set name = #{name,jdbcType=VARCHAR},
-		experience = #{experience,jdbcType=INTEGER},
-		isdefault = #{isdefault,jdbcType=VARCHAR},
+		experience =
+		#{experience,jdbcType=INTEGER},
+		isdefault =
+		#{isdefault,jdbcType=VARCHAR},
 		point = #{point,jdbcType=INTEGER},
 		dis_count = #{disCount,jdbcType=REAL},
-		site_id = #{siteId,jdbcType=BIGINT}
+		site_id =
+		#{siteId,jdbcType=BIGINT}
 		where id = #{id,jdbcType=BIGINT}
 	</update>
 </mapper>

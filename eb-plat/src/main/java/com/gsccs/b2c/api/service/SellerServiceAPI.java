@@ -26,7 +26,7 @@ public class SellerServiceAPI implements SellerServiceI {
 	public Account getSeller(Long userId) throws ApiException {
 		Account user = new Account();
 		SellerAccount seller = sellerService.findById(userId);
-		user.setUserId(seller.getId());
+		user.setId(seller.getId());
 		user.setNick(seller.getName());
 		return user;
 	}
@@ -41,8 +41,8 @@ public class SellerServiceAPI implements SellerServiceI {
 		SellerAccount seller = sellerService.findByAccount(account);
 		if (null != seller) {
 			Account user = new Account();
-			user.setUserId(seller.getId());
-			user.setSiteId(seller.getStoreId());
+			user.setId(seller.getId());
+			user.setShopid(seller.getStoreId());
 			user.setNick(seller.getName());
 			user.setAccount(seller.getAccount());
 			user.setPassword(seller.getPwd());
@@ -61,7 +61,7 @@ public class SellerServiceAPI implements SellerServiceI {
 			account.setAccount(user.getAccount());
 			account.setName(user.getNick());
 			account.setPwd(user.getPassword());
-			account.setStoreId(user.getSiteId());
+			account.setStoreId(user.getShopid());
 			account.setEmail(user.getEmail());
 			sellerService.insert(account);
 		}

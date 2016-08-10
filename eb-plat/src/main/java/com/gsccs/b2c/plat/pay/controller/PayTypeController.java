@@ -24,7 +24,7 @@ import com.gsccs.eb.api.utils.JsonMsg;
  * 
  */
 @Controller
-@RequestMapping("/payargs")
+@RequestMapping("/paytype")
 public class PayTypeController {
 
 	@Autowired
@@ -40,10 +40,8 @@ public class PayTypeController {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String payargsList(
-			@RequestParam(defaultValue = "1") int page,
-			@RequestParam(defaultValue = "10") int pagesize, 
-			ModelMap map,
+	public String payTypeList(@RequestParam(defaultValue = "1") int page,
+			@RequestParam(defaultValue = "10") int pagesize, ModelMap map,
 			PayType param) {
 		List<PayType> payTypes = payService
 				.queryPayTypes(param, page, pagesize);
