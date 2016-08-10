@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gsccs.b2c.plat.site.service.ChannelService;
+import com.gsccs.eb.api.domain.goods.Category;
 import com.gsccs.eb.api.domain.site.Channel;
 import com.gsccs.eb.api.utils.JsonMsg;
 
@@ -37,8 +38,7 @@ public class ChannelController {
 		model.addAttribute("channelList", channelList);
 		return "site/channel-list";
 	}
-	
-	
+
 	/**
 	 * 
 	 * @param id
@@ -76,6 +76,14 @@ public class ChannelController {
 		channelService.insert(channel);
 		jsonMsg.setSuccess(true);
 		return jsonMsg;
+	}
+
+	
+	@RequestMapping(value = "/child", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Channel> child(Long id) {
+		List<Channel> channelList = channelService.findSubChannel(id);
+		return channelList;
 	}
 
 }

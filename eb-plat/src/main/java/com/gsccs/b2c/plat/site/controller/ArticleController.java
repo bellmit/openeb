@@ -35,7 +35,7 @@ public class ArticleController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String articleList(
-			@RequestParam(defaultValue = " ordernum ") String order,
+			@RequestParam(defaultValue = " indexnum ") String order,
 			@RequestParam(defaultValue = "1") int currPage,
 			@RequestParam(defaultValue = "10") int pageSize, ModelMap map,
 			Article param, HttpServletRequest request) {

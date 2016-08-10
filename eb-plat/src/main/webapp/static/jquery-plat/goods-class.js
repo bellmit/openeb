@@ -10,7 +10,7 @@ $(document).ready(function () {
             $(this).attr('status', 'none');
             //ajax
             $.ajax({
-                url: APP_BASE + '/goods/class/child?id=' + id + '&level=' + (Number(level) + 1),
+                url: APP_BASE + '/category/child?id=' + id + '&level=' + (Number(level) + 1),
                 dataType: 'json',
                 success: function (data) {
                     var src = '';

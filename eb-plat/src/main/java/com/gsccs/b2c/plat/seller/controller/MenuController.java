@@ -9,16 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gsccs.b2c.plat.bass.JsonMsg;
-import com.gsccs.b2c.plat.seller.service.ShopService;
-import com.gsccs.eb.api.domain.seller.Grade;
-import com.gsccs.eb.api.domain.seller.Shop;
+import com.gsccs.b2c.plat.seller.service.ShopMenuService;
+import com.gsccs.eb.api.domain.seller.Menu;
 
 /**
- * 平台店铺菜单管理
+ * 店铺菜单管理
  * 
  */
 @Controller
@@ -26,10 +24,11 @@ import com.gsccs.eb.api.domain.seller.Shop;
 public class MenuController {
 
 	@Resource
-	private ShopService storeService;
+	private ShopMenuService shopMenuService;
 
 	/**
-	 * 店铺列表
+	 * 店铺菜单列表
+	 * 
 	 * @param param
 	 * @param currPage
 	 * @param pageSize
@@ -38,36 +37,30 @@ public class MenuController {
 	 */
 	@RequiresPermissions("store:view")
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(Shop param,
-			@RequestParam(defaultValue = "1") int currPage,
-			@RequestParam(defaultValue = "10") int pageSize, ModelMap map) {
-		List<Shop> storeList = storeService.find(param, "", currPage, pageSize);
-		List<Grade> gradeList = storeService.findGradeList();
-
-		map.put("storeList", storeList);
-		map.put("gradeList", gradeList);
-		return "seller/shop-list";
+	public String list(ModelMap map) {
+		List<Menu> menuList = shopMenuService.findByParid(0l);
+		map.put("menuList", menuList);
+		return "seller/menu-list";
 	}
-	
+
 	/**
-	 * 开店申请列表
+	 * 子级列表
+	 * 
 	 * @param param
 	 * @param currPage
 	 * @param pageSize
 	 * @param map
 	 * @return
 	 */
-	@RequestMapping(value = "/auditlist", method = RequestMethod.GET)
-	public String joinList(Shop param,
-			@RequestParam(defaultValue = "1") int currPage,
-			@RequestParam(defaultValue = "10") int pageSize, ModelMap map) {
-		List<Shop> storeList = storeService.find(param, "", currPage, pageSize);
-		map.put("storeList", storeList);
-		return "seller/shop-auditlist";
+	@ResponseBody
+	@RequestMapping(value = "/child", method = RequestMethod.GET)
+	public List<Menu> child(Long id) {
+		List<Menu> menuList = shopMenuService.findByParid(id);
+		return menuList;
 	}
 
 	/**
-	 * 店铺表单
+	 * 店铺菜单表单
 	 * 
 	 * @param id
 	 * @param map
@@ -75,67 +68,34 @@ public class MenuController {
 	 */
 	@RequestMapping(value = "/form", method = RequestMethod.GET)
 	public String storeForm(Long id, ModelMap map) {
-		String view = "seller/shop-add";
-		Shop shop = null;
+		String view = "seller/menu-add";
+		Menu menu = null;
 		if (null != id) {
-			view = "seller/shop-edit";
-			shop = storeService.findById(id);
+			view = "seller/menu-edit";
+			menu = shopMenuService.getById(id);
 		}
-		map.put("shop", shop);
+		map.put("menu", menu);
 		return view;
 	}
 
-	
 	/**
-	 * 店铺表单
+	 * 信息保存
 	 * 
-	 * @param id
-	 * @param map
-	 * @return
-	 */
-	@RequestMapping(value = "/audit", method = RequestMethod.GET)
-	public String applyForm(Long id, ModelMap map) {
-		String view = "seller/shop-audit";
-		Shop shop = null;
-		if (null != id) {
-			shop = storeService.findById(id);
-		}
-		map.put("shop", shop);
-		return view;
-	}
-
-	
-	/**
-	 * 店铺查看
-	 * 
-	 * @param id
-	 * @param map
-	 * @return
-	 */
-	@RequestMapping(value = "/view", method = RequestMethod.GET)
-	public String storeView(Long id, ModelMap map) {
-		Shop shop = storeService.findById(id);
-		map.put("shop", shop);
-		return "seller/shop-view";
-	}
-
-	/**
-	 * 店铺信息保存
 	 * @param map
 	 * @param shop
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public JsonMsg saveShop(ModelMap map, Shop shop) {
+	public JsonMsg saveMenu(ModelMap map, Menu menu) {
 		JsonMsg json = new JsonMsg();
 		try {
-			if (null == shop) {
+			if (null == menu) {
 				json.setMsg("保存失败");
 				json.setSuccess(false);
 				return json;
 			}
-			storeService.saveShop(shop);
+			shopMenuService.save(menu);
 			json.setSuccess(true);
 			json.setMsg("保存成功！");
 		} catch (Exception e) {

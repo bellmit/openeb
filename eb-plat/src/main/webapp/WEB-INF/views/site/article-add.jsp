@@ -19,29 +19,31 @@
 	        var APP_BASE = '${pageContext.request.contextPath}';
 	        LOADING_IMAGE = "${pageContext.request.contextPath}/res/images/loading.gif";
 	</script>
-<script type="text/javascript" src="./管理后台-文章新增_files/jquery.ui.js"></script>
-<script type="text/javascript" src="./管理后台-文章新增_files/zh-CN.js" charset="utf-8"></script>
-<link rel="stylesheet" type="text/css" href="./管理后台-文章新增_files/jquery.ui.css">
-<script type="text/javascript" src="./管理后台-文章新增_files/common_select.js" charset="utf-8"></script>
-<link rel="stylesheet" href="./管理后台-文章新增_files/default.css">
-<script charset="utf-8" src="./管理后台-文章新增_files/kindeditor.js"></script>
-<script charset="utf-8" src="./管理后台-文章新增_files/kindeditor-all.js"></script>
-<script charset="utf-8" src="./管理后台-文章新增_files/zh_CN.js"></script>
-<script charset="utf-8" src="./管理后台-文章新增_files/layer.js"></script><link rel="stylesheet" href="./管理后台-文章新增_files/layer.css" id="layui_layer_skinlayercss">
-<script type="text/javascript">
-	$(function (){
-        KindEditor.ready(function(K) {
-            var editor1 = K.create('textarea[id="content"]', {
-                uploadJson : APP_BASE+'/kind/upload',
-                afterCreate : function() {
-                    var self = this;
-                },
-                afterBlur: function(){this.sync();}
-            });
-        });
-	});
-    
-</script>
+	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-ui/ui/jquery-ui.js"></script>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/jquery-ui/themes/ui-lightness/jquery-ui.css" />
+	<script type="text/javascript" src="${pageContext.request.contextPath}/static/layer/layer.js" charset="utf-8"></script>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/layer/layer.css" id="layui_layer_skinlayercss">
+	<script type="text/javascript" src="${pageContext.request.contextPath}/static/ui-v2/jquery.edit.js" charset="utf-8"></script>
+	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/static/ui-v2/common_select.js" charset="utf-8"></script>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/kindeditor/themes/default/default.css"></head>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/static/kindeditor/kindeditor.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/static/kindeditor/kindeditor-all.js"></script>
+	<script type="text/javascript">
+		$(function (){
+	        KindEditor.ready(function(K) {
+	            var editor1 = K.create('textarea[id="content"]', {
+	                uploadJson : APP_BASE+'/kind/upload',
+	                afterCreate : function() {
+	                    var self = this;
+	                },
+	                afterBlur: function(){this.sync();}
+	            });
+	        });
+		});
+	    
+	</script>
 </head>
 <body>
 <div id="append_parent"></div>

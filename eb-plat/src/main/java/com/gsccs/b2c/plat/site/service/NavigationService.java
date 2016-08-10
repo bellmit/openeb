@@ -18,7 +18,7 @@ public interface NavigationService {
 	 * @param navigation
 	 * @return
 	 */
-	public void add(Navigation navigation);
+	public void save(Navigation navigation);
 
 	/**
 	 * 查询导航列表
@@ -28,5 +28,14 @@ public interface NavigationService {
 	 * @return
 	 */
 	public List<Navigation> findnavList(Navigation param, int page, int rows);
+	
+	
+	/**
+	 * 查询
+	 * 
+	 * @param navigation
+	 * @return
+	 */
+	public Navigation get(String id);
 
 }

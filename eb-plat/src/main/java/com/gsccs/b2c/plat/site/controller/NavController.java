@@ -10,10 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gsccs.b2c.plat.site.service.FloorService;
+import com.gsccs.b2c.plat.site.service.NavigationService;
+import com.gsccs.eb.api.domain.site.Article;
 import com.gsccs.eb.api.domain.site.Floor;
+import com.gsccs.eb.api.domain.site.Navigation;
 import com.gsccs.eb.api.utils.JsonMsg;
 
 /**
@@ -24,7 +28,7 @@ import com.gsccs.eb.api.utils.JsonMsg;
 public class NavController {
 
 	@Autowired
-	private FloorService floorService;
+	private NavigationService navigationService;
 
 	/**
 	 * 
@@ -32,10 +36,13 @@ public class NavController {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(Model model) {
-		List<Floor> floorList = floorService.findFloorList(1001L);
-		model.addAttribute("floorList", floorList);
-		return "site/floor-list";
+	public String list(@RequestParam(defaultValue = " ") String order,
+			@RequestParam(defaultValue = "1") int page,
+			@RequestParam(defaultValue = "10") int rows,
+			Navigation param,Model model) {
+		List<Navigation> navList = navigationService.findnavList(param, page, rows);
+		model.addAttribute("navList", navList);
+		return "site/navigation-list";
 	}
 	
 	
@@ -46,12 +53,12 @@ public class NavController {
 	 * @return
 	 */
 	@RequestMapping(value = "/form", method = RequestMethod.GET)
-	public String floorForm(String id, Model model) {
+	public String navForm(String id, Model model) {
 		String view = "site/floor-add";
 		if (null != id) {
 			view = "site/floor-edit";
-			Floor floor = floorService.getFloor(id);
-			model.addAttribute("floor", floor);
+			Navigation navigation = navigationService.get(id);
+			model.addAttribute("navigation", navigation);
 		}
 		return view;
 	}
@@ -66,15 +73,15 @@ public class NavController {
 	 */
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@ResponseBody
-	public JsonMsg floorSave(Floor floor, ModelMap map,
+	public JsonMsg navSave(Navigation navigation, ModelMap map,
 			HttpServletRequest request) {
 		JsonMsg jsonMsg = new JsonMsg();
-		if (null == floor) {
+		if (null == navigation) {
 			jsonMsg.setSuccess(false);
 			return jsonMsg;
 		}
 
-		floorService.saveFloor(floor);
+		navigationService.save(navigation);
 		jsonMsg.setSuccess(true);
 		return jsonMsg;
 	}

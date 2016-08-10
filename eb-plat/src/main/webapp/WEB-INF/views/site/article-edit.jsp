@@ -1,0 +1,176 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+    
+    <title>管理后台</title>
+    <link href="${pageContext.request.contextPath}/static/ui-v2/css/skin_0.css" rel="stylesheet" type="text/css" id="cssfile" />
+
+    <script type="text/javascript" src="${pageContext.request.contextPath}/static/ui-v2/jquery.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/static/ui-v2/jquery.validation.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/static/ui-v2/admincp.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/static/ui-v2/jquery.cookie.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/static/ui-v2/common.js"></script>
+    
+    <script type="text/javascript">
+	        var APP_BASE = '${pageContext.request.contextPath}';
+	        LOADING_IMAGE = "${pageContext.request.contextPath}/res/images/loading.gif";
+	</script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/static/ui-v2/common_select.js" charset="utf-8"></script>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/kindeditor/themes/default/default.css"></head>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/static/kindeditor/kindeditor.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/static/kindeditor/kindeditor-all.js"></script>
+	<script type="text/javascript">
+		
+		$(function (){
+		  	KindEditor.create('textarea[id="content"]', {
+	            uploadJson : APP_BASE+'/kind/upload',
+	            afterCreate : function() {
+	                var self = this;
+	            },
+			 	allowFileManager: true,
+				afterBlur: function(){this.sync();}
+			});
+	
+		});
+	</script>
+<body>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title">
+            <h3>文章管理</h3>
+            <ul class="tab-base">
+                <li><a href="http://b2b2c.leimingtech.com/leimingtech-admin/website/article/index"><span>管理</span></a></li>
+                <li><a href="http://b2b2c.leimingtech.com/leimingtech-admin/website/article/forward?id=0"><span>新增文章</span></a></li>
+                <li><a href="JavaScript:void(0);" class="current"><span>编辑</span></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="fixed-empty"></div>
+    <form action="http://b2b2c.leimingtech.com/leimingtech-admin/website/article/edit" method="post" name="saveForm" id="saveForm">
+        <input type="hidden" name="articleId" value="28">
+        <table class="table tb-type2 nobdb">
+            <tbody>
+            <tr class="noborder">
+                <td colspan="2" class="required"><label class="validation">标题：</label></td>
+            </tr>
+            <tr class="noborder" style="background: rgb(255, 255, 255);">
+                <td class="vatop rowform"><input type="text" name="articleTitle" class="text" value="购物车常见问题和购物技巧"></td>
+                <td class="vatop tips"></td>
+            </tr>
+            <tr style="background: rgb(255, 255, 255);">
+                <td colspan="2" class="required"><label class="validation">所属分类：</label> </td>
+            </tr>
+            <tr class="noborder" style="background: rgb(255, 255, 255);">
+                <td class="vatop rowform" id="gcategory">
+                    <select class="select" name="acId" style="height:25px;width:100px">
+                        <option value="0">全部</option>
+		                    	<option value="1"> 店主之家</option>
+		                            <option value="15">&nbsp;&nbsp;  好店主如何养成</option>
+		                    	<option value="2" selected="selected"> 新手上路</option>
+		                    	<option value="3"> 支付方式</option>
+		                    	<option value="4"> 配送方式</option>
+		                    	<option value="5"> 售后服务</option>
+		                    	<option value="7"> 关于我们</option>
+		                    	<option value="8"> 商城公告</option>
+		                    	<option value="9"> 帮助中心</option>
+                    </select>
+                </td>
+                <td class="vatop tips">选择分类</td>
+            </tr>
+            <tr class="noborder" style="background: rgb(255, 255, 255);">
+                <td colspan="2" class="required">链接：</td>
+            </tr>
+            <tr class="noborder">
+                <td class="vatop rowform"><input type="text" name="articleUrl" class="text" value=""></td>
+                <td class="vatop tips">当填写"链接"后点击文章标题将直接跳转至链接地址，不显示文章内容。链接格式请以http://开头</td>
+            </tr>
+            <tr style="background: rgb(255, 255, 255);">
+                <td colspan="2" class="required">是否显示: </td>
+            </tr>
+            <tr class="noborder">
+                <td class="vatop rowform onoff">
+                	<label for="brand_recommend1" class="cb-enable selected" title="是"><span>是</span></label>
+                    <label for="brand_recommend0" class="cb-disable " title="否"><span>否</span></label>
+                    <input id="brand_recommend1" name="articleShow" checked="checked" value="1" type="radio">
+                    <input id="brand_recommend0" name="articleShow" value="0" type="radio">
+                </td>
+                <td class="vatop tips"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="required">排序: </td>
+            </tr>
+            <tr class="noborder">
+                <td class="vatop rowform"><input type="text" name="articleSort" id="article_sort" class="txt" value="255">
+                </td>
+                <td class="vatop tips">数字范围为0~255，数字越大越靠前</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="required">文章内容: </td>
+            </tr>
+            <tr class="noborder" style="background: rgb(251, 251, 251);">
+                <td colspan="2">
+                <textarea id="content" style="width: 700px; height: 300px; display: none;" name="articleContent">                &lt;p&gt;
+	&lt;strong&gt;Q1:为什么购物车中显示有货，去结算时无货？&lt;/strong&gt; 
+&lt;/p&gt;
+&lt;p&gt;
+	A:1.可能您未设置购物车右上角的“配送至地区”，如果“结算页面设置的地区”和“购物车中的配送至地区”不同，有些商品在本地区无货，但别的地区还有货，建议去结算前请先核对页面右上角的“配送至地区”，看是否有货；
+&lt;/p&gt;
+&lt;p&gt;
+	2.可能因为抢购（特别是紧俏的商品），没有抢购到，若别的地区还有货，修改收货地区后，请尝试重新购买；
+&lt;/p&gt;
+&lt;p&gt;
+	3.赠品在购物车中没显示库存信息，结算时赠品如果显示无货，可以回到购物车页中删除赠品后继续下单。
+&lt;/p&gt;
+&lt;p&gt;
+	&lt;strong&gt;Q2:为什么加入购物车后，去结算时价格发生变化&lt;strong&gt;?&lt;/strong&gt;&lt;/strong&gt; 
+&lt;/p&gt;
+&lt;p&gt;
+	A:因为商品在促销时可能优惠力度比较大，造成抢购到限购数量结束，或促销结束时间到了，所以可能会出现结算时价格变高或变低；
+&lt;/p&gt;
+&lt;p&gt;
+	&lt;strong&gt;Q3:如何向店铺咨询问题&lt;strong&gt;?&lt;/strong&gt;&lt;/strong&gt; 
+&lt;/p&gt;
+&lt;p&gt;
+	A:购物车页中店铺名称右边有个咚咚入口，您可以点击“联系客服”与店铺客服交流；如需获得更好体验，可以查看聊天历史记录等，沟通更方便；
+&lt;/p&gt;
+                </textarea>
+                </td>
+                <td class="vatop tips"></td>
+            </tr>
+          	</tbody>
+            <tfoot>
+            <tr class="tfoot">
+                <td colspan="2"><a href="JavaScript:void(0);" class="btn" id="submitBtn"><span>提交</span></a></td>
+            </tr>
+            </tfoot>
+        </table>
+    </form>
+ </div>
+ <script type="text/javascript">
+   //按钮先执行验证再提交表单
+    $(function(){$("#submitBtn").click(function(){
+       	if($("#articleTitle").val()==""){
+       		alert("标题不能为空");
+       		return false;
+       	}
+        if($("#acId").val()==0){
+       		alert("请选择分类");
+       		return false;
+       	}
+
+         $("#saveForm").submit();
+         layer.load(2, {
+             shade: [0.2, '#999999'] //0.1透明度的白色背景
+           });
+        });
+    });
+</script>
+
+
+</body></html>

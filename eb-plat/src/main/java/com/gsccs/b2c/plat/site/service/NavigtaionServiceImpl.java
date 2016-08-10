@@ -17,10 +17,23 @@ public class NavigtaionServiceImpl implements NavigationService {
 	private NavigationMapper navigationMapper;
 
 	@Override
-	public void add(Navigation nav) {
-		if (nav != null) {
-			navigationMapper.insert(nav);
+	public void save(Navigation nav) {
+		if (nav == null) {
+			return;
 		}
+		if (StringUtils.isEmpty(nav.getId())) {
+			navigationMapper.insert(nav);
+		} else {
+			navigationMapper.updateByPrimaryKey(nav);
+		}
+	}
+
+	@Override
+	public Navigation get(String id) {
+		if(StringUtils.isEmpty(id)){
+			return null;
+		}
+		return navigationMapper.selectByPrimaryKey(id);
 	}
 
 	@Override

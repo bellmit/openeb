@@ -11,11 +11,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gsccs.b2c.plat.pay.service.PayService;
 import com.gsccs.eb.api.domain.trade.PayType;
-import com.gsccs.eb.api.utils.JsonMsg;
 
 /**
  * 支付记录管理
@@ -46,7 +44,7 @@ public class PayNoteController {
 		List<PayType> payTypes = payService
 				.queryPayTypes(param, page, pagesize);
 		map.put("payTypeList", payTypes);
-		return "trade/paytype_list";
+		return "trade/paynote_list";
 	}
 
 	/**
@@ -57,7 +55,7 @@ public class PayNoteController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value = "/form", method = RequestMethod.GET)
+	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public String payTypeForm(String id, ModelMap map,
 			HttpServletRequest request) {
 		PayType payType = null;
@@ -65,21 +63,7 @@ public class PayNoteController {
 			payType = payService.getPayType(id);
 		}
 		map.put("payType", payType);
-		return "trade/paytype_form";
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public JsonMsg paytypeSave(PayType payType, ModelMap map,
-			HttpServletRequest request) {
-		JsonMsg jsonMsg = new JsonMsg();
-		if (null == payType) {
-			jsonMsg.setSuccess(false);
-			return jsonMsg;
-		}
-		payService.savePayType(payType);
-		jsonMsg.setSuccess(true);
-		return jsonMsg;
+		return "trade/paynote_view";
 	}
 
 }
