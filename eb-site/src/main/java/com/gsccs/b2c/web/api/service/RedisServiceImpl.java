@@ -120,7 +120,7 @@ public class RedisServiceImpl implements RedisService {
 		List<Navigation> navs = redisTemplate.boundListOps(
 				CacheConst.SITE_NAV_LIST_ + sid).range(0, -1);
 		if (null == navs || navs.size() <= 0) {
-			navs = shopAPI.getStoreNav(sid);
+			navs = shopAPI.findShopNav(sid);
 			if (null != navs && navs.size() > 0) {
 				for (Navigation nav : navs) {
 					redisTemplate.boundListOps(CacheConst.SITE_NAV_LIST_ + sid)

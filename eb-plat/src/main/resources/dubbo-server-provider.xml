@@ -72,9 +72,9 @@
 		ref="orderAPI" />
 		
 	<!-- 楼层管理服务接口 -->
-	<bean id="storeyAPI" class="com.gsccs.b2c.api.service.StoreyServiceAPI" />
-	<dubbo:service interface="com.gsccs.b2c.api.service.StoreyServiceI"
-		ref="storeyAPI" />
+	<bean id="floorAPI" class="com.gsccs.b2c.api.service.FloorServiceAPI" />
+	<dubbo:service interface="com.gsccs.b2c.api.service.FloorServiceI"
+		ref="floorAPI" />
 		
 	<!-- 物流服务接口 -->
 	<bean id="deliverAPI" class="com.gsccs.b2c.api.service.DeliverServiceAPI" />
@@ -95,5 +95,10 @@
 	<bean id="returnOrderAPI" class="com.gsccs.b2c.api.service.ReturnOrderServiceAPI" />
 	<dubbo:service interface="com.gsccs.b2c.api.service.ReturnOrderServiceI"
 		ref="returnOrderAPI" />
+		
+	<!-- 支付服务接口 -->
+	<bean id="payAPI" class="com.gsccs.b2c.api.service.PayServiceAPI" />
+	<dubbo:service interface="com.gsccs.b2c.api.service.PayServiceI"
+		ref="payAPI" />
 	
 </beans>

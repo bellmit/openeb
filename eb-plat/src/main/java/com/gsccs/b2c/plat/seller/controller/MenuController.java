@@ -38,7 +38,7 @@ public class MenuController {
 	@RequiresPermissions("store:view")
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(ModelMap map) {
-		List<Menu> menuList = shopMenuService.findByParid(0l);
+		List<Menu> menuList = shopMenuService.findByParId(0l);
 		map.put("menuList", menuList);
 		return "seller/menu-list";
 	}
@@ -55,7 +55,7 @@ public class MenuController {
 	@ResponseBody
 	@RequestMapping(value = "/child", method = RequestMethod.GET)
 	public List<Menu> child(Long id) {
-		List<Menu> menuList = shopMenuService.findByParid(id);
+		List<Menu> menuList = shopMenuService.findByParId(id);
 		return menuList;
 	}
 

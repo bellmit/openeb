@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.gsccs.eb.api.domain.base.Account;
 import com.gsccs.eb.api.domain.trade.PayArgs;
-import com.gsccs.eb.api.domain.trade.Payment;
+import com.gsccs.eb.api.domain.trade.PayNote;
 import com.gsccs.eb.api.exception.ApiException;
 
 

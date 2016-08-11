@@ -7,7 +7,7 @@ import com.gsccs.eb.api.domain.base.Domain;
  * @author x.d zhang
  *
  */
-public class Payment extends Domain{
+public class PayNote extends Domain{
 
 	private String id;
 	private String appId;

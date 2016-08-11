@@ -148,26 +148,26 @@
                 <td><input type="checkbox" class="checkall" id="checkallBottom"></td>
                 <td colspan="16"><label for="checkallBottom">全选</label>
                     &nbsp;&nbsp;<a href="JavaScript:void(0);" class="btn" onclick="delArticleAll()"><span>删除</span></a>
-<div class="pagination">
-    <ul><li>
-                </li><li><span>首页</span></li>
-                    <li><span class="currentpage">1</span></li>
-                <li><span>末页</span></li>
-        <script language="javascript">
-            function turnOverPage(no) {
-                var queryForm = document.formSearch;
-                if (no >1) {
-                    no =1;
-                }
-                if (no < 1) {
-                    no = 1;
-                }
-                queryForm.pageNo.value=no;
-                queryForm.submit();
-            }
-        </script>
-    </ul>
-</div>
+			<div class="pagination">
+			    <ul><li>
+			                </li><li><span>首页</span></li>
+			                    <li><span class="currentpage">1</span></li>
+			                <li><span>末页</span></li>
+			        <script language="javascript">
+			            function turnOverPage(no) {
+			                var queryForm = document.formSearch;
+			                if (no >1) {
+			                    no =1;
+			                }
+			                if (no < 1) {
+			                    no = 1;
+			                }
+			                queryForm.pageNo.value=no;
+			                queryForm.submit();
+			            }
+			        </script>
+			    </ul>
+			</div>
             </td></tr>
             </tfoot>
         </table>

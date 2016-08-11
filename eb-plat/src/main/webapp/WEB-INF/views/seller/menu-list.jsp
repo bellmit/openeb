@@ -22,7 +22,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-ui/ui/jquery-ui.js"></script>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/jquery-ui/themes/ui-lightness/jquery-ui.css" />
 	<script type="text/javascript" src="${pageContext.request.contextPath}/static/ui-v2/jquery.edit.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/static/ui-v2/jquery.seller_menu_class.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/static/ui-v2/seller_menu_class.js"></script>
 	<script type="text/javascript">
 	var vadate=false;
 	function delClass(){
@@ -41,7 +41,7 @@
 	       valicountparent(classid);
 	       if(vadate){
 	           if(confirm('您确定要删除吗?')){
-	           var url = "/leimingtech-admin/shopSellerMenu/deleteid";
+	           var url = APP_BASE+"/shopmenu/deleteid";
 			   var para = {"classid":classid};
 			   $.ajax({
 		             type: "post",
@@ -52,7 +52,7 @@
 					 success:function(data) {
 						if(data.success == "true"){
 							 alert(data.result);
-						     window.location = '/leimingtech-admin/shopSellerMenu/list'
+						     window.location = '/leimingtech-admin/shopmenu/list'
 						}else{
 							 alert(data.result);
 						}
@@ -64,7 +64,7 @@
 		     }  
 	    }
 	function valicountparent(classid){
-	   var url = "/leimingtech-admin/shopSellerMenu/validateparentid";
+	   var url = APP_BASE+"/shopmenu/validateparentid";
 	   var para = {"id":classid};
 	   var va=
 	   $.ajax({
@@ -96,7 +96,7 @@
             <h3>店铺菜单管理</h3>
             <ul class="tab-base">
                 <li><a href="JavaScript:void(0);" class="current"><span>管理</span></a></li>
-                <li><a href="http://b2b2c.leimingtech.com/leimingtech-admin/shopSellerMenu/forward?menuId=0&amp;menuParentId=0"><span>新增</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/shopmenu/form?menuParentId=0"><span>新增</span></a></li>
             </ul>
         </div>
     </div>
@@ -115,7 +115,7 @@
         </tr>
         </tbody>
     </table>
-    <form method="post" id="form_list" action="http://b2b2c.leimingtech.com/leimingtech-admin/shopSellerMenu/delete">
+    <form method="post" id="form_list" action="${pageContext.request.contextPath}/shopmenu/delete">
         <table class="table tb-type2">
             <thead>
             <tr class="thead">
@@ -128,167 +128,25 @@
 	        </tr>
             </thead>
             <tbody>
+            	<c:forEach items="${menuList }" var="shopmenu">
 	            <tr class="hover edit" style="background: rgb(255, 255, 255);">
-	            	<td class="w48"><input type="checkbox" name="mIds" value="18" class="checkitem">
-		                    <img fieldid="18" status="open" nc_type="flex" level="1" src="./管理后台-店铺菜单_files/tv-expandable.gif">
+	            	<td class="w48">
+	            		<input type="checkbox" name="mIds" value="18" class="checkitem">
+		                <img fieldid="${shopmenu.id }" status="open" nc_type="flex" level="1" src="${pageContext.request.contextPath}/static/ui-v2/images/tv-expandable.gif">
 		            </td>
-		            <td class="w50pre name">
-		                  商品管理
-		                <a class="btn-add-nofloat marginleft" href="http://b2b2c.leimingtech.com/leimingtech-admin/shopSellerMenu/forward?menuId=0&amp;menuParentId=18"><span>新增下级</span></a>
+		            <td class="w50pre name">${shopmenu.name }
+		                <a class="btn-add-nofloat marginleft" href="${pageContext.request.contextPath}/shopmenu/form?menuId=0&amp;menuParentId=${shopmenu.id }"><span>新增下级</span></a>
 		            </td>
-	                <td>
-	                	
-	                </td>
-	                <td>
-	                	1
-	                </td>
-	                <td>
-	                	
-	                </td>
+	                <td></td>
+	                <td>1</td>
+	                <td></td>
 	                <td class="w84">
-	                    <a href="http://b2b2c.leimingtech.com/leimingtech-admin/shopSellerMenu/forward?menuId=18&amp;menuParentId=0">编辑</a>
+	                    <a href="${pageContext.request.contextPath}/shopmenu/form?menuId=${shopmenu.id }&amp;menuParentId=0">编辑</a>
 	                    &nbsp;|&nbsp;
-	                    <a href="javascript:;" onclick="delClassid(&#39;18&#39;)">删除</a>
+	                    <a href="javascript:;" onclick="delClassid('${shopmenu.id }')">删除</a>
 	                </td>
 	            </tr>
-	            <tr class="hover edit" style="background: rgb(255, 255, 255);">
-	            	<td class="w48"><input type="checkbox" name="mIds" value="28" class="checkitem">
-		                    <img fieldid="28" status="open" nc_type="flex" level="1" src="./管理后台-店铺菜单_files/tv-expandable.gif">
-		            </td>
-		            <td class="w50pre name">
-		                  交易管理
-		                <a class="btn-add-nofloat marginleft" href="http://b2b2c.leimingtech.com/leimingtech-admin/shopSellerMenu/forward?menuId=0&amp;menuParentId=28"><span>新增下级</span></a>
-		            </td>
-	                <td>
-	                	 
-	                </td>
-	                <td>
-	                	1
-	                </td>
-	                <td>
-	                	
-	                </td>
-	                <td class="w84">
-	                    <a href="http://b2b2c.leimingtech.com/leimingtech-admin/shopSellerMenu/forward?menuId=28&amp;menuParentId=0">编辑</a>
-	                    &nbsp;|&nbsp;
-	                    <a href="javascript:;" onclick="delClassid(&#39;28&#39;)">删除</a>
-	                </td>
-	            </tr>
-	            <tr class="hover edit" style="background: rgb(255, 255, 255);">
-	            	<td class="w48"><input type="checkbox" name="mIds" value="35" class="checkitem">
-		                    <img fieldid="35" status="open" nc_type="flex" level="1" src="./管理后台-店铺菜单_files/tv-expandable.gif">
-		            </td>
-		            <td class="w50pre name">
-		                  促销管理
-		                <a class="btn-add-nofloat marginleft" href="http://b2b2c.leimingtech.com/leimingtech-admin/shopSellerMenu/forward?menuId=0&amp;menuParentId=35"><span>新增下级</span></a>
-		            </td>
-	                <td>
-	                	 
-	                </td>
-	                <td>
-	                	1
-	                </td>
-	                <td>
-	                	
-	                </td>
-	                <td class="w84">
-	                    <a href="http://b2b2c.leimingtech.com/leimingtech-admin/shopSellerMenu/forward?menuId=35&amp;menuParentId=0">编辑</a>
-	                    &nbsp;|&nbsp;
-	                    <a href="javascript:;" onclick="delClassid(&#39;35&#39;)">删除</a>
-	                </td>
-	            </tr>
-	            <tr class="hover edit">
-	            	<td class="w48"><input type="checkbox" name="mIds" value="38" class="checkitem">
-		                    <img fieldid="38" status="open" nc_type="flex" level="1" src="./管理后台-店铺菜单_files/tv-expandable.gif">
-		            </td>
-		            <td class="w50pre name">
-		                  店铺设置
-		                <a class="btn-add-nofloat marginleft" href="http://b2b2c.leimingtech.com/leimingtech-admin/shopSellerMenu/forward?menuId=0&amp;menuParentId=38"><span>新增下级</span></a>
-		            </td>
-	                <td>
-	                	 
-	                </td>
-	                <td>
-	                	1
-	                </td>
-	                <td>
-	                	
-	                </td>
-	                <td class="w84">
-	                    <a href="http://b2b2c.leimingtech.com/leimingtech-admin/shopSellerMenu/forward?menuId=38&amp;menuParentId=0">编辑</a>
-	                    &nbsp;|&nbsp;
-	                    <a href="javascript:;" onclick="delClassid(&#39;38&#39;)">删除</a>
-	                </td>
-	            </tr>
-	            <tr class="hover edit">
-	            	<td class="w48"><input type="checkbox" name="mIds" value="43" class="checkitem">
-		                    <img fieldid="43" status="open" nc_type="flex" level="1" src="./管理后台-店铺菜单_files/tv-expandable.gif">
-		            </td>
-		            <td class="w50pre name">
-		                  客服管理
-		                <a class="btn-add-nofloat marginleft" href="http://b2b2c.leimingtech.com/leimingtech-admin/shopSellerMenu/forward?menuId=0&amp;menuParentId=43"><span>新增下级</span></a>
-		            </td>
-	                <td>
-	                	consult/index
-	                </td>
-	                <td>
-	                	1
-	                </td>
-	                <td>
-	                	
-	                </td>
-	                <td class="w84">
-	                    <a href="http://b2b2c.leimingtech.com/leimingtech-admin/shopSellerMenu/forward?menuId=43&amp;menuParentId=0">编辑</a>
-	                    &nbsp;|&nbsp;
-	                    <a href="javascript:;" onclick="delClassid(&#39;43&#39;)">删除</a>
-	                </td>
-	            </tr>
-	            <tr class="hover edit" style="background: rgb(251, 251, 251);">
-	            	<td class="w48"><input type="checkbox" name="mIds" value="46" class="checkitem">
-		                    <img fieldid="46" status="open" nc_type="flex" level="1" src="./管理后台-店铺菜单_files/tv-expandable.gif">
-		            </td>
-		            <td class="w50pre name">
-		                  统计结算
-		                <a class="btn-add-nofloat marginleft" href="http://b2b2c.leimingtech.com/leimingtech-admin/shopSellerMenu/forward?menuId=0&amp;menuParentId=46"><span>新增下级</span></a>
-		            </td>
-	                <td>
-	                	 
-	                </td>
-	                <td>
-	                	1
-	                </td>
-	                <td>
-	                	
-	                </td>
-	                <td class="w84">
-	                    <a href="http://b2b2c.leimingtech.com/leimingtech-admin/shopSellerMenu/forward?menuId=46&amp;menuParentId=0">编辑</a>
-	                    &nbsp;|&nbsp;
-	                    <a href="javascript:;" onclick="delClassid(&#39;46&#39;)">删除</a>
-	                </td>
-	            </tr>
-	            <tr class="hover edit" style="background: rgb(255, 255, 255);">
-	            	<td class="w48"><input type="checkbox" name="mIds" value="52" class="checkitem">
-		                    <img fieldid="52" status="open" nc_type="flex" level="1" src="./管理后台-店铺菜单_files/tv-expandable.gif">
-		            </td>
-		            <td class="w50pre name">
-		                  账号
-		                <a class="btn-add-nofloat marginleft" href="http://b2b2c.leimingtech.com/leimingtech-admin/shopSellerMenu/forward?menuId=0&amp;menuParentId=52"><span>新增下级</span></a>
-		            </td>
-	                <td>
-	                	 
-	                </td>
-	                <td>
-	                	1
-	                </td>
-	                <td>
-	                	
-	                </td>
-	                <td class="w84">
-	                    <a href="http://b2b2c.leimingtech.com/leimingtech-admin/shopSellerMenu/forward?menuId=52&amp;menuParentId=0">编辑</a>
-	                    &nbsp;|&nbsp;
-	                    <a href="javascript:;" onclick="delClassid(&#39;52&#39;)">删除</a>
-	                </td>
-	            </tr>
+	            </c:forEach>
             </tbody>
             <tfoot>
 	            <tr class="tfoot">
@@ -303,6 +161,5 @@
         </table>
     </form>
 </div>
-
-
-</body></html>
+</body>
+</html>

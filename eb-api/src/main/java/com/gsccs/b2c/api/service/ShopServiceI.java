@@ -2,6 +2,7 @@ package com.gsccs.b2c.api.service;
 
 import java.util.List;
 
+import com.gsccs.eb.api.domain.seller.Menu;
 import com.gsccs.eb.api.domain.seller.Shop;
 import com.gsccs.eb.api.domain.site.Navigation;
 import com.gsccs.eb.api.exception.ApiException;
@@ -30,5 +31,12 @@ public interface ShopServiceI {
 	 * @param sid
 	 * @return
 	 */
-	public List<Navigation> getStoreNav(Long sid);
+	public List<Navigation> findShopNav(Long sid);
+	
+	/**
+	 * 查询店铺菜单
+	 * @param shopid
+	 * @return
+	 */
+	public List<Menu> findShopMenu();
 }

@@ -43,14 +43,14 @@ public class ShopMenuServiceImpl implements ShopMenuService {
 
 	@Override
 	public List<Menu> findByParId(Long parid) {
-		MenuExample rexample = new MenuExample();
-		Criteria c = rexample.createCriteria();
+		MenuExample example = new MenuExample();
+		MenuExample.Criteria c = example.createCriteria();
 		if (null != parid) {
 			c.andParentIdEqualTo(parid);
 		} else {
 			c.andParentIdEqualTo(0l);
 		}
-		return shopMenuMapper.selectByExample(rexample);
+		return shopMenuMapper.selectByExample(example);
 	}
 
 	@Override
@@ -61,10 +61,9 @@ public class ShopMenuServiceImpl implements ShopMenuService {
 			if (null != param.getParentId()) {
 				c.andParentIdEqualTo(param.getParentId());
 			}
-			/*
-			 * if (null != param.getAvailable()){
-			 * c.andParentIdEqualTo(param.getParentId()); }
-			 */
+			if (null != param.getState()){
+				c.andStateEqualTo(param.getState());
+			}
 		}
 		return shopMenuMapper.selectByExample(rexample);
 	}

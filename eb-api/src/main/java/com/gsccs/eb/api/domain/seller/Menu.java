@@ -15,8 +15,7 @@ public class Menu extends Domain {
 	private String permission; // 权限字符串
 	private Long parentId; // 父编号
 	private String parentIds; // 父编号列表
-	private Boolean available = Boolean.FALSE;
-
+	private String state;
 	private String remark;
 	private String icon;
 
@@ -92,12 +91,12 @@ public class Menu extends Domain {
 		this.parentIds = parentIds;
 	}
 
-	public Boolean getAvailable() {
-		return available;
+	public String getState() {
+		return state;
 	}
 
-	public void setAvailable(Boolean available) {
-		this.available = available;
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	public boolean isRootNode() {
@@ -152,11 +151,4 @@ public class Menu extends Domain {
 		this.subs = subs;
 	}
 
-	@Override
-	public String toString() {
-		return "Resource{" + "id=" + id + ", name='" + name + '\'' + ", type="
-				+ type + ", permission='" + permission + '\'' + ", parentId="
-				+ parentId + ", parentIds='" + parentIds + '\''
-				+ ", available=" + available + '}';
-	}
 }

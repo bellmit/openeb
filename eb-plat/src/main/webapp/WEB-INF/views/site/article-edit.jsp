@@ -45,22 +45,22 @@
         <div class="item-title">
             <h3>文章管理</h3>
             <ul class="tab-base">
-                <li><a href="http://b2b2c.leimingtech.com/leimingtech-admin/website/article/index"><span>管理</span></a></li>
-                <li><a href="http://b2b2c.leimingtech.com/leimingtech-admin/website/article/forward?id=0"><span>新增文章</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/article"><span>管理</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/article/form"><span>新增文章</span></a></li>
                 <li><a href="JavaScript:void(0);" class="current"><span>编辑</span></a></li>
             </ul>
         </div>
     </div>
     <div class="fixed-empty"></div>
-    <form action="http://b2b2c.leimingtech.com/leimingtech-admin/website/article/edit" method="post" name="saveForm" id="saveForm">
-        <input type="hidden" name="articleId" value="28">
+    <form action="${pageContext.request.contextPath}/article/save" method="post" name="saveForm" id="saveForm">
+        <input type="hidden" name="articleId" value="${article.id }">
         <table class="table tb-type2 nobdb">
             <tbody>
             <tr class="noborder">
                 <td colspan="2" class="required"><label class="validation">标题：</label></td>
             </tr>
             <tr class="noborder" style="background: rgb(255, 255, 255);">
-                <td class="vatop rowform"><input type="text" name="articleTitle" class="text" value="购物车常见问题和购物技巧"></td>
+                <td class="vatop rowform"><input type="text" name="articleTitle" class="text" value="${article.title }"></td>
                 <td class="vatop tips"></td>
             </tr>
             <tr style="background: rgb(255, 255, 255);">
@@ -115,31 +115,7 @@
             </tr>
             <tr class="noborder" style="background: rgb(251, 251, 251);">
                 <td colspan="2">
-                <textarea id="content" style="width: 700px; height: 300px; display: none;" name="articleContent">                &lt;p&gt;
-	&lt;strong&gt;Q1:为什么购物车中显示有货，去结算时无货？&lt;/strong&gt; 
-&lt;/p&gt;
-&lt;p&gt;
-	A:1.可能您未设置购物车右上角的“配送至地区”，如果“结算页面设置的地区”和“购物车中的配送至地区”不同，有些商品在本地区无货，但别的地区还有货，建议去结算前请先核对页面右上角的“配送至地区”，看是否有货；
-&lt;/p&gt;
-&lt;p&gt;
-	2.可能因为抢购（特别是紧俏的商品），没有抢购到，若别的地区还有货，修改收货地区后，请尝试重新购买；
-&lt;/p&gt;
-&lt;p&gt;
-	3.赠品在购物车中没显示库存信息，结算时赠品如果显示无货，可以回到购物车页中删除赠品后继续下单。
-&lt;/p&gt;
-&lt;p&gt;
-	&lt;strong&gt;Q2:为什么加入购物车后，去结算时价格发生变化&lt;strong&gt;?&lt;/strong&gt;&lt;/strong&gt; 
-&lt;/p&gt;
-&lt;p&gt;
-	A:因为商品在促销时可能优惠力度比较大，造成抢购到限购数量结束，或促销结束时间到了，所以可能会出现结算时价格变高或变低；
-&lt;/p&gt;
-&lt;p&gt;
-	&lt;strong&gt;Q3:如何向店铺咨询问题&lt;strong&gt;?&lt;/strong&gt;&lt;/strong&gt; 
-&lt;/p&gt;
-&lt;p&gt;
-	A:购物车页中店铺名称右边有个咚咚入口，您可以点击“联系客服”与店铺客服交流；如需获得更好体验，可以查看聊天历史记录等，沟通更方便；
-&lt;/p&gt;
-                </textarea>
+                <textarea id="content" style="width: 700px; height: 300px; display: none;" name="articleContent">${article.content }</textarea>
                 </td>
                 <td class="vatop tips"></td>
             </tr>
@@ -171,6 +147,5 @@
         });
     });
 </script>
-
-
-</body></html>
+</body>
+</html>

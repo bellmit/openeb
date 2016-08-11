@@ -9,7 +9,7 @@
 		<result column="parent_id" property="parentId" jdbcType="BIGINT" />
 		<result column="parent_ids" property="parentIds" jdbcType="VARCHAR" />
 		<result column="permission" property="permission" jdbcType="VARCHAR" />
-		<result column="available" property="available" jdbcType="BIT" />
+		<result column="state" property="state" jdbcType="VARCHAR" />
 		<result column="icon" property="icon" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Example_Where_Clause">
@@ -76,7 +76,7 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		id, name, type, url, parent_id, parent_ids, permission, available,icon
+		id, name, type, url, parent_id, parent_ids, permission, state,icon
 	</sql>
 	<select id="selectByExample" resultMap="BaseResultMap"
 		parameterType="com.gsccs.b2c.plat.seller.model.MenuExample">
@@ -85,7 +85,7 @@
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from plat_sys_resource
+		from plat_shop_menu
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -97,31 +97,31 @@
 		parameterType="java.lang.Long">
 		select
 		<include refid="Base_Column_List" />
-		from plat_sys_resource
+		from plat_shop_menu
 		where id = #{id,jdbcType=BIGINT}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-		delete from plat_sys_resource
+		delete from plat_shop_menu
 		where id = #{id,jdbcType=BIGINT}
 	</delete>
 	<delete id="deleteByExample" parameterType="com.gsccs.b2c.plat.seller.model.MenuExample">
-		delete from plat_sys_resource
+		delete from plat_shop_menu
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
 	</delete>
 	<insert id="insert" parameterType="com.gsccs.eb.api.domain.seller.Menu">
-		insert into plat_sys_resource (id, name, type,
+		insert into plat_shop_menu (id, name, type,
 		url, parent_id, parent_ids,
-		permission, available,icon)
+		permission, state,icon)
 		values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},
 		#{type,jdbcType=VARCHAR},
 		#{url,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, #{parentIds,jdbcType=VARCHAR},
-		#{permission,jdbcType=VARCHAR}, #{available,jdbcType=BIT},
+		#{permission,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR},
 		#{icon,jdbcType=VARCHAR})
 	</insert>
 	<insert id="insertSelective" parameterType="com.gsccs.eb.api.domain.seller.Menu">
-		insert into plat_sys_resource
+		insert into plat_shop_menu
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
 				id,
@@ -144,8 +144,8 @@
 			<if test="permission != null">
 				permission,
 			</if>
-			<if test="available != null">
-				available,
+			<if test="state != null">
+				state,
 			</if>
 			<if test="icon != null">
 				icon,
@@ -173,8 +173,8 @@
 			<if test="permission != null">
 				#{permission,jdbcType=VARCHAR},
 			</if>
-			<if test="available != null">
-				#{available,jdbcType=BIT},
+			<if test="state != null">
+				#{state,jdbcType=VARCHAR},
 			</if>
 			<if test="icon != null">
 				#{icon,jdbcType=VARCHAR},
@@ -183,13 +183,13 @@
 	</insert>
 	<select id="countByExample" parameterType="com.gsccs.b2c.plat.seller.model.MenuExample"
 		resultType="java.lang.Integer">
-		select count(*) from plat_sys_resource
+		select count(*) from plat_shop_menu
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
 	</select>
 	<update id="updateByExampleSelective" parameterType="map">
-		update plat_sys_resource
+		update plat_shop_menu
 		<set>
 			<if test="record.id != null">
 				id = #{record.id,jdbcType=BIGINT},
@@ -212,8 +212,8 @@
 			<if test="record.permission != null">
 				permission = #{record.permission,jdbcType=VARCHAR},
 			</if>
-			<if test="record.available != null">
-				available = #{record.available,jdbcType=BIT},
+			<if test="record.state != null">
+				state = #{record.state,jdbcType=VARCHAR},
 			</if>
 			<if test="record.icon != null">
 				icon = #{record.icon,jdbcType=VARCHAR},
@@ -224,7 +224,7 @@
 		</if>
 	</update>
 	<update id="updateByExample" parameterType="map">
-		update plat_sys_resource
+		update plat_shop_menu
 		set id = #{record.id,jdbcType=BIGINT},
 		name = #{record.name,jdbcType=VARCHAR},
 		type = #{record.type,jdbcType=VARCHAR},
@@ -232,7 +232,7 @@
 		parent_id = #{record.parentId,jdbcType=BIGINT},
 		parent_ids = #{record.parentIds,jdbcType=VARCHAR},
 		permission = #{record.permission,jdbcType=VARCHAR},
-		available = #{record.available,jdbcType=BIT},
+		state = #{record.state,jdbcType=VARCHAR},
 		icon = #{record.icon,jdbcType=VARCHAR}
 		<if test="_parameter != null">
 			<include refid="Update_By_Example_Where_Clause" />
@@ -240,14 +240,14 @@
 	</update>
 
 	<update id="updateByPrimaryKey" parameterType="com.gsccs.eb.api.domain.seller.Menu">
-		update plat_sys_resource
+		update plat_shop_menu
 		set name = #{name,jdbcType=VARCHAR},
 		type = #{type,jdbcType=VARCHAR},
 		url = #{url,jdbcType=VARCHAR},
 		parent_id = #{parentId,jdbcType=BIGINT},
 		parent_ids = #{parentIds,jdbcType=VARCHAR},
 		permission = #{permission,jdbcType=VARCHAR},
-		available = #{available,jdbcType=BIT},
+		state = #{state,jdbcType=VARCHAR},
 		icon = #{icon,jdbcType=VARCHAR}
 		where id = #{id,jdbcType=BIGINT}
 	</update>

@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gsccs.b2c.plat.site.service.FloorService;
 import com.gsccs.b2c.plat.site.service.NavigationService;
-import com.gsccs.eb.api.domain.site.Article;
-import com.gsccs.eb.api.domain.site.Floor;
 import com.gsccs.eb.api.domain.site.Navigation;
 import com.gsccs.eb.api.utils.JsonMsg;
 

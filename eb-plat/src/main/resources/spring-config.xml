@@ -26,6 +26,7 @@
     <import resource="classpath:spring-config-redis.xml"/>
     <!-- 
     <import resource="classpath:spring-quartz.xml"/>
-    <import resource="classpath:dubbo-server-provider.xml"/>
      -->  
+    <import resource="classpath:dubbo-server-provider.xml"/>
+    
 </beans>

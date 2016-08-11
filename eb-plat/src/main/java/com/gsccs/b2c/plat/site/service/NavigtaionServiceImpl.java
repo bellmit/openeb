@@ -65,8 +65,10 @@ public class NavigtaionServiceImpl implements NavigationService {
 				criteria.andHiddenEqualTo(param.getHidden());
 			}
 
-			if (null == param.getShopid()) {
+			if (null != param.getShopid()) {
 				criteria.andShopidEqualTo(param.getShopid());
+			}else{
+				criteria.andShopidEqualTo(0l);
 			}
 		}
 	}

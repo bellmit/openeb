@@ -597,65 +597,22 @@ public class MenuExample {
 			return (Criteria) this;
 		}
 
-		public Criteria andAvailableIsNull() {
-			addCriterion("available is null");
+		public Criteria andStateIsNull() {
+			addCriterion("state is null");
 			return (Criteria) this;
 		}
 
-		public Criteria andAvailableIsNotNull() {
-			addCriterion("available is not null");
+		public Criteria andStateIsNotNull() {
+			addCriterion("state is not null");
 			return (Criteria) this;
 		}
 
-		public Criteria andAvailableEqualTo(Boolean value) {
-			addCriterion("available =", value, "available");
+		public Criteria andStateEqualTo(String value) {
+			addCriterion("state =", value, "state");
 			return (Criteria) this;
 		}
 
-		public Criteria andAvailableNotEqualTo(Boolean value) {
-			addCriterion("available <>", value, "available");
-			return (Criteria) this;
-		}
-
-		public Criteria andAvailableGreaterThan(Boolean value) {
-			addCriterion("available >", value, "available");
-			return (Criteria) this;
-		}
-
-		public Criteria andAvailableGreaterThanOrEqualTo(Boolean value) {
-			addCriterion("available >=", value, "available");
-			return (Criteria) this;
-		}
-
-		public Criteria andAvailableLessThan(Boolean value) {
-			addCriterion("available <", value, "available");
-			return (Criteria) this;
-		}
-
-		public Criteria andAvailableLessThanOrEqualTo(Boolean value) {
-			addCriterion("available <=", value, "available");
-			return (Criteria) this;
-		}
-
-		public Criteria andAvailableIn(List<Boolean> values) {
-			addCriterion("available in", values, "available");
-			return (Criteria) this;
-		}
-
-		public Criteria andAvailableNotIn(List<Boolean> values) {
-			addCriterion("available not in", values, "available");
-			return (Criteria) this;
-		}
-
-		public Criteria andAvailableBetween(Boolean value1, Boolean value2) {
-			addCriterion("available between", value1, value2, "available");
-			return (Criteria) this;
-		}
-
-		public Criteria andAvailableNotBetween(Boolean value1, Boolean value2) {
-			addCriterion("available not between", value1, value2, "available");
-			return (Criteria) this;
-		}
+		
 	}
 
 	/**
