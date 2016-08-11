@@ -1,5 +1,6 @@
 package com.gsccs.b2c.plat.site.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -102,6 +103,12 @@ public class ChannelServiceImpl implements ChannelService {
 			if (null != chanelT.getParids()) {
 				criteria.andParidsLike("%" + chanelT.getParids() + "%");
 			}
+
+			if (null != chanelT.getShopid()) {
+				criteria.andShopidEqualTo(chanelT.getShopid());
+			}else{
+				criteria.andShopidEqualTo(0l);
+			}
 		}
 	}
 
@@ -143,4 +150,110 @@ public class ChannelServiceImpl implements ChannelService {
 		}
 		return nodearray;
 	}
+
+	public List<Channel> searchAllChannel() throws Exception {
+		List<Channel> listAllObject = find(null);
+		List<Channel> listAllChannel = new ArrayList<Channel>();
+		for (Channel row : listAllObject) {
+			if (0 == row.getParid()) {
+				listAllChannel.add(row);
+				fomateChannel(listAllObject, row);
+			}
+		}
+		return listAllChannel;
+	}
+
+	private void fomateChannel(List<Channel> tmp, Channel dept) {
+		for (Channel row : tmp) {
+			
+			if (row.getParid()==0 || row.getParid()==null){
+				continue;
+			}
+			
+			System.out.println(row.getParid()  +" | "+dept.getId());
+			System.out.println(row.getParid() == dept.getId());
+			if (row.getParid().equals(dept.getId())) {
+				List<Channel> list = dept.getSubChannel();
+				if (list == null) {
+					list = new ArrayList<Channel>();
+				}
+				list.add(row);
+				dept.setSubChannel(list);
+				fomateChannel(tmp, row);
+			}
+		}
+	}
+
+	private List<Channel> data() {
+		List<Channel> allChannel = new ArrayList<Channel>();
+		Channel channel = new Channel();
+		channel.setId(1l);
+		channel.setTitle("1_");
+		channel.setParid(0l);
+		allChannel.add(channel);
+
+		channel = new Channel();
+		channel.setId(2l);
+		channel.setTitle("1_1_");
+		channel.setParid(1l);
+		allChannel.add(channel);
+
+		channel = new Channel();
+		channel.setId(3l);
+		channel.setTitle("1_1_1_");
+		channel.setParid(2l);
+		allChannel.add(channel);
+
+		channel = new Channel();
+		channel.setId(30l);
+		channel.setTitle("1_2_");
+		channel.setParid(1l);
+		allChannel.add(channel);
+
+		channel = new Channel();
+		channel.setId(4l);
+		channel.setTitle("2_");
+		channel.setParid(0l);
+		allChannel.add(channel);
+
+		channel = new Channel();
+		channel.setId(5l);
+		channel.setTitle("2_2_");
+		channel.setParid(4l);
+		allChannel.add(channel);
+
+		return allChannel;
+	}
+
+	public static void main(String[] args) {
+		ChannelServiceImpl channelService = new ChannelServiceImpl();
+		try {
+			List<Channel> channels = channelService.searchAllChannel();
+			for (Channel c : channels) {
+				System.out.println(c.getTitle());
+				System.out.println("   " + c.getSubChannel().size());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public List<Channel> findChannelTree(Long shopid) {
+		Channel param = new Channel();
+		param.setShopid(shopid);
+		List<Channel> listAllDb = find(param);
+		System.out.println("listAllDb size:"+listAllDb.size());
+		List<Channel> listAllTree = new ArrayList<Channel>();
+		for (Channel row : listAllDb) {
+			if (0 == row.getParid()) {
+				listAllTree.add(row);
+				fomateChannel(listAllDb, row);
+			}
+			int size = null==row.getSubChannel()?0:row.getSubChannel().size();
+			System.out.println(row.getTitle()+" "+size);
+		}
+		return listAllTree;
+	}
+
 }

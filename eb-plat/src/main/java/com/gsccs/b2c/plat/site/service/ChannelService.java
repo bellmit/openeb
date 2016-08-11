@@ -27,4 +27,6 @@ public interface ChannelService {
 	public List<Channel> findByParids(String string);
 
 	public JSONArray findChannelTree();
+
+	public List<Channel> findChannelTree(Long shopid);
 }

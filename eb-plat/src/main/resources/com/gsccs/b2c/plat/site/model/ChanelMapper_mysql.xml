@@ -8,7 +8,7 @@
 		<result column="title" property="title" jdbcType="VARCHAR" />
 		<result column="logo" property="logo" jdbcType="VARCHAR" />
 		<result column="templet" property="templet" jdbcType="VARCHAR" />
-		<result column="site" property="site" jdbcType="VARCHAR" />
+		<result column="shopid" property="shopid" jdbcType="BIGINT" />
 		<result column="url" property="url" jdbcType="VARCHAR" />
 		<result column="status" property="status" jdbcType="VARCHAR" />
 		<result column="clicknum" property="clicknum" jdbcType="INTEGER" />
@@ -91,7 +91,7 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		id, parid, parids, title, logo, templet, site, url, status,
+		id, parid, parids, title, logo, templet, shopid, url, status,
 		clicknum, pagemark,
 		indexnum, meta_title, meta_keywords, meta_descr
 	</sql>
@@ -145,7 +145,7 @@
 		insert into site_channel (id,
 		parid, parids,
 		title, logo,
-		templet, site, url,
+		templet, shopid, url,
 		status, clicknum,
 		pagemark,
 		indexnum, content, meta_title, meta_keywords,
@@ -155,7 +155,7 @@
 		#{title,jdbcType=VARCHAR},
 		#{logo,jdbcType=VARCHAR},
 		#{templet,jdbcType=VARCHAR},
-		#{site,jdbcType=VARCHAR},
+		#{shopid,jdbcType=BIGINT},
 		#{url,jdbcType=VARCHAR},
 		#{status,jdbcType=VARCHAR}, #{clicknum,jdbcType=INTEGER},
 		#{pagemark,jdbcType=VARCHAR},
@@ -224,8 +224,8 @@
 		logo =
 		#{logo,jdbcType=VARCHAR},
 		templet = #{templet,jdbcType=VARCHAR},
-		site =
-		#{site,jdbcType=VARCHAR},
+		shopid =
+		#{shopid,jdbcType=BIGINT},
 		url = #{url,jdbcType=VARCHAR},
 		status =
 		#{status,jdbcType=VARCHAR},

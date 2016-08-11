@@ -21,7 +21,6 @@
 	</script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-ui/ui/jquery-ui.js"></script>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/jquery-ui/themes/ui-lightness/jquery-ui.css" />
-	
 </head>
 <body>
 <div id="append_parent"></div>
@@ -32,44 +31,40 @@
         
         <h3>文章分类</h3>
             <ul class="tab-base">
-                <li><a href="http://b2b2c.leimingtech.com/leimingtech-admin/website/class/list"><span>管理</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/channel"><span>管理</span></a></li>
                 <li><a href="JavaScript:void(0);" class="current"><span>新增</span></a></li>
             </ul>
         </div>
     </div>
     <div class="fixed-empty"></div>
-    <form id="article_class_form" method="post" action="http://b2b2c.leimingtech.com/leimingtech-admin/website/class/saveOrUpdate">
+    <form id="article_class_form" method="post" action="${pageContext.request.contextPath}/channel/saveOrUpdate">
+    	<input type="hidden" name="id" value="${channel.id }">
         <table class="table tb-type2">
             <tbody>
             <tr class="noborder">
                 <td colspan="2" class="required"><label class="validation" for="acName">文章分类:</label></td>
             </tr>
             <tr class="noborder">
-                <td class="vatop rowform"><input type="text" value="" name="acName" id="ac_name" class="txt"></td>
+                <td class="vatop rowform"><input type="text" value="" name="title" id="ac_name" class="txt"></td>
                 <td class="vatop tips"></td>
             </tr>
             <tr>
                 <td colspan="2" class="required"><label for="acParentId">上级分类:</label></td>
             </tr>
             <tr class="noborder" style="background: rgb(255, 255, 255);">
-                <td class="vatop rowform"><select name="acParentId" id="ac_parent_id" class="valid">
+                <td class="vatop rowform">
+                <select name="parid" id="ac_parent_id" class="valid">
                     <option value="0">请选择...</option>
-                    <option value="1">
-                        &nbsp;&nbsp;店主之家</option>
-                    <option value="2">
-                        &nbsp;&nbsp;新手上路</option>
-                    <option value="3">
-                        &nbsp;&nbsp;支付方式</option>
-                    <option value="4">
-                        &nbsp;&nbsp;配送方式</option>
-                    <option value="5">
-                        &nbsp;&nbsp;售后服务</option>
-                    <option value="7">
-                        &nbsp;&nbsp;关于我们</option>
-                    <option value="8">
-                        &nbsp;&nbsp;商城公告</option>
-                    <option value="9">
-                        &nbsp;&nbsp;帮助中心</option>
+                    <c:forEach items="${channelTree }" var="chl">
+                    <option value="${chl.id }">${chl.title }</option>
+	                    <c:forEach items="${chl.subChannel }" var="chl2">
+	                    <option value="${chl2.id }">&nbsp;&nbsp;|--${chl2.title }</option>
+	                    <c:forEach items="${chl2.subChannel }" var="chl3">
+	                    <option value="${chl3.id }">&nbsp;&nbsp;&nbsp;&nbsp;|-- 
+	                    		${chl3.title }</option>
+	                    </c:forEach>
+	                    </c:forEach>
+                    </c:forEach>
                 </select></td>
                 <td class="vatop tips">如果选择上级分类，那么新增的分类则为被选择上级分类的子分类</td>
 
@@ -78,7 +73,7 @@
                 <td colspan="2" class="required"><label for="acSort">排序:</label></td>
             </tr>
             <tr class="noborder" style="background: rgb(255, 255, 255);">
-                <td class="vatop rowform"><input type="text" value="255" name="acSort" id="ac_sort" class="txt"></td>
+                <td class="vatop rowform"><input type="text" value="255" name="indexnum" id="ac_sort" class="txt"></td>
                 <td class="vatop tips">更新排序</td>
             </tr>
             </tbody>
@@ -108,16 +103,15 @@
                 acName : {
                     required : true,
                     remote   : {
-                        url :APP_BASE+'/website/class/validate',
+                        url :APP_BASE+'/channel/validName',
                         type:'post',
                         data:{
-                            acName : function(){
+                            name : function(){
                                 return $('#ac_name').val();
                             },
-                            acParentId : function() {
+                            parid : function() {
                                 return $('#ac_parent_id').val();
-                            },
-                            acId : ''
+                            }
                         }
                     }
                 },

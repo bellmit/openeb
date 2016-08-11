@@ -24,22 +24,18 @@ public class DictServiceImpl implements DictService {
 	private DictItemMapper dictItemMapper;
 
 	@Override
-	public void createDictGroup(DictGroup groupT) {
-		if (null != groupT) {
+	public void saveDictGroup(DictGroup groupT) {
+		if (null == groupT) {
+			return;
+		}
+		if (StringUtils.isEmpty(groupT.getId())) {
 			String code = groupT.getCode();
 			DictGroup t = getGroupByCode(code);
-			if (null != t) { // 已存在
-
-			} else {
+			if (null == t) {
 				groupT.setId(UUID.randomUUID().toString());
 				dictGroupMapper.insert(groupT);
 			}
-		}
-	}
-
-	@Override
-	public void updateDictGroup(DictGroup groupT) {
-		if (null != groupT) {
+		} else {
 			dictGroupMapper.updateByPrimaryKey(groupT);
 		}
 	}
@@ -82,16 +78,16 @@ public class DictServiceImpl implements DictService {
 	}
 
 	@Override
-	public void createDictItem(DictItem dictItem) {
-		if (null != dictItem) {
+	public void saveDictItem(DictItem dictItem) {
+		if (null == dictItem) {
+			return;
+		}
+		if (StringUtils.isEmpty(dictItem.getId())) {
 			dictItem.setId(UUID.randomUUID().toString());
 			dictItemMapper.insert(dictItem);
+		} else {
+			dictItemMapper.updateByPrimaryKey(dictItem);
 		}
-	}
-
-	@Override
-	public void updateDictItem(DictItem dictItem) {
-		dictItemMapper.updateByPrimaryKey(dictItem);
 	}
 
 	@Override

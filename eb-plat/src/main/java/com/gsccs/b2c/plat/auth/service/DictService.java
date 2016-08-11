@@ -15,9 +15,7 @@ import com.gsccs.b2c.plat.auth.model.DictItem;
  */
 public interface DictService {
 
-	public void createDictGroup(DictGroup dictGroupT);
-
-	public void updateDictGroup(DictGroup dictGroupT);
+	public void saveDictGroup(DictGroup dictGroupT);
 
 	public void deleteDictGroup(String id);
 
@@ -35,9 +33,7 @@ public interface DictService {
 
 	public Integer countDictGroup(DictGroup param);
 
-	public void createDictItem(DictItem dictItemT);
-
-	public void updateDictItem(DictItem dictItemT);
+	public void saveDictItem(DictItem dictItemT);
 
 	public void deleteDictItem(String id);
 

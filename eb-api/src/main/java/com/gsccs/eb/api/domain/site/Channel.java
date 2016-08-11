@@ -1,16 +1,22 @@
 package com.gsccs.eb.api.domain.site;
 
+import java.util.List;
+
 import com.gsccs.eb.api.domain.base.Domain;
 
+/**
+ * 文章栏目
+ * @author x.d zhang
+ *
+ */
 public class Channel extends Domain {
-	
+
 	private Long id;
 	private Long parid;
 	private String parids;
 	private String title;
 	private String logo;
 	private String templet;
-	private String site;
 	private String url;
 	private String status;
 	private Integer clicknum;
@@ -20,6 +26,10 @@ public class Channel extends Domain {
 	private String metaKeywords;
 	private String metaDescr;
 	private String content;
+	
+	private Long shopid;
+
+	private List<Channel> subChannel;
 
 	public Long getId() {
 		return id;
@@ -69,14 +79,6 @@ public class Channel extends Domain {
 		this.templet = templet;
 	}
 
-	public String getSite() {
-		return site;
-	}
-
-	public void setSite(String site) {
-		this.site = site;
-	}
-
 	public String getContent() {
 		return content;
 	}
@@ -86,8 +88,8 @@ public class Channel extends Domain {
 	}
 
 	public String getUrl() {
-		if (url ==null || url.trim().length()<=0){
-			url = "/channel"+id+".html";
+		if (url == null || url.trim().length() <= 0) {
+			url = "/channel" + id + ".html";
 		}
 		return url;
 	}
@@ -152,5 +154,21 @@ public class Channel extends Domain {
 		this.metaDescr = metaDescr;
 	}
 
+	public List<Channel> getSubChannel() {
+		return subChannel;
+	}
+
+	public void setSubChannel(List<Channel> subChannel) {
+		this.subChannel = subChannel;
+	}
+
+	public Long getShopid() {
+		return shopid;
+	}
+
+	public void setShopid(Long shopid) {
+		this.shopid = shopid;
+	}
+	
 	
 }

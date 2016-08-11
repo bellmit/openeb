@@ -46,13 +46,18 @@ public class ChannelController {
 	 * @return
 	 */
 	@RequestMapping(value = "/form", method = RequestMethod.GET)
-	public String channelForm(Long id, Model model) {
+	public String channelForm(Long id,Long parid, Model model) {
+		Channel channel = null;
 		String view = "site/channel-add";
 		if (null != id) {
 			view = "site/channel-edit";
-			Channel channel = channelService.findById(id);
-			model.addAttribute("channel", channel);
+			channel = channelService.findById(id);
+		}else{
+			channel = new Channel();
+			channel.setParid(parid);
 		}
+		model.addAttribute("channel", channel);
+		model.addAttribute("channelTree", channelService.findChannelTree(0l));
 		return view;
 	}
 
@@ -84,6 +89,12 @@ public class ChannelController {
 	public List<Channel> child(Long id) {
 		List<Channel> channelList = channelService.findSubChannel(id);
 		return channelList;
+	}
+	
+	@RequestMapping(value = "/validName", method = RequestMethod.GET)
+	@ResponseBody
+	public Boolean validName(String name) {
+		return true;
 	}
 
 }

@@ -35,12 +35,12 @@
             <h3>页面导航</h3>
             <ul class="tab-base">
                 <li><a href="JavaScript:void(0);" class="current"><span>管理</span></a></li>
-                <li><a href="http://b2b2c.leimingtech.com/leimingtech-admin/website/navigation/forward?id=0"><span>新增</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/navigation/form"><span>新增</span></a></li>
             </ul>
         </div>
     </div>
     <div class="fixed-empty"></div>
-    <form method="post" name="formSearch" action="http://b2b2c.leimingtech.com/leimingtech-admin/website/navigation/list">
+    <form method="post" name="formSearch" action="${pageContext.request.contextPath}/navigation/list">
         <input type="hidden" name="pageNo" value="1">
         <table class="tb-type1 noborder search">
             <tbody>
@@ -60,7 +60,7 @@
             </tbody>
         </table>
     </form>
-    <form method="post" id="form_nav" action="http://b2b2c.leimingtech.com/leimingtech-admin/website/navigation/delete">
+    <form method="post" id="form_nav" action="${pageContext.request.contextPath}/navigation/delete">
         <table class="table tb-type2">
             <thead>
             <tr class="space">
@@ -77,16 +77,19 @@
             </tr>
             </thead>
             <tbody>
+            	<c:forEach items="${navList }" var="nav">
                 <tr class="hover" style="background: rgb(255, 255, 255);">
-                    <td class="w24"><input type="checkbox" name="ids" value="6" class="checkitem"></td>
+                    <td class="w24"><input type="checkbox" name="ids" value="${nav.id }" class="checkitem"></td>
                     <td class="w48 sort"><span title="可编辑" style="cursor:pointer;" datatype="number" fieldid="6" fieldname="nav_sort" nc_type="inline_edit" class="editable">255</span></td>
-                    <td>联系我们</td>
-                    <td>http://b2b2c.leimingtech.com/help/content?acId=7&amp;articleId=38</td>
+                    <td>${nav.title }</td>
+                    <td>${nav.url }</td>
                     <td class="w150 align-center">底部</td>
                     <td class="w150 align-center">是</td>
                     <td class="w72 align-center">
-                        <a href="http://b2b2c.leimingtech.com/leimingtech-admin/website/navigation/forward?id=6">编辑</a> | <a href="javascript:if(confirm(&#39;您确定要删除吗?&#39;))window.location = &#39;/leimingtech-admin/website/navigation/delete?ids=6&#39;;">删除</a></td>
+                        <a href="${pageContext.request.contextPath}/navigation/form?id=${nav.id}">编辑</a> 
+                      | <a href="javascript:if(confirm('您确定要删除吗?'))window.location ='${pageContext.request.contextPath}/navigation/delete?ids=${nav.id}">删除</a></td>
                 </tr>
+                </c:forEach>
                 <tr class="hover">
                     <td class="w24"><input type="checkbox" name="ids" value="7" class="checkitem"></td>
                     <td class="w48 sort"><span title="可编辑" style="cursor:pointer;" datatype="number" fieldid="7" fieldname="nav_sort" nc_type="inline_edit" class="editable">255</span></td>
