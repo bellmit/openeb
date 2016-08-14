@@ -5,6 +5,7 @@ import java.util.List;
 import com.gsccs.b2c.plat.seller.model.StorePay;
 import com.gsccs.eb.api.domain.trade.PayArgs;
 import com.gsccs.eb.api.domain.trade.PayType;
+import com.gsccs.eb.api.utils.JsonMsg;
 
 /**
  * 支付接口
@@ -44,7 +45,7 @@ public interface PayService {
 	 * @param args
 	 * @return
 	 */
-	public String savePayArgs(PayArgs args);
+	public JsonMsg savePayArgs(PayArgs args);
 
 
 	public PayArgs getPayArgs(String id);
@@ -55,5 +56,12 @@ public interface PayService {
 	 * @return
 	 */
 	public List<PayArgs> queryPayArgs(PayArgs payArgs, int page, int pagesize);
+
+	/**
+	 * 支付参数
+	 * 
+	 * @return
+	 */
+	public List<PayArgs> queryPayArgs(Long shopid,String paytypeid);
 
 }

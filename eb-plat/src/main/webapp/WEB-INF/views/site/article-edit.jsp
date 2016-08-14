@@ -70,15 +70,16 @@
                 <td class="vatop rowform" id="gcategory">
                     <select class="select" name="acId" style="height:25px;width:100px">
                         <option value="0">全部</option>
-		                    	<option value="1"> 店主之家</option>
-		                            <option value="15">&nbsp;&nbsp;  好店主如何养成</option>
-		                    	<option value="2" selected="selected"> 新手上路</option>
-		                    	<option value="3"> 支付方式</option>
-		                    	<option value="4"> 配送方式</option>
-		                    	<option value="5"> 售后服务</option>
-		                    	<option value="7"> 关于我们</option>
-		                    	<option value="8"> 商城公告</option>
-		                    	<option value="9"> 帮助中心</option>
+			            <c:forEach items="${channelTree }" var="chl">
+	                    <option value="${chl.id }">${chl.title }</option>
+		                    <c:forEach items="${chl.subChannel }" var="chl2">
+		                    <option value="${chl2.id }">&nbsp;&nbsp;|--${chl2.title }</option>
+		                    <c:forEach items="${chl2.subChannel }" var="chl3">
+		                    <option value="${chl3.id }">&nbsp;&nbsp;&nbsp;&nbsp;|-- 
+		                    		${chl3.title }</option>
+		                    </c:forEach>
+		                    </c:forEach>
+	                    </c:forEach>
                     </select>
                 </td>
                 <td class="vatop tips">选择分类</td>

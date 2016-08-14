@@ -44,7 +44,7 @@ public class CategoryController {
 	@RequestMapping(value = "/child", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Category> child(Long id) {
-		List<Category> categorieList = categoryService.queryCateList(1001l, id);
+		List<Category> categorieList = categoryService.queryCateList(0l, id);
 		return categorieList;
 	}
 

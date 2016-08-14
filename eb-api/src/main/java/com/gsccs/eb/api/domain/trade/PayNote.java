@@ -1,77 +1,132 @@
 package com.gsccs.eb.api.domain.trade;
 
+import java.util.Date;
+
 import com.gsccs.eb.api.domain.base.Domain;
 
 /**
- * 在线支付参数配置
+ * 支付记录
  * @author x.d zhang
  *
  */
-public class PayNote extends Domain{
+public class PayNote extends Domain {
 
-	private String id;
-	private String appId;
-	private String appKey;
-	private String signType;
-	private String sellerId;
-	private String sellerEmail;
-	private String payType;
-	private String service;
-	private String status;
-	
-	public String getId() {
+	private Long id;
+	private String payno;
+	private Long buyerid;
+	private Long shopid;
+	private String typeid;
+	private Long orderid;
+	private String ordersn;
+	private String payaccount;
+	private String recaccount;
+	private Integer payfee;
+	private Date paytime;
+	private String transid;
+	private String state;
+
+	public Long getId() {
 		return id;
 	}
-	public void setId(String id) {
+
+	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getAppId() {
-		return appId;
+
+	public String getPayno() {
+		return payno;
 	}
-	public void setAppId(String appId) {
-		this.appId = appId;
+
+	public void setPayno(String payno) {
+		this.payno = payno;
 	}
-	public String getAppKey() {
-		return appKey;
+
+	public Long getBuyerid() {
+		return buyerid;
 	}
-	public void setAppKey(String appKey) {
-		this.appKey = appKey;
+
+	public void setBuyerid(Long buyerid) {
+		this.buyerid = buyerid;
 	}
-	public String getSignType() {
-		return signType;
+
+	public Long getShopid() {
+		return shopid;
 	}
-	public void setSignType(String signType) {
-		this.signType = signType;
+
+	public void setShopid(Long shopid) {
+		this.shopid = shopid;
 	}
-	public String getSellerId() {
-		return sellerId;
+
+	public String getTypeid() {
+		return typeid;
 	}
-	public void setSellerId(String sellerId) {
-		this.sellerId = sellerId;
+
+	public void setTypeid(String typeid) {
+		this.typeid = typeid;
 	}
-	public String getSellerEmail() {
-		return sellerEmail;
+
+	public Long getOrderid() {
+		return orderid;
 	}
-	public void setSellerEmail(String sellerEmail) {
-		this.sellerEmail = sellerEmail;
+
+	public void setOrderid(Long orderid) {
+		this.orderid = orderid;
 	}
-	public String getPayType() {
-		return payType;
+
+	public String getOrdersn() {
+		return ordersn;
 	}
-	public void setPayType(String payType) {
-		this.payType = payType;
+
+	public void setOrdersn(String ordersn) {
+		this.ordersn = ordersn;
 	}
-	public String getService() {
-		return service;
+
+	public String getPayaccount() {
+		return payaccount;
 	}
-	public void setService(String service) {
-		this.service = service;
+
+	public void setPayaccount(String payaccount) {
+		this.payaccount = payaccount;
 	}
-	public String getStatus() {
-		return status;
+
+	public String getRecaccount() {
+		return recaccount;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+
+	public void setRecaccount(String recaccount) {
+		this.recaccount = recaccount;
+	}
+
+	public Integer getPayfee() {
+		return payfee;
+	}
+
+	public void setPayfee(Integer payfee) {
+		this.payfee = payfee;
+	}
+
+	public Date getPaytime() {
+		return paytime;
+	}
+
+	public void setPaytime(Date paytime) {
+		this.paytime = paytime;
+	}
+
+	public String getTransid() {
+		return transid;
+	}
+
+	public void setTransid(String transid) {
+		this.transid = transid;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 }

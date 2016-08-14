@@ -5,7 +5,7 @@
 		<id column="id" property="id" jdbcType="BIGINT" />
 		<result column="title" property="title" jdbcType="VARCHAR" />
 		<result column="type_id" property="typeId" jdbcType="BIGINT" />
-		<result column="shop_id" property="shopId" jdbcType="BIGINT" />
+		<result column="shopid" property="shopId" jdbcType="BIGINT" />
 		<result column="logo" property="logo" jdbcType="VARCHAR" />
 		<result column="parid" property="parid" jdbcType="BIGINT" />
 		<result column="templet" property="templet" jdbcType="VARCHAR" />
@@ -87,13 +87,13 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		id, title, type_id,shop_id, logo, parid, templet, url, state, parids, clickNum,
+		id, title, type_id,shopid, logo, parid, templet, url, state, parids, clickNum,
 		pagemark,
 		indexnum, meta_title, meta_keywords, meta_descr
 	</sql>
 	
 	<sql id="JOIN_Column_List">
-		id, title, type_id,shop_id, logo, parid, templet, url, state, parids, clickNum,
+		id, title, type_id,shopid, logo, parid, templet, url, state, parids, clickNum,
 		pagemark,
 		indexnum, meta_title, meta_keywords, meta_descr,typename
 	</sql>
@@ -165,7 +165,7 @@
 		parameterType="com.gsccs.eb.api.domain.goods.Category">
 		insert into shop_category (id, title, 
 		type_id,
-		shop_id,
+		shopid,
 		logo, parid, templet,
 		url, state, parids,
 		clickNum, pagemark, indexnum,
@@ -201,7 +201,7 @@
 		set id = #{record.id,jdbcType=BIGINT},
 		title = #{record.title,jdbcType=VARCHAR},
 		type_id = #{record.typeId,jdbcType=BIGINT},
-		shop_id = #{record.shopId,jdbcType=BIGINT},
+		shopid = #{record.shopId,jdbcType=BIGINT},
 		logo = #{record.logo,jdbcType=VARCHAR},
 		parid = #{record.parid,jdbcType=BIGINT},
 		templet = #{record.templet,jdbcType=VARCHAR},
@@ -223,7 +223,7 @@
 		update shop_category
 		set title = #{title,jdbcType=VARCHAR},
 		type_id = #{typeId,jdbcType=VARCHAR},
-		shop_id = #{shopId,jdbcType=BIGINT},
+		shopid = #{shopId,jdbcType=BIGINT},
 		logo = #{logo,jdbcType=VARCHAR},
 		parid = #{parid,jdbcType=BIGINT},
 		templet = #{templet,jdbcType=VARCHAR},

@@ -11,6 +11,8 @@ import com.gsccs.b2c.plat.site.dao.BannerMapper;
 import com.gsccs.b2c.plat.site.dao.FloorMapper;
 import com.gsccs.b2c.plat.site.model.BannerExample;
 import com.gsccs.b2c.plat.site.model.FloorExample;
+import com.gsccs.eb.api.domain.goods.Category;
+import com.gsccs.eb.api.domain.goods.Goods;
 import com.gsccs.eb.api.domain.site.Banner;
 import com.gsccs.eb.api.domain.site.Floor;
 
@@ -68,8 +70,7 @@ public class FloorServiceImpl implements FloorService {
 	}
 
 	@Override
-	public boolean addBanners(Long siteId, List<Banner> items) {
-		boolean result = true;
+	public void addBanners(Long siteId, List<Banner> items) {
 		try {
 			if (null != items) {
 				for (Banner banner : items) {
@@ -77,9 +78,31 @@ public class FloorServiceImpl implements FloorService {
 				}
 			}
 		} catch (Exception e) {
-			result = false;
 		}
-		return result;
+	}
+
+	@Override
+	public List<Goods> findFloorGoodList(Long shopid, String floorid) {
+		if (shopid==null){
+			shopid = 0l;
+		}
+		
+		if (StringUtils.isEmpty(floorid)){
+			return null;
+		}
+		Floor floor = this.getFloor(floorid);
+		if (null != floor){
+			
+		}
+		return null;
+	}
+
+	@Override
+	public List<Category> findFloorCateList(Long shopid, String floorid) {
+		if (shopid==null){
+			shopid = 0l;
+		}
+		return null;
 	}
 
 }

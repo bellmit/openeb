@@ -1,5 +1,6 @@
 package com.gsccs.b2c.plat.shop.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,14 @@ public class CategoryServiceImpl implements CategoryService {
 			return categoryMapper.selectByExample(example);
 		}
 	}
+	
+	@Override
+	public List<Category> findCateList(String ids) {
+		CategoryExample example = new CategoryExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andSql(" id in ("+ids+")");
+		return categoryMapper.selectByExample(example);
+	}
 
 	@Override
 	public List<Category> findByPar(Long parid, String state) {
@@ -138,7 +147,7 @@ public class CategoryServiceImpl implements CategoryService {
 		categoryMapper.deleteByExample(example);
 	}
 
-	public List<Category> findAll() {
+	public List<Category> findAll(Long shopid) {
 		CategoryExample example = new CategoryExample();
 		Criteria criteria = example.createCriteria();
 		// proSearchParam(t, criteria);
@@ -147,7 +156,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public JSONArray findAll(String state) {
-		List<Category> categoryList = findAll();
+		List<Category> categoryList = findAll(0l);
 		return java2JsonArray(categoryList);
 	}
 
@@ -213,8 +222,8 @@ public class CategoryServiceImpl implements CategoryService {
 		return null;
 	}
 
-	public JSONArray findBySite(Long siteid) {
-		List<Category> roots = findAll();
+	public JSONArray findBySite(Long shopid) {
+		List<Category> roots = findAll(shopid);
 		if (null != roots) {
 			JSONArray rootArray = (JSONArray) JSON.toJSON(roots);
 			return treeList(rootArray, 0l);
@@ -256,7 +265,47 @@ public class CategoryServiceImpl implements CategoryService {
 			if (null != c.getParid()) {
 				criteria.andParidEqualTo(c.getParid());
 			}
+			
+			if (null != c.getShopId()) {
+				criteria.andShopidEqualTo(c.getShopId());
+			}
 		}
 	}
+
+	@Override
+	public List<Category> findCategoryTree(Long shopid) {
+		shopid = shopid==null?0:shopid;
+		List<Category> listAllDb = findAll(shopid);
+		List<Category> listAllTree = new ArrayList<Category>();
+		for (Category row : listAllDb) {
+			if (0 == row.getParid()) {
+				listAllTree.add(row);
+				fomateChannel(listAllDb, row);
+			}
+			// int size =
+			// null==row.getSubCategory()?0:row.getSubCategory().size();
+		}
+		return listAllTree;
+	}
+
+	private void fomateChannel(List<Category> tmp, Category node) {
+		for (Category row : tmp) {
+
+			if (row.getParid() == 0 || row.getParid() == null) {
+				continue;
+			}
+			if (row.getParid().equals(node.getId())) {
+				List<Category> list = node.getSubCategory();
+				if (list == null) {
+					list = new ArrayList<Category>();
+				}
+				list.add(row);
+				node.setSubCategory(list);
+				fomateChannel(tmp, row);
+			}
+		}
+	}
+
+	
 
 }

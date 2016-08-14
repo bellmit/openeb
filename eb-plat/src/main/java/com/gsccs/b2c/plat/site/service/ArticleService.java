@@ -11,7 +11,7 @@ import com.gsccs.eb.api.domain.site.Article;
  */
 public interface ArticleService {
 
-	public void addArticle(Article conten);
+	public void saveArticle(Article content);
 
 	public Article getArticle(Long id);
 

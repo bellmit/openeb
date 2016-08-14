@@ -97,7 +97,7 @@ function gcategoryChange()
     if (this.value != 0)
     {
         var _self = this;
-        var url = APP_BASE + '/goods/class/child';
+        var url = APP_BASE + '/category/child';
         $.getJSON(url, {'id':this.value,'level':0}, function(data){
             if (data)
             {
@@ -107,7 +107,7 @@ function gcategoryChange()
                     var data  = data;
                     for (i = 0; i < data.length; i++)
                     {
-                        $(_self).next("select").append("<option value='" + data[i].gcId + "'>" + data[i].gcName + "</option>");
+                        $(_self).next("select").append("<option value='" + data[i].id + "'>" + data[i].title + "</option>");
                     }
                 }
             }
@@ -137,19 +137,19 @@ function getArea(callback){
 
 
 var loadSelectCategory = function(id, seletedId, obj){
-	var url = APP_BASE + '/goods/class/child';
+	var url = APP_BASE + '/category/child';
 	$.getJSON(url, {'id':id, 'level':0}, function(data){
         if (data) {
             if (data.length > 0) {
                 $("<select class='class-select'><option>-请选择-</option></select>").change(gcategoryChange).insertAfter(obj);
                 var data  = data;
                 for (i = 0; i < data.length; i++) {
-                	var op =  "<option value='" + data[i].gcId + "'";
+                	var op =  "<option value='" + data[i].id + "'";
                 	if(seletedId == data[i].gcId){
                 		op += " selected='selected' ";
                 	}
                 	op += " >";
-                	op += data[i].gcName + "</option>";
+                	op += data[i].title + "</option>";
                     $(obj).next("select").append(op);
                 }
             }

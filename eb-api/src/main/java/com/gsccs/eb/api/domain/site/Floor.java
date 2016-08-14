@@ -8,16 +8,21 @@ import com.gsccs.eb.api.domain.base.Domain;
  * @author x.d zhang
  * 
  */
-public class Floor extends Domain{
+public class Floor extends Domain {
 
 	private String id;
 	private String title;
-	private String link;
-	private String imgurl;
-	private String type;
+	private String subtitle;
+	// 主题图
+	private String themeimg;
+	// 导航图
+	private String banneimg;
+
 	private String state;
 	private Long shopid;
 	private Integer ordernum = 0;
+	private String goodids;
+	private String cateids;
 
 	public String getId() {
 		return id;
@@ -35,28 +40,28 @@ public class Floor extends Domain{
 		this.title = title;
 	}
 
-	public String getLink() {
-		return link;
+	public String getThemeimg() {
+		return themeimg;
 	}
 
-	public void setLink(String link) {
-		this.link = link;
+	public void setThemeimg(String themeimg) {
+		this.themeimg = themeimg;
 	}
 
-	public String getImgurl() {
-		return imgurl;
+	public String getBanneimg() {
+		return banneimg;
 	}
 
-	public void setImgurl(String imgurl) {
-		this.imgurl = imgurl;
+	public void setBanneimg(String banneimg) {
+		this.banneimg = banneimg;
 	}
 
-	public String getType() {
-		return type;
+	public String getSubtitle() {
+		return subtitle;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setSubtitle(String subtitle) {
+		this.subtitle = subtitle;
 	}
 
 	public String getState() {
@@ -82,7 +87,21 @@ public class Floor extends Domain{
 	public void setOrdernum(Integer ordernum) {
 		this.ordernum = ordernum;
 	}
-	
-	
+
+	public String getGoodids() {
+		return goodids;
+	}
+
+	public void setGoodids(String goodids) {
+		this.goodids = goodids;
+	}
+
+	public String getCateids() {
+		return cateids;
+	}
+
+	public void setCateids(String cateids) {
+		this.cateids = cateids;
+	}
 
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.gsccs.b2c.plat.bass.BaseExample;
 
-public class CategoryExample extends BaseExample{
+public class CategoryExample extends BaseExample {
 	protected String orderByClause;
 
 	protected boolean distinct;
@@ -170,6 +170,11 @@ public class CategoryExample extends BaseExample{
 			criteria.add(new Criterion(condition, value1, value2));
 		}
 
+		public Criteria andSql(String value) {
+			addCriterion(value);
+			return (Criteria) this;
+		}
+
 		public Criteria andIdIsNull() {
 			addCriterion("id is null");
 			return (Criteria) this;
@@ -212,11 +217,6 @@ public class CategoryExample extends BaseExample{
 
 		public Criteria andIdIn(List<Long> values) {
 			addCriterion("id in", values, "id");
-			return (Criteria) this;
-		}
-		
-		public Criteria andSQL(String sql) {
-			addCriterion(sql);
 			return (Criteria) this;
 		}
 
@@ -285,25 +285,7 @@ public class CategoryExample extends BaseExample{
 			return (Criteria) this;
 		}
 
-		public Criteria andTitleIn(List<String> values) {
-			addCriterion("title in", values, "title");
-			return (Criteria) this;
-		}
-
-		public Criteria andTitleNotIn(List<String> values) {
-			addCriterion("title not in", values, "title");
-			return (Criteria) this;
-		}
-
-		public Criteria andTitleBetween(String value1, String value2) {
-			addCriterion("title between", value1, value2, "title");
-			return (Criteria) this;
-		}
-
-		public Criteria andTitleNotBetween(String value1, String value2) {
-			addCriterion("title not between", value1, value2, "title");
-			return (Criteria) this;
-		}
+		
 
 		public Criteria andTypeIdIsNull() {
 			addCriterion("type_id is null");
@@ -320,41 +302,7 @@ public class CategoryExample extends BaseExample{
 			return (Criteria) this;
 		}
 
-		public Criteria andTypeIdNotEqualTo(String value) {
-			addCriterion("type_id <>", value, "typeId");
-			return (Criteria) this;
-		}
-
-		public Criteria andTypeIdGreaterThan(String value) {
-			addCriterion("type_id >", value, "typeId");
-			return (Criteria) this;
-		}
-
-		public Criteria andTypeIdGreaterThanOrEqualTo(String value) {
-			addCriterion("type_id >=", value, "typeId");
-			return (Criteria) this;
-		}
-
-		public Criteria andTypeIdLessThan(String value) {
-			addCriterion("type_id <", value, "typeId");
-			return (Criteria) this;
-		}
-
-		public Criteria andTypeIdLessThanOrEqualTo(String value) {
-			addCriterion("type_id <=", value, "typeId");
-			return (Criteria) this;
-		}
-
-		public Criteria andTypeIdLike(String value) {
-			addCriterion("type_id like", value, "typeId");
-			return (Criteria) this;
-		}
-
-		public Criteria andTypeIdNotLike(String value) {
-			addCriterion("type_id not like", value, "typeId");
-			return (Criteria) this;
-		}
-
+		
 		public Criteria andTypeIdIn(List<String> values) {
 			addCriterion("type_id in", values, "typeId");
 			return (Criteria) this;
@@ -362,16 +310,6 @@ public class CategoryExample extends BaseExample{
 
 		public Criteria andTypeIdNotIn(List<String> values) {
 			addCriterion("type_id not in", values, "typeId");
-			return (Criteria) this;
-		}
-
-		public Criteria andTypeIdBetween(String value1, String value2) {
-			addCriterion("type_id between", value1, value2, "typeId");
-			return (Criteria) this;
-		}
-
-		public Criteria andTypeIdNotBetween(String value1, String value2) {
-			addCriterion("type_id not between", value1, value2, "typeId");
 			return (Criteria) this;
 		}
 
@@ -395,55 +333,7 @@ public class CategoryExample extends BaseExample{
 			return (Criteria) this;
 		}
 
-		public Criteria andLogoGreaterThan(String value) {
-			addCriterion("logo >", value, "logo");
-			return (Criteria) this;
-		}
 
-		public Criteria andLogoGreaterThanOrEqualTo(String value) {
-			addCriterion("logo >=", value, "logo");
-			return (Criteria) this;
-		}
-
-		public Criteria andLogoLessThan(String value) {
-			addCriterion("logo <", value, "logo");
-			return (Criteria) this;
-		}
-
-		public Criteria andLogoLessThanOrEqualTo(String value) {
-			addCriterion("logo <=", value, "logo");
-			return (Criteria) this;
-		}
-
-		public Criteria andLogoLike(String value) {
-			addCriterion("logo like", value, "logo");
-			return (Criteria) this;
-		}
-
-		public Criteria andLogoNotLike(String value) {
-			addCriterion("logo not like", value, "logo");
-			return (Criteria) this;
-		}
-
-		public Criteria andLogoIn(List<String> values) {
-			addCriterion("logo in", values, "logo");
-			return (Criteria) this;
-		}
-
-		public Criteria andLogoNotIn(List<String> values) {
-			addCriterion("logo not in", values, "logo");
-			return (Criteria) this;
-		}
-
-		public Criteria andLogoBetween(String value1, String value2) {
-			addCriterion("logo between", value1, value2, "logo");
-			return (Criteria) this;
-		}
-
-		public Criteria andLogoNotBetween(String value1, String value2) {
-			addCriterion("logo not between", value1, value2, "logo");
-			return (Criteria) this;
-		}
 
 		public Criteria andParidIsNull() {
 			addCriterion("parId is null");
@@ -462,26 +352,6 @@ public class CategoryExample extends BaseExample{
 
 		public Criteria andParidNotEqualTo(Long value) {
 			addCriterion("parId <>", value, "parid");
-			return (Criteria) this;
-		}
-
-		public Criteria andParidGreaterThan(Long value) {
-			addCriterion("parId >", value, "parid");
-			return (Criteria) this;
-		}
-
-		public Criteria andParidGreaterThanOrEqualTo(Long value) {
-			addCriterion("parId >=", value, "parid");
-			return (Criteria) this;
-		}
-
-		public Criteria andParidLessThan(Long value) {
-			addCriterion("parId <", value, "parid");
-			return (Criteria) this;
-		}
-
-		public Criteria andParidLessThanOrEqualTo(Long value) {
-			addCriterion("parId <=", value, "parid");
 			return (Criteria) this;
 		}
 
@@ -555,93 +425,34 @@ public class CategoryExample extends BaseExample{
 			return (Criteria) this;
 		}
 
-		public Criteria andTempletIn(List<String> values) {
-			addCriterion("templet in", values, "templet");
+
+		public Criteria andShopidIsNull() {
+			addCriterion("shopid is null");
 			return (Criteria) this;
 		}
 
-		public Criteria andTempletNotIn(List<String> values) {
-			addCriterion("templet not in", values, "templet");
+		public Criteria andShopidIsNotNull() {
+			addCriterion("shopid is not null");
 			return (Criteria) this;
 		}
 
-		public Criteria andTempletBetween(String value1, String value2) {
-			addCriterion("templet between", value1, value2, "templet");
+		public Criteria andShopidEqualTo(Long value) {
+			addCriterion("shopid =", value, "shopid");
 			return (Criteria) this;
 		}
 
-		public Criteria andTempletNotBetween(String value1, String value2) {
-			addCriterion("templet not between", value1, value2, "templet");
+		public Criteria andShopidNotEqualTo(Long value) {
+			addCriterion("shopid <>", value, "shopid");
 			return (Criteria) this;
 		}
 
-		public Criteria andSiteIsNull() {
-			addCriterion("site is null");
+		public Criteria andShopidIn(List<Long> values) {
+			addCriterion("shopid in", values, "shopid");
 			return (Criteria) this;
 		}
 
-		public Criteria andSiteIsNotNull() {
-			addCriterion("site is not null");
-			return (Criteria) this;
-		}
-
-		public Criteria andSiteEqualTo(String value) {
-			addCriterion("site =", value, "site");
-			return (Criteria) this;
-		}
-
-		public Criteria andSiteNotEqualTo(String value) {
-			addCriterion("site <>", value, "site");
-			return (Criteria) this;
-		}
-
-		public Criteria andSiteGreaterThan(String value) {
-			addCriterion("site >", value, "site");
-			return (Criteria) this;
-		}
-
-		public Criteria andSiteGreaterThanOrEqualTo(String value) {
-			addCriterion("site >=", value, "site");
-			return (Criteria) this;
-		}
-
-		public Criteria andSiteLessThan(String value) {
-			addCriterion("site <", value, "site");
-			return (Criteria) this;
-		}
-
-		public Criteria andSiteLessThanOrEqualTo(String value) {
-			addCriterion("site <=", value, "site");
-			return (Criteria) this;
-		}
-
-		public Criteria andSiteLike(String value) {
-			addCriterion("site like", value, "site");
-			return (Criteria) this;
-		}
-
-		public Criteria andSiteNotLike(String value) {
-			addCriterion("site not like", value, "site");
-			return (Criteria) this;
-		}
-
-		public Criteria andSiteIn(List<String> values) {
-			addCriterion("site in", values, "site");
-			return (Criteria) this;
-		}
-
-		public Criteria andSiteNotIn(List<String> values) {
-			addCriterion("site not in", values, "site");
-			return (Criteria) this;
-		}
-
-		public Criteria andSiteBetween(String value1, String value2) {
-			addCriterion("site between", value1, value2, "site");
-			return (Criteria) this;
-		}
-
-		public Criteria andSiteNotBetween(String value1, String value2) {
-			addCriterion("site not between", value1, value2, "site");
+		public Criteria andShopidNotIn(List<Long> values) {
+			addCriterion("shopid not in", values, "shopid");
 			return (Criteria) this;
 		}
 
@@ -670,21 +481,7 @@ public class CategoryExample extends BaseExample{
 			return (Criteria) this;
 		}
 
-		public Criteria andUrlGreaterThanOrEqualTo(String value) {
-			addCriterion("url >=", value, "url");
-			return (Criteria) this;
-		}
-
-		public Criteria andUrlLessThan(String value) {
-			addCriterion("url <", value, "url");
-			return (Criteria) this;
-		}
-
-		public Criteria andUrlLessThanOrEqualTo(String value) {
-			addCriterion("url <=", value, "url");
-			return (Criteria) this;
-		}
-
+		
 		public Criteria andUrlLike(String value) {
 			addCriterion("url like", value, "url");
 			return (Criteria) this;
@@ -695,25 +492,7 @@ public class CategoryExample extends BaseExample{
 			return (Criteria) this;
 		}
 
-		public Criteria andUrlIn(List<String> values) {
-			addCriterion("url in", values, "url");
-			return (Criteria) this;
-		}
-
-		public Criteria andUrlNotIn(List<String> values) {
-			addCriterion("url not in", values, "url");
-			return (Criteria) this;
-		}
-
-		public Criteria andUrlBetween(String value1, String value2) {
-			addCriterion("url between", value1, value2, "url");
-			return (Criteria) this;
-		}
-
-		public Criteria andUrlNotBetween(String value1, String value2) {
-			addCriterion("url not between", value1, value2, "url");
-			return (Criteria) this;
-		}
+		
 
 		public Criteria andStateIsNull() {
 			addCriterion("state is null");
@@ -735,26 +514,7 @@ public class CategoryExample extends BaseExample{
 			return (Criteria) this;
 		}
 
-		public Criteria andStateGreaterThan(String value) {
-			addCriterion("state >", value, "state");
-			return (Criteria) this;
-		}
-
-		public Criteria andStateGreaterThanOrEqualTo(String value) {
-			addCriterion("state >=", value, "state");
-			return (Criteria) this;
-		}
-
-		public Criteria andStateLessThan(String value) {
-			addCriterion("state <", value, "state");
-			return (Criteria) this;
-		}
-
-		public Criteria andStateLessThanOrEqualTo(String value) {
-			addCriterion("state <=", value, "state");
-			return (Criteria) this;
-		}
-
+		
 		public Criteria andStateLike(String value) {
 			addCriterion("state like", value, "state");
 			return (Criteria) this;
@@ -805,46 +565,7 @@ public class CategoryExample extends BaseExample{
 			return (Criteria) this;
 		}
 
-		public Criteria andOrdernumGreaterThan(Integer value) {
-			addCriterion("orderNum >", value, "ordernum");
-			return (Criteria) this;
-		}
-
-		public Criteria andOrdernumGreaterThanOrEqualTo(Integer value) {
-			addCriterion("orderNum >=", value, "ordernum");
-			return (Criteria) this;
-		}
-
-		public Criteria andOrdernumLessThan(Integer value) {
-			addCriterion("orderNum <", value, "ordernum");
-			return (Criteria) this;
-		}
-
-		public Criteria andOrdernumLessThanOrEqualTo(Integer value) {
-			addCriterion("orderNum <=", value, "ordernum");
-			return (Criteria) this;
-		}
-
-		public Criteria andOrdernumIn(List<Integer> values) {
-			addCriterion("orderNum in", values, "ordernum");
-			return (Criteria) this;
-		}
-
-		public Criteria andOrdernumNotIn(List<Integer> values) {
-			addCriterion("orderNum not in", values, "ordernum");
-			return (Criteria) this;
-		}
-
-		public Criteria andOrdernumBetween(Integer value1, Integer value2) {
-			addCriterion("orderNum between", value1, value2, "ordernum");
-			return (Criteria) this;
-		}
-
-		public Criteria andOrdernumNotBetween(Integer value1, Integer value2) {
-			addCriterion("orderNum not between", value1, value2, "ordernum");
-			return (Criteria) this;
-		}
-
+		
 		public Criteria andClicknumIsNull() {
 			addCriterion("clickNum is null");
 			return (Criteria) this;
@@ -870,20 +591,7 @@ public class CategoryExample extends BaseExample{
 			return (Criteria) this;
 		}
 
-		public Criteria andClicknumGreaterThanOrEqualTo(Integer value) {
-			addCriterion("clickNum >=", value, "clicknum");
-			return (Criteria) this;
-		}
-
-		public Criteria andClicknumLessThan(Integer value) {
-			addCriterion("clickNum <", value, "clicknum");
-			return (Criteria) this;
-		}
-
-		public Criteria andClicknumLessThanOrEqualTo(Integer value) {
-			addCriterion("clickNum <=", value, "clicknum");
-			return (Criteria) this;
-		}
+		
 
 		public Criteria andClicknumIn(List<Integer> values) {
 			addCriterion("clickNum in", values, "clicknum");
@@ -1197,25 +905,7 @@ public class CategoryExample extends BaseExample{
 			return (Criteria) this;
 		}
 
-		public Criteria andMetaDescrGreaterThan(String value) {
-			addCriterion("meta_descr >", value, "metaDescr");
-			return (Criteria) this;
-		}
-
-		public Criteria andMetaDescrGreaterThanOrEqualTo(String value) {
-			addCriterion("meta_descr >=", value, "metaDescr");
-			return (Criteria) this;
-		}
-
-		public Criteria andMetaDescrLessThan(String value) {
-			addCriterion("meta_descr <", value, "metaDescr");
-			return (Criteria) this;
-		}
-
-		public Criteria andMetaDescrLessThanOrEqualTo(String value) {
-			addCriterion("meta_descr <=", value, "metaDescr");
-			return (Criteria) this;
-		}
+		
 
 		public Criteria andMetaDescrLike(String value) {
 			addCriterion("meta_descr like", value, "metaDescr");

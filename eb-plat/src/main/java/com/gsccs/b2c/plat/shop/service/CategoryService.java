@@ -21,6 +21,8 @@ public interface CategoryService {
 			int pageSize);
 
 	public int count(Category category);
+	
+	public List<Category> findCateList(String ids);
 
 	/**
 	 * 查询所有类目
@@ -125,4 +127,10 @@ public interface CategoryService {
 	 */
 	public JSONArray findByStore(Long storeid, Long parid);
 
+	/**
+	 * 类目树
+	 * @param shopid
+	 * @return
+	 */
+	public List<Category> findCategoryTree(Long shopid);
 }

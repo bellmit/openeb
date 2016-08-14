@@ -67,7 +67,7 @@
                 <td colspan="2" class="required"><label class="validation">标题：</label></td>
             </tr>
             <tr class="noborder" style="background: rgb(255, 255, 255);">
-                <td class="vatop rowform"><input type="text" id="articleTitle" name="articleTitle" class="text" value=""></td>
+                <td class="vatop rowform"><input type="text" id="articleTitle" name="title" class="text" value=""></td>
                 <td class="vatop tips"></td>
             </tr>
             <tr style="background: rgb(255, 255, 255);">
@@ -77,15 +77,16 @@
                 <td class="vatop rowform" id="gcategory">
                     <select class="select" name="acId" id="acId" style="height:25px;width:100px">
                         <option value="0">请选择</option>
-                        	<option value="1"> 店主之家</option>
-                                <option value="15">&nbsp;&nbsp;  好店主如何养成</option>
-                        	<option value="2"> 新手上路</option>
-                        	<option value="3"> 支付方式</option>
-                        	<option value="4"> 配送方式</option>
-                        	<option value="5"> 售后服务</option>
-                        	<option value="7"> 关于我们</option>
-                        	<option value="8"> 商城公告</option>
-                        	<option value="9"> 帮助中心</option>
+                        	<c:forEach items="${channelTree }" var="chl">
+		                    <option value="${chl.id }">${chl.title }</option>
+			                    <c:forEach items="${chl.subChannel }" var="chl2">
+			                    <option value="${chl2.id }">&nbsp;&nbsp;|--${chl2.title }</option>
+			                    <c:forEach items="${chl2.subChannel }" var="chl3">
+			                    <option value="${chl3.id }">&nbsp;&nbsp;&nbsp;&nbsp;|-- 
+			                    		${chl3.title }</option>
+			                    </c:forEach>
+			                    </c:forEach>
+		                    </c:forEach>
                     </select>
                 </td>
                 <td class="vatop tips">选择分类</td>
@@ -113,7 +114,7 @@
                 <td colspan="2" class="required">排序: </td>
             </tr>
             <tr class="noborder" style="background: rgb(255, 255, 255);">
-                <td class="vatop rowform"><input type="text" name="articleSort" id="article_sort" class="txt" value="255">
+                <td class="vatop rowform"><input type="text" name="indexnum" id="article_sort" class="txt" value="255">
                 </td>
                 <td class="vatop tips">数字范围为0~255，数字越大越靠前</td>
             </tr>
@@ -149,10 +150,10 @@ $(document).ready(function(){
         	articleTitle : {
                 required : true,
                 remote   : {
-                    url :APP_BASE+'/website/article/validate',
+                    url :APP_BASE+'/article/validName',
                     type:'post',
                     data:{
-                        brandName : function(){
+                        name : function(){
                             return $('#articleTitle').val();
                         },
                         brandId  : 0

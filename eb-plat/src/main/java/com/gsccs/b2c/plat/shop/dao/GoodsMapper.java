@@ -14,7 +14,7 @@ import com.gsccs.eb.api.domain.goods.Goods;
  */
 public interface GoodsMapper {
 
-	int countByExample(@Param("sid") Long sid,
+	int countByExample(
 			@Param("example") GoodsExample example);
 
 	int deleteByExample(@Param("sid") Long sid,

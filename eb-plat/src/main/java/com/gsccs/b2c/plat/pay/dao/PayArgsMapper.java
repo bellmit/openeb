@@ -19,7 +19,7 @@ public interface PayArgsMapper {
 
 	int insertSelective(PayArgs record);
 
-	List<PayArgs> selectByExample(PayArgsExample example);
+	List<PayArgs> selectPageByExample(PayArgsExample example);
 
 	PayArgs selectByPrimaryKey(String id);
 

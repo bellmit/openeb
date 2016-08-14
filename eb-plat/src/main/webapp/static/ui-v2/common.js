@@ -499,7 +499,7 @@ function load_history_information(){
             init_dialog(settings.title);
         }
         settings.left = $(window).scrollLeft() + ($(window).width() - settings.width) / 2;
-        settings.top  = ($(window).height() - $(this).height()) / 2;
+        settings.top  = ($(window).height() - $(this).height()) / 3;
         $(this).attr("style","display:none; z-index: 1100; position: fixed; width: "+settings.width+"px; left: "+settings.left+"px; top: "+settings.top+"px;");
         $(this).show();
 

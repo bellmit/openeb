@@ -2,6 +2,8 @@ package com.gsccs.b2c.plat.site.service;
 
 import java.util.List;
 
+import com.gsccs.eb.api.domain.goods.Category;
+import com.gsccs.eb.api.domain.goods.Goods;
 import com.gsccs.eb.api.domain.site.Banner;
 import com.gsccs.eb.api.domain.site.Floor;
 
@@ -40,6 +42,24 @@ public interface FloorService {
 	public List<Floor> findFloorList(Long shopid);
 
 	/**
+	 * 查询楼层商品
+	 * 
+	 * @param shopid
+	 * @param floorid
+	 * @return
+	 */
+	public List<Goods> findFloorGoodList(Long shopid, String floorid);
+
+	/**
+	 * 查询楼层类目
+	 * 
+	 * @param shopid
+	 * @param floorid
+	 * @return
+	 */
+	public List<Category> findFloorCateList(Long shopid, String floorid);
+
+	/**
 	 * 获取楼层banner
 	 * 
 	 * @param siteid
@@ -47,6 +67,6 @@ public interface FloorService {
 	 */
 	public List<Banner> findBannerList(Long shopid);
 
-	public boolean addBanners(Long siteId, List<Banner> items);
+	public void addBanners(Long siteId, List<Banner> items);
 
 }

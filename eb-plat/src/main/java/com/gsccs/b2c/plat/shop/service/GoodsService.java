@@ -42,6 +42,10 @@ public interface GoodsService {
 
 	public List<Goods> getGoodsList(Goods param, String order, int currPage,
 			int pageSize);
+	
+	int count(Goods param);
+	
+	public List<Goods> findGoodsList(String ids);
 
 	/**
 	 * 获取SKU
@@ -51,8 +55,6 @@ public interface GoodsService {
 	 * @return
 	 */
 	public List<Sku> findSkuList(Long goodsid);
-
-	int count(Long sid, Long pid);
 
 	
 	/**

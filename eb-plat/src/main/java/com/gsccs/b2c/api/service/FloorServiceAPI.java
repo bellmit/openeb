@@ -58,9 +58,9 @@ public class FloorServiceAPI implements FloorServiceI {
 				JSONObject itemObject = (JSONObject) items.get(i);
 				Floor storeyItem = new Floor();
 				storeyItem.setTitle(itemObject.getString("title"));
-				storeyItem.setLink(itemObject.getString("link"));
-				storeyItem.setImgurl(itemObject.getString("imgurl"));
-				storeyItem.setType(itemObject.getString("type"));
+				//storeyItem.setLink(itemObject.getString("link"));
+				//storeyItem.setImgurl(itemObject.getString("imgurl"));
+				//storeyItem.setType(itemObject.getString("type"));
 				storeyItem.setOrdernum(i);
 				storeyItem.setId(UUID.randomUUID().toString());
 				storeyItems.add(storeyItem);

@@ -7,7 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gsccs.b2c.plat.common.service.SolrService;
 import com.gsccs.b2c.plat.site.dao.ArticleMapper;
 import com.gsccs.b2c.plat.site.dao.ChannelMapper;
 import com.gsccs.b2c.plat.site.model.ArticleExample;
@@ -22,14 +21,25 @@ public class ArticleServiceImpl implements ArticleService {
 	private ChannelMapper channelMapper;
 
 	@Override
-	public void addArticle(Article content) {
-		if (null != content) {
-			content.setAddtime(new Date());
-			content.setStatus(content.getStatus() == null ? "0" : content
+	public void saveArticle(Article article) {
+		if (null==article){
+			return;
+		}
+		
+		//默认平台文章
+		if(article.getShopid()==null){
+			article.setShopid(0l);
+		}
+		
+		if (null==article.getId()) {
+			article.setAddtime(new Date());
+			article.setStatus(article.getStatus() == null ? "0" : article
 					.getStatus());
-			content.setIsrelease("0");
-			articleMapper.insert(content);
+			article.setIsrelease("0");
+			articleMapper.insert(article);
 			// indexArticle(content);
+		}else{
+			articleMapper.updateByPrimaryKeySelective(article);
 		}
 	}
 

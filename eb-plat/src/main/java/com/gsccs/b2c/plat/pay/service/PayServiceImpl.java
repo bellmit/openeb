@@ -13,6 +13,7 @@ import com.gsccs.b2c.plat.pay.model.PayArgsExample;
 import com.gsccs.b2c.plat.pay.model.PayTypeExample;
 import com.gsccs.eb.api.domain.trade.PayArgs;
 import com.gsccs.eb.api.domain.trade.PayType;
+import com.gsccs.eb.api.utils.JsonMsg;
 
 @Service
 public class PayServiceImpl implements PayService {
@@ -23,19 +24,32 @@ public class PayServiceImpl implements PayService {
 	private PayArgsMapper payArgsMapper;
 
 	@Override
-	public String savePayArgs(PayArgs param) {
+	public JsonMsg savePayArgs(PayArgs param) {
+		JsonMsg jsonMsg = new JsonMsg();
 		if (null == param) {
-			return null;
+			jsonMsg.setSuccess(false);
+			jsonMsg.setMsg("数据有误！");
+			return jsonMsg;
 		}
 		String id = param.getId();
 		if (StringUtils.isEmpty(id)) {
+			// 判断支付方式是否存在
+			List<PayArgs> payArgsList = queryPayArgs(param.getShopid(),
+					param.getTypeid());
+			if (null != payArgsList || payArgsList.size() > 0) {
+				jsonMsg.setSuccess(false);
+				jsonMsg.setMsg("保存失败，该支付方式已存在！");
+				return jsonMsg;
+			}
+
 			id = UUID.randomUUID().toString();
 			param.setId(id);
 			payArgsMapper.insert(param);
 		} else {
 			payArgsMapper.updateByPrimaryKey(param);
 		}
-		return id;
+		jsonMsg.setSuccess(true);
+		return jsonMsg;
 	}
 
 	@Override
@@ -73,8 +87,29 @@ public class PayServiceImpl implements PayService {
 	}
 
 	@Override
-	public List<PayArgs> queryPayArgs(PayArgs payArgs, int page, int pagesize) {
-		return null;
+	public List<PayArgs> queryPayArgs(PayArgs param, int page, int pagesize) {
+		PayArgsExample example = new PayArgsExample();
+		PayArgsExample.Criteria c = example.createCriteria();
+		proSearchParam(param, c);
+		example.setCurrPage(page);
+		example.setPageSize(pagesize);
+		return payArgsMapper.selectPageByExample(example);
+	}
+
+	@Override
+	public List<PayArgs> queryPayArgs(Long shopid, String paytypeid) {
+		if (null == shopid || StringUtils.isEmpty(paytypeid)) {
+			return null;
+		}
+		PayArgsExample example = new PayArgsExample();
+		PayArgsExample.Criteria c = example.createCriteria();
+		PayArgs param = new PayArgs();
+		param.setShopid(shopid);
+		param.setTypeid(paytypeid);
+		proSearchParam(param, c);
+		example.setCurrPage(1);
+		example.setPageSize(Integer.MAX_VALUE);
+		return payArgsMapper.selectPageByExample(example);
 	}
 
 	public void proSearchParam(PayType param, PayTypeExample.Criteria criteria) {
@@ -96,9 +131,13 @@ public class PayServiceImpl implements PayService {
 			if (StringUtils.isNotEmpty(param.getAppid())) {
 				criteria.andAppidEqualTo(param.getAppid());
 			}
-			if (null != param.getShopid()) {
-				criteria.andShopidEqualTo(param.getShopid());
-			}
+
+		}
+		// 不允许查询到其他地铺支付参数
+		if (null != param && null != param.getShopid()) {
+			criteria.andShopidEqualTo(param.getShopid());
+		} else {
+			criteria.andShopidEqualTo(0l);
 		}
 	}
 

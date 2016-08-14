@@ -59,9 +59,11 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public int count(Long sid, Long pid) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int count(Goods param) {
+		GoodsExample example = new GoodsExample();
+		GoodsExample.Criteria c = example.createCriteria();
+		proSearchParam(param, c);
+		return goodsMapper.countByExample(example);
 	}
 
 	@Override
@@ -125,6 +127,19 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
+	public List<Goods> findGoodsList(String ids) {
+		if (StringUtils.isEmpty(ids)) {
+			return null;
+		}
+		GoodsExample example = new GoodsExample();
+		GoodsExample.Criteria c = example.createCriteria();
+		c.andSql(" id in (" + ids + ")");
+		example.setCurrPage(1);
+		example.setPageSize(Integer.MAX_VALUE);
+		return goodsMapper.selectPageByExample(example);
+	}
+
+	@Override
 	public Long addGoods(Goods goods, List<Sku> skulist) {
 		Long goodsid = null;
 		// 保存产品基础信息
@@ -155,7 +170,7 @@ public class GoodsServiceImpl implements GoodsService {
 			skuids.add(sku.getId());
 		}
 		// 删除失效的SKU数据
-		System.out.println("###########goodsid:"+goodsid);
+		System.out.println("###########goodsid:" + goodsid);
 		if (null != skuids && skuids.size() > 0) {
 			SkuExample example = new SkuExample();
 			SkuExample.Criteria c = example.createCriteria();
@@ -225,6 +240,15 @@ public class GoodsServiceImpl implements GoodsService {
 			if (StringUtils.isNotEmpty(param.getBarcode())) {
 				c.andBarcodeLike("%" + param.getBarcode().trim() + "%");
 			}
+
+			if (null != param.getCateid()) {
+				c.andCateidEqualTo(param.getCateid());
+			}
+
+			if (null != param.getShopid()) {
+				c.andShopidEqualTo(param.getShopid());
+			}
 		}
 	}
+
 }

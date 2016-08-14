@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gsccs.b2c.plat.site.service.ArticleService;
+import com.gsccs.b2c.plat.site.service.ChannelService;
 import com.gsccs.eb.api.domain.site.Article;
 import com.gsccs.eb.api.utils.JsonMsg;
 
@@ -26,6 +27,8 @@ public class ArticleController {
 
 	@Autowired
 	private ArticleService articleService;
+	@Autowired
+	private ChannelService channelService;
 
 	/**
 	 * 文章列表
@@ -59,6 +62,7 @@ public class ArticleController {
 			Article article = articleService.getArticle(id);
 			model.addAttribute("article", article);
 		}
+		model.addAttribute("channelTree", channelService.findChannelTree(0l));
 		return view;
 	}
 
@@ -79,8 +83,7 @@ public class ArticleController {
 			jsonMsg.setSuccess(false);
 			return jsonMsg;
 		}
-
-		articleService.addArticle(article);
+		articleService.saveArticle(article);
 		jsonMsg.setSuccess(true);
 		return jsonMsg;
 	}

@@ -188,5 +188,17 @@ public class GoodsController {
 		
 		return skuList;
 	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/list",method = RequestMethod.POST)
+	public List<Goods> goodsList(
+			@RequestParam(defaultValue = "1") int page,
+			@RequestParam(defaultValue = "10") int rows, ModelMap map,
+			Goods param) {
+		System.out.println("goodslist param:"+param.getCateid());
+		List<Goods> list = goodsService.getGoodsList(param, "", page, rows);
+		return list;
+	}
 
 }

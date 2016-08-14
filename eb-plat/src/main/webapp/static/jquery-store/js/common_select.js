@@ -107,7 +107,7 @@ function gcategoryChange()
 					var data  = data;
 					for (i = 0; i < data.length; i++)
 					{
-						$(_self).next("select").append("<option value='" + data[i].gcId + "'>" + data[i].gcName + "</option>");
+						$(_self).next("select").append("<option value='" + data[i].id + "'>" + data[i].title + "</option>");
 					}
 				}
 			}

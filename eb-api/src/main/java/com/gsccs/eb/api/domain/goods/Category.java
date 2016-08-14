@@ -1,5 +1,7 @@
 package com.gsccs.eb.api.domain.goods;
 
+import java.util.List;
+
 import com.gsccs.eb.api.domain.base.Domain;
 
 /**
@@ -39,6 +41,8 @@ public class Category extends Domain {
 	private String metaDescr;
 
 	private String typename;
+
+	private List<Category> subCategory;
 
 	public Long getId() {
 		return id;
@@ -182,6 +186,14 @@ public class Category extends Domain {
 
 	public void setShopId(Long shopId) {
 		this.shopId = shopId;
+	}
+
+	public List<Category> getSubCategory() {
+		return subCategory;
+	}
+
+	public void setSubCategory(List<Category> subCategory) {
+		this.subCategory = subCategory;
 	}
 
 }

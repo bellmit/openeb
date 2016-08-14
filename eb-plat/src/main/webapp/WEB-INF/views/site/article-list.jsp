@@ -19,9 +19,9 @@
 	        var APP_BASE = '${pageContext.request.contextPath}';
 	        LOADING_IMAGE = "${pageContext.request.contextPath}/res/images/loading.gif";
 	</script>
-<script type="text/javascript" src="./管理后台-文章管理_files/jquery.ui.js"></script>
-<script type="text/javascript" src="./管理后台-文章管理_files/zh-CN.js" charset="utf-8"></script>
-<link rel="stylesheet" type="text/css" href="./管理后台-文章管理_files/jquery.ui.css">
+	<script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-ui/ui/jquery-ui.js"></script>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/jquery-ui/themes/ui-lightness/jquery-ui.css" />
+	
 <script type="text/javascript">
     $(function(){
         $('#ncsubmit').click(function(){
