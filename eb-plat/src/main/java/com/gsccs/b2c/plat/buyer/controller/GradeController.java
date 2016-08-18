@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gsccs.b2c.plat.bass.Datagrid;
 import com.gsccs.b2c.plat.buyer.service.BuyerService;
 import com.gsccs.eb.api.domain.buyer.Grade;
 import com.gsccs.eb.api.utils.JsonMsg;

@@ -8,12 +8,11 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gsccs.b2c.api.APIConst;
-import com.gsccs.b2c.plat.shop.model.EvalGoodsT;
-import com.gsccs.b2c.plat.shop.model.EvalItemT;
-import com.gsccs.b2c.plat.shop.model.EvalOrderT;
-import com.gsccs.b2c.plat.shop.model.EvalTypeT;
-import com.gsccs.b2c.plat.shop.service.EvalService;
-import com.gsccs.eb.api.domain.deliver.Templet;
+import com.gsccs.b2c.plat.rated.model.EvalGoodsT;
+import com.gsccs.b2c.plat.rated.model.EvalItemT;
+import com.gsccs.b2c.plat.rated.model.EvalOrderT;
+import com.gsccs.b2c.plat.rated.model.EvalTypeT;
+import com.gsccs.b2c.plat.rated.service.EvalService;
 import com.gsccs.eb.api.domain.rated.EvalGoods;
 import com.gsccs.eb.api.domain.rated.EvalItem;
 import com.gsccs.eb.api.domain.rated.EvalModel;

@@ -179,7 +179,8 @@
 			<include refid="Example_Where_Clause" />
 		</if>
 	</delete>
-	<insert id="insert" parameterType="com.gsccs.eb.api.domain.site.Article">
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.gsccs.eb.api.domain.site.Article">
 		insert into site_article (id, title,shorttitle, channelid,
 		addtime, userid,remark,source, clicknum, indexnum,
 		img, author, istop,ishot, isimg, shopid,

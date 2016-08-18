@@ -10,15 +10,58 @@
 
 	<artifactId>eb-client</artifactId>
 
+	<!-- 集中定义依赖版本号 -->
+	<properties>
+		<jackson.version>2.4.2</jackson.version>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.gsccs.b2c</groupId>
 			<artifactId>eb-api</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
+
+		<!-- Jackson Json处理工具包 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<!-- 文件上传组件 -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.csource</groupId>
+			<artifactId>fastdfs-client-java</artifactId>
+			<version>1.25</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-solrj</artifactId>
+			<version>${solr-solrj.version}</version>
+		</dependency>
+		
+		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+             <version>${spring.version}</version>
+        </dependency>
+		
 	</dependencies>
 	<build>
-		<finalName>eb-core</finalName>
+		<finalName>eb-client</finalName>
 		<plugins>
 			<!-- 编译的时候使用JDK6和UTF8编码 -->
 			<plugin>

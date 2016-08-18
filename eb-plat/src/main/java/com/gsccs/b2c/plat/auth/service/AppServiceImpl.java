@@ -11,13 +11,9 @@ import com.gsccs.b2c.plat.auth.model.AppExample;
 import com.gsccs.b2c.plat.auth.model.AppExample.Criteria;
 
 /**
- * <p>
- * User: x.d zhang
- * <p>
- * Date: 14-1-28
- * <p>
- * Version: 1.0
  * 
+ * @author x.d zhang
+ *
  */
 @Service
 public class AppServiceImpl implements AppService {

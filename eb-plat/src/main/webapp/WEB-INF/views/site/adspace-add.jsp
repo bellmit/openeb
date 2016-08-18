@@ -39,7 +39,7 @@
 </div>
 <div class="fixed-empty"></div>
 <form id="adv_position_form" action="${pageContext.request.contextPath}/adspace/save" method="post">
-    <input type="hidden" name="apId" value="">
+    <input type="hidden" name="id" value="">
     <table class="table tb-type2">
         <tbody>
 	        <tr class="noborder" style="background: rgb(255, 255, 255);">
@@ -47,26 +47,26 @@
 	        </tr>
 	        <tr class="noborder" style="background: rgb(255, 255, 255);">
 	            <td class="vatop rowform">
-	            <input type="text" value="" name="apName" id="apName" maxlength="100" class="txt"></td>
+	            <input type="text" value="" name="gcName" id="title" maxlength="100" class="txt"></td>
 	            <td class="vatop tips"></td>
 	        </tr>
 	        <tr>
-	            <td colspan="2" class="required"><label class="validation" for="parent_id">广告位简介:</label></td>
+	            <td colspan="2" class="required"><label class="validation" for="remark">广告位简介:</label></td>
 	        </tr>
 	        <tr class="noborder" style="background: rgb(255, 255, 255);">
 	            <td class="vatop rowform">
-	            <input type="text" value="" name="apIntro" id="apIntro" maxlength="100" class="txt">
+	            <input type="text" value="" name="remark" id="remark" maxlength="100" class="txt">
 	            </td>
 	            <td class="vatop tips"></td>
 	        </tr>
 	        
 	         <tr>
-	             <td colspan="2" class="required"><label for="murl" class="validation">广告类别:</label></td>
+	             <td colspan="2" class="required"><label for="apClass" class="validation">广告类别:</label></td>
 	            </tr>
 	            <tr class="noborder">
 	                <td class="vatop rowform">
 	              <!-- 0图片1文字2幻灯3Flash -->
-	                <select name="apClass" id="apClass">
+	                <select name="apclass" id="apClass">
 	                	<option value="0">图片</option>
 	                	<option value="1">文字</option>
 	                	<option value="2">Flash</option>
@@ -75,12 +75,12 @@
 	            </tr>
 	        <tr>
 	        </tr><tr>
-	            <td colspan="2" class="required"><label for="gcmdescription">广告展示方式:</label></td>
+	            <td colspan="2" class="required"><label for="apDisplay">广告展示方式:</label></td>
 	        </tr>
 	        <tr class="noborder">
                 <td class="vatop rowform">
                 <!-- 0幻灯片1多广告展示2单广告展示 -->
-                <select name="apDisplay" id="apDisplay">
+                <select name="apdisplay" id="apDisplay">
                 	<option value="0">幻灯片</option>
                 	<option value="1">多广告展示</option>
                 	<option value="2">单广告展示</option>
@@ -88,11 +88,11 @@
                 </td>
 	        </tr>
 	        <tr>
-	            <td colspan="2" class="required"><label for="apKey">获取标记:</label></td>
+	            <td colspan="2" class="required"><label for="apcode">获取标记:</label></td>
 	        </tr>
 	        <tr class="noborder">
                 <td class="vatop rowform">
-               		<input type="text" value="" name="apKey" id="apKey" maxlength="100" class="txt">
+               		<input type="text" value="" name="apcode" id="apcode" maxlength="100" class="txt">
                 </td>
 	        </tr>
 	        <tr style="background: rgb(255, 255, 255);">
@@ -105,17 +105,17 @@
 	        </tr>
 	        
 	         <tr style="background: rgb(255, 255, 255);">
-	            <td colspan="2" class="required"><label for="apWidth" class="validation">广告位宽度:</label></td>
+	            <td colspan="2" class="required"><label for="apwidth" class="validation">广告位宽度:</label></td>
 	        </tr>
 	        <tr class="noborder" style="background: rgb(255, 255, 255);">
-	            <td class="vatop rowform"><input type="text" value="" name="apWidth" id="apWidth" class="txt"></td>
+	            <td class="vatop rowform"><input type="text" value="" name="apwidth" id="apwidth" class="txt"></td>
 	           <td class="vatop tips">请填写数字</td>
 	        </tr>
 	         <tr>
-	            <td colspan="2" class="required"><label for="apHeight" class="validation">广告位高度:</label></td>
+	            <td colspan="2" class="required"><label for="apheight" class="validation">广告位高度:</label></td>
 	        </tr>
 	        <tr class="noborder">
-	            <td class="vatop rowform"><input type="text" value="" name="apHeight" id="apHeight" class="txt"></td>
+	            <td class="vatop rowform"><input type="text" value="" name="apheight" id="apheight" class="txt"></td>
 	            <td class="vatop tips">请填写数字</td>
 	        </tr>
 	        
@@ -141,49 +141,49 @@
                 error.appendTo(element.parent().parent().prev().find('td:first'));
             },
             rules : {
-            	apName: {
+            	title: {
                     required : true,
                     maxlength: 10,
                     minlength: 1
                 },
-                apIntro: {	//简介
+                remark: {	//简介
                     required : true
                 },
-                apClass: {
+                apclass: {
                 	required : true
                 },
-                apKey:  {	//标记
+                apcode:  {	//标记
                 	required : true
                 },
-                apWidth:{	//宽度
+                apwidth:{	//宽度
                 	required:true,
                 	digits:true 
                 },
-                apHeight:{	//高度
+                apheight:{	//高度
                 	required:true,
                 	digits:true 
                 }
             },
             messages : {
-            	apName : {
+            	title : {
                     required : '请填写广告位置名',
                     maxlength: '广告位置名称长度应在1-10个字符之间',
                     minlength: '广告位置名称长度应在1-10个字符之间'
                 },
-                apIntro : {
+                remark : {
                     required : '请填写广告位简介'
                 },
-                apClass: {
+                apclass: {
                 	required : '请填写广告类别'
                 },
-                apKey: {
+                apcode: {
                     required : '请填写标记'
                 },
-                apWidth:{	//宽度
+                apwidth:{	//宽度
                 	required : '请填写广告位宽度',
                 	digits : '请输入合法的数字'
                 },
-                apHeight:{	//高度
+                apheight:{	//高度
                 	required:'请填写广告位高度',
                 	digits : '请输入合法的数字'
                 }
